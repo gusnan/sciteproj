@@ -1,0 +1,49 @@
+
+Installation:
+-------------
+
+To build, first check that you have the packages required. The ones required 
+to build are:
+
+libgtk2.0-dev
+
+Then create a folder (if there isn't one already) to build in. 
+
+	$ mkdir build
+	$ cd build
+	
+There you just run the cmake command, pointing it to the folder with the 
+CMakeLists.txt file, which should be the one above, and tell it that it
+should generate Unix Makefiles.
+
+	$ cmake .. -G"Unix Makefiles"
+
+(On a linux system there is a chance that the -G"Unix Makefiles" is implied
+by default, and thus not necessary.) This will find necessary GTK libraries, 
+and generate makefiles. If you would like to build a debug version of the 
+program, you should enter 
+
+	$ cmake .. -DDEBUG=on
+
+Which will make the resulting executable contain debug flags for easy usage
+with for example gdb. It will also #define _DEBUG, which is used in the source
+for debug specific code.
+
+When this is done (for either the debug or release version) you can simply 
+enter 
+
+	$ make
+
+and the program will be built. If you would like to see the full commands
+including all options that are run during the compile, you can add VERBOSE=1 
+to the make command. Then, to install run make install with superuser rights:
+
+	$ su -c "make install"
+	
+or on a system using sudo:
+
+	$ sudo make install
+
+This installs a desktop file too, so now you should have an icon in the 
+development part of your X menu.
+Now you are ready to run the program!

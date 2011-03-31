@@ -1,0 +1,78 @@
+
+SciteProj
+---------
+
+SciteProj is a Project Manager for usage with the SciTE text editor.
+It is based on ScitePM by Roy Wood. It is a "director" of SciTE, using
+it's director interface to communicate between SciteProj and SciTE. See 
+
+http://www.scintilla.org/SciTEDirector.html
+
+for more information. SciteProj saves the project file to disk in XML format.
+
+
+Running:
+--------
+
+SciteProj will load a configuration from the file ~/.sciteproj each program
+start - If no such file exists one will be created. The options availible in
+there are:
+
+* The window geometry
+
+You can enter wanted window geometry/positioning, which will be applied to 
+the program upon next program start. The variable are xpos, ypos, width and
+height.
+
+Also, the following options exist:
+
+* give_scite_focus
+	If this is set to TRUE, the SciTE window will recieve focus when you open
+	a file from SciteProj. (Defaults to FALSE)
+
+* dirty_on_folder_change
+	Should the project be marked as "dirty" when expanding or collapsing a 
+	folder? (Defaults to FALSE)
+
+* allow_duplicates
+	Specifies wether the user shall be able to add a file that has a name that 
+	is the same as a file already included in the project? (Defaults to TRUE)
+
+* identify_sciteproj_xml
+	Specifies wether SciteProj shall try to identify the XML as saved by 
+	SciteProj? (Defaults to TRUE)
+
+You can open this configuration file by opening the Edit menu and select Edit 
+Options in that menu. This will open ($HOME)/.sciteproj as if it was part of 
+your project and edit it in SciTE.
+
+SciteProj will give you a warning if it isn't able to find the SciTE 
+executable on SciteProj start. As default SciTE will be searched for in 
+/usr/bin, /bin, and /usr/local/bin, under the names scite and SciTE. If it 
+isn't found there you will get a warning upon running. You can also use the 
+--scite flag when running to locate SciTE, for example 
+
+sciteproj --scite=/bin/scite 
+
+will look for the scite executable in the /bin/ folder. SciTE will also be
+searched for in the path pointed to by the environment variable SciTE_HOME.
+
+You will need to save a project before adding to it - this is because SciteProj
+saves the XML containing relative paths, relative to the postition your project
+file is located in.
+
+SciteProj is able to generate a project file through the --generate option - 
+using a command line like
+
+sciteproj --generate test.xml 7
+
+will create a SciteProj project file named test.xml, containing all the folders
+and files in the current dir, and 7 folder underneath in the directory 
+structure. If the depth is left out, SciteProj will default to a maximum depth
+of 4 folders.
+
+By pressing Ctrl+R or choosing "View Recently Opened Files" in the "View" menu,
+you split up the project window in two parts, and the new part contain a list
+of the most recently opened files in the project. The files in this list are 
+sorted so the ones you opened latest is at the top of the list.
+

@@ -1,0 +1,21 @@
+
+SciteProj todo:
+---------------
+
+* new icon?
+* file-type icons automatically generated?
+* svn integration?
+* Recent files menu items
+
+
+Fixed:
+------
+
+* Check up sorting of the treeview
+* import directory structure
+
+
+WontDo:
+-------
+
+* Toolbar - Would take too much space

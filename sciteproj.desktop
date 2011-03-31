@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=SciteProj
+Type=Application
+Comment=Project manager for the Scintilla Text Editor (SciTE)
+Comment[sv]=Projekt-hanterare för Scintilla Text Editor (SciTE)
+Exec=sciteproj
+Icon=sciteproj
+Categories=Development;IDE;
+Terminal=false

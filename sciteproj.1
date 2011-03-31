@@ -1,0 +1,41 @@
+.TH sciteproj 1 "3 March 2010" "Version 0.4.01"
+.SH NAME
+SciteProj - a Project Manager for the SciTE editor
+.SH DESCRIPTION
+.B SciteProj
+is a Project Manager for the SciTE editor - It is used to group a bunch 
+of files into a project for easy access in SciTE giving the possibility 
+to group files in folders, and saves the project to disc in XML format. 
+It is based on the program ScitePM by Roy Wood. It uses the director 
+interface of SciTE to communicate between SciTE and SciteProj.
+.SH OPTIONS
+.IP "--scite FILENAME"
+Sets the filename for the instance of SciTE to open.
+.IP "--version"
+Displays the version number of SciteProj
+.IP "--generate FILENAME [MAX_DEPTH]"
+Generate a sciteproj project file with the name FILENAME from the contents of the current 
+folder.  Go at most down MAX_DEPTH levels in the folder hierarchy. This option will not 
+consider adding hidden files to the generated project.
+.IP "--help"
+Display a short help
+.SH CONFIG FILE
+The config file SciteProj is using is stored in the users home directory and is 
+called .sciteproj. It is loaded on every program start. There is a
+menuitem in the program to open the file directly in SciTE for editing. 
+If there isn't a .sciteproj in the user home when starting SciteProj, 
+one will be created filled with default values.
+The following options are supported in the config file:
+.IP "xpos, ypos, xsize and ysize"
+Specifies the position and size of the program window on start
+.IP "give_scite_focus"
+Specifies wether SciTE shall get focus when opening a file from SciteProj (TRUE or FALSE)
+.IP "dirty_on_folder_change"
+Specifies wether SciteProj shall flag your project as dirty when you exapand or collapse a folder (TRUE or FALSE)
+.IP allow_duplicates
+Specifies wether several files with the same name should be allowed in one project (TRUE or FALSE)
+.IP identify_sciteproj_xml
+Specifies wether SciteProj shall try to recognize XML files saved by SciteProj (TRUE or FALSE)
+.SH AUTHOR
+.B SciteProj 
+was written by Andreas Rönnquist <gusnan@gusnan.se>.
