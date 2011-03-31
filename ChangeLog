@@ -2,6 +2,12 @@
 ChangeLog:
 ----------
 
+0.4.02
+	* Added a "Recently opened files" box
+	* Updated in-source commenting
+	* Updated documentation
+	* Split up the GUI code into several files
+
 0.4.01
 	* Made the rename functionality rename in the treeview, instead of using
 	  another dialog
