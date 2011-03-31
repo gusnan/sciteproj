@@ -74,5 +74,6 @@ of 4 folders.
 By pressing Ctrl+R or choosing "View Recently Opened Files" in the "View" menu,
 you split up the project window in two parts, and the new part contain a list
 of the most recently opened files in the project. The files in this list are 
-sorted so the ones you opened latest is at the top of the list.
+sorted so the ones you opened latest is at the top of the list (or bottom - 
+its configurable).
 
