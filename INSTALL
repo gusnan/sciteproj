@@ -11,7 +11,10 @@ Then create a folder (if there isn't one already) to build in.
 
 	$ mkdir build
 	$ cd build
-	
+
+This should be done inside the sciteproj folder structure, so that the build
+folder is placed right in the sciteproj folder.
+
 There you just run the cmake command, pointing it to the folder with the 
 CMakeLists.txt file, which should be the one above, and tell it that it
 should generate Unix Makefiles.
