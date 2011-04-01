@@ -47,86 +47,94 @@ gchar *homepage_string=(gchar*)"http://sciteproj.gusnan.se";
 gchar *sVersion = (gchar*)"0.4.01";
 
 /**
- *	show_about_dialog
+ * show_new_about_dialog
  */
 void show_about_dialog()
 {
-	GtkWidget *dialog,/**table,*/*textview; //,scrolled_window;
+	GtkWidget *window;
+	GtkWidget *vbox;
+	GtkWidget *textview;
+	GtkWidget *logo_image;
+	GtkWidget *linkbutton;
+	GtkWidget *ok_button;
 	GtkTextBuffer *textbuffer;
 	GtkTextIter iter;
-	gchar *about_text,*about_text2;
-	GtkWidget *table;
-	GtkWidget *linkbutton;
 	
+	gchar *copyrightstring;
+	
+	GtkWidget *label;
+	
+	
+	// Make the dialog
+	window=gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_container_set_border_width(GTK_CONTAINER(window), 8);
+	
+	gtk_widget_set_size_request(window,500,400);
+	
+	// Make a container
+	vbox=gtk_vbox_new(FALSE,5);
+	
+	gtk_container_add(GTK_CONTAINER(window),vbox);
+	
+	logo_image=gtk_image_new_from_pixbuf(program_icon_pixbuf);
+	
+	gtk_box_pack_start(GTK_BOX(vbox), logo_image, FALSE, FALSE, 0);
+	
+	label=gtk_label_new(NULL);
+	gtk_label_set_selectable(GTK_LABEL(label),FALSE);
+	gtk_label_set_markup(GTK_LABEL(label),"<big><b>SciteProj</b></big>");
 		
-	gint result;
-	// Create a new dialog
-	dialog=gtk_dialog_new_with_buttons("About SciteProj",NULL,GTK_DIALOG_MODAL,
-													GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
+	gtk_box_pack_start(GTK_BOX(vbox),label,FALSE,FALSE,0);
 	
-	gtk_dialog_set_default_response(GTK_DIALOG(dialog),GTK_RESPONSE_OK);
+	// Show version of SciteProj
 	
-	gtk_widget_set_size_request(dialog,500,400);
+	gchar *version_string;
 	
-	table=gtk_table_new(15,15,TRUE);
+#ifdef _DEBUG
+	version_string=g_strdup_printf("version %s DEBUG",sVersion);
+#else
+	version_string=g_strdup_printf("version %s",sVersion);
+#endif
 	
+	label=gtk_label_new(version_string);
+	gtk_label_set_selectable(GTK_LABEL(label),FALSE);
+	gtk_box_pack_start(GTK_BOX(vbox),label,FALSE,FALSE,0);
+	
+	// Show SciteProj copyrights
+	copyrightstring=g_strdup_printf("%s\n%s",
+			"Copyright (C) 2008-2011 Andreas Rönnquist <gusnan@gusnan.se>",
+			"Copyright (C) 2006 Roy Wood <roy.wood@gmail.com>");
+	
+	label=gtk_label_new(copyrightstring);
+	gtk_label_set_selectable(GTK_LABEL(label),FALSE);
+	gtk_box_pack_start(GTK_BOX(vbox),label,FALSE,FALSE,0);
+	
+	// show GTK versions
+	gchar *gtk_string=g_strdup_printf("GTK+ %d.%d.%d / GLib %d.%d.%d",
+		   //"Operating System: unknown",
+		   gtk_major_version, gtk_minor_version, gtk_micro_version,
+		   glib_major_version, glib_minor_version, glib_micro_version);
+			
+	label=gtk_label_new(gtk_string);
+	
+	gtk_label_set_selectable(GTK_LABEL(label),FALSE);
+	gtk_box_pack_start(GTK_BOX(vbox),label,FALSE,FALSE,0);
+	
+	// Show a link to the SciteProj homepage
+	linkbutton=gtk_link_button_new_with_label(homepage_string,"http://www.gusnan.se/sciteproj");
+	
+	
+	GtkWidget *hbox = gtk_hbox_new(FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+
+	linkbutton=gtk_link_button_new_with_label(homepage_string,"http://www.gusnan.se/sciteproj");
+	gtk_box_pack_start(GTK_BOX(hbox), linkbutton, TRUE, FALSE, 0);
+
 	// New textbuffer - and we get the beginning of the textbuffer
 	textbuffer=gtk_text_buffer_new(NULL);
 	gtk_text_buffer_get_start_iter(textbuffer,&iter);
-	
-	// Write out program title with nice text attributes
-	GtkTextTag *tag;
-	
-	tag=gtk_text_buffer_create_tag(textbuffer,NULL,
-													"foreground","blue",
-													"size-points",15.0,
-													"weight",700,
-													NULL);
-	
-	gtk_text_buffer_insert_with_tags(textbuffer,&iter,"SciteProj",-1,tag,NULL);
-	
-	
-	
-	gtk_text_buffer_get_end_iter(textbuffer,&iter);
-	
-	
-	// Version and credits
-	about_text=g_strdup_printf("\n"
-											"version %s\n"
-											"by Andreas Ronnquist <gusnan@gusnan.se>\n",sVersion);
-	
-	gtk_text_buffer_insert(textbuffer,&iter,about_text,-1);
-	
-	gtk_text_buffer_get_end_iter(textbuffer,&iter);
 
-	// fix a proper link of the homepage
-	
-	GtkTextChildAnchor *anchor;
-	
-	anchor=gtk_text_buffer_create_child_anchor(textbuffer,&iter);
-	
-	gtk_text_buffer_insert(textbuffer,&iter,"\n",-1);
-	
-	
-	// Print is we have been built with Debug information or not
-#ifdef _DEBUG
-	GtkTextTag *debug_tag;
-	
-	debug_tag=gtk_text_buffer_create_tag(textbuffer,NULL, "foreground", "red", NULL);
-	
-	gtk_text_buffer_insert_with_tags(textbuffer,&iter,"Built with DEBUG information enabled\n",-1,debug_tag,NULL);
-	
-	gtk_text_buffer_get_end_iter(textbuffer,&iter);
-	
-#else
-	// Just write an empty line if we are running the release executable
-	gtk_text_buffer_insert(textbuffer,&iter,"\n",-1);
-	
-	gtk_text_buffer_get_end_iter(textbuffer,&iter);
-#endif
-	
-	// What are we based on?
-	about_text2=g_strdup_printf("----------------------------------------------------------\n"
+	gchar *about_text2=g_strdup_printf("----------------------------------------------------------\n"
 											"based on ScitePM by\n"
 											"Roy Wood<roy.wood@gmail.com> and\n"
 											"Martin Andrews<ScitePM@PLATFORMedia.com>\n\n"
@@ -139,88 +147,48 @@ void show_about_dialog()
 	
 	gtk_text_buffer_get_end_iter(textbuffer,&iter);
 	
+	
 	gtk_text_buffer_insert(textbuffer,&iter,sLicense,-1);
-	
-	gtk_text_buffer_insert(textbuffer,&iter,"----------------------------------------------------------\n",-1);
-	
-	// GTK versions
-	gchar *gtk_string=g_strdup_printf("GTK+ %d.%d.%d / GLib %d.%d.%d\n",
-		   //"Operating System: unknown",
-		   gtk_major_version, gtk_minor_version, gtk_micro_version,
-		   glib_major_version, glib_minor_version, glib_micro_version);
-	
-	gtk_text_buffer_get_end_iter(textbuffer,&iter);
-	gtk_text_buffer_insert(textbuffer,&iter,gtk_string,-1);
-	
-	gtk_text_buffer_get_end_iter(textbuffer,&iter);
-
-
-	
-	gtk_text_buffer_insert(textbuffer,&iter,"\n",-1);
-	gtk_text_buffer_get_end_iter(textbuffer,&iter);
 	
 	// Setup the textview and windows
 	textview=gtk_text_view_new_with_buffer(textbuffer);
 	
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview),FALSE);
+	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview),TRUE);
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview),FALSE);
 	
+	GtkWidget *scrolled_window;
 	
-	// add a "button" for the link at the anchor we created prevoiusly
-	
-	gchar *buf_homepage=g_strdup_printf("%s\n",homepage_string);
-
-	linkbutton=gtk_link_button_new_with_label(homepage_string,"http://www.gusnan.se/sciteproj");
-	gtk_text_view_add_child_at_anchor(GTK_TEXT_VIEW(textview),linkbutton,anchor);
-	
-	// create the scrolledwindow
-	
-	GtkScrolledWindow *scrolled_window;
-	
-	scrolled_window=GTK_SCROLLED_WINDOW(gtk_scrolled_window_new(NULL,NULL));
+	scrolled_window=gtk_scrolled_window_new(NULL,NULL);
 
 	// Never show horisontal scrollbar, always show vertical
-	gtk_scrolled_window_set_policy(scrolled_window,GTK_POLICY_NEVER,GTK_POLICY_ALWAYS);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),GTK_POLICY_NEVER,GTK_POLICY_ALWAYS);
 
 	gtk_container_add(GTK_CONTAINER(scrolled_window),textview);
+		
+	gtk_box_pack_start(GTK_BOX(vbox), scrolled_window, TRUE, TRUE, 0);
+	
+	gtk_text_buffer_place_cursor(textbuffer,&iter);
+	gtk_text_buffer_select_range (textbuffer,&iter,&iter);
 
-	// Nice big icon
-	GtkWidget *icon_image=gtk_image_new_from_pixbuf(program_icon_pixbuf);
-
-	// ---
-	gtk_table_attach_defaults(GTK_TABLE(table),icon_image,0,2,0,3);
+	hbox=gtk_hbox_new(FALSE,0);
 	
-	gtk_table_attach_defaults(GTK_TABLE(table),GTK_WIDGET(scrolled_window),2,15,0,15);
+	ok_button=gtk_button_new_from_stock(GTK_STOCK_OK);
 	
-	gtk_table_set_row_spacings(GTK_TABLE(table),0);
-	gtk_table_set_col_spacings(GTK_TABLE(table),0);
+	gtk_box_pack_end(GTK_BOX(hbox),ok_button,FALSE,FALSE,0);
 	
-	gtk_container_set_border_width(GTK_CONTAINER(table),0);
+	gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
 	
-	GtkWidget *container_vbox=gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	gtk_widget_show_all(window);
 	
-	gtk_box_pack_start(GTK_BOX(container_vbox),table,TRUE,TRUE,0);
+	gtk_widget_grab_focus(ok_button);
+		
+	gtk_text_buffer_get_start_iter(textbuffer, &iter);
+	gtk_text_buffer_place_cursor(textbuffer, &iter);
 	
-	// --
-
-	gtk_widget_show_all(dialog);
-	
-	result=gtk_dialog_run(GTK_DIALOG(dialog));
-	
-	gtk_widget_destroy(dialog);
-	
-	// Free all used strings and data
-	g_free(about_text);
-	g_free(about_text2);
-	g_free(gtk_string);
-	g_free(buf_homepage);
-	
-	g_object_unref(tag);
-	
-	
-#ifdef _DEBUG
-	g_object_unref(debug_tag);
-#endif
+	g_signal_connect_closure
+		(G_OBJECT(ok_button), "clicked",
+		 g_cclosure_new_swap(G_CALLBACK(gtk_widget_hide_on_delete),
+				     window, NULL), FALSE);
 }
 
 /**
