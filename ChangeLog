@@ -7,6 +7,7 @@ ChangeLog:
 	* Updated in-source commenting
 	* Updated documentation
 	* Split up the GUI code into several files
+	* Redesigned the About-dialog
 
 0.4.01
 	* Made the rename functionality rename in the treeview, instead of using
