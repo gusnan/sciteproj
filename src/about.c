@@ -191,8 +191,6 @@ void create_about_dialog()
 	
 	gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
 	
-	gtk_widget_show_all(window);
-	
 	gtk_widget_grab_focus(ok_button);
 		
 	gtk_text_buffer_get_start_iter(textbuffer, &iter);
@@ -202,6 +200,10 @@ void create_about_dialog()
 		(G_OBJECT(ok_button), "clicked",
 		 g_cclosure_new_swap(G_CALLBACK(gtk_widget_hide_on_delete),
 				     window, NULL), FALSE);
+					  
+	
+	gtk_widget_show_all(window);
+
 }
 
 /**
