@@ -46,12 +46,27 @@ gchar *homepage_string=(gchar*)"http://sciteproj.gusnan.se";
 
 gchar *sVersion = (gchar*)"0.4.01";
 
+static GtkWidget *window;
+
+void create_about_dialog();
+
 /**
- * show_new_about_dialog
+ * show_about_dialog
+ * Shows the about dialog, and if it isnt already made, creates it
  */
 void show_about_dialog()
 {
-	GtkWidget *window;
+	if (!window) 
+		create_about_dialog();
+	else
+		gtk_window_present(GTK_WINDOW(window));
+}
+
+/**
+ *
+ */
+void create_about_dialog()
+{
 	GtkWidget *vbox;
 	GtkWidget *textview;
 	GtkWidget *logo_image;
