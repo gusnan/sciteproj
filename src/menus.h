@@ -48,7 +48,6 @@ static gchar *sMenuDefXML = (gchar*)\
 				<menuitem name=\"ViewRecentMenuItem\" action=\"ViewRecentAction\"/> \
 			</menu> \
 			<menu name=\"HelpMenu\" action=\"HelpMenuAction\"> \
-				<menuitem name=\"UsageItem\" action=\"UsageAction\"/> \
 				<menuitem name=\"AboutItem\" action=\"AboutAction\"/> \
 			</menu> \
 		</menubar> \

@@ -188,7 +188,9 @@ void create_about_dialog()
 											"Martin Andrews<ScitePM@PLATFORMedia.com>\n\n"
 											"Many thanks to\n"
 											"Mattias Wecksten <wecksten@gmail.com>\n"
-											"Frank Wunderlich\n"
+											"Frank Wunderlich\n\n"
+											"For more information about SciteProj, see the README file that\n"
+											"is provided with the package."
 											);
 	
 	gtk_text_buffer_insert(textbuffer_info,&iter,about_text2,-1);
@@ -243,86 +245,6 @@ void create_about_dialog()
 	gtk_widget_show_all(window);
 
 }
-
-/**
- *	show_usage_dialog
- */
-void show_usage_dialog()
-{
-	GtkWidget *dialog,/**table,*/*textview; //,scrolled_window;
-	GtkTextBuffer *textbuffer;
-	GtkTextIter iter;
-	GtkWidget *table;
-	
-	gchar* usage_text=g_strdup_printf(	
-			"To open or save projects, click the 'Open Project' or 'Save Project' "
-			"buttons.  Project files are simple XML files, and may be easily "
-			"modified using a text editor or other tool.\n\n"
-			"Click the 'Add Files' or 'Add Group' buttons to add items to the "
-			"project tree, then reorganize them via drag-and-drop.  Additional "
-			"file and group operations are available via right-clicking.\n\n"
-			"To open a file in SciTE, double-click the file item in the project "
-			"tree, or highlight it and press return.");
-	
-	gint result;
-	
-	dialog=gtk_dialog_new_with_buttons("Usage",NULL,GTK_DIALOG_MODAL,
-													GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
-	
-	gtk_dialog_set_default_response(GTK_DIALOG(dialog),GTK_RESPONSE_OK);
-	
-	gtk_widget_set_size_request(dialog,500,400);
-	
-	table=gtk_table_new(15,15,TRUE);
-	
-	textbuffer=gtk_text_buffer_new(NULL);
-	
-	gtk_text_buffer_get_start_iter(textbuffer,&iter);
-	gtk_text_buffer_insert(textbuffer,&iter,usage_text,-1);
-	
-	textview=gtk_text_view_new_with_buffer(textbuffer);
-	
-	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview),GTK_WRAP_WORD_CHAR);
-	
-	//gtk_text_buffer_get_start_iter(textbuffer,&iter);
-	gtk_text_view_get_iter_at_location(GTK_TEXT_VIEW(textview),&iter,0,0);
-	gtk_text_view_scroll_to_iter(GTK_TEXT_VIEW(textview),&iter,0.0f,FALSE,0.0f,0.0f);
-	
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview),FALSE);
-	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview),FALSE);
-	
-	GtkScrolledWindow *scrolled_window;
-	
-	scrolled_window=GTK_SCROLLED_WINDOW(gtk_scrolled_window_new(NULL,NULL));
-	
-	gtk_scrolled_window_set_policy(scrolled_window,GTK_POLICY_NEVER,GTK_POLICY_ALWAYS);
-	
-	gtk_container_add(GTK_CONTAINER(scrolled_window),textview);
-
-		
-	GtkWidget *icon_image=gtk_image_new_from_pixbuf(program_icon_pixbuf);
-
-	gtk_table_attach_defaults(GTK_TABLE(table),icon_image,0,2,0,3);
-	
-	gtk_table_attach_defaults(GTK_TABLE(table),GTK_WIDGET(scrolled_window),2,15,0,15);
-	
-	gtk_table_set_row_spacings(GTK_TABLE(table),0);
-	gtk_table_set_col_spacings(GTK_TABLE(table),0);
-	
-	gtk_container_set_border_width(GTK_CONTAINER(table),0);
-
-	GtkWidget *container_vbox=gtk_dialog_get_content_area(GTK_DIALOG(dialog));
-	gtk_box_pack_start(GTK_BOX(container_vbox),table,TRUE,TRUE,0);
-
-	gtk_widget_show_all(dialog);
-	
-	result=gtk_dialog_run(GTK_DIALOG(dialog));
-	
-	gtk_widget_destroy(dialog);
-	
-	g_free(usage_text);
-}
-
 
 /**
  * Show version

@@ -74,7 +74,6 @@ static void row_expand_or_collapse_cb(GtkTreeView *treeview, GtkTreeIter *arg1, 
 
 static void quit_menu_cb();
 static void about_menu_cb();
-static void usage_menu_cb();
 static void saveproject_menu_cb();
 static void saveproject_as_menu_cb();
 static void openproject_menu_cb();
@@ -121,7 +120,6 @@ static GtkActionEntry sMenuActions[] =
 	{ "ExpandAllGroupsAction", NULL, "Expand All Groups", "<control><shift>E", "Expand All Groups", G_CALLBACK(expand_all_items_cb) },
 	{ "CollapseAllGroupsAction", NULL, "Collapse All Groups", "<control><shift>C", "Collapse All Groups", G_CALLBACK(collapse_all_items_cb) },
 	
-	{ "UsageAction", GTK_STOCK_HELP, "_Usage", "", "Show command line usage", G_CALLBACK(usage_menu_cb) },
 	{ "AboutAction", GTK_STOCK_ABOUT, "_About", "", "Show information about this application", G_CALLBACK(about_menu_cb) },
 	
 	{ "AddFilesPopupAction", GTK_STOCK_FILE, "Add Files", "", "Add files to the project", G_CALLBACK(popup_add_files_cb) },
@@ -1040,15 +1038,6 @@ static void quit_menu_cb()
 static void about_menu_cb()
 {
 	show_about_dialog();	
-}
-
-
-/**
- * Callback for "Usage" menu item
- */
-static void usage_menu_cb()
-{
-	show_usage_dialog();
 }
 
 
