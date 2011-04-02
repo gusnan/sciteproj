@@ -68,11 +68,16 @@ void show_about_dialog()
 void create_about_dialog()
 {
 	GtkWidget *vbox;
-	GtkWidget *textview;
+	GtkWidget *textview_info;
 	GtkWidget *logo_image;
 	GtkWidget *linkbutton;
 	GtkWidget *ok_button;
-	GtkTextBuffer *textbuffer;
+	GtkWidget *notebook;
+	GtkWidget *notebook_label1;
+	GtkWidget *notebook_label2;
+	GtkTextBuffer *textbuffer_info;
+	GtkTextBuffer *textbuffer_license;
+	GtkWidget *textview_license;
 	GtkTextIter iter;
 	
 	gchar *copyrightstring;
@@ -142,49 +147,82 @@ void create_about_dialog()
 
 	linkbutton=gtk_link_button_new_with_label(homepage_string,"http://www.gusnan.se/sciteproj");
 	gtk_box_pack_start(GTK_BOX(hbox), linkbutton, TRUE, FALSE, 0);
-
-	// New textbuffer - and we get the beginning of the textbuffer
-	textbuffer=gtk_text_buffer_new(NULL);
-	gtk_text_buffer_get_start_iter(textbuffer,&iter);
-
-	gchar *about_text2=g_strdup_printf("----------------------------------------------------------\n"
-											"based on ScitePM by\n"
-											"Roy Wood<roy.wood@gmail.com> and\n"
-											"Martin Andrews<ScitePM@PLATFORMedia.com>\n\n"
-											"Thanks to\n"
-											"Mattias Wecksten <wecksten@gmail.com>\n"
-											"Frank Wunderlich\n"
-											"----------------------------------------------------------\n\n");
 	
-	gtk_text_buffer_insert(textbuffer,&iter,about_text2,-1);
+	// New notebook - we want tabs for different sets of text
 	
-	gtk_text_buffer_get_end_iter(textbuffer,&iter);
+	notebook=gtk_notebook_new();
+	
+	notebook_label1=gtk_label_new("Information");
+	notebook_label2=gtk_label_new("License");
+	
+	// create a scrolled_window and a textview for the license
+	textbuffer_license=gtk_text_buffer_new(NULL);
+	gtk_text_buffer_get_start_iter(textbuffer_license,&iter);
+	
+	gtk_text_buffer_insert(textbuffer_license,&iter,sLicense,-1);
+	
+	textview_license=gtk_text_view_new_with_buffer(textbuffer_license);
 	
 	
-	gtk_text_buffer_insert(textbuffer,&iter,sLicense,-1);
+	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview_license),TRUE);
+	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview_license),FALSE);
 	
-	// Setup the textview and windows
-	textview=gtk_text_view_new_with_buffer(textbuffer);
+	GtkWidget *scrolled_window_license;
 	
-	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview),TRUE);
-	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview),FALSE);
-	
-	GtkWidget *scrolled_window;
-	
-	scrolled_window=gtk_scrolled_window_new(NULL,NULL);
+	scrolled_window_license=gtk_scrolled_window_new(NULL,NULL);
 
 	// Never show horisontal scrollbar, always show vertical
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),GTK_POLICY_NEVER,GTK_POLICY_ALWAYS);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window_license),GTK_POLICY_NEVER,GTK_POLICY_ALWAYS);
 
-	gtk_container_add(GTK_CONTAINER(scrolled_window),textview);
-		
-	gtk_box_pack_start(GTK_BOX(vbox), scrolled_window, TRUE, TRUE, 0);
+	gtk_container_add(GTK_CONTAINER(scrolled_window_license),textview_license);
 	
-	gtk_text_buffer_place_cursor(textbuffer,&iter);
-	gtk_text_buffer_select_range (textbuffer,&iter,&iter);
+	
+
+	// New textbuffer - and we get the beginning of the textbuffer
+	textbuffer_info=gtk_text_buffer_new(NULL);
+	gtk_text_buffer_get_start_iter(textbuffer_info,&iter);
+
+	gchar *about_text2=g_strdup_printf(""
+											"SciteProj is based on ScitePM by\n"
+											"Roy Wood<roy.wood@gmail.com> and\n"
+											"Martin Andrews<ScitePM@PLATFORMedia.com>\n\n"
+											"Many thanks to\n"
+											"Mattias Wecksten <wecksten@gmail.com>\n"
+											"Frank Wunderlich\n"
+											);
+	
+	gtk_text_buffer_insert(textbuffer_info,&iter,about_text2,-1);
+	
+	gtk_text_buffer_get_end_iter(textbuffer_info,&iter);
+	
+	// Setup the textview and windows
+	textview_info=gtk_text_view_new_with_buffer(textbuffer_info);
+	
+	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview_info),TRUE);
+	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview_info),FALSE);
+	
+	GtkWidget *scrolled_window_info;
+	
+	scrolled_window_info=gtk_scrolled_window_new(NULL,NULL);
+
+	// Never show horisontal scrollbar, always show vertical
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window_info),GTK_POLICY_NEVER,GTK_POLICY_ALWAYS);
+
+	gtk_container_add(GTK_CONTAINER(scrolled_window_info),textview_info);
+		
+	//gtk_box_pack_start(GTK_BOX(vbox), scrolled_window, TRUE, TRUE, 0);
+	
+	gtk_notebook_append_page(GTK_NOTEBOOK(notebook),scrolled_window_info,notebook_label1);
+	gtk_notebook_append_page(GTK_NOTEBOOK(notebook),scrolled_window_license,notebook_label2);
+	
+	gtk_box_pack_start(GTK_BOX(vbox), notebook,TRUE,TRUE,0);
+	
+	gtk_text_buffer_place_cursor(textbuffer_info,&iter);
+	gtk_text_buffer_select_range (textbuffer_info,&iter,&iter);
 
 	hbox=gtk_hbox_new(FALSE,0);
 	
+	// Create an ok button
 	ok_button=gtk_button_new_from_stock(GTK_STOCK_OK);
 	
 	gtk_box_pack_end(GTK_BOX(hbox),ok_button,FALSE,FALSE,0);
@@ -193,8 +231,8 @@ void create_about_dialog()
 	
 	gtk_widget_grab_focus(ok_button);
 		
-	gtk_text_buffer_get_start_iter(textbuffer, &iter);
-	gtk_text_buffer_place_cursor(textbuffer, &iter);
+	gtk_text_buffer_get_start_iter(textbuffer_info, &iter);
+	gtk_text_buffer_place_cursor(textbuffer_info, &iter);
 	
 	g_signal_connect_closure
 		(G_OBJECT(ok_button), "clicked",
