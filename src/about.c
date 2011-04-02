@@ -101,9 +101,7 @@ void show_about_dialog()
 	gtk_box_pack_start(GTK_BOX(vbox),label,FALSE,FALSE,0);
 	
 	// Show SciteProj copyrights
-	copyrightstring=g_strdup_printf("%s\n%s",
-			"Copyright (C) 2008-2011 Andreas Rönnquist <gusnan@gusnan.se>",
-			"Copyright (C) 2006 Roy Wood <roy.wood@gmail.com>");
+	copyrightstring=g_strdup_printf("Copyright (C) 2008-2011 Andreas Rönnquist <gusnan@gusnan.se>");
 	
 	label=gtk_label_new(copyrightstring);
 	gtk_label_set_selectable(GTK_LABEL(label),FALSE);
