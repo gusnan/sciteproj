@@ -63,7 +63,7 @@ void show_about_dialog()
 }
 
 /**
- *
+ *	creates a new dialog box, and fills it will all necessary information
  */
 void create_about_dialog()
 {
