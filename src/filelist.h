@@ -30,6 +30,7 @@
 struct File {
 	gchar *filename;
 	gchar *full_path;
+	int count;
 };
 
 typedef struct File File;
@@ -42,11 +43,12 @@ extern GList *list;
 gboolean init_filelist();
 void done_filelist();
 
-void printlist();
+void print_filelist();
 
 void add_item(gchar *filename, gchar *full_path);
 
 gboolean remove_item(gchar *filename, gchar *full_path);
+File *exists_in_list(gchar *full_path);
 
 
 #endif /*__HEADER_FILE_LIST_*/

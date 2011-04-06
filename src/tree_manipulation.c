@@ -927,6 +927,47 @@ EXITPOINT:
 }
 
 
+/**
+ *
+ */
+void helper_remove(GtkTreeIter *iter)
+{
+		
+	GtkTreeIter *tempIter=gtk_tree_iter_copy(iter);
+	GtkTreeIter newIter;
+		
+	if (gtk_tree_model_iter_children(GTK_TREE_MODEL(sTreeStore),&newIter,tempIter)) {
+		
+		gboolean next_valid=TRUE;
+		
+		do {
+			
+			if (next_valid) {
+				
+				gchar *nodeContents;
+				int itemType;
+					
+				gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), &newIter, COLUMN_ITEMTYPE, &itemType, COLUMN_FILEPATH, &nodeContents, -1);
+				
+				gchar *fileName = get_filename_from_full_path((gchar*)nodeContents);
+				
+				if (itemType==ITEMTYPE_GROUP) {
+					helper_remove(&newIter);
+				} else {
+					//printf("Removed: %s, %s\n",fileName,nodeContents);
+					
+					remove_item(fileName,nodeContents);
+				}
+			}
+
+			next_valid=gtk_tree_model_iter_next(GTK_TREE_MODEL(sTreeStore),&newIter);
+			
+		} while(next_valid);
+		
+	}
+	
+}
+
 
 /**
  * Remove a node from the GtkTreeStore.
@@ -938,10 +979,6 @@ EXITPOINT:
  */
 extern gboolean remove_tree_node(GtkTreeIter *iter, GError **err)
 {
-	// Count if this is the last of the copy of the actual file stored in 
-	// the tree - in that case, remove it from the filelist.
-	
-	gchar *filename;
 	gchar *file_path;
 	
 	int itemType;
@@ -951,6 +988,17 @@ extern gboolean remove_tree_node(GtkTreeIter *iter, GError **err)
 	gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), iter, COLUMN_ITEMTYPE, &itemType, COLUMN_FILEPATH, &file_path, -1);
 	
 	printf("Filename: %s\n",file_path);
+	
+	if (itemType==ITEMTYPE_GROUP) {
+		
+		helper_remove(iter);
+		
+	} else {
+	
+		gchar *fileName = get_filename_from_full_path((gchar*)file_path);
+		
+		remove_item(fileName,file_path);
+	}
 	
 	gtk_tree_store_remove(sTreeStore, iter);
 	
