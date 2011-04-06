@@ -51,6 +51,7 @@
 #include "addfiles.h"
 
 #include "recent_files.h"
+#include "filelist.h"
 
 #include "menus.h"
 
@@ -484,6 +485,9 @@ gboolean setup_gui(GError **err)
 	
 	resultCode = TRUE;
 	
+	// init the filelist
+	init_filelist();
+	
 EXITPOINT:
 	
 	if (tempErr) g_error_free(tempErr);
@@ -504,6 +508,8 @@ void gui_close()
 	unload_graphics();
 	
 	done_statusbar();
+	
+	done_filelist();
 
 	if (sMainWindow) gtk_widget_destroy(sMainWindow);
 }

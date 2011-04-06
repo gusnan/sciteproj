@@ -80,6 +80,7 @@ set(SOURCES
 	src/clipboard.c
 	src/drag_drop.c
 	src/file_utils.c
+	src/filelist.c
 	src/folder_to_xml.c
 	src/graphics.c
 	src/gui.c
