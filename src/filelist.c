@@ -96,7 +96,7 @@ File *exists_in_list(gchar *full_path)
 	
 	while(iter) {
 		
-		File *data=iter->data;
+		File *data=(File*)iter->data;
 		
 		if (result==NULL) {
 			
