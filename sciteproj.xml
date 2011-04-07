@@ -16,6 +16,7 @@
 		<file>./src/rename.c</file>
 		<file>./src/remove.c</file>
 		<file>./src/scite_utils.c</file>
+		<file>./src/search.c</file>
 		<file>./src/string_utils.c</file>
 		<file>./src/statusbar.c</file>
 		<file>./src/tree_manipulation.c</file>
@@ -38,6 +39,7 @@
 		<file>./src/rename.h</file>
 		<file>./src/remove.h</file>
 		<file>./src/scite_utils.h</file>
+		<file>./src/search.h</file>
 		<file>./src/statusbar.h</file>
 		<file>./src/string_utils.h</file>
 		<file>./src/tree_manipulation.h</file>

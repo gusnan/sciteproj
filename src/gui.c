@@ -55,6 +55,8 @@
 
 #include "menus.h"
 
+#include "search.h"
+
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
@@ -120,6 +122,8 @@ static GtkActionEntry sMenuActions[] =
 	
 	{ "ExpandAllGroupsAction", NULL, "Expand All Groups", "<control><shift>E", "Expand All Groups", G_CALLBACK(expand_all_items_cb) },
 	{ "CollapseAllGroupsAction", NULL, "Collapse All Groups", "<control><shift>C", "Collapse All Groups", G_CALLBACK(collapse_all_items_cb) },
+	
+	{ "SearchAction", GTK_STOCK_FIND, "Search", "", "Search for a string in the project", G_CALLBACK(search_dialog_cb) },
 	
 	{ "AboutAction", GTK_STOCK_ABOUT, "_About", "", "Show information about this application", G_CALLBACK(about_menu_cb) },
 	

@@ -91,6 +91,7 @@ set(SOURCES
 	src/remove.c
 	src/rename.c
 	src/scite_utils.c
+	src/search.c
 	src/statusbar.c
 	src/string_utils.c
 	src/tree_manipulation.c
