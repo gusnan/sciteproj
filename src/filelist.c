@@ -138,8 +138,6 @@ void add_item(gchar *filename, gchar *full_path)
 	} else {
 		newFile->count++;
 	}		
-	
-	printf("File: %d - %s, %s\n",newFile->count,newFile->filename,newFile->full_path);
 }
 
 
