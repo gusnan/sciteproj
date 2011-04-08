@@ -122,7 +122,7 @@ void search_dialog()
 	gtk_box_pack_end(hbox,search_text_entry,TRUE,TRUE,0);
 	*/
 	
-	search_button=gtk_button_new_with_label("Search");
+	search_button=gtk_button_new_from_stock(GTK_STOCK_FIND);
 	
 	gtk_box_pack_start(GTK_BOX(hbox),search_button,FALSE,FALSE,5);
 	
@@ -167,7 +167,7 @@ void search_dialog()
 	gtk_box_pack_start(GTK_BOX(vbox),scrolled_win,TRUE,TRUE,0);
 	
 	
-	close_button=gtk_button_new_with_label("Close");
+	close_button=gtk_button_new_from_stock(GTK_STOCK_CLOSE);
 	
 	close_hbox=gtk_hbox_new(FALSE,8);
 	gtk_box_pack_end(GTK_BOX(close_hbox),close_button,FALSE,FALSE,5);
