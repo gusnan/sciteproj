@@ -60,13 +60,17 @@ GtkWidget *match_whole_words_only_checkbutton=NULL;
 
 
 static void setup_tree_view(GtkWidget *treeview);
-static void search_button_clicked(GtkButton *button, gpointer data);
 static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkTreeViewColumn *column, gpointer userData);
 
 void dialog_response(GtkDialog *dialog,gint response_id,gpointer user_data);
 
 gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData);
 
+
+static void destroy_search_dialog_cb(GtkWidget *widget,GdkEvent *event,gpointer data);
+static void close_button_pressed_cb(GtkWidget *widget,gpointer data);
+
+static void search_button_clicked_cb(GtkButton *button,gpointer data);
 
 
 /**
@@ -173,21 +177,35 @@ void search_dialog()
 	// add the table to the window
 	gtk_container_add(GTK_CONTAINER(window),vbox);
 	
+	/*
+	g_signal_connect (G_OBJECT(window), "destroy",
+			G_CALLBACK (expose_event_callback), NULL);
+			*/
+			
+	g_signal_connect (window, "destroy",G_CALLBACK (destroy_search_dialog_cb), &window);
+			
+	g_signal_connect(G_OBJECT(close_button),"clicked",G_CALLBACK(close_button_pressed_cb),NULL);
+	
+	g_signal_connect(G_OBJECT(search_button),"clicked",G_CALLBACK(search_button_clicked_cb),NULL);
+	
+	g_signal_connect(G_OBJECT(window),"key-press-event",G_CALLBACK(search_key_press_cb),NULL);
+	
 	gtk_widget_show_all(window);
 }
 
 /**
  *
  */
-static void search_button_clicked(GtkButton *button,gpointer data)
+static void search_button_clicked_cb(GtkButton *button,gpointer user_data)
 {
-	printf("Search...\n");
+	gchar *data=(gchar*)user_data;
+	printf("Search '%s'...\n",data);
 }
 
 /**
  *
  */
-gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
+gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer user_data)
 {
 	switch (event->keyval) 
 	{
@@ -195,7 +213,7 @@ gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer use
 		{
 			//g_print((gchar*)"key_press_cb: keyval = %d = GDK_Return, hardware_keycode = %d\n", event->keyval, event->hardware_keycode);
 			
-			search_button_clicked(GTK_BUTTON(search_button),NULL);
+			search_button_clicked_cb(GTK_BUTTON(search_button),user_data);
 			break;
 		}
 	}
@@ -266,8 +284,6 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	gtk_tree_model_get(treeModel, &iter, /*COLUMN_ITEMTYPE, &nodeItemType,*/ FILENAME, &absFilePath, LINENUMBER, &line_number, -1);
 	
 	debug_printf("Path:%s, line:%d\n",absFilePath,line_number);
-	
-	
 	
 	// It's a file, so try to open it
 	
@@ -365,9 +381,24 @@ void dialog_response(GtkDialog *dialog, gint response_id,gpointer user_data)
 	if (response_id==GTK_RESPONSE_CLOSE) {
 		// Close all (threads and everything)
 		
-		gtk_widget_destroy(GTK_WIDGET(dialog));
+		gtk_widget_destroy(GTK_WIDGET(window));
 	}
+}
+
+/**
+ *
+ */
+static void destroy_search_dialog_cb(GtkWidget *widget,GdkEvent *event,gpointer data)
+{
 	
-	//debug_printf("Response:%d\n",response_id);
+}
+
+/**
+ *
+ */
+static void close_button_pressed_cb(GtkWidget *widget,gpointer data)
+{
+	// close the window (calls the destroy_search_dialog_cb function)
+	gtk_widget_destroy(GTK_WIDGET(window));
 }
 
