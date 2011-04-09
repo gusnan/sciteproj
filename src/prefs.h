@@ -36,6 +36,7 @@ typedef struct {
 	
 	gboolean dirty_on_folder_change;
 	gboolean give_scite_focus;
+	gboolean search_give_scite_focus;
 	
 	gboolean allow_duplicates;
 	
