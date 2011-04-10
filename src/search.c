@@ -152,7 +152,8 @@ void search_dialog()
 	gtk_container_set_border_width(GTK_CONTAINER(window), 8);
 	
 	gtk_window_set_title(GTK_WINDOW(window),"Search project");
-		
+	
+	// Set up size and position from prefs
 	gtk_window_resize(GTK_WINDOW(window), gPrefs.search_width, gPrefs.search_height);
 	
 	if (gPrefs.search_xpos!=-1) {
