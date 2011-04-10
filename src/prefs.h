@@ -34,6 +34,9 @@ typedef struct {
 	int last_file_filter;
 	int xpos,ypos;
 	
+	int search_xpos,search_ypos;
+	int search_width,search_height;
+	
 	gboolean dirty_on_folder_change;
 	gboolean give_scite_focus;
 	gboolean search_give_scite_focus;

@@ -152,8 +152,13 @@ void search_dialog()
 	gtk_container_set_border_width(GTK_CONTAINER(window), 8);
 	
 	gtk_window_set_title(GTK_WINDOW(window),"Search project");
+		
+	gtk_window_resize(GTK_WINDOW(window), gPrefs.search_width, gPrefs.search_height);
 	
-	gtk_widget_set_size_request(window,500,400);
+	if (gPrefs.search_xpos!=-1) {
+		gtk_window_move(GTK_WINDOW(window),gPrefs.search_xpos,gPrefs.search_ypos);
+	}
+
 	
 	// Create the busy cursor
 	GdkDisplay *display=gdk_display_get_default();

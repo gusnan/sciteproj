@@ -40,6 +40,12 @@ gchar *default_config_string=(gchar*)"" \
 				"width=200\n"
 				"height=400\n"
 				"\n"
+				"# Search window geometry (-1 on xpos and ypos means default center screen):\n"
+				"search_xpos=-1\n"
+				"search_ypos=-1\n"
+				"search_width=500\n"
+				"search_height=400\n"
+				"\n"
 				"#other:\n"
 				"give_scite_focus=FALSE\n"
 				"search_give_scite_focus=TRUE\n"
@@ -117,6 +123,28 @@ gboolean check_config_string(gchar *in_config)
 			tempdouble=g_ascii_strtod(value,NULL);
 			gPrefs.height=(int)tempdouble;
 		}
+		
+		
+		if (g_ascii_strcasecmp(tempstring,"search_xpos")==0) {
+			tempdouble=g_ascii_strtod(value,NULL);
+			gPrefs.search_xpos=(int) tempdouble;
+		}
+		
+		if (g_ascii_strcasecmp(tempstring,"search_ypos")==0) {
+			tempdouble=g_ascii_strtod(value,NULL);
+			gPrefs.search_ypos=(int)tempdouble;
+		}
+		
+		if (g_ascii_strcasecmp(tempstring,"search_width")==0) {
+			tempdouble=g_ascii_strtod(value,NULL);
+			gPrefs.search_width=(int)tempdouble;
+		}
+		
+		if (g_ascii_strcasecmp(tempstring,"search_height")==0) {
+			tempdouble=g_ascii_strtod(value,NULL);
+			gPrefs.search_height=(int)tempdouble;
+		}
+		
 		
 		gPrefs.give_scite_focus=FALSE;
 		if (g_ascii_strcasecmp(tempstring,"give_scite_focus")==0) {
@@ -210,6 +238,12 @@ gboolean init_prefs(GError **err)
 	gPrefs.height=600;
 	gPrefs.verbosity=0; // No informational messages
 	gPrefs.last_file_filter=-1; // All files (my choice)
+	
+	gPrefs.search_xpos=-1;
+	gPrefs.search_ypos=-1;
+	
+	gPrefs.search_width=500;
+	gPrefs.search_height=400;
 	
 	gPrefs.give_scite_focus=FALSE;
 	gPrefs.search_give_scite_focus=TRUE;
