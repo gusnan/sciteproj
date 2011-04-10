@@ -63,6 +63,9 @@ typedef struct _Data
 	
 	gboolean search_give_scite_focus;
 	
+	gboolean match_case;
+	//gboolean match_whole_words;
+	
 } Data;
 
 typedef struct _Message
@@ -80,7 +83,7 @@ gboolean is_searching=FALSE;
 
 GtkWidget *treeview;
 GtkWidget *match_case_checkbutton=NULL;
-GtkWidget *match_whole_words_only_checkbutton=NULL;
+//GtkWidget *match_whole_words_only_checkbutton=NULL;
 
 
 GdkCursor *standard_cursor;
@@ -194,13 +197,19 @@ void search_dialog()
 	
 	match_case_checkbutton=gtk_check_button_new_with_label("Match case");
 	
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case_checkbutton),TRUE);
+	
 	//gtk_table_attach(GTK_TABLE(table),match_case_checkbutton,0,2,1,2, GTK_SHRINK, GTK_SHRINK, 0,0);
 	gtk_box_pack_start(GTK_BOX(check_button_box),match_case_checkbutton,FALSE,TRUE,5);
 	
+	/*
 	match_whole_words_only_checkbutton=gtk_check_button_new_with_label("Match whole word");
+	
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton),FALSE);
 	
 	//gtk_table_attach(GTK_TABLE(table),match_whole_words_only_checkbutton,2,4,1,2, GTK_SHRINK,GTK_SHRINK, 0,0);
 	gtk_box_pack_start(GTK_BOX(check_button_box),match_whole_words_only_checkbutton,FALSE,TRUE,5);
+	*/
 	
 	gtk_box_pack_start(GTK_BOX(vbox),check_button_box,FALSE,FALSE,0);
 	
@@ -227,6 +236,8 @@ void search_dialog()
 	
 	gtk_box_pack_start(GTK_BOX(vbox),scrolled_win,TRUE,TRUE,0);
 	
+	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolled_win),
+					    GTK_SHADOW_IN);
 	
 	close_button=gtk_button_new_from_stock(GTK_STOCK_CLOSE);
 	
@@ -326,9 +337,20 @@ static gpointer thread_func(Data *data)
 					for (co=0;co<strlen(line);co++) {
 						int length=strlen(data->text_to_search_for);
 						
-						if (strncmp(tempString,data->text_to_search_for,length)==0) {
-							// text found!
+						gboolean text_found=FALSE;
+						
+						if (data->match_case) {
+							if (strncmp(tempString,data->text_to_search_for,length)==0) text_found=TRUE;
+						} else {
 							
+							gchar *indep1=g_utf8_casefold(tempString,length);
+							gchar *indep2=g_utf8_casefold(data->text_to_search_for,length);
+							
+							if (strncmp(indep1,indep2,length)==0) text_found=TRUE;
+						}
+						
+						// text found!
+						if (text_found) {
 							Message *tempMessage=g_slice_new(Message);
 							
 							tempMessage->line_number=line_number;
@@ -408,6 +430,9 @@ static void search_button_clicked_cb(GtkButton *button,gpointer user_data)
 			
 			// get the text from the search string entry
 			data->text_to_search_for=(gchar*)(gtk_entry_get_text(GTK_ENTRY(data->search_string_entry)));
+			
+			data->match_case=(gboolean)gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(match_case_checkbutton));
+			//data->match_whole_words=(gboolean)gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton));
 					
 			gtk_widget_set_sensitive(GTK_WIDGET(data->search_button),FALSE);
 			
