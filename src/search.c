@@ -105,13 +105,13 @@ void dialog_response(GtkDialog *dialog,gint response_id,gpointer user_data);
 gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData);
 
 static void destroy_search_dialog_cb(GtkWidget *widget,GdkEvent *event,gpointer data);
-static void close_button_pressed_cb(GtkWidget *widget,gpointer data);
+G_MODULE_EXPORT void close_button_pressed_cb(GtkWidget *widget,gpointer data);
 
 static void search_button_clicked_cb(GtkButton *button,gpointer data);
 
 static gpointer thread_func(Data *data);
 
-void cancel_search(gpointer data);
+static void cancel_search(gpointer data);
 
 
 /**
@@ -250,7 +250,7 @@ void search_dialog()
 	gtk_container_add(GTK_CONTAINER(window),vbox);
 			
 	g_signal_connect(G_OBJECT(window), "destroy",G_CALLBACK (destroy_search_dialog_cb), &window);
-	g_signal_connect(G_OBJECT(close_button),"clicked",G_CALLBACK(close_button_pressed_cb),NULL);
+	g_signal_connect(G_OBJECT(close_button),"clicked",G_CALLBACK(close_button_pressed_cb),data);
 	g_signal_connect(G_OBJECT(data->search_button),"clicked",G_CALLBACK(search_button_clicked_cb),data);
 	g_signal_connect(G_OBJECT(window),"key-press-event",G_CALLBACK(search_key_press_cb),data);
 	
@@ -265,14 +265,13 @@ static gboolean update_tree(Data *data)
 	GtkTreeIter iter;
 	Message *msg;
 	
-	if (threaded_flag!=0) {
-		msg=(Message*)g_async_queue_pop(data->queue);
-		gtk_list_store_append(data->store,&iter);
+	msg=(Message*)g_async_queue_pop(data->queue);
+	gtk_list_store_append(data->store,&iter);
 		
-		gtk_list_store_set(data->store,&iter,0,msg->filename,1,msg->line_number,-1);
-		g_free(msg->filename);
-		g_slice_free(Message,msg);
-	}
+	gtk_list_store_set(data->store,&iter,0,msg->filename,1,msg->line_number,-1);
+	g_free(msg->filename);
+	g_slice_free(Message,msg);
+	
 	return FALSE;
 }
 
@@ -310,10 +309,6 @@ static gpointer thread_func(Data *data)
 				File *file=(File*)(list->data);
 				
 				gchar *filename=(gchar*)(file->full_path);
-				
-				//msg->filename=g_strdup_printf("File: %d %s - '%s'",counter,(gchar*)(file->filename),(gchar*)(data->text_to_search_for));
-				
-				// do your stuff for the file
 				
 				// convert to a full path
 				if (!relative_path_to_abs_path(filename, &absFilePath, get_project_directory(), &err)) {
@@ -369,7 +364,7 @@ static gpointer thread_func(Data *data)
 				// through that list, and add the results to the tree
 				GList *iter=result_list;
 	
-				while(iter) {
+				while ((iter) && (g_atomic_int_get(&threaded_flag))) {
 		
 					Message *msg=(Message*)iter->data;
 		
@@ -385,6 +380,7 @@ static gpointer thread_func(Data *data)
 					}	
 		
 					iter=iter->next;
+					iter=g_list_next(iter);
 				}
 				
 				msg->line_number=counter;
@@ -521,8 +517,6 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	
 	gint line_number=-1;
 	
-	printf("Tree_row..\n");
-	
 	// Launch scite if it isn't already launched
 	if (!scite_ready()) {
 		if (!launch_scite("",&err)) {
@@ -614,9 +608,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 		}
 	}
 	
-	printf("krooth\n");
 	if (gPrefs.search_give_scite_focus) {
-		printf("Bah!\n");
 		send_scite_command((gchar*)"focus:1",NULL);
 		GError *err;
 		activate_scite(&err);
@@ -673,12 +665,17 @@ void dialog_response(GtkDialog *dialog, gint response_id,gpointer user_data)
 /**
  *
  */
-void stop_search(gpointer user_data)
+static void stop_search(gpointer user_data)
 {
 	Data *data=(Data*)(user_data);
 	
-	if (is_searching) {
-		is_searching=FALSE;
+	if (is_searching==1) {
+		is_searching=0;
+		
+		g_atomic_int_set(&threaded_flag,0);
+		if (thread!=NULL) g_thread_join(thread);
+		
+		g_async_queue_unref(data->queue);
 		
 		gtk_widget_set_sensitive(GTK_WIDGET(data->search_button),TRUE);
 		
@@ -689,7 +686,7 @@ void stop_search(gpointer user_data)
 /**
  *
  */
-void cancel_search(gpointer data)
+static void cancel_search(gpointer data)
 {
 	stop_search((Data*)data);
 }
@@ -706,7 +703,7 @@ static void destroy_search_dialog_cb(GtkWidget *widget,GdkEvent *event,gpointer 
 /**
  *
  */
-static void close_button_pressed_cb(GtkWidget *widget,gpointer user_data)
+G_MODULE_EXPORT void close_button_pressed_cb(GtkWidget *widget,gpointer user_data)
 {
 	Data *data=(Data*)user_data;
 	
@@ -715,4 +712,3 @@ static void close_button_pressed_cb(GtkWidget *widget,gpointer user_data)
 	// close the window (calls the destroy_search_dialog_cb function)
 	gtk_widget_destroy(GTK_WIDGET(window));
 }
-
