@@ -659,19 +659,24 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 		}
 	}
 	
+	debug_printf("Go to the line number...\n");
+	
 	// go to the right line number:
 	if ((command = g_strdup_printf("goto:%d\n", line_number)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
 	}
 	else {
+		
+				
 		if (send_scite_command(command, &err)) {
 			// Try to activate SciTE; ignore errors
 			
+			debug_printf("Send the commend worked!\n");
 			
 			if (data->search_give_scite_focus!=FALSE) {
 				send_scite_command((gchar*)"focus:0",NULL);
 			}
-			
+						
 			//activate_scite(NULL);
 			
 			//GError *err;
@@ -685,12 +690,15 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 			g_free(statusbar_text);
 		} else {
 			
+			printf("goto didn't work...\n");
 			if (err) {
 				printf("Error:%s\n",err->message);
 			}
 			
 		}
 	}
+	
+	debug_printf("Set scite focus...\n");
 	
 	if (gPrefs.search_give_scite_focus) {
 		send_scite_command((gchar*)"focus:1",NULL);

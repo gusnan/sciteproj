@@ -278,9 +278,7 @@ static void cancel_button_cb(GtkDialog *dialog, gint responseID, gpointer userDa
 gboolean launch_scite(gchar *instring,GError **err)
 {
 
-#ifdef DEBUG_SCITE	
 	debug_printf("launch_scite\n");
-#endif
 
 	gboolean resultCode = FALSE;
 	gchar* ipcDirectorName = (gchar*)"ipc.director.name";
@@ -573,6 +571,7 @@ gboolean launch_scite(gchar *instring,GError **err)
 		set_statusbar_text("Launched SciTE");
 	}
 	
+	debug_printf("All done launching SciTE...\n");
 	
 EXITPOINT:
 	
