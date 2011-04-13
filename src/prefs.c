@@ -46,6 +46,8 @@ gchar *default_config_string=(gchar*)"" \
 				"search_width=500\n"
 				"search_height=400\n"
 				"\n"
+				"search_alert_file_warnings=TRUE\n"
+				"\n"
 				"#other:\n"
 				"give_scite_focus=FALSE\n"
 				"search_give_scite_focus=TRUE\n"
@@ -146,7 +148,7 @@ gboolean check_config_string(gchar *in_config)
 		}
 		
 		
-		gPrefs.give_scite_focus=FALSE;
+		//gPrefs.give_scite_focus=FALSE;
 		if (g_ascii_strcasecmp(tempstring,"give_scite_focus")==0) {
 			
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
@@ -156,7 +158,7 @@ gboolean check_config_string(gchar *in_config)
 			}
 		}
 		
-		gPrefs.search_give_scite_focus=FALSE;
+		//gPrefs.search_give_scite_focus=FALSE;
 		if (g_ascii_strcasecmp(tempstring,"search_give_scite_focus")==0) {
 			
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
@@ -164,48 +166,47 @@ gboolean check_config_string(gchar *in_config)
 			}
 		}
 		
-		gPrefs.dirty_on_folder_change=FALSE;
-		if (g_ascii_strcasecmp(tempstring,"dirty_on_folder_change")==0) {
+		//gPrefs.search_alert_file_warnings=TRUE;
+		if (g_ascii_strcasecmp(tempstring,"search_alert_file_warnings")==0) {
 			
-			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				//printf("give_scite_focus=TRUE");
-				gPrefs.dirty_on_folder_change=TRUE;
-				
+			if (g_ascii_strcasecmp(value,"FALSE")==0) {
+				gPrefs.search_alert_file_warnings=FALSE;
 			}
 		}
 		
-		gPrefs.allow_duplicates=TRUE;
+		if (g_ascii_strcasecmp(tempstring,"dirty_on_folder_change")==0) {
+			
+			if (g_ascii_strcasecmp(value,"TRUE")==0) {
+				gPrefs.dirty_on_folder_change=TRUE;
+			}
+		}
+		
 		if (g_ascii_strcasecmp(tempstring,"allow_duplicates")==0) {
 			if (g_ascii_strcasecmp(value,"FALSE")==0) {
 				gPrefs.allow_duplicates=FALSE;
 			}
 		}
 		
-		gPrefs.scite_path=NULL;
 		if (g_ascii_strcasecmp(tempstring,"scite_path")==0) {
 			gPrefs.scite_path=g_strdup_printf("%s",value);
 		}
 		
-		gPrefs.file_to_load=NULL;
 		if (g_ascii_strcasecmp(tempstring,"file_to_load")==0) {
 			gPrefs.file_to_load=g_strdup_printf("%s",value);
 		}
 		
-		gPrefs.identify_sciteproj_xml=FALSE;
 		if (g_ascii_strcasecmp(tempstring,"identify_sciteproj_xml")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
 				gPrefs.identify_sciteproj_xml=TRUE;
 			}
 		}
 		
-		gPrefs.show_recent=FALSE;
 		if (g_ascii_strcasecmp(tempstring,"show_recent")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
 				gPrefs.show_recent=TRUE;
 			}
 		}
 		
-		gPrefs.recent_add_to_bottom=FALSE;
 		if (g_ascii_strcasecmp(tempstring,"recent_add_to_bottom")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
 				gPrefs.recent_add_to_bottom=TRUE;
@@ -249,12 +250,18 @@ gboolean init_prefs(GError **err)
 	gPrefs.search_give_scite_focus=TRUE;
 	gPrefs.dirty_on_folder_change=FALSE;
 	
+	gPrefs.search_alert_file_warnings=TRUE;
+	
 	gPrefs.allow_duplicates=TRUE;
 	
 	gPrefs.show_recent=FALSE;
 	gPrefs.recent_add_to_bottom=FALSE;
 	
 	gchar *config_filename=NULL;
+	
+	gPrefs.file_to_load=NULL;
+	
+	gPrefs.scite_path=NULL;
 	
 	config_filename=g_build_filename(g_get_home_dir(),".sciteproj",NULL);
 	

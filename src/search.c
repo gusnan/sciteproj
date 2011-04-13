@@ -66,6 +66,8 @@ typedef struct _Data
 	gboolean match_case;
 	
 	gchar *error;
+	
+	sciteproj_prefs prefs;
 	//gboolean match_whole_words;
 	
 } Data;
@@ -152,6 +154,8 @@ void search_dialog()
 	data=g_slice_new(Data);
 	
 	data->search_list=list;
+	
+	data->prefs=gPrefs;
 
 	// Make the dialog
 	window=gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -747,10 +751,13 @@ static void stop_search(gpointer user_data)
 		// If we have error results from the search - open a dialog, and show it
 		if (data->error!=NULL) {
 			
-			GtkWidget *warningDialog = gtk_message_dialog_new(NULL,
-				GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,"%s",data->error);
-			gtk_dialog_run(GTK_DIALOG(warningDialog));
-			gtk_widget_destroy(warningDialog);
+			if (data->prefs.search_alert_file_warnings) {
+			
+				GtkWidget *warningDialog = gtk_message_dialog_new(NULL,
+					GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,"%s",data->error);
+				gtk_dialog_run(GTK_DIALOG(warningDialog));
+				gtk_widget_destroy(warningDialog);
+			}
 		
 		}
 	}

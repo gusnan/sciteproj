@@ -52,6 +52,8 @@ typedef struct {
 	gboolean show_recent;
 	gboolean recent_add_to_bottom;
 	
+	gboolean search_alert_file_warnings;
+	
 } sciteproj_prefs;
 
 extern sciteproj_prefs gPrefs;
