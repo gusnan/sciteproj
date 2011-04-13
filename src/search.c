@@ -587,6 +587,8 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	if (!scite_ready()) {
 		if (!launch_scite("",&err)) {
 			
+			printf("Error:%s\n",err->message);
+			
 			//goto EXITPOINT;
 			
 			/*
@@ -616,6 +618,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	
 	// convert to a full path
 	if (!relative_path_to_abs_path(temppath, &absFilePath, get_project_directory(), &err)) {
+		printf("Error:%s\n",err->message);
 		goto EXITPOINT;
 	}
 	
@@ -623,8 +626,10 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	
 	if ((command = g_strdup_printf("open:%s\n", absFilePath)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
+		goto EXITPOINT;
 	}
 	else {
+		GError *err;
 		if (send_scite_command(command, &err)) {
 			// Try to activate SciTE; ignore errors
 			
@@ -632,7 +637,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 			
 			if (data->search_give_scite_focus) {
 				
-				GError *err;
+				GError *err=NULL;
 				send_scite_command((gchar*)"focus:1",&err);
 			}
 			
@@ -645,6 +650,12 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 			set_statusbar_text(statusbar_text);
 			
 			g_free(statusbar_text);
+		} else {
+
+			if (err) {
+				printf("Error:%s\n",err->message);
+			}
+			
 		}
 	}
 	
@@ -656,11 +667,12 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 		if (send_scite_command(command, &err)) {
 			// Try to activate SciTE; ignore errors
 			
-			activate_scite(NULL);
 			
 			if (data->search_give_scite_focus!=FALSE) {
 				send_scite_command((gchar*)"focus:0",NULL);
 			}
+			
+			//activate_scite(NULL);
 			
 			//GError *err;
 			
@@ -671,13 +683,26 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 			set_statusbar_text(statusbar_text);
 			
 			g_free(statusbar_text);
+		} else {
+			
+			if (err) {
+				printf("Error:%s\n",err->message);
+			}
+			
 		}
 	}
 	
 	if (gPrefs.search_give_scite_focus) {
 		send_scite_command((gchar*)"focus:1",NULL);
-		GError *err;
+		/*
+		GError *err=NULL;
 		activate_scite(&err);
+		
+		if (err) {
+			printf("focus\n");
+			printf("Error:%s\n",err->message);
+		}
+		*/
 	}
 			
 
