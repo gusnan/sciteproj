@@ -1,7 +1,7 @@
 /**
  * search.c - Search dialog for searching the files in the SciteProj project
  *
- *  Copyright 2011 Andreas Rönnquist
+ *  Copyright 2011 Andreas Ronnquist
  *
  * This file is part of SciteProj
  *
@@ -64,6 +64,8 @@ typedef struct _Data
 	gboolean search_give_scite_focus;
 	
 	gboolean match_case;
+	
+	gchar *error;
 	//gboolean match_whole_words;
 	
 } Data;
@@ -126,6 +128,7 @@ void search_dialog_cb()
 		gtk_window_present(GTK_WINDOW(window));
 	}
 }
+
 
 /**
  *
@@ -257,6 +260,7 @@ void search_dialog()
 	gtk_widget_show_all(window);
 }
 
+
 /**
  *
  */
@@ -275,6 +279,16 @@ static gboolean update_tree(Data *data)
 	return FALSE;
 }
 
+
+/**
+ *
+ */
+static gint insert_sorted_func(gconstpointer a,gconstpointer b)
+{
+	return 1;
+}
+
+
 /**
  *
  */
@@ -287,26 +301,28 @@ static gpointer thread_func(Data *data)
 	
 	gchar *absFilePath;
 	
+	GList *file_error_list=NULL;
+	
 	gint counter=0;
 	int line_number;
 	
-	char line[256];
+	char line[512];
 	int co;
 	
-	GList *list=data->search_list;
-	GList *saved_list=list;
+	GList *search_list=data->search_list;
+	GList *saved_list=search_list;
 	
 	g_async_queue_ref(data->queue);
 	
-	while(g_atomic_int_get(&threaded_flag) && do_work && list!=NULL) {
+	while(g_atomic_int_get(&threaded_flag) && do_work && search_list!=NULL) {
 		msg=g_slice_new(Message);
 		
 		msg->filename=NULL;
-		if (list!=NULL) {
+		if (search_list!=NULL) {
 			
-			if ((gchar*)(list->data)!=NULL) {
+			if ((gchar*)(search_list->data)!=NULL) {
 				
-				File *file=(File*)(list->data);
+				File *file=(File*)(search_list->data);
 				
 				gchar *filename=(gchar*)(file->full_path);
 				
@@ -317,81 +333,95 @@ static gpointer thread_func(Data *data)
 				
 				// Create a list to store the found elements.
 				GList *result_list=NULL;
-				
 				// Open the file
 				FILE *file_read;
-				file_read=fopen(absFilePath,"rt");
+				file_read=fopen((const char*)absFilePath,"r");
 				
-				line_number=0;
-				
-				while(fgets(line,256,file_read)!=NULL) {
+				if (file_read==NULL) {
+					gchar *temp;
+					temp=g_strdup_printf("%s",filename);
+					file_error_list=g_list_prepend(file_error_list,(gpointer)(temp));
 					
-					char *tempString=line;
-					line_number++;
-
-					for (co=0;co<strlen(line);co++) {
-						int length=strlen(data->text_to_search_for);
+				} else {
+					
+					line_number=0;
+					
+					while(fgets(line,512,file_read)!=NULL) {
 						
-						gboolean text_found=FALSE;
+						char *tempString=line;
+						line_number++;
 						
-						if (data->match_case) {
-							if (strncmp(tempString,data->text_to_search_for,length)==0) text_found=TRUE;
-						} else {
+						for (co=0;co<strlen(line);co++) {
+							int length=strlen(data->text_to_search_for);
 							
-							gchar *indep1=g_utf8_casefold(tempString,length);
-							gchar *indep2=g_utf8_casefold(data->text_to_search_for,length);
+							gboolean text_found=FALSE;
 							
-							if (strncmp(indep1,indep2,length)==0) text_found=TRUE;
+							if (data->match_case) {
+								//printf("%s\n",data->text_to_search_for);
+								
+								if (strncmp(tempString,data->text_to_search_for,length)==0) {
+									text_found=TRUE;
+								}
+							} else {
+								
+								gchar *indep1=g_utf8_casefold(tempString,length);
+								gchar *indep2=g_utf8_casefold(data->text_to_search_for,length);
+								
+								if (strncmp(indep1,indep2,length)==0) text_found=TRUE;
+							}
+							
+							// text found!
+							if (text_found) {
+								Message *tempMessage=g_slice_new(Message);
+								
+								tempMessage->line_number=line_number;
+								tempMessage->filename=g_strdup_printf(filename);
+								
+								//result_list=g_list_prepend(result_list,(gpointer)(tempMessage));
+								result_list=g_list_insert_sorted(result_list,(gpointer)(tempMessage),insert_sorted_func);
+								
+								text_found=FALSE;
+							
+							}
+							tempString++;
 						}
-						
-						// text found!
-						if (text_found) {
-							Message *tempMessage=g_slice_new(Message);
-							
-							tempMessage->line_number=line_number;
-							tempMessage->filename=g_strdup_printf(filename);
-							
-							result_list=g_list_append(result_list,(gpointer)(tempMessage));
-						
-						}
-						tempString++;
 					}
+					
+					fclose(file_read);
+					
+					// Now that we have the results for the current file in the list, go
+					// through that list, and add the results to the tree
+					GList *iter=result_list;
+		
+					while ((iter) && (g_atomic_int_get(&threaded_flag))) {
+			
+						Message *msg=(Message*)iter->data;
+			
+						//printf("N:%s compared to %s\n",data->full_path,full_path);
+			
+						//printf("%s%ld\n",msg->filename,msg->line_number);
+						if (msg->filename!=NULL) {
+					
+							g_async_queue_push(data->queue,msg);
+							g_idle_add((GSourceFunc)update_tree,data);
+					
+							sleep(0);
+						}	
+			
+						iter=g_list_next(iter);
+					}
+					
+					msg->line_number=counter;
+					counter++;
+					
 				}
-				
-				fclose(file_read);
-				
-				// Now that we have the results for the current file in the list, go
-				// through that list, and add the results to the tree
-				GList *iter=result_list;
-	
-				while ((iter) && (g_atomic_int_get(&threaded_flag))) {
-		
-					Message *msg=(Message*)iter->data;
-		
-					//printf("N:%s compared to %s\n",data->full_path,full_path);
-		
-					//printf("%s%ld\n",msg->filename,msg->line_number);
-					if (msg->filename!=NULL) {
-				
-						g_async_queue_push(data->queue,msg);
-						g_idle_add((GSourceFunc)update_tree,data);
-				
-						sleep(0);
-					}	
-		
-					iter=iter->next;
-					iter=g_list_next(iter);
-				}
-				
-				msg->line_number=counter;
-				counter++;
-				
 				// go to the next element in the list
-				list=g_list_next(list);
+				search_list=g_list_next(search_list);
+				
+				g_free(absFilePath);
 				
 				// final element?
-				if (!list) do_work=FALSE;
-					
+				if (!search_list) do_work=FALSE;
 			}
 		} 
 	}
@@ -404,10 +434,41 @@ static gpointer thread_func(Data *data)
 	
 	data->search_list=saved_list;
 	
+	if (file_error_list!=NULL) {
+		
+		gchar *error_message=NULL;
+		data->error=NULL;
+		
+		error_message=g_strdup_printf("There was problems opening the following files in the project:\n\n");
+					
+		while((file_error_list)) {
+			
+			gchar *temp=(gchar*)file_error_list->data;
+			
+			gchar *temp2=g_strconcat(error_message,temp,", \n",NULL);
+			error_message=temp2;
+			g_free(temp);
+			
+			file_error_list=g_list_next(file_error_list);
+		}
+		
+		gchar *temp2=g_strconcat(error_message,"\nThey couldn't be opened for reading in the search.\n",NULL);
+		
+		g_free(error_message);
+		error_message=temp2;
+				
+		if (error_message!=NULL) 
+		{
+			data->error=g_strdup(error_message);
+			g_free(error_message);
+		}
+	}
+	
 EXITPOINT:	
 	
 	return NULL;
 }
+
 
 /**
  *
@@ -453,6 +514,7 @@ static void search_button_clicked_cb(GtkButton *button,gpointer user_data)
 	}
 }
 
+
 /**
  *
  */
@@ -460,7 +522,7 @@ gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer use
 {
 	Data *data=(Data*)(user_data);
 	
-	switch (event->keyval) 
+	switch (event->keyval)
 	{
 		// Check for both return and Keypad enter
 		case GDK_Return:
@@ -479,7 +541,7 @@ gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer use
 		}
 	}
 
-/*	
+	/*	
 	if (event->state & GDK_SHIFT_MASK) debug_printf(", GDK_SHIFT_MASK");
 	if (event->state & GDK_CONTROL_MASK) debug_printf(", GDK_CONTROL_MASK");
 	if (event->state & GDK_MOD1_MASK) debug_printf(", GDK_MOD1_MASK");
@@ -662,8 +724,9 @@ void dialog_response(GtkDialog *dialog, gint response_id,gpointer user_data)
 	}
 }
 
+
 /**
- *
+ * stop_search
  */
 static void stop_search(gpointer user_data)
 {
@@ -680,8 +743,19 @@ static void stop_search(gpointer user_data)
 		gtk_widget_set_sensitive(GTK_WIDGET(data->search_button),TRUE);
 		
 		gdk_window_set_cursor(gtk_widget_get_window(window),NULL);
+		
+		// If we have error results from the search - open a dialog, and show it
+		if (data->error!=NULL) {
+			
+			GtkWidget *warningDialog = gtk_message_dialog_new(NULL,
+				GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,"%s",data->error);
+			gtk_dialog_run(GTK_DIALOG(warningDialog));
+			gtk_widget_destroy(warningDialog);
+		
+		}
 	}
 }
+
 
 /**
  *
@@ -691,6 +765,7 @@ static void cancel_search(gpointer data)
 	stop_search((Data*)data);
 }
 
+
 /**
  *
  */
@@ -699,6 +774,7 @@ static void destroy_search_dialog_cb(GtkWidget *widget,GdkEvent *event,gpointer 
 	stop_search(data);
 	search_dialog_open=FALSE;
 }
+
 
 /**
  *
