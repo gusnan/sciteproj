@@ -1,12 +1,12 @@
 /**
- * addfiles.h - Interface for adding files to the project
+ * search.h - Search dialog for searching SciteProj project
  *
- *  Copyright 2011 Andreas Ronnquist
+ *  Copyright 2011 Andreas Rönnquist
  *
  * This file is part of SciteProj
  *
  * SciteProj is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by 
+ * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
@@ -17,20 +17,16 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.
- *
  */
-#ifndef __HEADER_ADDFILES_
-#define __HEADER_ADDFILES_
+#ifndef __HEADER_SEARCH_DIALOG_
+#define __HEADER_SEARCH_DIALOG_
 
 /**
  *
  */
-void popup_add_files_cb();
-void popup_add_group_cb();
-void ask_name_add_group(GtkTreeIter *nodeIter);
+void search_dialog();
 
-void addfile_menu_cb();
-void menu_add_widget_cb(GtkUIManager *ui, GtkWidget *widget, GtkContainer *container);
- 
+void search_dialog_cb();
 
-#endif /*__HEADER_ADDFILES_*/
+
+#endif /*__HEADER_SEARCH_DIALOG_*/

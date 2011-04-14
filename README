@@ -42,6 +42,11 @@ Also, the following options exist:
 	Specifies wether SciteProj shall try to identify the XML as saved by 
 	SciteProj? (Defaults to TRUE)
 
+The search dialogs size and position can also be customzed via the 
+configuration file. See the variables 
+
+* search_xpos, search_ypos, search_width and search_height
+
 You can open this configuration file by opening the Edit menu and select Edit 
 Options in that menu. This will open ($HOME)/.sciteproj as if it was part of 
 your project and edit it in SciTE.

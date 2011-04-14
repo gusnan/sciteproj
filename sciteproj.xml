@@ -4,6 +4,7 @@
 		<file>./src/addfiles.c</file>
 		<file>./src/clipboard.c</file>
 		<file>./src/drag_drop.c</file>
+		<file>./src/filelist.c</file>
 		<file>./src/file_utils.c</file>
 		<file>./src/folder_to_xml.c</file>
 		<file>./src/graphics.c</file>
@@ -15,6 +16,7 @@
 		<file>./src/rename.c</file>
 		<file>./src/remove.c</file>
 		<file>./src/scite_utils.c</file>
+		<file>./src/search.c</file>
 		<file>./src/string_utils.c</file>
 		<file>./src/statusbar.c</file>
 		<file>./src/tree_manipulation.c</file>
@@ -25,6 +27,7 @@
 		<file>./src/addfiles.h</file>
 		<file>./src/clipboard.h</file>
 		<file>./src/drag_drop.h</file>
+		<file>./src/filelist.h</file>
 		<file>./src/file_utils.h</file>
 		<file>./src/folder_to_xml.h</file>
 		<file>./src/graphics.h</file>
@@ -36,6 +39,7 @@
 		<file>./src/rename.h</file>
 		<file>./src/remove.h</file>
 		<file>./src/scite_utils.h</file>
+		<file>./src/search.h</file>
 		<file>./src/statusbar.h</file>
 		<file>./src/string_utils.h</file>
 		<file>./src/tree_manipulation.h</file>

@@ -42,6 +42,8 @@ static gchar *sMenuDefXML = (gchar*)\
 				<menuitem name=\"ExpandAllGroupsItem\" action=\"ExpandAllGroupsAction\" /> \
 				<menuitem name=\"CollapseAllGroupsItem\" action=\"CollapseAllGroupsAction\" /> \
 				<separator/> \
+				<menuitem name=\"SearchItem\" action=\"SearchAction\" /> \
+				<separator/> \
 				<menuitem name=\"Edit Options\" action=\"EditOptionsAction\" /> \
 			</menu> \
 			<menu name=\"ViewMenu\" action=\"ViewMenuAction\"> \

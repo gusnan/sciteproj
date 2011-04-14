@@ -36,6 +36,8 @@
 
 #include "gui.h"
 
+#include "filelist.h"
+
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_TREEMANIPULATION_ERROR")
 
@@ -856,6 +858,8 @@ gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, con
 	// Extract filename from filepath
 	fileName = get_filename_from_full_path((gchar*)filepath);
 	
+	add_item((gchar*)fileName,(gchar*)relFilename);
+	
 	// Append to root, or before/after/within an existing node?
 	
 	if (currentIter == NULL) {
@@ -923,6 +927,47 @@ EXITPOINT:
 }
 
 
+/**
+ *
+ */
+void helper_remove(GtkTreeIter *iter)
+{
+		
+	GtkTreeIter *tempIter=gtk_tree_iter_copy(iter);
+	GtkTreeIter newIter;
+		
+	if (gtk_tree_model_iter_children(GTK_TREE_MODEL(sTreeStore),&newIter,tempIter)) {
+		
+		gboolean next_valid=TRUE;
+		
+		do {
+			
+			if (next_valid) {
+				
+				gchar *nodeContents;
+				int itemType;
+					
+				gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), &newIter, COLUMN_ITEMTYPE, &itemType, COLUMN_FILEPATH, &nodeContents, -1);
+				
+				gchar *fileName = get_filename_from_full_path((gchar*)nodeContents);
+				
+				if (itemType==ITEMTYPE_GROUP) {
+					helper_remove(&newIter);
+				} else {
+					//printf("Removed: %s, %s\n",fileName,nodeContents);
+					
+					remove_item(fileName,nodeContents);
+				}
+			}
+
+			next_valid=gtk_tree_model_iter_next(GTK_TREE_MODEL(sTreeStore),&newIter);
+			
+		} while(next_valid);
+		
+	}
+	
+}
+
 
 /**
  * Remove a node from the GtkTreeStore.
@@ -934,6 +979,27 @@ EXITPOINT:
  */
 extern gboolean remove_tree_node(GtkTreeIter *iter, GError **err)
 {
+	gchar *file_path;
+	
+	int itemType;
+	
+	// Get the node type and content
+	
+	gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), iter, COLUMN_ITEMTYPE, &itemType, COLUMN_FILEPATH, &file_path, -1);
+	
+	printf("Filename: %s\n",file_path);
+	
+	if (itemType==ITEMTYPE_GROUP) {
+		
+		helper_remove(iter);
+		
+	} else {
+	
+		gchar *fileName = get_filename_from_full_path((gchar*)file_path);
+		
+		remove_item(fileName,file_path);
+	}
+	
 	gtk_tree_store_remove(sTreeStore, iter);
 	
 	set_project_dirty_status(TRUE);

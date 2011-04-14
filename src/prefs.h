@@ -34,8 +34,12 @@ typedef struct {
 	int last_file_filter;
 	int xpos,ypos;
 	
+	int search_xpos,search_ypos;
+	int search_width,search_height;
+	
 	gboolean dirty_on_folder_change;
 	gboolean give_scite_focus;
+	gboolean search_give_scite_focus;
 	
 	gboolean allow_duplicates;
 	
@@ -47,6 +51,8 @@ typedef struct {
 	
 	gboolean show_recent;
 	gboolean recent_add_to_bottom;
+	
+	gboolean search_alert_file_warnings;
 	
 } sciteproj_prefs;
 

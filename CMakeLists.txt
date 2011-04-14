@@ -80,6 +80,7 @@ set(SOURCES
 	src/clipboard.c
 	src/drag_drop.c
 	src/file_utils.c
+	src/filelist.c
 	src/folder_to_xml.c
 	src/graphics.c
 	src/gui.c
@@ -90,6 +91,7 @@ set(SOURCES
 	src/remove.c
 	src/rename.c
 	src/scite_utils.c
+	src/search.c
 	src/statusbar.c
 	src/string_utils.c
 	src/tree_manipulation.c

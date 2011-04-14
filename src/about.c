@@ -50,6 +50,8 @@ static GtkWidget *window;
 
 void create_about_dialog();
 
+gboolean handle_about_close_event(GtkWidget *widget,GdkEvent *event,gpointer user_data);
+
 /**
  * show_about_dialog
  * Shows the about dialog, and if it isnt already made, creates it
@@ -242,6 +244,8 @@ void create_about_dialog()
 				     window, NULL), FALSE);
 					  
 	
+	g_signal_connect(G_OBJECT(window),"delete-event",G_CALLBACK(handle_about_close_event),window);
+	
 	gtk_widget_show_all(window);
 
 }
@@ -252,4 +256,14 @@ void create_about_dialog()
 void show_version()
 {
 	g_print("SciteProj version %s\n", sVersion);
+}
+
+/**
+ *
+ */
+gboolean handle_about_close_event(GtkWidget *widget,GdkEvent *event,gpointer user_data)
+{
+	gtk_widget_hide(window);
+	
+	return TRUE;
 }
