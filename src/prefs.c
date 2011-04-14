@@ -95,13 +95,10 @@ gboolean check_config_string(gchar *in_config)
 		value++;
 	}
 	
-	//gchar *new_tempstring,*new_value;
-	
 	if ((tempstring!=NULL) && (value!=NULL)) {
 	
 		tempstring=g_strchug(tempstring);
 		tempstring=g_strchomp(tempstring);
-		//new_tempstring=g_ascii_strup(tempstring,-1);
 
 		value=g_strchug(value);
 		value=g_strchomp(value);
@@ -147,18 +144,13 @@ gboolean check_config_string(gchar *in_config)
 			gPrefs.search_height=(int)tempdouble;
 		}
 		
-		
-		//gPrefs.give_scite_focus=FALSE;
 		if (g_ascii_strcasecmp(tempstring,"give_scite_focus")==0) {
 			
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				//printf("give_scite_focus=TRUE");
 				gPrefs.give_scite_focus=TRUE;
-				
 			}
 		}
 		
-		//gPrefs.search_give_scite_focus=FALSE;
 		if (g_ascii_strcasecmp(tempstring,"search_give_scite_focus")==0) {
 			
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
@@ -166,7 +158,6 @@ gboolean check_config_string(gchar *in_config)
 			}
 		}
 		
-		//gPrefs.search_alert_file_warnings=TRUE;
 		if (g_ascii_strcasecmp(tempstring,"search_alert_file_warnings")==0) {
 			
 			if (g_ascii_strcasecmp(value,"FALSE")==0) {

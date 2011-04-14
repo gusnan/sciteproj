@@ -278,7 +278,7 @@ static void cancel_button_cb(GtkDialog *dialog, gint responseID, gpointer userDa
 gboolean launch_scite(gchar *instring,GError **err)
 {
 
-	debug_printf("launch_scite\n");
+	debug_printf("launch_scite: %s\n",instring);
 
 	gboolean resultCode = FALSE;
 	gchar* ipcDirectorName = (gchar*)"ipc.director.name";
@@ -403,6 +403,67 @@ gboolean launch_scite(gchar *instring,GError **err)
 		}
 		
 		
+		// Fix the instring
+		
+	
+		gchar *opt1=NULL;
+		gchar *opt2=NULL;
+		
+		if (instring!=NULL) {
+		
+			int len=strlen(instring);
+			int split=-1;
+			gchar *tempstring=instring;
+			gchar *place=NULL;
+			int co;
+			for (co=0;co<len;co++) {
+				
+				gchar temp=instring[co];
+				
+				if (temp==' ') {
+					split=co;
+					co=len;
+					place=tempstring;
+				}
+				
+				tempstring++;
+			}
+			
+			if (split!=-1) {
+				opt1=g_strndup(instring,split);
+				opt2=g_strdup(place);
+			} else {
+				strcpy(opt1,instring);
+			}
+		}
+		
+		debug_printf("opt1:%s\n",opt1);
+		debug_printf("opt2:%s\n",opt2);
+		
+	  // Set up the command line 
+		if (opt1!=NULL) {
+			
+			opt1=g_strchug(opt1);
+			opt1=g_strchomp(opt1);
+
+			strcpy(scite_arg1,opt1);
+		} else {
+			strcpy(scite_arg1,"");
+		}
+		
+		if (opt2!=NULL) {
+			
+			opt2=g_strchug(opt2);
+			opt2=g_strchomp(opt2);
+
+			strcpy(scite_arg2,opt2);
+		} else {
+			strcpy(scite_arg2,"");
+		}
+		strcpy(scite_arg3,"");
+		strcpy(scite_arg4,"");
+
+		
 		// Fork and (we hope) exec Scite
 		
 		childPID = fork();
@@ -413,34 +474,13 @@ gboolean launch_scite(gchar *instring,GError **err)
 			goto EXITPOINT;
 		}
 		else if (childPID == 0) {
+			
+			debug_printf("Launching:'%s','%s','%s','%s'\n",scite_arg1,scite_arg2,scite_arg3,scite_arg4);
+				
 			// We are the child process, so close our end of the read pipe
 			
 			close(childPipePair[0]);
-			
-		  // Set up the command line 
-			strcpy(scite_arg1,"");
-			strcpy(scite_arg2,"");
-			strcpy(scite_arg3,"");
-			strcpy(scite_arg4,"");
-			/*
-			if (gPrefs.lhs) {  
-				gint left,top,width,height, screen_width,screen_height;
-					
-					left=0; top=0; 
-					width=gPrefs.width; 
-					height=200; // redundant
-				
-			get_dimensions(&left,&top,&width,&height);
-					
-				screen_height = gdk_screen_height();
-				screen_width  = gdk_screen_width();
 
-					sprintf(scite_arg1,"-position.left=%d", (left+width));
-					sprintf(scite_arg2,"-position.top=%d", (top));
-					sprintf(scite_arg3,"-position.width=%d", (screen_width-(left+width)));
-					sprintf(scite_arg4,"-position.height=%d", (screen_height-(top)));
-			}
-			*/
 			
 			if (gPrefs.scite_path!=NULL) {
 				execlp(gPrefs.scite_path, gPrefs.scite_path, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
@@ -476,7 +516,7 @@ gboolean launch_scite(gchar *instring,GError **err)
 			
 			close(childPipePair[1]);
 			
-			_exit(0);
+			//_exit(0);
 		}
 		
 		

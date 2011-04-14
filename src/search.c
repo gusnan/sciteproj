@@ -583,9 +583,31 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	
 	gint line_number=-1;
 	
+		
+	// Get the data from the row that was activated
+	// We need to do this before launching Scite - because if SciTE wasn't ran before, we need to 
+	// provide the line number to SciTE in the launching command.
+	gchar *temppath;
+	
+	treeModel = gtk_tree_view_get_model(GTK_TREE_VIEW(treeview));
+	gtk_tree_model_get_iter(treeModel, &iter, path);
+	gtk_tree_model_get(treeModel, &iter, /*COLUMN_ITEMTYPE, &nodeItemType,*/ FILENAME, &temppath, LINENUMBER, &line_number, -1);
+	
+	// convert to a full path
+	if (!relative_path_to_abs_path(temppath, &absFilePath, get_project_directory(), &err)) {
+		printf("Error:%s\n",err->message);
+		goto EXITPOINT;
+	}
+
+	
 	// Launch scite if it isn't already launched
 	if (!scite_ready()) {
-		if (!launch_scite("",&err)) {
+		
+		gchar *run_options;
+		
+		run_options=g_strdup_printf("%s -goto:%d",absFilePath,line_number);
+		
+		if (!launch_scite(run_options,&err)) {
 			
 			printf("Error:%s\n",err->message);
 			
@@ -605,21 +627,9 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 			return;
 			*/
 			
+			goto EXITPOINT;
+			
 		}
-	}
-	
-	// Get the data from the row that was activated
-	
-	gchar *temppath;
-	
-	treeModel = gtk_tree_view_get_model(GTK_TREE_VIEW(treeview));
-	gtk_tree_model_get_iter(treeModel, &iter, path);
-	gtk_tree_model_get(treeModel, &iter, /*COLUMN_ITEMTYPE, &nodeItemType,*/ FILENAME, &temppath, LINENUMBER, &line_number, -1);
-	
-	// convert to a full path
-	if (!relative_path_to_abs_path(temppath, &absFilePath, get_project_directory(), &err)) {
-		printf("Error:%s\n",err->message);
-		goto EXITPOINT;
 	}
 	
 	// It's a file, so try to open it
