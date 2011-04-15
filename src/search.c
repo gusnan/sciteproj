@@ -291,11 +291,13 @@ static gboolean update_tree(Data *data)
 /**
  *
  */
-gboolean check_match(gchar *full_line,gchar *tempString,gchar *text_to_search_for,gint length,gpointer user_data)
+gboolean check_match(gchar *full_line,int begin_temp_string,gchar *tempString,gchar *text_to_search_for,gint length,gpointer user_data)
 {
 	gboolean result=FALSE;;
-	Data *data=(Data*)(user_data);
-
+	Data *data=(Data*)(user_data);		
+	
+	gboolean whole_word=TRUE;
+	
 	if (data->match_case) {
 		//printf("%s\n",data->text_to_search_for);
 		
@@ -304,8 +306,44 @@ gboolean check_match(gchar *full_line,gchar *tempString,gchar *text_to_search_fo
 			if (strncmp(tempString,text_to_search_for,length)==0) result=TRUE;
 		} else {
 			
-			// match the whole word, and case
+			// match the whole word, and also case
+				
+			if (strncmp(tempString,text_to_search_for,length)==0) {
+				result=TRUE;
+			
+				// check if we are at the beginning of the string (full_line points to same location as
+				// tempString
+							
+				if (full_line!=tempString) {
+					
+					gchar before=*(tempString-1);
+					
+					if (begin_temp_string+length>=((int)strlen(full_line))) {
+						// we are at the end (no more characters after)
+					} else {
+						
+						// there are more characters after 
+						gchar after=*(tempString+length);
+						
+						if (is_word_character(after)) {
+							whole_word=FALSE;
+						} else {
+							
+							// check if the word continues with letter before the found word
+							if (is_word_character(before)) {
+								whole_word=FALSE;
+							}
+						}
+					}
+				}
+			}
 		}
+		
+		if (!whole_word) {
+			result=FALSE;
+		}
+		
+		// krootha
 		
 	} else {
 		
@@ -320,7 +358,40 @@ gboolean check_match(gchar *full_line,gchar *tempString,gchar *text_to_search_fo
 		} else {
 			
 			// match whole word, but don't match case
+				// match the whole word, and also case
+				
+			if (strncmp(indep1,indep2,length)==0) {
+				result=TRUE;
+			
+				// check if we are at the beginning of the string (full_line points to same location as
+				// tempString
+							
+				if (full_line!=tempString) {
+					
+					gchar before=*(tempString-1);
+					
+					if (begin_temp_string+length>=((int)strlen(full_line))) {
+						// we are at the end (no more characters after)
+					} else {
+						
+						// there are more characters after 
+						gchar after=*(tempString+length);
+						
+						if (is_word_character(after)) {
+							whole_word=FALSE;
+						} else {
+							
+							// check if the word continues with letter before the found word
+							if (is_word_character(before)) {
+								whole_word=FALSE;
+							}
+						}
+					}
+				}
+			}
 		}
+		
+		if (!whole_word) result=FALSE;
 	}
 	
 	return result;
@@ -392,7 +463,7 @@ static gpointer thread_func(Data *data)
 						for (co=0;co<strlen(line);co++) {
 							int length=strlen(data->text_to_search_for);
 							
-							gboolean text_found=check_match(line,tempString,data->text_to_search_for,length,data);
+							gboolean text_found=check_match(line,co,tempString,data->text_to_search_for,length,data);
 							
 							// text found!
 							if (text_found) {
