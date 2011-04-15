@@ -287,6 +287,24 @@ static gboolean update_tree(Data *data)
 	return FALSE;
 }
 
+/**
+ *
+ */
+gboolean whole_word_helper(gchar before,gchar after)
+{
+	gboolean result=TRUE;
+	
+	if (is_word_character(after)) {
+		result=FALSE;
+	} else {
+		if (is_word_character(before)) {
+			result=FALSE;
+		}
+	}
+	
+	return result;
+}
+
 
 /**
  *
@@ -303,11 +321,11 @@ gboolean check_match(gchar *full_line,int begin_temp_string,gchar *tempString,gc
 		
 		if (!data->match_whole_words) {
 		
+			// match case, but not whole words
 			if (strncmp(tempString,text_to_search_for,length)==0) result=TRUE;
 		} else {
 			
 			// match the whole word, and also case
-				
 			if (strncmp(tempString,text_to_search_for,length)==0) {
 				result=TRUE;
 			
@@ -321,45 +339,27 @@ gboolean check_match(gchar *full_line,int begin_temp_string,gchar *tempString,gc
 					if (begin_temp_string+length>=((int)strlen(full_line))) {
 						// we are at the end (no more characters after)
 					} else {
-						
 						// there are more characters after 
 						gchar after=*(tempString+length);
-						
-						if (is_word_character(after)) {
-							whole_word=FALSE;
-						} else {
-							
-							// check if the word continues with letter before the found word
-							if (is_word_character(before)) {
-								whole_word=FALSE;
-							}
-						}
+						whole_word=whole_word_helper(before,after);
 					}
 				}
 			}
+			if (!whole_word) result=FALSE;
 		}
-		
-		if (!whole_word) {
-			result=FALSE;
-		}
-		
-		// krootha
 		
 	} else {
-		
-
 		
 		gchar *indep1=g_utf8_casefold(tempString,length);
 		gchar *indep2=g_utf8_casefold(text_to_search_for,length);
 		
 		if (!data->match_whole_words) {
 		
+			// match whole word, but don't match case
 			if (strncmp(indep1,indep2,length)==0) result=TRUE;
 		} else {
 			
-			// match whole word, but don't match case
-				// match the whole word, and also case
-				
+			// match the whole word only, and don't match case
 			if (strncmp(indep1,indep2,length)==0) {
 				result=TRUE;
 			
@@ -376,22 +376,12 @@ gboolean check_match(gchar *full_line,int begin_temp_string,gchar *tempString,gc
 						
 						// there are more characters after 
 						gchar after=*(tempString+length);
-						
-						if (is_word_character(after)) {
-							whole_word=FALSE;
-						} else {
-							
-							// check if the word continues with letter before the found word
-							if (is_word_character(before)) {
-								whole_word=FALSE;
-							}
-						}
+						whole_word=whole_word_helper(before,after);
 					}
 				}
 			}
+			if (!whole_word) result=FALSE;
 		}
-		
-		if (!whole_word) result=FALSE;
 	}
 	
 	return result;
