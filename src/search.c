@@ -293,7 +293,10 @@ static gboolean update_tree(Data *data)
  */
 static gint insert_sorted_func(gconstpointer a,gconstpointer b)
 {
-	return 1;
+	gchar *string1=(gchar*)a;
+	gchar *string2=(gchar*)b;
+	
+	return strcmp(string1,string2);
 }
 
 /**
