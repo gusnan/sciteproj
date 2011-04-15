@@ -4,6 +4,7 @@ ChangeLog:
 
 0.X.XX
 	* Added a search dialog
+	* Fixed problems with the prefs system
 
 0.4.10
 	* Added a "Recently opened files" box
