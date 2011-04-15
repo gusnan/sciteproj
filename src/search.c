@@ -64,13 +64,13 @@ typedef struct _Data
 	gboolean search_give_scite_focus;
 	
 	gboolean match_case;
+	gboolean match_whole_words;
 	
 	gchar *error;
 	
 	sciteproj_prefs prefs;
 	
 	int number_of_results;
-	//gboolean match_whole_words;
 	
 } Data;
 
@@ -89,7 +89,7 @@ gboolean is_searching=FALSE;
 
 GtkWidget *treeview;
 GtkWidget *match_case_checkbutton=NULL;
-//GtkWidget *match_whole_words_only_checkbutton=NULL;
+GtkWidget *match_whole_words_only_checkbutton=NULL;
 
 
 GdkCursor *standard_cursor;
@@ -208,19 +208,19 @@ void search_dialog()
 	
 	match_case_checkbutton=gtk_check_button_new_with_label("Match case");
 	
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case_checkbutton),TRUE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case_checkbutton),gPrefs.search_match_case);
 	
 	//gtk_table_attach(GTK_TABLE(table),match_case_checkbutton,0,2,1,2, GTK_SHRINK, GTK_SHRINK, 0,0);
 	gtk_box_pack_start(GTK_BOX(check_button_box),match_case_checkbutton,FALSE,TRUE,5);
 	
-	/*
+	
 	match_whole_words_only_checkbutton=gtk_check_button_new_with_label("Match whole word");
 	
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton),FALSE);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton),gPrefs.search_match_whole_words);
 	
 	//gtk_table_attach(GTK_TABLE(table),match_whole_words_only_checkbutton,2,4,1,2, GTK_SHRINK,GTK_SHRINK, 0,0);
 	gtk_box_pack_start(GTK_BOX(check_button_box),match_whole_words_only_checkbutton,FALSE,TRUE,5);
-	*/
+	
 	
 	gtk_box_pack_start(GTK_BOX(vbox),check_button_box,FALSE,FALSE,0);
 	
@@ -296,6 +296,30 @@ static gint insert_sorted_func(gconstpointer a,gconstpointer b)
 	return 1;
 }
 
+/**
+ *
+ */
+gboolean check_match(gchar *full_line,gchar *tempString,gchar *text_to_search_for,gint length,gpointer user_data)
+{
+	gboolean result=FALSE;;
+	Data *data=(Data*)(user_data);
+
+	if (data->match_case) {
+		//printf("%s\n",data->text_to_search_for);
+		
+		if (strncmp(tempString,text_to_search_for,length)==0) result=TRUE;
+		
+	} else {
+		
+		gchar *indep1=g_utf8_casefold(tempString,length);
+		gchar *indep2=g_utf8_casefold(text_to_search_for,length);
+		
+		if (strncmp(indep1,indep2,length)==0) result=TRUE;
+	}
+	
+	return result;
+}
+
 
 /**
  *
@@ -362,21 +386,7 @@ static gpointer thread_func(Data *data)
 						for (co=0;co<strlen(line);co++) {
 							int length=strlen(data->text_to_search_for);
 							
-							gboolean text_found=FALSE;
-							
-							if (data->match_case) {
-								//printf("%s\n",data->text_to_search_for);
-								
-								if (strncmp(tempString,data->text_to_search_for,length)==0) {
-									text_found=TRUE;
-								}
-							} else {
-								
-								gchar *indep1=g_utf8_casefold(tempString,length);
-								gchar *indep2=g_utf8_casefold(data->text_to_search_for,length);
-								
-								if (strncmp(indep1,indep2,length)==0) text_found=TRUE;
-							}
+							gboolean text_found=check_match(line,tempString,data->text_to_search_for,length,data);
 							
 							// text found!
 							if (text_found) {

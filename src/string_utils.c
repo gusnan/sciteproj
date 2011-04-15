@@ -438,4 +438,11 @@ gboolean is_integer(gchar *string)
 	return TRUE;
 }
 
+/**
+ *
+ */
+gboolean is_word_character(char ch)
+{
+	return ((ch=='_') || (g_ascii_isalnum(ch)));
+}
 

@@ -46,4 +46,6 @@ char *remove_newline( char *s );
 
 gboolean is_integer(gchar *string);
 
+gboolean is_word_character(char ch);
+
 #endif /*__HEADER_STRING_UTILS_*/
