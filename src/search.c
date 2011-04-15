@@ -68,6 +68,8 @@ typedef struct _Data
 	gchar *error;
 	
 	sciteproj_prefs prefs;
+	
+	int number_of_results;
 	//gboolean match_whole_words;
 	
 } Data;
@@ -190,6 +192,8 @@ void search_dialog()
 	
 	gtk_box_pack_end(hbox,search_text_entry,TRUE,TRUE,0);
 	*/
+	
+	data->number_of_results=0;
 	
 	data->search_button=gtk_button_new_from_stock(GTK_STOCK_FIND);
 	
@@ -384,6 +388,8 @@ static gpointer thread_func(Data *data)
 								//result_list=g_list_prepend(result_list,(gpointer)(tempMessage));
 								result_list=g_list_insert_sorted(result_list,(gpointer)(tempMessage),insert_sorted_func);
 								
+								data->number_of_results++;
+								
 								text_found=FALSE;
 							
 							}
@@ -488,6 +494,7 @@ static void search_button_clicked_cb(GtkButton *button,gpointer user_data)
 		
 		if (gtk_entry_get_text_length(GTK_ENTRY(data->search_string_entry))!=0) {
 		
+			data->number_of_results=0;
 			
 			// get the text from the search string entry
 			data->text_to_search_for=(gchar*)(gtk_entry_get_text(GTK_ENTRY(data->search_string_entry)));
@@ -800,6 +807,14 @@ static void stop_search(gpointer user_data)
 				gtk_widget_destroy(warningDialog);
 			}
 		
+		}
+		
+		// Give a dialog if the search didn't find anything.
+		if (data->number_of_results==0) {
+			GtkWidget *dialog=gtk_message_dialog_new(NULL,
+				GTK_DIALOG_MODAL,GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,"The search didn't give any results.");
+			gtk_dialog_run(GTK_DIALOG(dialog));
+			gtk_widget_destroy(dialog);
 		}
 	}
 }
