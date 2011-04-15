@@ -41,6 +41,9 @@ typedef struct {
 	gboolean give_scite_focus;
 	gboolean search_give_scite_focus;
 	
+	gboolean search_match_whole_words;
+	gboolean search_match_case;
+	
 	gboolean allow_duplicates;
 	
 	gchar *scite_path;

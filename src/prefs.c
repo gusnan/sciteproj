@@ -47,6 +47,8 @@ gchar *default_config_string=(gchar*)"" \
 				"search_height=400\n"
 				"\n"
 				"search_alert_file_warnings=TRUE\n"
+				"search_match_case=FALSE\n"
+				"search_match_whole_words=FALSE\n"
 				"\n"
 				"#other:\n"
 				"give_scite_focus=FALSE\n"
@@ -165,6 +167,20 @@ gboolean check_config_string(gchar *in_config)
 			}
 		}
 		
+		if (g_ascii_strcasecmp(tempstring,"search_match_case")==0) {
+			
+			if (g_ascii_strcasecmp(value,"TRUE")==0) {
+				gPrefs.search_match_case=TRUE;
+			}
+		}
+		
+		if (g_ascii_strcasecmp(tempstring,"search_match_whole_words")==0) {
+			
+			if (g_ascii_strcasecmp(value,"TRUE")==0) {
+				gPrefs.search_match_whole_words=TRUE;
+			}
+		}
+		
 		if (g_ascii_strcasecmp(tempstring,"dirty_on_folder_change")==0) {
 			
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
@@ -242,6 +258,9 @@ gboolean init_prefs(GError **err)
 	gPrefs.dirty_on_folder_change=FALSE;
 	
 	gPrefs.search_alert_file_warnings=TRUE;
+	
+	gPrefs.search_match_case=FALSE;
+	gPrefs.search_match_whole_words=FALSE;
 	
 	gPrefs.allow_duplicates=TRUE;
 	
