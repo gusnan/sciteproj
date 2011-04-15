@@ -291,17 +291,6 @@ static gboolean update_tree(Data *data)
 /**
  *
  */
-static gint insert_sorted_func(gconstpointer a,gconstpointer b)
-{
-	gchar *string1=(gchar*)a;
-	gchar *string2=(gchar*)b;
-	
-	return strcmp(string1,string2);
-}
-
-/**
- *
- */
 gboolean check_match(gchar *full_line,gchar *tempString,gchar *text_to_search_for,gint length,gpointer user_data)
 {
 	gboolean result=FALSE;;
@@ -310,14 +299,28 @@ gboolean check_match(gchar *full_line,gchar *tempString,gchar *text_to_search_fo
 	if (data->match_case) {
 		//printf("%s\n",data->text_to_search_for);
 		
-		if (strncmp(tempString,text_to_search_for,length)==0) result=TRUE;
+		if (!data->match_whole_words) {
+		
+			if (strncmp(tempString,text_to_search_for,length)==0) result=TRUE;
+		} else {
+			
+			// match the whole word, and case
+		}
 		
 	} else {
+		
+
 		
 		gchar *indep1=g_utf8_casefold(tempString,length);
 		gchar *indep2=g_utf8_casefold(text_to_search_for,length);
 		
-		if (strncmp(indep1,indep2,length)==0) result=TRUE;
+		if (!data->match_whole_words) {
+		
+			if (strncmp(indep1,indep2,length)==0) result=TRUE;
+		} else {
+			
+			// match whole word, but don't match case
+		}
 	}
 	
 	return result;
@@ -398,8 +401,8 @@ static gpointer thread_func(Data *data)
 								tempMessage->line_number=line_number;
 								tempMessage->filename=g_strdup_printf(filename);
 								
-								//result_list=g_list_prepend(result_list,(gpointer)(tempMessage));
-								result_list=g_list_insert_sorted(result_list,(gpointer)(tempMessage),insert_sorted_func);
+								//result_list=g_list_insert_sorted(result_list,(gpointer)(tempMessage),insert_sorted_func);
+								result_list=g_list_append(result_list,(gpointer)tempMessage);
 								
 								data->number_of_results++;
 								
@@ -513,7 +516,7 @@ static void search_button_clicked_cb(GtkButton *button,gpointer user_data)
 			data->text_to_search_for=(gchar*)(gtk_entry_get_text(GTK_ENTRY(data->search_string_entry)));
 			
 			data->match_case=(gboolean)gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(match_case_checkbutton));
-			//data->match_whole_words=(gboolean)gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton));
+			data->match_whole_words=(gboolean)gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton));
 					
 			gtk_widget_set_sensitive(GTK_WIDGET(data->search_button),FALSE);
 			
