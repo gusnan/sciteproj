@@ -139,14 +139,11 @@ void create_about_dialog()
 	
 	gtk_label_set_selectable(GTK_LABEL(label),FALSE);
 	gtk_box_pack_start(GTK_BOX(vbox),label,FALSE,FALSE,0);
-	
-	// Show a link to the SciteProj homepage
-	linkbutton=gtk_link_button_new_with_label(homepage_string,"http://www.gusnan.se/sciteproj");
-	
-	
+		
 	GtkWidget *hbox = gtk_hbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
+	// Show a link to the SciteProj homepage
 	linkbutton=gtk_link_button_new_with_label(homepage_string,"http://www.gusnan.se/sciteproj");
 	gtk_box_pack_start(GTK_BOX(hbox), linkbutton, TRUE, FALSE, 0);
 	
