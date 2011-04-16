@@ -901,6 +901,8 @@ static void stop_search(gpointer user_data)
 			
 		gtk_label_set_text(GTK_LABEL(data->result_label),string);
 		
+		g_free(string);
+		
 		// Give a dialog if the search didn't find anything.
 		if (data->number_of_results==0) {
 			GtkWidget *dialog=gtk_message_dialog_new(NULL,
