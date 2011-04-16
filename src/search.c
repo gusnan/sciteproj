@@ -627,6 +627,12 @@ gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer use
 			
 			break;
 		}
+		case GDK_Escape:
+		{
+			printf("Escape!\n");
+			gtk_widget_destroy(GTK_WIDGET(window));
+			break;
+		}
 	}
 
 	/*	
