@@ -54,6 +54,7 @@ typedef struct _Data
 	
 	GtkListStore *store;
 	GtkWidget *search_button;
+	GtkWidget *result_label;
 	
 	GdkCursor *busy_cursor;
 	
@@ -253,6 +254,11 @@ void search_dialog()
 	close_button=gtk_button_new_from_stock(GTK_STOCK_CLOSE);
 	
 	close_hbox=gtk_hbox_new(FALSE,8);
+	
+	data->result_label=gtk_label_new(NULL);
+	
+	gtk_box_pack_start(GTK_BOX(close_hbox),data->result_label,FALSE,FALSE,0);
+	
 	gtk_box_pack_end(GTK_BOX(close_hbox),close_button,FALSE,FALSE,5);
 	
 	gtk_box_pack_start(GTK_BOX(vbox),close_hbox,FALSE,FALSE,0);
@@ -890,6 +896,10 @@ static void stop_search(gpointer user_data)
 			}
 		
 		}
+
+		gchar *string=g_strdup_printf("Found %d elements",data->number_of_results);
+			
+		gtk_label_set_text(GTK_LABEL(data->result_label),string);
 		
 		// Give a dialog if the search didn't find anything.
 		if (data->number_of_results==0) {
