@@ -42,6 +42,7 @@ enum
 {
 	FILENAME=0,
 	LINENUMBER,
+	FILE_CONTENTS,
 	COLUMNS
 };
 
@@ -79,6 +80,7 @@ typedef struct _Message
 {
 	gchar *filename;
 	glong line_number;
+	gchar *file_contents;
 } Message;
 
 /**
@@ -231,7 +233,7 @@ void search_dialog()
 	setup_tree_view(treeview);
 	
 	// init the list store
-	data->store=gtk_list_store_new(COLUMNS,G_TYPE_STRING,G_TYPE_INT);
+	data->store=gtk_list_store_new(COLUMNS,G_TYPE_STRING,G_TYPE_INT,G_TYPE_STRING);
 	
 	gtk_tree_view_set_model(GTK_TREE_VIEW(treeview),GTK_TREE_MODEL(data->store));
 	g_object_unref(data->store);
@@ -286,7 +288,7 @@ static gboolean update_tree(Data *data)
 	msg=(Message*)g_async_queue_pop(data->queue);
 	gtk_list_store_append(data->store,&iter);
 		
-	gtk_list_store_set(data->store,&iter,0,msg->filename,1,msg->line_number,-1);
+	gtk_list_store_set(data->store,&iter,0,msg->filename,1,msg->line_number,2,msg->file_contents,-1);
 	g_free(msg->filename);
 	g_slice_free(Message,msg);
 	
@@ -423,6 +425,8 @@ static gpointer thread_func(Data *data)
 		msg=g_slice_new(Message);
 		
 		msg->filename=NULL;
+		msg->file_contents=NULL;
+		
 		if (search_list!=NULL) {
 			
 			if ((gchar*)(search_list->data)!=NULL) {
@@ -467,6 +471,7 @@ static gpointer thread_func(Data *data)
 								
 								tempMessage->line_number=line_number;
 								tempMessage->filename=g_strdup_printf(filename);
+								tempMessage->file_contents=g_strdup_printf("%s",remove_newline(line));
 								
 								//result_list=g_list_insert_sorted(result_list,(gpointer)(tempMessage),insert_sorted_func);
 								result_list=g_list_append(result_list,(gpointer)tempMessage);
@@ -844,10 +849,13 @@ static void setup_tree_view(GtkWidget *treeview)
 	renderer=gtk_cell_renderer_text_new();
 	column=gtk_tree_view_column_new_with_attributes("Filename",renderer,"text",FILENAME,NULL);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview),column);
-	
-	
+		
 	renderer=gtk_cell_renderer_text_new();
 	column=gtk_tree_view_column_new_with_attributes("Line",renderer,"text",LINENUMBER,NULL);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview),column);
+	
+	renderer=gtk_cell_renderer_text_new();
+	column=gtk_tree_view_column_new_with_attributes("File contents",renderer,"text",FILE_CONTENTS,NULL);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview),column);
 }
 
