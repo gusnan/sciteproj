@@ -148,42 +148,36 @@ gboolean check_config_string(gchar *in_config)
 		}
 		
 		if (g_ascii_strcasecmp(tempstring,"give_scite_focus")==0) {
-			
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
 				gPrefs.give_scite_focus=TRUE;
 			}
 		}
 		
 		if (g_ascii_strcasecmp(tempstring,"search_give_scite_focus")==0) {
-			
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
 				gPrefs.search_give_scite_focus=TRUE;
 			}
 		}
 		
 		if (g_ascii_strcasecmp(tempstring,"search_alert_file_warnings")==0) {
-			
 			if (g_ascii_strcasecmp(value,"FALSE")==0) {
 				gPrefs.search_alert_file_warnings=FALSE;
 			}
 		}
 		
 		if (g_ascii_strcasecmp(tempstring,"search_match_case")==0) {
-			
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
 				gPrefs.search_match_case=TRUE;
 			}
 		}
 		
 		if (g_ascii_strcasecmp(tempstring,"search_match_whole_words")==0) {
-			
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
 				gPrefs.search_match_whole_words=TRUE;
 			}
 		}
 		
 		if (g_ascii_strcasecmp(tempstring,"dirty_on_folder_change")==0) {
-			
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
 				gPrefs.dirty_on_folder_change=TRUE;
 			}
