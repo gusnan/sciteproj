@@ -36,6 +36,16 @@ Specifies wether SciteProj shall flag your project as dirty when you exapand or 
 Specifies wether several files with the same name should be allowed in one project (TRUE or FALSE)
 .IP identify_sciteproj_xml
 Specifies wether SciteProj shall try to recognize XML files saved by SciteProj (TRUE or FALSE)
+.IP "search_xpos, search_ypos, search_width, search_height"
+The position of the search dialog when opened. If any of these values are set to -1, a default will be selected.
+.IP search_match_case
+Should the search dialog check the Search match case option by default
+.IP search_match_whole_words
+Should the checkbutton Match whole words be checked in the search dialog by defualt
+.IP search_give_scite_focus
+Should the SciTE window be focused when double-clicking a search result in the search dialog?
+.IP search_file_alert_warning
+If the project contains filename that doesn't exist on disk, should SciteProj give a warning?
 .SH AUTHOR
 .B SciteProj 
 was written by Andreas Rönnquist <gusnan@gusnan.se>.
