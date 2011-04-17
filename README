@@ -47,6 +47,22 @@ configuration file. See the variables
 
 * search_xpos, search_ypos, search_width and search_height
 
+In the configuration file you can set the search_file_alert_warning variable
+if you would like SciteProj to warn if the search tries to search files in
+the project that isn't availible on disk. 
+
+For the search dialog, you also have the variables "search_match_case" 
+and "search_match_whole_words", which can be used to set the default
+behaviour in the search dialog.
+
+There is also the variable "search_give_scite_focus", which determines if 
+double-clicking a result in the search dialog result list should bring the 
+SciTE window to front. If this isn't selected SciTE won't be brought to front, 
+which also comes with the side-effect that the line that is selected isn't 
+highlighted, which makes it really easy to miss. Because of this it is 
+recommended to make the SciTE window focus when you double click search 
+results through this option.
+
 You can open this configuration file by opening the Edit menu and select Edit 
 Options in that menu. This will open ($HOME)/.sciteproj as if it was part of 
 your project and edit it in SciTE.
