@@ -184,8 +184,8 @@ void create_about_dialog()
 
 	gchar *about_text2=g_strdup_printf(""
 											"SciteProj is based on ScitePM by\n"
-											"Roy Wood<roy.wood@gmail.com> and\n"
-											"Martin Andrews<ScitePM@PLATFORMedia.com>\n\n"
+											"Roy Wood <roy.wood@gmail.com> and\n"
+											"Martin Andrews <ScitePM@PLATFORMedia.com>\n\n"
 											"Many thanks to\n"
 											"Mattias Wecksten <wecksten@gmail.com>\n"
 											"Frank Wunderlich\n\n"
