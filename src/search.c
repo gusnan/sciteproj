@@ -217,7 +217,7 @@ void search_dialog()
 	gtk_box_pack_start(GTK_BOX(check_button_box),match_case_checkbutton,FALSE,TRUE,5);
 	
 	
-	match_whole_words_only_checkbutton=gtk_check_button_new_with_label("Match whole word");
+	match_whole_words_only_checkbutton=gtk_check_button_new_with_label("Match whole word only");
 	
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton),gPrefs.search_match_whole_words);
 	
