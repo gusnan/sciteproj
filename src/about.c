@@ -42,7 +42,7 @@ static gchar *sLicense =	(gchar*)"SciteProj is free software: you can redistribu
 											  "along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n";
 
 
-gchar *homepage_string=(gchar*)"http://sciteproj.gusnan.se";
+gchar *homepage_string=(gchar*)"http://www.gusnan.se/sciteproj";
 
 gchar *sVersion = (gchar*)"0.4.10";
 
@@ -144,7 +144,7 @@ void create_about_dialog()
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
 	// Show a link to the SciteProj homepage
-	linkbutton=gtk_link_button_new_with_label(homepage_string,"http://www.gusnan.se/sciteproj");
+	linkbutton=gtk_link_button_new_with_label(homepage_string,homepage_string);
 	gtk_box_pack_start(GTK_BOX(hbox), linkbutton, TRUE, FALSE, 0);
 	
 	// New notebook - we want tabs for different sets of text
