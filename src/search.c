@@ -471,7 +471,15 @@ static gpointer thread_func(Data *data)
 								
 								tempMessage->line_number=line_number;
 								tempMessage->filename=g_strdup_printf(filename);
-								tempMessage->file_contents=g_strdup_printf("%s",remove_newline(line));
+								
+								gchar *resulttemp=remove_newline(line);
+								
+								if (gPrefs.search_trim_results) {
+									resulttemp=g_strchug(resulttemp);
+									resulttemp=g_strchomp(resulttemp);
+								}
+								
+								tempMessage->file_contents=g_strdup_printf("%s",resulttemp);
 								
 								//result_list=g_list_insert_sorted(result_list,(gpointer)(tempMessage),insert_sorted_func);
 								result_list=g_list_append(result_list,(gpointer)tempMessage);

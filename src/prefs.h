@@ -56,6 +56,7 @@ typedef struct {
 	gboolean recent_add_to_bottom;
 	
 	gboolean search_alert_file_warnings;
+	gboolean search_trim_results;
 	
 } sciteproj_prefs;
 

@@ -49,6 +49,7 @@ gchar *default_config_string=(gchar*)"" \
 				"search_alert_file_warnings=TRUE\n"
 				"search_match_case=FALSE\n"
 				"search_match_whole_words=FALSE\n"
+				"search_trim_results=TRUE\n"
 				"\n"
 				"#other:\n"
 				"give_scite_focus=FALSE\n"
@@ -219,6 +220,12 @@ gboolean check_config_string(gchar *in_config)
 				gPrefs.recent_add_to_bottom=TRUE;
 			}
 		}
+		
+		if (g_ascii_strcasecmp(tempstring,"search_trim_results")==0) {
+			if (g_ascii_strcasecmp(value,"TRUE")==0) {
+				gPrefs.search_trim_results=TRUE;
+			}
+		}
 	}
 	
 	if (tempstring!=NULL) g_free(tempstring);
@@ -272,6 +279,8 @@ gboolean init_prefs(GError **err)
 	gPrefs.file_to_load=NULL;
 	
 	gPrefs.scite_path=NULL;
+	
+	gPrefs.search_trim_results=FALSE;
 	
 	config_filename=g_build_filename(g_get_home_dir(),".sciteproj",NULL);
 	
