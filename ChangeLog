@@ -2,9 +2,10 @@
 ChangeLog:
 ----------
 
-0.X.XX
+0.5.00
 	* Added a search dialog
 	* Fixed problems with the prefs system
+	* Documentation updates
 
 0.4.10
 	* Added a "Recently opened files" box
