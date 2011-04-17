@@ -51,6 +51,7 @@ static GtkWidget *window;
 void create_about_dialog();
 
 gboolean handle_about_close_event(GtkWidget *widget,GdkEvent *event,gpointer user_data);
+void link_button_cb(GtkButton *button,gpointer user_data);
 
 /**
  * show_about_dialog
@@ -242,6 +243,7 @@ void create_about_dialog()
 					  
 	
 	g_signal_connect(G_OBJECT(window),"delete-event",G_CALLBACK(handle_about_close_event),window);
+	g_signal_connect(G_OBJECT(linkbutton),"released",G_CALLBACK(link_button_cb),linkbutton);
 	
 	gtk_widget_show_all(window);
 
@@ -263,4 +265,15 @@ gboolean handle_about_close_event(GtkWidget *widget,GdkEvent *event,gpointer use
 	gtk_widget_hide(window);
 	
 	return TRUE;
+}
+
+/**
+ *	Callback for the link button, Without this, it would color the text purple when the
+ *	link is followed, which I found really ugly.
+ */
+void link_button_cb(GtkButton *button,gpointer user_data)
+{
+	GtkWidget *linkbutton=(GtkWidget*)(user_data);
+	
+	gtk_link_button_set_visited(GTK_LINK_BUTTON(linkbutton),FALSE);
 }
