@@ -433,7 +433,7 @@ gboolean launch_scite(gchar *instring,GError **err)
 				opt1=g_strndup(instring,split);
 				opt2=g_strdup(place);
 			} else {
-				strcpy(opt1,instring);
+				opt1=g_strdup(instring);
 			}
 		}
 		
