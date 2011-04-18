@@ -2,6 +2,10 @@
 ChangeLog:
 ----------
 
+0.5.01
+	* Fix a cppcheck warning (writing to non-initialized char pointer)
+	* Man-page updates
+
 0.5.00
 	* Added a search dialog
 	* Fixed problems with the prefs system
