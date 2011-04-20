@@ -62,7 +62,6 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 	
 	
 	if (!g_path_is_absolute(absPath)) {
-	//if (absPath[0] != G_DIR_SEPARATOR) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Specified path, '%s', is not absolute", __func__ , absPath);
 		
 		goto EXITPOINT;
@@ -83,9 +82,6 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 		
 	}
 
-	//printf("basepath:%s\n",basePath);
-	
-	
 	// Set up a local copy of the base path, and ensure it ends with a '/'
 	
 	if (!str_append(&localBasePath, basePath, err)) {
@@ -130,16 +126,7 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 	}
 	
 	// Finally, add the leftover part of the absolute path
-	
-	/*
-	if (relativePath) {
-		printf("rel:%s\n",relativePath);
-	} else {
-		printf("relativePath=NULL!\n");
-	}
-	printf("abs:%s\n",absPath);
-	*/
-	
+
 	if (!str_append(relativePath, absPath + dirSlashOffset, err)) {
 		goto EXITPOINT;
 	}
@@ -198,28 +185,9 @@ gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const g
 	
 	if (!basePath) {
 		debug_printf("No basepath.\n");
-		/*
-		workingDir = getcwd(NULL, 0);
-		
-		if (!workingDir) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not determine current working directory, getcwd() = NULL, errno = %d", __func__, errno);
-			
-			goto EXITPOINT;
-		}
-		*/
 		
 		basePath = g_get_current_dir ();
 	}
-	
-	/*
-	debug_printf("\n");
-	
-	debug_printf("Absolute:%s\n",localAbsPath);
-	debug_printf("basePath:%s\n",basePath);
-	debug_printf("RelativePath:%s\n",relativePath);
-	
-	debug_printf("\n");
-	*/
 	
 	// Absolute path is base path + '/' + relative path
 	
@@ -232,18 +200,9 @@ gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const g
 	}
 	
 	//// Only do this if the relativepath REALLY is a realative path.
-	//if (!g_path_is_absolute(relativePath)) {
-		if (!str_append(&localAbsPath, relativePath, err)) {
-			goto EXITPOINT;
-		}
-		/*
-	} else {
-		// it is absolute - 
-		localAbsPath=g_strdup(relativePath);
+	if (!str_append(&localAbsPath, relativePath, err)) {
+		goto EXITPOINT;
 	}
-		*/
-	
-	//debug_printf("curr:%s\n",localAbsPath);
 	
 	// Now go through and collapse elements like  "/./" and "/foo/../" and "//"
 	
@@ -354,7 +313,6 @@ EXITPOINT:
  */
 gchar *get_filename_from_full_path(gchar *src)
 {
-	//gboolean finalResult=FALSE;
 	gchar *pointer=NULL;
 	gchar *result=NULL;
 	gboolean slashFound=FALSE;
@@ -402,14 +360,6 @@ void debug_printf(const char *st, ...)
  */
 char *remove_newline( char *s )
 {
-	/*
-   char *n = malloc( strlen( s ? s : "\n" ) );
-   if( s )
-       strcpy( n, s );
-   n[strlen(n)-1]='\0';
-   return n;
-	*/
-	
 	int len=strlen(s);
 	
 	if (s[len-1]=='\n') {
@@ -449,4 +399,3 @@ gboolean is_word_character(char ch)
 	
 	return result;
 }
-
