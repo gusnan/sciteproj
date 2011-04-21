@@ -1,7 +1,7 @@
 /**
  * recent_files.c - list of recently opened files
  *
- *  Copyright 2011 Andreas Ronnquist
+ *  Copyright 2011 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  * 

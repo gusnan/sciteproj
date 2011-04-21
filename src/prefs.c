@@ -1,7 +1,7 @@
 /**
  * prefs.c - prefs for SciteProj
  *
- *  Copyright 2006 Roy Wood, 2009-2011 Andreas Ronnquist
+ *  Copyright 2006 Roy Wood, 2009-2011 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  * 

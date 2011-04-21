@@ -1,7 +1,7 @@
 /**
  * about.h - about dialog for SciteProj
  *
- *	 Copyright 2008-2011 Andreas Ronnquist
+ *	 Copyright 2008-2011 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  * 

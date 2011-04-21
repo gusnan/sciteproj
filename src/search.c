@@ -1,7 +1,7 @@
 /**
  * search.c - Search dialog for searching the files in the SciteProj project
  *
- *  Copyright 2011 Andreas Ronnquist
+ *  Copyright 2011 Andreas Rönnquist
  *
  * This file is part of SciteProj
  *
