@@ -249,6 +249,7 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 	return finalResult;
 }
 
+
 /**
  * Callback for the progress dialog shown when opening Scite.  This callback simply sets a boolean
  * pointed to by the userData paramater.
@@ -745,6 +746,7 @@ EXITPOINT:
 
 	return finalResult;
 }
+
 
 /**
  *

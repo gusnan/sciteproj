@@ -370,6 +370,7 @@ char *remove_newline( char *s )
 	 
 }
 
+
 /**
  * returns true if a gchar is an integer
  *	(Very limited functionality at the moment)
@@ -387,6 +388,7 @@ gboolean is_integer(gchar *string)
 	
 	return TRUE;
 }
+
 
 /**
  *

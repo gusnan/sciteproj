@@ -45,6 +45,7 @@ static struct CommandLineIndata {
 
 static void parse_cmd_options(int argc,char *argv[]);
 
+
 /*
  *		Program main entry
  */

@@ -53,6 +53,7 @@ void create_about_dialog();
 gboolean handle_about_close_event(GtkWidget *widget,GdkEvent *event,gpointer user_data);
 void link_button_cb(GtkButton *button,gpointer user_data);
 
+
 /**
  * show_about_dialog
  * Shows the about dialog, and if it isnt already made, creates it
@@ -64,6 +65,7 @@ void show_about_dialog()
 	else
 		gtk_window_present(GTK_WINDOW(window));
 }
+
 
 /**
  *	creates a new dialog box, and fills it will all necessary information
@@ -249,6 +251,7 @@ void create_about_dialog()
 
 }
 
+
 /**
  * Show version
  */
@@ -256,6 +259,7 @@ void show_version()
 {
 	g_print("SciteProj version %s\n", sVersion);
 }
+
 
 /**
  *
@@ -266,6 +270,7 @@ gboolean handle_about_close_event(GtkWidget *widget,GdkEvent *event,gpointer use
 	
 	return TRUE;
 }
+
 
 /**
  *	Callback for the link button, Without this, it would color the text purple when the

@@ -636,6 +636,7 @@ static void switch_folder_icon(GtkTreeView *treeView,GtkTreePath *path)
 	g_free(relFilePath);
 }
 
+
 /**
  * Callback handler for Gtk "row-activated" event.
  *
@@ -842,6 +843,7 @@ EXITPOINT:
 	//
 	if (err) g_error_free(err);
 }
+
 
 /**
  *
@@ -1071,6 +1073,7 @@ static void saveproject_as_menu_cb()
 	if (err) g_error_free(err);
 }
 
+
 /**
  * Callback for "Save Project" menu item
  */
@@ -1191,6 +1194,7 @@ static gboolean foreach_expand(GtkTreeModel *model,GtkTreePath *path,GtkTreeIter
 	return FALSE;
 }
 
+
 /**
  *		Collapses all folders
  */
@@ -1199,6 +1203,7 @@ static gboolean foreach_collapse(GtkTreeModel *model,GtkTreePath *path,GtkTreeIt
 	collapse_tree_row(path);
 	return FALSE;
 }
+
 
 /**
  *
@@ -1290,6 +1295,7 @@ gboolean dialog_response_is_exit(gint test)
 	
 	return result;
 }
+
 
 /**
  *

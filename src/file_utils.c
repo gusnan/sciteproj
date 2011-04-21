@@ -25,6 +25,7 @@
 
 #include "file_utils.h"
 
+
 /**
  *
  */
@@ -43,6 +44,7 @@ gboolean is_separator(gchar ch)
 	}
 	return result;	
 }
+
 
 /**
  *
@@ -73,6 +75,7 @@ gchar *path_up_string(gchar *instring)
 
 	return resstring;
 }
+
 
 /** 
  *		fix_separators
@@ -110,6 +113,7 @@ gchar *fix_separators(gchar *source)
 	
 	return result;
 }
+
 
 /**
  *
@@ -180,6 +184,7 @@ gchar *fix_path(char *base_dir,char *temp)
 	
 	return new_res;
 }
+
 
 /**
  *

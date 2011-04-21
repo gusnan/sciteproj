@@ -38,6 +38,7 @@
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
+
 /**
  *
  */

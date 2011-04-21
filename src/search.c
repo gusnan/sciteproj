@@ -35,6 +35,7 @@
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_SEARCH_ERROR")
 
+
 /**
  *
  */
@@ -102,6 +103,7 @@ static GThread *thread=NULL;
 static gint threaded_flag;
 
 static gboolean search_dialog_open=FALSE;
+
 
 /**
  *
@@ -294,6 +296,7 @@ static gboolean update_tree(Data *data)
 	
 	return FALSE;
 }
+
 
 /**
  *

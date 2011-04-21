@@ -25,10 +25,12 @@
 
 #include "filelist.h"
 
+
 /**
  *
  */
 GList *list=NULL;
+
 
 /**
  * init the list of files in the project
@@ -39,6 +41,7 @@ gboolean init_filelist()
 	return TRUE;
 }
 
+
 /**
  * free the data of every item
  */
@@ -48,6 +51,7 @@ static void free_list_data(gpointer data,gpointer priv)
 	
 	g_free(file);
 }
+
 
 /**
  *
@@ -61,6 +65,7 @@ void done_filelist()
 	if (list!=NULL) g_list_free(list);
 	
 }
+
 
 /**
  *
@@ -76,6 +81,7 @@ static void printitem(gpointer data,gpointer priv)
 	
 }
 
+
 /**
  *
  */
@@ -84,6 +90,7 @@ void print_filelist()
 	printf("Filelist:-----------------\n");
 	g_list_foreach(list,printitem,NULL);
 }
+
 
 /**
  *
@@ -113,6 +120,7 @@ File *exists_in_list(gchar *full_path)
 	return result;
 	
 }
+
 
 /**
  *

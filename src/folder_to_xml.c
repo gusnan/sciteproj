@@ -31,6 +31,7 @@
 
 #include "folder_to_xml.h"
 
+
 /*
  *
  */
@@ -41,6 +42,7 @@ gchar *base_folder=0;
 FILE *save_file=NULL;
 
 gchar *stored_current_dir;
+
 
 /**
  *
@@ -62,6 +64,7 @@ gchar *get_short_folder_name(gchar *base,gchar *current)
 	return result;
 }
 
+
 /**
  *
  */
@@ -75,6 +78,7 @@ void print_indent(int in)
 		}
 	}
 }
+
 
 /**
  * traverse_folder
@@ -195,6 +199,7 @@ gboolean traverse_folder(gchar *folder,int *indent,gboolean ignore_hidden,int ma
 	// success
 	return TRUE;
 }
+
 
 /**
  *	folder_to_xml

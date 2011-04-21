@@ -29,9 +29,11 @@
 
 #include "rename.h"
 
+
 /**
  *
  */
+
 
 /**
  *
@@ -61,6 +63,7 @@ void rename_cb(gchar *new_text, gchar *path_string,gpointer user_data)
 	
 }
 
+
 /**
  *
  */
@@ -89,6 +92,7 @@ void do_rename_iter(GtkTreeIter iter)
 		g_object_set(G_OBJECT(textCellRenderer), "editable",FALSE, NULL);
 	}
 }
+
 
 /**
  *
