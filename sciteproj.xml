@@ -13,12 +13,12 @@
 		<file>./src/prefs.c</file>
 		<file>./src/properties_dialog.c</file>
 		<file>./src/recent_files.c</file>
-		<file>./src/rename.c</file>
 		<file>./src/remove.c</file>
+		<file>./src/rename.c</file>
 		<file>./src/scite_utils.c</file>
 		<file>./src/search.c</file>
-		<file>./src/string_utils.c</file>
 		<file>./src/statusbar.c</file>
+		<file>./src/string_utils.c</file>
 		<file>./src/tree_manipulation.c</file>
 		<file>./src/xml_processing.c</file>
 	</group>
@@ -36,8 +36,8 @@
 		<file>./src/prefs.h</file>
 		<file>./src/properties_dialog.h</file>
 		<file>./src/recent_files.h</file>
-		<file>./src/rename.h</file>
 		<file>./src/remove.h</file>
+		<file>./src/rename.h</file>
 		<file>./src/scite_utils.h</file>
 		<file>./src/search.h</file>
 		<file>./src/statusbar.h</file>
