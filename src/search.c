@@ -58,8 +58,6 @@ typedef struct _Data
 	GtkWidget *search_button;
 	GtkWidget *result_label;
 	
-	GdkCursor *busy_cursor;
-	
 	GtkWidget *search_string_entry;
 	
 	gchar *text_to_search_for;
@@ -176,11 +174,6 @@ void search_dialog()
 	if (gPrefs.search_xpos!=-1) {
 		gtk_window_move(GTK_WINDOW(window),gPrefs.search_xpos,gPrefs.search_ypos);
 	}
-
-	
-	// Create the busy cursor
-	GdkDisplay *display=gdk_display_get_default();
-	data->busy_cursor=gdk_cursor_new_for_display(display,GDK_WATCH);
 	
 	hbox=gtk_hbox_new(FALSE,8);
 	
@@ -611,7 +604,7 @@ static void search_button_clicked_cb(GtkButton *button,gpointer user_data)
 			is_searching=TRUE;
 			
 			// set the mouse cursor
-			gdk_window_set_cursor(gtk_widget_get_window(window),data->busy_cursor);
+			gdk_window_set_cursor(gtk_widget_get_window(window),busy_cursor);
 		} else {
 			// string to search for has a length of zero.
 			GtkWidget *warningDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK, 
