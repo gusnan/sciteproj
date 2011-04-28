@@ -42,7 +42,7 @@ static gchar *sLicense =	(gchar*)"SciteProj is free software: you can redistribu
 											  "along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n";
 
 
-gchar *homepage_string=(gchar*)"http://www.gusnan.se/sciteproj";
+gchar *homepage_string=(gchar*)"http://sciteproj.sourceforge.net";
 
 gchar *sVersion = (gchar*)"0.5.01";
 
