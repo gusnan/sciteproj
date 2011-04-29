@@ -25,6 +25,7 @@
 	<group name='includes' expanded='TRUE'>
 		<file>./src/about.h</file>
 		<file>./src/addfiles.h</file>
+		<file>./src/clicked_node.h</file>
 		<file>./src/clipboard.h</file>
 		<file>./src/drag_drop.h</file>
 		<file>./src/filelist.h</file>
