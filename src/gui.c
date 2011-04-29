@@ -205,9 +205,10 @@ gboolean setup_gui(GError **err)
 	GtkWidget *recentHbox=NULL;
 
 	GtkWidget *fullVbox=NULL;
-
-
 	
+	GtkWidget *hbox=NULL;
+	GtkWidget *statusBarVbox=NULL;
+		
 	clicked_node.valid=FALSE;
 	clicked_node.name=NULL;
 	clicked_node.type=-1;
@@ -306,8 +307,6 @@ gboolean setup_gui(GError **err)
 	
 	gtk_box_pack_start(GTK_BOX(vbox), scrolledWindow, TRUE, TRUE, 0);
 	
-	
-	GtkWidget *hbox;
 	
 	hbox=gtk_hbox_new(FALSE,0);
 	
@@ -438,7 +437,7 @@ gboolean setup_gui(GError **err)
 		goto EXITPOINT;
 	}
 
-	GtkWidget *statusBarVbox=gtk_vbox_new(FALSE,0);
+	statusBarVbox=gtk_vbox_new(FALSE,0);
 	if (!statusBarVbox) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create statusBarVbox, gtk_hbox_new() = NULL", __func__);
 		
@@ -737,6 +736,7 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	gchar *nodeName = NULL;
 	gint nodeItemType;
 	GtkTreeIter iter;
+	GtkTreeSelection *tree_selection=NULL;
 	
 	g_assert(treeView != NULL);
 	g_assert(event != NULL);
@@ -787,8 +787,6 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	nodeName = NULL;
 	
 	// Check if something is selected
-	GtkTreeSelection *tree_selection=NULL;
-	
 	tree_selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(treeView));
 	
 	if (tree_selection!=NULL) {

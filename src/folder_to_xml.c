@@ -214,6 +214,7 @@ gboolean folder_to_xml(gchar *folder,gchar *save_filename_in,int max_depth)
 	gboolean result=FALSE;
 	
 	gchar *save_filename;
+	int temp_indent=0;
 	
 	stored_current_dir=g_get_current_dir();
 
@@ -245,11 +246,9 @@ gboolean folder_to_xml(gchar *folder,gchar *save_filename_in,int max_depth)
 	
 	if (save_file!=NULL) fprintf(save_file,"<root identifier='sciteproj project file'>\n");
 	
-	int q=0;
-	
 	base_folder=g_strdup(folder);
 	
-	traverse_folder(folder,&q,TRUE,max_depth);
+	traverse_folder(folder,&temp_indent,TRUE,max_depth);
 	
 	if (save_file!=NULL) {
 		fprintf(save_file,"</root>\n");

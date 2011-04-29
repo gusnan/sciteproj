@@ -189,7 +189,8 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	GtkWidget *table;
 	GtkWidget *label1,*label2,*label3;
 	GtkWidget *path,*filename,*filesize_label;
-	
+	GtkWidget *container_vbox=NULL;
+
 	gchar *filePath=NULL;
 	int nodeType=-1;
 	
@@ -255,7 +256,7 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	gtk_container_set_border_width(GTK_CONTAINER(table),5);
 	
 	
-	GtkWidget *container_vbox=gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	container_vbox=gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	gtk_box_pack_start(GTK_BOX(container_vbox),table,TRUE,TRUE,0);
 	
 	gtk_widget_show_all(dialog);

@@ -240,6 +240,12 @@ gboolean init_prefs(GError **err)
 	gchar *config_string=NULL;
 	
 	gboolean result=TRUE;
+
+	// the list of strings
+	gchar **list=NULL;
+	gchar **savedlist=NULL;
+
+	gchar *temp=NULL;
 	
 	// Set default values
 	gPrefs.lhs=1;
@@ -293,15 +299,10 @@ gboolean init_prefs(GError **err)
 		goto ERROR;
 	}
 	
-	// the list of strings
-	gchar **list=NULL;
-	
 	// split out the lines, and add each to the list of strings
 	list=g_strsplit(config_string,"\n",-1);
 	
-	gchar **savedlist=list;
-	
-	gchar *temp=NULL;
+	savedlist=list;
 	
 	do {
 		temp=*list;

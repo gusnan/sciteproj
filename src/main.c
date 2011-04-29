@@ -53,6 +53,7 @@ int main(int argc, char *argv[])
 {
 	int returnCode = EXIT_FAILURE;
 	GError *err = NULL;
+	gchar *file_to_load=NULL;
 	
 	parse_cmd_options(argc,argv);
 	
@@ -136,7 +137,7 @@ int main(int argc, char *argv[])
 	}
 	
 	
-	gchar *file_to_load=NULL;
+	file_to_load=NULL;
 	if (cmd.file_to_load!=NULL) {
 		file_to_load=cmd.file_to_load;
 	} else {

@@ -45,6 +45,8 @@ void copy_filename_to_clipboard(GtkTreeModel *model, GtkTreeIter *iter)
 	gchar *nodename=NULL;
 	gchar *filePath=NULL;
 	int nodeType=-1;
+	GdkDisplay *display=NULL;
+	GtkClipboard *clipboard=NULL;
 	
 	gtk_tree_model_get(model, iter, COLUMN_FILENAME, &nodename, COLUMN_ITEMTYPE, &nodeType, COLUMN_FILEPATH, &filePath, -1);
 	
@@ -57,9 +59,9 @@ void copy_filename_to_clipboard(GtkTreeModel *model, GtkTreeIter *iter)
 		goto EXITPOINT;
 	}
 	
-	GdkDisplay *display=gdk_display_get_default();
+	display=gdk_display_get_default();
 	
-	GtkClipboard *clipboard=gtk_clipboard_get_for_display(display,GDK_SELECTION_CLIPBOARD);
+	clipboard=gtk_clipboard_get_for_display(display,GDK_SELECTION_CLIPBOARD);
 	
 	gtk_clipboard_set_text(clipboard,absFilePath,-1);
 	

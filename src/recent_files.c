@@ -336,6 +336,7 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 	gchar *nodeName = NULL;
 	gint nodeItemType;
 	GtkTreeIter iter;
+	GtkTreeSelection *tree_selection=NULL;
 	
 	g_assert(treeView != NULL);
 	g_assert(event != NULL);
@@ -385,8 +386,6 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 	nodeName = NULL;
 	
 	// Check if something is selected
-	GtkTreeSelection *tree_selection=NULL;
-	
 	tree_selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(treeView));
 	
 	if (tree_selection!=NULL) {
@@ -548,6 +547,7 @@ void popup_remove_recent_file_cb()
 	GError *err = NULL;
 	GtkWidget *dialog = NULL;
 	gchar *absFilePath = NULL;
+	gchar *fileName=NULL;
 		
 	// There are only files in this list
 	
@@ -555,7 +555,7 @@ void popup_remove_recent_file_cb()
 		goto EXITPOINT;
 	}
 	
-	gchar *fileName = get_filename_from_full_path((gchar*)recent_clicked_node.name);
+	fileName = get_filename_from_full_path((gchar*)recent_clicked_node.name);
 		
 	remove_if_already_exists(fileName);
 	
