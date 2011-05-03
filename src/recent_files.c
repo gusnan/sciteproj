@@ -580,18 +580,6 @@ EXITPOINT:
  */
 void copy_recent_filename_to_clipboard_cb()
 {
-	gint selected_rows=0;
-	gboolean multiple_selected=FALSE;
-	
-	GtkTreeSelection *treeSelect;
-	
-	treeSelect=gtk_tree_view_get_selection(GTK_TREE_VIEW(recentTreeView));
-	
-	selected_rows=gtk_tree_selection_count_selected_rows(treeSelect);
-	if (selected_rows>1) {
-		multiple_selected=TRUE;
-	}
-		
 	if (!recent_clicked_node.valid || recent_clicked_node.type != ITEMTYPE_FILE) {
 		//goto EXITPOINT;
 	} else {
@@ -606,18 +594,6 @@ void copy_recent_filename_to_clipboard_cb()
  */
 void properties_recent_file_cb()
 {
-	gint selected_rows=0;
-	gboolean multiple_selected=FALSE;
-	
-	GtkTreeSelection *treeSelect;
-	
-	treeSelect=gtk_tree_view_get_selection(GTK_TREE_VIEW(recentTreeView));
-	
-	selected_rows=gtk_tree_selection_count_selected_rows(treeSelect);
-	if (selected_rows>1) {
-		multiple_selected=TRUE;
-	}
-		
 	if (!recent_clicked_node.valid || recent_clicked_node.type != ITEMTYPE_FILE) {
 		//goto EXITPOINT;
 	} else {

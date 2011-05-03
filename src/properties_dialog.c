@@ -94,7 +94,6 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 {
 	GError *err = NULL;
 	GtkWidget *dialog = NULL;
-	gint dialogResponse;
 	gchar *nodename = NULL;
 	
 	GtkWidget *table;
@@ -164,7 +163,7 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 	gtk_widget_show_all(dialog);
 	
 	
-	dialogResponse=gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_dialog_run(GTK_DIALOG(dialog));
 	
 	
 //EXITPOINT:
@@ -183,7 +182,6 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	
 	GError *err = NULL;
 	GtkWidget *dialog = NULL;
-	gint dialogResponse;
 	gchar *nodename = NULL;
 	
 	GtkWidget *table;
@@ -262,7 +260,7 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	gtk_widget_show_all(dialog);
 	
 	
-	dialogResponse=gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_dialog_run(GTK_DIALOG(dialog));
 	
 	
 EXITPOINT:
@@ -277,18 +275,6 @@ EXITPOINT:
  */
 void group_properties_cb()
 {
-	gint selected_rows=0;
-	gboolean multiple_selected=FALSE;
-	
-	GtkTreeSelection *treeSelect;
-	
-	treeSelect=gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
-	
-	selected_rows=gtk_tree_selection_count_selected_rows(treeSelect);
-	if (selected_rows>1) {
-		multiple_selected=TRUE;
-	}
-		
 	if (!clicked_node.valid || clicked_node.type != ITEMTYPE_GROUP) {
 		//goto EXITPOINT;
 	} else {
@@ -303,18 +289,6 @@ void group_properties_cb()
  */
 void file_properties_cb()
 {
-	gint selected_rows=0;
-	gboolean multiple_selected=FALSE;
-	
-	GtkTreeSelection *treeSelect;
-	
-	treeSelect=gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
-	
-	selected_rows=gtk_tree_selection_count_selected_rows(treeSelect);
-	if (selected_rows>1) {
-		multiple_selected=TRUE;
-	}
-		
 	if (!clicked_node.valid || clicked_node.type != ITEMTYPE_FILE) {
 		//goto EXITPOINT;
 	} else {
