@@ -988,8 +988,6 @@ extern gboolean remove_tree_node(GtkTreeIter *iter, GError **err)
 	
 	gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), iter, COLUMN_ITEMTYPE, &itemType, COLUMN_FILEPATH, &file_path, -1);
 	
-	printf("Filename: %s\n",file_path);
-	
 	if (itemType==ITEMTYPE_GROUP) {
 		
 		helper_remove(iter);
