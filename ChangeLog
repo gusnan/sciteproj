@@ -2,6 +2,15 @@
 ChangeLog:
 ----------
 
+0.5.10
+	* Removed a debug printf
+	* Fixed warnings caused by new version of gcc
+	* Added missing clicked_node.h to project file
+	* Removed making a busy cursor in the search code, one was already
+	  created in the graphics codes
+	* Fixed homepage in the about dialog
+	* Some minor code cleanups
+
 0.5.01
 	* Fix a cppcheck warning (writing to non-initialized char pointer)
 	* Man-page updates
