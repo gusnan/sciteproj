@@ -466,7 +466,7 @@ static gpointer thread_func(Data *data)
 								Message *tempMessage=g_slice_new(Message);
 								
 								tempMessage->line_number=line_number;
-								tempMessage->filename=g_strdup_printf(filename);
+								tempMessage->filename=g_strdup_printf("%s",filename);
 								
 								gchar *resulttemp=remove_newline(line);
 								
