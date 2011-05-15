@@ -10,6 +10,7 @@ ChangeLog:
 	  created in the graphics codes
 	* Fixed homepage in the about dialog
 	* Some minor code cleanups
+	* Fix minus-sign in the man page
 
 0.5.01
 	* Fix a cppcheck warning (writing to non-initialized char pointer)
