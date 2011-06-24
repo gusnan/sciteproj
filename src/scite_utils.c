@@ -754,14 +754,6 @@ EXITPOINT:
 void set_scite_launched(gboolean launched)
 {
 	sSciteLaunched=launched;
-	
-	/*
-	if (launched) {
-		set_scite_connection_icon(TRUE);
-	} else {
-		set_scite_connection_icon(FALSE);
-	}
-	*/
 }
 
 
