@@ -901,6 +901,7 @@ gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, con
 		(strcmp(fileExt,"cpp")==0)
 		) {
 		gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, cpp_file_pixbuf, -1);
+			
 	} else if (
 		(strcmp(fileExt,"hh")==0) ||
 		(strcmp(fileExt,"h++")==0) ||
@@ -908,6 +909,16 @@ gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, con
 		(strcmp(fileExt,"hpp")==0)
 	) {
 		gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, header_file_pixbuf, -1);
+		
+	} else if (
+		(strcmp(fileExt,"lua")==0) 
+	) {
+		gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, lua_file_pixbuf, -1);
+		
+	} else if (
+		(strcmp(fileExt,"java")==0)
+	) {
+		gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, java_file_pixbuf, -1);
 	} else {
 		gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, txt_file_pixbuf, -1);
 	}

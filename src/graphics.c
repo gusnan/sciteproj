@@ -32,6 +32,8 @@
 #include "../graphics/text-x-cpp.xpm"
 #include "../graphics/text-x-h.xpm"
 #include "../graphics/text-x-txt.xpm"
+#include "../graphics/text-x-java.xpm"
+#include "../graphics/text-x-lua.xpm"
 #include "../graphics/sciteproj.xpm"
 
 
@@ -39,6 +41,9 @@
 GdkPixbuf *header_file_pixbuf=NULL;
 GdkPixbuf *cpp_file_pixbuf=NULL;
 GdkPixbuf *txt_file_pixbuf=NULL;
+GdkPixbuf *java_file_pixbuf=NULL;
+GdkPixbuf *lua_file_pixbuf=NULL;
+
 GdkPixbuf *directory_closed_pixbuf=NULL;
 GdkPixbuf *directory_open_pixbuf=NULL;
 
@@ -77,6 +82,14 @@ gboolean load_graphics(GError **err)
 	txt_file_pixbuf=gdk_pixbuf_scale_simple(temp,16,16,GDK_INTERP_HYPER);
 	g_object_unref(temp);
 	
+	temp=gdk_pixbuf_new_from_xpm_data((const char **)text_x_java_xpm);
+	java_file_pixbuf=gdk_pixbuf_scale_simple(temp,16,16,GDK_INTERP_HYPER);
+	g_object_unref(temp);
+	
+	temp=gdk_pixbuf_new_from_xpm_data((const char **)text_x_lua_xpm);
+	lua_file_pixbuf=gdk_pixbuf_scale_simple(temp,16,16,GDK_INTERP_HYPER);
+	g_object_unref(temp);
+	
 	standard_cursor=gdk_cursor_new(GDK_X_CURSOR);
 	busy_cursor=gdk_cursor_new(GDK_WATCH);
 	
@@ -95,6 +108,8 @@ void unload_graphics()
 	if (cpp_file_pixbuf!=NULL) g_object_unref(cpp_file_pixbuf);
 	if (header_file_pixbuf!=NULL) g_object_unref(header_file_pixbuf);
 	if (txt_file_pixbuf!=NULL) g_object_unref(txt_file_pixbuf);
+	if (java_file_pixbuf!=NULL) g_object_unref(java_file_pixbuf);
+	if (lua_file_pixbuf!=NULL) g_object_unref(lua_file_pixbuf);
 
 	if (directory_closed_pixbuf!=NULL) g_object_unref(directory_closed_pixbuf);
 	if (directory_open_pixbuf!=NULL) g_object_unref(directory_open_pixbuf);
