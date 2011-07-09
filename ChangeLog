@@ -2,6 +2,10 @@
 ChangeLog:
 ----------
 
+0.5.11
+	* Added icons for lua and java files
+	* Fix minor warning (-Wformat-security)
+
 0.5.10
 	* Removed a debug printf
 	* Fixed warnings caused by new version of gcc
