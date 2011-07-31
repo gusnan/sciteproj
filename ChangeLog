@@ -2,6 +2,9 @@
 ChangeLog:
 ----------
 
+X.X.XX
+	* Use g_get_user_config_dir to get where to put the config file
+
 0.5.11
 	* Added icons for lua and java files
 	* Fix minor warning (-Wformat-security)

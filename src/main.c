@@ -174,6 +174,8 @@ EXITPOINT:
 	
 	gui_close();
 	
+	done_prefs();
+	
 	if (err) g_error_free(err);
 	
 	return returnCode;

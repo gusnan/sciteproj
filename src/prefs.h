@@ -62,6 +62,9 @@ typedef struct {
 
 extern sciteproj_prefs gPrefs;
 
+extern gchar *prefs_filename;
+
 gboolean init_prefs();
+void done_prefs();
 
 #endif /*__HEADER_PREFS_*/

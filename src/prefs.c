@@ -29,6 +29,8 @@
 
 sciteproj_prefs gPrefs;
 
+gchar *prefs_filename;
+
 gchar *default_config_string=(gchar*)"" \
 				"# ---------------------------\n"
 				"# Configuration for SciteProj\n"
@@ -274,26 +276,27 @@ gboolean init_prefs(GError **err)
 	gPrefs.show_recent=FALSE;
 	gPrefs.recent_add_to_bottom=FALSE;
 	
-	gchar *config_filename=NULL;
-	
 	gPrefs.file_to_load=NULL;
 	
 	gPrefs.scite_path=NULL;
 	
 	gPrefs.search_trim_results=FALSE;
 	
-	config_filename=g_build_filename(g_get_home_dir(),".sciteproj",NULL);
+	gchar *config_dir;
+	config_dir=(gchar*)g_get_user_config_dir();
+	
+	prefs_filename=g_build_filename(config_dir,".sciteproj",NULL);
 	
 	// Check if a config-file exists
-	if (!g_file_test(config_filename,G_FILE_TEST_IS_REGULAR)) {
+	if (!g_file_test(prefs_filename,G_FILE_TEST_IS_REGULAR)) {
 		
 		// No config-file exists, create a new one and write default values
-		g_file_set_contents(config_filename,default_config_string,-1,err);
+		g_file_set_contents(prefs_filename,default_config_string,-1,err);
 	}
 
 	// Load preferences from config dot-file
 	
-	if (!g_file_get_contents(config_filename,&config_string,NULL,err)) {
+	if (!g_file_get_contents(prefs_filename,&config_string,NULL,err)) {
 		
 		result=FALSE;
 		goto ERROR;
@@ -324,8 +327,15 @@ gboolean init_prefs(GError **err)
 
 ERROR:
 	
-	g_free(config_filename);
 	g_free(config_string);
 	
 	return result;
+}
+
+/**
+ *
+ */
+void done_prefs()
+{
+	g_free(prefs_filename);
 }

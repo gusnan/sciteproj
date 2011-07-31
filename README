@@ -14,9 +14,20 @@ for more information. SciteProj saves the project file to disk in XML format.
 Running:
 --------
 
-SciteProj will load a configuration from the file ~/.sciteproj each program
-start - If no such file exists one will be created. The options availible in
-there are:
+SciteProj will load a configuration from the file .sciteproj in the directory
+specified by $XDG_CONFIG_HOME each program start. This is most likely
+
+~/.config/.sciteproj
+
+and if no such file exists one will be created. See the following links:
+
+http://developer.gnome.org/glib/stable/glib-Miscellaneous-Utility-Functions.html#g-get-user-config-dir
+http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+
+If you have used a previous version of SciteProj, you probably still have your
+config in ~/.sciteproj - You can simply copy it to ~/.config/.sciteproj , and
+your config will as you are used to.
+The options availible in the file are:
 
 * The window geometry
 

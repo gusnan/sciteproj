@@ -1227,17 +1227,10 @@ static void collapse_all_items_cb()
  */
 void edit_options_cb()
 {
-	gchar *absFilePath=NULL;
 	GError *err=NULL;
 	gchar *command=NULL;
 	
-	const char *homedir=g_get_home_dir();
-	
-	debug_printf("Home:%s\n",homedir);
-	
-	absFilePath=g_strdup_printf("%s/.sciteproj",homedir);
-	
-	if ((command = g_strdup_printf("open:%s\n", absFilePath)) == NULL) {
+	if ((command = g_strdup_printf("open:%s\n", prefs_filename)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
 	}
 	else {
@@ -1251,8 +1244,6 @@ void edit_options_cb()
 			}
 		}
 	}	
-	
-	g_free(absFilePath);
 }
 
 
