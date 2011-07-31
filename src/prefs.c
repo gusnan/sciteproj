@@ -282,10 +282,10 @@ gboolean init_prefs(GError **err)
 	
 	gPrefs.search_trim_results=FALSE;
 	
-	gchar *config_dir;
-	config_dir=(gchar*)g_get_user_config_dir();
-	
-	prefs_filename=g_build_filename(config_dir,".sciteproj",NULL);
+
+	// the result of g_get_user_config_dir doesn't need to be freed, so we
+	// dont need to put it in a pointer of its own.
+	prefs_filename=g_build_filename(g_get_user_config_dir(),".sciteproj",NULL);
 	
 	// Check if a config-file exists
 	if (!g_file_test(prefs_filename,G_FILE_TEST_IS_REGULAR)) {
