@@ -107,7 +107,7 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 	
 	// Skip over matching parent dirs
 	
-	while (localBasePath[i] == absPath[i] && i < localBasePathLength && i < absPathLength) {
+	while (i < localBasePathLength && i < absPathLength && localBasePath[i] == absPath[i]) {
 		if (absPath[i] == G_DIR_SEPARATOR) {
 			dirSlashOffset = i + 1;
 		}
