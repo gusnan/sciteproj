@@ -7,46 +7,37 @@ to build are:
 
 libgtk2.0-dev
 
-Then create a folder (if there isn't one already) to build in. 
+Then the build process is simple - to build the program, just type
 
-	$ mkdir build
-	$ cd build
+make
 
-This should be done inside the sciteproj folder structure, so that the build
-folder is placed right in the sciteproj folder.
+which will in the end create an executable in the bin folder. If you want to
+build an executable with debug symbols enable, run
 
-There you just run the cmake command, pointing it to the folder with the 
-CMakeLists.txt file, which should be the one above, and tell it that it
-should generate Unix Makefiles.
+make DEBUG=1
 
-	$ cmake .. -G"Unix Makefiles"
+The makefile makes it possible to build with flags to turn on warnings for
+non-GTK3 compatible symbols, to enable this, run
 
-(On a linux system there is a chance that the -G"Unix Makefiles" is implied
-by default, and thus not necessary.) This will find necessary GTK libraries, 
-and generate makefiles. If you would like to build a debug version of the 
-program, you should enter 
+make CHECK_GTK3=1
 
-	$ cmake .. -DDEBUG=on
+and also flags for other checks for deprecated symbols 
 
-Which will make the resulting executable contain debug flags for easy usage
-with for example gdb. It will also #define _DEBUG, which is used in the source
-for debug specific code.
+make CHECK_DEPRECATED=1
 
-When this is done (for either the debug or release version) you can simply 
-enter 
+(this is also enabled by the CHECK_GTK3 flag).
+To install the program run
 
-	$ make
+make install
 
-and the program will be built. If you would like to see the full commands
-including all options that are run during the compile, you can add VERBOSE=1 
-to the make command. Then, to install run make install with superuser rights:
+with super user priviliges, on a system using root:
 
-	$ su -c "make install"
-	
-or on a system using sudo:
+su -c "make install"
 
-	$ sudo make install
+or on a system using sudo, run
 
-This installs a desktop file too, so now you should have an icon in the 
-development part of your X menu.
-Now you are ready to run the program!
+sudo make install
+
+This will install the program in the system. This installs a desktop file too, 
+so now you should have an icon in the development part of your X menu.
+
