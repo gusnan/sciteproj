@@ -4,3 +4,4 @@ build/*
 bin/sciteproj
 test.xml
 test2.xml
+obj/*.o
