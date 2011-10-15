@@ -64,7 +64,7 @@ ifdef CHECK_DEPRECATED
 	LOCAL_CFLAGS+=-DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED
 endif 
 
-all: sciteproj
+all: bin/sciteproj
 
 $(OBJ)/about.o: $(SRC)/about.h $(SRC)/graphics.h
 	$(CC) $(LOCAL_CFLAGS) $(SRC)/about.c -o $(OBJ)/about.o
@@ -129,7 +129,7 @@ $(OBJ)/tree_manipulation.o: $(SRC)/tree_manipulation.h $(SRC)/xml_processing.h $
 $(OBJ)/xml_processing.o: $(SRC)/xml_processing.h $(SRC)/string_utils.h $(SRC)/tree_manipulation.h $(SRC)/clicked_node.h $(SRC)/gui.h $(SRC)/file_utils.h $(SRC)/prefs.h
 	$(CC) $(LOCAL_CFLAGS) $(SRC)/xml_processing.c -o $(OBJ)/xml_processing.o
 
-sciteproj: $(OBJECTS)
+bin/sciteproj: $(OBJECTS)
 	$(CC) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG)
 
 clean:
