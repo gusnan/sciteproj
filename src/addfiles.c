@@ -21,6 +21,7 @@
  */
  
 #include <gtk/gtk.h>
+#include <glib-object.h>
 
 #include "clicked_node.h"
 
@@ -243,7 +244,7 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 	
 	gtkEntry = gtk_entry_new();
 
-	g_signal_connect(GTK_OBJECT(gtkEntry), "activate", G_CALLBACK(entry_widget_activated_cb), dialog);
+	g_signal_connect(G_OBJECT(gtkEntry), "activate", G_CALLBACK(entry_widget_activated_cb), dialog);
 	gtk_table_attach(GTK_TABLE(table), gtkEntry, 1, 2, 0, 1, options, options, 5, 5);
 	
 	
