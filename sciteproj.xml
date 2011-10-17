@@ -32,6 +32,7 @@
 		<file>./src/file_utils.h</file>
 		<file>./src/folder_to_xml.h</file>
 		<file>./src/graphics.h</file>
+		<file>./src/gtk3_compat.h</file>
 		<file>./src/gui.h</file>
 		<file>./src/menus.h</file>
 		<file>./src/prefs.h</file>
