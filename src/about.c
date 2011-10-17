@@ -44,7 +44,7 @@ static gchar *sLicense =	(gchar*)"SciteProj is free software: you can redistribu
 
 gchar *homepage_string=(gchar*)"http://sciteproj.sourceforge.net";
 
-gchar *sVersion = (gchar*)"0.5.11";
+gchar *sVersion = (gchar*)"0.6.00";
 
 static GtkWidget *window;
 

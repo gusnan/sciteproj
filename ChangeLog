@@ -2,9 +2,12 @@
 ChangeLog:
 ----------
 
-X.X.XX
+0.6.00
 	* Use g_get_user_config_dir to get where to put the config file
-
+	* Make code GTK3 compatible
+	* Leave Cmake and use a basic Makefile
+	* Default Makefile to GTK3 (use GTK2=1 for using GTK2 during compilation)
+	
 0.5.11
 	* Added icons for lua and java files
 	* Fix minor warning (-Wformat-security)
