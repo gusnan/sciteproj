@@ -47,9 +47,9 @@
 		<file>./src/xml_processing.h</file>
 	</group>
 	<group name='other' expanded='TRUE'>
-		<file>./CMakeLists.txt</file>
 		<file>./sciteproj.xml</file>
 		<file>./sciteproj.1</file>
+		<file>./Makefile</file>
 	</group>
 	<group name='docs' expanded='TRUE'>
 		<file>./ChangeLog</file>
