@@ -45,7 +45,7 @@ gboolean init_statusbar(GtkWidget *widget,GError **err)
 		return FALSE;
 	}
 	
-	gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(statusbar),TRUE);
+	// gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(statusbar),TRUE);
 	
 	gtk_widget_set_size_request(statusbar, 1, -1);
 
