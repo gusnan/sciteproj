@@ -27,6 +27,8 @@
 
 #include "graphics.h"
 
+#include "prefs.h"
+
 
 static gchar *sLicense =	(gchar*)"SciteProj is free software: you can redistribute it and/or modify\n"
 											  "it under the terms of the GNU General Public License as published by\n"
@@ -195,7 +197,21 @@ void create_about_dialog()
 											"is provided with the package."
 											);
 	
-	gtk_text_buffer_insert(textbuffer_info,&iter,about_text2,-1);
+	gchar *text_to_add;
+	
+#ifdef _DEBUG
+
+	gchar *prefs_dir_string=g_strdup_printf("Preferences loaded from %s",prefs_filename);
+
+	text_to_add=g_strdup_printf("%s\n\n%s",about_text2,
+									prefs_dir_string);
+
+#else
+	text_to_add=about_text2;
+
+#endif 
+	
+	gtk_text_buffer_insert(textbuffer_info,&iter,text_to_add,-1);
 	
 	gtk_text_buffer_get_end_iter(textbuffer_info,&iter);
 	
