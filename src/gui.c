@@ -57,6 +57,8 @@
 
 #include "search.h"
 
+#include "gtk3_compat.h"
+
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
@@ -1134,28 +1136,28 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
 {
 	switch (event->keyval) 
 	{
-		case GDK_BackSpace: 
+		case GDK_KEY_BackSpace: 
 		{
 			debug_printf((gchar*)"key_press_cb: keyval = %d = GDK_BackSpace, hardware_keycode = %d\n", event->keyval, event->hardware_keycode);
 			break;
 		}
 		
-		case GDK_Delete: 
+		case GDK_KEY_Delete: 
 		{
 			do_remove_node(TRUE);
 			break;
 		}
-		case GDK_Insert: 
+		case GDK_KEY_Insert: 
 		{
 			break;
 		}
-		case GDK_F2:
+		case GDK_KEY_F2:
 		{
 			do_rename_node(TRUE);
 			return TRUE;
 			break;
 		}
-		case GDK_F5:
+		case GDK_KEY_F5:
 		{
 			print_filelist();
 			break;

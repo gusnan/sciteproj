@@ -33,6 +33,8 @@
 
 #include "filelist.h"
 
+#include "gtk3_compat.h"
+
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_SEARCH_ERROR")
 
 
@@ -628,8 +630,8 @@ gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer use
 	switch (event->keyval)
 	{
 		// Check for both return and Keypad enter
-		case GDK_Return:
-		case GDK_KP_Enter:
+		case GDK_KEY_Return:
+		case GDK_KEY_KP_Enter:
 		{
 			//g_print((gchar*)"key_press_cb: keyval = %d = GDK_Return, hardware_keycode = %d\n", event->keyval, event->hardware_keycode);
 			
@@ -642,7 +644,7 @@ gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer use
 			
 			break;
 		}
-		case GDK_Escape:
+		case GDK_KEY_Escape:
 		{
 			gtk_widget_destroy(GTK_WIDGET(window));
 			break;
