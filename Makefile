@@ -47,8 +47,17 @@ ifndef DESTDIR
 DESTDIR=/usr/local
 endif
 
-LIB_CFLAGS=`pkg-config --cflags gtk+-2.0`
-STD_LDFLAGS= `pkg-config --libs gtk+-2.0`
+ifdef GTK2
+	PKG_GTK=gtk+-2.0
+	
+	CHECK_GTK3=1
+else
+	PKG_GTK=gtk+-3.0
+endif
+	
+
+LIB_CFLAGS=`pkg-config --cflags $(PKG_GTK)`
+STD_LDFLAGS= `pkg-config --libs $(PKG_GTK)`
 
 LOCAL_CFLAGS=$(STD_CFLAGS) $(LIB_CFLAGS) $(DEPRECATED)
 LOCAL_LDFLAGS=$(STD_LDFLAGS)
