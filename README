@@ -25,8 +25,9 @@ http://developer.gnome.org/glib/stable/glib-Miscellaneous-Utility-Functions.html
 http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
 If you have used a previous version of SciteProj, you probably still have your
-config in ~/.sciteproj - You can simply copy it to ~/.config/.sciteproj , and
-your config will as you are used to.
+config in ~/.sciteproj - SciteProj will copy the old config to the new position,
+and when you have tested so that everything works as before you can simply 
+delete the ~/.sciteproj file.
 The options availible in the file are:
 
 * The window geometry
