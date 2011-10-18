@@ -147,6 +147,8 @@ clean:
 install:
 	install -d $(DESTDIR)/bin
 	install -m 755 $(PROG) $(DESTDIR)/bin
+	install -d $(DESTDIR)/share/pixmaps
+	install -m 644 graphics/sciteproj.xpm $(DESTDIR)/share/pixmaps
 	
 uninstall:
 	rm -f $(DESTDIR)/$(PROG)
