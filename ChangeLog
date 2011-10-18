@@ -3,7 +3,8 @@ ChangeLog:
 ----------
 
 0.6.00
-	* Use g_get_user_config_dir to get where to put the config file
+	* Use g_get_user_config_dir to get where to put the config file, if it 
+	  doesn't exist, copy the configfile from ~/.sciteproj
 	* Make code GTK3 compatible
 	* Remove Cmake stuff and use a basic Makefile instead
 	* Update makefile to use GTK3 by default (add GTK2=1 to make command to use 

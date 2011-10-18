@@ -290,8 +290,25 @@ gboolean init_prefs(GError **err)
 	// Check if a config-file exists
 	if (!g_file_test(prefs_filename,G_FILE_TEST_IS_REGULAR)) {
 		
-		// No config-file exists, create a new one and write default values
-		g_file_set_contents(prefs_filename,default_config_string,-1,err);
+		// First, check if ~/.sciteproj exists.
+		gchar *old_configfilename=g_build_filename(g_get_home_dir(),".sciteproj",NULL);
+		
+		if (g_file_test(old_configfilename,G_FILE_TEST_IS_REGULAR)) {
+			
+			// config-file at the "old" position exists, copy its contents to the
+			// new file
+			
+			gchar *old_buffer;
+			
+			g_file_get_contents(old_configfilename,&old_buffer,NULL,err);
+			
+			g_file_set_contents(prefs_filename,old_buffer,-1,err);
+			
+		} else {
+		
+			// No config-file exists, create a new one and write default values
+			g_file_set_contents(prefs_filename,default_config_string,-1,err);
+		}
 	}
 
 	// Load preferences from config dot-file
