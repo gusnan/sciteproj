@@ -2,6 +2,10 @@
 ChangeLog:
 ----------
 
+0.6.01
+	* Update build flags to include standard system build flags
+	* install sciteproj icon to correct place
+
 0.6.00
 	* Use g_get_user_config_dir to get where to put the config file, if it 
 	  doesn't exist, copy the configfile from ~/.sciteproj
