@@ -74,7 +74,7 @@ uninstall:
 	rm -f $(DESTDIR)/$(PROG)
 	rm -f $(DESTDIR)/share/pixmaps/sciteproj.xpm
 
-depend:
-	$(CC) -MM  $(SRC)/*.c > Makefile.dep
+Makefile.dep:
+	$(CC) -MM $(SRC)/*.c > Makefile.dep
 
 -include Makefile.dep
