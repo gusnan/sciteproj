@@ -31,12 +31,10 @@ endif
 
 ifdef GTK2
 	PKG_GTK=gtk+-2.0
-	
 	CHECK_GTK3=1
 else
 	PKG_GTK=gtk+-3.0
 endif
-	
 
 LIB_CFLAGS=`pkg-config --cflags $(PKG_GTK)`
 STD_LDFLAGS= `pkg-config --libs $(PKG_GTK)`
@@ -47,7 +45,7 @@ LOCAL_LDFLAGS=$(LDFLAGS) $(STD_LDFLAGS)
 ifdef CHECK_GTK3
 	LOCAL_CFLAGS+=-DGTK_DISABLE_SINGLE_INCLUDES
 	LOCAL_CFLAGS+=-DGSEAL_ENABLE
-	
+
 	CHECK_DEPRECATED=1
 endif
 
