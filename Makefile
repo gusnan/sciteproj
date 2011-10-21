@@ -62,7 +62,7 @@ $(BIN)/sciteproj: $(OBJECTS)
 	$(CC) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG)
 
 clean:
-	rm -rf $(OBJECTS) $(PROG)
+	rm -rf $(OBJECTS) $(PROG) Makefile.dep
 
 install:
 	install -d $(DESTDIR)/bin
