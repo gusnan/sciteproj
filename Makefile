@@ -152,3 +152,5 @@ install:
 	
 uninstall:
 	rm -f $(DESTDIR)/$(PROG)
+	rm -f $(DESTDIR)/share/pixmaps/sciteproj.xpm
+
