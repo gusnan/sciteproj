@@ -53,12 +53,12 @@ ifdef CHECK_DEPRECATED
 	LOCAL_CFLAGS+=-DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED
 endif 
 
-all: $(DESTDIR)$(BIN)/sciteproj
+all: $(BIN)/sciteproj
 
 %.o: $(SRC)/%.c
 	$(CC) $(LOCAL_CFLAGS) -c $< -o $@
 
-$(DESTDIR)$(BIN)/sciteproj: $(OBJECTS)
+$(BIN)/sciteproj: $(OBJECTS)
 	$(CC) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG)
 
 clean:
