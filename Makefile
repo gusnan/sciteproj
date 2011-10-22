@@ -25,10 +25,6 @@ $(GRPH)/text-x-java.xpm \
 $(GRPH)/text-x-lua.xpm \
 $(GRPH)/sciteproj.xpm
 
-ifndef PREFIX
-	PREFIX=/usr/local
-endif
-
 ifdef GTK2
 	PKG_GTK=gtk+-2.0
 	CHECK_GTK3=1
@@ -53,26 +49,26 @@ ifdef CHECK_DEPRECATED
 	LOCAL_CFLAGS+=-DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED
 endif 
 
-all: $(BIN)/sciteproj
+all: $(DESTDIR)$(BIN)/sciteproj
 
 %.o: $(SRC)/%.c
 	$(CC) $(LOCAL_CFLAGS) -c $< -o $@
 
-$(BIN)/sciteproj: $(OBJECTS)
+$(DESTDIR)$(BIN)/sciteproj: $(OBJECTS)
 	$(CC) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG)
 
 clean:
 	rm -rf $(OBJECTS) $(PROG) Makefile.dep
 
 install:
-	install -d $(PREFIX)/bin
-	install -m 755 $(PROG) $(PREFIX)/bin
-	install -d $(PREFIX)/share/pixmaps
-	install -m 644 graphics/sciteproj.xpm $(PREFIX)/share/pixmaps
+	install -d $(DESTDIR)$(prefix)/bin
+	install -m 755 $(PROG) $(DESTDIR)$(prefix)/bin
+	install -d $(DESTDIR)$(prefix)/share/pixmaps
+	install -m 644 graphics/sciteproj.xpm $(DESTDIR)$(prefix)/share/pixmaps
 
 uninstall:
-	rm -f $(PREFIX)/$(PROG)
-	rm -f $(PREFIX)/share/pixmaps/sciteproj.xpm
+	rm -f $(DESTDIR)$(prefix)/$(PROG)
+	rm -f $(DESTDIR)$(prefix)/share/pixmaps/sciteproj.xpm
 
 Makefile.dep:
 	$(CC) -MM $(SRC)/*.c > Makefile.dep
