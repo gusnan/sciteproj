@@ -2,6 +2,11 @@
 ChangeLog:
 ----------
 
+0.6.04
+	* Move libraries to after objects in linker call, allowing to build 
+	  with --as-needed
+	* Whitespace fixes
+	
 0.6.03
 	* More makefile fixes to support both prefix and DESTDIR
 
