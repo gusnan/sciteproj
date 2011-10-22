@@ -25,6 +25,10 @@ $(GRPH)/text-x-java.xpm \
 $(GRPH)/text-x-lua.xpm \
 $(GRPH)/sciteproj.xpm
 
+ifndef prefix
+	prefix=/usr/local
+endif
+
 ifdef GTK2
 	PKG_GTK=gtk+-2.0
 	CHECK_GTK3=1
