@@ -25,8 +25,8 @@ $(GRPH)/text-x-java.xpm \
 $(GRPH)/text-x-lua.xpm \
 $(GRPH)/sciteproj.xpm
 
-ifndef DESTDIR
-DESTDIR=/usr/local
+ifndef PREFIX
+	PREFIX=/usr/local
 endif
 
 ifdef GTK2
@@ -65,14 +65,14 @@ clean:
 	rm -rf $(OBJECTS) $(PROG) Makefile.dep
 
 install:
-	install -d $(DESTDIR)/bin
-	install -m 755 $(PROG) $(DESTDIR)/bin
-	install -d $(DESTDIR)/share/pixmaps
-	install -m 644 graphics/sciteproj.xpm $(DESTDIR)/share/pixmaps
+	install -d $(PREFIX)/bin
+	install -m 755 $(PROG) $(PREFIX)/bin
+	install -d $(PREFIX)/share/pixmaps
+	install -m 644 graphics/sciteproj.xpm $(PREFIX)/share/pixmaps
 
 uninstall:
-	rm -f $(DESTDIR)/$(PROG)
-	rm -f $(DESTDIR)/share/pixmaps/sciteproj.xpm
+	rm -f $(PREFIX)/$(PROG)
+	rm -f $(PREFIX)/share/pixmaps/sciteproj.xpm
 
 Makefile.dep:
 	$(CC) -MM $(SRC)/*.c > Makefile.dep
