@@ -2,6 +2,7 @@ CC=gcc
 SRC=src
 BIN=bin
 GRPH=graphics
+OBJ=obj
 
 ifdef DEBUG
 	STD_CFLAGS=-c -Wall -g3 -ggdb -D_DEBUG
@@ -11,10 +12,12 @@ endif
 
 PROG=bin/sciteproj
 
-OBJECTS=about.o addfiles.o clipboard.o drag_drop.o file_utils.o filelist.o \
-folder_to_xml.o graphics.o gui.o main.o prefs.o properties_dialog.o \
-recent_files.o remove.o rename.o scite_utils.o search.o statusbar.o  \
-string_utils.o tree_manipulation.o xml_processing.o
+OBJECTS=$(OBJ)/about.o $(OBJ)/addfiles.o $(OBJ)/clipboard.o $(OBJ)/drag_drop.o\
+$(OBJ)/file_utils.o $(OBJ)/filelist.o $(OBJ)/folder_to_xml.o $(OBJ)/graphics.o\
+$(OBJ)/gui.o $(OBJ)/main.o $(OBJ)/prefs.o $(OBJ)/properties_dialog.o \
+$(OBJ)/recent_files.o $(OBJ)/remove.o $(OBJ)/rename.o $(OBJ)/scite_utils.o\
+$(OBJ)/search.o $(OBJ)/statusbar.o  $(OBJ)/string_utils.o\
+$(OBJ)/tree_manipulation.o $(OBJ)/xml_processing.o
 
 GRAPHICS_INCLUDES=$(GRPH)/dir-close.xpm \
 $(GRPH)/dir-open.xpm \
@@ -59,7 +62,7 @@ endif
 
 all: $(BIN)/sciteproj
 
-%.o: $(SRC)/%.c
+$(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(LOCAL_CFLAGS) -c $< -o $@
 
 $(BIN)/sciteproj: $(OBJECTS)
@@ -79,6 +82,6 @@ uninstall:
 	rm -f $(DESTDIR)$(prefix)/share/pixmaps/sciteproj.xpm
 
 Makefile.dep:
-	$(CC) -MM $(SRC)/*.c > Makefile.dep
+	$(CC) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z+-0._&+-]*:\)/\$(OBJ)\/\1/g" > Makefile.dep
 
 -include Makefile.dep
