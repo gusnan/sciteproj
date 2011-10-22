@@ -26,7 +26,11 @@ $(GRPH)/text-x-lua.xpm \
 $(GRPH)/sciteproj.xpm
 
 ifndef prefix
-	prefix=/usr/local
+	ifdef INSTALL_PREFIX
+		prefix=$(INSTALL_PREFIX)
+	else
+		prefix=/usr/local
+	endif
 endif
 
 ifdef GTK2
