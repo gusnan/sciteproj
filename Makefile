@@ -59,7 +59,7 @@ all: $(BIN)/sciteproj
 	$(CC) $(LOCAL_CFLAGS) -c $< -o $@
 
 $(BIN)/sciteproj: $(OBJECTS)
-	$(CC) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG)
+	$(CC) $(OBJECTS) -o $(PROG) $(LOCAL_LDFLAGS) 
 
 clean:
 	rm -rf $(OBJECTS) $(PROG) Makefile.dep
