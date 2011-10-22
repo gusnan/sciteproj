@@ -2,6 +2,9 @@
 ChangeLog:
 ----------
 
+0.6.06
+	* Update makefile to nicely use obj folder again
+
 0.6.05
 	* Make build use INSTALL_PREFIX flag to simplify packaging
 
