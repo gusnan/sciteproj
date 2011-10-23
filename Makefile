@@ -11,6 +11,7 @@ else
 endif
 
 PROG=bin/sciteproj
+DEPEND=Makefile.dep
 
 OBJECTS=$(OBJ)/about.o $(OBJ)/addfiles.o $(OBJ)/clipboard.o $(OBJ)/drag_drop.o\
 $(OBJ)/file_utils.o $(OBJ)/filelist.o $(OBJ)/folder_to_xml.o $(OBJ)/graphics.o\
@@ -69,7 +70,7 @@ $(BIN)/sciteproj: $(OBJECTS)
 	$(CC) $(OBJECTS) -o $(PROG) $(LOCAL_LDFLAGS) 
 
 clean:
-	rm -rf $(OBJECTS) $(PROG) Makefile.dep
+	rm -rf $(OBJECTS) $(PROG) $(DEPEND)
 
 install:
 	install -d $(DESTDIR)$(prefix)/bin
@@ -81,7 +82,7 @@ uninstall:
 	rm -f $(DESTDIR)$(prefix)/$(PROG)
 	rm -f $(DESTDIR)$(prefix)/share/pixmaps/sciteproj.xpm
 
-Makefile.dep:
-	$(CC) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z+-0._&+-]*:\)/\$(OBJ)\/\1/g" > Makefile.dep
+$(DEPEND):
+	$(CC) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z+-0._&+-]*:\)/\$(OBJ)\/\1/g" > $(DEPEND)
 
--include Makefile.dep
+-include $(DEPEND)
