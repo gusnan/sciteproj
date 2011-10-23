@@ -45,7 +45,7 @@ else
 endif
 
 LIB_CFLAGS=`pkg-config --cflags $(PKG_GTK)`
-STD_LDFLAGS= 
+STD_LDFLAGS=
 
 LIBS+=`pkg-config --libs $(PKG_GTK)`
 
