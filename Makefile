@@ -45,7 +45,9 @@ else
 endif
 
 LIB_CFLAGS=`pkg-config --cflags $(PKG_GTK)`
-STD_LDFLAGS= `pkg-config --libs $(PKG_GTK)`
+STD_LDFLAGS= 
+
+LIBS+=`pkg-config --libs $(PKG_GTK)`
 
 LOCAL_CFLAGS=$(STD_CFLAGS) $(DEPRECATED) $(CFLAGS) $(LIB_CFLAGS) 
 LOCAL_LDFLAGS=$(LDFLAGS) $(STD_LDFLAGS) 
@@ -67,7 +69,7 @@ $(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(LOCAL_CFLAGS) -c $< -o $@
 
 $(BIN)/sciteproj: $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(PROG) $(LOCAL_LDFLAGS) 
+	$(CC) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG) $(LIBS)
 
 clean:
 	rm -rf $(OBJECTS) $(PROG) $(DEPEND)
