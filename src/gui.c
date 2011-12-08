@@ -1155,7 +1155,6 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
 		{
 			do_rename_node(TRUE);
 			return TRUE;
-			break;
 		}
 		case GDK_KEY_F5:
 		{
@@ -1166,8 +1165,6 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
 		{
 			debug_printf("key_press_cb: keyval = %d = '%c', hardware_keycode = %d\n", event->keyval, (char) event->keyval, event->hardware_keycode);
 			return FALSE;
-			
-			break;
 		}
 	}
 	
