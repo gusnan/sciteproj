@@ -33,7 +33,7 @@ The options availible in the file are:
 * The window geometry
 
 You can enter wanted window geometry/positioning, which will be applied to 
-the program upon next program start. The variable are xpos, ypos, width and
+the program upon next program start. The variables are xpos, ypos, width and
 height.
 
 Also, the following options exist:
