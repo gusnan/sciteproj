@@ -139,7 +139,8 @@ void addfile_menu_cb()
  */
 void menu_add_widget_cb(GtkUIManager *ui, GtkWidget *widget, GtkContainer *container)
 {
-	gtk_box_pack_start(GTK_BOX(container), widget, FALSE, FALSE, 0);
+	//gtk_box_pack_start(GTK_BOX(container), widget, FALSE, FALSE, 0);
+	gtk_grid_attach(GTK_GRID(container),widget,0,0,1,1);
 	gtk_widget_show(widget);
 }
 

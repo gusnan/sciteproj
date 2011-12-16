@@ -36,7 +36,7 @@ guint context_id;
 /**
  *		init_statusbar
  */
-gboolean init_statusbar(GtkWidget *widget,GError **err)
+gboolean init_statusbar(GtkWidget *widget,GtkWidget *next_to,GError **err)
 {
 	statusbar=gtk_statusbar_new();
 	
@@ -55,7 +55,10 @@ gboolean init_statusbar(GtkWidget *widget,GError **err)
 	
 	gtk_widget_set_size_request(statusbar, -1, 20);
 	
-	gtk_box_pack_end (GTK_BOX (widget), statusbar,FALSE, FALSE, 0);
+	//gtk_box_pack_end (GTK_BOX (widget), statusbar,FALSE, FALSE, 0);
+	
+	gtk_grid_attach_next_to(GTK_GRID(widget),statusbar,next_to,GTK_POS_BOTTOM,1,1);
+	
 	gtk_widget_show (statusbar);
 
 	
