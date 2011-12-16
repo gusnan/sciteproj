@@ -241,7 +241,7 @@ gboolean setup_gui(GError **err)
 	
 	// Main content of the window is a vpaned
 	
-	vpaned=gtk_vpaned_new();
+	vpaned=gtk_paned_new(GTK_ORIENTATION_VERTICAL);
 	
 	// Then we need a vbox
 	
