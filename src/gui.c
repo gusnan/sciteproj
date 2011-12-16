@@ -203,13 +203,8 @@ gboolean setup_gui(GError **err)
 			
 	GtkWidget *recentScrolledWindow=NULL;
 	
-	//GtkWidget *recentHbox=NULL;
-
-	//GtkWidget *fullVbox=NULL;
 	GtkWidget *fullGrid=NULL;
 	
-	//GtkWidget *statusBarVbox=NULL;
-		
 	clicked_node.valid=FALSE;
 	clicked_node.name=NULL;
 	clicked_node.type=-1;
@@ -297,20 +292,11 @@ gboolean setup_gui(GError **err)
 	
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
 	
-	//gtk_box_pack_start(GTK_BOX(vbox), scrolledWindow, TRUE, TRUE, 0);
 	gtk_grid_attach(GTK_GRID(grid),scrolledWindow,0,1,1,1);
 	
 	gtk_widget_set_vexpand(scrolledWindow,TRUE);
 	gtk_widget_set_hexpand(scrolledWindow,TRUE);
 	
-	
-	//hbox=gtk_hbox_new(FALSE,0);
-	
-	//gtk_widget_show(hbox);
-	
-	//gtk_box_pack_end(GTK_BOX(vbox),hbox,FALSE,TRUE,0);
-	
-
 	// Create the tree datastore
 	
 	if ((projectTreeStore = create_treestore(&tempErr)) == NULL) {
@@ -410,14 +396,6 @@ gboolean setup_gui(GError **err)
 		g_set_error(err, APP_SCITEPROJ_ERROR,-1, "%s: Could not create recentGrid, gtk_grid_new() = NULL", __func__);
 		goto EXITPOINT;
 	}	
-	
-	/*
-	if (!(recentHbox=gtk_hbox_new(FALSE,0))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create main vbox, gtk_hbox_new() = NULL", __func__);
-		
-		goto EXITPOINT;
-	}
-	*/
 
 	if ((recentScrolledWindow=init_recent_files(&tempErr)) == NULL) {
 		
@@ -427,43 +405,17 @@ gboolean setup_gui(GError **err)
 		
 	gtk_widget_set_vexpand(recentScrolledWindow,TRUE);
 	gtk_widget_set_hexpand(recentScrolledWindow,TRUE);
-
-	
-	/*
-	gtk_box_pack_start(GTK_BOX(recentVbox),recentScrolledWindow, TRUE,TRUE,0);
-	gtk_box_pack_end(GTK_BOX(recentVbox),recentHbox,FALSE,TRUE,0);
-	*/
 	
 	gtk_grid_attach(GTK_GRID(recentGrid),recentScrolledWindow,0,0,1,1);
 	
-	/*
-	if (!(fullVbox=gtk_vbox_new(FALSE,0))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create fullVbox, gtk_hbox_new() = NULL", __func__);
-		
-		goto EXITPOINT;
-	}
-	*/
-	
 	fullGrid=gtk_grid_new();
 
-	/*
-	statusBarVbox=gtk_vbox_new(FALSE,0);
-	if (!statusBarVbox) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create statusBarVbox, gtk_hbox_new() = NULL", __func__);
-		
-		goto EXITPOINT;
-	}
-	*/
-	
-	//statusBarGrid=gtk_grid_new();
-	
 
 	gtk_paned_pack1(GTK_PANED(vpaned),grid,TRUE,FALSE);
 	gtk_paned_pack2(GTK_PANED(vpaned),recentGrid,TRUE,TRUE);
 	
 	gtk_widget_show(vpaned);
 	
-	//gtk_box_pack_start(GTK_BOX(fullVbox),vpaned,TRUE,TRUE,0);
 	gtk_grid_attach(GTK_GRID(fullGrid),vpaned,0,0,1,1);
 	
 	gtk_widget_show(GTK_WIDGET(fullGrid));
