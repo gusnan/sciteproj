@@ -27,21 +27,21 @@ $(GRPH)/text-x-lua.xpm \
 $(GRPH)/sciteproj.xpm
 
 
+
+ifndef PREFIX
+	ifdef INSTALL_PREFIX
+		PREFIX=$(INSTALL_PREFIX)
+	else
+		PREFIX=/usr/local
+	endif
+endif
+
 NAME=sciteproj
 PROG=${BIN}/${NAME}
 DEPEND=Makefile.dep
 DATADIR= ${DESTDIR}${PREFIX}/share
 LOCALEDIR = ${DATADIR}/locale
 VERSION=$(shell cat ./VERSION)
-
-
-ifndef prefix
-	ifdef INSTALL_PREFIX
-		prefix=$(INSTALL_PREFIX)
-	else
-		prefix=/usr/local
-	endif
-endif
 
 ifdef GTK2
 	PKG_GTK=gtk+-2.0
@@ -83,14 +83,14 @@ clean:
 	rm -rf $(OBJECTS) $(PROG) $(DEPEND)
 
 install:
-	install -d $(DESTDIR)$(prefix)/bin
-	install -m 755 $(PROG) $(DESTDIR)$(prefix)/bin
-	install -d $(DESTDIR)$(prefix)/share/pixmaps
-	install -m 644 graphics/sciteproj.xpm $(DESTDIR)$(prefix)/share/pixmaps
+	install -d $(DESTDIR)$(PREFIX)/bin
+	install -m 755 $(PROG) $(DESTDIR)$(PREFIX)/bin
+	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
+	install -m 644 graphics/sciteproj.xpm $(DESTDIR)$(PREFIX)/share/pixmaps
 
 uninstall:
-	rm -f $(DESTDIR)$(prefix)/$(PROG)
-	rm -f $(DESTDIR)$(prefix)/share/pixmaps/sciteproj.xpm
+	rm -f $(DESTDIR)$(PREFIX)/$(PROG)
+	rm -f $(DESTDIR)$(PREFIX)/share/pixmaps/sciteproj.xpm
 
 $(DEPEND):
 	$(CC) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" > $(DEPEND)
