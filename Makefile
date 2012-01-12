@@ -7,11 +7,8 @@ OBJ=obj
 ifdef DEBUG
 	STD_CFLAGS=-c -Wall -g3 -ggdb -D_DEBUG
 else
-	STD_CFLAGS=-c -Wall
+	STD_CFLAGS=-c -Wall -Wformat -Wno-format-extra-args -Wformat-security -Wformat-nonliteral -Wformat=2
 endif
-
-PROG=bin/sciteproj
-DEPEND=Makefile.dep
 
 OBJECTS=$(OBJ)/about.o $(OBJ)/addfiles.o $(OBJ)/clipboard.o $(OBJ)/drag_drop.o\
 $(OBJ)/file_utils.o $(OBJ)/filelist.o $(OBJ)/folder_to_xml.o $(OBJ)/graphics.o\
@@ -28,6 +25,15 @@ $(GRPH)/text-x-txt.xpm \
 $(GRPH)/text-x-java.xpm \
 $(GRPH)/text-x-lua.xpm \
 $(GRPH)/sciteproj.xpm
+
+
+NAME=sciteproj
+PROG=${BIN}/${NAME}
+DEPEND=Makefile.dep
+DATADIR= ${DESTDIR}${PREFIX}/share
+LOCALEDIR = ${DATADIR}/locale
+VERSION=$(shell cat ./VERSION)
+
 
 ifndef prefix
 	ifdef INSTALL_PREFIX
@@ -62,6 +68,8 @@ endif
 ifdef CHECK_DEPRECATED
 	LOCAL_CFLAGS+=-DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED
 endif
+
+LOCAL_CFLAGS+=-DLOCALEDIR=\"$(LOCALEDIR)\" -DPACKAGE=\"$(NAME)\" -DSCITEPROJ_VERSION=\"$(VERSION)\"
 
 all: $(BIN)/sciteproj
 
