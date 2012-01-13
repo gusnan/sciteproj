@@ -147,16 +147,20 @@ void search_dialog()
 	GtkWidget *find_label;
 	
 	GtkWidget *close_button;
-	//GtkWidget *close_hbox;
-	
-	//GtkWidget *check_button_box;
 
 	GtkWidget *scrolled_win;
 	
-	//GtkWidget *hbox;
+#if GTK_MAJOR_VERSION>=3
 	GtkWidget *grid;
+#else
+	GtkWidget *hbox;
 	
-	//GtkWidget *vbox;
+	GtkWidget *vbox;
+	GtkWidget *close_hbox;
+	
+	GtkWidget *check_button_box;
+
+#endif
 	
 	Data *data;
 	
@@ -181,20 +185,29 @@ void search_dialog()
 		gtk_window_move(GTK_WINDOW(window),gPrefs.search_xpos,gPrefs.search_ypos);
 	}
 	
-	//hbox=gtk_hbox_new(FALSE,8);
+#if GTK_MAJOR_VERSION>=3
 	grid=gtk_grid_new();
 	gtk_grid_set_row_spacing (GTK_GRID (grid), 6);
+#else
+	hbox=gtk_hbox_new(FALSE,8);
+#endif
 	
 	find_label=gtk_label_new("Find What:");
-	//gtk_box_pack_start(GTK_BOX(hbox),find_label,FALSE,TRUE,5);
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach(GTK_GRID(grid),find_label,0,0,1,1);
+#else
+	gtk_box_pack_start(GTK_BOX(hbox),find_label,FALSE,TRUE,5);
+#endif
 	
 		
 	data->search_string_entry=gtk_entry_new();
 	gtk_entry_set_visibility(GTK_ENTRY(data->search_string_entry),TRUE);
 	
-	//gtk_box_pack_start(GTK_BOX(hbox),data->search_string_entry,TRUE,TRUE,5);
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),data->search_string_entry,find_label,GTK_POS_RIGHT,3,1);
+#else
+	gtk_box_pack_start(GTK_BOX(hbox),data->search_string_entry,TRUE,TRUE,5);
+#endif
 	
 	/*
 	GtkBox *hbox=gtk_hbox_new(TRUE,0);
@@ -205,23 +218,30 @@ void search_dialog()
 	data->number_of_results=0;
 	
 	data->search_button=gtk_button_new_from_stock(GTK_STOCK_FIND);
-	
-	//gtk_box_pack_start(GTK_BOX(hbox),data->search_button,FALSE,FALSE,5);
+
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),data->search_button,data->search_string_entry,GTK_POS_RIGHT,1,1);
+#else
+	gtk_box_pack_start(GTK_BOX(hbox),data->search_button,FALSE,FALSE,5);
+		
+	vbox=gtk_vbox_new(FALSE,8);
 	
-	//vbox=gtk_vbox_new(FALSE,8);
-	
-	//gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
+	gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
 		
 	
-	//check_button_box=gtk_hbox_new(FALSE,8);
+	check_button_box=gtk_hbox_new(FALSE,8);
 	
+
+#endif
+
 	match_case_checkbutton=gtk_check_button_new_with_label("Match case");
 	
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case_checkbutton),gPrefs.search_match_case);
 	
 	//gtk_table_attach(GTK_TABLE(table),match_case_checkbutton,0,2,1,2, GTK_SHRINK, GTK_SHRINK, 0,0);
-	//gtk_box_pack_start(GTK_BOX(check_button_box),match_case_checkbutton,FALSE,TRUE,5);
+#if GTK_MAJOR_VERSION<3
+	gtk_box_pack_start(GTK_BOX(check_button_box),match_case_checkbutton,FALSE,TRUE,5);
+#endif
 	//gtk_grid_attach_next_to(GTK_GRID(grid),match_case_checkbutton,
 	
 	
@@ -230,15 +250,19 @@ void search_dialog()
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton),gPrefs.search_match_whole_words);
 	
 	//gtk_table_attach(GTK_TABLE(table),match_whole_words_only_checkbutton,2,4,1,2, GTK_SHRINK,GTK_SHRINK, 0,0);
-	//gtk_box_pack_start(GTK_BOX(check_button_box),match_whole_words_only_checkbutton,FALSE,TRUE,5);
+
+#if GTK_MAJOR_VERSION>=3
 	
 	gtk_grid_attach(GTK_GRID(grid),match_case_checkbutton,0,1,1,1);
 	
 	gtk_grid_attach(GTK_GRID(grid),match_whole_words_only_checkbutton,1,1,1,1);
+#else	
+	gtk_box_pack_start(GTK_BOX(check_button_box),match_whole_words_only_checkbutton,FALSE,TRUE,5);
 	
+	gtk_box_pack_start(GTK_BOX(vbox),check_button_box,FALSE,FALSE,0);
 	
+#endif
 	
-	//gtk_box_pack_start(GTK_BOX(vbox),check_button_box,FALSE,FALSE,0);
 	
 	
 	
@@ -261,32 +285,49 @@ void search_dialog()
 	
 	gtk_container_add(GTK_CONTAINER(scrolled_win),treeview);
 	
+#if GTK_MAJOR_VERSION>=3
+	
 	gtk_widget_set_vexpand(scrolled_win,TRUE);
 	gtk_widget_set_hexpand(scrolled_win,TRUE);
 	
-	//gtk_box_pack_start(GTK_BOX(vbox),scrolled_win,TRUE,TRUE,0);
 	gtk_grid_attach(GTK_GRID(grid),scrolled_win,0,2,5,1);
+#else
+	gtk_box_pack_start(GTK_BOX(vbox),scrolled_win,TRUE,TRUE,0);
+	
+#endif
 	
 	gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolled_win),
 					    GTK_SHADOW_IN);
 	
 	close_button=gtk_button_new_from_stock(GTK_STOCK_CLOSE);
 	
+#if GTK_MAJOR_VERSION<3
+	close_hbox=gtk_hbox_new(FALSE,8);
+#endif
+	
 	data->result_label=gtk_label_new(NULL);
 	
 	gtk_label_set_text(GTK_LABEL(data->result_label),"");
 	
-	//gtk_box_pack_start(GTK_BOX(close_hbox),data->result_label,FALSE,FALSE,0);
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach(GTK_GRID(grid),data->result_label,0,3,1,1);
-	
-	
-	//gtk_box_pack_end(GTK_BOX(close_hbox),close_button,FALSE,FALSE,5);
+
 	gtk_grid_attach(GTK_GRID(grid),close_button,4,3,1,1);
-	
-	//gtk_box_pack_start(GTK_BOX(vbox),close_hbox,FALSE,FALSE,0);
 	
 	// add the table to the window
 	gtk_container_add(GTK_CONTAINER(window),grid);
+	
+#else
+	gtk_box_pack_start(GTK_BOX(close_hbox),data->result_label,FALSE,FALSE,0);
+	
+	gtk_box_pack_end(GTK_BOX(close_hbox),close_button,FALSE,FALSE,5);
+	
+	gtk_box_pack_start(GTK_BOX(vbox),close_hbox,FALSE,FALSE,0);
+	
+	gtk_container_add(GTK_CONTAINER(window),vbox);
+#endif
+	
+	
 			
 	g_signal_connect(G_OBJECT(window), "destroy",G_CALLBACK (destroy_search_dialog_cb), &window);
 	g_signal_connect(G_OBJECT(close_button),"clicked",G_CALLBACK(close_button_pressed_cb),data);

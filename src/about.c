@@ -74,8 +74,11 @@ void show_about_dialog()
  */
 void create_about_dialog()
 {
-	//GtkWidget *vbox;
+#if GTK_MAJOR_VERSION>=3
 	GtkWidget *grid;
+#else
+	GtkWidget *vbox;
+#endif
 	GtkWidget *textview_info;
 	GtkWidget *logo_image;
 	GtkWidget *linkbutton;
@@ -104,25 +107,36 @@ void create_about_dialog()
 	gtk_widget_set_size_request(window,500,400);
 
 	// Make a container
-	//vbox=gtk_vbox_new(FALSE,5);
+#if GTK_MAJOR_VERSION>=3
 	grid=gtk_grid_new();
 	
 	gtk_grid_set_row_spacing (GTK_GRID (grid), 6);
 	
 	gtk_container_add(GTK_CONTAINER(window),grid);
+#else
+	vbox=gtk_vbox_new(FALSE,5);
 	
+	gtk_container_add(GTK_CONTAINER(window),vbox);
+#endif
 
 	logo_image=gtk_image_new_from_pixbuf(program_icon_pixbuf);
 
-	//gtk_box_pack_start(GTK_BOX(vbox), logo_image, FALSE, FALSE, 0);
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach(GTK_GRID(grid),logo_image,0,0,5,1);
+#else
+	gtk_box_pack_start(GTK_BOX(vbox), logo_image, FALSE, FALSE, 0);
+#endif
 
 	sciteproj_label=gtk_label_new(NULL);
 	gtk_label_set_selectable(GTK_LABEL(sciteproj_label),FALSE);
 	gtk_label_set_markup(GTK_LABEL(sciteproj_label),"<big><b>SciteProj</b></big>");
 
-	//gtk_box_pack_start(GTK_BOX(vbox),sciteproj_label,FALSE,FALSE,0);
+	
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),sciteproj_label,logo_image,GTK_POS_BOTTOM,5,1);
+#else
+	gtk_box_pack_start(GTK_BOX(vbox),sciteproj_label,FALSE,FALSE,0);
+#endif
 
 	// Show version of SciteProj
 
@@ -136,16 +150,24 @@ void create_about_dialog()
 
 	version_string_label=gtk_label_new(version_string);
 	gtk_label_set_selectable(GTK_LABEL(version_string_label),FALSE);
-	//gtk_box_pack_start(GTK_BOX(vbox),version_string_label,FALSE,FALSE,0);
+	
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),version_string_label,sciteproj_label,GTK_POS_BOTTOM,5,1);
-
+#else
+	gtk_box_pack_start(GTK_BOX(vbox),version_string_label,FALSE,FALSE,0);
+#endif
+	
 	// Show SciteProj copyrights
 	copyrightstring=g_strdup_printf("Copyright (C) 2008-2011 Andreas Rönnquist <gusnan@gusnan.se>");
 
 	copyright_label=gtk_label_new(copyrightstring);
 	gtk_label_set_selectable(GTK_LABEL(copyright_label),FALSE);
-	//gtk_box_pack_start(GTK_BOX(vbox),copyright_label,FALSE,FALSE,0);
+
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),copyright_label,version_string_label,GTK_POS_BOTTOM,5,1);
+#else
+	gtk_box_pack_start(GTK_BOX(vbox),copyright_label,FALSE,FALSE,0);
+#endif
 
 	// show GTK versions
 	gchar *gtk_string=g_strdup_printf("GTK+ %d.%d.%d / GLib %d.%d.%d",
@@ -156,19 +178,26 @@ void create_about_dialog()
 	gtk_version_label=gtk_label_new(gtk_string);
 
 	gtk_label_set_selectable(GTK_LABEL(gtk_version_label),FALSE);
-	//gtk_box_pack_start(GTK_BOX(vbox),gtk_version_label,FALSE,FALSE,0);
+	
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),gtk_version_label,copyright_label,GTK_POS_BOTTOM,5,1);
+#else
+	gtk_box_pack_start(GTK_BOX(vbox),gtk_version_label,FALSE,FALSE,0);
 
-	/*
 	GtkWidget *hbox = gtk_hbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
-	*/
+#endif
+
 
 	// Show a link to the SciteProj homepage
 	linkbutton=gtk_link_button_new_with_label(homepage_string,homepage_string);
-	//gtk_box_pack_start(GTK_BOX(hbox), linkbutton, TRUE, FALSE, 0);
+	
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),linkbutton,gtk_version_label,GTK_POS_BOTTOM,5,1);
-
+#else
+	gtk_box_pack_start(GTK_BOX(hbox), linkbutton, TRUE, FALSE, 0);
+#endif
+	
 	// New notebook - we want tabs for different sets of text
 
 	notebook=gtk_notebook_new();
@@ -252,29 +281,39 @@ void create_about_dialog()
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook),scrolled_window_info,notebook_label1);
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook),scrolled_window_license,notebook_label2);
 	
+#if GTK_MAJOR_VERSION>=3
 	gtk_widget_set_vexpand(notebook,TRUE);
 	
 	gtk_widget_set_hexpand(notebook,TRUE);
 
-	//gtk_box_pack_start(GTK_BOX(vbox), notebook,TRUE,TRUE,0);
 	gtk_grid_attach_next_to(GTK_GRID(grid),notebook,linkbutton/*gtk_version_label*/,GTK_POS_BOTTOM,5,1);
+#else
+	gtk_box_pack_start(GTK_BOX(vbox), notebook,TRUE,TRUE,0);
+#endif
 
 	gtk_text_buffer_place_cursor(textbuffer_info,&iter);
 	gtk_text_buffer_select_range (textbuffer_info,&iter,&iter);
 
-	//GtkWidget *hbox=gtk_hbox_new(FALSE,0);
+	GtkWidget *ok_button_hbox=gtk_hbox_new(FALSE,0);
 
 	// Create an ok button
 	ok_button=gtk_button_new_from_stock(GTK_STOCK_OK);
 	
+#if GTK_MAJOR_VERSION>=3
 	gtk_widget_set_halign(ok_button,GTK_ALIGN_END);
 	gtk_widget_set_hexpand(ok_button,FALSE);
+#endif
 
 	//gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
 	//	gtk_grid_attach_next_to(GTK_GRID(grid),hbox,notebook,GTK_POS_BOTTOM,5,1);
 
-	//gtk_box_pack_end(GTK_BOX(hbox),ok_button,FALSE,FALSE,0);
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),ok_button,notebook,GTK_POS_BOTTOM,5,1);
+#else
+	gtk_box_pack_end(GTK_BOX(ok_button_hbox),ok_button,FALSE,FALSE,0);
+	
+	gtk_box_pack_start(GTK_BOX(vbox),ok_button_hbox,FALSE,FALSE,0);
+#endif
 
 	gtk_widget_grab_focus(ok_button);
 

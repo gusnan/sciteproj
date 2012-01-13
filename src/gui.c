@@ -179,7 +179,12 @@ GtkWidget *scrolledWindow = NULL;
 
 GtkTreeViewColumn *column1 = NULL;
 
+#if GTK_MAJOR_VERSION>=3
 GtkWidget *recentGrid=NULL;
+#else
+GtkWidget *recentVbox=NULL;
+GtkWidget *recentHbox=NULL;
+#endif
 
 
 /**
@@ -199,11 +204,20 @@ gboolean setup_gui(GError **err)
 	GtkTreeStore *projectTreeStore = NULL;
 	GtkAccelGroup* accelgroup = NULL;
 	GError *tempErr = NULL;
+	
+#if GTK_MAJOR_VERSION>=3
 	GtkWidget *grid;
+	GtkWidget *fullGrid=NULL;
+#else
+	GtkWidget *vbox=NULL;
+	GtkWidget *hbox=NULL;
+	
+	GtkWidget *statusBarVbox=NULL;
+	GtkWidget *fullVbox=NULL;
+#endif
 			
 	GtkWidget *recentScrolledWindow=NULL;
 	
-	GtkWidget *fullGrid=NULL;
 	
 	clicked_node.valid=FALSE;
 	clicked_node.name=NULL;
@@ -235,10 +249,25 @@ gboolean setup_gui(GError **err)
 	
 	// Main content of the window is a vpaned
 	
+#if GTK_MAJOR_VERSION>=3
 	vpaned=gtk_paned_new(GTK_ORIENTATION_VERTICAL);
 	
 	// Then we need a grid
 	grid=gtk_grid_new();
+
+#else
+	vpaned=gtk_vpaned_new();
+
+	// Then we need a vbox
+
+	if (!(vbox = gtk_vbox_new(FALSE, 0))) {
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create main vbox, gtk_vbox_new() = NULL", __func__);
+		goto EXITPOINT;
+	}
+
+	//gtk_container_add(GTK_CONTAINER(sMainWindow), vbox);
+	
+#endif
 	
 	
 	// Create menus
@@ -255,7 +284,12 @@ gboolean setup_gui(GError **err)
 		goto EXITPOINT;
 	}
 	
+#if GTK_MAJOR_VERSION>=3
 	g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), grid);
+#else
+	//g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), vpaned);
+	g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), vbox);
+#endif 
 	
 	gtk_action_group_add_actions(sActionGroup, sMenuActions, sNumMenuActions, NULL);
 	
@@ -291,11 +325,21 @@ gboolean setup_gui(GError **err)
 	}
 	
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
-	
+
+#if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach(GTK_GRID(grid),scrolledWindow,0,1,1,1);
 	
 	gtk_widget_set_vexpand(scrolledWindow,TRUE);
 	gtk_widget_set_hexpand(scrolledWindow,TRUE);
+#else
+	gtk_box_pack_start(GTK_BOX(vbox), scrolledWindow, TRUE, TRUE, 0);
+	
+	hbox=gtk_hbox_new(FALSE,0);
+	
+	gtk_widget_show(hbox);
+	
+	gtk_box_pack_end(GTK_BOX(vbox),hbox,FALSE,TRUE,0);
+#endif
 	
 	// Create the tree datastore
 	
@@ -392,17 +436,31 @@ gboolean setup_gui(GError **err)
 	// --------------------------------
 	// Recent file stuff:
 	
+#if GTK_MAJOR_VERSION>=3
+	
 	if (!(recentGrid=gtk_grid_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR,-1, "%s: Could not create recentGrid, gtk_grid_new() = NULL", __func__);
 		goto EXITPOINT;
 	}	
+	
+#else
+	if (!(recentVbox=gtk_vbox_new(FALSE, 0))) {
+		g_set_error(err, APP_SCITEPROJ_ERROR,-1, "%s: Could not create recentGrid, gtk_vbox_new() = NULL", __func__);
+		goto EXITPOINT;
+	}	
+#endif
+	
+	if (!(recentHbox=gtk_hbox_new(FALSE,0))) {
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create main vbox, gtk_hbox_new() = NULL", __func__);
+		goto EXITPOINT;
+	}
 
 	if ((recentScrolledWindow=init_recent_files(&tempErr)) == NULL) {
 		
 		goto EXITPOINT;
 	}
 	
-		
+#if GTK_MAJOR_VERSION>=3		
 	gtk_widget_set_vexpand(recentScrolledWindow,TRUE);
 	gtk_widget_set_hexpand(recentScrolledWindow,TRUE);
 	
@@ -410,12 +468,39 @@ gboolean setup_gui(GError **err)
 	
 	fullGrid=gtk_grid_new();
 
+#else
+	
+	if (!(fullVbox=gtk_vbox_new(FALSE,0))) {
+ 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create fullVbox, gtk_hbox_new() = NULL", __func__);
+ 		
+ 		goto EXITPOINT;
+ 	}
+	
+	gtk_box_pack_start(GTK_BOX(recentVbox),recentScrolledWindow, TRUE,TRUE,0);
+	gtk_box_pack_end(GTK_BOX(recentVbox),recentHbox,FALSE,TRUE,0);
+	
+	
+	statusBarVbox=gtk_vbox_new(FALSE,0);
 
+	if (!statusBarVbox) {
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create statusBarVbox, gtk_hbox_new() = NULL", __func__);
+		goto EXITPOINT;
+	}
+#endif
+
+
+#if GTK_MAJOR_VERSION>=3		
 	gtk_paned_pack1(GTK_PANED(vpaned),grid,TRUE,FALSE);
 	gtk_paned_pack2(GTK_PANED(vpaned),recentGrid,TRUE,TRUE);
+#else
+	gtk_paned_pack1(GTK_PANED(vpaned),vbox,TRUE,FALSE);
+	gtk_paned_pack2(GTK_PANED(vpaned),recentVbox,TRUE,TRUE);
+#endif
 	
 	gtk_widget_show(vpaned);
 	
+	
+#if GTK_MAJOR_VERSION>=3		
 	gtk_grid_attach(GTK_GRID(fullGrid),vpaned,0,0,1,1);
 	
 	gtk_widget_show(GTK_WIDGET(fullGrid));
@@ -427,6 +512,23 @@ gboolean setup_gui(GError **err)
 			
 	gtk_container_add(GTK_CONTAINER(sMainWindow), fullGrid);
 
+	
+#else
+	gtk_box_pack_start(GTK_BOX(fullVbox),vpaned,TRUE,TRUE,0);
+	
+	gtk_widget_show(GTK_WIDGET(fullVbox));
+	
+	if (!init_statusbar(fullVbox,vpaned,&tempErr)) {
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not init statusbar", tempErr->message);
+		goto EXITPOINT;
+	}
+			
+	gtk_container_add(GTK_CONTAINER(sMainWindow), fullVbox);
+
+	gtk_widget_show(fullVbox);
+	gtk_widget_show(vpaned);
+	
+#endif
 	g_signal_connect(G_OBJECT(recentTreeView), "key-press-event", G_CALLBACK(key_press_cb), recentTreeView);
 
 	gtk_window_resize(GTK_WINDOW(sMainWindow), gPrefs.width, gPrefs.height);
@@ -439,6 +541,7 @@ gboolean setup_gui(GError **err)
 	
 	// Show it all....
 			
+#if GTK_MAJOR_VERSION>=3
 	gtk_widget_show(recentGrid);
 		
 	if (!gPrefs.show_recent) {
@@ -446,10 +549,23 @@ gboolean setup_gui(GError **err)
 	} else {
 		gtk_widget_show(recentGrid);
 	}
+#else
+	gtk_widget_show(recentVbox);
+		
+	if (!gPrefs.show_recent) {
+		gtk_widget_hide(recentVbox);
+	} else {
+		gtk_widget_show(recentVbox);
+	}
+#endif
 	
 	gtk_widget_show(projectTreeView);
 	gtk_widget_show(scrolledWindow);
+#if GTK_MAJOR_VERSION>=3
 	gtk_widget_show(grid);
+#else
+	gtk_widget_show(vbox);
+#endif
 	gtk_widget_show(sMainWindow);
 	
 	resultCode = TRUE;
@@ -1255,7 +1371,8 @@ gboolean dialog_response_is_exit(gint test)
 void recent_files_switch_visible()
 {
 	gboolean visible=FALSE;
-	
+
+#if GTK_MAJOR_VERSION>=3
 	g_object_get(G_OBJECT(recentGrid),"visible", &visible,NULL);
 	
 	if (visible) {
@@ -1264,4 +1381,15 @@ void recent_files_switch_visible()
 	} else {
 		gtk_widget_show(recentGrid);
 	}
+#else
+	g_object_get(G_OBJECT(recentVbox),"visible", &visible,NULL);
+	
+	if (visible) {
+		gtk_widget_hide(recentVbox);
+		gtk_widget_grab_focus(projectTreeView);
+	} else {
+		gtk_widget_show(recentVbox);
+	}
+#endif
+	
 }
