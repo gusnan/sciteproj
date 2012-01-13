@@ -294,8 +294,6 @@ void create_about_dialog()
 	gtk_text_buffer_place_cursor(textbuffer_info,&iter);
 	gtk_text_buffer_select_range (textbuffer_info,&iter,&iter);
 
-	GtkWidget *ok_button_hbox=gtk_hbox_new(FALSE,0);
-
 	// Create an ok button
 	ok_button=gtk_button_new_from_stock(GTK_STOCK_OK);
 	
@@ -310,6 +308,8 @@ void create_about_dialog()
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),ok_button,notebook,GTK_POS_BOTTOM,5,1);
 #else
+	GtkWidget *ok_button_hbox=gtk_hbox_new(FALSE,0);
+
 	gtk_box_pack_end(GTK_BOX(ok_button_hbox),ok_button,FALSE,FALSE,0);
 	
 	gtk_box_pack_start(GTK_BOX(vbox),ok_button_hbox,FALSE,FALSE,0);
