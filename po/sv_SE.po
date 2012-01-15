@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sciteproj 0.6.07\n"
+"Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
+"POT-Creation-Date: 2012-01-15 22:40+0100\n"
+"PO-Revision-Date: 2012-01-15 22:36+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Swedish\n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.c:79
+#, c-format
+msgid "Error initing preferences: %s"
+msgstr ""
+
+#: main.c:96 main.c:106
+msgid ""
+"Environment variable exists, but doesn't point to a folder containing scite."
+msgstr ""
+
+#: main.c:123
+#, c-format
+msgid "Couldn't find a SciTE executable named '%s'!\n"
+msgstr ""
+
+#: main.c:124
+msgid "Checking for SciTE in the standard locations instead.\n"
+msgstr ""
+
+#: main.c:137
+msgid ""
+"Warning! Couldn't locate SciTE!\n"
+"Program will start, but you won't be able to open SciTE to edit files."
+msgstr ""
+
+#: main.c:145
+#, c-format
+msgid "Could not initialize application globals: %s"
+msgstr ""
+
+#: main.c:210
+#, c-format
+msgid "Usage: %s [OPTION] [FILE]..."
+msgstr "Användning: %s [FLAGGOR] [FIL]..."
+
+#: main.c:214
+msgid "Options can be one of the following:"
+msgstr "Flaggor kan vara en av följande:"
+
+#: main.c:215
+msgid "  --help                            display this help and exit"
+msgstr "  --help                            visa denna hjälp och avsluta"
+
+#: main.c:216
+msgid "  --version                         show version of sciteproj and exit"
+msgstr "  --version                         visa version av sciteproj och avsluta"
+
+#: main.c:217
+msgid ""
+"  --scite FILENAME                  set a filename for the instance of SciTE "
+"to open"
+msgstr ""
+"  --scite FILENAME                  sätt ett filnamn för instansen av SciTE "
+"du önskar köra"
+
+#: main.c:218
+msgid ""
+"  --generate FILENAME [MAX_DEPTH]   generate a sciteproj project file with "
+"name FILENAME,\n"
+"                                      recursively from current folder "
+"contents, at most\n"
+"                                      MAX_DEPTH folders down in the hierarchy"
+msgstr "  --generate FILNAMN [MAX_DJUP]     generera en sciteproj-projektfil "
+"med namn FILNAMN,\n"
+"                                    rekursivt från aktuell folderinnehåll, "
+"med som mest\n"
+"                                    MAX_DJUP steg ner i mapp-hierarkin"
+
+#: main.c:246
+#, c-format
+msgid ""
+"\n"
+"The syntax for that command is:\n"
+"\n"
+msgstr ""
+
+#: main.c:247
+#, c-format
+msgid ""
+"sciteproj --generate FILENAME [MAX_DEPTH]\n"
+"\n"
+msgstr ""
+
+#: main.c:261
+#, c-format
+msgid "Expected an integer as max_depth..."
+msgstr ""
+
+#: main.c:273
+#, c-format
+msgid "Generated '%s' successfully!"
+msgstr ""
+
+#~ msgid ""
+#~ "  --generate FILENAME [MAX_DEPTH]   generate a sciteproj project file "
+#~ "with name FILENAME,"
+#~ msgstr ""
+#~ "  --generate FILNAMN [MAX_DJUP]      generera en projektfil för sciteproj "
+#~ "med namnet FILNAMN"
