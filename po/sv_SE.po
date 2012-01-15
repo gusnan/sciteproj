@@ -69,7 +69,7 @@ msgid ""
 "  --scite FILENAME                  set a filename for the instance of SciTE "
 "to open"
 msgstr ""
-"  --scite FILENAME                  sätt ett filnamn för instansen av SciTE "
+"  --scite FILNAMN                   sätt ett filnamn för instansen av SciTE "
 "du önskar köra"
 
 #: main.c:218
