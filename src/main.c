@@ -243,8 +243,11 @@ static void parse_cmd_options(int argc,char *argv[])
 			
 			if ((argc!=3) && (argc!=4)) {
 				
-				printf(_("\nThe syntax for that command is:\n\n"));
-				printf(_("sciteproj --generate FILENAME [MAX_DEPTH]\n\n"));
+				printf("\n");
+				printf(_("The syntax for that command is:"));
+				printf("\n\n");
+				printf(_("sciteproj --generate FILENAME [MAX_DEPTH]"));
+				printf("\n\n");
 				
 				exit(EXIT_FAILURE);
 			}
