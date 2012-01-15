@@ -52,6 +52,9 @@
 		<file>./sciteproj.1</file>
 		<file>./Makefile</file>
 	</group>
+	<group name='po' expanded='TRUE'>
+		<file>./po/Makefile</file>
+	</group>
 	<group name='docs' expanded='TRUE'>
 		<file>./ChangeLog</file>
 		<file>./COPYING</file>
