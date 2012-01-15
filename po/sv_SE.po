@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-01-15 22:40+0100\n"
+"POT-Creation-Date: 2012-01-16 00:55+0100\n"
 "PO-Revision-Date: 2012-01-15 22:36+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Swedish\n"
@@ -62,7 +62,8 @@ msgstr "  --help                            visa denna hjälp och avsluta"
 
 #: main.c:216
 msgid "  --version                         show version of sciteproj and exit"
-msgstr "  --version                         visa version av sciteproj och avsluta"
+msgstr ""
+"  --version                         visa version av sciteproj och avsluta"
 
 #: main.c:217
 msgid ""
@@ -76,43 +77,32 @@ msgstr ""
 msgid ""
 "  --generate FILENAME [MAX_DEPTH]   generate a sciteproj project file with "
 "name FILENAME,\n"
-"                                      recursively from current folder "
+"                                    recursively from current folder "
 "contents, at most\n"
-"                                      MAX_DEPTH folders down in the hierarchy"
-msgstr "  --generate FILNAMN [MAX_DJUP]     generera en sciteproj-projektfil "
-"med namn FILNAMN,\n"
+"                                    MAX_DEPTH folders down in the hierarchy"
+msgstr ""
+"  --generate FILNAMN [MAX_DJUP]     generera en sciteproj-projektfil med "
+"namn FILNAMN,\n"
 "                                    rekursivt från aktuell folderinnehåll, "
 "med som mest\n"
 "                                    MAX_DJUP steg ner i mapp-hierarkin"
 
-#: main.c:246
-#, c-format
-msgid ""
-"\n"
-"The syntax for that command is:\n"
-"\n"
-msgstr ""
-
 #: main.c:247
 #, c-format
-msgid ""
-"sciteproj --generate FILENAME [MAX_DEPTH]\n"
-"\n"
+msgid "The syntax for that command is:"
 msgstr ""
 
-#: main.c:261
+#: main.c:249
+#, c-format
+msgid "sciteproj --generate FILENAME [MAX_DEPTH]"
+msgstr ""
+
+#: main.c:264
 #, c-format
 msgid "Expected an integer as max_depth..."
 msgstr ""
 
-#: main.c:273
+#: main.c:276
 #, c-format
 msgid "Generated '%s' successfully!"
 msgstr ""
-
-#~ msgid ""
-#~ "  --generate FILENAME [MAX_DEPTH]   generate a sciteproj project file "
-#~ "with name FILENAME,"
-#~ msgstr ""
-#~ "  --generate FILNAMN [MAX_DJUP]      generera en projektfil för sciteproj "
-#~ "med namnet FILNAMN"
