@@ -216,8 +216,8 @@ static void parse_cmd_options(int argc,char *argv[])
 			g_print("%s\n", _("  --version                         show version of sciteproj and exit"));
 			g_print("%s\n", _("  --scite FILENAME                  set a filename for the instance of SciTE to open"));
 			g_print("%s\n", _("  --generate FILENAME [MAX_DEPTH]   generate a sciteproj project file with name FILENAME,\n"
-									"                                      recursively from current folder contents, at most\n"
-									"                                      MAX_DEPTH folders down in the hierarchy"));
+									"                                    recursively from current folder contents, at most\n"
+									"                                    MAX_DEPTH folders down in the hierarchy"));
 			g_print("\n");
 			exit(EXIT_SUCCESS);
 			
