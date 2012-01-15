@@ -25,6 +25,9 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <string.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
 
 #include "clicked_node.h"
 #include "gui.h"
@@ -55,6 +58,13 @@ int main(int argc, char *argv[])
 	GError *err = NULL;
 	gchar *file_to_load=NULL;
 	
+	// Init gettext stuff
+	setlocale(LC_ALL,"");
+	
+	bindtextdomain(PACKAGE,LOCALEDIR);
+	bind_textdomain_codeset(PACKAGE,"");
+	textdomain(PACKAGE);
+	
 	parse_cmd_options(argc,argv);
 	
 	// Init gtk
@@ -66,7 +76,7 @@ int main(int argc, char *argv[])
 	
 	// Init sciteproj prefs
 	if (!init_prefs(&err)) {
-		g_print("Error initing preferences: %s", err->message);
+		g_print(_("Error initing preferences: %s"), err->message);
 		return EXIT_FAILURE;
 	}
 	
@@ -83,7 +93,7 @@ int main(int argc, char *argv[])
 				cmd.scite_filename=g_strdup(env_filename);
 			}
 		} else {
-			g_warning("Environment variable exists, but doesn't point to a folder containing scite.");
+			g_warning(_("Environment variable exists, but doesn't point to a folder containing scite."));
 		}
 
 		if (env_filename!=NULL) g_free(env_filename);
@@ -93,7 +103,7 @@ int main(int argc, char *argv[])
 				cmd.scite_filename=g_strdup(env_filename);
 			}
 		} else {
-			g_warning("Environment variable exists, but doesn't point to a folder containing scite.");
+			g_warning(_("Environment variable exists, but doesn't point to a folder containing scite."));
 		}
 	}
 	
@@ -110,8 +120,8 @@ int main(int argc, char *argv[])
 			gPrefs.scite_path=g_strdup(cmd.scite_filename);
 			
 		} else {
-			g_print("Couldn't find a SciTE executable named '%s'!\n",cmd.scite_filename);
-			g_print("Checking for SciTE in the standard locations instead.\n");
+			g_print(_("Couldn't find a SciTE executable named '%s'!\n"),cmd.scite_filename);
+			g_print(_("Checking for SciTE in the standard locations instead.\n"));
 		}
 	} 
 	
@@ -124,15 +134,16 @@ int main(int argc, char *argv[])
 	// Check for SciTE
 	if (!check_if_scite_exists()) {
 		GtkWidget *warningDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK, 
-				"Warning! Couldn't locate SciTE!\n"
-				"Program will start, but you won't be able to open SciTE to edit files.");
+				_("Warning! Couldn't locate SciTE!\n"
+				"Program will start, but you won't be able to open SciTE to edit files."));
 		gtk_dialog_run(GTK_DIALOG(warningDialog));
 		gtk_widget_destroy(warningDialog);
 	}
 	
 	// Set up the GUI
 	if (!setup_gui(&err)) {
-		g_print("Could not initialize application globals: %s\n", err->message);
+		g_print(_("Could not initialize application globals: %s"), err->message);
+		g_print("\n");
 		goto EXITPOINT;
 	}
 	
@@ -196,17 +207,17 @@ static void parse_cmd_options(int argc,char *argv[])
 	for (i=1;i<argc;i++) {
 		if (!strncmp(argv[i],"--help",6)) {
 			g_print("\n");
-			g_print("Usage: %s [OPTION] [FILE]...",
+			g_print(_("Usage: %s [OPTION] [FILE]..."),
 				g_basename(argv[0]));
 			
 			g_print("\n\n");
-			g_print("%s\n\n", "Options can be one of the following:");
-			g_print("%s\n", "  --help                            display this help and exit");
-			g_print("%s\n", "  --version                         show version of sciteproj and exit");
-			g_print("%s\n", "  --scite FILENAME                  set a filename for the instance of SciTE to open");			
-			g_print("%s\n", "  --generate FILENAME [MAX_DEPTH]   generate a sciteproj project file with name FILENAME,");
-			g_print("%s\n", "                                      recursively from current folder contents, at most");
-			g_print("%s\n", "                                      MAX_DEPTH folders down in the hierarchy");
+			g_print("%s\n\n", _("Options can be one of the following:"));
+			g_print("%s\n", _("  --help                            display this help and exit"));
+			g_print("%s\n", _("  --version                         show version of sciteproj and exit"));
+			g_print("%s\n", _("  --scite FILENAME                  set a filename for the instance of SciTE to open"));
+			g_print("%s\n", _("  --generate FILENAME [MAX_DEPTH]   generate a sciteproj project file with name FILENAME,\n"
+									"                                      recursively from current folder contents, at most\n"
+									"                                      MAX_DEPTH folders down in the hierarchy"));
 			g_print("\n");
 			exit(EXIT_SUCCESS);
 			
@@ -232,8 +243,8 @@ static void parse_cmd_options(int argc,char *argv[])
 			
 			if ((argc!=3) && (argc!=4)) {
 				
-				printf("\nThe syntax for that command is:\n\n");
-				printf("sciteproj --generate FILENAME [MAX_DEPTH]\n\n");
+				printf(_("\nThe syntax for that command is:\n\n"));
+				printf(_("sciteproj --generate FILENAME [MAX_DEPTH]\n\n"));
 				
 				exit(EXIT_FAILURE);
 			}
@@ -247,7 +258,8 @@ static void parse_cmd_options(int argc,char *argv[])
 				gchar *max_depth_s=argv[3];
 				
 				if (!is_integer(max_depth_s)) {
-					printf("Expected an integer as max_depth...\n\n");
+					printf(_("Expected an integer as max_depth..."));
+					printf("\n\n");
 					exit(EXIT_FAILURE);
 				} else {
 					max_depth=atoi(max_depth_s);
@@ -258,7 +270,8 @@ static void parse_cmd_options(int argc,char *argv[])
 			gboolean result=folder_to_xml(".",filename,max_depth);
 			
 			if (result) {
-				printf("Generated '%s' successfully!\n\n",filename);
+				printf(_("Generated '%s' successfully!"),filename);
+				printf("\n\n");
 			} else {
 				exit(EXIT_FAILURE);
 			}
