@@ -72,25 +72,29 @@ endif
 LOCAL_CFLAGS+=-DLOCALEDIR=\"$(LOCALEDIR)\" -DPACKAGE=\"$(NAME)\" -DSCITEPROJ_VERSION=\"$(VERSION)\"
 
 all: $(BIN)/sciteproj
+	${MAKE} -C po build
 
 $(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(LOCAL_CFLAGS) -c $< -o $@
 
-$(BIN)/sciteproj: $(OBJECTS)
+$(BIN)/$(NAME): $(OBJECTS)
 	$(CC) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG) $(LIBS)
 
 clean:
 	rm -rf $(OBJECTS) $(PROG) $(DEPEND)
+	${MAKE} -C po clean
 
 install:
 	install -d $(DESTDIR)$(PREFIX)/bin
 	install -m 755 $(PROG) $(DESTDIR)$(PREFIX)/bin
 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
 	install -m 644 graphics/sciteproj.xpm $(DESTDIR)$(PREFIX)/share/pixmaps
+	${MAKE} -C po install
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/$(PROG)
 	rm -f $(DESTDIR)$(PREFIX)/share/pixmaps/sciteproj.xpm
+	${MAKE} -C po uninstall
 
 $(DEPEND):
 	$(CC) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" > $(DEPEND)
