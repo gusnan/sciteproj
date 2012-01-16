@@ -95,7 +95,7 @@ msgstr "Avsluta"
 
 #: gui.c:124
 msgid "Create _Group"
-msgstr ""
+msgstr "Skapa _Grupp"
 
 #: gui.c:124
 msgid "Create a group node in the project"
@@ -207,7 +207,7 @@ msgstr ""
 
 #: gui.c:144 properties_dialog.c:131
 msgid "Group Properties"
-msgstr ""
+msgstr "Mappegenskaper"
 
 #: gui.c:144
 msgid "Show group properties"
@@ -255,11 +255,11 @@ msgstr ""
 
 #: gui.c:152 gui.c:158 properties_dialog.c:204
 msgid "File Properties"
-msgstr ""
+msgstr "Filegenskaper"
 
 #: gui.c:152 gui.c:158
 msgid "Show file properties"
-msgstr ""
+msgstr "Visa fileegenskaper"
 
 #: gui.c:155
 msgid "Remove File from this List"
@@ -368,7 +368,7 @@ msgstr ""
 #: gui.c:783 scite_utils.c:213 search.c:831 search.c:869
 #, c-format
 msgid "Opened %s"
-msgstr ""
+msgstr "Öppnade %s"
 
 #: gui.c:794
 #, c-format
@@ -674,15 +674,15 @@ msgstr ""
 
 #: search.c:923
 msgid "Filename"
-msgstr ""
+msgstr "Filnamn"
 
 #: search.c:927
 msgid "Line"
-msgstr ""
+msgstr "Rad"
 
 #: search.c:931
 msgid "File contents"
-msgstr ""
+msgstr "Fil-innehåll"
 
 #: search.c:982
 #, c-format
@@ -773,4 +773,4 @@ msgstr ""
 #: xml_processing.c:365
 #, c-format
 msgid "%s: Not a valid sciteproj XML file!"
-msgstr ""
+msgstr "%s: Är inte en giltig sciteproj XML-fil!"
