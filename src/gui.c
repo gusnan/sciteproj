@@ -115,7 +115,7 @@ static GtkActionEntry sMenuActions[] =
 	
 	{ "OpenProjectAction", GTK_STOCK_OPEN, "_Open Project", "<control>O", "Open Project", G_CALLBACK(openproject_menu_cb) },
 	{ "SaveProjectAction", GTK_STOCK_SAVE, "_Save Project", "<control>S", "Save Project", G_CALLBACK(saveproject_menu_cb) },
-	{ "SaveProjectAsAction", GTK_STOCK_SAVE_AS, "Save Project As...", "<control><shift>S", "Save Proeject As", G_CALLBACK(saveproject_as_menu_cb) },
+	{ "SaveProjectAsAction", GTK_STOCK_SAVE_AS, "Save Project As...", "<control><shift>S", "Save Project As", G_CALLBACK(saveproject_as_menu_cb) },
 	{ "ExitAction", GTK_STOCK_QUIT, "_Exit", "<control>Q", "Exit", G_CALLBACK(quit_menu_cb) },
 	
 	{ "CreateGroupAction", GTK_STOCK_DIRECTORY, "Create _Group", "", "Create a group node in the project", G_CALLBACK(creategroup_menu_cb) },
