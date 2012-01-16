@@ -22,6 +22,9 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
 
 #include "about.h"
 
@@ -30,7 +33,7 @@
 #include "prefs.h"
 
 
-static gchar *sLicense =	(gchar*)"SciteProj is free software: you can redistribute it and/or modify\n"
+static gchar *sLicense =	(gchar*)N_("SciteProj is free software: you can redistribute it and/or modify\n"
 											  "it under the terms of the GNU General Public License as published by\n"
 											  "the Free Software Foundation, either version 3 of the License, or\n"
 											  "(at your option) any later version.\n"
@@ -41,7 +44,7 @@ static gchar *sLicense =	(gchar*)"SciteProj is free software: you can redistribu
 											  "GNU General Public License for more details.\n"
 											  "\n"
 											  "You should have received a copy of the GNU General Public License\n"
-											  "along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n";
+											  "along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n");
 
 
 gchar *homepage_string=(gchar*)"http://sciteproj.sourceforge.net";
@@ -143,9 +146,9 @@ void create_about_dialog()
 	gchar *version_string;
 
 #ifdef _DEBUG
-	version_string=g_strdup_printf("version %s DEBUG",sVersion);
+	version_string=g_strdup_printf(_("version %s DEBUG"),sVersion);
 #else
-	version_string=g_strdup_printf("version %s",sVersion);
+	version_string=g_strdup_printf(_("version %s"),sVersion);
 #endif
 
 	version_string_label=gtk_label_new(version_string);
@@ -202,8 +205,8 @@ void create_about_dialog()
 
 	notebook=gtk_notebook_new();
 
-	notebook_label1=gtk_label_new("Information");
-	notebook_label2=gtk_label_new("License");
+	notebook_label1=gtk_label_new(_("Information"));
+	notebook_label2=gtk_label_new(_("License"));
 
 	// create a scrolled_window and a textview for the license
 	textbuffer_license=gtk_text_buffer_new(NULL);
@@ -232,7 +235,7 @@ void create_about_dialog()
 	textbuffer_info=gtk_text_buffer_new(NULL);
 	gtk_text_buffer_get_start_iter(textbuffer_info,&iter);
 
-	gchar *about_text2=g_strdup_printf(""
+	gchar *about_text2=g_strdup_printf(_(""
 											"SciteProj is based on ScitePM by\n"
 											"Roy Wood <roy.wood@gmail.com> and\n"
 											"Martin Andrews <ScitePM@PLATFORMedia.com>\n\n"
@@ -240,7 +243,7 @@ void create_about_dialog()
 											"Mattias Wecksten <wecksten@gmail.com>\n"
 											"Frank Wunderlich\n\n"
 											"For more information about SciteProj, see the README file that\n"
-											"is provided with the package."
+											"is provided with the package.")
 											);
 
 	gchar *text_to_add;
@@ -339,7 +342,7 @@ void create_about_dialog()
  */
 void show_version()
 {
-	g_print("SciteProj version %s\n", sVersion);
+	g_print(_("SciteProj version %s\n"), sVersion);
 }
 
 
