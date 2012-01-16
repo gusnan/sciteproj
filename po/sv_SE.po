@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-01-16 15:38+0100\n"
+"POT-Creation-Date: 2012-01-16 19:39+0100\n"
 "PO-Revision-Date: 2012-01-15 22:36+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -46,6 +46,7 @@ msgid "Error: Couldn't g_chdir to directory"
 msgstr ""
 
 #: folder_to_xml.c:242
+#, c-format
 msgid "Couldn't create file with the name %s!"
 msgstr "Kunde inte skapa en fil med namnet '%s'!"
 
@@ -82,8 +83,12 @@ msgid "Save Project"
 msgstr "Spara Projekt"
 
 #: gui.c:121
-msgid "Save Project As"
-msgstr "Spara Projekt Som"
+msgid "Save Project As..."
+msgstr "Spara Projekt Som..."
+
+#: gui.c:121
+msgid "Save Project with a specific filename"
+msgstr "Spara Projekt med ett specifikt filnamn"
 
 #: gui.c:122
 msgid "_Exit"
@@ -115,7 +120,7 @@ msgstr "Ta bort filer"
 
 #: gui.c:126
 msgid "Remove selected files from the project"
-msgstr ""
+msgstr "Ta bort valda filer från projektet"
 
 #: gui.c:128
 msgid "Expand All Groups"
@@ -131,7 +136,7 @@ msgstr "Sök"
 
 #: gui.c:131
 msgid "Search for a string in the project"
-msgstr ""
+msgstr "Sök efter en sträng i projektet"
 
 #: gui.c:133
 msgid "_About"
@@ -139,7 +144,7 @@ msgstr "_Om"
 
 #: gui.c:133
 msgid "Show information about this application"
-msgstr ""
+msgstr "Visa information om denna applikation"
 
 #: gui.c:135 tree_manipulation.c:582
 msgid "Add Files"
@@ -155,7 +160,7 @@ msgstr "Lägg till grupp"
 
 #: gui.c:136
 msgid "Add a group to the project"
-msgstr ""
+msgstr "Lägg till en grupp till projektet"
 
 #: gui.c:138
 msgid "Add Files to Group"
@@ -288,90 +293,91 @@ msgstr ""
 msgid "%s: Could not create GtkUIManager, gtk_ui_manager_new() = NULL"
 msgstr ""
 
-#: gui.c:302
+#: gui.c:304
 #, c-format
 msgid ""
 "%s: Could not create create menus from XML, gtk_ui_manager_add_ui_from_string"
 "() = %s"
 msgstr ""
 
-#: gui.c:325
+#: gui.c:327
 #, c-format
 msgid ""
 "%s: Could not create main scrolled window, gtk_scrolled_window_new() = NULL"
 msgstr ""
 
-#: gui.c:350
+#: gui.c:352
 #, c-format
 msgid "%s: Could not create the treestore"
 msgstr "%s: Kunde inte skapa treestore"
 
-#: gui.c:357 recent_files.c:116
+#: gui.c:359 recent_files.c:116
 #, c-format
 msgid "%s: Could not create GtkTreeView, gtk_tree_view_new_with_model() = NULL"
-msgstr "%s: Kunde inte skapa GtkTreeView, gtk_tree_view_new_with_model() = NULL"
+msgstr ""
+"%s: Kunde inte skapa GtkTreeView, gtk_tree_view_new_with_model() = NULL"
 
-#: gui.c:367 recent_files.c:126
+#: gui.c:369 recent_files.c:126
 #, c-format
 msgid ""
 "%s: Could not create GtkCellRenderer, gtk_cell_renderer_text_new() = NULL"
 msgstr ""
 "%s: Kunde inte skapa GtkCellRenderer, gtk_cell_renderer_text_new() = NULL"
 
-#: gui.c:378 recent_files.c:141
+#: gui.c:380 recent_files.c:141
 #, c-format
 msgid ""
 "%s: Could not create GtkCellRenderer, gtk_cell_renderer_pixbuf_new() = NULL"
 msgstr ""
 
-#: gui.c:384 recent_files.c:133
+#: gui.c:386 recent_files.c:133
 #, c-format
 msgid ""
 "%s: Could not create GtkTreeViewColumn, gtk_tree_view_column_new() = NULL"
 msgstr ""
 
-#: gui.c:445
+#: gui.c:447
 #, c-format
 msgid "%s: Could not create recentGrid, gtk_grid_new() = NULL"
 msgstr ""
 
-#: gui.c:451
+#: gui.c:453
 #, c-format
 msgid "%s: Could not create recentGrid, gtk_vbox_new() = NULL"
 msgstr ""
 
-#: gui.c:457
+#: gui.c:459
 #, c-format
 msgid "%s: Could not create main vbox, gtk_hbox_new() = NULL"
 msgstr ""
 
-#: gui.c:477
+#: gui.c:479
 #, c-format
 msgid "%s: Could not create fullVbox, gtk_hbox_new() = NULL"
 msgstr ""
 
-#: gui.c:489
+#: gui.c:491
 #, c-format
 msgid "%s: Could not create statusBarVbox, gtk_hbox_new() = NULL"
 msgstr ""
 
-#: gui.c:512 gui.c:525 statusbar.c:47
+#: gui.c:514 gui.c:527 statusbar.c:47
 #, c-format
 msgid "%s: Could not init statusbar"
 msgstr "%s: Kunde inte initiera statusfältet"
 
-#: gui.c:767 gui.c:1316 recent_files.c:502 scite_utils.c:862 search.c:811
+#: gui.c:769 gui.c:1318 recent_files.c:502 scite_utils.c:862 search.c:811
 #: search.c:849
 #, c-format
 msgid "%s: Error formatting Scite director command, g_strdup_printf() = NULL"
 msgstr ""
 
-#: gui.c:783 scite_utils.c:213 search.c:831 search.c:869
+#: gui.c:785 scite_utils.c:213 search.c:831 search.c:869
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
 
-#: gui.c:794
+#: gui.c:796
 #, c-format
 msgid ""
 "Could not open selected file: \n"
