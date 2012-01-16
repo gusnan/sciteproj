@@ -226,7 +226,7 @@ gboolean setup_gui(GError **err)
 	clicked_node.name=NULL;
 	clicked_node.type=-1;
 	
-	window_saved_title=g_strdup_printf("[UNTITLED]");
+	window_saved_title=g_strdup_printf(_("[UNTITLED]"));
 	
 	// Create top-level window, configure it
 	
