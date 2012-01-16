@@ -304,18 +304,19 @@ msgstr ""
 #: gui.c:350
 #, c-format
 msgid "%s: Could not create the treestore"
-msgstr ""
+msgstr "%s: Kunde inte skapa treestore"
 
 #: gui.c:357 recent_files.c:116
 #, c-format
 msgid "%s: Could not create GtkTreeView, gtk_tree_view_new_with_model() = NULL"
-msgstr ""
+msgstr "%s: Kunde inte skapa GtkTreeView, gtk_tree_view_new_with_model() = NULL"
 
 #: gui.c:367 recent_files.c:126
 #, c-format
 msgid ""
 "%s: Could not create GtkCellRenderer, gtk_cell_renderer_text_new() = NULL"
 msgstr ""
+"%s: Kunde inte skapa GtkCellRenderer, gtk_cell_renderer_text_new() = NULL"
 
 #: gui.c:378 recent_files.c:141
 #, c-format
@@ -357,7 +358,7 @@ msgstr ""
 #: gui.c:512 gui.c:525 statusbar.c:47
 #, c-format
 msgid "%s: Could not init statusbar"
-msgstr ""
+msgstr "%s: Kunde inte initiera statusfältet"
 
 #: gui.c:767 gui.c:1316 recent_files.c:502 scite_utils.c:862 search.c:811
 #: search.c:849
@@ -377,6 +378,9 @@ msgid ""
 "\n"
 "%s"
 msgstr ""
+"Kunde inte öppna vald fil: \n"
+"\n"
+"%s"
 
 #: main.c:79
 #, c-format
@@ -474,11 +478,11 @@ msgstr "Genererade '%s' framgångsrikt!"
 
 #: properties_dialog.c:135
 msgid "Group name:"
-msgstr ""
+msgstr "Gruppnamn:"
 
 #: properties_dialog.c:136
 msgid "Contains number of Files:"
-msgstr ""
+msgstr "Innehåller antal filer:"
 
 #: properties_dialog.c:228
 msgid "Filename:"
