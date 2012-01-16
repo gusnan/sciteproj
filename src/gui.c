@@ -111,10 +111,10 @@ gchar *window_saved_title=NULL;
 
 static GtkActionEntry sMenuActions[] = 
 {
-	{ "FileMenuAction", NULL, "_File" },
-	{ "EditMenuAction", NULL, "_Edit" },
-	{ "ViewMenuAction", NULL, "_View" },
-	{ "HelpMenuAction", NULL, "_Help" },
+	{ "FileMenuAction", NULL, N_("_File") },
+	{ "EditMenuAction", NULL, N_("_Edit") },
+	{ "ViewMenuAction", NULL, N_("_View") },
+	{ "HelpMenuAction", NULL, N_("_Help") },
 	
 	{ "OpenProjectAction", GTK_STOCK_OPEN, N_("_Open Project"), "<control>O", N_("Open Project"), G_CALLBACK(openproject_menu_cb) },
 	{ "SaveProjectAction", GTK_STOCK_SAVE, N_("_Save Project"), "<control>S", N_("Save Project"), G_CALLBACK(saveproject_menu_cb) },
