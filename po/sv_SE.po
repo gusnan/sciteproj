@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-01-16 22:43+0100\n"
+"POT-Creation-Date: 2012-01-16 22:52+0100\n"
 "PO-Revision-Date: 2012-01-16 20:25+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -618,6 +618,10 @@ msgstr "%s: Fel när anropade g_io_channel_read_chars() = %s\n"
 #, c-format
 msgid "Closed %s"
 msgstr "Stängde %s"
+
+#: scite_utils.c:190
+msgid "Closed SciTE"
+msgstr "Stängde SciTE"
 
 #: scite_utils.c:200
 #, c-format
