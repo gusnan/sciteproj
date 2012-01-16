@@ -1,16 +1,16 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Swedish translation of SciteProj
+# Copyright (C) 2012 Andreas Rönnquist
+# This file is distributed under the same license as the sciteproj package.
+# Andreas Rönnquist <gusnan@gusnan.se>, 2012.
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-01-16 00:55+0100\n"
+"POT-Creation-Date: 2012-01-16 01:08+0100\n"
 "PO-Revision-Date: 2012-01-15 22:36+0100\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
@@ -20,32 +20,36 @@ msgstr ""
 #: main.c:79
 #, c-format
 msgid "Error initing preferences: %s"
-msgstr ""
+msgstr "Fel vid initiering av inställningar: %s"
 
 #: main.c:96 main.c:106
 msgid ""
 "Environment variable exists, but doesn't point to a folder containing scite."
 msgstr ""
+"Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
 
 #: main.c:123
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
-msgstr ""
+msgstr "Kunde inte hitta en körbar fil med namnet '%s'!\n"
 
 #: main.c:124
 msgid "Checking for SciTE in the standard locations instead.\n"
-msgstr ""
+msgstr "Kollar efter SciTE på standard-platserna istället.\n"
 
 #: main.c:137
 msgid ""
 "Warning! Couldn't locate SciTE!\n"
 "Program will start, but you won't be able to open SciTE to edit files."
 msgstr ""
+"Varning! Kunde inte hitta SciTE!\n"
+"Programmet kommer att starta, men du kommer inte kunna använda SciTE för att "
+"editera filer."
 
 #: main.c:145
 #, c-format
 msgid "Could not initialize application globals: %s"
-msgstr ""
+msgstr "Kunde inte initiera program-globaler: %s"
 
 #: main.c:210
 #, c-format
@@ -90,19 +94,19 @@ msgstr ""
 #: main.c:247
 #, c-format
 msgid "The syntax for that command is:"
-msgstr ""
+msgstr "Syntaxen för det kommandot är:"
 
 #: main.c:249
 #, c-format
 msgid "sciteproj --generate FILENAME [MAX_DEPTH]"
-msgstr ""
+msgstr "sciteproj --generate FILNAMN [MAX_DJUP]"
 
 #: main.c:264
 #, c-format
 msgid "Expected an integer as max_depth..."
-msgstr ""
+msgstr "Väntade ett heltal för MAX_DJUP..."
 
 #: main.c:276
 #, c-format
 msgid "Generated '%s' successfully!"
-msgstr ""
+msgstr "Genererade '%s' framgångsrikt!"
