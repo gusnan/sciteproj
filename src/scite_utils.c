@@ -187,7 +187,7 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 				
 				if (g_str_has_prefix(buff, "closing:")) {
 					
-					set_statusbar_text("Closed SciTE");
+					set_statusbar_text(_("Closed SciTE"));
 					
 				}
 				
