@@ -32,21 +32,6 @@
 
 #include "prefs.h"
 
-
-static gchar *sLicense =	(gchar*)N_("SciteProj is free software: you can redistribute it and/or modify "
-											  "it under the terms of the GNU General Public License as published by "
-											  "the Free Software Foundation, either version 3 of the License, or "
-											  "(at your option) any later version.\n"
-											  "\n"
-											  "SciteProj is distributed in the hope that it will be useful, "
-											  "but WITHOUT ANY WARRANTY; without even the implied warranty of "
-											  "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
-											  "GNU General Public License for more details.\n"
-											  "\n"
-											  "You should have received a copy of the GNU General Public License "
-											  "along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n");
-
-
 gchar *homepage_string=(gchar*)"http://sciteproj.sourceforge.net";
 
 gchar *sVersion = (gchar*)SCITEPROJ_VERSION;
@@ -211,6 +196,23 @@ void create_about_dialog()
 	// create a scrolled_window and a textview for the license
 	textbuffer_license=gtk_text_buffer_new(NULL);
 	gtk_text_buffer_get_start_iter(textbuffer_license,&iter);
+	
+	
+
+	gchar *sLicense =	_("SciteProj is free software: you can redistribute it and/or modify "
+											  "it under the terms of the GNU General Public License as published by "
+											  "the Free Software Foundation, either version 3 of the License, or "
+											  "(at your option) any later version.\n"
+											  "\n"
+											  "SciteProj is distributed in the hope that it will be useful, "
+											  "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+											  "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+											  "GNU General Public License for more details.\n"
+											  "\n"
+											  "You should have received a copy of the GNU General Public License "
+											  "along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n");
+
+
 
 	gtk_text_buffer_insert(textbuffer_license,&iter,sLicense,-1);
 
