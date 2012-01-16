@@ -294,6 +294,8 @@ gboolean setup_gui(GError **err)
 	g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), vbox);
 #endif 
 	
+	gtk_action_group_set_translation_domain(sActionGroup,PACKAGE);
+	
 	gtk_action_group_add_actions(sActionGroup, sMenuActions, sNumMenuActions, NULL);
 	
 	gtk_ui_manager_insert_action_group(sGtkUIManager, sActionGroup, 0);
