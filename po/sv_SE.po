@@ -1,5 +1,5 @@
 # Swedish translation of SciteProj
-# Copyright (C) 2012 Andreas Rönnquist
+# Copyright (C) 2012 Andreas Rönnquist <gusnan@gusnan.se>
 # This file is distributed under the same license as the sciteproj package.
 # Andreas Rönnquist <gusnan@gusnan.se>, 2012.
 #
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-01-16 01:08+0100\n"
+"POT-Creation-Date: 2012-01-16 15:38+0100\n"
 "PO-Revision-Date: 2012-01-15 22:36+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -16,6 +16,367 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: drag_drop.c:188 drag_drop.c:193
+#, c-format
+msgid "%s: Could not add drag/drop data: %s\n"
+msgstr ""
+
+#: drag_drop.c:381 drag_drop.c:387
+#, c-format
+msgid "%s: Could not format drag/drop data: %s\n"
+msgstr ""
+
+#: drag_drop.c:407
+#, c-format
+msgid "%s: Could not set drag/drop data\n"
+msgstr ""
+
+#: drag_drop.c:494
+#, c-format
+msgid "%s: Cannot drop a group node into itself"
+msgstr ""
+
+#: folder_to_xml.c:229
+msgid "Error: Invalid directory!"
+msgstr ""
+
+#: folder_to_xml.c:235
+msgid "Error: Couldn't g_chdir to directory"
+msgstr ""
+
+#: folder_to_xml.c:242
+msgid "Couldn't create file with the name %s!"
+msgstr "Kunde inte skapa en fil med namnet '%s'!"
+
+#: gui.c:114
+msgid "_File"
+msgstr "Arkiv"
+
+#: gui.c:115
+msgid "_Edit"
+msgstr "R_edigera"
+
+#: gui.c:116
+msgid "_View"
+msgstr "_Visa"
+
+#: gui.c:117
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: gui.c:119
+msgid "_Open Project"
+msgstr "Öppna Projekt"
+
+#: gui.c:119
+msgid "Open Project"
+msgstr "Öppna Projekt"
+
+#: gui.c:120
+msgid "_Save Project"
+msgstr "_Spara Projekt"
+
+#: gui.c:120 tree_manipulation.c:286
+msgid "Save Project"
+msgstr "Spara Projekt"
+
+#: gui.c:121
+msgid "Save Project As"
+msgstr "Spara Projekt Som"
+
+#: gui.c:122
+msgid "_Exit"
+msgstr "_Avsluta"
+
+#: gui.c:122
+msgid "Exit"
+msgstr "Avsluta"
+
+#: gui.c:124
+msgid "Create _Group"
+msgstr ""
+
+#: gui.c:124
+msgid "Create a group node in the project"
+msgstr ""
+
+#: gui.c:125
+msgid "Add _File"
+msgstr "Lägg till _Fil"
+
+#: gui.c:125
+msgid "Add a file to the project"
+msgstr ""
+
+#: gui.c:126
+msgid "Remove File(s)"
+msgstr "Ta bort filer"
+
+#: gui.c:126
+msgid "Remove selected files from the project"
+msgstr ""
+
+#: gui.c:128
+msgid "Expand All Groups"
+msgstr "Expandera alla grupper"
+
+#: gui.c:129
+msgid "Collapse All Groups"
+msgstr "Kollapsa alla grupper"
+
+#: gui.c:131
+msgid "Search"
+msgstr "Sök"
+
+#: gui.c:131
+msgid "Search for a string in the project"
+msgstr ""
+
+#: gui.c:133
+msgid "_About"
+msgstr "_Om"
+
+#: gui.c:133
+msgid "Show information about this application"
+msgstr ""
+
+#: gui.c:135 tree_manipulation.c:582
+msgid "Add Files"
+msgstr "Lägg till Filer"
+
+#: gui.c:135
+msgid "Add files to the project"
+msgstr "Lägg till filer till projektet"
+
+#: gui.c:136
+msgid "Add Group"
+msgstr "Lägg till grupp"
+
+#: gui.c:136
+msgid "Add a group to the project"
+msgstr ""
+
+#: gui.c:138
+msgid "Add Files to Group"
+msgstr ""
+
+#: gui.c:138
+msgid "Add files to an existing group"
+msgstr ""
+
+#: gui.c:139
+msgid "Add Subgroup to Group"
+msgstr ""
+
+#: gui.c:139
+msgid "Add a subgroup to an existing group"
+msgstr ""
+
+#: gui.c:140
+msgid "Rename Group"
+msgstr "Byt namn på grupp"
+
+#: gui.c:140
+msgid "Rename a group"
+msgstr "Byter namn på en grupp"
+
+#: gui.c:141
+msgid "Remove Group From Project"
+msgstr ""
+
+#: gui.c:141
+msgid "Remove a group and its children from the project"
+msgstr ""
+
+#: gui.c:142
+msgid "Sort Group Ascending"
+msgstr ""
+
+#: gui.c:142
+msgid "Sort the filenames ascending"
+msgstr ""
+
+#: gui.c:143
+msgid "Sort Group Descending"
+msgstr ""
+
+#: gui.c:143
+msgid "Sort the filenames descending"
+msgstr ""
+
+#: gui.c:144 properties_dialog.c:131
+msgid "Group Properties"
+msgstr ""
+
+#: gui.c:144
+msgid "Show group properties"
+msgstr "Visa mappegenskaper"
+
+#: gui.c:145
+msgid "Edit Options"
+msgstr ""
+
+#: gui.c:145
+msgid "Edit Program Options"
+msgstr ""
+
+#: gui.c:147
+msgid "View Recently Opened Files"
+msgstr ""
+
+#: gui.c:147
+msgid "View Recent Files"
+msgstr ""
+
+#: gui.c:149 gui.c:154
+msgid "Open File in SciTE"
+msgstr ""
+
+#: gui.c:149 gui.c:154
+msgid "Open a file in SciTE"
+msgstr ""
+
+#: gui.c:150
+msgid "Remove File From Project"
+msgstr ""
+
+#: gui.c:150
+msgid "Remove a file from the project"
+msgstr ""
+
+#: gui.c:151
+msgid "Copy Filename to Clipboard"
+msgstr ""
+
+#: gui.c:151
+msgid "Copies the full path and filename to the clipboard"
+msgstr ""
+
+#: gui.c:152 gui.c:158 properties_dialog.c:204
+msgid "File Properties"
+msgstr ""
+
+#: gui.c:152 gui.c:158
+msgid "Show file properties"
+msgstr ""
+
+#: gui.c:155
+msgid "Remove File from this List"
+msgstr ""
+
+#: gui.c:155
+msgid "Remove file from this List"
+msgstr ""
+
+#: gui.c:156
+msgid "Copy filename to clipboard"
+msgstr ""
+
+#: gui.c:234
+#, c-format
+msgid "%s: Could not create main window, gtk_window_new() = NULL"
+msgstr ""
+
+#: gui.c:279
+#, c-format
+msgid "%s: Could not create GtkActionGroup, gtk_action_group_new() = NULL"
+msgstr ""
+
+#: gui.c:285
+#, c-format
+msgid "%s: Could not create GtkUIManager, gtk_ui_manager_new() = NULL"
+msgstr ""
+
+#: gui.c:302
+#, c-format
+msgid ""
+"%s: Could not create create menus from XML, gtk_ui_manager_add_ui_from_string"
+"() = %s"
+msgstr ""
+
+#: gui.c:325
+#, c-format
+msgid ""
+"%s: Could not create main scrolled window, gtk_scrolled_window_new() = NULL"
+msgstr ""
+
+#: gui.c:350
+#, c-format
+msgid "%s: Could not create the treestore"
+msgstr ""
+
+#: gui.c:357 recent_files.c:116
+#, c-format
+msgid "%s: Could not create GtkTreeView, gtk_tree_view_new_with_model() = NULL"
+msgstr ""
+
+#: gui.c:367 recent_files.c:126
+#, c-format
+msgid ""
+"%s: Could not create GtkCellRenderer, gtk_cell_renderer_text_new() = NULL"
+msgstr ""
+
+#: gui.c:378 recent_files.c:141
+#, c-format
+msgid ""
+"%s: Could not create GtkCellRenderer, gtk_cell_renderer_pixbuf_new() = NULL"
+msgstr ""
+
+#: gui.c:384 recent_files.c:133
+#, c-format
+msgid ""
+"%s: Could not create GtkTreeViewColumn, gtk_tree_view_column_new() = NULL"
+msgstr ""
+
+#: gui.c:445
+#, c-format
+msgid "%s: Could not create recentGrid, gtk_grid_new() = NULL"
+msgstr ""
+
+#: gui.c:451
+#, c-format
+msgid "%s: Could not create recentGrid, gtk_vbox_new() = NULL"
+msgstr ""
+
+#: gui.c:457
+#, c-format
+msgid "%s: Could not create main vbox, gtk_hbox_new() = NULL"
+msgstr ""
+
+#: gui.c:477
+#, c-format
+msgid "%s: Could not create fullVbox, gtk_hbox_new() = NULL"
+msgstr ""
+
+#: gui.c:489
+#, c-format
+msgid "%s: Could not create statusBarVbox, gtk_hbox_new() = NULL"
+msgstr ""
+
+#: gui.c:512 gui.c:525 statusbar.c:47
+#, c-format
+msgid "%s: Could not init statusbar"
+msgstr ""
+
+#: gui.c:767 gui.c:1316 recent_files.c:502 scite_utils.c:862 search.c:811
+#: search.c:849
+#, c-format
+msgid "%s: Error formatting Scite director command, g_strdup_printf() = NULL"
+msgstr ""
+
+#: gui.c:783 scite_utils.c:213 search.c:831 search.c:869
+#, c-format
+msgid "Opened %s"
+msgstr ""
+
+#: gui.c:794
+#, c-format
+msgid ""
+"Could not open selected file: \n"
+"\n"
+"%s"
+msgstr ""
 
 #: main.c:79
 #, c-format
@@ -110,3 +471,306 @@ msgstr "Väntade ett heltal för MAX_DJUP..."
 #, c-format
 msgid "Generated '%s' successfully!"
 msgstr "Genererade '%s' framgångsrikt!"
+
+#: properties_dialog.c:135
+msgid "Group name:"
+msgstr ""
+
+#: properties_dialog.c:136
+msgid "Contains number of Files:"
+msgstr ""
+
+#: properties_dialog.c:228
+msgid "Filename:"
+msgstr ""
+
+#: properties_dialog.c:229
+msgid "Path:"
+msgstr ""
+
+#: properties_dialog.c:230
+msgid "File size:"
+msgstr ""
+
+#: recent_files.c:77 tree_manipulation.c:159
+#, c-format
+msgid "%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL"
+msgstr ""
+
+#: recent_files.c:101
+#, c-format
+msgid ""
+"%s: Could not create recent scrolled window, gtk_scrolled_window_new() = NULL"
+msgstr ""
+
+#: recent_files.c:110
+#, c-format
+msgid "%s: Could not create the recent treestore"
+msgstr ""
+
+#: recent_files.c:138
+msgid "Recently opened files:"
+msgstr ""
+
+#: remove.c:75 remove.c:80 rename.c:136 rename.c:141
+msgid "Error!!!\n"
+msgstr ""
+
+#: scite_utils.c:150
+#, c-format
+msgid "%s: Error calling g_io_channel_read_chars() = %s\n"
+msgstr ""
+
+#: scite_utils.c:181
+#, c-format
+msgid "Closed %s"
+msgstr ""
+
+#: scite_utils.c:200
+#, c-format
+msgid "Switched to %s"
+msgstr ""
+
+#: scite_utils.c:224
+#, c-format
+msgid "%s: condition = G_IO_ERR\n"
+msgstr ""
+
+#: scite_utils.c:231
+#, c-format
+msgid "%s: condition = G_IO_HUP\n"
+msgstr ""
+
+#: scite_utils.c:336 scite_utils.c:347
+#, c-format
+msgid ""
+"%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, errno = %d = %s"
+msgstr ""
+
+#: scite_utils.c:358 scite_utils.c:366
+#, c-format
+msgid "%s: Could not launch Scite, remove(\"%s\") failed, errno = %d = %s"
+msgstr ""
+
+#: scite_utils.c:377
+#, c-format
+msgid "%s: Could not launch Scite, mkfifo(\"%s\") failed, errno = %d = %s"
+msgstr ""
+
+#: scite_utils.c:388 scite_utils.c:607
+#, c-format
+msgid "%s: Could not launch Scite, open(\"%s\") failed, errno = %d = %s"
+msgstr ""
+
+#: scite_utils.c:398
+#, c-format
+msgid ""
+"%s: Could not launch Scite, g_io_channel_unix_new(\"%s\") failed, errno = %d "
+"= %s"
+msgstr ""
+
+#: scite_utils.c:405
+#, c-format
+msgid ""
+"%s: Could not launch Scite, g_io_channel_set_encoding( ) failed, error = %s"
+msgstr ""
+
+#: scite_utils.c:418
+#, c-format
+msgid "%s: Could not launch Scite, pipe( ) failed, errno = %d = %s"
+msgstr ""
+
+#: scite_utils.c:492
+#, c-format
+msgid "%s: Could not launch Scite, fork() failed, errno = %d = %s"
+msgstr ""
+
+#: scite_utils.c:525
+msgid "Error: Could not execute Scite from child process"
+msgstr ""
+
+#: scite_utils.c:534
+#, c-format
+msgid ""
+"%s: Problem sending message to parent: messageLength = %d, bytesWritten = "
+"%d\n"
+msgstr ""
+
+#: scite_utils.c:576
+#, c-format
+msgid "%s: Could not launch Scite, execlp( ) failed"
+msgstr ""
+
+#: scite_utils.c:584
+msgid "Connecting to Scite...."
+msgstr ""
+
+#: scite_utils.c:594
+#, c-format
+msgid "%s: Could not connect to Scite"
+msgstr ""
+
+#: scite_utils.c:633
+msgid "Launched SciTE"
+msgstr ""
+
+#: scite_utils.c:686
+#, c-format
+msgid ""
+"%s: Could not send command to Scite, write(\"%s\") failed, errno = %d = %s"
+msgstr ""
+
+#: scite_utils.c:729
+#, c-format
+msgid "%s: Could not open X display, XOpenDisplay() = NULL"
+msgstr ""
+
+#: scite_utils.c:738
+#, c-format
+msgid "%s: Could not activate SciTE window, X11 window ID invalid"
+msgstr ""
+
+#: scite_utils.c:760
+#, c-format
+msgid "%s: Could not activate SciTE, XSendEvent() = FALSE"
+msgstr ""
+
+#: search.c:182
+msgid "Search project"
+msgstr ""
+
+#: search.c:198
+msgid "Find What:"
+msgstr "Hitta vad:"
+
+#: search.c:240
+msgid "Match case"
+msgstr ""
+
+#: search.c:251
+msgid "Match whole word only"
+msgstr ""
+
+#: search.c:613
+msgid ""
+"There was problems opening the following files in the project:\n"
+"\n"
+msgstr ""
+
+#: search.c:626
+msgid ""
+"\n"
+"They couldn't be opened for reading in the search.\n"
+msgstr ""
+
+#: search.c:680
+msgid "Please enter a text to search for!\n"
+msgstr ""
+
+#: search.c:771 search.c:785 search.c:839 search.c:878
+#, c-format
+msgid "Error:%s\n"
+msgstr ""
+
+#: search.c:923
+msgid "Filename"
+msgstr ""
+
+#: search.c:927
+msgid "Line"
+msgstr ""
+
+#: search.c:931
+msgid "File contents"
+msgstr ""
+
+#: search.c:982
+#, c-format
+msgid "Found %d elements"
+msgstr ""
+
+#: search.c:991
+msgid "The search didn't give any results."
+msgstr ""
+
+#: statusbar.c:57
+msgid "Welcome to SciteProj\n"
+msgstr ""
+
+#: string_utils.c:68
+#, c-format
+msgid "%s: Specified path, '%s', is not absolute"
+msgstr ""
+
+#: string_utils.c:79
+#, c-format
+msgid ""
+"%s: Could not determine current working directory, getcwd() = NULL, errno = "
+"%d"
+msgstr ""
+
+#: string_utils.c:181
+#, c-format
+msgid "%s: Specified path, '%s', is absolute"
+msgstr ""
+
+#: string_utils.c:297
+#, c-format
+msgid "%s: Could not allocate memory, g_try_realloc(%ld) = NULL"
+msgstr ""
+
+#: tree_manipulation.c:311
+#, c-format
+msgid "An error occurred while making project file paths relative: %s"
+msgstr ""
+
+#: tree_manipulation.c:451
+msgid "Load Project"
+msgstr ""
+
+#: tree_manipulation.c:454
+msgid "Project Files (*.xml)"
+msgstr ""
+
+#: tree_manipulation.c:459 tree_manipulation.c:534
+msgid "All Files"
+msgstr ""
+
+#: tree_manipulation.c:505
+msgid "C/C++ Files"
+msgstr ""
+
+#: tree_manipulation.c:516
+msgid "LAMP Script Files"
+msgstr ""
+
+#: tree_manipulation.c:523
+msgid "Java* Files"
+msgstr ""
+
+#: tree_manipulation.c:528
+msgid "HTML Files"
+msgstr ""
+
+#: tree_manipulation.c:569
+msgid "You need to save the project before adding files."
+msgstr ""
+
+#: tree_manipulation.c:663
+msgid ""
+"\n"
+"The following files:\n"
+"\n"
+msgstr ""
+
+#: tree_manipulation.c:689
+#, c-format
+msgid ""
+"%s\n"
+"couldn't be added, because they were already present in the project.\n"
+msgstr ""
+
+#: xml_processing.c:365
+#, c-format
+msgid "%s: Not a valid sciteproj XML file!"
+msgstr ""
