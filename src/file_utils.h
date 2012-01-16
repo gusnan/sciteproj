@@ -1,7 +1,7 @@
 /**
  * file_utils.h - file utilities for SciteProj
  *
- *  Copyright 2009-2011 Andreas Rönnquist
+ *  Copyright 2009-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  * 

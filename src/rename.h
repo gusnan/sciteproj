@@ -1,7 +1,7 @@
 /**
  * rename.h - code for renaming a group for SciteProj
  *
- *  Copyright 2011 Andreas Rönnquist
+ *  Copyright 2011-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  * 

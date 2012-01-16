@@ -1,7 +1,7 @@
 /**
  * filelist.h - list containing all files in the project
  *
- *  Copyright 2009-2011 Andreas Rönnquist
+ *  Copyright 2009-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  * 

@@ -1,7 +1,7 @@
 /**
  * remove.h - code for removing nodes
  *
- *  Copyright 2011 Andreas Rönnquist
+ *  Copyright 2011-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj
  *

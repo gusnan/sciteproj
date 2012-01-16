@@ -1,7 +1,7 @@
 /**
  * clipboard.h - clipboard support for SciteProj
  *
- *  Copyright 2010-2011 Andreas Rönnquist
+ *  Copyright 2010-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  * 

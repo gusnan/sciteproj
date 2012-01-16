@@ -1,7 +1,7 @@
 /**
  * xml_processing.c - XML processing support for SciteProj
  *
- *  Copyright 2006 Roy Wood, 2008-2011 Andreas Rönnquist
+ *  Copyright 2006 Roy Wood, 2008-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  * 

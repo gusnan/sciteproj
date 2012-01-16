@@ -1,7 +1,7 @@
 /**
  * addfiles.c - Interface for adding files to the project
  *
- *  Copyright 2011 Andreas Rönnquist
+ *  Copyright 2011-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj
  *
