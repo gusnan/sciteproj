@@ -22,7 +22,9 @@
 
 #include <gtk/gtk.h>
 #include <string.h>
+#include <glib/gi18n.h>
 
+#include <locale.h>
 
 #include "recent_files.h"
 #include "prefs.h"
@@ -72,7 +74,7 @@ GtkTreeStore* create_treestore_recent(GError **err)
 		result= gtk_tree_store_new(COLUMN_EOL, TYPE_ITEMTYPE, TYPE_FILEPATH, TYPE_FILENAME, TYPE_FILESIZE, TYPE_FONTWEIGHT, TYPE_FONTWEIGHTSET, TYPE_ICON, TYPE_EXPANDED);
 		
 	if (result == NULL) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL"), __func__);
 	}
 	
 	
@@ -96,7 +98,7 @@ GtkWidget *init_recent_files(GError **err)
 	
 	// add a scrolledwindow for recent files
 	if (!(recentScrolledWindow=gtk_scrolled_window_new(NULL,NULL))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create recent scrolled window, gtk_scrolled_window_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create recent scrolled window, gtk_scrolled_window_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	} 
@@ -105,13 +107,13 @@ GtkWidget *init_recent_files(GError **err)
 
 	
 	if ((recentTreeStore=create_treestore_recent(&tempErr))==NULL) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1 ,"%s: Could not create the recent treestore", tempErr->message);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1 ,_("%s: Could not create the recent treestore"), tempErr->message);
 		goto EXITPOINT;
 	}
 	
 	
 	if (!(recentTreeView=gtk_tree_view_new_with_model(GTK_TREE_MODEL(recentTreeStore)))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkTreeView, gtk_tree_view_new_with_model() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeView, gtk_tree_view_new_with_model() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
@@ -121,22 +123,22 @@ GtkWidget *init_recent_files(GError **err)
 	gtk_container_add(GTK_CONTAINER(recentScrolledWindow), recentTreeView);
 
 	if (!(recentCellRenderer = gtk_cell_renderer_text_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkCellRenderer, gtk_cell_renderer_text_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkCellRenderer, gtk_cell_renderer_text_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
 	
 		
 	if (!(recentColumn1 = gtk_tree_view_column_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkTreeViewColumn, gtk_tree_view_column_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeViewColumn, gtk_tree_view_column_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
 	
-	g_object_set(recentColumn1,"title","Recently opened files:",NULL);
+	g_object_set(recentColumn1,"title",_("Recently opened files:"),NULL);
 	
 	if (!(recentPixbuffCellRenderer = gtk_cell_renderer_pixbuf_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkCellRenderer, gtk_cell_renderer_pixbuf_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkCellRenderer, gtk_cell_renderer_pixbuf_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
@@ -497,7 +499,7 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *pat
 	fixed=fix_path((gchar*)get_project_directory(),relFilePath);
 	
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Error formatting Scite director command, g_strdup_printf() = NULL"), __func__);
 	}
 	else {
 		if (send_scite_command(command, &err)) {

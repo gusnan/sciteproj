@@ -24,6 +24,10 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
+
 
 #include "properties_dialog.h"
 #include "tree_manipulation.h"
@@ -124,12 +128,12 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 		
 	number_of_files_string=g_strdup_printf("%d",number_of_files);
 	
-	dialog=gtk_dialog_new_with_buttons("Group Properties",NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
+	dialog=gtk_dialog_new_with_buttons(_("Group Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
 		
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog),GTK_RESPONSE_OK);
 	
-	label1=gtk_label_new("Group name:");
-	label2=gtk_label_new("Contains number of Files:");
+	label1=gtk_label_new(_("Group name:"));
+	label2=gtk_label_new(_("Contains number of Files:"));
 	
 	filename=gtk_label_new(nodename);
 
@@ -197,7 +201,7 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	debug_printf((gchar*)"Node name: %s\n",nodename);
 	debug_printf((gchar*)"File name: %s\n",filePath);
 		
-	dialog=gtk_dialog_new_with_buttons("File Properties",NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
+	dialog=gtk_dialog_new_with_buttons(_("File Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
 		
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog),GTK_RESPONSE_OK);
 		
@@ -221,9 +225,9 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	
 	size_string=g_strdup_printf("%d bytes",(int)(file_status.st_size));
 	
-	label1=gtk_label_new("Filename:");
-	label2=gtk_label_new("Path:");
-	label3=gtk_label_new("File size:");
+	label1=gtk_label_new(_("Filename:"));
+	label2=gtk_label_new(_("Path:"));
+	label3=gtk_label_new(_("File size:"));
 	
 	filename=gtk_label_new(nodename);
 	path=gtk_label_new(absFilePath/*sClickedNodeName*/);

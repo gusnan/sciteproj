@@ -22,6 +22,10 @@
 
 #include <string.h>
 #include <glib.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
+
 
 #include "file_utils.h"
 

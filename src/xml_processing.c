@@ -23,6 +23,9 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <glib/gstdio.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
 
 #include <string.h>
 
@@ -359,7 +362,7 @@ gboolean load_parse_XML(GtkTreeStore *treeStore, const char *filepath, GError **
 	
 	if (!parseStruct.valid_file) {
 		if (gPrefs.identify_sciteproj_xml) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Not a valid sciteproj XML file!", __func__);
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Not a valid sciteproj XML file!"), __func__);
 			goto EXITPOINT;
 		}
 	}

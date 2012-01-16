@@ -28,6 +28,9 @@
 #include <gdk/gdkkeysyms.h>
 
 #include <stdlib.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
 
 #include "clicked_node.h"
 
@@ -113,46 +116,46 @@ static GtkActionEntry sMenuActions[] =
 	{ "ViewMenuAction", NULL, "_View" },
 	{ "HelpMenuAction", NULL, "_Help" },
 	
-	{ "OpenProjectAction", GTK_STOCK_OPEN, "_Open Project", "<control>O", "Open Project", G_CALLBACK(openproject_menu_cb) },
-	{ "SaveProjectAction", GTK_STOCK_SAVE, "_Save Project", "<control>S", "Save Project", G_CALLBACK(saveproject_menu_cb) },
-	{ "SaveProjectAsAction", GTK_STOCK_SAVE_AS, "Save Project As...", "<control><shift>S", "Save Project As", G_CALLBACK(saveproject_as_menu_cb) },
-	{ "ExitAction", GTK_STOCK_QUIT, "_Exit", "<control>Q", "Exit", G_CALLBACK(quit_menu_cb) },
+	{ "OpenProjectAction", GTK_STOCK_OPEN, N_("_Open Project"), "<control>O", N_("Open Project"), G_CALLBACK(openproject_menu_cb) },
+	{ "SaveProjectAction", GTK_STOCK_SAVE, N_("_Save Project"), "<control>S", N_("Save Project"), G_CALLBACK(saveproject_menu_cb) },
+	{ "SaveProjectAsAction", GTK_STOCK_SAVE_AS, "Save Project As...", "<control><shift>S", N_("Save Project As"), G_CALLBACK(saveproject_as_menu_cb) },
+	{ "ExitAction", GTK_STOCK_QUIT, N_("_Exit"), "<control>Q", N_("Exit"), G_CALLBACK(quit_menu_cb) },
 	
-	{ "CreateGroupAction", GTK_STOCK_DIRECTORY, "Create _Group", "", "Create a group node in the project", G_CALLBACK(creategroup_menu_cb) },
-	{ "AddFileAction", GTK_STOCK_FILE, "Add _File", "", "Add a file to the project", G_CALLBACK(addfile_menu_cb) },
-	{ "RemoveFileAction", GTK_STOCK_DELETE, "Remove File(s)", "", "Remove selected files from the project", G_CALLBACK(removeitem_menu_cb) },
+	{ "CreateGroupAction", GTK_STOCK_DIRECTORY, N_("Create _Group"), "", N_("Create a group node in the project"), G_CALLBACK(creategroup_menu_cb) },
+	{ "AddFileAction", GTK_STOCK_FILE, N_("Add _File"), "", N_("Add a file to the project"), G_CALLBACK(addfile_menu_cb) },
+	{ "RemoveFileAction", GTK_STOCK_DELETE, N_("Remove File(s)"), "", N_("Remove selected files from the project"), G_CALLBACK(removeitem_menu_cb) },
 	
-	{ "ExpandAllGroupsAction", NULL, "Expand All Groups", "<control><shift>E", "Expand All Groups", G_CALLBACK(expand_all_items_cb) },
-	{ "CollapseAllGroupsAction", NULL, "Collapse All Groups", "<control><shift>C", "Collapse All Groups", G_CALLBACK(collapse_all_items_cb) },
+	{ "ExpandAllGroupsAction", NULL, N_("Expand All Groups"), "<control><shift>E", N_("Expand All Groups"), G_CALLBACK(expand_all_items_cb) },
+	{ "CollapseAllGroupsAction", NULL, N_("Collapse All Groups"), "<control><shift>C", N_("Collapse All Groups"), G_CALLBACK(collapse_all_items_cb) },
 	
-	{ "SearchAction", GTK_STOCK_FIND, "Search", "<control>F", "Search for a string in the project", G_CALLBACK(search_dialog_cb) },
+	{ "SearchAction", GTK_STOCK_FIND, N_("Search"), "<control>F", N_("Search for a string in the project"), G_CALLBACK(search_dialog_cb) },
 	
-	{ "AboutAction", GTK_STOCK_ABOUT, "_About", "", "Show information about this application", G_CALLBACK(about_menu_cb) },
+	{ "AboutAction", GTK_STOCK_ABOUT, N_("_About"), "", N_("Show information about this application"), G_CALLBACK(about_menu_cb) },
 	
-	{ "AddFilesPopupAction", GTK_STOCK_FILE, "Add Files", "", "Add files to the project", G_CALLBACK(popup_add_files_cb) },
-	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, "Add Group", "", "Add a group to the project", G_CALLBACK(popup_add_group_cb) },
+	{ "AddFilesPopupAction", GTK_STOCK_FILE, N_("Add Files"), "", N_("Add files to the project"), G_CALLBACK(popup_add_files_cb) },
+	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, N_("Add Group"), "", N_("Add a group to the project"), G_CALLBACK(popup_add_group_cb) },
 	
-	{ "AddFilestoGroupPopupAction", GTK_STOCK_FILE, "Add Files to Group", "", "Add files to an existing group", G_CALLBACK(popup_add_files_cb) },
-	{ "AddSubgroupPopupAction", GTK_STOCK_DIRECTORY, "Add Subgroup to Group", "", "Add a subgroup to an existing group", G_CALLBACK(popup_add_group_cb) },
-	{ "RenameGroupPopupAction", GTK_STOCK_EDIT, "Rename Group", "", "Rename a group", G_CALLBACK(popup_rename_group_cb) },
-	{ "RemoveGroupPopupAction", GTK_STOCK_DELETE, "Remove Group From Project", "", "Remove a group and its children from the project", G_CALLBACK(popup_remove_node_cb) },
-	{ "SortAscendingAction", GTK_STOCK_SORT_ASCENDING, "Sort Group Ascending","","Sort the filenames ascending",G_CALLBACK(sort_ascending_cb) },
-	{ "SortDescendingAction", GTK_STOCK_SORT_DESCENDING, "Sort Group Descending","","Sort the filenames descending",G_CALLBACK(sort_descending_cb) },
-	{ "PropertiesGroupPopupAction", GTK_STOCK_PROPERTIES, "Group Properties", "", "Show group properties", G_CALLBACK(group_properties_cb) },
-	{ "EditOptionsAction", GTK_STOCK_PROPERTIES, "Edit Options", "", "Edit Program Options", G_CALLBACK(edit_options_cb) },
+	{ "AddFilestoGroupPopupAction", GTK_STOCK_FILE, N_("Add Files to Group"), "", N_("Add files to an existing group"), G_CALLBACK(popup_add_files_cb) },
+	{ "AddSubgroupPopupAction", GTK_STOCK_DIRECTORY, N_("Add Subgroup to Group"), "", N_("Add a subgroup to an existing group"), G_CALLBACK(popup_add_group_cb) },
+	{ "RenameGroupPopupAction", GTK_STOCK_EDIT, N_("Rename Group"), "", N_("Rename a group"), G_CALLBACK(popup_rename_group_cb) },
+	{ "RemoveGroupPopupAction", GTK_STOCK_DELETE, N_("Remove Group From Project"), "", N_("Remove a group and its children from the project"), G_CALLBACK(popup_remove_node_cb) },
+	{ "SortAscendingAction", GTK_STOCK_SORT_ASCENDING, N_("Sort Group Ascending"),"",N_("Sort the filenames ascending"),G_CALLBACK(sort_ascending_cb) },
+	{ "SortDescendingAction", GTK_STOCK_SORT_DESCENDING, N_("Sort Group Descending"),"",N_("Sort the filenames descending"),G_CALLBACK(sort_descending_cb) },
+	{ "PropertiesGroupPopupAction", GTK_STOCK_PROPERTIES, N_("Group Properties"), "", N_("Show group properties"), G_CALLBACK(group_properties_cb) },
+	{ "EditOptionsAction", GTK_STOCK_PROPERTIES, N_("Edit Options"), "", N_("Edit Program Options"), G_CALLBACK(edit_options_cb) },
 	
-	{ "ViewRecentAction" , GTK_STOCK_PROPERTIES, "View Recently Opened Files", "<control>R", "View Recent Files", G_CALLBACK(recent_files_switch_visible) },
+	{ "ViewRecentAction" , GTK_STOCK_PROPERTIES, N_("View Recently Opened Files"), "<control>R", N_("View Recent Files"), G_CALLBACK(recent_files_switch_visible) },
 	
-	{ "OpenFilePopupAction", GTK_STOCK_OPEN, "Open File in SciTE", "", "Open a file in SciTE", G_CALLBACK(popup_open_file_cb) },
-	{ "RemoveFilePopupAction", GTK_STOCK_DELETE, "Remove File From Project", "", "Remove a file from the project", G_CALLBACK(popup_remove_node_cb) },
-	{ "CopyFilenameToClipBoardAction", GTK_STOCK_COPY, "Copy Filename to Clipboard", "", "Copies the full path and filename to the clipboard", G_CALLBACK(copy_filename_to_clipboard_cb) },
-	{ "PropertiesPopupAction", GTK_STOCK_PROPERTIES, "File Properties", "", "Show file properties", G_CALLBACK(file_properties_cb) },
+	{ "OpenFilePopupAction", GTK_STOCK_OPEN, N_("Open File in SciTE"), "", N_("Open a file in SciTE"), G_CALLBACK(popup_open_file_cb) },
+	{ "RemoveFilePopupAction", GTK_STOCK_DELETE, N_("Remove File From Project"), "", N_("Remove a file from the project"), G_CALLBACK(popup_remove_node_cb) },
+	{ "CopyFilenameToClipBoardAction", GTK_STOCK_COPY, N_("Copy Filename to Clipboard"), "", N_("Copies the full path and filename to the clipboard"), G_CALLBACK(copy_filename_to_clipboard_cb) },
+	{ "PropertiesPopupAction", GTK_STOCK_PROPERTIES, N_("File Properties"), "", N_("Show file properties"), G_CALLBACK(file_properties_cb) },
 	
-	{ "OpenRecentFilePopupAction", GTK_STOCK_OPEN, "Open File in SciTE", "", "Open a file in SciTE", G_CALLBACK(popup_open_recent_file_cb) },
-	{ "RemoveRecentFilePopupAction", GTK_STOCK_DELETE, "Remove File from this List", "", "Remove file from this List", G_CALLBACK(popup_remove_recent_file_cb) },
-	{ "CopyRecentToClipboardAction", GTK_STOCK_COPY, "Copy filename to clipboard", "", "Copy filename to clipboard", G_CALLBACK(copy_recent_filename_to_clipboard_cb) },
+	{ "OpenRecentFilePopupAction", GTK_STOCK_OPEN, N_("Open File in SciTE"), "", N_("Open a file in SciTE"), G_CALLBACK(popup_open_recent_file_cb) },
+	{ "RemoveRecentFilePopupAction", GTK_STOCK_DELETE, N_("Remove File from this List"), "", N_("Remove file from this List"), G_CALLBACK(popup_remove_recent_file_cb) },
+	{ "CopyRecentToClipboardAction", GTK_STOCK_COPY, N_("Copy filename to clipboard"), "", N_("Copy filename to clipboard"), G_CALLBACK(copy_recent_filename_to_clipboard_cb) },
 	
-	{ "PropertiesRecentPopupAction", GTK_STOCK_PROPERTIES, "File Properties", "", "Show file properties", G_CALLBACK(properties_recent_file_cb) }
+	{ "PropertiesRecentPopupAction", GTK_STOCK_PROPERTIES, N_("File Properties"), "", N_("Show file properties"), G_CALLBACK(properties_recent_file_cb) }
 
 };
 
@@ -228,7 +231,7 @@ gboolean setup_gui(GError **err)
 	// Create top-level window, configure it
 	
 	if (!(sMainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create main window, gtk_window_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create main window, gtk_window_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
@@ -273,13 +276,13 @@ gboolean setup_gui(GError **err)
 	// Create menus
 	
 	if (!(sActionGroup = gtk_action_group_new("SciteProjActions"))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkActionGroup, gtk_action_group_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkActionGroup, gtk_action_group_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
 		
 	if (!(sGtkUIManager = gtk_ui_manager_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkUIManager, gtk_ui_manager_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkUIManager, gtk_ui_manager_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
@@ -296,7 +299,7 @@ gboolean setup_gui(GError **err)
 	gtk_ui_manager_insert_action_group(sGtkUIManager, sActionGroup, 0);
 	
 	if (gtk_ui_manager_add_ui_from_string(sGtkUIManager, sMenuDefXML, strlen(sMenuDefXML), &tempErr) == 0) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create create menus from XML, gtk_ui_manager_add_ui_from_string() = %s", __func__, tempErr->message);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create create menus from XML, gtk_ui_manager_add_ui_from_string() = %s"), __func__, tempErr->message);
 		
 		goto EXITPOINT;
 	}
@@ -319,7 +322,7 @@ gboolean setup_gui(GError **err)
 	// Add a scrolled window to the main window
 	
 	if (!(scrolledWindow = gtk_scrolled_window_new(NULL, NULL))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create main scrolled window, gtk_scrolled_window_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create main scrolled window, gtk_scrolled_window_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
@@ -344,14 +347,14 @@ gboolean setup_gui(GError **err)
 	// Create the tree datastore
 	
 	if ((projectTreeStore = create_treestore(&tempErr)) == NULL) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create the treestore", tempErr->message);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create the treestore"), tempErr->message);
 		goto EXITPOINT;
 	}
 		
 	// Create the treeview, set it up to render the tree datastore, and add it to the hbox
 	
 	if (!(projectTreeView = gtk_tree_view_new_with_model(GTK_TREE_MODEL(projectTreeStore)))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkTreeView, gtk_tree_view_new_with_model() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeView, gtk_tree_view_new_with_model() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
@@ -361,7 +364,7 @@ gboolean setup_gui(GError **err)
 	gtk_tree_view_set_enable_search(GTK_TREE_VIEW(projectTreeView),TRUE);
 	
 	if (!(textCellRenderer = gtk_cell_renderer_text_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkCellRenderer, gtk_cell_renderer_text_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkCellRenderer, gtk_cell_renderer_text_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
@@ -372,13 +375,13 @@ gboolean setup_gui(GError **err)
 			NULL);
 	
 	if (!(pixbuffCellRenderer = gtk_cell_renderer_pixbuf_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkCellRenderer, gtk_cell_renderer_pixbuf_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkCellRenderer, gtk_cell_renderer_pixbuf_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
 	
 	if (!(column1 = gtk_tree_view_column_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkTreeViewColumn, gtk_tree_view_column_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeViewColumn, gtk_tree_view_column_new() = NULL"), __func__);
 		
 		goto EXITPOINT;
 	}
@@ -439,19 +442,19 @@ gboolean setup_gui(GError **err)
 #if GTK_MAJOR_VERSION>=3
 	
 	if (!(recentGrid=gtk_grid_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR,-1, "%s: Could not create recentGrid, gtk_grid_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR,-1, _("%s: Could not create recentGrid, gtk_grid_new() = NULL"), __func__);
 		goto EXITPOINT;
 	}	
 	
 #else
 	if (!(recentVbox=gtk_vbox_new(FALSE, 0))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR,-1, "%s: Could not create recentGrid, gtk_vbox_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR,-1, _("%s: Could not create recentGrid, gtk_vbox_new() = NULL"), __func__);
 		goto EXITPOINT;
 	}	
 #endif
 	
 	if (!(recentHbox=gtk_hbox_new(FALSE,0))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create main vbox, gtk_hbox_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create main vbox, gtk_hbox_new() = NULL"), __func__);
 		goto EXITPOINT;
 	}
 
@@ -471,7 +474,7 @@ gboolean setup_gui(GError **err)
 #else
 	
 	if (!(fullVbox=gtk_vbox_new(FALSE,0))) {
- 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create fullVbox, gtk_hbox_new() = NULL", __func__);
+ 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create fullVbox, gtk_hbox_new() = NULL"), __func__);
  		
  		goto EXITPOINT;
  	}
@@ -483,7 +486,7 @@ gboolean setup_gui(GError **err)
 	statusBarVbox=gtk_vbox_new(FALSE,0);
 
 	if (!statusBarVbox) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create statusBarVbox, gtk_hbox_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create statusBarVbox, gtk_hbox_new() = NULL"), __func__);
 		goto EXITPOINT;
 	}
 #endif
@@ -506,7 +509,7 @@ gboolean setup_gui(GError **err)
 	gtk_widget_show(GTK_WIDGET(fullGrid));
 	
 	if (!init_statusbar(fullGrid,vpaned,&tempErr)) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not init statusbar", tempErr->message);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not init statusbar"), tempErr->message);
 		goto EXITPOINT;
 	}
 			
@@ -519,7 +522,7 @@ gboolean setup_gui(GError **err)
 	gtk_widget_show(GTK_WIDGET(fullVbox));
 	
 	if (!init_statusbar(fullVbox,vpaned,&tempErr)) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not init statusbar", tempErr->message);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not init statusbar"), tempErr->message);
 		goto EXITPOINT;
 	}
 			
@@ -761,7 +764,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	fixed=fix_path((gchar*)get_project_directory(),relFilePath);
 	
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Error formatting Scite director command, g_strdup_printf() = NULL"), __func__);
 	}
 	else {
 		if (send_scite_command(command, &err)) {
@@ -777,7 +780,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 			
 			gchar *statusbar_text=NULL;
 			
-			statusbar_text=g_strdup_printf("Opened %s",remove_newline(get_filename_from_full_path(command)));
+			statusbar_text=g_strdup_printf(_("Opened %s"),remove_newline(get_filename_from_full_path(command)));
 			
 			set_statusbar_text(statusbar_text);
 			
@@ -788,7 +791,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 EXITPOINT:
 	
 	if (err != NULL) {
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Could not open selected file: \n\n%s", err->message);
+		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("Could not open selected file: \n\n%s"), err->message);
 		
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}
@@ -1310,7 +1313,7 @@ void edit_options_cb()
 	gchar *command=NULL;
 	
 	if ((command = g_strdup_printf("open:%s\n", prefs_filename)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Error formatting Scite director command, g_strdup_printf() = NULL"), __func__);
 	}
 	else {
 		if (send_scite_command(command, &err)) {

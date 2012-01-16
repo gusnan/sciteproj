@@ -20,6 +20,9 @@
  */
 #include <string.h>
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
 
 #include "clicked_node.h"
 
@@ -69,12 +72,12 @@ void remove_selected_items ( GtkTreeView *treeview )
 				nRemoved++;   
 			}
 			else { // invalid path
-				g_error("Error!!!\n");
+				g_error(_("Error!!!\n"));
 			}
 			gtk_tree_path_free (path);
 		}
 		else {
-			g_error("Error!!!\n");
+			g_error(_("Error!!!\n"));
 		}
 		list=list->prev;
 	}

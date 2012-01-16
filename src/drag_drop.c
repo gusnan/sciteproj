@@ -23,7 +23,9 @@
 
 #include <gtk/gtk.h>
 #include <glib.h>
+#include <glib/gi18n.h>
 
+#include <locale.h>
 
 
 #include "drag_drop.h"
@@ -183,12 +185,12 @@ void drag_data_received_cb(GtkWidget *widget, GdkDragContext *drag_context, gint
 		
 		if (dropPath == NULL && i == 0) {
 			if (!add_tree_file(NULL, ADD_CHILD, filePath, &dropIter, TRUE, &err)) {
-				g_warning("%s: Could not add drag/drop data: %s\n", __func__, err->message);
+				g_warning(_("%s: Could not add drag/drop data: %s\n"), __func__, err->message);
 			}
 		}
 		else {
 			if (!add_tree_file(&dropIter, position, filePath, &dropIter, TRUE, &err)) {
-				g_warning("%s: Could not add drag/drop data: %s\n", __func__, err->message);
+				g_warning(_("%s: Could not add drag/drop data: %s\n"), __func__, err->message);
 			}
 		}
 		
@@ -376,13 +378,13 @@ void drag_data_get_cb(GtkWidget *widget, GdkDragContext *drag_context, GtkSelect
 		// Format the node content (i.e. filepath) as a URI and append it to the list
 		
 		if (fileURI != NULL && !str_append(&fileURI, "\n", &err)) {
-			g_warning("%s: Could not format drag/drop data: %s\n", __func__, err->message);
+			g_warning(_("%s: Could not format drag/drop data: %s\n"), __func__, err->message);
 			goto EXITPOINT;
 		}
 		
 		
 		if (!str_append(&fileURI, "file://", &err) || !str_append(&fileURI, nodeContentString, &err)) {
-			g_warning("%s: Could not format drag/drop data: %s\n", __func__, err->message);
+			g_warning(_("%s: Could not format drag/drop data: %s\n"), __func__, err->message);
 			goto EXITPOINT;
 		}
 	}
@@ -402,7 +404,7 @@ void drag_data_get_cb(GtkWidget *widget, GdkDragContext *drag_context, GtkSelect
 	uriList = g_strsplit(fileURI, "\n", -1);
 	
 	if (!uriList || !gtk_selection_data_set_uris(selection_data, uriList)) {
-		g_warning("%s: Could not set drag/drop data\n", __func__);
+		g_warning(_("%s: Could not set drag/drop data\n"), __func__);
 	}
 	
 	
@@ -489,7 +491,7 @@ static gboolean handle_local_drag_drop(TreeViewDragStruct *dragStruct, GtkTreePa
 		for (i = 0 ; i < dragStruct->numDragNodes; ++i) {
 			if (gtk_tree_path_is_descendant(dropPath,dragStruct->dragNodes[i].nodePath)) {
 					 
-				g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Cannot drop a group node into itself", __func__);
+				g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Cannot drop a group node into itself"), __func__);
 				
 				goto EXITPOINT;
 			}

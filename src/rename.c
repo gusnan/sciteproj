@@ -21,6 +21,9 @@
  */
 
 #include <gtk/gtk.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
 
 #include "tree_manipulation.h"
 
@@ -130,12 +133,12 @@ void do_rename_node(gboolean ignore_clicked_node)
 				do_rename_iter(iter);
 			}
 			else { // invalid path
-				g_error("Error!!!\n");
+				g_error(_("Error!!!\n"));
 			}
 			gtk_tree_path_free (path);
 		}
 		else {
-			g_error("Error!!!\n");
+			g_error(_("Error!!!\n"));
 		}
 		list=list->prev;
 	}

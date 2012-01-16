@@ -22,6 +22,9 @@
 #include <gdk/gdkkeysyms.h>
 #include <unistd.h>
 #include <string.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
 
 #include "search.h"
 #include "tree_manipulation.h"
@@ -176,7 +179,7 @@ void search_dialog()
 	window=gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_container_set_border_width(GTK_CONTAINER(window), 8);
 	
-	gtk_window_set_title(GTK_WINDOW(window),"Search project");
+	gtk_window_set_title(GTK_WINDOW(window),_("Search project"));
 	
 	// Set up size and position from prefs
 	gtk_window_resize(GTK_WINDOW(window), gPrefs.search_width, gPrefs.search_height);
@@ -192,7 +195,7 @@ void search_dialog()
 	hbox=gtk_hbox_new(FALSE,8);
 #endif
 	
-	find_label=gtk_label_new("Find What:");
+	find_label=gtk_label_new(_("Find What:"));
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach(GTK_GRID(grid),find_label,0,0,1,1);
 #else
@@ -234,7 +237,7 @@ void search_dialog()
 
 #endif
 
-	match_case_checkbutton=gtk_check_button_new_with_label("Match case");
+	match_case_checkbutton=gtk_check_button_new_with_label(_("Match case"));
 	
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case_checkbutton),gPrefs.search_match_case);
 	
@@ -245,7 +248,7 @@ void search_dialog()
 	//gtk_grid_attach_next_to(GTK_GRID(grid),match_case_checkbutton,
 	
 	
-	match_whole_words_only_checkbutton=gtk_check_button_new_with_label("Match whole word only");
+	match_whole_words_only_checkbutton=gtk_check_button_new_with_label(_("Match whole word only"));
 	
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton),gPrefs.search_match_whole_words);
 	
@@ -607,7 +610,7 @@ static gpointer thread_func(Data *data)
 		gchar *error_message=NULL;
 		data->error=NULL;
 		
-		error_message=g_strdup_printf("There was problems opening the following files in the project:\n\n");
+		error_message=g_strdup_printf(_("There was problems opening the following files in the project:\n\n"));
 					
 		while((file_error_list)) {
 			
@@ -620,7 +623,7 @@ static gpointer thread_func(Data *data)
 			file_error_list=g_list_next(file_error_list);
 		}
 		
-		gchar *temp2=g_strconcat(error_message,"\nThey couldn't be opened for reading in the search.\n",NULL);
+		gchar *temp2=g_strconcat(error_message,_("\nThey couldn't be opened for reading in the search.\n"),NULL);
 		
 		g_free(error_message);
 		error_message=temp2;
@@ -674,7 +677,7 @@ static void search_button_clicked_cb(GtkButton *button,gpointer user_data)
 		} else {
 			// string to search for has a length of zero.
 			GtkWidget *warningDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK, 
-				"Please enter a text to search for!\n"
+				_("Please enter a text to search for!\n")
 				);
 			gtk_dialog_run(GTK_DIALOG(warningDialog));
 			gtk_widget_destroy(warningDialog);
@@ -765,7 +768,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	
 	// convert to a full path
 	if (!relative_path_to_abs_path(temppath, &absFilePath, get_project_directory(), &err)) {
-		printf("Error:%s\n",err->message);
+		printf(_("Error:%s\n"),err->message);
 		goto EXITPOINT;
 	}
 
@@ -779,7 +782,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 		
 		if (!launch_scite(run_options,&err)) {
 			
-			printf("Error:%s\n",err->message);
+			printf(_("Error:%s\n"),err->message);
 			
 			//goto EXITPOINT;
 			
@@ -805,7 +808,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	// It's a file, so try to open it
 	
 	if ((command = g_strdup_printf("open:%s\n", absFilePath)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Error formatting Scite director command, g_strdup_printf() = NULL"), __func__);
 		goto EXITPOINT;
 	}
 	else {
@@ -825,7 +828,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 			
 			gchar *statusbar_text=NULL;
 			
-			statusbar_text=g_strdup_printf("Opened %s",remove_newline(get_filename_from_full_path(command)));
+			statusbar_text=g_strdup_printf(_("Opened %s"),remove_newline(get_filename_from_full_path(command)));
 			
 			set_statusbar_text(statusbar_text);
 			
@@ -833,7 +836,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 		} else {
 
 			if (err) {
-				printf("Error:%s\n",err->message);
+				printf(_("Error:%s\n"),err->message);
 			}
 			
 		}
@@ -843,7 +846,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	
 	// go to the right line number:
 	if ((command = g_strdup_printf("goto:%d\n", line_number)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Error formatting Scite director command, g_strdup_printf() = NULL"), __func__);
 	}
 	else {
 		
@@ -863,7 +866,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 			
 			gchar *statusbar_text=NULL;
 			
-			statusbar_text=g_strdup_printf("Opened %s",remove_newline(get_filename_from_full_path(command)));
+			statusbar_text=g_strdup_printf(_("Opened %s"),remove_newline(get_filename_from_full_path(command)));
 			
 			set_statusbar_text(statusbar_text);
 			
@@ -872,7 +875,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 			
 			printf("goto didn't work...\n");
 			if (err) {
-				printf("Error:%s\n",err->message);
+				printf(_("Error:%s\n"),err->message);
 			}
 			
 		}
@@ -917,15 +920,15 @@ static void setup_tree_view(GtkWidget *treeview)
 	GtkTreeViewColumn *column;
 	
 	renderer=gtk_cell_renderer_text_new();
-	column=gtk_tree_view_column_new_with_attributes("Filename",renderer,"text",FILENAME,NULL);
+	column=gtk_tree_view_column_new_with_attributes(_("Filename"),renderer,"text",FILENAME,NULL);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview),column);
 		
 	renderer=gtk_cell_renderer_text_new();
-	column=gtk_tree_view_column_new_with_attributes("Line",renderer,"text",LINENUMBER,NULL);
+	column=gtk_tree_view_column_new_with_attributes(_("Line"),renderer,"text",LINENUMBER,NULL);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview),column);
 	
 	renderer=gtk_cell_renderer_text_new();
-	column=gtk_tree_view_column_new_with_attributes("File contents",renderer,"text",FILE_CONTENTS,NULL);
+	column=gtk_tree_view_column_new_with_attributes(_("File contents"),renderer,"text",FILE_CONTENTS,NULL);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(treeview),column);
 }
 
@@ -976,7 +979,7 @@ static void stop_search(gpointer user_data)
 		
 		}
 
-		gchar *string=g_strdup_printf("Found %d elements",data->number_of_results);
+		gchar *string=g_strdup_printf(_("Found %d elements"),data->number_of_results);
 			
 		gtk_label_set_text(GTK_LABEL(data->result_label),string);
 		
@@ -985,7 +988,7 @@ static void stop_search(gpointer user_data)
 		// Give a dialog if the search didn't find anything.
 		if (data->number_of_results==0) {
 			GtkWidget *dialog=gtk_message_dialog_new(NULL,
-				GTK_DIALOG_MODAL,GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,"The search didn't give any results.");
+				GTK_DIALOG_MODAL,GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,_("The search didn't give any results."));
 			gtk_dialog_run(GTK_DIALOG(dialog));
 			gtk_widget_destroy(dialog);
 		}

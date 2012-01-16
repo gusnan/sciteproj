@@ -24,7 +24,9 @@
 
 #include <string.h>
 #include <sys/stat.h>
+#include <glib/gi18n.h>
 
+#include <locale.h>
 
 #include "tree_manipulation.h"
 #include "xml_processing.h"
@@ -154,7 +156,7 @@ GtkTreeStore* create_treestore(GError **err)
 		sTreeStore = gtk_tree_store_new(COLUMN_EOL, TYPE_ITEMTYPE, TYPE_FILEPATH, TYPE_FILENAME, TYPE_FILESIZE, TYPE_FONTWEIGHT, TYPE_FONTWEIGHTSET, TYPE_ICON, TYPE_EXPANDED);
 		
 		if (sTreeStore == NULL) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL", __func__);
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL"), __func__);
 		}
 	}
 	
@@ -281,7 +283,7 @@ gboolean save_project(gchar *proj_filepath,GError **err)
 		GError *pathProcessErr = NULL;
 		int resultID;
 		
-		dialog = gtk_file_chooser_dialog_new("Save Project", NULL, GTK_FILE_CHOOSER_ACTION_SAVE, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT, NULL);
+		dialog = gtk_file_chooser_dialog_new(_("Save Project"), NULL, GTK_FILE_CHOOSER_ACTION_SAVE, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT, NULL);
 		
 		gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(dialog), "untitled.xml");
 		
@@ -306,7 +308,7 @@ gboolean save_project(gchar *proj_filepath,GError **err)
 		gtk_tree_model_foreach(GTK_TREE_MODEL(sTreeStore), make_paths_relative, &pathProcessErr);
 		
 		if (pathProcessErr) {
-			GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "An error occurred while making project file paths relative: %s", pathProcessErr->message);
+			GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while making project file paths relative: %s"), pathProcessErr->message);
 			
 			gtk_dialog_run(GTK_DIALOG(errDialog));
 			
@@ -446,15 +448,15 @@ gboolean load_project(gchar *projectPath, GError **err)
 	else {
 		//  Pop up a file selection dialog and let the user choose a project file
 		
-		dialog = gtk_file_chooser_dialog_new("Load Project", NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+		dialog = gtk_file_chooser_dialog_new(_("Load Project"), NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
 		
 		fileFilter = gtk_file_filter_new();
-		gtk_file_filter_set_name(fileFilter, "Project Files (*.xml)");
+		gtk_file_filter_set_name(fileFilter, _("Project Files (*.xml)"));
 		gtk_file_filter_add_pattern(fileFilter, "*.xml");
 		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), fileFilter);
 		
 		fileFilter = gtk_file_filter_new();
-		gtk_file_filter_set_name(fileFilter, "All Files");
+		gtk_file_filter_set_name(fileFilter, _("All Files"));
 		gtk_file_filter_add_pattern(fileFilter, "*");
 		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), fileFilter);
 		
@@ -500,7 +502,7 @@ EXITPOINT:
 void build_file_filter(int n, GtkFileFilter* fileFilter ) {
  	switch(n) {
 	case 0 : 
-		gtk_file_filter_set_name(fileFilter, "C/C++ Files");
+		gtk_file_filter_set_name(fileFilter, _("C/C++ Files"));
 		gtk_file_filter_add_pattern(fileFilter, "*.c");
 		gtk_file_filter_add_pattern(fileFilter, "*.cc");
 		gtk_file_filter_add_pattern(fileFilter, "*.cpp");
@@ -511,25 +513,25 @@ void build_file_filter(int n, GtkFileFilter* fileFilter ) {
 		gtk_file_filter_add_pattern(fileFilter, "*.CXX");
 		break;
 	case 1 : 
-		gtk_file_filter_set_name(fileFilter, "LAMP Script Files");
+		gtk_file_filter_set_name(fileFilter, _("LAMP Script Files"));
 		gtk_file_filter_add_pattern(fileFilter, "*.pm");
 		gtk_file_filter_add_pattern(fileFilter, "*.pl");
 		gtk_file_filter_add_pattern(fileFilter, "*.py");
 		gtk_file_filter_add_pattern(fileFilter, "*.php*");
 		break;
 	case 2 : 
-		gtk_file_filter_set_name(fileFilter, "Java* Files");
+		gtk_file_filter_set_name(fileFilter, _("Java* Files"));
 		gtk_file_filter_add_pattern(fileFilter, "*.js");
 		gtk_file_filter_add_pattern(fileFilter, "*.java");
 		break;
 	case 3 : 
-		gtk_file_filter_set_name(fileFilter, "HTML Files");
+		gtk_file_filter_set_name(fileFilter, _("HTML Files"));
 		gtk_file_filter_add_pattern(fileFilter, "*.html");
 		gtk_file_filter_add_pattern(fileFilter, "*.htm");
 		gtk_file_filter_add_pattern(fileFilter, "*.txt");
 		break;
 	default : 
-		gtk_file_filter_set_name(fileFilter, "All Files");
+		gtk_file_filter_set_name(fileFilter, _("All Files"));
 		gtk_file_filter_add_pattern(fileFilter, "*");
 		break;		
 	}
@@ -564,7 +566,7 @@ gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err)
 	// Check if we have saved before
 	if (get_project_directory()==NULL) {
 				
-		result_string=g_strdup_printf("You need to save the project before adding files.");
+		result_string=g_strdup_printf(_("You need to save the project before adding files."));
 		
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s", result_string);
 		
@@ -577,7 +579,7 @@ gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err)
 	
 	// Create the file selection dialog and add filters
 	
-	dialog = gtk_file_chooser_dialog_new ("Add Files", NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+	dialog = gtk_file_chooser_dialog_new (_("Add Files"), NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
 	
 	if (saved_file_folder!=NULL) {
 		gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), saved_file_folder);
@@ -658,7 +660,7 @@ EXITPOINT:
 		
 		gchar *temp=NULL;
 		
-		result_string=g_strdup_printf("\nThe following files:\n\n");
+		result_string=g_strdup_printf(_("\nThe following files:\n\n"));
 		
 		int q=0;
 		
@@ -684,7 +686,7 @@ EXITPOINT:
 			
 		}
 		
-		temp=g_strdup_printf("%s\ncouldn't be added, because they were already present in the project.\n",result_string);
+		temp=g_strdup_printf(_("%s\ncouldn't be added, because they were already present in the project.\n"),result_string);
 		g_free(result_string);
 		result_string=temp;
 		

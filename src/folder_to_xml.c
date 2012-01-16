@@ -26,6 +26,9 @@
 
 #include <glib.h>
 #include <glib/gstdio.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
 
 #include <unistd.h>
 
@@ -223,20 +226,20 @@ gboolean folder_to_xml(gchar *folder,gchar *save_filename_in,int max_depth)
 	save_filename=g_build_filename(stored_current_dir,save_filename_in,NULL);
 	
 	if (!g_file_test(directory_string,G_FILE_TEST_IS_DIR)) {
-		g_error("Error: Invalid directory!");
+		g_error(_("Error: Invalid directory!"));
 		goto EXIT_POINT;
 	}
 	
 	// Check if the directory is valid
 	if (g_chdir(directory_string)!=0) {
-		g_error("Error: Couldn't g_chdir to directory");
+		g_error(_("Error: Couldn't g_chdir to directory"));
 		goto EXIT_POINT;
 	}
 	
 	if (save_filename!=NULL) {
 		
 		if ((save_file=fopen(save_filename,"w"))==NULL) {
-			g_error("Couldn't create file with the name %s!",save_filename);
+			g_error(_("Couldn't create file with the name %s!"),save_filename);
 			goto EXIT_POINT;
 		}
 		

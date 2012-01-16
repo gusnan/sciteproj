@@ -22,6 +22,9 @@
 #include <glib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
 
 #include "string_utils.h"
 #include "file_utils.h"
@@ -62,7 +65,7 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 	
 	
 	if (!g_path_is_absolute(absPath)) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Specified path, '%s', is not absolute", __func__ , absPath);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Specified path, '%s', is not absolute"), __func__ , absPath);
 		
 		goto EXITPOINT;
 	}
@@ -73,7 +76,7 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 		workingDir = getcwd(NULL, 0);
 		
 		if (!workingDir) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not determine current working directory, getcwd() = NULL, errno = %d", __func__ , errno);
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not determine current working directory, getcwd() = NULL, errno = %d"), __func__ , errno);
 			
 			goto EXITPOINT;
 		}
@@ -175,7 +178,7 @@ gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const g
 	// On linux check if first character is '/', and on windows check for something 
 	// like "C:" in the beginning of the string
 	if (relativePath[0] == G_DIR_SEPARATOR) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Specified path, '%s', is absolute", __func__ , relativePath);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Specified path, '%s', is absolute"), __func__ , relativePath);
 		g_print("Separator at birth.\n");
 		goto EXITPOINT;
 	}
@@ -291,7 +294,7 @@ gboolean str_append(gchar **dst, const gchar *src, GError **err)
 	gchar *newDst = (gchar *) g_try_realloc(*dst, totalLength);
 	
 	if (newDst == NULL) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not allocate memory, g_try_realloc(%ld) = NULL", __func__, totalLength);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not allocate memory, g_try_realloc(%ld) = NULL"), __func__, totalLength);
 		
 		goto EXITPOINT;
 	}
