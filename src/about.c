@@ -33,17 +33,17 @@
 #include "prefs.h"
 
 
-static gchar *sLicense =	(gchar*)N_("SciteProj is free software: you can redistribute it and/or modify\n"
-											  "it under the terms of the GNU General Public License as published by\n"
-											  "the Free Software Foundation, either version 3 of the License, or\n"
+static gchar *sLicense =	(gchar*)N_("SciteProj is free software: you can redistribute it and/or modify "
+											  "it under the terms of the GNU General Public License as published by "
+											  "the Free Software Foundation, either version 3 of the License, or "
 											  "(at your option) any later version.\n"
 											  "\n"
-											  "SciteProj is distributed in the hope that it will be useful,\n"
-											  "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-											  "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+											  "SciteProj is distributed in the hope that it will be useful, "
+											  "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+											  "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
 											  "GNU General Public License for more details.\n"
 											  "\n"
-											  "You should have received a copy of the GNU General Public License\n"
+											  "You should have received a copy of the GNU General Public License "
 											  "along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n");
 
 
@@ -216,6 +216,7 @@ void create_about_dialog()
 
 	textview_license=gtk_text_view_new_with_buffer(textbuffer_license);
 
+	gtk_text_view_set_wrap_mode(GTK_TEXT_VIEW(textview_license),GTK_WRAP_WORD);
 
 	gtk_text_view_set_cursor_visible(GTK_TEXT_VIEW(textview_license),TRUE);
 	gtk_text_view_set_editable(GTK_TEXT_VIEW(textview_license),FALSE);
