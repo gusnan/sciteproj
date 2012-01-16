@@ -99,7 +99,7 @@ msgstr "Skapa _Grupp"
 
 #: gui.c:124
 msgid "Create a group node in the project"
-msgstr ""
+msgstr "Skapar en grupp-nod i projektet"
 
 #: gui.c:125
 msgid "Add _File"
@@ -482,15 +482,15 @@ msgstr ""
 
 #: properties_dialog.c:228
 msgid "Filename:"
-msgstr ""
+msgstr "Filnamn:"
 
 #: properties_dialog.c:229
 msgid "Path:"
-msgstr ""
+msgstr "Sökväg:"
 
 #: properties_dialog.c:230
 msgid "File size:"
-msgstr ""
+msgstr "Filstorlek:"
 
 #: recent_files.c:77 tree_manipulation.c:159
 #, c-format
@@ -510,11 +510,11 @@ msgstr ""
 
 #: recent_files.c:138
 msgid "Recently opened files:"
-msgstr ""
+msgstr "Nyligen öppnade filer:"
 
 #: remove.c:75 remove.c:80 rename.c:136 rename.c:141
 msgid "Error!!!\n"
-msgstr ""
+msgstr "Fel!!!\n"
 
 #: scite_utils.c:150
 #, c-format
@@ -524,7 +524,7 @@ msgstr ""
 #: scite_utils.c:181
 #, c-format
 msgid "Closed %s"
-msgstr ""
+msgstr "Stängde %s"
 
 #: scite_utils.c:200
 #, c-format
@@ -599,20 +599,20 @@ msgstr ""
 #: scite_utils.c:576
 #, c-format
 msgid "%s: Could not launch Scite, execlp( ) failed"
-msgstr ""
+msgstr "%s: Kunde inte starta Scite, execlp( ) misslyckades"
 
 #: scite_utils.c:584
 msgid "Connecting to Scite...."
-msgstr ""
+msgstr "Ansluter till Scite...."
 
 #: scite_utils.c:594
 #, c-format
 msgid "%s: Could not connect to Scite"
-msgstr ""
+msgstr "%s: Kunde inte ansluta till SciTE"
 
 #: scite_utils.c:633
 msgid "Launched SciTE"
-msgstr ""
+msgstr "Startade SciTE"
 
 #: scite_utils.c:686
 #, c-format
@@ -637,7 +637,7 @@ msgstr ""
 
 #: search.c:182
 msgid "Search project"
-msgstr ""
+msgstr "Sök i projektet"
 
 #: search.c:198
 msgid "Find What:"
@@ -645,32 +645,36 @@ msgstr "Hitta vad:"
 
 #: search.c:240
 msgid "Match case"
-msgstr ""
+msgstr "Matcha stora/små bokstäver"
 
 #: search.c:251
 msgid "Match whole word only"
-msgstr ""
+msgstr "Matcha endast hela ord"
 
 #: search.c:613
 msgid ""
 "There was problems opening the following files in the project:\n"
 "\n"
 msgstr ""
+"Det var problem med att öppna följande filer i projektet:\n"
+"\n"
 
 #: search.c:626
 msgid ""
 "\n"
 "They couldn't be opened for reading in the search.\n"
 msgstr ""
+"\n"
+"Dom kunde inte öppnas för läsning i sökningen.\n"
 
 #: search.c:680
 msgid "Please enter a text to search for!\n"
-msgstr ""
+msgstr "Vänligen mata in en text att söka efter!\n"
 
 #: search.c:771 search.c:785 search.c:839 search.c:878
 #, c-format
 msgid "Error:%s\n"
-msgstr ""
+msgstr "Fel:%s\n"
 
 #: search.c:923
 msgid "Filename"
@@ -695,7 +699,7 @@ msgstr ""
 
 #: statusbar.c:57
 msgid "Welcome to SciteProj\n"
-msgstr ""
+msgstr "Välkommen till SciteProj\n"
 
 #: string_utils.c:68
 #, c-format
@@ -726,15 +730,15 @@ msgstr ""
 
 #: tree_manipulation.c:451
 msgid "Load Project"
-msgstr ""
+msgstr "Ladda Projekt"
 
 #: tree_manipulation.c:454
 msgid "Project Files (*.xml)"
-msgstr ""
+msgstr "Projektfiler (*.xml)"
 
 #: tree_manipulation.c:459 tree_manipulation.c:534
 msgid "All Files"
-msgstr ""
+msgstr "Alla filer"
 
 #: tree_manipulation.c:505
 msgid "C/C++ Files"
