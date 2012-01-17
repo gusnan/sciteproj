@@ -54,6 +54,9 @@ Also, the following options exist:
 	Specifies wether SciteProj shall try to identify the XML as saved by 
 	SciteProj? (Defaults to TRUE)
 
+* use_no_statusbar
+	Don't show the statusbar to save valuable screen-space.
+
 The search dialogs size and position can also be customzed via the 
 configuration file. See the variables 
 

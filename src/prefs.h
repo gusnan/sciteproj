@@ -58,6 +58,8 @@ typedef struct {
 	gboolean search_alert_file_warnings;
 	gboolean search_trim_results;
 	
+	gboolean use_no_statusbar;
+	
 } sciteproj_prefs;
 
 extern sciteproj_prefs gPrefs;

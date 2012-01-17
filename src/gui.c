@@ -510,9 +510,11 @@ gboolean setup_gui(GError **err)
 	
 	gtk_widget_show(GTK_WIDGET(fullGrid));
 	
-	if (!init_statusbar(fullGrid,vpaned,&tempErr)) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not init statusbar"), tempErr->message);
-		goto EXITPOINT;
+	if (!gPrefs.use_no_statusbar) {
+		if (!init_statusbar(fullGrid,vpaned,&tempErr)) {
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not init statusbar"), tempErr->message);
+			goto EXITPOINT;
+		}
 	}
 			
 	gtk_container_add(GTK_CONTAINER(sMainWindow), fullGrid);
@@ -523,9 +525,11 @@ gboolean setup_gui(GError **err)
 	
 	gtk_widget_show(GTK_WIDGET(fullVbox));
 	
-	if (!init_statusbar(fullVbox,vpaned,&tempErr)) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not init statusbar"), tempErr->message);
-		goto EXITPOINT;
+	if (!gPrefs.use_no_statusbar) {
+		if (!init_statusbar(fullVbox,vpaned,&tempErr)) {
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not init statusbar"), tempErr->message);
+			goto EXITPOINT;
+		}
 	}
 			
 	gtk_container_add(GTK_CONTAINER(sMainWindow), fullVbox);
