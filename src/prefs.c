@@ -65,7 +65,7 @@ gchar *default_config_string=(gchar*)"" \
 				"show_recent=FALSE\n"
 				"recent_add_to_bottom=FALSE\n"
 				"\n"
-				"use_no_statusbar=FALSE\n"
+				"hide_statusbar=FALSE\n"
 				"\n"
 				"\n";
 
@@ -225,9 +225,9 @@ gboolean check_config_string(gchar *in_config)
 			}
 		}
 		
-		if (g_ascii_strcasecmp(tempstring,"use_no_statusbar")==0) {
+		if (g_ascii_strcasecmp(tempstring,"hide_statusbar")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.use_no_statusbar=TRUE;
+				gPrefs.hide_statusbar=TRUE;
 			}
 		}
 	}
@@ -290,7 +290,7 @@ gboolean init_prefs(GError **err)
 	
 	gPrefs.search_trim_results=FALSE;
 	
-	gPrefs.use_no_statusbar=FALSE;
+	gPrefs.hide_statusbar=FALSE;
 	
 
 	// the result of g_get_user_config_dir doesn't need to be freed, so we
