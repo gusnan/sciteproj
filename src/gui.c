@@ -831,7 +831,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, 
-			_("%s: %s, g_strdup_printf() = NULL"), 
+			"%s: %s, g_strdup_printf() = NULL", 
 			error_formatting_scite_command,
 			__func__);
 	}

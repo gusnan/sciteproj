@@ -528,7 +528,7 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *pat
 	
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, 
-			_("%s: %s, g_strdup_printf() = NULL"), 
+			"%s: %s, g_strdup_printf() = NULL", 
 			__func__,
 			error_formatting_scite_command
 		);
