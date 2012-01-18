@@ -62,6 +62,8 @@
 
 #include "gtk3_compat.h"
 
+#include "error.h"
+
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
@@ -231,7 +233,10 @@ gboolean setup_gui(GError **err)
 	// Create top-level window, configure it
 	
 	if (!(sMainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create main window, gtk_window_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: %s, gtk_window_new() = NULL"), 
+			__func__,
+			error_init_main_window
+		);
 		
 		goto EXITPOINT;
 	}
@@ -264,7 +269,10 @@ gboolean setup_gui(GError **err)
 	// Then we need a vbox
 
 	if (!(vbox = gtk_vbox_new(FALSE, 0))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create main vbox, gtk_vbox_new() = NULL", __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_vbox_new() = NULL", 
+			__func__,
+			error_init_main_vbox
+		);
 		goto EXITPOINT;
 	}
 
@@ -276,13 +284,19 @@ gboolean setup_gui(GError **err)
 	// Create menus
 	
 	if (!(sActionGroup = gtk_action_group_new("SciteProjActions"))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkActionGroup, gtk_action_group_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_action_group_new() = NULL",
+			__func__,
+			error_init_gtk_action_group
+		);
 		
 		goto EXITPOINT;
 	}
 		
 	if (!(sGtkUIManager = gtk_ui_manager_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkUIManager, gtk_ui_manager_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_ui_manager_new() = NULL", 
+			__func__,
+			error_init_gtk_ui_manager
+		);
 		
 		goto EXITPOINT;
 	}
@@ -301,7 +315,11 @@ gboolean setup_gui(GError **err)
 	gtk_ui_manager_insert_action_group(sGtkUIManager, sActionGroup, 0);
 	
 	if (gtk_ui_manager_add_ui_from_string(sGtkUIManager, sMenuDefXML, strlen(sMenuDefXML), &tempErr) == 0) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create create menus from XML, gtk_ui_manager_add_ui_from_string() = %s"), __func__, tempErr->message);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_ui_manager_add_ui_from_string() = %s",
+			__func__, 
+			error_init_menu_from_xml,
+			tempErr->message
+		);
 		
 		goto EXITPOINT;
 	}
@@ -324,7 +342,10 @@ gboolean setup_gui(GError **err)
 	// Add a scrolled window to the main window
 	
 	if (!(scrolledWindow = gtk_scrolled_window_new(NULL, NULL))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create main scrolled window, gtk_scrolled_window_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
+			__func__,
+			error_init_main_scrolled_window
+		);
 		
 		goto EXITPOINT;
 	}
@@ -349,14 +370,20 @@ gboolean setup_gui(GError **err)
 	// Create the tree datastore
 	
 	if ((projectTreeStore = create_treestore(&tempErr)) == NULL) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create the treestore"), tempErr->message);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s", 
+			tempErr->message,
+			error_init_treestore
+		);
 		goto EXITPOINT;
 	}
 		
 	// Create the treeview, set it up to render the tree datastore, and add it to the hbox
 	
 	if (!(projectTreeView = gtk_tree_view_new_with_model(GTK_TREE_MODEL(projectTreeStore)))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeView, gtk_tree_view_new_with_model() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_tree_view_new_with_model() = NULL", 
+			__func__,
+			error_init_gtk_tree_view
+		);
 		
 		goto EXITPOINT;
 	}
@@ -366,7 +393,10 @@ gboolean setup_gui(GError **err)
 	gtk_tree_view_set_enable_search(GTK_TREE_VIEW(projectTreeView),TRUE);
 	
 	if (!(textCellRenderer = gtk_cell_renderer_text_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkCellRenderer, gtk_cell_renderer_text_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_cell_renderer_text_new() = NULL", 
+			__func__,
+			error_init_gtk_cell_renderer
+		);
 		
 		goto EXITPOINT;
 	}
@@ -377,13 +407,21 @@ gboolean setup_gui(GError **err)
 			NULL);
 	
 	if (!(pixbuffCellRenderer = gtk_cell_renderer_pixbuf_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkCellRenderer, gtk_cell_renderer_pixbuf_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+			"%s: %s, gtk_cell_renderer_pixbuf_new() = NULL",
+			__func__,
+			error_init_gtk_cell_renderer_pixbuf
+		);
 		
 		goto EXITPOINT;
 	}
 	
 	if (!(column1 = gtk_tree_view_column_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeViewColumn, gtk_tree_view_column_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
+			"%s: %s, gtk_tree_view_column_new() = NULL",
+			__func__,
+			error_init_gtk_tree_view_column
+		);
 		
 		goto EXITPOINT;
 	}
@@ -444,19 +482,30 @@ gboolean setup_gui(GError **err)
 #if GTK_MAJOR_VERSION>=3
 	
 	if (!(recentGrid=gtk_grid_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR,-1, _("%s: Could not create recentGrid, gtk_grid_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR,-1,
+			"%s: %s, gtk_grid_new() = NULL",
+			error_init_recent_grid,
+			__func__);
 		goto EXITPOINT;
 	}	
 	
 #else
 	if (!(recentVbox=gtk_vbox_new(FALSE, 0))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR,-1, _("%s: Could not create recentGrid, gtk_vbox_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR,-1,
+			"%s: %s, gtk_vbox_new() = NULL",
+			__func__,
+			error_init_recent_grid
+			);
 		goto EXITPOINT;
 	}	
 #endif
 	
 	if (!(recentHbox=gtk_hbox_new(FALSE,0))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create main vbox, gtk_hbox_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+			"%s: %s, gtk_hbox_new() = NULL",
+			__func__,
+			error_init_main_vbox
+			);
 		goto EXITPOINT;
 	}
 
@@ -476,7 +525,11 @@ gboolean setup_gui(GError **err)
 #else
 	
 	if (!(fullVbox=gtk_vbox_new(FALSE,0))) {
- 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create fullVbox, gtk_hbox_new() = NULL"), __func__);
+ 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
+			"%s: %s, gtk_hbox_new() = NULL",
+			__func__,
+			error_init_full_vbox
+			);
  		
  		goto EXITPOINT;
  	}
@@ -488,7 +541,11 @@ gboolean setup_gui(GError **err)
 	statusBarVbox=gtk_vbox_new(FALSE,0);
 
 	if (!statusBarVbox) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create statusBarVbox, gtk_hbox_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
+			"%s: %s, gtk_hbox_new() = NULL",
+			__func__,
+			error_init_statusbar_vbox
+			);
 		goto EXITPOINT;
 	}
 #endif
@@ -512,7 +569,7 @@ gboolean setup_gui(GError **err)
 	
 	if (!gPrefs.hide_statusbar) {
 		if (!init_statusbar(fullGrid,vpaned,&tempErr)) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not init statusbar"), tempErr->message);
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s", tempErr->message,error_init_statusbar);
 			goto EXITPOINT;
 		}
 	}
@@ -527,7 +584,10 @@ gboolean setup_gui(GError **err)
 	
 	if (!gPrefs.hide_statusbar) {
 		if (!init_statusbar(fullVbox,vpaned,&tempErr)) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not init statusbar"), tempErr->message);
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s", 
+				tempErr->message,
+				error_init_statusbar
+			);
 			goto EXITPOINT;
 		}
 	}
@@ -770,7 +830,10 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	fixed=fix_path((gchar*)get_project_directory(),relFilePath);
 	
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Error formatting Scite director command, g_strdup_printf() = NULL"), __func__);
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, 
+			_("%s: %s, g_strdup_printf() = NULL"), 
+			error_formatting_scite_command,
+			__func__);
 	}
 	else {
 		if (send_scite_command(command, &err)) {
@@ -797,7 +860,8 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 EXITPOINT:
 	
 	if (err != NULL) {
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("Could not open selected file: \n\n%s"), err->message);
+		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+			_("Could not open selected file: \n\n%s"), err->message);
 		
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}
@@ -984,7 +1048,8 @@ static void popup_open_file_cb()
 EXITPOINT:
 	
 	if (err != NULL) {
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Could not open selected file: \n\n%s", err->message);
+		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+			_("Could not open selected file: \n\n%s"), err->message);
 		
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}
@@ -1030,7 +1095,7 @@ void update_project_is_dirty(gboolean dirty)
 	gchar *temp_string=g_new(gchar,512);
 	
 	if ((int)strlen((char*)(window_saved_title))==0) {
-		g_snprintf(window_saved_title,512,"[UNTITLED]");
+		g_snprintf(window_saved_title,512,_("[UNTITLED]"));
 	}
 	
 	if (!dirty) {
@@ -1150,7 +1215,7 @@ static void saveproject_as_menu_cb()
 	GError *err = NULL;
 	
 	if (!save_project(NULL,&err)) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "An error occurred while saving the project: %s", err->message);
+		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while saving the project: %s"), err->message);
 		
 		if (dialog) {
 			gtk_dialog_run(GTK_DIALOG(dialog));
@@ -1173,7 +1238,7 @@ static void saveproject_menu_cb()
 	gchar *temp_filepath=get_project_filepath();
 	
 	if (!save_project(temp_filepath,&err)) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "An error occurred while saving the project: %s", err->message);
+		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while saving the project: %s"), err->message);
 		
 		if (dialog) {
 			gtk_dialog_run(GTK_DIALOG(dialog));
@@ -1195,7 +1260,7 @@ static void openproject_menu_cb()
 	GError *err = NULL;
 	
 	if (!load_project(NULL, &err)) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "An error occurred while saving the project: %s", err->message);
+		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while saving the project: %s"), err->message);
 		
 		if (dialog) {
 			gtk_dialog_run(GTK_DIALOG(dialog));
@@ -1319,7 +1384,10 @@ void edit_options_cb()
 	gchar *command=NULL;
 	
 	if ((command = g_strdup_printf("open:%s\n", prefs_filename)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Error formatting Scite director command, g_strdup_printf() = NULL"), __func__);
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, 
+			"%s: %s, g_strdup_printf() = NULL",
+			error_formatting_scite_command,
+			__func__);
 	}
 	else {
 		if (send_scite_command(command, &err)) {

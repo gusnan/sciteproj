@@ -37,6 +37,7 @@
 #include "scite_utils.h"
 #include "clipboard.h"
 #include "properties_dialog.h"
+#include "error.h"
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
@@ -74,7 +75,11 @@ GtkTreeStore* create_treestore_recent(GError **err)
 		result= gtk_tree_store_new(COLUMN_EOL, TYPE_ITEMTYPE, TYPE_FILEPATH, TYPE_FILENAME, TYPE_FILESIZE, TYPE_FONTWEIGHT, TYPE_FONTWEIGHTSET, TYPE_ICON, TYPE_EXPANDED);
 		
 	if (result == NULL) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
+			"%s: %s, gtk_tree_store_new() = NULL",
+			__func__,
+			error_init_treestore
+		);
 	}
 	
 	
@@ -98,7 +103,11 @@ GtkWidget *init_recent_files(GError **err)
 	
 	// add a scrolledwindow for recent files
 	if (!(recentScrolledWindow=gtk_scrolled_window_new(NULL,NULL))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create recent scrolled window, gtk_scrolled_window_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
+			"%s: %s, gtk_scrolled_window_new() = NULL", 
+			__func__,
+			error_init_recent_scrolled_window
+		);
 		
 		goto EXITPOINT;
 	} 
@@ -107,13 +116,20 @@ GtkWidget *init_recent_files(GError **err)
 
 	
 	if ((recentTreeStore=create_treestore_recent(&tempErr))==NULL) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1 ,_("%s: Could not create the recent treestore"), tempErr->message);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1 ,
+			"%s: %s", 
+			tempErr->message,
+			error_init_recent_treestore
+		);
 		goto EXITPOINT;
 	}
 	
 	
 	if (!(recentTreeView=gtk_tree_view_new_with_model(GTK_TREE_MODEL(recentTreeStore)))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeView, gtk_tree_view_new_with_model() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
+			"%s: %s, gtk_tree_view_new_with_model() = NULL", 
+			__func__,
+			error_init_gtk_tree_view);
 		
 		goto EXITPOINT;
 	}
@@ -123,14 +139,22 @@ GtkWidget *init_recent_files(GError **err)
 	gtk_container_add(GTK_CONTAINER(recentScrolledWindow), recentTreeView);
 
 	if (!(recentCellRenderer = gtk_cell_renderer_text_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkCellRenderer, gtk_cell_renderer_text_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
+			"%s: %s, gtk_cell_renderer_text_new() = NULL", 
+			__func__,
+			error_init_gtk_cell_renderer
+		);
 		
 		goto EXITPOINT;
 	}
 	
 		
 	if (!(recentColumn1 = gtk_tree_view_column_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeViewColumn, gtk_tree_view_column_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+			"%s: %s, gtk_tree_view_column_new() = NULL", 
+			__func__,
+			error_init_gtk_tree_view_column
+		);
 		
 		goto EXITPOINT;
 	}
@@ -138,7 +162,11 @@ GtkWidget *init_recent_files(GError **err)
 	g_object_set(recentColumn1,"title",_("Recently opened files:"),NULL);
 	
 	if (!(recentPixbuffCellRenderer = gtk_cell_renderer_pixbuf_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkCellRenderer, gtk_cell_renderer_pixbuf_new() = NULL"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
+			"%s: %s, gtk_cell_renderer_pixbuf_new() = NULL",
+			__func__,
+			error_init_gtk_cell_renderer
+		);
 		
 		goto EXITPOINT;
 	}
@@ -499,7 +527,11 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *pat
 	fixed=fix_path((gchar*)get_project_directory(),relFilePath);
 	
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Error formatting Scite director command, g_strdup_printf() = NULL"), __func__);
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, 
+			_("%s: %s, g_strdup_printf() = NULL"), 
+			__func__,
+			error_formatting_scite_command
+		);
 	}
 	else {
 		if (send_scite_command(command, &err)) {
@@ -526,7 +558,10 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *pat
 //EXITPOINT:
 	
 	if (err != NULL) {
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Could not open selected file: \n\n%s", err->message);
+		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+			_("Could not open selected file: \n\n%s"), 
+			err->message
+		);
 		
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}
@@ -564,7 +599,10 @@ void popup_remove_recent_file_cb()
 EXITPOINT:
 	
 	if (err != NULL) {
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Could not open selected file: \n\n%s", err->message);
+		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+			_("Could not open selected file: \n\n%s"),
+			err->message
+		);
 		
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}

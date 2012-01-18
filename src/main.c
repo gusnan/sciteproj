@@ -29,6 +29,7 @@
 
 #include <locale.h>
 
+#include "error.h"
 #include "clicked_node.h"
 #include "gui.h"
 #include "tree_manipulation.h"
@@ -71,6 +72,8 @@ int main(int argc, char *argv[])
 	gtk_init(&argc, &argv);
 	
 	g_thread_init(NULL);
+	
+	init_error_strings();
 	
 	init_file_utils();
 	
@@ -186,6 +189,8 @@ EXITPOINT:
 	gui_close();
 	
 	done_prefs();
+	
+	done_error_strings();
 	
 	if (err) g_error_free(err);
 	

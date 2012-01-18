@@ -11,8 +11,9 @@ else
 endif
 
 OBJECTS=$(OBJ)/about.o $(OBJ)/addfiles.o $(OBJ)/clipboard.o $(OBJ)/drag_drop.o\
-$(OBJ)/file_utils.o $(OBJ)/filelist.o $(OBJ)/folder_to_xml.o $(OBJ)/graphics.o\
-$(OBJ)/gui.o $(OBJ)/main.o $(OBJ)/prefs.o $(OBJ)/properties_dialog.o \
+$(OBJ)/error.o $(OBJ)/file_utils.o $(OBJ)/filelist.o $(OBJ)/folder_to_xml.o \
+$(OBJ)/graphics.o $(OBJ)/gui.o $(OBJ)/main.o $(OBJ)/prefs.o \
+$(OBJ)/properties_dialog.o \
 $(OBJ)/recent_files.o $(OBJ)/remove.o $(OBJ)/rename.o $(OBJ)/scite_utils.o\
 $(OBJ)/search.o $(OBJ)/statusbar.o  $(OBJ)/string_utils.o\
 $(OBJ)/tree_manipulation.o $(OBJ)/xml_processing.o
