@@ -50,6 +50,8 @@
 #include "string_utils.h"
 #include "statusbar.h"
 
+#include "error.h"
+
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_SCITEUTILS_ERROR")
 
 
@@ -147,7 +149,10 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 	
 	if (condition & G_IO_IN) {
 		if (g_io_channel_read_chars(source, buff, sizeof(buff) - 1, &bytes_read, &error) != G_IO_STATUS_NORMAL) {
-			g_print(_("%s: Error calling g_io_channel_read_chars() = %s\n"), __func__, (error != NULL) ? error->message : "<unknown>");
+			g_print("%s: %s = %s\n", 
+				__func__, 
+				error_calling_g_io_channel,
+				(error != NULL) ? error->message : "<unknown>");
 		}
 		else {
 			if ((bytes_read-1)!=0) {

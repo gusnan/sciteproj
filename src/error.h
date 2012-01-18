@@ -44,6 +44,7 @@ gchar *error_init_full_vbox;
 gchar *error_init_statusbar_vbox;
 gchar *error_init_statusbar;
 gchar *error_formatting_scite_command;
+gchar *error_calling_g_io_channel;
 
 
 /**

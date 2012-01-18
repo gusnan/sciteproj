@@ -50,6 +50,7 @@ gchar *error_init_full_vbox=NULL;
 gchar *error_init_statusbar_vbox=NULL;
 gchar *error_init_statusbar=NULL;
 gchar *error_formatting_scite_command=NULL;
+gchar *error_calling_g_io_channel=NULL;
 
 
 /**
@@ -76,6 +77,7 @@ gboolean init_error_strings()
 	error_init_statusbar_vbox=g_strdup(_("Error initing statusbar"));
 	error_init_statusbar=g_strdup(_("Error initing statusbar"));
 	error_formatting_scite_command=g_strdup(_("Error formatting SciTE director command"));
+	error_calling_g_io_channel=g_strdup(_("Error calling g_io_channel_read_chars()"));
 	
 	return TRUE;
 }

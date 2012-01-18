@@ -233,7 +233,7 @@ gboolean setup_gui(GError **err)
 	// Create top-level window, configure it
 	
 	if (!(sMainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: %s, gtk_window_new() = NULL"), 
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_window_new() = NULL", 
 			__func__,
 			error_init_main_window
 		);
