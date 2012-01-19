@@ -31,8 +31,8 @@ Checking your translation for errors and completeness
 Building SciteProj with your translation included
 --------------------------------------------------
 
-Edit the Makefile in the po folder to include your translation under the 
-LANGUAGES variable listing.
+Edit the Makefile in the po folder to include your translation in the listing 
+under the LANGUAGES variable.
 Then build sciteproj as usual with make and install using make install as root.
 
 
