@@ -89,5 +89,26 @@ gboolean init_error_strings()
 void done_error_strings()
 {
 	g_free(error_init_recent_scrolled_window);
+	g_free(error_init_recent_scrolled_window);
+	g_free(error_init_recent_treestore);
+	g_free(error_init_gtk_tree_view);
+	g_free(error_init_gtk_cell_renderer);
+	g_free(error_init_gtk_tree_view_column);
+	g_free(error_init_gtk_cell_renderer_pixbuf);
+	g_free(error_init_main_window);
+	g_free(error_init_gtk_action_group);
+	g_free(error_init_gtk_ui_manager);
+	g_free(error_init_menu_from_xml);
+	g_free(error_init_main_scrolled_window);
+	g_free(error_init_treestore);
+	g_free(error_init_recent_grid);
+	g_free(error_init_main_vbox);
+	g_free(error_init_main_hbox);
+	g_free(error_init_full_vbox);
+	g_free(error_init_statusbar_vbox);
+	g_free(error_init_statusbar);
+	g_free(error_formatting_scite_command);
+	g_free(error_calling_g_io_channel);
+
 	
 }
