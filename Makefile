@@ -72,7 +72,7 @@ endif
 
 LOCAL_CFLAGS+=-DLOCALEDIR=\"$(LOCALEDIR)\" -DPACKAGE=\"$(NAME)\" -DSCITEPROJ_VERSION=\"$(VERSION)\"
 
-all: $(BIN)/sciteproj
+all: $(BIN)/$(NAME)
 	${MAKE} -C po build
 
 $(OBJ)/%.o: $(SRC)/%.c
