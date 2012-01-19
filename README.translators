@@ -25,7 +25,7 @@ found at http://www.poedit.net.)
 Checking your translation for errors and completeness
 -----------------------------------------------------
 
-	msgfmt -c --statistics sv_SE.po
+	msgfmt -c --statistics sv_SE.po -o /dev/null
 
 
 Building SciteProj with your translation included
