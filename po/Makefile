@@ -25,6 +25,10 @@ string_utils.c tree_manipulation.c xml_processing.c
 XG_ARGS = --keyword=_ --keyword=N_ -w 80 --package-name=${NAME} --package-version=${VERSION} --msgid-bugs-address=gusnan@gusnan.se
 LANGUAGES = sv_SE
 
+# 
+LANGUAGES_MO = $(foreach currlang,$(LANGUAGES),$(currlang).mo)
+LANGUAGES_PO = $(foreach currlang,$(LANGUAGES),$(currlang).po)
+
 all: build
 
 ${NAME}.pot:
@@ -35,7 +39,9 @@ update-pot: ${NAME}.pot
 %.pox: %.po
 	msgmerge -o $@ --previous $< ${NAME}.pot 
 
-build:
+build: $(LANGUAGES_MO)
+	
+$(LANGUAGES_MO): $(LANGUAGES_PO)
 	for po in ${LANGUAGES}; \
 	do msgfmt -v --statistics -c -o t-$${po} $${po}.po && mv -f t-$${po} $${po}.mo; \
 	done
