@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-01-18 17:04+0100\n"
+"POT-Creation-Date: 2012-01-20 13:27+0100\n"
 "PO-Revision-Date: 2012-01-18 17:12+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -38,13 +38,14 @@ msgstr "Licens"
 #: about.c:202
 msgid ""
 "SciteProj is free software: you can redistribute it and/or modify it under "
-"the terms of the GNU General Public License as published by the Free Software "
-"Foundation, either version 3 of the License, or (at your option) any later "
-"version.\n"
+"the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version.\n"
 "\n"
 "SciteProj is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR "
-"A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details.\n"
 "\n"
 "You should have received a copy of the GNU General Public License along with "
 "SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n"
@@ -91,14 +92,12 @@ msgstr ""
 msgid "SciteProj version %s\n"
 msgstr "SciteProj version %s\n"
 
-#: drag_drop.c:188
-#: drag_drop.c:193
+#: drag_drop.c:188 drag_drop.c:193
 #, c-format
 msgid "%s: Could not add drag/drop data: %s\n"
 msgstr "%s: Kunde inte addera draosläpp-data: %s\n"
 
-#: drag_drop.c:381
-#: drag_drop.c:387
+#: drag_drop.c:381 drag_drop.c:387
 #, c-format
 msgid "%s: Could not format drag/drop data: %s\n"
 msgstr "%s: Kunde inte formatera draosläpp-data: %s\n"
@@ -177,8 +176,7 @@ msgstr "Kunde inte skapa main hbox"
 msgid "Could not create full vbox"
 msgstr "Kunde inte skapa full vbox"
 
-#: error.c:77
-#: error.c:78
+#: error.c:77 error.c:78
 msgid "Error initing statusbar"
 msgstr "Kunde inte initiera statusfältet"
 
@@ -231,8 +229,7 @@ msgstr "Öppna projekt"
 msgid "_Save Project"
 msgstr "_Spara projekt"
 
-#: gui.c:122
-#: tree_manipulation.c:286
+#: gui.c:122 tree_manipulation.c:286
 msgid "Save Project"
 msgstr "Spara projekt"
 
@@ -300,8 +297,7 @@ msgstr "_Om"
 msgid "Show information about this application"
 msgstr "Visa information om denna applikation"
 
-#: gui.c:137
-#: tree_manipulation.c:582
+#: gui.c:137 tree_manipulation.c:582
 msgid "Add Files"
 msgstr "Lägg till filer"
 
@@ -365,10 +361,9 @@ msgstr "Sortera grupp fallande"
 msgid "Sort the filenames descending"
 msgstr "Sorterar filnamnen i gruppen fallande"
 
-#: gui.c:146
-#: properties_dialog.c:131
-msgid "Group Properties"
-msgstr "Mappegenskaper"
+#: gui.c:146 gui.c:154 gui.c:160
+msgid "Properties"
+msgstr "Egenskaper"
 
 #: gui.c:146
 msgid "Show group properties"
@@ -390,13 +385,11 @@ msgstr "Visa nyligen öppnade filer"
 msgid "View Recent Files"
 msgstr "Visa senaste filer"
 
-#: gui.c:151
-#: gui.c:156
+#: gui.c:151 gui.c:156
 msgid "Open File in SciTE"
 msgstr "Öppna fil i SciTE"
 
-#: gui.c:151
-#: gui.c:156
+#: gui.c:151 gui.c:156
 msgid "Open a file in SciTE"
 msgstr "Öppnar en fil i SciTE"
 
@@ -416,14 +409,7 @@ msgstr "Kopiera filnamn till urklipp"
 msgid "Copies the full path and filename to the clipboard"
 msgstr "Kopierar filnamn inklusive hela sökvägen till urklipp"
 
-#: gui.c:154
-#: gui.c:160
-#: properties_dialog.c:204
-msgid "File Properties"
-msgstr "Filegenskaper"
-
-#: gui.c:154
-#: gui.c:160
+#: gui.c:154 gui.c:160
 msgid "Show file properties"
 msgstr "Visa fileegenskaper"
 
@@ -439,23 +425,16 @@ msgstr "Ta bort fil från denna lista"
 msgid "Copy filename to clipboard"
 msgstr "Kopiera filnamn till urklipp"
 
-#: gui.c:231
-#: gui.c:1098
+#: gui.c:231 gui.c:1098
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:852
-#: scite_utils.c:218
-#: search.c:831
-#: search.c:869
+#: gui.c:852 scite_utils.c:218 search.c:831 search.c:869
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
 
-#: gui.c:864
-#: gui.c:1052
-#: recent_files.c:562
-#: recent_files.c:603
+#: gui.c:864 gui.c:1052 recent_files.c:562 recent_files.c:603
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -466,9 +445,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gui.c:1218
-#: gui.c:1241
-#: gui.c:1263
+#: gui.c:1218 gui.c:1241 gui.c:1263
 #, c-format
 msgid "An error occurred while saving the project: %s"
 msgstr "Ett fel uppstod medan projektets sparades: %s"
@@ -478,10 +455,11 @@ msgstr "Ett fel uppstod medan projektets sparades: %s"
 msgid "Error initing preferences: %s"
 msgstr "Fel vid initiering av inställningar: %s"
 
-#: main.c:99
-#: main.c:109
-msgid "Environment variable exists, but doesn't point to a folder containing scite."
-msgstr "Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
+#: main.c:99 main.c:109
+msgid ""
+"Environment variable exists, but doesn't point to a folder containing scite."
+msgstr ""
+"Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
 
 #: main.c:126
 #, c-format
@@ -498,7 +476,8 @@ msgid ""
 "Program will start, but you won't be able to open SciTE to edit files."
 msgstr ""
 "Varning! Kunde inte hitta SciTE!\n"
-"Programmet kommer att starta, men du kommer inte kunna använda SciTE för att editera filer."
+"Programmet kommer att starta, men du kommer inte kunna använda SciTE för att "
+"editera filer."
 
 #: main.c:148
 #, c-format
@@ -520,20 +499,29 @@ msgstr "  --help                            visa denna hjälp och avsluta"
 
 #: main.c:221
 msgid "  --version                         show version of sciteproj and exit"
-msgstr "  --version                         visa version av sciteproj och avsluta"
+msgstr ""
+"  --version                         visa version av sciteproj och avsluta"
 
 #: main.c:222
-msgid "  --scite FILENAME                  set a filename for the instance of SciTE to open"
-msgstr "  --scite FILNAMN                   sätt ett filnamn för instansen av SciTE du önskar köra"
+msgid ""
+"  --scite FILENAME                  set a filename for the instance of SciTE "
+"to open"
+msgstr ""
+"  --scite FILNAMN                   sätt ett filnamn för instansen av SciTE "
+"du önskar köra"
 
 #: main.c:223
 msgid ""
-"  --generate FILENAME [MAX_DEPTH]   generate a sciteproj project file with name FILENAME,\n"
-"                                    recursively from current folder contents, at most\n"
+"  --generate FILENAME [MAX_DEPTH]   generate a sciteproj project file with "
+"name FILENAME,\n"
+"                                    recursively from current folder "
+"contents, at most\n"
 "                                    MAX_DEPTH folders down in the hierarchy"
 msgstr ""
-"  --generate FILNAMN [MAX_DJUP]     generera en sciteproj-projektfil med namn FILNAMN,\n"
-"                                    rekursivt från aktuell folderinnehåll, med som mest\n"
+"  --generate FILNAMN [MAX_DJUP]     generera en sciteproj-projektfil med "
+"namn FILNAMN,\n"
+"                                    rekursivt från aktuell folderinnehåll, "
+"med som mest\n"
 "                                    MAX_DJUP steg ner i mapp-hierarkin"
 
 #: main.c:252
@@ -556,6 +544,10 @@ msgstr "Väntade ett heltal för MAX_DJUP..."
 msgid "Generated '%s' successfully!"
 msgstr "Genererade '%s' framgångsrikt!"
 
+#: properties_dialog.c:131
+msgid "Group Properties"
+msgstr "Mappegenskaper"
+
 #: properties_dialog.c:135
 msgid "Group name:"
 msgstr "Gruppnamn:"
@@ -563,6 +555,10 @@ msgstr "Gruppnamn:"
 #: properties_dialog.c:136
 msgid "Contains number of Files:"
 msgstr "Innehåller antal filer:"
+
+#: properties_dialog.c:204
+msgid "File Properties"
+msgstr "Filegenskaper"
 
 #: properties_dialog.c:228
 msgid "Filename:"
@@ -580,10 +576,7 @@ msgstr "Filstorlek:"
 msgid "Recently opened files:"
 msgstr "Nyligen öppnade filer:"
 
-#: remove.c:75
-#: remove.c:80
-#: rename.c:136
-#: rename.c:141
+#: remove.c:75 remove.c:80 rename.c:136 rename.c:141
 msgid "Error!!!\n"
 msgstr "Fel!!!\n"
 
@@ -611,38 +604,48 @@ msgstr "%s: kondition = G_IO_ERR\n"
 msgid "%s: condition = G_IO_HUP\n"
 msgstr "%s: kondition = G_IO_HUP\n"
 
-#: scite_utils.c:341
-#: scite_utils.c:352
+#: scite_utils.c:341 scite_utils.c:352
 #, c-format
-msgid "%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, errno = %d = %s"
-msgstr "%s: Kunde inte starta Scite, setenv(\"%s\", \"%s\") misslyckades, errno = %d = %s"
+msgid ""
+"%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, errno = %d = %s"
+msgstr ""
+"%s: Kunde inte starta Scite, setenv(\"%s\", \"%s\") misslyckades, errno = %d "
+"= %s"
 
-#: scite_utils.c:363
-#: scite_utils.c:371
+#: scite_utils.c:363 scite_utils.c:371
 #, c-format
 msgid "%s: Could not launch Scite, remove(\"%s\") failed, errno = %d = %s"
-msgstr "%s: Kunde inte starta Scite, remove(\"%s\") misslyckades, errno = %d = %s"
+msgstr ""
+"%s: Kunde inte starta Scite, remove(\"%s\") misslyckades, errno = %d = %s"
 
 #: scite_utils.c:382
 #, c-format
 msgid "%s: Could not launch Scite, mkfifo(\"%s\") failed, errno = %d = %s"
-msgstr "%s: Kunde inte starta Scite, mkfifo(\"%s\") misslyckades, errno = %d = %s"
+msgstr ""
+"%s: Kunde inte starta Scite, mkfifo(\"%s\") misslyckades, errno = %d = %s"
 
-#: scite_utils.c:393
-#: scite_utils.c:612
+#: scite_utils.c:393 scite_utils.c:612
 #, c-format
 msgid "%s: Could not launch Scite, open(\"%s\") failed, errno = %d = %s"
-msgstr "%s: Kunde inte starta Scite, open(\"%s\") misslyckades, errno = %d = %s"
+msgstr ""
+"%s: Kunde inte starta Scite, open(\"%s\") misslyckades, errno = %d = %s"
 
 #: scite_utils.c:403
 #, c-format
-msgid "%s: Could not launch Scite, g_io_channel_unix_new(\"%s\") failed, errno = %d = %s"
-msgstr "%s: Kunde inte starta Scite, g_io_channel_unix_new(\"%s\") misslyckades, errno = %d= %s"
+msgid ""
+"%s: Could not launch Scite, g_io_channel_unix_new(\"%s\") failed, errno = %d "
+"= %s"
+msgstr ""
+"%s: Kunde inte starta Scite, g_io_channel_unix_new(\"%s\") misslyckades, "
+"errno = %d= %s"
 
 #: scite_utils.c:410
 #, c-format
-msgid "%s: Could not launch Scite, g_io_channel_set_encoding( ) failed, error = %s"
-msgstr "%s: Kunde inte starta Scite, g_io_channel_set_encoding() misslyckades, errno = %s"
+msgid ""
+"%s: Could not launch Scite, g_io_channel_set_encoding( ) failed, error = %s"
+msgstr ""
+"%s: Kunde inte starta Scite, g_io_channel_set_encoding() misslyckades, errno "
+"= %s"
 
 #: scite_utils.c:423
 #, c-format
@@ -660,8 +663,12 @@ msgstr "Fel: Kunde inte exekvera Scite från barnprocessen"
 
 #: scite_utils.c:539
 #, c-format
-msgid "%s: Problem sending message to parent: messageLength = %d, bytesWritten = %d\n"
-msgstr "%s: Problem att skicka meddelande till förälder: messageLength = %d, bytesWritten = %d\n"
+msgid ""
+"%s: Problem sending message to parent: messageLength = %d, bytesWritten = "
+"%d\n"
+msgstr ""
+"%s: Problem att skicka meddelande till förälder: messageLength = %d, "
+"bytesWritten = %d\n"
 
 #: scite_utils.c:581
 #, c-format
@@ -683,8 +690,11 @@ msgstr "Startade SciTE"
 
 #: scite_utils.c:691
 #, c-format
-msgid "%s: Could not send command to Scite, write(\"%s\") failed, errno = %d = %s"
-msgstr "%s: Kunde inte skicka kommando till Scite, write(\"%s\") misslyckades, errno = %d = %s"
+msgid ""
+"%s: Could not send command to Scite, write(\"%s\") failed, errno = %d = %s"
+msgstr ""
+"%s: Kunde inte skicka kommando till Scite, write(\"%s\") misslyckades, errno "
+"= %d = %s"
 
 #: scite_utils.c:734
 #, c-format
@@ -694,19 +704,19 @@ msgstr "%s: Kunde inte öppna X-displayen, XOpenDisplay() = NULL"
 #: scite_utils.c:743
 #, c-format
 msgid "%s: Could not activate SciTE window, X11 window ID invalid"
-msgstr "%s: Kunde inte aktivera SciTEs fönster, dess X11 fönster-ID är ogiltigt"
+msgstr ""
+"%s: Kunde inte aktivera SciTEs fönster, dess X11 fönster-ID är ogiltigt"
 
 #: scite_utils.c:765
 #, c-format
 msgid "%s: Could not activate SciTE, XSendEvent() = FALSE"
 msgstr "%s: Kunde inte aktivera SciTE, XSendEvent() =FALSE"
 
-#: scite_utils.c:867
-#: search.c:811
-#: search.c:849
+#: scite_utils.c:867 search.c:811 search.c:849
 #, c-format
 msgid "%s: Error formatting Scite director command, g_strdup_printf() = NULL"
-msgstr "%s: Fel när formatterade Scite director-kommando, g_strdup_printf() = NULL"
+msgstr ""
+"%s: Fel när formatterade Scite director-kommando, g_strdup_printf() = NULL"
 
 #: search.c:182
 msgid "Search project"
@@ -744,10 +754,7 @@ msgstr ""
 msgid "Please enter a text to search for!\n"
 msgstr "Vänligen mata in en text att söka efter!\n"
 
-#: search.c:771
-#: search.c:785
-#: search.c:839
-#: search.c:878
+#: search.c:771 search.c:785 search.c:839 search.c:878
 #, c-format
 msgid "Error:%s\n"
 msgstr "Fel:%s\n"
@@ -789,8 +796,11 @@ msgstr "%s: Specificerad sökväg, '%s' är inte absolut"
 
 #: string_utils.c:79
 #, c-format
-msgid "%s: Could not determine current working directory, getcwd() = NULL, errno = %d"
-msgstr "%s: Kunde inte avgöra nuvarande arbetssökväg, getcwd() = NULL, errnmo = %d"
+msgid ""
+"%s: Could not determine current working directory, getcwd() = NULL, errno = "
+"%d"
+msgstr ""
+"%s: Kunde inte avgöra nuvarande arbetssökväg, getcwd() = NULL, errnmo = %d"
 
 #: string_utils.c:181
 #, c-format
@@ -820,8 +830,7 @@ msgstr "Ladda Projekt"
 msgid "Project Files (*.xml)"
 msgstr "Projektfiler (*.xml)"
 
-#: tree_manipulation.c:459
-#: tree_manipulation.c:534
+#: tree_manipulation.c:459 tree_manipulation.c:534
 msgid "All Files"
 msgstr "Alla filer"
 
@@ -868,4 +877,3 @@ msgstr ""
 #, c-format
 msgid "%s: Not a valid sciteproj XML file!"
 msgstr "%s: Är inte en giltig sciteproj XML-fil!"
-
