@@ -89,7 +89,6 @@ gboolean init_error_strings()
 void done_error_strings()
 {
 	g_free(error_init_recent_scrolled_window);
-	g_free(error_init_recent_scrolled_window);
 	g_free(error_init_recent_treestore);
 	g_free(error_init_gtk_tree_view);
 	g_free(error_init_gtk_cell_renderer);
