@@ -47,9 +47,6 @@ static struct CommandLineIndata {
 } cmd;
 
 
-static void parse_cmd_options(int argc,char *argv[]);
-
-
 /*
  *		Program main entry
  */
@@ -58,6 +55,27 @@ int main(int argc, char *argv[])
 	int returnCode = EXIT_FAILURE;
 	GError *err = NULL;
 	gchar *file_to_load=NULL;
+	GOptionContext *context=NULL;
+	
+	static gboolean version=FALSE;
+	static gchar *scite_instance=NULL;
+	//static gboolean gene
+	static gchar *generate_xml_file=NULL;
+	static int max_depth_generated=-1;
+	
+	static const GOptionEntry options[]={
+		{ "version",		'v',	0, G_OPTION_ARG_NONE,		&version,
+			N_("Show program version and quit")},
+		{ "scite",			's',	0, G_OPTION_ARG_STRING,		&scite_instance,
+			N_("Set a filename for the instance of SciTE to open"),	N_("SCITE_FILENAME")},
+		{ "generate",		'g',	0, G_OPTION_ARG_STRING,		&generate_xml_file,
+			N_("Generate a sciteproj project file with name XML_FILENAME, recursively from current folder"),
+			N_("XML_FILENAME")},
+		{ "max_depth",		'm',	0, G_OPTION_ARG_INT,	&max_depth_generated,
+			N_("Set maximum depth of folders to read through when generating XML file"),
+			N_("MAX_DEPTH")},
+		{ NULL }
+	};
 	
 	// Init gettext stuff
 	setlocale(LC_ALL,"");
@@ -66,22 +84,71 @@ int main(int argc, char *argv[])
 	bind_textdomain_codeset(PACKAGE,"");
 	textdomain(PACKAGE);
 	
-	parse_cmd_options(argc,argv);
-	
 	// Init gtk
 	gtk_init(&argc, &argv);
+	
+	gchar *sciteproj_description=NULL;
+	sciteproj_description=g_strdup_printf(_("SciTE Project Manager"));
+	
+	gchar *full_desc_string=g_strdup_printf("- %s",sciteproj_description);
+	
+	context=g_option_context_new(full_desc_string);
+	g_option_context_add_main_entries(context,options,NULL);
+	if (!g_option_context_parse(context, &argc, &argv, &err)) {
+		g_print(_("option parsing failed: %s"),err->message);
+		printf("\n");
+		exit(EXIT_FAILURE);
+	}
+	
+	g_free(sciteproj_description);
+	g_free(full_desc_string);
+	
+	/*
+		Interpret the options
+	 */
+	/*
+		set instance of SciTE to run
+	*/
+	if (scite_instance) {
+		cmd.scite_filename=scite_instance;
+	}
+	
+	/*
+		Generate a project file going down at max max_depth levels in the folder
+		hierarchy
+	*/
+	if (generate_xml_file) {
+		int max_depth=4;
+		if (max_depth_generated!=-1) max_depth=max_depth_generated;
+		
+		//gboolean result=folder_to_xml(folder,filename,max_depth);
+		gboolean result=folder_to_xml(".",generate_xml_file,max_depth);
+		
+		if (result) {
+			printf(_("Generated '%s' successfully!"),generate_xml_file);
+			printf("\n\n");
+		} else {
+			exit(EXIT_FAILURE);
+		}
+		
+		exit(EXIT_SUCCESS);
+		
+	}
+	
+	/*
+		Show SciteProj version 
+	*/
+	if (version) {
+		show_version();
+		printf("\n");
+		exit(EXIT_SUCCESS);
+	}
 	
 	g_thread_init(NULL);
 	
 	init_error_strings();
 	
 	init_file_utils();
-	
-	// Init sciteproj prefs
-	if (!init_prefs(&err)) {
-		g_print(_("Error initing preferences: %s"), err->message);
-		return EXIT_FAILURE;
-	}
 	
 	// check environment variable
 	gchar *scite_path_env=getenv("SciTE_HOME");
@@ -195,110 +262,4 @@ EXITPOINT:
 	if (err) g_error_free(err);
 	
 	return returnCode;
-}
-
-
-/**
- *		parse_cmd_options
- *		Parses the argc/argv data
- */
-static void parse_cmd_options(int argc,char *argv[])
-{
-	gint i;
-	
-	gchar *indata_left=NULL;
-
-	
-	for (i=1;i<argc;i++) {
-		if (!strncmp(argv[i],"--help",6)) {
-			g_print("\n");
-			g_print(_("Usage: %s [OPTION] [FILE]..."),
-				g_basename(argv[0]));
-			
-			g_print("\n\n");
-			g_print("%s\n\n", _("Options can be one of the following:"));
-			g_print("%s\n", _("  --help                            display this help and exit"));
-			g_print("%s\n", _("  --version                         show version of sciteproj and exit"));
-			g_print("%s\n", _("  --scite FILENAME                  set a filename for the instance of SciTE to open"));
-			g_print("%s\n", _("  --generate FILENAME [MAX_DEPTH]   generate a sciteproj project file with name FILENAME,\n"
-									"                                    recursively from current folder contents, at most\n"
-									"                                    MAX_DEPTH folders down in the hierarchy"));
-			g_print("\n");
-			exit(EXIT_SUCCESS);
-			
-		} else if (!strncmp(argv[i],"--scite",7)) {
-			const gchar *p = argv[i + 1];
-
-			//cmd.set_scite_folder = TRUE;
-			cmd.scite_filename= NULL;
-			if (p && *p != '\0' && *p != '-') {
-				/*
-				if (!strncmp(p, "mailto:", 7))
-					cmd.scite_folder = p + 7;
-				else
-				*/
-				cmd.scite_filename= p;
-				i++;
-			}	
-		} else if (!strncmp(argv[i],"--version",9)) {
-			
-			show_version();
-			exit(EXIT_SUCCESS);
-		} else if (!strncmp(argv[i],"--generate",10)) {
-			
-			if ((argc!=3) && (argc!=4)) {
-				
-				printf("\n");
-				printf(_("The syntax for that command is:"));
-				printf("\n\n");
-				printf(_("sciteproj --generate FILENAME [MAX_DEPTH]"));
-				printf("\n\n");
-				
-				exit(EXIT_FAILURE);
-			}
-			
-			gchar *filename=argv[2];
-			int max_depth=4;
-			
-			// 4 inputs (means we should expect an max_depth value too)
-			// sciteproj --generate file.xml [depth]
-			if (argc==4) {
-				gchar *max_depth_s=argv[3];
-				
-				if (!is_integer(max_depth_s)) {
-					printf(_("Expected an integer as max_depth..."));
-					printf("\n\n");
-					exit(EXIT_FAILURE);
-				} else {
-					max_depth=atoi(max_depth_s);
-				}
-			}
-			
-			//gboolean result=folder_to_xml(folder,filename,max_depth);
-			gboolean result=folder_to_xml(".",filename,max_depth);
-			
-			if (result) {
-				printf(_("Generated '%s' successfully!"),filename);
-				printf("\n\n");
-			} else {
-				exit(EXIT_FAILURE);
-			}
-			
-			exit(EXIT_SUCCESS);
-		} else {
-			
-			indata_left=argv[i];
-		}
-	}
-	
-#ifdef _DEBUG
-	if (cmd.scite_filename!=NULL) {
-		g_print("scite_filename:%s\n",cmd.scite_filename);
-	}
-#endif
-	
-	if (indata_left!=NULL) {
-		cmd.file_to_load=g_strdup(indata_left);
-	}
-	
 }
