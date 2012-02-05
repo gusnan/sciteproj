@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-05 21:07+0100\n"
-"PO-Revision-Date: 2012-02-05 21:11+0100\n"
+"POT-Creation-Date: 2012-02-06 00:02+0100\n"
+"PO-Revision-Date: 2012-02-06 00:02+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -497,21 +497,26 @@ msgstr "tolkning av alternativ misslyckades: %s"
 msgid "Generated '%s' successfully!"
 msgstr "Genererade '%s' framgångsrikt!"
 
-#: main.c:166
+#: main.c:159
+#, c-format
+msgid "Error initing preferences: %s"
+msgstr "Fel vid initiering av inställningar: %s"
+
 #: main.c:176
+#: main.c:186
 msgid "Environment variable exists, but doesn't point to a folder containing scite."
 msgstr "Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
 
-#: main.c:193
+#: main.c:203
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
 msgstr "Kunde inte hitta en körbar fil med namnet '%s'!\n"
 
-#: main.c:194
+#: main.c:204
 msgid "Checking for SciTE in the standard locations instead.\n"
 msgstr "Kollar efter SciTE på standard-platserna istället.\n"
 
-#: main.c:207
+#: main.c:217
 msgid ""
 "Warning! Couldn't locate SciTE!\n"
 "Program will start, but you won't be able to open SciTE to edit files."
@@ -519,7 +524,7 @@ msgstr ""
 "Varning! Kunde inte hitta SciTE!\n"
 "Programmet kommer att starta, men du kommer inte kunna använda SciTE för att editera filer."
 
-#: main.c:215
+#: main.c:225
 #, c-format
 msgid "Could not initialize application globals: %s"
 msgstr "Kunde inte initiera program-globaler: %s"
@@ -845,8 +850,6 @@ msgstr ""
 msgid "%s: Not a valid sciteproj XML file!"
 msgstr "%s: Är inte en giltig sciteproj XML-fil!"
 
-#~ msgid "Error initing preferences: %s"
-#~ msgstr "Fel vid initiering av inställningar: %s"
 #~ msgid "Usage: %s [OPTION] [FILE]..."
 #~ msgstr "Användning: %s [FLAGGOR] [FIL]..."
 #~ msgid "Options can be one of the following:"
