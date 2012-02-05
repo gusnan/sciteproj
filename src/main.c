@@ -143,12 +143,22 @@ int main(int argc, char *argv[])
 		printf("\n");
 		exit(EXIT_SUCCESS);
 	}
+
+	// If there is any indata left - load it as a sciteproj project
+	if (argc>1)
+		cmd.file_to_load=g_strdup_printf("%s",argv[1]);
 	
 	g_thread_init(NULL);
 	
 	init_error_strings();
 	
 	init_file_utils();
+	
+	// Init preferences
+	if (!init_prefs(&err)) {
+		g_print(_("Error init preferences: %s"), err->message);
+		return EXIT_FAILURE;
+	}
 	
 	// check environment variable
 	gchar *scite_path_env=getenv("SciTE_HOME");
@@ -224,6 +234,7 @@ int main(int argc, char *argv[])
 	} else {
 		if (gPrefs.file_to_load!=NULL) file_to_load=gPrefs.file_to_load;
 	}
+	
 	
 	
 	// Was a project file specified on the command line?
