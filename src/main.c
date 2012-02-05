@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
 	
 	// Init preferences
 	if (!init_prefs(&err)) {
-		g_print(_("Error init preferences: %s"), err->message);
+		g_print(_("Error initing preferences: %s"), err->message);
 		return EXIT_FAILURE;
 	}
 	
