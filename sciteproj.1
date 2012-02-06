@@ -1,4 +1,4 @@
-.TH sciteproj 1 "17 October 2011" "Version 0.6.00"
+.TH sciteproj 1 "6 February 2011" "Version 0.7.00"
 .SH NAME
 SciteProj - a Project Manager for the SciTE editor
 .SH DESCRIPTION
@@ -9,15 +9,18 @@ to group files in folders, and saves the project to disc in XML format.
 It is based on the program ScitePM by Roy Wood. It uses the director 
 interface of SciTE to communicate between SciTE and SciteProj.
 .SH OPTIONS
-.IP "--scite FILENAME"
+.IP "-s, --scite FILENAME"
 Sets the filename for the instance of SciTE to open.
-.IP "--version"
+.IP "-v, --version"
 Displays the version number of SciteProj
-.IP "--generate FILENAME [MAX_DEPTH]"
-Generate a sciteproj project file with the name FILENAME from the contents of the current 
-folder.  Go at most down MAX_DEPTH levels in the folder hierarchy. This option will not 
-consider adding hidden files to the generated project.
-.IP "--help"
+.IP "-g, --generate=XML_FILENAME"
+Generate a sciteproj project file with the name FILENAME from the contents of 
+the current folder.  This option will not consider adding hidden files to the 
+generated project.
+.IP "-m, --max_depth=MAX_DEPTH"
+Set maximum depth of folders to read through to MAX_DEPTH when generating
+project file.
+.IP "-h, --help"
 Display a short help
 .SH CONFIG FILE
 The config file SciteProj is using is stored in the users home directory and is 
