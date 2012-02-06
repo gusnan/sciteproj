@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-06 00:02+0100\n"
-"PO-Revision-Date: 2012-02-06 00:02+0100\n"
+"POT-Creation-Date: 2012-02-06 09:01+0100\n"
+"PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -476,8 +476,8 @@ msgid "XML_FILENAME"
 msgstr "XML_FILNAMN"
 
 #: main.c:75
-msgid "Set maximum depth of folders to read through when generating XML file"
-msgstr "Sätt maximalt djup av mappar att läsa igenom vid generering av projektfil"
+msgid "Set maximum depth of folders to read through to MAX_DEPTH when generating project file"
+msgstr "Sätt maximalt djup av mappar att läsa igenom till MAX_DJUP vid generering av projektfil"
 
 #: main.c:76
 msgid "MAX_DEPTH"
