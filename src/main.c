@@ -84,9 +84,6 @@ int main(int argc, char *argv[])
 	bind_textdomain_codeset(PACKAGE,"");
 	textdomain(PACKAGE);
 	
-	// Init gtk
-	gtk_init(&argc, &argv);
-	
 	gchar *sciteproj_description=NULL;
 	sciteproj_description=g_strdup_printf(_("SciTE Project Manager"));
 	
@@ -147,6 +144,9 @@ int main(int argc, char *argv[])
 	// If there is any indata left - load it as a sciteproj project
 	if (argc>1)
 		cmd.file_to_load=g_strdup_printf("%s",argv[1]);
+	
+	// Init gtk
+	gtk_init(&argc, &argv);
 	
 	g_thread_init(NULL);
 	
