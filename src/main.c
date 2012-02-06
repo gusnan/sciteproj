@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 			N_("Generate a sciteproj project file with name XML_FILENAME, recursively from current folder"),
 			N_("XML_FILENAME")},
 		{ "max_depth",		'm',	0, G_OPTION_ARG_INT,	&max_depth_generated,
-			N_("Set maximum depth of folders to read through when generating XML file"),
+			N_("Set maximum depth of folders to read through to MAX_DEPTH when generating project file"),
 			N_("MAX_DEPTH")},
 		{ NULL }
 	};
