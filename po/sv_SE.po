@@ -469,7 +469,7 @@ msgstr "SCITE_FILNAMN"
 
 #: main.c:72
 msgid "Generate a sciteproj project file with name XML_FILENAME, recursively from current folder"
-msgstr "Generera en sciteproj projectfil med namnet XML_FILNAMN, rekursivt från aktuell mapp"
+msgstr "Generera en projektfil för sciteproj med namnet XML_FILNAMN, rekursivt från aktuell mapp"
 
 #: main.c:73
 msgid "XML_FILENAME"
@@ -477,7 +477,7 @@ msgstr "XML_FILNAMN"
 
 #: main.c:75
 msgid "Set maximum depth of folders to read through when generating XML file"
-msgstr "Sätt maximalt djup av mappar att läsa igenom vid gererering av XML-fil"
+msgstr "Sätt maximalt djup av mappar att läsa igenom vid generering av projektfil"
 
 #: main.c:76
 msgid "MAX_DEPTH"
