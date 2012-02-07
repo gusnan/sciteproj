@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-07 10:49+0100\n"
+"POT-Creation-Date: 2012-02-07 11:17+0100\n"
 "PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -112,82 +112,6 @@ msgstr "%s: Kunde inte sätta draosläpp-data\n"
 msgid "%s: Cannot drop a group node into itself"
 msgstr "%s: Kan inte släppa en grupp i sig själv"
 
-#: error.c:61
-msgid "Could not create recent scrolled window"
-msgstr "Kunde inte skapa recent scrolled window"
-
-#: error.c:62
-msgid "Couldn't init recent treestore"
-msgstr "Kunde inte skapa recent treestore"
-
-#: error.c:63
-msgid "Couldn't init gtk treeview"
-msgstr "Kunde inte initiera gtk treeview"
-
-#: error.c:64
-msgid "Could not create GtkCellRenderer"
-msgstr "Kunde inte skapa GtkCellRenderer"
-
-#: error.c:65
-msgid "Could not create GtkTreeViewColumn"
-msgstr "Kunde inte skapa GtkTreeViewColumn"
-
-#: error.c:66
-msgid "Couldn't create GtkCellRendererPixbuf"
-msgstr "Kunde inte skapa GtkCellRendererPixbuf"
-
-#: error.c:67
-msgid "Couldn't create main Window"
-msgstr "Kunde inte skapa huvudfönstret"
-
-#: error.c:68
-msgid "Couldn't create GtkActionGroup"
-msgstr "Kunde inte skapa GtkActionGroup"
-
-#: error.c:69
-msgid "Couldn't create GtkUIManager"
-msgstr "Kunde inte skapa GtkUIManager"
-
-#: error.c:70
-msgid "Couldn't create menus from XML"
-msgstr "Kunde inte skapa menyer från XML-kod"
-
-#: error.c:71
-msgid "Could not create main scrolled window"
-msgstr "Kunde inte skapa main scrolled window"
-
-#: error.c:72
-msgid "Could not create the treestore"
-msgstr "Kunde inte skapa treestore"
-
-#: error.c:73
-msgid "Could not create recentGrid"
-msgstr "Kunde inte skapa recentGrid"
-
-#: error.c:74
-msgid "Could not create main vbox"
-msgstr "Kunde inte skapa main vbox"
-
-#: error.c:75
-msgid "Could not create main hbox"
-msgstr "Kunde inte skapa main hbox"
-
-#: error.c:76
-msgid "Could not create full vbox"
-msgstr "Kunde inte skapa full vbox"
-
-#: error.c:77 error.c:78
-msgid "Error initing statusbar"
-msgstr "Kunde inte initiera statusfältet"
-
-#: error.c:79
-msgid "Error formatting SciTE director command"
-msgstr "Fel vid formattering av Scite director-kommando"
-
-#: error.c:80
-msgid "Error calling g_io_channel_read_chars()"
-msgstr "Fel vid anrop av g_io_channel_read_chars()"
-
 #: folder_to_xml.c:229
 msgid "Error: Invalid directory!"
 msgstr "Fel: Ogiltig katalog!"
@@ -201,240 +125,240 @@ msgstr "Fel: Kunde inte byta till katalog med hjälp av g_chdir"
 msgid "Couldn't create file with the name %s!"
 msgstr "Kunde inte skapa en fil med namnet '%s'!"
 
-#: gui.c:116
+#: gui.c:114
 msgid "_File"
 msgstr "Arkiv"
 
-#: gui.c:117
+#: gui.c:115
 msgid "_Edit"
 msgstr "R_edigera"
 
-#: gui.c:118
+#: gui.c:116
 msgid "_View"
 msgstr "_Visa"
 
-#: gui.c:119
+#: gui.c:117
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: gui.c:121
+#: gui.c:119
 msgid "_Open Project"
 msgstr "Öppna projekt"
 
-#: gui.c:121
+#: gui.c:119
 msgid "Open Project"
 msgstr "Öppna projekt"
 
-#: gui.c:122
+#: gui.c:120
 msgid "_Save Project"
 msgstr "_Spara projekt"
 
-#: gui.c:122 tree_manipulation.c:286
+#: gui.c:120 tree_manipulation.c:286
 msgid "Save Project"
 msgstr "Spara projekt"
 
-#: gui.c:123
+#: gui.c:121
 msgid "Save Project As..."
 msgstr "Spara projekt som..."
 
-#: gui.c:123
+#: gui.c:121
 msgid "Save Project with a specific filename"
 msgstr "Spara projekt med ett specifikt filnamn"
 
-#: gui.c:124
+#: gui.c:122
 msgid "_Exit"
 msgstr "_Avsluta"
 
-#: gui.c:124
+#: gui.c:122
 msgid "Exit"
 msgstr "Avsluta"
 
-#: gui.c:126
+#: gui.c:124
 msgid "Create _Group"
 msgstr "Skapa _grupp"
 
-#: gui.c:126
+#: gui.c:124
 msgid "Create a group node in the project"
 msgstr "Skapar en grupp-nod i projektet"
 
-#: gui.c:127
+#: gui.c:125
 msgid "Add _File"
 msgstr "Lägg till _fil"
 
-#: gui.c:127
+#: gui.c:125
 msgid "Add a file to the project"
 msgstr "Lägg till en fil i projektet"
 
-#: gui.c:128
+#: gui.c:126
 msgid "Remove File(s)"
 msgstr "Ta bort filer"
 
-#: gui.c:128
+#: gui.c:126
 msgid "Remove selected files from the project"
 msgstr "Ta bort valda filer från projektet"
 
-#: gui.c:130
+#: gui.c:128
 msgid "Expand All Groups"
 msgstr "Expandera alla grupper"
 
-#: gui.c:131
+#: gui.c:129
 msgid "Collapse All Groups"
 msgstr "Kollapsa alla grupper"
 
-#: gui.c:133
+#: gui.c:131
 msgid "Search"
 msgstr "Sök"
 
-#: gui.c:133
+#: gui.c:131
 msgid "Search for a string in the project"
 msgstr "Sök efter en sträng i projektet"
 
-#: gui.c:135
+#: gui.c:133
 msgid "_About"
 msgstr "_Om"
 
-#: gui.c:135
+#: gui.c:133
 msgid "Show information about this application"
 msgstr "Visa information om denna applikation"
 
-#: gui.c:137 tree_manipulation.c:582
+#: gui.c:135 tree_manipulation.c:582
 msgid "Add Files"
 msgstr "Lägg till filer"
 
-#: gui.c:137
+#: gui.c:135
 msgid "Add files to the project"
 msgstr "Lägg till filer till projektet"
 
-#: gui.c:138
+#: gui.c:136
 msgid "Add Group"
 msgstr "Lägg till grupp"
 
-#: gui.c:138
+#: gui.c:136
 msgid "Add a group to the project"
 msgstr "Lägg till en grupp till projektet"
 
-#: gui.c:140
+#: gui.c:138
 msgid "Add Files to Group"
 msgstr "Lägg till filer till grupp"
 
-#: gui.c:140
+#: gui.c:138
 msgid "Add files to an existing group"
 msgstr "Lägg till filer till en existerande grupp"
 
-#: gui.c:141
+#: gui.c:139
 msgid "Add Subgroup to Group"
 msgstr "Lägg till undergrupp till grupp"
 
-#: gui.c:141
+#: gui.c:139
 msgid "Add a subgroup to an existing group"
 msgstr "Lägger till en undergrupp till en existerande grupp"
 
-#: gui.c:142
+#: gui.c:140
 msgid "Rename Group"
 msgstr "Byt namn på grupp"
 
-#: gui.c:142
+#: gui.c:140
 msgid "Rename a group"
 msgstr "Byter namn på en grupp"
 
-#: gui.c:143
+#: gui.c:141
 msgid "Remove Group From Project"
 msgstr "Ta bort grupp från projektet"
 
-#: gui.c:143
+#: gui.c:141
 msgid "Remove a group and its children from the project"
 msgstr "Ta bort en grupp och dess innehåll från projektet"
 
-#: gui.c:144
+#: gui.c:142
 msgid "Sort Group Ascending"
 msgstr "Sortera grupp stigande"
 
-#: gui.c:144
+#: gui.c:142
 msgid "Sort the filenames ascending"
 msgstr "Sorterar filnamnen i gruppen stigande"
 
-#: gui.c:145
+#: gui.c:143
 msgid "Sort Group Descending"
 msgstr "Sortera grupp fallande"
 
-#: gui.c:145
+#: gui.c:143
 msgid "Sort the filenames descending"
 msgstr "Sorterar filnamnen i gruppen fallande"
 
-#: gui.c:146 gui.c:154 gui.c:160
+#: gui.c:144 gui.c:152 gui.c:158
 msgid "Properties"
 msgstr "Egenskaper"
 
-#: gui.c:146
+#: gui.c:144
 msgid "Show group properties"
 msgstr "Visa mappegenskaper"
 
-#: gui.c:147
+#: gui.c:145
 msgid "Edit Options"
 msgstr "Editera egenskaper"
 
-#: gui.c:147
+#: gui.c:145
 msgid "Edit Program Options"
 msgstr "Editera programmets egenskaper"
 
-#: gui.c:149
+#: gui.c:147
 msgid "View Recently Opened Files"
 msgstr "Visa nyligen öppnade filer"
 
-#: gui.c:149
+#: gui.c:147
 msgid "View Recent Files"
 msgstr "Visa senaste filer"
 
-#: gui.c:151 gui.c:156
+#: gui.c:149 gui.c:154
 msgid "Open File in SciTE"
 msgstr "Öppna fil i SciTE"
 
-#: gui.c:151 gui.c:156
+#: gui.c:149 gui.c:154
 msgid "Open a file in SciTE"
 msgstr "Öppnar en fil i SciTE"
 
-#: gui.c:152
+#: gui.c:150
 msgid "Remove File From Project"
 msgstr "Ta bort fil från projektet"
 
-#: gui.c:152
+#: gui.c:150
 msgid "Remove a file from the project"
 msgstr "Ta bort en fil från projektet"
 
-#: gui.c:153
+#: gui.c:151
 msgid "Copy Filename to Clipboard"
 msgstr "Kopiera filnamn till urklipp"
 
-#: gui.c:153
+#: gui.c:151
 msgid "Copies the full path and filename to the clipboard"
 msgstr "Kopierar filnamn inklusive hela sökvägen till urklipp"
 
-#: gui.c:154 gui.c:160
+#: gui.c:152 gui.c:158
 msgid "Show file properties"
 msgstr "Visa fileegenskaper"
 
-#: gui.c:157
+#: gui.c:155
 msgid "Remove File from this List"
 msgstr "Ta bort fil från denna lista"
 
-#: gui.c:157
+#: gui.c:155
 msgid "Remove file from this List"
 msgstr "Ta bort fil från denna lista"
 
-#: gui.c:158
+#: gui.c:156
 msgid "Copy filename to clipboard"
 msgstr "Kopiera filnamn till urklipp"
 
-#: gui.c:231 gui.c:1098
+#: gui.c:229 gui.c:1096
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:852 scite_utils.c:218 search.c:831 search.c:869
+#: gui.c:850 scite_utils.c:218 search.c:831 search.c:869
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
 
-#: gui.c:864 gui.c:1052 recent_files.c:562 recent_files.c:603
+#: gui.c:862 gui.c:1050 recent_files.c:563 recent_files.c:604
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -445,7 +369,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gui.c:1218 gui.c:1241 gui.c:1263
+#: gui.c:1216 gui.c:1239 gui.c:1261
 #, c-format
 msgid "An error occurred while saving the project: %s"
 msgstr "Ett fel uppstod medan projektets sparades: %s"
@@ -500,27 +424,27 @@ msgstr "tolkning av alternativ misslyckades: %s"
 msgid "Generated '%s' successfully!"
 msgstr "Genererade '%s' framgångsrikt!"
 
-#: main.c:159
+#: main.c:157
 #, c-format
 msgid "Error initing preferences: %s"
 msgstr "Fel vid initiering av inställningar: %s"
 
-#: main.c:176 main.c:186
+#: main.c:174 main.c:184
 msgid ""
 "Environment variable exists, but doesn't point to a folder containing scite."
 msgstr ""
 "Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
 
-#: main.c:203
+#: main.c:201
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
 msgstr "Kunde inte hitta en körbar fil med namnet '%s'!\n"
 
-#: main.c:204
+#: main.c:202
 msgid "Checking for SciTE in the standard locations instead.\n"
 msgstr "Kollar efter SciTE på standard-platserna istället.\n"
 
-#: main.c:217
+#: main.c:215
 msgid ""
 "Warning! Couldn't locate SciTE!\n"
 "Program will start, but you won't be able to open SciTE to edit files."
@@ -529,7 +453,7 @@ msgstr ""
 "Programmet kommer att starta, men du kommer inte kunna använda SciTE för att "
 "editera filer."
 
-#: main.c:225
+#: main.c:223
 #, c-format
 msgid "Could not initialize application globals: %s"
 msgstr "Kunde inte initiera program-globaler: %s"
@@ -562,7 +486,7 @@ msgstr "Sökväg:"
 msgid "File size:"
 msgstr "Filstorlek:"
 
-#: recent_files.c:162
+#: recent_files.c:163
 msgid "Recently opened files:"
 msgstr "Nyligen öppnade filer:"
 
