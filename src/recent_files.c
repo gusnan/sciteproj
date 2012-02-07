@@ -548,7 +548,7 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *pat
 			
 			gchar *statusbar_text=NULL;
 			
-			statusbar_text=g_strdup_printf("Opened %s",remove_newline(get_filename_from_full_path(command)));
+			statusbar_text=g_strdup_printf(_("Opened %s"),remove_newline(get_filename_from_full_path(command)));
 			
 			set_statusbar_text(statusbar_text);
 			
