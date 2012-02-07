@@ -150,8 +150,6 @@ int main(int argc, char *argv[])
 	
 	g_thread_init(NULL);
 	
-	init_error_strings();
-	
 	init_file_utils();
 	
 	// Init preferences
@@ -267,8 +265,6 @@ EXITPOINT:
 	gui_close();
 	
 	done_prefs();
-	
-	done_error_strings();
 	
 	if (err) g_error_free(err);
 	

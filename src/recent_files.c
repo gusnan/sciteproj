@@ -78,7 +78,7 @@ GtkTreeStore* create_treestore_recent(GError **err)
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
 			"%s: %s, gtk_tree_store_new() = NULL",
 			__func__,
-			error_init_treestore
+			"Couldn't init treestore"
 		);
 	}
 	
@@ -106,7 +106,7 @@ GtkWidget *init_recent_files(GError **err)
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
 			"%s: %s, gtk_scrolled_window_new() = NULL", 
 			__func__,
-			error_init_recent_scrolled_window
+			"Couldn't init recent scrolled window"
 		);
 		
 		goto EXITPOINT;
@@ -119,7 +119,7 @@ GtkWidget *init_recent_files(GError **err)
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1 ,
 			"%s: %s", 
 			tempErr->message,
-			error_init_recent_treestore
+			"Coudn't init recent treestore"
 		);
 		goto EXITPOINT;
 	}
@@ -129,7 +129,8 @@ GtkWidget *init_recent_files(GError **err)
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
 			"%s: %s, gtk_tree_view_new_with_model() = NULL", 
 			__func__,
-			error_init_gtk_tree_view);
+			"Couldn't init recent gtk_tree_view"
+			);
 		
 		goto EXITPOINT;
 	}
@@ -142,7 +143,7 @@ GtkWidget *init_recent_files(GError **err)
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
 			"%s: %s, gtk_cell_renderer_text_new() = NULL", 
 			__func__,
-			error_init_gtk_cell_renderer
+			"Couldn't init recent gtk_cell_renderer"
 		);
 		
 		goto EXITPOINT;
@@ -153,7 +154,7 @@ GtkWidget *init_recent_files(GError **err)
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
 			"%s: %s, gtk_tree_view_column_new() = NULL", 
 			__func__,
-			error_init_gtk_tree_view_column
+			"Couldn't init recent gtk_tree_view_column"
 		);
 		
 		goto EXITPOINT;
@@ -165,7 +166,7 @@ GtkWidget *init_recent_files(GError **err)
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
 			"%s: %s, gtk_cell_renderer_pixbuf_new() = NULL",
 			__func__,
-			error_init_gtk_cell_renderer
+			"Couldn't init recent gtk_cell_renderer_pixbuf"
 		);
 		
 		goto EXITPOINT;
@@ -530,7 +531,7 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *pat
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, 
 			"%s: %s, g_strdup_printf() = NULL", 
 			__func__,
-			error_formatting_scite_command
+			"Error formatting SciTE command"
 		);
 	}
 	else {

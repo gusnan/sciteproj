@@ -151,7 +151,7 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 		if (g_io_channel_read_chars(source, buff, sizeof(buff) - 1, &bytes_read, &error) != G_IO_STATUS_NORMAL) {
 			g_print("%s: %s = %s\n", 
 				__func__, 
-				error_calling_g_io_channel,
+				"g_io_channel_read_chars failed",
 				(error != NULL) ? error->message : "<unknown>");
 		}
 		else {
