@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-07 11:17+0100\n"
+"POT-Creation-Date: 2012-02-07 12:01+0100\n"
 "PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -353,7 +353,7 @@ msgstr "Kopiera filnamn till urklipp"
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:850 scite_utils.c:218 search.c:831 search.c:869
+#: gui.c:850 recent_files.c:551 scite_utils.c:218 search.c:831 search.c:869
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
@@ -693,4 +693,3 @@ msgstr ""
 #, c-format
 msgid "%s: Not a valid sciteproj XML file!"
 msgstr "%s: Är inte en giltig sciteproj XML-fil!"
-
