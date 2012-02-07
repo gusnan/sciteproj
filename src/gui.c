@@ -482,7 +482,7 @@ gboolean setup_gui(GError **err)
 	if (!(recentGrid=gtk_grid_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR,-1,
 			"%s: %s, gtk_grid_new() = NULL",
-			error_init_recent_grid,
+			"Couldn't init recent grid",
 			__func__);
 		goto EXITPOINT;
 	}	
