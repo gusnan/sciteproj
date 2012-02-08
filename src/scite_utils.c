@@ -349,7 +349,7 @@ gboolean launch_scite(gchar *instring,GError **err)
 		if (setenv(ipcSciteName, requestPipePath, TRUE)) {
 			errCode = errno;
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
-				_("%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, errno = %d = %s"), 
+				"%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, errno = %d = %s", 
 				__func__, ipcSciteName, requestPipePath, errCode, strerror(errCode));
 			goto EXITPOINT;
 		}
@@ -527,7 +527,7 @@ gboolean launch_scite(gchar *instring,GError **err)
 			
 			// If we get here, the execlp() failed, so tell our parent and exit
 			
-			char *message = (gchar*)_("Error: Could not execute Scite from child process");
+			char *message = (gchar*)"Error: Could not execute Scite from child process";
 			int messageLength = strlen(message);
 			int bytesWritten;
 			
