@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-08 15:00+0100\n"
+"POT-Creation-Date: 2012-02-08 16:06+0100\n"
 "PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -595,11 +595,6 @@ msgstr "%s: Specificerad sökväg, '%s' är absolut"
 #, c-format
 msgid "%s: Could not allocate memory, g_try_realloc(%ld) = NULL"
 msgstr "%s: Kunde inte allokera minne, g_try_realloc(%ld) = NULL"
-
-#: tree_manipulation.c:159
-#, c-format
-msgid "%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL"
-msgstr "%s: Kunde inte skapa GtkTreeStore, gtk_tree_store_new() = NULL"
 
 #: tree_manipulation.c:311
 #, c-format
