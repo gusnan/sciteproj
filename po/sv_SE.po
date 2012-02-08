@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-08 16:06+0100\n"
+"POT-Creation-Date: 2012-02-08 16:16+0100\n"
 "PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -536,12 +536,6 @@ msgstr "Vänligen mata in en text att söka efter!\n"
 #, c-format
 msgid "Error:%s\n"
 msgstr "Fel:%s\n"
-
-#: search.c:811 search.c:849
-#, c-format
-msgid "%s: Error formatting Scite director command, g_strdup_printf() = NULL"
-msgstr ""
-"%s: Fel när formatterade Scite director-kommando, g_strdup_printf() = NULL"
 
 #: search.c:923
 msgid "Filename"
