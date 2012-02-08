@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-08 16:16+0100\n"
+"POT-Creation-Date: 2012-02-08 16:21+0100\n"
 "PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -557,11 +557,6 @@ msgstr "Hittade %d element"
 #: search.c:991
 msgid "The search didn't give any results."
 msgstr "Sökningen gav inga resultat."
-
-#: statusbar.c:47
-#, c-format
-msgid "%s: Could not init statusbar"
-msgstr "%s: Kunde inte initiera statusfältet"
 
 #: statusbar.c:57
 msgid "Welcome to SciteProj\n"
