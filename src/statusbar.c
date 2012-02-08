@@ -44,7 +44,7 @@ gboolean init_statusbar(GtkWidget *widget,GtkWidget *next_to,GError **err)
 	statusbar=gtk_statusbar_new();
 	
 	if (!statusbar) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not init statusbar"), __func__);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not init statusbar", __func__);
 		return FALSE;
 	}
 	
