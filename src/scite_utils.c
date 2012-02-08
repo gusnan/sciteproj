@@ -50,8 +50,6 @@
 #include "string_utils.h"
 #include "statusbar.h"
 
-#include "error.h"
-
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_SCITEUTILS_ERROR")
 
 

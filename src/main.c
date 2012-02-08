@@ -29,7 +29,6 @@
 
 #include <locale.h>
 
-#include "error.h"
 #include "clicked_node.h"
 #include "gui.h"
 #include "tree_manipulation.h"

@@ -37,7 +37,6 @@
 #include "scite_utils.h"
 #include "clipboard.h"
 #include "properties_dialog.h"
-#include "error.h"
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
