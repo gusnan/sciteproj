@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-08 16:21+0100\n"
+"POT-Creation-Date: 2012-02-08 17:27+0100\n"
 "PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -333,12 +333,12 @@ msgstr "Kopiera filnamn till urklipp"
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:850 recent_files.c:551 scite_utils.c:218 search.c:831 search.c:869
+#: gui.c:850 recent_files.c:553 scite_utils.c:218 search.c:831 search.c:869
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
 
-#: gui.c:862 gui.c:1050 recent_files.c:563 recent_files.c:604
+#: gui.c:862 gui.c:1050 recent_files.c:565 recent_files.c:606
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -433,11 +433,6 @@ msgstr ""
 "Programmet kommer att starta, men du kommer inte kunna använda SciTE för att "
 "editera filer."
 
-#: main.c:223
-#, c-format
-msgid "Could not initialize application globals: %s"
-msgstr "Kunde inte initiera program-globaler: %s"
-
 #: properties_dialog.c:131
 msgid "Group Properties"
 msgstr "Mappegenskaper"
@@ -466,7 +461,7 @@ msgstr "Sökväg:"
 msgid "File size:"
 msgstr "Filstorlek:"
 
-#: recent_files.c:163
+#: recent_files.c:165
 msgid "Recently opened files:"
 msgstr "Nyligen öppnade filer:"
 
