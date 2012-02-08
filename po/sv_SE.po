@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-07 12:01+0100\n"
+"POT-Creation-Date: 2012-02-08 13:20+0100\n"
 "PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -91,26 +91,6 @@ msgstr ""
 #, c-format
 msgid "SciteProj version %s\n"
 msgstr "SciteProj version %s\n"
-
-#: drag_drop.c:188 drag_drop.c:193
-#, c-format
-msgid "%s: Could not add drag/drop data: %s\n"
-msgstr "%s: Kunde inte addera draosläpp-data: %s\n"
-
-#: drag_drop.c:381 drag_drop.c:387
-#, c-format
-msgid "%s: Could not format drag/drop data: %s\n"
-msgstr "%s: Kunde inte formatera draosläpp-data: %s\n"
-
-#: drag_drop.c:407
-#, c-format
-msgid "%s: Could not set drag/drop data\n"
-msgstr "%s: Kunde inte sätta draosläpp-data\n"
-
-#: drag_drop.c:494
-#, c-format
-msgid "%s: Cannot drop a group node into itself"
-msgstr "%s: Kan inte släppa en grupp i sig själv"
 
 #: folder_to_xml.c:229
 msgid "Error: Invalid directory!"
