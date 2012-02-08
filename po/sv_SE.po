@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-08 13:20+0100\n"
+"POT-Creation-Date: 2012-02-08 15:00+0100\n"
 "PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -487,18 +487,6 @@ msgstr "Stängde SciTE"
 #, c-format
 msgid "Switched to %s"
 msgstr "Växlade till %s"
-
-#: scite_utils.c:352
-#, c-format
-msgid ""
-"%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, errno = %d = %s"
-msgstr ""
-"%s: Kunde inte starta Scite, setenv(\"%s\", \"%s\") misslyckades, errno = %d "
-"= %s"
-
-#: scite_utils.c:530
-msgid "Error: Could not execute Scite from child process"
-msgstr "Fel: Kunde inte exekvera Scite från barnprocessen"
 
 #: scite_utils.c:589
 msgid "Connecting to Scite...."
