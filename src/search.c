@@ -808,7 +808,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	// It's a file, so try to open it
 	
 	if ((command = g_strdup_printf("open:%s\n", absFilePath)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Error formatting Scite director command, g_strdup_printf() = NULL"), __func__);
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
 		goto EXITPOINT;
 	}
 	else {
@@ -846,7 +846,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 	
 	// go to the right line number:
 	if ((command = g_strdup_printf("goto:%d\n", line_number)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, _("%s: Error formatting Scite director command, g_strdup_printf() = NULL"), __func__);
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
 	}
 	else {
 		
