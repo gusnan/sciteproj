@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-08 17:27+0100\n"
+"POT-Creation-Date: 2012-02-08 17:42+0100\n"
 "PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -556,29 +556,6 @@ msgstr "Sökningen gav inga resultat."
 #: statusbar.c:57
 msgid "Welcome to SciteProj\n"
 msgstr "Välkommen till SciteProj\n"
-
-#: string_utils.c:68
-#, c-format
-msgid "%s: Specified path, '%s', is not absolute"
-msgstr "%s: Specificerad sökväg, '%s' är inte absolut"
-
-#: string_utils.c:79
-#, c-format
-msgid ""
-"%s: Could not determine current working directory, getcwd() = NULL, errno = "
-"%d"
-msgstr ""
-"%s: Kunde inte avgöra nuvarande arbetssökväg, getcwd() = NULL, errnmo = %d"
-
-#: string_utils.c:181
-#, c-format
-msgid "%s: Specified path, '%s', is absolute"
-msgstr "%s: Specificerad sökväg, '%s' är absolut"
-
-#: string_utils.c:297
-#, c-format
-msgid "%s: Could not allocate memory, g_try_realloc(%ld) = NULL"
-msgstr "%s: Kunde inte allokera minne, g_try_realloc(%ld) = NULL"
 
 #: tree_manipulation.c:311
 #, c-format
