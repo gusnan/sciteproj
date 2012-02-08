@@ -156,7 +156,7 @@ GtkTreeStore* create_treestore(GError **err)
 		sTreeStore = gtk_tree_store_new(COLUMN_EOL, TYPE_ITEMTYPE, TYPE_FILEPATH, TYPE_FILENAME, TYPE_FILESIZE, TYPE_FONTWEIGHT, TYPE_FONTWEIGHTSET, TYPE_ICON, TYPE_EXPANDED);
 		
 		if (sTreeStore == NULL) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL"), __func__);
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL", __func__);
 		}
 	}
 	
