@@ -116,11 +116,13 @@ GtkWidget *init_recent_files(GError **err)
 
 	
 	if ((recentTreeStore=create_treestore_recent(&tempErr))==NULL) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1 ,
-			"%s: %s", 
-			tempErr->message,
-			"Coudn't init recent treestore"
-		);
+		if (tempErr) {
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1 ,
+				"%s: %s", 
+				tempErr->message,
+				"Coudn't init recent treestore"
+			);
+		}
 		goto EXITPOINT;
 	}
 	
