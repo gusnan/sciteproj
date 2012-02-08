@@ -220,7 +220,7 @@ int main(int argc, char *argv[])
 	
 	// Set up the GUI
 	if (!setup_gui(&err)) {
-		g_print(_("Could not initialize application globals: %s"), err->message);
+		g_print("Could not setup the gui: %s", err->message);
 		g_print("\n");
 		goto EXITPOINT;
 	}
