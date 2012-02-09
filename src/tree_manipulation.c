@@ -448,7 +448,7 @@ gboolean load_project(gchar *projectPath, GError **err)
 	else {
 		//  Pop up a file selection dialog and let the user choose a project file
 		
-		dialog = gtk_file_chooser_dialog_new(_("Load Project"), NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+		dialog = gtk_file_chooser_dialog_new(_("Open Project"), NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
 		
 		fileFilter = gtk_file_filter_new();
 		gtk_file_filter_set_name(fileFilter, _("Project Files (*.xml)"));
