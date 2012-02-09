@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-08 17:42+0100\n"
+"POT-Creation-Date: 2012-02-09 09:29+0100\n"
 "PO-Revision-Date: 2012-02-06 09:01+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -333,12 +333,12 @@ msgstr "Kopiera filnamn till urklipp"
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:850 recent_files.c:553 scite_utils.c:218 search.c:831 search.c:869
+#: gui.c:850 recent_files.c:552 scite_utils.c:216 search.c:831 search.c:869
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
 
-#: gui.c:862 gui.c:1050 recent_files.c:565 recent_files.c:606
+#: gui.c:862 gui.c:1050 recent_files.c:564 recent_files.c:605
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -349,24 +349,29 @@ msgstr ""
 "\n"
 "%s"
 
-#: gui.c:1216 gui.c:1239 gui.c:1261
+#: gui.c:1216 gui.c:1239
 #, c-format
 msgid "An error occurred while saving the project: %s"
 msgstr "Ett fel uppstod medan projektets sparades: %s"
 
-#: main.c:68
+#: gui.c:1261
+#, c-format
+msgid "An error occurred while opening project file: %s"
+msgstr "Ett fel uppstod under öppning av projektfil: %s"
+
+#: main.c:67
 msgid "Show program version and quit"
 msgstr "Visa programversion och avsluta"
 
-#: main.c:70
+#: main.c:69
 msgid "Set a filename for the instance of SciTE to open"
 msgstr "Sätt ett filnamn för instansen av SciTE du önskar köra"
 
-#: main.c:70
+#: main.c:69
 msgid "SCITE_FILENAME"
 msgstr "SCITE_FILNAMN"
 
-#: main.c:72
+#: main.c:71
 msgid ""
 "Generate a sciteproj project file with name XML_FILENAME, recursively from "
 "current folder"
@@ -374,11 +379,11 @@ msgstr ""
 "Generera en projektfil för sciteproj med namnet XML_FILNAMN, rekursivt från "
 "aktuell mapp"
 
-#: main.c:73
+#: main.c:72
 msgid "XML_FILENAME"
 msgstr "XML_FILNAMN"
 
-#: main.c:75
+#: main.c:74
 msgid ""
 "Set maximum depth of folders to read through to MAX_DEPTH when generating "
 "project file"
@@ -386,45 +391,45 @@ msgstr ""
 "Sätt maximalt djup av mappar att läsa igenom till MAX_DJUP vid generering av "
 "projektfil"
 
-#: main.c:76
+#: main.c:75
 msgid "MAX_DEPTH"
 msgstr "MAX_DJUP"
 
-#: main.c:88
+#: main.c:87
 msgid "SciTE Project Manager"
 msgstr "SciTE Projekthanterare"
 
-#: main.c:95
+#: main.c:94
 #, c-format
 msgid "option parsing failed: %s"
 msgstr "tolkning av alternativ misslyckades: %s"
 
-#: main.c:125
+#: main.c:124
 #, c-format
 msgid "Generated '%s' successfully!"
 msgstr "Genererade '%s' framgångsrikt!"
 
-#: main.c:157
+#: main.c:156
 #, c-format
 msgid "Error initing preferences: %s"
 msgstr "Fel vid initiering av inställningar: %s"
 
-#: main.c:174 main.c:184
+#: main.c:173 main.c:183
 msgid ""
 "Environment variable exists, but doesn't point to a folder containing scite."
 msgstr ""
 "Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
 
-#: main.c:201
+#: main.c:200
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
 msgstr "Kunde inte hitta en körbar fil med namnet '%s'!\n"
 
-#: main.c:202
+#: main.c:201
 msgid "Checking for SciTE in the standard locations instead.\n"
 msgstr "Kollar efter SciTE på standard-platserna istället.\n"
 
-#: main.c:215
+#: main.c:214
 msgid ""
 "Warning! Couldn't locate SciTE!\n"
 "Program will start, but you won't be able to open SciTE to edit files."
@@ -461,7 +466,7 @@ msgstr "Sökväg:"
 msgid "File size:"
 msgstr "Filstorlek:"
 
-#: recent_files.c:165
+#: recent_files.c:164
 msgid "Recently opened files:"
 msgstr "Nyligen öppnade filer:"
 
@@ -469,25 +474,25 @@ msgstr "Nyligen öppnade filer:"
 msgid "Error!!!\n"
 msgstr "Fel!!!\n"
 
-#: scite_utils.c:186
+#: scite_utils.c:184
 #, c-format
 msgid "Closed %s"
 msgstr "Stängde %s"
 
-#: scite_utils.c:195
+#: scite_utils.c:193
 msgid "Closed SciTE"
 msgstr "Stängde SciTE"
 
-#: scite_utils.c:205
+#: scite_utils.c:203
 #, c-format
 msgid "Switched to %s"
 msgstr "Växlade till %s"
 
-#: scite_utils.c:589
+#: scite_utils.c:587
 msgid "Connecting to Scite...."
 msgstr "Ansluter till Scite...."
 
-#: scite_utils.c:638
+#: scite_utils.c:636
 msgid "Launched SciTE"
 msgstr "Startade SciTE"
 
