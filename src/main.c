@@ -237,7 +237,7 @@ int main(int argc, char *argv[])
 	// Was a project file specified on the command line?
 	if (file_to_load!=NULL) {
 		if (!load_project(file_to_load, &err)) {
-			GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "An error occurred while trying to load the specified project file: %s", err->message);
+			GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,_("An error occurred while trying to load the specified project file: %s"), err->message);
 			gtk_dialog_run(GTK_DIALOG(errDialog));
 			gtk_widget_destroy(errDialog);
 			
