@@ -1258,7 +1258,7 @@ static void openproject_menu_cb()
 	GError *err = NULL;
 	
 	if (!load_project(NULL, &err)) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while saving the project: %s"), err->message);
+		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while opening project file: %s"), err->message);
 		
 		if (dialog) {
 			gtk_dialog_run(GTK_DIALOG(dialog));
