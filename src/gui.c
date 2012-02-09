@@ -116,43 +116,43 @@ static GtkActionEntry sMenuActions[] =
 	{ "ViewMenuAction", NULL, N_("_View") },
 	{ "HelpMenuAction", NULL, N_("_Help") },
 	
-	{ "OpenProjectAction", GTK_STOCK_OPEN, N_("_Open Project"), "<control>O", N_("Open Project"), G_CALLBACK(openproject_menu_cb) },
-	{ "SaveProjectAction", GTK_STOCK_SAVE, N_("_Save Project"), "<control>S", N_("Save Project"), G_CALLBACK(saveproject_menu_cb) },
-	{ "SaveProjectAsAction", GTK_STOCK_SAVE_AS, N_("Save Project As..."), "<control><shift>S", N_("Save Project with a specific filename"), G_CALLBACK(saveproject_as_menu_cb) },
+	{ "OpenProjectAction", GTK_STOCK_OPEN, N_("_Open project"), "<control>O", N_("Open Project"), G_CALLBACK(openproject_menu_cb) },
+	{ "SaveProjectAction", GTK_STOCK_SAVE, N_("_Save project"), "<control>S", N_("Save Project"), G_CALLBACK(saveproject_menu_cb) },
+	{ "SaveProjectAsAction", GTK_STOCK_SAVE_AS, N_("Save project as..."), "<control><shift>S", N_("Save Project with a specific filename"), G_CALLBACK(saveproject_as_menu_cb) },
 	{ "ExitAction", GTK_STOCK_QUIT, N_("_Exit"), "<control>Q", N_("Exit"), G_CALLBACK(quit_menu_cb) },
 	
-	{ "CreateGroupAction", GTK_STOCK_DIRECTORY, N_("Create _Group"), "", N_("Create a group node in the project"), G_CALLBACK(creategroup_menu_cb) },
-	{ "AddFileAction", GTK_STOCK_FILE, N_("Add _File"), "", N_("Add a file to the project"), G_CALLBACK(addfile_menu_cb) },
-	{ "RemoveFileAction", GTK_STOCK_DELETE, N_("Remove File(s)"), "", N_("Remove selected files from the project"), G_CALLBACK(removeitem_menu_cb) },
+	{ "CreateGroupAction", GTK_STOCK_DIRECTORY, N_("Create _group"), "", N_("Create a group node in the project"), G_CALLBACK(creategroup_menu_cb) },
+	{ "AddFileAction", GTK_STOCK_FILE, N_("Add _file"), "", N_("Add a file to the project"), G_CALLBACK(addfile_menu_cb) },
+	{ "RemoveFileAction", GTK_STOCK_DELETE, N_("Remove file(s)"), "", N_("Remove selected files from the project"), G_CALLBACK(removeitem_menu_cb) },
 	
-	{ "ExpandAllGroupsAction", NULL, N_("Expand All Groups"), "<control><shift>E", N_("Expand All Groups"), G_CALLBACK(expand_all_items_cb) },
-	{ "CollapseAllGroupsAction", NULL, N_("Collapse All Groups"), "<control><shift>C", N_("Collapse All Groups"), G_CALLBACK(collapse_all_items_cb) },
+	{ "ExpandAllGroupsAction", NULL, N_("Expand all groups"), "<control><shift>E", N_("Expand All Groups"), G_CALLBACK(expand_all_items_cb) },
+	{ "CollapseAllGroupsAction", NULL, N_("Collapse all groups"), "<control><shift>C", N_("Collapse All Groups"), G_CALLBACK(collapse_all_items_cb) },
 	
 	{ "SearchAction", GTK_STOCK_FIND, N_("Search"), "<control>F", N_("Search for a string in the project"), G_CALLBACK(search_dialog_cb) },
 	
 	{ "AboutAction", GTK_STOCK_ABOUT, N_("_About"), "", N_("Show information about this application"), G_CALLBACK(about_menu_cb) },
 	
-	{ "AddFilesPopupAction", GTK_STOCK_FILE, N_("Add Files"), "", N_("Add files to the project"), G_CALLBACK(popup_add_files_cb) },
-	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, N_("Add Group"), "", N_("Add a group to the project"), G_CALLBACK(popup_add_group_cb) },
+	{ "AddFilesPopupAction", GTK_STOCK_FILE, N_("Add files"), "", N_("Add files to the project"), G_CALLBACK(popup_add_files_cb) },
+	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, N_("Add group"), "", N_("Add a group to the project"), G_CALLBACK(popup_add_group_cb) },
 	
-	{ "AddFilestoGroupPopupAction", GTK_STOCK_FILE, N_("Add Files to Group"), "", N_("Add files to an existing group"), G_CALLBACK(popup_add_files_cb) },
-	{ "AddSubgroupPopupAction", GTK_STOCK_DIRECTORY, N_("Add Subgroup to Group"), "", N_("Add a subgroup to an existing group"), G_CALLBACK(popup_add_group_cb) },
-	{ "RenameGroupPopupAction", GTK_STOCK_EDIT, N_("Rename Group"), "", N_("Rename a group"), G_CALLBACK(popup_rename_group_cb) },
-	{ "RemoveGroupPopupAction", GTK_STOCK_DELETE, N_("Remove Group From Project"), "", N_("Remove a group and its children from the project"), G_CALLBACK(popup_remove_node_cb) },
-	{ "SortAscendingAction", GTK_STOCK_SORT_ASCENDING, N_("Sort Group Ascending"),"",N_("Sort the filenames ascending"),G_CALLBACK(sort_ascending_cb) },
-	{ "SortDescendingAction", GTK_STOCK_SORT_DESCENDING, N_("Sort Group Descending"),"",N_("Sort the filenames descending"),G_CALLBACK(sort_descending_cb) },
+	{ "AddFilestoGroupPopupAction", GTK_STOCK_FILE, N_("Add files to group"), "", N_("Add files to an existing group"), G_CALLBACK(popup_add_files_cb) },
+	{ "AddSubgroupPopupAction", GTK_STOCK_DIRECTORY, N_("Add subgroup to group"), "", N_("Add a subgroup to an existing group"), G_CALLBACK(popup_add_group_cb) },
+	{ "RenameGroupPopupAction", GTK_STOCK_EDIT, N_("Rename group"), "", N_("Rename a group"), G_CALLBACK(popup_rename_group_cb) },
+	{ "RemoveGroupPopupAction", GTK_STOCK_DELETE, N_("Remove group from project"), "", N_("Remove a group and its children from the project"), G_CALLBACK(popup_remove_node_cb) },
+	{ "SortAscendingAction", GTK_STOCK_SORT_ASCENDING, N_("Sort group ascending"),"",N_("Sort the filenames ascending"),G_CALLBACK(sort_ascending_cb) },
+	{ "SortDescendingAction", GTK_STOCK_SORT_DESCENDING, N_("Sort group descending"),"",N_("Sort the filenames descending"),G_CALLBACK(sort_descending_cb) },
 	{ "PropertiesGroupPopupAction", GTK_STOCK_PROPERTIES, N_("Properties"), "", N_("Show group properties"), G_CALLBACK(group_properties_cb) },
-	{ "EditOptionsAction", GTK_STOCK_PROPERTIES, N_("Edit Options"), "", N_("Edit Program Options"), G_CALLBACK(edit_options_cb) },
+	{ "EditOptionsAction", GTK_STOCK_PROPERTIES, N_("Edit options"), "", N_("Edit program options"), G_CALLBACK(edit_options_cb) },
 	
-	{ "ViewRecentAction" , GTK_STOCK_PROPERTIES, N_("View Recently Opened Files"), "<control>R", N_("View Recent Files"), G_CALLBACK(recent_files_switch_visible) },
+	{ "ViewRecentAction" , GTK_STOCK_PROPERTIES, N_("View recently opened files"), "<control>R", N_("View Recent Files"), G_CALLBACK(recent_files_switch_visible) },
 	
-	{ "OpenFilePopupAction", GTK_STOCK_OPEN, N_("Open File in SciTE"), "", N_("Open a file in SciTE"), G_CALLBACK(popup_open_file_cb) },
-	{ "RemoveFilePopupAction", GTK_STOCK_DELETE, N_("Remove File From Project"), "", N_("Remove a file from the project"), G_CALLBACK(popup_remove_node_cb) },
-	{ "CopyFilenameToClipBoardAction", GTK_STOCK_COPY, N_("Copy Filename to Clipboard"), "", N_("Copies the full path and filename to the clipboard"), G_CALLBACK(copy_filename_to_clipboard_cb) },
+	{ "OpenFilePopupAction", GTK_STOCK_OPEN, N_("Open file in SciTE"), "", N_("Open a file in SciTE"), G_CALLBACK(popup_open_file_cb) },
+	{ "RemoveFilePopupAction", GTK_STOCK_DELETE, N_("Remove file From project"), "", N_("Remove a file from the project"), G_CALLBACK(popup_remove_node_cb) },
+	{ "CopyFilenameToClipBoardAction", GTK_STOCK_COPY, N_("Copy filename to clipboard"), "", N_("Copies the full path and filename to the clipboard"), G_CALLBACK(copy_filename_to_clipboard_cb) },
 	{ "PropertiesPopupAction", GTK_STOCK_PROPERTIES, N_("Properties"), "", N_("Show file properties"), G_CALLBACK(file_properties_cb) },
 	
-	{ "OpenRecentFilePopupAction", GTK_STOCK_OPEN, N_("Open File in SciTE"), "", N_("Open a file in SciTE"), G_CALLBACK(popup_open_recent_file_cb) },
-	{ "RemoveRecentFilePopupAction", GTK_STOCK_DELETE, N_("Remove File from this List"), "", N_("Remove file from this List"), G_CALLBACK(popup_remove_recent_file_cb) },
+	{ "OpenRecentFilePopupAction", GTK_STOCK_OPEN, N_("Open file in SciTE"), "", N_("Open a file in SciTE"), G_CALLBACK(popup_open_recent_file_cb) },
+	{ "RemoveRecentFilePopupAction", GTK_STOCK_DELETE, N_("Remove file from this list"), "", N_("Remove file from this List"), G_CALLBACK(popup_remove_recent_file_cb) },
 	{ "CopyRecentToClipboardAction", GTK_STOCK_COPY, N_("Copy filename to clipboard"), "", N_("Copy filename to clipboard"), G_CALLBACK(copy_recent_filename_to_clipboard_cb) },
 	
 	{ "PropertiesRecentPopupAction", GTK_STOCK_PROPERTIES, N_("Properties"), "", N_("Show file properties"), G_CALLBACK(properties_recent_file_cb) }
