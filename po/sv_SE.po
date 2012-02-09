@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-09 09:29+0100\n"
-"PO-Revision-Date: 2012-02-06 09:01+0100\n"
+"POT-Creation-Date: 2012-02-09 09:34+0100\n"
+"PO-Revision-Date: 2012-02-09 09:35+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -37,31 +37,17 @@ msgstr "Licens"
 
 #: about.c:202
 msgid ""
-"SciteProj is free software: you can redistribute it and/or modify it under "
-"the terms of the GNU General Public License as published by the Free "
-"Software Foundation, either version 3 of the License, or (at your option) "
-"any later version.\n"
+"SciteProj is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n"
 "\n"
-"SciteProj is distributed in the hope that it will be useful, but WITHOUT ANY "
-"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
-"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
-"details.\n"
+"SciteProj is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
 "\n"
-"You should have received a copy of the GNU General Public License along with "
-"SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n"
+"You should have received a copy of the GNU General Public License along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
-"SciteProj är fri mjukvara: du kan redistribuera det och/eller modifiera det "
-"enligt villkoren i GNU General Public License som publicerad av the Free "
-"Software Foundation; enligt version 3, eller (efter ditt eget val) någon "
-"senare version.\n"
+"SciteProj är fri mjukvara: du kan redistribuera det och/eller modifiera det enligt villkoren i GNU General Public License som publicerad av the Free Software Foundation; enligt version 3, eller (efter ditt eget val) någon senare version.\n"
 "\n"
-"SciteProj distribueras med förhoppningen att det kommer att vara användbart, "
-"men UTAN NÅGON SOM HELST GARANTI; utan ens den implicita garantin av "
-"SÄLJBARHET eller ÄNDAMÅLSENLIGHET FÖR NÅGOT SÄRSKILT SYFTE. Se GNU General "
-"Public License för fler detaljer.\n"
+"SciteProj distribueras med förhoppningen att det kommer att vara användbart, men UTAN NÅGON SOM HELST GARANTI; utan ens den implicita garantin av SÄLJBARHET eller ÄNDAMÅLSENLIGHET FÖR NÅGOT SÄRSKILT SYFTE. Se GNU General Public License för fler detaljer.\n"
 "\n"
-"Du bör ha fått en kopia av GNU General Public License tillsammans med detta "
-"program; om inte, se <http://www.gnu.org/licenses/>.\n"
+"Du bör ha fått en kopia av GNU General Public License tillsammans med detta program; om inte, se <http://www.gnu.org/licenses/>.\n"
 
 #: about.c:241
 msgid ""
@@ -133,7 +119,8 @@ msgstr "Öppna projekt"
 msgid "_Save Project"
 msgstr "_Spara projekt"
 
-#: gui.c:120 tree_manipulation.c:286
+#: gui.c:120
+#: tree_manipulation.c:286
 msgid "Save Project"
 msgstr "Spara projekt"
 
@@ -201,7 +188,8 @@ msgstr "_Om"
 msgid "Show information about this application"
 msgstr "Visa information om denna applikation"
 
-#: gui.c:135 tree_manipulation.c:582
+#: gui.c:135
+#: tree_manipulation.c:582
 msgid "Add Files"
 msgstr "Lägg till filer"
 
@@ -265,7 +253,9 @@ msgstr "Sortera grupp fallande"
 msgid "Sort the filenames descending"
 msgstr "Sorterar filnamnen i gruppen fallande"
 
-#: gui.c:144 gui.c:152 gui.c:158
+#: gui.c:144
+#: gui.c:152
+#: gui.c:158
 msgid "Properties"
 msgstr "Egenskaper"
 
@@ -289,11 +279,13 @@ msgstr "Visa nyligen öppnade filer"
 msgid "View Recent Files"
 msgstr "Visa senaste filer"
 
-#: gui.c:149 gui.c:154
+#: gui.c:149
+#: gui.c:154
 msgid "Open File in SciTE"
 msgstr "Öppna fil i SciTE"
 
-#: gui.c:149 gui.c:154
+#: gui.c:149
+#: gui.c:154
 msgid "Open a file in SciTE"
 msgstr "Öppnar en fil i SciTE"
 
@@ -313,7 +305,8 @@ msgstr "Kopiera filnamn till urklipp"
 msgid "Copies the full path and filename to the clipboard"
 msgstr "Kopierar filnamn inklusive hela sökvägen till urklipp"
 
-#: gui.c:152 gui.c:158
+#: gui.c:152
+#: gui.c:158
 msgid "Show file properties"
 msgstr "Visa fileegenskaper"
 
@@ -329,16 +322,24 @@ msgstr "Ta bort fil från denna lista"
 msgid "Copy filename to clipboard"
 msgstr "Kopiera filnamn till urklipp"
 
-#: gui.c:229 gui.c:1096
+#: gui.c:229
+#: gui.c:1096
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:850 recent_files.c:552 scite_utils.c:216 search.c:831 search.c:869
+#: gui.c:850
+#: recent_files.c:552
+#: scite_utils.c:216
+#: search.c:831
+#: search.c:869
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
 
-#: gui.c:862 gui.c:1050 recent_files.c:564 recent_files.c:605
+#: gui.c:862
+#: gui.c:1050
+#: recent_files.c:564
+#: recent_files.c:605
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -349,7 +350,8 @@ msgstr ""
 "\n"
 "%s"
 
-#: gui.c:1216 gui.c:1239
+#: gui.c:1216
+#: gui.c:1239
 #, c-format
 msgid "An error occurred while saving the project: %s"
 msgstr "Ett fel uppstod medan projektets sparades: %s"
@@ -372,24 +374,16 @@ msgid "SCITE_FILENAME"
 msgstr "SCITE_FILNAMN"
 
 #: main.c:71
-msgid ""
-"Generate a sciteproj project file with name XML_FILENAME, recursively from "
-"current folder"
-msgstr ""
-"Generera en projektfil för sciteproj med namnet XML_FILNAMN, rekursivt från "
-"aktuell mapp"
+msgid "Generate a sciteproj project file with name XML_FILENAME, recursively from current folder"
+msgstr "Generera en projektfil för sciteproj med namnet XML_FILNAMN, rekursivt från aktuell mapp"
 
 #: main.c:72
 msgid "XML_FILENAME"
 msgstr "XML_FILNAMN"
 
 #: main.c:74
-msgid ""
-"Set maximum depth of folders to read through to MAX_DEPTH when generating "
-"project file"
-msgstr ""
-"Sätt maximalt djup av mappar att läsa igenom till MAX_DJUP vid generering av "
-"projektfil"
+msgid "Set maximum depth of folders to read through to MAX_DEPTH when generating project file"
+msgstr "Sätt maximalt djup av mappar att läsa igenom till MAX_DJUP vid generering av projektfil"
 
 #: main.c:75
 msgid "MAX_DEPTH"
@@ -414,11 +408,10 @@ msgstr "Genererade '%s' framgångsrikt!"
 msgid "Error initing preferences: %s"
 msgstr "Fel vid initiering av inställningar: %s"
 
-#: main.c:173 main.c:183
-msgid ""
-"Environment variable exists, but doesn't point to a folder containing scite."
-msgstr ""
-"Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
+#: main.c:173
+#: main.c:183
+msgid "Environment variable exists, but doesn't point to a folder containing scite."
+msgstr "Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
 
 #: main.c:200
 #, c-format
@@ -435,8 +428,12 @@ msgid ""
 "Program will start, but you won't be able to open SciTE to edit files."
 msgstr ""
 "Varning! Kunde inte hitta SciTE!\n"
-"Programmet kommer att starta, men du kommer inte kunna använda SciTE för att "
-"editera filer."
+"Programmet kommer att starta, men du kommer inte kunna använda SciTE för att editera filer."
+
+#: main.c:240
+#, c-format
+msgid "An error occurred while trying to load the specified project file: %s"
+msgstr "Ett fel uppstod vid öppning av en specifik projektfil: %s"
 
 #: properties_dialog.c:131
 msgid "Group Properties"
@@ -470,7 +467,10 @@ msgstr "Filstorlek:"
 msgid "Recently opened files:"
 msgstr "Nyligen öppnade filer:"
 
-#: remove.c:75 remove.c:80 rename.c:136 rename.c:141
+#: remove.c:75
+#: remove.c:80
+#: rename.c:136
+#: rename.c:141
 msgid "Error!!!\n"
 msgstr "Fel!!!\n"
 
@@ -532,7 +532,10 @@ msgstr ""
 msgid "Please enter a text to search for!\n"
 msgstr "Vänligen mata in en text att söka efter!\n"
 
-#: search.c:771 search.c:785 search.c:839 search.c:878
+#: search.c:771
+#: search.c:785
+#: search.c:839
+#: search.c:878
 #, c-format
 msgid "Error:%s\n"
 msgstr "Fel:%s\n"
@@ -575,7 +578,8 @@ msgstr "Ladda Projekt"
 msgid "Project Files (*.xml)"
 msgstr "Projektfiler (*.xml)"
 
-#: tree_manipulation.c:459 tree_manipulation.c:534
+#: tree_manipulation.c:459
+#: tree_manipulation.c:534
 msgid "All Files"
 msgstr "Alla filer"
 
@@ -622,3 +626,4 @@ msgstr ""
 #, c-format
 msgid "%s: Not a valid sciteproj XML file!"
 msgstr "%s: Är inte en giltig sciteproj XML-fil!"
+
