@@ -62,6 +62,7 @@
 		<file>./GPL3.txt</file>
 		<file>./INSTALL</file>
 		<file>./README</file>
+		<file>./README.translators</file>
 		<file>./sciteproj.desktop</file>
 	</group>
 	<group name='graphics' expanded='TRUE'>
