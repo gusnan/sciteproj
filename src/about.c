@@ -238,16 +238,18 @@ void create_about_dialog()
 	textbuffer_info=gtk_text_buffer_new(NULL);
 	gtk_text_buffer_get_start_iter(textbuffer_info,&iter);
 
-	gchar *about_text2=g_strdup_printf(_(""
-											"SciteProj is based on ScitePM by\n"
+	gchar *about_text2=g_strdup_printf(""
+		"%s\n"
 											"Roy Wood <roy.wood@gmail.com> and\n"
 											"Martin Andrews <ScitePM@PLATFORMedia.com>\n\n"
-											"Many thanks to\n"
+		"%s\n"
 											"Mattias Wecksten <wecksten@gmail.com>\n"
 											"Frank Wunderlich\n\n"
-											"For more information about SciteProj, see the README file that\n"
-											"is provided with the package.")
-											);
+		"%s",
+		_("SciteProj is based on ScitePM by"),
+		_("Many thanks to"),
+		_("For more information about SciteProj, see the README file that\n"
+											"is provided with this package."));
 
 	gchar *text_to_add;
 
