@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-09 20:12+0100\n"
-"PO-Revision-Date: 2012-02-09 20:13+0100\n"
+"POT-Creation-Date: 2012-02-12 14:51+0100\n"
+"PO-Revision-Date: 2012-02-12 14:53+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -49,31 +49,23 @@ msgstr ""
 "\n"
 "Du bör ha fått en kopia av GNU General Public License tillsammans med detta program; om inte, se <http://www.gnu.org/licenses/>.\n"
 
-#: about.c:241
-msgid ""
-"SciteProj is based on ScitePM by\n"
-"Roy Wood <roy.wood@gmail.com> and\n"
-"Martin Andrews <ScitePM@PLATFORMedia.com>\n"
-"\n"
-"Many thanks to\n"
-"Mattias Wecksten <wecksten@gmail.com>\n"
-"Frank Wunderlich\n"
-"\n"
-"For more information about SciteProj, see the README file that\n"
-"is provided with the package."
-msgstr ""
-"SciteProj är baserat på ScitePM av\n"
-"Roy Wood <roy.wood@gmail.com> och\n"
-"Martin Andrews <ScitePM@PLATFORMedia.com>\n"
-"\n"
-"Många tack till\n"
-"Mattias Wecksten <wecksten@gmail.com>\n"
-"Frank Wunderlich\n"
-"\n"
-"För mer information om SciteProj, se README-filen som\n"
-"följer med detta paket."
+#: about.c:249
+msgid "SciteProj is based on ScitePM by"
+msgstr "SciteProj är baserat på ScitePM av"
 
-#: about.c:348
+#: about.c:250
+msgid "Many thanks to"
+msgstr "Många tack till"
+
+#: about.c:251
+msgid ""
+"For more information about SciteProj, see the README file that\n"
+"is provided with this package."
+msgstr ""
+"För mer information om SciteProj, se README-filen som\n"
+"är bifogad med detta paket."
+
+#: about.c:350
 #, c-format
 msgid "SciteProj version %s\n"
 msgstr "SciteProj version %s\n"
@@ -631,3 +623,4 @@ msgstr ""
 #, c-format
 msgid "%s: Not a valid sciteproj XML file!"
 msgstr "%s: Är inte en giltig sciteproj XML-fil!"
+
