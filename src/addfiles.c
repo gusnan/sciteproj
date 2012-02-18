@@ -230,7 +230,10 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 	GtkWidget* gtkEntry = NULL;
 	GtkWidget* gtkLabel = NULL;
 	GtkWidget* table = NULL;
+	
+#if GTK_MAJOR_VERSION<3
 	GtkAttachOptions options = (GtkAttachOptions) (GTK_EXPAND | GTK_SHRINK | GTK_FILL);
+#endif
 	const gchar *groupName = NULL;
 	gint dialogResponse;
 	
