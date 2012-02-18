@@ -241,16 +241,31 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 	g_signal_connect(dialog, "response",  G_CALLBACK(gtk_widget_hide), dialog);
 	
 	gtk_container_set_border_width(GTK_CONTAINER(dialog), 0);
-	
+#if GTK_MAJOR_VERSION>=3
+	table=gtk_grid_new();
+	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
+
+#else
 	table = gtk_table_new(1, 2, FALSE);
+#endif
 	
 	gtkLabel = gtk_label_new("Enter name of new group:");
-	gtk_table_attach(GTK_TABLE(table), gtkLabel, 0, 1, 0, 1, options, options, 5, 5);
 	
+#if GTK_MAJOR_VERSION>=3
+	gtk_grid_attach(GTK_GRID(table),gtkLabel,0,0,1,1);
+#else
+	gtk_table_attach(GTK_TABLE(table), gtkLabel, 0, 1, 0, 1, options, options, 5, 5);
+#endif
+
 	gtkEntry = gtk_entry_new();
 
 	g_signal_connect(G_OBJECT(gtkEntry), "activate", G_CALLBACK(entry_widget_activated_cb), dialog);
+
+#if GTK_MAJOR_VERSION>=3
+	gtk_grid_attach_next_to(GTK_GRID(table),gtkEntry,gtkLabel,GTK_POS_BOTTOM,1,1);
+#else
 	gtk_table_attach(GTK_TABLE(table), gtkEntry, 1, 2, 0, 1, options, options, 5, 5);
+#endif
 	
 	
 	GtkWidget *container_vbox=gtk_dialog_get_content_area(GTK_DIALOG(dialog));
