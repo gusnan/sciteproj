@@ -239,7 +239,7 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 	
 	
 	// Create a dialog box with a nicely-centered text entry widget
-	dialog = gtk_dialog_new_with_buttons("Choose Group Name", NULL, GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, NULL);
+	dialog = gtk_dialog_new_with_buttons(_("Choose Group Name"), NULL, GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, NULL);
 	
 	g_signal_connect(dialog, "response",  G_CALLBACK(gtk_widget_hide), dialog);
 	
@@ -253,7 +253,7 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 	table = gtk_table_new(1, 2, FALSE);
 #endif
 	
-	gtkLabel = gtk_label_new("Enter name of new group:");
+	gtkLabel = gtk_label_new(_("Enter name of new group:"));
 	
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach(GTK_GRID(table),gtkLabel,0,0,3,1);
