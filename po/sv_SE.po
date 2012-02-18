@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-18 22:11+0100\n"
-"PO-Revision-Date: 2012-02-18 22:11+0100\n"
+"POT-Creation-Date: 2012-02-18 22:16+0100\n"
+"PO-Revision-Date: 2012-02-18 22:18+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -70,11 +70,11 @@ msgstr ""
 msgid "SciteProj version %s\n"
 msgstr "SciteProj version %s\n"
 
-#: addfiles.c:242
+#: addfiles.c:245
 msgid "Choose Group Name"
 msgstr "Välj gruppnamn"
 
-#: addfiles.c:256
+#: addfiles.c:259
 msgid "Enter name of new group:"
 msgstr "Mata in namnet på den nya gruppen:"
 
@@ -478,6 +478,39 @@ msgstr "Nyligen öppnade filer:"
 #: rename.c:141
 msgid "Error!!!\n"
 msgstr "Fel!!!\n"
+
+#: remove.c:140
+msgid "Remove all selected items?"
+msgstr "Ta bort alla valda objekt?"
+
+#: remove.c:155
+#, c-format
+msgid "Remove file '%s' from project?"
+msgstr "Ta bort filen '%s' från projektet?"
+
+#: remove.c:157
+msgid "Remove file from project?"
+msgstr "Ta bort fil från projektet?"
+
+#: remove.c:162
+#, c-format
+msgid "Remove group '%s' and any contained files from project?"
+msgstr "Ta bort gruppen '%s' och alla filer som den innehåller från projektet?"
+
+#: remove.c:164
+msgid "Remove group and any contained files from project?"
+msgstr "Ta bort grupp och dess innehåll från projektet?"
+
+#: remove.c:177
+#, c-format
+msgid ""
+"Could not remove the selected node: \n"
+"\n"
+"%s"
+msgstr ""
+"Kunde inte ta bort vald nod: \n"
+"\n"
+"%s"
 
 #: scite_utils.c:184
 #, c-format
