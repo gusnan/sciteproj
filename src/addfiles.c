@@ -247,6 +247,7 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 #if GTK_MAJOR_VERSION>=3
 	table=gtk_grid_new();
 	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
+	gtk_grid_set_column_spacing(GTK_GRID(table),6);
 
 #else
 	table = gtk_table_new(1, 2, FALSE);
