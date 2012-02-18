@@ -7,7 +7,7 @@ OBJ=obj
 ifdef DEBUG
 	STD_CFLAGS=-c -Wall -g3 -ggdb -D_DEBUG
 else
-	STD_CFLAGS=-c -Wall -Wformat -Wno-format-extra-args -Wformat-security -Wformat-nonliteral -Wformat=2
+	STD_CFLAGS=-c -Wall -Wformat -Wno-format-extra-args -Wformat-security -Wformat-nonliteral -Wformat=2 -Wdeprecated-declarations
 endif
 
 OBJECTS=$(OBJ)/about.o $(OBJ)/addfiles.o $(OBJ)/clipboard.o $(OBJ)/drag_drop.o\
