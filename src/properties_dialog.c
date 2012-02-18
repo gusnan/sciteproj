@@ -252,6 +252,8 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	gtk_grid_attach(GTK_GRID(table),path,1,1,4,1);
 	gtk_grid_attach(GTK_GRID(table),filesize_label,1,2,4,1);
 	
+	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
+	
 #else
 	table=gtk_table_new(3,2,FALSE);
 	
