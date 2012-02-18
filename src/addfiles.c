@@ -22,6 +22,9 @@
  
 #include <gtk/gtk.h>
 #include <glib-object.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
 
 #include "clicked_node.h"
 
