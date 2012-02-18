@@ -137,7 +137,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 	
 	if (multiple_selected==TRUE) {
 		
-		dialog=gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, "Remove all selected items?" /*, nodename*/);
+		dialog=gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove all selected items?") /*, nodename*/);
 		
 		dialogResponse = gtk_dialog_run(GTK_DIALOG (dialog));
 		
@@ -152,16 +152,16 @@ void do_remove_node(gboolean ignore_clicked_node)
 		
 		if (clicked_node.type == ITEMTYPE_FILE) {
 			if (nodename!=NULL) {
-				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, "Remove file '%s' from project?", nodename);
+				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove file '%s' from project?"), nodename);
 			} else {
-				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, "Remove file from project?");
+				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove file from project?"));
 			}
 		}
 		else {
 			if (nodename!=NULL) {
-				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, "Remove group '%s' and any contained files from project?", nodename);
+				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove group '%s' and any contained files from project?"), nodename);
 			} else {
-				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, "Remove group and any contained files from project?");
+				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove group and any contained files from project?"));
 			}
 		}
 		
@@ -174,7 +174,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 		// Remove the node
 		
 		if (!remove_tree_node(&(clicked_node.iter), &err)) {
-			GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Could not remove the selected node: \n\n%s", err->message);
+			GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("Could not remove the selected node: \n\n%s"), err->message);
 			
 			gtk_dialog_run(GTK_DIALOG (errDialog));
 			
