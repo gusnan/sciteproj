@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
 	// Init gtk
 	gtk_init(&argc, &argv);
 	
-	g_thread_init(NULL);
+	g_type_init();
 	
 	init_file_utils();
 	
