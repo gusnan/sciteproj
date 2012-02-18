@@ -498,7 +498,11 @@ gboolean setup_gui(GError **err)
 	}	
 #endif
 	
+#if GTK_MAJOR_VERSION>=3
+	if (!(recentHbox=gtk_box_new(GTK_ORIENTATION_HORISONTAL,0))) {
+#else
 	if (!(recentHbox=gtk_hbox_new(FALSE,0))) {
+#endif
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
 			"%s: %s, gtk_hbox_new() = NULL",
 			__func__,
