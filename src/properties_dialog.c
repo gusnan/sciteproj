@@ -241,7 +241,18 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	gtk_misc_set_alignment(GTK_MISC(label2),0,0);
 	gtk_misc_set_alignment(GTK_MISC(label3),0,0);
 	
+#if GTK_MAJOR_VERSION>=3
+	table=gtk_grid_new();
 	
+	gtk_grid_attach(GTK_GRID(table),label1,0,0,1,1);
+	gtk_grid_attach(GTK_GRID(table),label2,0,1,1,1);
+	gtk_grid_attach(GTK_GRID(table),label3,0,2,1,1);
+	
+	gtk_grid_attach(GTK_GRID(table),filename,1,0,4,1);
+	gtk_grid_attach(GTK_GRID(table),path,1,1,4,1);
+	gtk_grid_attach(GTK_GRID(table),filesize_label,1,2,4,1);
+	
+#else
 	table=gtk_table_new(3,2,FALSE);
 	
 	gtk_table_attach_defaults(GTK_TABLE(table),label1,0,1,0,1);
@@ -256,7 +267,7 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	gtk_table_set_col_spacings(GTK_TABLE(table),5);
 	
 	gtk_container_set_border_width(GTK_CONTAINER(table),5);
-	
+#endif	
 	
 	container_vbox=gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	gtk_box_pack_start(GTK_BOX(container_vbox),table,TRUE,TRUE,0);
