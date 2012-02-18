@@ -265,7 +265,7 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 	g_signal_connect(G_OBJECT(gtkEntry), "activate", G_CALLBACK(entry_widget_activated_cb), dialog);
 
 #if GTK_MAJOR_VERSION>=3
-	gtk_grid_attach_next_to(GTK_GRID(table),gtkEntry,gtkLabel,GTK_POS_BOTTOM,3,1);
+	gtk_grid_attach_next_to(GTK_GRID(table),gtkEntry,gtkLabel,GTK_POS_RIGHT,3,1);
 #else
 	gtk_table_attach(GTK_TABLE(table), gtkEntry, 1, 2, 0, 1, options, options, 5, 5);
 #endif
