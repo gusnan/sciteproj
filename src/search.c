@@ -670,7 +670,7 @@ static void search_button_clicked_cb(GtkButton *button,gpointer user_data)
 			
 			data->queue=g_async_queue_new();
 
-#if GLIB_CHECK_VERSION(2,30,0)
+#if GLIB_CHECK_VERSION(2,32,0)
 			thread=g_thread_new("search_thread",(GThreadFunc)thread_func,NULL);
 #else			
 			thread=g_thread_create((GThreadFunc)thread_func,data,TRUE,NULL);
