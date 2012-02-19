@@ -121,7 +121,7 @@ static GtkActionEntry sMenuActions[] =
 	{ "SaveProjectAsAction", GTK_STOCK_SAVE_AS, N_("Save project as..."), "<control><shift>S", N_("Save Project with a specific filename"), G_CALLBACK(saveproject_as_menu_cb) },
 	{ "ExitAction", GTK_STOCK_QUIT, N_("_Exit"), "<control>Q", N_("Exit"), G_CALLBACK(quit_menu_cb) },
 	
-	{ "CreateGroupAction", GTK_STOCK_DIRECTORY, N_("Create _group"), "", N_("Create a group node in the project"), G_CALLBACK(creategroup_menu_cb) },
+	{ "CreateGroupAction", GTK_STOCK_DIRECTORY, N_("Create _group"), "", N_("Create a new group in the project"), G_CALLBACK(creategroup_menu_cb) },
 	{ "AddFileAction", GTK_STOCK_FILE, N_("Add _file"), "", N_("Add a file to the project"), G_CALLBACK(addfile_menu_cb) },
 	{ "RemoveFileAction", GTK_STOCK_DELETE, N_("Remove file(s)"), "", N_("Remove selected files from the project"), G_CALLBACK(removeitem_menu_cb) },
 	
@@ -133,7 +133,7 @@ static GtkActionEntry sMenuActions[] =
 	{ "AboutAction", GTK_STOCK_ABOUT, N_("_About"), "", N_("Show information about this application"), G_CALLBACK(about_menu_cb) },
 	
 	{ "AddFilesPopupAction", GTK_STOCK_FILE, N_("Add files"), "", N_("Add files to the project"), G_CALLBACK(popup_add_files_cb) },
-	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, N_("Add group"), "", N_("Add a group to the project"), G_CALLBACK(popup_add_group_cb) },
+	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, N_("Create group"), "", N_("Create a new group in the project"), G_CALLBACK(popup_add_group_cb) },
 	
 	{ "AddFilestoGroupPopupAction", GTK_STOCK_FILE, N_("Add files to group"), "", N_("Add files to an existing group"), G_CALLBACK(popup_add_files_cb) },
 	{ "AddSubgroupPopupAction", GTK_STOCK_DIRECTORY, N_("Add subgroup to group"), "", N_("Add a subgroup to an existing group"), G_CALLBACK(popup_add_group_cb) },
