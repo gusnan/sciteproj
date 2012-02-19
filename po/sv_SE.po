@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-19 14:12+0100\n"
-"PO-Revision-Date: 2012-02-19 14:12+0100\n"
+"POT-Creation-Date: 2012-02-19 14:17+0100\n"
+"PO-Revision-Date: 2012-02-19 14:18+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -71,8 +71,8 @@ msgid "SciteProj version %s\n"
 msgstr "SciteProj version %s\n"
 
 #: addfiles.c:245
-msgid "Choose Group Name"
-msgstr "Välj gruppnamn"
+msgid "Create Group"
+msgstr "Skapa Grupp"
 
 #: addfiles.c:259
 msgid "Enter name of new group:"
