@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.6.07\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-02-18 22:16+0100\n"
-"PO-Revision-Date: 2012-02-18 22:18+0100\n"
+"POT-Creation-Date: 2012-02-19 14:12+0100\n"
+"PO-Revision-Date: 2012-02-19 14:12+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -142,12 +142,14 @@ msgid "Exit"
 msgstr "Avsluta"
 
 #: gui.c:124
+#: gui.c:136
 msgid "Create _group"
 msgstr "Skapa _grupp"
 
 #: gui.c:124
-msgid "Create a group node in the project"
-msgstr "Skapar en grupp-nod i projektet"
+#: gui.c:136
+msgid "Create a new group in the project"
+msgstr "Skapar en ny grupp i projektet"
 
 #: gui.c:125
 msgid "Add _file"
@@ -204,14 +206,6 @@ msgstr "Lägg till filer"
 #: gui.c:135
 msgid "Add files to the project"
 msgstr "Lägg till filer till projektet"
-
-#: gui.c:136
-msgid "Add group"
-msgstr "Lägg till grupp"
-
-#: gui.c:136
-msgid "Add a group to the project"
-msgstr "Lägg till en grupp till projektet"
 
 #: gui.c:138
 msgid "Add files to group"
