@@ -133,7 +133,7 @@ static GtkActionEntry sMenuActions[] =
 	{ "AboutAction", GTK_STOCK_ABOUT, N_("_About"), "", N_("Show information about this application"), G_CALLBACK(about_menu_cb) },
 	
 	{ "AddFilesPopupAction", GTK_STOCK_FILE, N_("Add files"), "", N_("Add files to the project"), G_CALLBACK(popup_add_files_cb) },
-	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, N_("Create group"), "", N_("Create a new group in the project"), G_CALLBACK(popup_add_group_cb) },
+	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, N_("Create _group"), "", N_("Create a new group in the project"), G_CALLBACK(popup_add_group_cb) },
 	
 	{ "AddFilestoGroupPopupAction", GTK_STOCK_FILE, N_("Add files to group"), "", N_("Add files to an existing group"), G_CALLBACK(popup_add_files_cb) },
 	{ "AddSubgroupPopupAction", GTK_STOCK_DIRECTORY, N_("Add subgroup to group"), "", N_("Add a subgroup to an existing group"), G_CALLBACK(popup_add_group_cb) },
