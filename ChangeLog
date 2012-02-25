@@ -5,6 +5,7 @@ ChangeLog:
 0.7.00
 	* Make it possible to hide the statusbar to save screen space
 	* Made SciteProj translatable using gettext
+	* Complete GTK3 migration
 
 0.6.06
 	* Update makefile to nicely use obj folder again
