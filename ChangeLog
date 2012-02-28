@@ -2,6 +2,9 @@
 ChangeLog:
 ----------
 
+0.7.01
+	* Add LIB_CFLAGS to dependency generation in Makefile
+
 0.7.00
 	* Make it possible to hide the statusbar to save screen space
 	* Made SciteProj translatable using gettext
