@@ -51,6 +51,7 @@
 		<file>./sciteproj.xml</file>
 		<file>./sciteproj.1</file>
 		<file>./Makefile</file>
+		<file>./VERSION</file>
 	</group>
 	<group name='po' expanded='TRUE'>
 		<file>./po/Makefile</file>
