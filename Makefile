@@ -98,6 +98,6 @@ uninstall:
 	${MAKE} -C po uninstall
 
 $(DEPEND):
-	$(CC) $(LIB_CFLAGS) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" > $(DEPEND)
+	$(CC) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" > $(DEPEND)
 
 -include $(DEPEND)
