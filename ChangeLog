@@ -2,6 +2,9 @@
 ChangeLog:
 ----------
 
+0.7.02
+	* Really fix the dependency generation
+
 0.7.01
 	* Add LIB_CFLAGS to dependency generation in Makefile
 
