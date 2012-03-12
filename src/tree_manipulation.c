@@ -668,12 +668,11 @@ EXITPOINT:
 			gchar *tempstring = (gchar *) (listIter->data);
 			
 			if (q<=10) {
-			
-			temp=g_strdup_printf("%s%s\n",result_string,get_filename_from_full_path(tempstring));
+				temp=g_strdup_printf("%s%s\n",result_string,get_filename_from_full_path(tempstring));
 
-			g_free(result_string);
-			
-			result_string=temp;
+				g_free(result_string);
+				
+				result_string=temp;
 			}
 			
 			q++;
