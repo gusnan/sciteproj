@@ -2,6 +2,10 @@
 ChangeLog:
 ----------
 
+0.7.04
+	* Remove translation context from a string where it isn't required (and 
+	  causes build failure)
+
 0.7.03
 	* Add context to menu translatable strings
 	* Updated build instructions with gettext info
