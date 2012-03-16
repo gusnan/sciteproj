@@ -11,15 +11,16 @@ Get a copy of the sciteproj sources, and create a sciteproj.pot file:
 cd po 
 make sciteproj.pot
 
-Copy the sciteproj.pot to [LANGUAGE ABBREV].po, (replace [LANGUAGE ABBREV] with
-the correct abbreviation for your language, e.g. 'sv_SE' if you are translating
-into Swedish).
+Generate a new po for your language with sciteproj.pot as input:
 
-cp sciteproj.pot sv_SE.po
+msginit --input=sciteproj.pot
 
-and start translating all strings in the sv_SE.po using your favourite 
-texteditor, or a "gettext catalogs (.po files) editor" like poedit (which can be
-found at http://www.poedit.net.)
+This will read your environment, and init the translation meta information with 
+values based on that info. See msginit --help for more info.
+
+Then start translating all strings in the po using your favourite texteditor, 
+or a "gettext catalogs (.po files) editor" like poedit (which can be found at 
+http://www.poedit.net.)
 
 
 Checking your translation for errors and completeness
