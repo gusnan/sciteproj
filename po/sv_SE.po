@@ -415,7 +415,7 @@ msgstr "Miljövariabeln finns, men hänvisar inte till någon mapp som innehåll
 #: main.c:200
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
-msgstr "Kunde inte hitta en körbar fil med namnet '%s'!\n"
+msgstr "Kunde inte hitta en körbar fil för SciTE med namnet '%s'!\n"
 
 #: main.c:201
 msgid "Checking for SciTE in the standard locations instead.\n"
