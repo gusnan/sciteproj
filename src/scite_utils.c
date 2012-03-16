@@ -336,7 +336,9 @@ gboolean launch_scite(gchar *instring,GError **err)
 			
 		if (setenv(ipcDirectorName, responsePipePath, TRUE)) {
 			errCode = errno;
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, errno = %d = %s", __func__, ipcDirectorName, responsePipePath, errCode, strerror(errCode));
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
+				"%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, error = %s", 
+			__func__, ipcDirectorName, responsePipePath, strerror(errCode));
 			goto EXITPOINT;
 		}
 		
@@ -347,8 +349,8 @@ gboolean launch_scite(gchar *instring,GError **err)
 		if (setenv(ipcSciteName, requestPipePath, TRUE)) {
 			errCode = errno;
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
-				"%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, errno = %d = %s", 
-				__func__, ipcSciteName, requestPipePath, errCode, strerror(errCode));
+				"%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, error = %s", 
+				__func__, ipcSciteName, requestPipePath, strerror(errCode));
 			goto EXITPOINT;
 		}
 		
@@ -358,16 +360,16 @@ gboolean launch_scite(gchar *instring,GError **err)
 		if (remove(responsePipePath) && errno != ENOENT) {
 			errCode = errno;
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
-					"%s: Could not launch Scite, remove(\"%s\") failed, errno = %d = %s", 
-					__func__, responsePipePath, errCode, strerror(errCode));
+					"%s: Could not launch Scite, remove(\"%s\") failed, error = %s", 
+					__func__, responsePipePath, strerror(errCode));
 			goto EXITPOINT;
 		}
 		
 		if (remove(requestPipePath) && errno != ENOENT) {
 			errCode = errno;
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
-				"%s: Could not launch Scite, remove(\"%s\") failed, errno = %d = %s",
-				__func__, requestPipePath, errCode, strerror(errCode));
+				"%s: Could not launch Scite, remove(\"%s\") failed, error = %s",
+				__func__, requestPipePath, strerror(errCode));
 			goto EXITPOINT;
 		}
 		
@@ -377,8 +379,8 @@ gboolean launch_scite(gchar *instring,GError **err)
 		if (mkfifo(responsePipePath, 0777)) {
 			errCode = errno;
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, 
-				"%s: Could not launch Scite, mkfifo(\"%s\") failed, errno = %d = %s",
-				__func__, responsePipePath, errCode, strerror(errCode));
+				"%s: Could not launch Scite, mkfifo(\"%s\") failed, error = %s",
+				__func__, responsePipePath, strerror(errCode));
 			goto EXITPOINT;
 		}
 		
@@ -388,8 +390,8 @@ gboolean launch_scite(gchar *instring,GError **err)
 		if ((sResponsePipeFD = open(responsePipePath, O_RDONLY | O_NONBLOCK)) <= 0) {
 			errCode = errno;
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-				"%s: Could not launch Scite, open(\"%s\") failed, errno = %d = %s",
-				__func__, responsePipePath, errCode, strerror(errCode));
+				"%s: Could not launch Scite, open(\"%s\") failed, error = %s",
+				__func__, responsePipePath, strerror(errCode));
 			goto EXITPOINT;
 		}
 		
@@ -398,8 +400,8 @@ gboolean launch_scite(gchar *instring,GError **err)
 		if ((sResponsePipeGIOChannel = g_io_channel_unix_new(sResponsePipeFD)) == NULL) {
 			errCode = errno;
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-				"%s: Could not launch Scite, g_io_channel_unix_new(\"%s\") failed, errno = %d = %s",
-				__func__, responsePipePath, errCode, strerror(errCode));
+				"%s: Could not launch Scite, g_io_channel_unix_new(\"%s\") failed, error = %s",
+				__func__, responsePipePath, strerror(errCode));
 			goto EXITPOINT;
 		}
 		
@@ -607,8 +609,8 @@ gboolean launch_scite(gchar *instring,GError **err)
 		if ((sRequestPipeFD = open(requestPipePath, O_WRONLY | O_NONBLOCK)) <= 0) {
 			errCode = errno;
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-				"%s: Could not launch Scite, open(\"%s\") failed, errno = %d = %s",
-				__func__, requestPipePath, errCode, strerror(errCode));
+				"%s: Could not launch Scite, open(\"%s\") failed, error = %s",
+				__func__, requestPipePath, strerror(errCode));
 			goto EXITPOINT;
 		}
 		
