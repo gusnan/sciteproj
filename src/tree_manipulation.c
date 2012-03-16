@@ -520,11 +520,14 @@ void build_file_filter(int n, GtkFileFilter* fileFilter ) {
 		gtk_file_filter_add_pattern(fileFilter, "*.php*");
 		break;
 	case 2 : 
-		gtk_file_filter_set_name(fileFilter, _("Java* Files"));
-		gtk_file_filter_add_pattern(fileFilter, "*.js");
+		gtk_file_filter_set_name(fileFilter, _("Java Files"));
 		gtk_file_filter_add_pattern(fileFilter, "*.java");
 		break;
-	case 3 : 
+	case 3 :
+		gtk_file_filter_set_name(fileFilter, _("JavaScript Files"));
+		gtk_file_filter_add_pattern(fileFilter, "*.js");
+		break;
+	case 4 : 
 		gtk_file_filter_set_name(fileFilter, _("HTML Files"));
 		gtk_file_filter_add_pattern(fileFilter, "*.html");
 		gtk_file_filter_add_pattern(fileFilter, "*.htm");
@@ -593,7 +596,7 @@ gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err)
 		build_file_filter(gPrefs.last_file_filter, fileFilter);
 		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), fileFilter);
 	}
-	for(i=0; i<5;i++) {
+	for(i=0; i<6;i++) {
 		fileFilter = gtk_file_filter_new();
 		build_file_filter(i, fileFilter);
 		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), fileFilter);
