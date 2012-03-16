@@ -43,6 +43,7 @@ void create_about_dialog();
 gboolean handle_about_close_event(GtkWidget *widget,GdkEvent *event,gpointer user_data);
 void link_button_cb(GtkButton *button,gpointer user_data);
 
+gchar *version_string=NULL;
 
 /**
  * show_about_dialog
@@ -128,15 +129,15 @@ void create_about_dialog()
 
 	// Show version of SciteProj
 
-	gchar *version_string;
+	gchar *about_dialog_version_string;
 
 #ifdef _DEBUG
-	version_string=g_strdup_printf(_("version %s DEBUG"),sVersion);
+	about_dialog_version_string=g_strdup_printf("%s DEBUG",version_string);
 #else
-	version_string=g_strdup_printf(_("version %s"),sVersion);
+	about_dialog_version_string=g_strdup_printf("%s",version_string);
 #endif
 
-	version_string_label=gtk_label_new(version_string);
+	version_string_label=gtk_label_new(about_dialog_version_string);
 	gtk_label_set_selectable(GTK_LABEL(version_string_label),FALSE);
 	
 #if GTK_MAJOR_VERSION>=3
@@ -347,7 +348,7 @@ void create_about_dialog()
  */
 void show_version()
 {
-	g_print(_("SciteProj version %s\n"), sVersion);
+	g_print("SciteProj %s\n",version_string);
 }
 
 
@@ -371,4 +372,22 @@ void link_button_cb(GtkButton *button,gpointer user_data)
 	GtkWidget *linkbutton=(GtkWidget*)(user_data);
 
 	gtk_link_button_set_visited(GTK_LINK_BUTTON(linkbutton),FALSE);
+}
+
+
+/**
+ *
+ */
+void init_version_string()
+{
+	version_string=g_strdup_printf(_("version %s"),SCITEPROJ_VERSION);
+}
+
+
+/**
+ *
+ */
+void done_version_string()
+{
+	g_free(version_string);
 }

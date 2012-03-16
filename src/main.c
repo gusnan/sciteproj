@@ -128,8 +128,9 @@ int main(int argc, char *argv[])
 		}
 		
 		exit(EXIT_SUCCESS);
-		
 	}
+	
+	init_version_string();
 	
 	/*
 		Show SciteProj version 
@@ -137,6 +138,7 @@ int main(int argc, char *argv[])
 	if (version) {
 		show_version();
 		printf("\n");
+		done_version_string();
 		exit(EXIT_SUCCESS);
 	}
 
@@ -154,6 +156,7 @@ int main(int argc, char *argv[])
 	// Init preferences
 	if (!init_prefs(&err)) {
 		g_print(_("Error initing preferences: %s"), err->message);
+		done_version_string();
 		return EXIT_FAILURE;
 	}
 	
@@ -264,6 +267,8 @@ EXITPOINT:
 	gui_close();
 	
 	done_prefs();
+	
+	done_version_string();
 	
 	if (err) g_error_free(err);
 	
