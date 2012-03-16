@@ -148,7 +148,7 @@ static GtkActionEntry sMenuActions[] =
 	
 	{ "OpenFilePopupAction", GTK_STOCK_OPEN, N_("Open file in SciTE"), "", N_("Open a file in SciTE"), G_CALLBACK(popup_open_file_cb) },
 	{ "RemoveFilePopupAction", GTK_STOCK_DELETE, N_("Remove file From project"), "", N_("Remove a file from the project"), G_CALLBACK(popup_remove_node_cb) },
-	{ "CopyFilenameToClipBoardAction", GTK_STOCK_COPY, NC_("Copy filename to clipboard"), "", N_("Copies the full path and filename to the clipboard"), G_CALLBACK(copy_filename_to_clipboard_cb) },
+	{ "CopyFilenameToClipBoardAction", GTK_STOCK_COPY, N_("Copy filename to clipboard"), "", N_("Copies the full path and filename to the clipboard"), G_CALLBACK(copy_filename_to_clipboard_cb) },
 	{ "PropertiesPopupAction", GTK_STOCK_PROPERTIES, NC_("RightClickFilePopup","Properties"), "", N_("Show file properties"), G_CALLBACK(file_properties_cb) },
 	
 	{ "OpenRecentFilePopupAction", GTK_STOCK_OPEN, N_("Open file in SciTE"), "", N_("Open a file in SciTE"), G_CALLBACK(popup_open_recent_file_cb) },
