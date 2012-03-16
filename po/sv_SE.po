@@ -93,7 +93,7 @@ msgstr "Kunde inte skapa en fil med namnet '%s'!"
 
 #: gui.c:114
 msgid "_File"
-msgstr "Arkiv"
+msgstr "_Arkiv"
 
 #: gui.c:115
 msgid "_Edit"
