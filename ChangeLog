@@ -2,6 +2,11 @@
 ChangeLog:
 ----------
 
+0.7.03
+	* Add context to menu translatable strings
+	* Updated build instructions with gettext info
+	* Removed printing non-informational error numbers
+
 0.7.02
 	* Really fix the dependency generation
 
