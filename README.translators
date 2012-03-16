@@ -22,6 +22,9 @@ Then start translating all strings in the po using your favourite texteditor,
 or a "gettext catalogs (.po files) editor" like poedit (which can be found at 
 http://www.poedit.net.)
 
+Note that hot-keys are illustrated with the "_" character, the character 
+following "_" is  the keyboard shortcut for that menu item.
+
 
 Checking your translation for errors and completeness
 -----------------------------------------------------
