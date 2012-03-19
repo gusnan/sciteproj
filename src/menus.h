@@ -226,7 +226,7 @@ struct ContextString menustrings[]= {
 	
 	{ "Menu|Popup|RecentFile","Properties"},
 
-	{NULL,NULL}
+	{ NULL,NULL}
 };
 
 
