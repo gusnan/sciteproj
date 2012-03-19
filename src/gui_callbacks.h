@@ -24,16 +24,7 @@
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
-
-//gint window_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer data);
-//void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkTreeViewColumn *column, gpointer userData);
-//gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *event, gpointer userData);
-
-//static void ask_name_add_group(GtkTreeIter *nodeIter);
-
 void row_expand_or_collapse_cb(GtkTreeView *treeview, GtkTreeIter *arg1, GtkTreePath *arg2, gpointer user_data);
-
-//static void menu_add_widget_cb(GtkUIManager *ui, GtkWidget *widget, GtkContainer *container);
 
 void quit_menu_cb();
 void about_menu_cb();
