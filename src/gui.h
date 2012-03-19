@@ -58,5 +58,6 @@ void update_project_is_dirty(gboolean dirty);
 
 gboolean dialog_response_is_exit(gint test);
 
+void recent_files_switch_visible();
 
 #endif /*__HEADER_GUI_*/

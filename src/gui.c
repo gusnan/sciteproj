@@ -56,6 +56,8 @@
 #include "recent_files.h"
 #include "filelist.h"
 
+#include "gui_callbacks.h"
+
 #include "menus.h"
 
 #include "search.h"
@@ -63,44 +65,20 @@
 #include "gtk3_compat.h"
 
 
-#define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
+
 
 
 // Forward-declare static functions
-
-//gboolean dialog_response_is_exit(gint test);
 
 static gint window_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer data);
 static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkTreeViewColumn *column, gpointer userData);
 static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *event, gpointer userData);
 
-//static void ask_name_add_group(GtkTreeIter *nodeIter);
-
-static void row_expand_or_collapse_cb(GtkTreeView *treeview, GtkTreeIter *arg1, GtkTreePath *arg2, gpointer user_data);
-
-//static void menu_add_widget_cb(GtkUIManager *ui, GtkWidget *widget, GtkContainer *container);
-
-static void quit_menu_cb();
-static void about_menu_cb();
-static void saveproject_menu_cb();
-static void saveproject_as_menu_cb();
-static void openproject_menu_cb();
-//static void addfile_menu_cb();
-static void creategroup_menu_cb();
-
-static void popup_open_file_cb();
-
-static void expand_all_items_cb();
-static void collapse_all_items_cb();
-
-static void sort_ascending_cb();
-static void sort_descending_cb();
+//gboolean dialog_response_is_exit(gint test);
 
 void recent_files_switch_visible();
 
 gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,const gchar *key,GtkTreeIter *iter,gpointer search_data);
-
-static void edit_options_cb();
 
 gboolean is_name_valid(gchar *instring);
 
@@ -108,56 +86,6 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData);
 
 gchar *window_saved_title=NULL;
 
-
-static GtkActionEntry sMenuActions[] = 
-{
-	{ "FileMenuAction", NULL, N_("_File") },
-	{ "EditMenuAction", NULL, N_("_Edit") },
-	{ "ViewMenuAction", NULL, N_("_View") },
-	{ "HelpMenuAction", NULL, N_("_Help") },
-	
-	{ "OpenProjectAction", GTK_STOCK_OPEN, NC_("File|","_Open project"), "<control>O", N_("Open Project"), G_CALLBACK(openproject_menu_cb) },
-	{ "SaveProjectAction", GTK_STOCK_SAVE, NC_("File|","_Save project"), "<control>S", N_("Save Project"), G_CALLBACK(saveproject_menu_cb) },
-	{ "SaveProjectAsAction", GTK_STOCK_SAVE_AS, NC_("File|","Save project as..."), "<control><shift>S", N_("Save Project with a specific filename"), G_CALLBACK(saveproject_as_menu_cb) },
-	{ "ExitAction", GTK_STOCK_QUIT, NC_("File|","_Exit"), "<control>Q", N_("Exit"), G_CALLBACK(quit_menu_cb) },
-	
-	{ "CreateGroupAction", GTK_STOCK_DIRECTORY, NC_("Edit|","Create _group"), "", N_("Create a new group in the project"), G_CALLBACK(creategroup_menu_cb) },
-	{ "AddFileAction", GTK_STOCK_FILE, NC_("Edit|","Add _file"), "", N_("Add a file to the project"), G_CALLBACK(addfile_menu_cb) },
-	{ "RemoveFileAction", GTK_STOCK_DELETE, NC_("Edit|","Remove file(s)"), "", N_("Remove selected files from the project"), G_CALLBACK(removeitem_menu_cb) },
-	
-	{ "ExpandAllGroupsAction", NULL, NC_("Edit|","Expand all groups"), "<control><shift>E", N_("Expand All Groups"), G_CALLBACK(expand_all_items_cb) },
-	{ "CollapseAllGroupsAction", NULL, NC_("Edit|","Collapse all groups"), "<control><shift>C", N_("Collapse All Groups"), G_CALLBACK(collapse_all_items_cb) },
-	
-	{ "SearchAction", GTK_STOCK_FIND, NC_("Edit|","Search"), "<control>F", N_("Search for a string in the project"), G_CALLBACK(search_dialog_cb) },
-	
-	{ "AboutAction", GTK_STOCK_ABOUT, NC_("Help|","_About"), "", N_("Show information about this application"), G_CALLBACK(about_menu_cb) },
-	
-	{ "AddFilesPopupAction", GTK_STOCK_FILE, N_("Add files"), "", N_("Add files to the project"), G_CALLBACK(popup_add_files_cb) },
-	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, N_("Create _group"), "", N_("Create a new group in the project"), G_CALLBACK(popup_add_group_cb) },
-	
-	{ "AddFilestoGroupPopupAction", GTK_STOCK_FILE, N_("Add files to group"), "", N_("Add files to an existing group"), G_CALLBACK(popup_add_files_cb) },
-	{ "AddSubgroupPopupAction", GTK_STOCK_DIRECTORY, N_("Add subgroup to group"), "", N_("Add a subgroup to an existing group"), G_CALLBACK(popup_add_group_cb) },
-	{ "RenameGroupPopupAction", GTK_STOCK_EDIT, N_("Rename group"), "", N_("Rename a group"), G_CALLBACK(popup_rename_group_cb) },
-	{ "RemoveGroupPopupAction", GTK_STOCK_DELETE, N_("Remove group from project"), "", N_("Remove a group and its children from the project"), G_CALLBACK(popup_remove_node_cb) },
-	{ "SortAscendingAction", GTK_STOCK_SORT_ASCENDING, N_("Sort group ascending"),"",N_("Sort the filenames ascending"),G_CALLBACK(sort_ascending_cb) },
-	{ "SortDescendingAction", GTK_STOCK_SORT_DESCENDING, N_("Sort group descending"),"",N_("Sort the filenames descending"),G_CALLBACK(sort_descending_cb) },
-	{ "PropertiesGroupPopupAction", GTK_STOCK_PROPERTIES, NC_("RightClickGroupPopup","Properties"), "", N_("Show group properties"), G_CALLBACK(group_properties_cb) },
-	{ "EditOptionsAction", GTK_STOCK_PROPERTIES, NC_("Edit|","Edit options"), "", N_("Edit program options"), G_CALLBACK(edit_options_cb) },
-	
-	{ "ViewRecentAction" , GTK_STOCK_PROPERTIES, NC_("View|","View recently opened files"), "<control>R", N_("View Recent Files"), G_CALLBACK(recent_files_switch_visible) },
-	
-	{ "OpenFilePopupAction", GTK_STOCK_OPEN, N_("Open file in SciTE"), "", N_("Open a file in SciTE"), G_CALLBACK(popup_open_file_cb) },
-	{ "RemoveFilePopupAction", GTK_STOCK_DELETE, N_("Remove file From project"), "", N_("Remove a file from the project"), G_CALLBACK(popup_remove_node_cb) },
-	{ "CopyFilenameToClipBoardAction", GTK_STOCK_COPY, N_("Copy filename to clipboard"), "", N_("Copies the full path and filename to the clipboard"), G_CALLBACK(copy_filename_to_clipboard_cb) },
-	{ "PropertiesPopupAction", GTK_STOCK_PROPERTIES, NC_("RightClickFilePopup","Properties"), "", N_("Show file properties"), G_CALLBACK(file_properties_cb) },
-	
-	{ "OpenRecentFilePopupAction", GTK_STOCK_OPEN, N_("Open file in SciTE"), "", N_("Open a file in SciTE"), G_CALLBACK(popup_open_recent_file_cb) },
-	{ "RemoveRecentFilePopupAction", GTK_STOCK_DELETE, N_("Remove file from this list"), "", N_("Remove file from this List"), G_CALLBACK(popup_remove_recent_file_cb) },
-	{ "CopyRecentToClipboardAction", GTK_STOCK_COPY, N_("Copy filename to clipboard"), "", N_("Copy filename to clipboard"), G_CALLBACK(copy_recent_filename_to_clipboard_cb) },
-	
-	{ "PropertiesRecentPopupAction", GTK_STOCK_PROPERTIES, NC_("RecentFilePopup","Properties"), "", N_("Show file properties"), G_CALLBACK(properties_recent_file_cb) }
-
-};
 
 static guint sNumMenuActions = G_N_ELEMENTS(sMenuActions);
 
@@ -304,7 +232,24 @@ gboolean setup_gui(GError **err)
 #else
 	//g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), vpaned);
 	g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), vbox);
-#endif 
+#endif
+	
+	// Fix the context-based translations for the menu strings
+	int co=0;
+	gchar *temp=NULL;
+	gchar *context=NULL;
+	do {
+		context=menustrings[co].context;
+		if (context!=NULL) {
+			temp=(gchar*)g_dpgettext2(PACKAGE,menustrings[co].context,menustrings[co].string);
+				
+			if (temp!=NULL) {
+				//printf("%s, %s\n",temp,_(temp));
+				sMenuActions[co].label=g_strdup_printf("%s",temp);
+				++co;
+			}
+		}
+	} while (context!=NULL);
 	
 	gtk_action_group_set_translation_domain(sActionGroup,PACKAGE);
 	
@@ -981,90 +926,6 @@ EXITPOINT:
 }
 
 
-/**
- *
- */
-static void sort_ascending_cb()
-{
-	GError *err = NULL;	
-	
-	if (clicked_node.valid && clicked_node.type==ITEMTYPE_FILE) {
-		goto EXITPOINT;
-	}
-
-	sort_children(&(clicked_node.iter),&err,compare_strings_smaller);
-	
-EXITPOINT:
-	//
-	if (err) g_error_free(err);
-}
-
-
-/**
- *
- */
-static void sort_descending_cb()
-{
-	GError *err = NULL;	
-	
-	if (clicked_node.valid && clicked_node.type==ITEMTYPE_FILE) {
-		goto EXITPOINT;
-	}
-	
-	sort_children(&clicked_node.iter,&err,compare_strings_bigger);
-	
-	
-EXITPOINT:
-	//
-	if (err) g_error_free(err);
-}
-
-
-
-/**
- * Open the selected file.
- *	This is called when a file is rightclicked and open is selected in the menu
- */
-static void popup_open_file_cb()
-{
-	gchar *command = NULL;
-	GError *err = NULL;
-	GtkWidget *dialog = NULL;
-	gchar *absFilePath = NULL;
-	
-	// several files in selection?
-		
-	// We can only open files
-	
-	if (!clicked_node.valid || clicked_node.type != ITEMTYPE_FILE) {
-		goto EXITPOINT;
-	}
-	
-	if (!open_filename(clicked_node.name,(gchar*)(get_project_directory()),&err)) {
-		goto EXITPOINT;
-	}
-	
-	add_file_to_recent(clicked_node.name,NULL);
-	
-	
-EXITPOINT:
-	
-	if (err != NULL) {
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
-			_("Could not open selected file: \n\n%s"), err->message);
-		
-		gtk_dialog_run(GTK_DIALOG (dialog));
-	}
-	
-	if (command) g_free(command);
-	if (absFilePath) g_free(absFilePath);
-	if (err) g_error_free(err);
-	if (dialog) gtk_widget_destroy(dialog);	
-}
-
-
-
-
 
 
 /**
@@ -1113,320 +974,6 @@ void update_project_is_dirty(gboolean dirty)
 
 
  
-/**
- * step-through function for expand/collapse folder
- *	
- * @param tree_view
- * @param newiter
- * @param tree_path
- */
-static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter,GtkTreePath *tree_path)
-{
-	GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
-	
-	gchar *relFilePath;
-	
-	GError *error;
-	gint nodeItemType;
-	
-	GtkTreeIter iter=newiter;
-
-	do {
-		
-		gtk_tree_model_get(tree_model, &iter, COLUMN_ITEMTYPE, &nodeItemType, -1);
-		
-
-		if (nodeItemType==ITEMTYPE_GROUP) {
-
-			GtkTreePath *srcPath = gtk_tree_model_get_path(tree_model, &iter);
-			gboolean groupIsExpanded = tree_row_is_expanded(srcPath);
-			
-			if (groupIsExpanded) {
-				set_tree_node_icon(&iter,directory_open_pixbuf,&error);
-			} else {
-				set_tree_node_icon(&iter,directory_closed_pixbuf,&error);
-			}
-			
-			gtk_tree_model_get(tree_model, &iter, COLUMN_FILEPATH, &relFilePath, -1);
-			
-			if (gtk_tree_model_iter_has_child(tree_model,&iter)) {
-				
-				GtkTreeIter newIter;
-				gtk_tree_model_iter_children(tree_model,&newIter,&iter);
-				fix_folders_step_through(tree_view,newIter,tree_path);
-			}
-			
-			g_free(relFilePath);
-			gtk_tree_path_free(srcPath);
-		
-		} else {
-			
-		}
-	
-
-	} while(gtk_tree_model_iter_next(tree_model,&iter));
-}
-
-
-/**
- * Callback for expand/collapse event of GtkTreeView
- *
- * @param treeView is not used
- * @param arg1 is not used
- * @param arg2 is not used
- * @param user_data is not used
- */
-static void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter, GtkTreePath *tree_path, gpointer user_data)
-{
-	/* Switch the folder icon open/closed*/
-	
-	
-	// make sure all icons the folder (and folders inside it) are set to a correct icon.
-	fix_folders_step_through(tree_view,*iter,tree_path);
-}
-
-
-
-/**
- * Callback for "Quit" menu item
- */
-static void quit_menu_cb()
-{
-	prompt_user_to_save_project();
-	
-	if (!project_is_dirty()) {
-		gtk_main_quit();
-	}
-}
-
-
-/**
- * Callback for "About" menu item
- */
-static void about_menu_cb()
-{
-	show_about_dialog();	
-}
-
-
-/**
- * Callback for "Save Project As..." menu item
- */
-static void saveproject_as_menu_cb()
-{
-	GError *err = NULL;
-	
-	if (!save_project(NULL,&err)) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while saving the project: %s"), err->message);
-		
-		if (dialog) {
-			gtk_dialog_run(GTK_DIALOG(dialog));
-			
-			gtk_widget_destroy(dialog);
-		}
-	}
-	
-	if (err) g_error_free(err);
-}
-
-
-/**
- * Callback for "Save Project" menu item
- */
-static void saveproject_menu_cb()
-{
-	GError *err = NULL;
-	
-	gchar *temp_filepath=get_project_filepath();
-	
-	if (!save_project(temp_filepath,&err)) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while saving the project: %s"), err->message);
-		
-		if (dialog) {
-			gtk_dialog_run(GTK_DIALOG(dialog));
-			
-			gtk_widget_destroy(dialog);
-		}
-	}
-	
-	if (err) g_error_free(err);
-}
-
-
-
-/**
- * Callback for "Open Project" menu item
- */
-static void openproject_menu_cb()
-{
-	GError *err = NULL;
-	
-	if (!load_project(NULL, &err)) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while opening project file: %s"), err->message);
-		
-		if (dialog) {
-			gtk_dialog_run(GTK_DIALOG(dialog));
-			
-			gtk_widget_destroy(dialog);
-		}
-	}
-	
-	if (err) g_error_free(err);
-}
-
-
-
-/**
- * Callback for "Create Group" menu item
- */
-static void creategroup_menu_cb()
-{
-	ask_name_add_group(NULL);
-}
-
-
-/**
- *
- */
-gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
-{
-	switch (event->keyval) 
-	{
-		case GDK_KEY_BackSpace: 
-		{
-			debug_printf((gchar*)"key_press_cb: keyval = %d = GDK_BackSpace, hardware_keycode = %d\n", event->keyval, event->hardware_keycode);
-			break;
-		}
-		
-		case GDK_KEY_Delete: 
-		{
-			do_remove_node(TRUE);
-			break;
-		}
-		case GDK_KEY_Insert: 
-		{
-			break;
-		}
-		case GDK_KEY_F2:
-		{
-			do_rename_node(TRUE);
-			return TRUE;
-		}
-		case GDK_KEY_F5:
-		{
-			print_filelist();
-			break;
-		}
-		default: 
-		{
-			debug_printf("key_press_cb: keyval = %d = '%c', hardware_keycode = %d\n", event->keyval, (char) event->keyval, event->hardware_keycode);
-			return FALSE;
-		}
-	}
-	
-	if (event->state & GDK_SHIFT_MASK) debug_printf(", GDK_SHIFT_MASK");
-	if (event->state & GDK_CONTROL_MASK) debug_printf(", GDK_CONTROL_MASK");
-	if (event->state & GDK_MOD1_MASK) debug_printf(", GDK_MOD1_MASK");
-	if (event->state & GDK_MOD2_MASK) debug_printf(", GDK_MOD2_MASK");
-	if (event->state & GDK_MOD3_MASK) debug_printf(", GDK_MOD3_MASK");
-	if (event->state & GDK_MOD4_MASK) debug_printf(", GDK_MOD4_MASK");
-	if (event->state & GDK_MOD5_MASK) debug_printf(", GDK_MOD5_MASK");
-	
-	debug_printf("\n");
-	
-	return FALSE;
-}
-
-
-/**
- *		Expands all folders
- */
-static gboolean foreach_expand(GtkTreeModel *model,GtkTreePath *path,GtkTreeIter *iter,gpointer data)
-{
-	expand_tree_row(path,TRUE);
-	return FALSE;
-}
-
-
-/**
- *		Collapses all folders
- */
-static gboolean foreach_collapse(GtkTreeModel *model,GtkTreePath *path,GtkTreeIter *iter,gpointer data)
-{
-	collapse_tree_row(path);
-	return FALSE;
-}
-
-
-/**
- *
- */
-static void expand_all_items_cb()
-{
-	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)),foreach_expand,NULL);
-}
-
-
-/**
- *
- */
-static void collapse_all_items_cb()
-{
-	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)),foreach_collapse,NULL);
-}
-
-
-/**
- *		edit_options_cb
- *			opens the user-specific options-file ($HOME/.sciteproj) in SciTE. 
- */
-void edit_options_cb()
-{
-	GError *err=NULL;
-	gchar *command=NULL;
-	
-	if ((command = g_strdup_printf("open:%s\n", prefs_filename)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, 
-			"%s: %s, g_strdup_printf() = NULL",
-			"Error formatting SciTE command",
-			__func__);
-	}
-	else {
-		if (send_scite_command(command, &err)) {
-			// Try to activate SciTE; ignore errors
-			
-			activate_scite(NULL);
-			
-			if (gPrefs.give_scite_focus==TRUE) {
-				send_scite_command((gchar*)"focus:0",NULL);
-			}
-		}
-	}	
-}
-
-
-/**
- *		search function for the gtk_tree_view_set_search_equal_func
- *		@return TRUE when rows DONT match, FALSE when rows match
- */
-gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,const gchar *key,GtkTreeIter *iter,gpointer search_data)
-{
-	gchar *filename;
-	// For some reason this should return TRUE if the row DONT match
-	gboolean res=TRUE;
-	
-	gtk_tree_model_get(model, iter, COLUMN_FILENAME, &filename, -1);
-	
-	// zero when matches, which means we should return FALSE
-	if (g_ascii_strncasecmp(key,filename,strlen(key))==0) res=FALSE;
-	
-	g_free(filename);
-
-	
-	return res;
-}
-
-
 
 /**
  *

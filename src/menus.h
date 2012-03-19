@@ -83,5 +83,151 @@ static gchar *sMenuDefXML = (gchar*)\
 			<menuitem name=\"PropertiesRecentPopupItem\" action=\"PropertiesRecentPopupAction\"/> \
 		</popup> \
 	</ui>";
+	
+
+/*
+ * Contains the NC strings that ends up in the po-files
+ */
+GtkActionEntry sMenuActions[] = 
+{
+	{ "FileMenuAction", NULL, NC_("Menu|","_File") },
+	{ "EditMenuAction", NULL, NC_("Menu|","_Edit") },
+	{ "ViewMenuAction", NULL, NC_("Menu|","_View") },
+	{ "HelpMenuAction", NULL, NC_("Menu|","_Help") },
+	
+	{ "OpenProjectAction", GTK_STOCK_OPEN, NC_("Menu|File|","_Open project"), "<control>O", 
+		NULL, G_CALLBACK(openproject_menu_cb) },
+	{ "SaveProjectAction", GTK_STOCK_SAVE, NC_("Menu|File|","_Save project"), "<control>S", 
+		NULL, G_CALLBACK(saveproject_menu_cb) },
+	{ "SaveProjectAsAction", GTK_STOCK_SAVE_AS, NC_("Menu|File|","Save project as..."), "<control><shift>S", 
+		NULL, G_CALLBACK(saveproject_as_menu_cb) },
+	{ "ExitAction", GTK_STOCK_QUIT, NC_("Menu|File|","_Exit"), "<control>Q", 
+		NULL, G_CALLBACK(quit_menu_cb) },
+	
+	{ "CreateGroupAction", GTK_STOCK_DIRECTORY, NC_("Menu|Edit|","Create _group"), "", 
+		NULL, G_CALLBACK(creategroup_menu_cb) },
+	{ "AddFileAction", GTK_STOCK_FILE, NC_("Menu|Edit|","Add _file"), "", 
+		NULL, G_CALLBACK(addfile_menu_cb) },
+	{ "RemoveFileAction", GTK_STOCK_DELETE, NC_("Menu|Edit|","Remove file(s)"), "", 
+		NULL, G_CALLBACK(removeitem_menu_cb) },
+	
+	{ "ExpandAllGroupsAction", NULL, NC_("Menu|Edit|","Expand all groups"), "<control><shift>E", 
+		NULL, G_CALLBACK(expand_all_items_cb) },
+	{ "CollapseAllGroupsAction", NULL, NC_("Menu|Edit|","Collapse all groups"), "<control><shift>C", 
+		NULL, G_CALLBACK(collapse_all_items_cb) },
+	
+	{ "SearchAction", GTK_STOCK_FIND, NC_("Menu|Edit|","Search"), "<control>F", 
+		NULL, G_CALLBACK(search_dialog_cb) },
+	
+	{ "AboutAction", GTK_STOCK_ABOUT, NC_("Menu|Help|","_About"), "", 
+		NULL, G_CALLBACK(about_menu_cb) },
+	
+	{ "AddFilesPopupAction", GTK_STOCK_FILE, NC_("Menu|Edit|","Add files"), "", 
+		NULL, G_CALLBACK(popup_add_files_cb) },
+	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, NC_("Menu|Edit|","Create _group"), "", 
+		NULL, G_CALLBACK(popup_add_group_cb) },
+	
+	{ "AddFilestoGroupPopupAction", GTK_STOCK_FILE, NC_("Menu|Popup|Group","Add files to group"), "", 
+		NULL, G_CALLBACK(popup_add_files_cb) },
+	{ "AddSubgroupPopupAction", GTK_STOCK_DIRECTORY, NC_("Menu|Popup|Group","Add subgroup to group"), "", 
+		NULL, G_CALLBACK(popup_add_group_cb) },
+	{ "RenameGroupPopupAction", GTK_STOCK_EDIT, NC_("Menu|Popup|Group","Rename group"), "", 
+		NULL, G_CALLBACK(popup_rename_group_cb) },
+	{ "RemoveGroupPopupAction", GTK_STOCK_DELETE, NC_("Menu|Popup|Group","Remove group from project"), "", 
+		NULL, G_CALLBACK(popup_remove_node_cb) },
+	{ "SortAscendingAction", GTK_STOCK_SORT_ASCENDING, NC_("Menu|Edit|","Sort group ascending"),"",
+		NULL, G_CALLBACK(sort_ascending_cb) },
+	{ "SortDescendingAction", GTK_STOCK_SORT_DESCENDING, NC_("Menu|Edit","Sort group descending"),"",
+		NULL, G_CALLBACK(sort_descending_cb) },
+	{ "PropertiesGroupPopupAction", GTK_STOCK_PROPERTIES, NC_("Menu|Popup|Group","Properties"), "", 
+		NULL, G_CALLBACK(group_properties_cb) },
+	{ "EditOptionsAction", GTK_STOCK_PROPERTIES, NC_("Menu|Edit|","Edit options"), "", 
+		NULL, G_CALLBACK(edit_options_cb) },
+	
+	{ "ViewRecentAction" , GTK_STOCK_PROPERTIES, NC_("Menu|View|","View recently opened files"), "<control>R", 
+		NULL, G_CALLBACK(recent_files_switch_visible) },
+	
+	{ "OpenFilePopupAction", GTK_STOCK_OPEN, NC_("Menu|Popup|File","Open file in SciTE"), "", 
+		NULL, G_CALLBACK(popup_open_file_cb) },
+	{ "RemoveFilePopupAction", GTK_STOCK_DELETE, NC_("Menu|Popup|File","Remove file From project"), "", 
+		NULL, G_CALLBACK(popup_remove_node_cb) },
+	{ "CopyFilenameToClipBoardAction", GTK_STOCK_COPY, NC_("Menu|Popup|File","Copy filename to clipboard"), "", 
+		NULL, G_CALLBACK(copy_filename_to_clipboard_cb) },
+	{ "PropertiesPopupAction", GTK_STOCK_PROPERTIES, NC_("Menu|Popup|File","Properties"), "", 
+		NULL, G_CALLBACK(file_properties_cb) },
+	
+	{ "OpenRecentFilePopupAction", GTK_STOCK_OPEN, NC_("Menu|Popup|RecentFile","Open file in SciTE"), "", 
+		NULL, G_CALLBACK(popup_open_recent_file_cb) },
+	{ "RemoveRecentFilePopupAction", GTK_STOCK_DELETE, NC_("Menu|Popup|RecentFile","Remove file from this list"), "", 
+		NULL, G_CALLBACK(popup_remove_recent_file_cb) },
+	{ "CopyRecentToClipboardAction", GTK_STOCK_COPY, NC_("Menu|Popup|RecentFile","Copy filename to clipboard"), "", 
+		NULL, G_CALLBACK(copy_recent_filename_to_clipboard_cb) },
+	
+	{ "PropertiesRecentPopupAction", GTK_STOCK_PROPERTIES, NC_("Menu|Popup|RecentFile","Properties"), "", 
+		NULL, G_CALLBACK(properties_recent_file_cb) }
+
+};
+
+/*
+	struct for strings in the menu
+ */
+struct ContextString {
+	gchar *context;
+	gchar *string;
+};
+
+/*
+ * The strings that are given to g_dpgettext2 - see gui.c:244
+ */
+struct ContextString menustrings[]= {
+	{ "Menu|","_File"},
+	{ "Menu|","_Edit"},
+	{ "Menu|","_View"},
+	{ "Menu|","_Help"},
+
+	{ "Menu|File|","_Open project"},
+	{ "Menu|File|","_Save project"},
+	{ "Menu|File|","Save project as..."},
+	{ "Menu|File|","_Exit"},
+	
+	{ "Menu|Edit|","Create _group"},
+	{ "Menu|Edit|","Add _file"},
+	{ "Menu|Edit|","Remove file(s)"},
+	
+	{ "Menu|Edit|","Expand all groups"},
+	{ "Menu|Edit|","Collapse all groups"},
+	
+	{ "Menu|Edit|","Search" },
+	
+	{ "Menu|Help|","_About"},
+	
+	{ "Menu|Edit|","Add files"},
+	{ "Menu|Edit|","Create _group"},
+	
+	{ "Menu|Popup|Group","Add files to group"},
+	{ "Menu|Popup|Group","Add subgroup to group"},
+	{ "Menu|Popup|Group","Rename group"},
+	{ "Menu|Popup|Group","Remove group from project" },
+	{ "Menu|Edit|","Sort group ascending" },
+	{ "Menu|Edit","Sort group descending" },
+	{ "Menu|Popup|Group","Properties" },
+	{ "Menu|Edit|","Edit options" },
+	
+	{ "Menu|View|","View recently opened files"},
+	
+	{ "Menu|Popup|File","Open file in SciTE"},
+	{ "Menu|Popup|File","Remove file from project"},
+	{ "Menu|Popup|File","Copy filename to clipboard"},
+	{ "Menu|Popup|File","Properties"},
+	
+	{ "Menu|Popup|RecentFile","Open file in SciTE"},
+	{ "Menu|Popup|RecentFile","Remove file from this list"},
+	{ "Menu|Popup|RecentFile","Copy filename to clipboard"},
+	
+	{ "Menu|Popup|RecentFile","Properties"},
+
+	{NULL,NULL}
+};
+
 
 #endif /*__HEADER_MENUS_*/
