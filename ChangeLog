@@ -4,7 +4,7 @@ ChangeLog:
 
 0.7.05
 	* Fix menu translations context to actually work
-	* Move gui_callbacks to a file of its own
+	* Move gui_callbacks to own sourcefiles
 	* Move menu stuff to a header
 
 0.7.04
