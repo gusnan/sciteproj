@@ -244,7 +244,6 @@ gboolean setup_gui(GError **err)
 			temp=(gchar*)g_dpgettext2(PACKAGE,menustrings[co].context,menustrings[co].string);
 				
 			if (temp!=NULL) {
-				//printf("%s, %s\n",temp,_(temp));
 				sMenuActions[co].label=g_strdup_printf("%s",temp);
 				++co;
 			}
