@@ -560,7 +560,7 @@ msgstr "Visa nyligen öppnade filer"
 #: menus.h:150
 msgctxt "Menu|Popup|File"
 msgid "Open file in SciTE"
-msgstr "Öppnar en fil i SciTE"
+msgstr "Öppna fil i SciTE"
 
 #: menus.h:152
 msgctxt "Menu|Popup|File"
