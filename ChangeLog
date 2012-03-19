@@ -2,6 +2,11 @@
 ChangeLog:
 ----------
 
+0.7.05
+	* Move gui_callbacks to a file of its own
+	* Move menu stuff to a header
+	* Fix menu translations to include context
+
 0.7.04
 	* Remove translation context from a string where it isn't required (and 
 	  causes build failure)
