@@ -168,6 +168,7 @@ GtkActionEntry sMenuActions[] =
 
 };
 
+
 /*
 	struct for strings in the menu
  */
@@ -176,8 +177,10 @@ struct ContextString {
 	gchar *string;
 };
 
+
 /*
- * The strings that are given to g_dpgettext2 - see gui.c:244
+	The strings that are given to g_dpgettext2 - see gui.c:244
+	Should be same order as in sMenuActions
  */
 struct ContextString menustrings[]= {
 	{ "Menu|","_File"},
