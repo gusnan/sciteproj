@@ -9,6 +9,7 @@
 		<file>./src/folder_to_xml.c</file>
 		<file>./src/graphics.c</file>
 		<file>./src/gui.c</file>
+		<file>./src/gui_callbacks.c</file>
 		<file>./src/main.c</file>
 		<file>./src/prefs.c</file>
 		<file>./src/properties_dialog.c</file>
@@ -34,6 +35,7 @@
 		<file>./src/graphics.h</file>
 		<file>./src/gtk3_compat.h</file>
 		<file>./src/gui.h</file>
+		<file>./src/gui_callbacks.h</file>
 		<file>./src/menus.h</file>
 		<file>./src/prefs.h</file>
 		<file>./src/properties_dialog.h</file>
