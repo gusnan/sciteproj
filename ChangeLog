@@ -6,6 +6,7 @@ ChangeLog:
 	* Fix menu translations context to actually work
 	* Move gui_callbacks to own sourcefiles
 	* Move menu stuff to a header
+	* Update manpage
 
 0.7.04
 	* Remove translation context from a string where it isn't required (and 
