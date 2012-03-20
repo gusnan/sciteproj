@@ -88,7 +88,7 @@ static gchar *sMenuDefXML = (gchar*)\
 /*
  * Contains the NC strings that ends up in the po-files
  */
-GtkActionEntry sMenuActions[] = 
+static GtkActionEntry sMenuActions[] = 
 {
 	{ "FileMenuAction", NULL, NC_("Menu|","_File") },
 	{ "EditMenuAction", NULL, NC_("Menu|","_Edit") },
@@ -182,7 +182,7 @@ struct ContextString {
 	The strings that are given to g_dpgettext2 - see gui.c:244
 	Should be same order as in sMenuActions
  */
-struct ContextString menustrings[]= {
+static struct ContextString menustrings[]= {
 	{ "Menu|","_File"},
 	{ "Menu|","_Edit"},
 	{ "Menu|","_View"},
