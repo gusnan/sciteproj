@@ -22,8 +22,9 @@
 #ifndef __HEADER_MENUS_
 #define __HEADER_MENUS_
 
-// Menu definitions
-
+/*
+	Menu definitions
+*/
 static gchar *sMenuDefXML = (gchar*)\
 	"<ui> \
 		<menubar> \
@@ -86,8 +87,8 @@ static gchar *sMenuDefXML = (gchar*)\
 	
 
 /*
- * Contains the NC strings that ends up in the po-files
- */
+	Contains the NC strings that ends up in the po-files
+*/
 static GtkActionEntry sMenuActions[] = 
 {
 	{ "FileMenuAction", NULL, NC_("Menu|","_File") },
@@ -171,7 +172,7 @@ static GtkActionEntry sMenuActions[] =
 
 /*
 	struct for strings in the menu
- */
+*/
 struct ContextString {
 	gchar *context;
 	gchar *string;
@@ -180,8 +181,9 @@ struct ContextString {
 
 /*
 	The strings that are given to g_dpgettext2 - see gui.c:244
-	Should be same order as in sMenuActions
- */
+	Should be same order as in sMenuActions, and of course the same strings so 
+	that it get matched by gettext
+*/
 static struct ContextString menustrings[]= {
 	{ "Menu|","_File"},
 	{ "Menu|","_Edit"},
