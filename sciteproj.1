@@ -23,9 +23,12 @@ project file.
 .IP "-h, --help"
 Display a short help
 .SH CONFIG FILE
-The config file SciteProj is using is stored in the users home directory and is 
-called .sciteproj. It is loaded on every program start. There is a
-menuitem in the program to open the file directly in SciTE for editing. 
+The config file that SciteProj is using is named sciteprojrc, and is loaded from 
+the directory that the glib function g_get_user_config_dir is returning. 
+Normally this is ($HOME)/.config/ - If this file isn't found, sciteproj searches
+for the file .sciteproj located in the users $HOME directory. It is loaded on 
+every program start. There is a menuitem in the program to open the file 
+directly in SciTE for editing. 
 If there isn't a .sciteproj in the user home when starting SciteProj, 
 one will be created filled with default values.
 The following options are supported in the config file:
