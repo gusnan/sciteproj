@@ -4,7 +4,7 @@
  *  Copyright 2006 Roy Wood, 2009-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj.
- * 
+ *
  * SciteProj is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -33,33 +33,33 @@ typedef struct {
 	int verbosity;
 	int last_file_filter;
 	int xpos,ypos;
-	
+
 	int search_xpos,search_ypos;
 	int search_width,search_height;
-	
+
 	gboolean dirty_on_folder_change;
 	gboolean give_scite_focus;
 	gboolean search_give_scite_focus;
-	
+
 	gboolean search_match_whole_words;
 	gboolean search_match_case;
-	
+
 	gboolean allow_duplicates;
-	
+
 	gchar *scite_path;
-	
+
 	gchar *file_to_load;
-	
+
 	gboolean identify_sciteproj_xml;
-	
+
 	gboolean show_recent;
 	gboolean recent_add_to_bottom;
-	
+
 	gboolean search_alert_file_warnings;
 	gboolean search_trim_results;
-	
+
 	gboolean hide_statusbar;
-	
+
 } sciteproj_prefs;
 
 extern sciteproj_prefs gPrefs;

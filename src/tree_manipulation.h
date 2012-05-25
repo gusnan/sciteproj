@@ -4,7 +4,7 @@
  *  Copyright 2006 Roy Wood, 2009-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj.
- * 
+ *
  * SciteProj is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with SciteProj.  
+ * along with SciteProj.
  * If not, see <http://www.gnu.org/licenses/>.
  *
  */
@@ -35,11 +35,11 @@ enum NodePosition {
 
 // Mnemonic identifiers for the columns in the GtkTreeStore
 
-enum { 
+enum {
 	COLUMN_ITEMTYPE = 0,
-	COLUMN_FILEPATH, 
-	COLUMN_FILENAME, 
-	COLUMN_FILESIZE, 
+	COLUMN_FILEPATH,
+	COLUMN_FILENAME,
+	COLUMN_FILESIZE,
 	COLUMN_FONTWEIGHT,
 	COLUMN_FONTWEIGHTSET,
 	COLUMN_ICON,
@@ -68,7 +68,7 @@ enum {
 #define TYPE_FONTWEIGHTSET		G_TYPE_BOOLEAN
 #define TYPE_ICON					GDK_TYPE_PIXBUF
 #define TYPE_EXPANDED			G_TYPE_BOOLEAN
-	
+
 
 
 typedef gint(*StringCompareFunction)(gconstpointer,gconstpointer);

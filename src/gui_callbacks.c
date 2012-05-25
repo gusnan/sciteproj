@@ -4,7 +4,7 @@
  *  Copyright 2006 Roy Wood, 2009-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj.
- * 
+ *
  * SciteProj is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -82,14 +82,14 @@ gboolean foreach_collapse(GtkTreeModel *model,GtkTreePath *path,GtkTreeIter *ite
  */
 void sort_ascending_cb()
 {
-	GError *err = NULL;	
-	
+	GError *err = NULL;
+
 	if (clicked_node.valid && clicked_node.type==ITEMTYPE_FILE) {
 		goto EXITPOINT;
 	}
 
 	sort_children(&(clicked_node.iter),&err,compare_strings_smaller);
-	
+
 EXITPOINT:
 	//
 	if (err) g_error_free(err);
@@ -101,15 +101,15 @@ EXITPOINT:
  */
 void sort_descending_cb()
 {
-	GError *err = NULL;	
-	
+	GError *err = NULL;
+
 	if (clicked_node.valid && clicked_node.type==ITEMTYPE_FILE) {
 		goto EXITPOINT;
 	}
-	
+
 	sort_children(&clicked_node.iter,&err,compare_strings_bigger);
-	
-	
+
+
 EXITPOINT:
 	//
 	if (err) g_error_free(err);
@@ -127,35 +127,35 @@ void popup_open_file_cb()
 	GError *err = NULL;
 	GtkWidget *dialog = NULL;
 	gchar *absFilePath = NULL;
-	
+
 	// several files in selection?
-		
+
 	// We can only open files
-	
+
 	if (!clicked_node.valid || clicked_node.type != ITEMTYPE_FILE) {
 		goto EXITPOINT;
 	}
-	
+
 	if (!open_filename(clicked_node.name,(gchar*)(get_project_directory()),&err)) {
 		goto EXITPOINT;
 	}
-	
+
 	add_file_to_recent(clicked_node.name,NULL);
-	
-	
+
+
 EXITPOINT:
-	
+
 	if (err != NULL) {
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, 
+		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
 			_("Could not open selected file: \n\n%s"), err->message);
-		
+
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}
-	
+
 	if (command) g_free(command);
 	if (absFilePath) g_free(absFilePath);
 	if (err) g_error_free(err);
-	if (dialog) gtk_widget_destroy(dialog);	
+	if (dialog) gtk_widget_destroy(dialog);
 }
 
 
@@ -173,15 +173,15 @@ void collapse_all_items_cb()
 
 /**
  *		edit_options_cb
- *			opens the user-specific options-file ($HOME/.sciteproj) in SciTE. 
+ *			opens the user-specific options-file ($HOME/.sciteproj) in SciTE.
  */
 void edit_options_cb()
 {
 	GError *err=NULL;
 	gchar *command=NULL;
-	
+
 	if ((command = g_strdup_printf("open:%s\n", prefs_filename)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1, 
+		g_set_error(&err, APP_SCITEPROJ_ERROR, -1,
 			"%s: %s, g_strdup_printf() = NULL",
 			"Error formatting SciTE command",
 			__func__);
@@ -189,14 +189,14 @@ void edit_options_cb()
 	else {
 		if (send_scite_command(command, &err)) {
 			// Try to activate SciTE; ignore errors
-			
+
 			activate_scite(NULL);
-			
+
 			if (gPrefs.give_scite_focus==TRUE) {
 				send_scite_command((gchar*)"focus:0",NULL);
 			}
 		}
-	}	
+	}
 }
 
 
@@ -211,7 +211,7 @@ void expand_all_items_cb()
 
 /**
  * step-through function for expand/collapse folder
- *	
+ *
  * @param tree_view
  * @param newiter
  * @param tree_path
@@ -219,46 +219,46 @@ void expand_all_items_cb()
 static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter,GtkTreePath *tree_path)
 {
 	GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
-	
+
 	gchar *relFilePath;
-	
+
 	GError *error;
 	gint nodeItemType;
-	
+
 	GtkTreeIter iter=newiter;
 
 	do {
-		
+
 		gtk_tree_model_get(tree_model, &iter, COLUMN_ITEMTYPE, &nodeItemType, -1);
-		
+
 
 		if (nodeItemType==ITEMTYPE_GROUP) {
 
 			GtkTreePath *srcPath = gtk_tree_model_get_path(tree_model, &iter);
 			gboolean groupIsExpanded = tree_row_is_expanded(srcPath);
-			
+
 			if (groupIsExpanded) {
 				set_tree_node_icon(&iter,directory_open_pixbuf,&error);
 			} else {
 				set_tree_node_icon(&iter,directory_closed_pixbuf,&error);
 			}
-			
+
 			gtk_tree_model_get(tree_model, &iter, COLUMN_FILEPATH, &relFilePath, -1);
-			
+
 			if (gtk_tree_model_iter_has_child(tree_model,&iter)) {
-				
+
 				GtkTreeIter newIter;
 				gtk_tree_model_iter_children(tree_model,&newIter,&iter);
 				fix_folders_step_through(tree_view,newIter,tree_path);
 			}
-			
+
 			g_free(relFilePath);
 			gtk_tree_path_free(srcPath);
-		
+
 		} else {
-			
+
 		}
-	
+
 
 	} while(gtk_tree_model_iter_next(tree_model,&iter));
 }
@@ -275,8 +275,8 @@ static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter
 void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter, GtkTreePath *tree_path, gpointer user_data)
 {
 	/* Switch the folder icon open/closed*/
-	
-	
+
+
 	// make sure all icons the folder (and folders inside it) are set to a correct icon.
 	fix_folders_step_through(tree_view,*iter,tree_path);
 }
@@ -289,7 +289,7 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter, GtkTre
 void quit_menu_cb()
 {
 	prompt_user_to_save_project();
-	
+
 	if (!project_is_dirty()) {
 		gtk_main_quit();
 	}
@@ -301,7 +301,7 @@ void quit_menu_cb()
  */
 void about_menu_cb()
 {
-	show_about_dialog();	
+	show_about_dialog();
 }
 
 
@@ -311,17 +311,17 @@ void about_menu_cb()
 void saveproject_as_menu_cb()
 {
 	GError *err = NULL;
-	
+
 	if (!save_project(NULL,&err)) {
 		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while saving the project: %s"), err->message);
-		
+
 		if (dialog) {
 			gtk_dialog_run(GTK_DIALOG(dialog));
-			
+
 			gtk_widget_destroy(dialog);
 		}
 	}
-	
+
 	if (err) g_error_free(err);
 }
 
@@ -332,19 +332,19 @@ void saveproject_as_menu_cb()
 void saveproject_menu_cb()
 {
 	GError *err = NULL;
-	
+
 	gchar *temp_filepath=get_project_filepath();
-	
+
 	if (!save_project(temp_filepath,&err)) {
 		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while saving the project: %s"), err->message);
-		
+
 		if (dialog) {
 			gtk_dialog_run(GTK_DIALOG(dialog));
-			
+
 			gtk_widget_destroy(dialog);
 		}
 	}
-	
+
 	if (err) g_error_free(err);
 }
 
@@ -356,17 +356,17 @@ void saveproject_menu_cb()
 void openproject_menu_cb()
 {
 	GError *err = NULL;
-	
+
 	if (!load_project(NULL, &err)) {
 		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while opening project file: %s"), err->message);
-		
+
 		if (dialog) {
 			gtk_dialog_run(GTK_DIALOG(dialog));
-			
+
 			gtk_widget_destroy(dialog);
 		}
 	}
-	
+
 	if (err) g_error_free(err);
 }
 
@@ -386,20 +386,20 @@ void creategroup_menu_cb()
  */
 gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
 {
-	switch (event->keyval) 
+	switch (event->keyval)
 	{
-		case GDK_KEY_BackSpace: 
+		case GDK_KEY_BackSpace:
 		{
 			debug_printf((gchar*)"key_press_cb: keyval = %d = GDK_BackSpace, hardware_keycode = %d\n", event->keyval, event->hardware_keycode);
 			break;
 		}
-		
-		case GDK_KEY_Delete: 
+
+		case GDK_KEY_Delete:
 		{
 			do_remove_node(TRUE);
 			break;
 		}
-		case GDK_KEY_Insert: 
+		case GDK_KEY_Insert:
 		{
 			break;
 		}
@@ -413,13 +413,13 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
 			print_filelist();
 			break;
 		}
-		default: 
+		default:
 		{
 			debug_printf("key_press_cb: keyval = %d = '%c', hardware_keycode = %d\n", event->keyval, (char) event->keyval, event->hardware_keycode);
 			return FALSE;
 		}
 	}
-	
+
 	if (event->state & GDK_SHIFT_MASK) debug_printf(", GDK_SHIFT_MASK");
 	if (event->state & GDK_CONTROL_MASK) debug_printf(", GDK_CONTROL_MASK");
 	if (event->state & GDK_MOD1_MASK) debug_printf(", GDK_MOD1_MASK");
@@ -427,9 +427,9 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
 	if (event->state & GDK_MOD3_MASK) debug_printf(", GDK_MOD3_MASK");
 	if (event->state & GDK_MOD4_MASK) debug_printf(", GDK_MOD4_MASK");
 	if (event->state & GDK_MOD5_MASK) debug_printf(", GDK_MOD5_MASK");
-	
+
 	debug_printf("\n");
-	
+
 	return FALSE;
 }
 
@@ -443,15 +443,15 @@ gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,const gchar
 	gchar *filename;
 	// For some reason this should return TRUE if the row DONT match
 	gboolean res=TRUE;
-	
+
 	gtk_tree_model_get(model, iter, COLUMN_FILENAME, &filename, -1);
-	
+
 	// zero when matches, which means we should return FALSE
 	if (g_ascii_strncasecmp(key,filename,strlen(key))==0) res=FALSE;
-	
+
 	g_free(filename);
 
-	
+
 	return res;
 }
 

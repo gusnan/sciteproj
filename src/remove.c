@@ -9,12 +9,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * SciteProj is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -43,20 +43,20 @@ void remove_selected_items ( GtkTreeView *treeview )
 	GtkTreeIter iter;
 
 	//GtkTreeStore *store;
-	
+
 	GError *error=NULL;
-   
+
 	if (gtk_tree_selection_count_selected_rows(selection) == 0)
 		return;
-	
+
 	model=gtk_tree_view_get_model(treeview);
 
 	GList *list = gtk_tree_selection_get_selected_rows( selection, &model );
 
 	int nRemoved = 0;
-	
+
 	// Begin at the end and go to the start
-	
+
 	list=g_list_last(list);
 	while(list) {
 		GString *fixed_path = g_string_new("");
@@ -67,9 +67,9 @@ void remove_selected_items ( GtkTreeView *treeview )
 
 		if (path) {
 			if ( gtk_tree_model_get_iter ( model, &iter, path) ) { // get iter from specified path
-					
+
 				remove_tree_node(&iter,&error);
-				nRemoved++;   
+				nRemoved++;
 			}
 			else { // invalid path
 				g_error(_("Error!!!\n"));
@@ -81,7 +81,7 @@ void remove_selected_items ( GtkTreeView *treeview )
 		}
 		list=list->prev;
 	}
-	
+
 	g_list_foreach (list, (GFunc)gtk_tree_path_free, NULL);
 	g_list_free (list);
 }
@@ -96,31 +96,31 @@ void do_remove_node(gboolean ignore_clicked_node)
 	GtkWidget *dialog = NULL;
 	gint dialogResponse;
 	gchar *nodename = NULL;
-	
+
 	gint selected_rows=0;
-	
+
 	gboolean multiple_selected=FALSE;
-	
+
 	// Make sure a node has been selected
 	if (!ignore_clicked_node) {
 		if (!clicked_node.valid) {
 			goto EXITPOINT;
 		}
 	}
-	
+
 	GtkTreeSelection *treeSelect;
-	
+
 	treeSelect=gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
-	
+
 	selected_rows=gtk_tree_selection_count_selected_rows(treeSelect);
 	if (selected_rows>1) {
 		multiple_selected=TRUE;
 	}
-	
+
 	if (!ignore_clicked_node) {
 		// Figure out the node name
 		nodename = strrchr(clicked_node.name, '/');
-		
+
 		if (nodename != NULL) {
 			++nodename;
 		}
@@ -132,24 +132,24 @@ void do_remove_node(gboolean ignore_clicked_node)
 		nodename=NULL;
 		multiple_selected=TRUE;
 	}
-		
+
 	// Confirm removal from project
-	
+
 	if (multiple_selected==TRUE) {
-		
+
 		dialog=gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove all selected items?") /*, nodename*/);
-		
+
 		dialogResponse = gtk_dialog_run(GTK_DIALOG (dialog));
-		
+
 		if (dialog_response_is_exit(dialogResponse)) {
 			goto EXITPOINT;
 		}
-		
+
 		// remove them!
 		remove_selected_items(GTK_TREE_VIEW(projectTreeView));
 
 	} else {
-		
+
 		if (clicked_node.type == ITEMTYPE_FILE) {
 			if (nodename!=NULL) {
 				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove file '%s' from project?"), nodename);
@@ -164,28 +164,28 @@ void do_remove_node(gboolean ignore_clicked_node)
 				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove group and any contained files from project?"));
 			}
 		}
-		
+
 		dialogResponse = gtk_dialog_run(GTK_DIALOG (dialog));
 		if (dialog_response_is_exit(dialogResponse)) {
 			goto EXITPOINT;
 		}
-		
-		
+
+
 		// Remove the node
-		
+
 		if (!remove_tree_node(&(clicked_node.iter), &err)) {
 			GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("Could not remove the selected node: \n\n%s"), err->message);
-			
+
 			gtk_dialog_run(GTK_DIALOG (errDialog));
-			
-			gtk_widget_destroy(errDialog);	
+
+			gtk_widget_destroy(errDialog);
 		}
 	}
-	
+
 EXITPOINT:
-	
+
 	if (err) g_error_free(err);
-	if (dialog) gtk_widget_destroy(dialog);	
+	if (dialog) gtk_widget_destroy(dialog);
 }
 
 

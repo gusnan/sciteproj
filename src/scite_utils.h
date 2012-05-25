@@ -4,7 +4,7 @@
  *  Copyright 2006 Roy Wood, 2009-2011 Andreas Rönnquist
  *
  * This file is part of SciteProj.
- * 
+ *
  * SciteProj is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or

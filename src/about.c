@@ -75,12 +75,12 @@ void create_about_dialog()
 	GtkWidget *notebook;
 	GtkWidget *notebook_label1;
 	GtkWidget *notebook_label2;
-	
+
 	GtkWidget *sciteproj_label;
 	GtkWidget *version_string_label;
 	GtkWidget *copyright_label;
 	GtkWidget *gtk_version_label;
-	
+
 	GtkTextBuffer *textbuffer_info;
 	GtkTextBuffer *textbuffer_license;
 	GtkWidget *textview_license;
@@ -98,13 +98,13 @@ void create_about_dialog()
 	// Make a container
 #if GTK_MAJOR_VERSION>=3
 	grid=gtk_grid_new();
-	
+
 	gtk_grid_set_row_spacing (GTK_GRID (grid), 6);
-	
+
 	gtk_container_add(GTK_CONTAINER(window),grid);
 #else
 	vbox=gtk_vbox_new(FALSE,5);
-	
+
 	gtk_container_add(GTK_CONTAINER(window),vbox);
 #endif
 
@@ -120,7 +120,7 @@ void create_about_dialog()
 	gtk_label_set_selectable(GTK_LABEL(sciteproj_label),FALSE);
 	gtk_label_set_markup(GTK_LABEL(sciteproj_label),"<big><b>SciteProj</b></big>");
 
-	
+
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),sciteproj_label,logo_image,GTK_POS_BOTTOM,5,1);
 #else
@@ -139,13 +139,13 @@ void create_about_dialog()
 
 	version_string_label=gtk_label_new(about_dialog_version_string);
 	gtk_label_set_selectable(GTK_LABEL(version_string_label),FALSE);
-	
+
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),version_string_label,sciteproj_label,GTK_POS_BOTTOM,5,1);
 #else
 	gtk_box_pack_start(GTK_BOX(vbox),version_string_label,FALSE,FALSE,0);
 #endif
-	
+
 	// Show SciteProj copyrights
 	copyrightstring=g_strdup_printf("Copyright (C) 2008-2011 Andreas Rönnquist <gusnan@gusnan.se>");
 
@@ -167,7 +167,7 @@ void create_about_dialog()
 	gtk_version_label=gtk_label_new(gtk_string);
 
 	gtk_label_set_selectable(GTK_LABEL(gtk_version_label),FALSE);
-	
+
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),gtk_version_label,copyright_label,GTK_POS_BOTTOM,5,1);
 #else
@@ -180,13 +180,13 @@ void create_about_dialog()
 
 	// Show a link to the SciteProj homepage
 	linkbutton=gtk_link_button_new_with_label(homepage_string,homepage_string);
-	
+
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),linkbutton,gtk_version_label,GTK_POS_BOTTOM,5,1);
 #else
 	gtk_box_pack_start(GTK_BOX(hbox), linkbutton, TRUE, FALSE, 0);
 #endif
-	
+
 	// New notebook - we want tabs for different sets of text
 
 	notebook=gtk_notebook_new();
@@ -197,8 +197,8 @@ void create_about_dialog()
 	// create a scrolled_window and a textview for the license
 	textbuffer_license=gtk_text_buffer_new(NULL);
 	gtk_text_buffer_get_start_iter(textbuffer_license,&iter);
-	
-	
+
+
 
 	gchar *sLicense =	_("SciteProj is free software: you can redistribute it and/or modify "
 											  "it under the terms of the GNU General Public License as published by "
@@ -289,10 +289,10 @@ void create_about_dialog()
 
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook),scrolled_window_info,notebook_label1);
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook),scrolled_window_license,notebook_label2);
-	
+
 #if GTK_MAJOR_VERSION>=3
 	gtk_widget_set_vexpand(notebook,TRUE);
-	
+
 	gtk_widget_set_hexpand(notebook,TRUE);
 
 	gtk_grid_attach_next_to(GTK_GRID(grid),notebook,linkbutton/*gtk_version_label*/,GTK_POS_BOTTOM,5,1);
@@ -305,7 +305,7 @@ void create_about_dialog()
 
 	// Create an ok button
 	ok_button=gtk_button_new_from_stock(GTK_STOCK_OK);
-	
+
 #if GTK_MAJOR_VERSION>=3
 	gtk_widget_set_halign(ok_button,GTK_ALIGN_END);
 	gtk_widget_set_hexpand(ok_button,FALSE);
@@ -320,7 +320,7 @@ void create_about_dialog()
 	GtkWidget *ok_button_hbox=gtk_hbox_new(FALSE,0);
 
 	gtk_box_pack_end(GTK_BOX(ok_button_hbox),ok_button,FALSE,FALSE,0);
-	
+
 	gtk_box_pack_start(GTK_BOX(vbox),ok_button_hbox,FALSE,FALSE,0);
 #endif
 

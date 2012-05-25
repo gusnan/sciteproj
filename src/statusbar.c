@@ -4,7 +4,7 @@
  *  Copyright 2009-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj.
- * 
+ *
  * SciteProj is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -42,31 +42,31 @@ guint context_id;
 gboolean init_statusbar(GtkWidget *widget,GtkWidget *next_to,GError **err)
 {
 	statusbar=gtk_statusbar_new();
-	
+
 	if (!statusbar) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not init statusbar", __func__);
 		return FALSE;
 	}
-	
+
 	// gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(statusbar),TRUE);
-	
+
 	gtk_widget_set_size_request(statusbar, 1, -1);
 
 	context_id=gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),"Info");
-	
+
 	set_statusbar_text(_("Welcome to SciteProj\n"));
-	
+
 	gtk_widget_set_size_request(statusbar, -1, 20);
-	
+
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(widget),statusbar,next_to,GTK_POS_BOTTOM,1,1);
 #else
 	gtk_box_pack_end (GTK_BOX (widget), statusbar,FALSE, FALSE, 0);
 #endif
-	
+
 	gtk_widget_show (statusbar);
 
-	
+
 	return TRUE;
 }
 
@@ -77,13 +77,13 @@ gboolean init_statusbar(GtkWidget *widget,GtkWidget *next_to,GError **err)
 void set_statusbar_text(const gchar *text)
 {
 	if (statusbar) {
-			
+
 		int co=0;
 		// new string - fill it with characters from text indata, but skip
 		// non-showable characters.
-		
+
 		gchar *newstring=(gchar*)(g_malloc((int)(strlen(text)+1)));
-		
+
 		int newco=0;
 		for (co=0;co<(int)strlen(text);co++) {
 			if (text[co]!='\n') {
@@ -91,18 +91,18 @@ void set_statusbar_text(const gchar *text)
 				newco++;
 			}
 		}
-		
+
 		newstring[newco]='\0';
-		
+
 		// Pop what message that was previously on the statusbar stack
 		gtk_statusbar_pop(GTK_STATUSBAR(statusbar),context_id);
-		
+
 		// Push the new message (the statusbar will show the message that
 		// is on top of the statusbar stack, the one pushed will be shown)
-		// We popped the last one, because we don't take advantage of the 
+		// We popped the last one, because we don't take advantage of the
 		// context_id system of the statusbar.
 		gtk_statusbar_push(GTK_STATUSBAR(statusbar),context_id,newstring);
-		
+
 		g_free(newstring);
 	}
 }

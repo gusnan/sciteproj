@@ -4,7 +4,7 @@
  *  Copyright 2011-2012 Andreas Rönnquist
  *
  * This file is part of SciteProj.
- * 
+ *
  * SciteProj is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -28,7 +28,7 @@
  */
 extern GtkWidget *recentTreeView;
 extern GtkWidget *recentPopupMenu;
-	
+
 GtkWidget *init_recent_files(GError **err);
 
 gboolean add_file_to_recent(gchar *filepath, GError **err);
