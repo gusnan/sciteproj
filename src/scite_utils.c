@@ -303,15 +303,6 @@ gboolean launch_scite(gchar *instring,GError **err)
 
 	gchar *scite_command;
 
-	char scite_arg1[256];
-	char scite_arg2[256];
-	char scite_arg3[256];
-	char scite_arg4[256];
-
-
-	static unsigned long usecsDelta = 100000;
-	static unsigned long usecsDialogDelay;
-
 	// Clean up anything open from previous attempts/activity
 
 	shutdown_pipes();
@@ -321,7 +312,15 @@ gboolean launch_scite(gchar *instring,GError **err)
 
 	if (scite_exists) {
 
-	// We need our process id for use in forming the named pipe filenames
+		char scite_arg1[256];
+		char scite_arg2[256];
+		char scite_arg3[256];
+		char scite_arg4[256];
+
+		static unsigned long usecsDelta = 100000;
+		static unsigned long usecsDialogDelay;
+
+		// We need our process id for use in forming the named pipe filenames
 		pid_t ourPID = 0;
 		pid_t childPID = 0;
 		gulong usecs=0;
