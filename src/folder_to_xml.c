@@ -258,8 +258,10 @@ gboolean folder_to_xml(gchar *folder,gchar *save_filename_in,int max_depth)
 	}
 
 	if (save_filename!=NULL) {
-		fclose(save_file);
-		save_file=NULL;
+		if (save_file!=NULL) {
+			fclose(save_file);
+			save_file=NULL;
+		}
 	}
 
 	// change back to the stored directory
