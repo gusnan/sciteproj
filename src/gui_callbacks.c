@@ -59,7 +59,8 @@
 /**
  *		Expands all folders
  */
-static gboolean foreach_expand(GtkTreeModel *model,GtkTreePath *path,GtkTreeIter *iter,gpointer data)
+static gboolean foreach_expand(GtkTreeModel *model,GtkTreePath *path,
+                               GtkTreeIter *iter,gpointer data)
 {
 	expand_tree_row(path,TRUE);
 	return FALSE;
@@ -69,7 +70,8 @@ static gboolean foreach_expand(GtkTreeModel *model,GtkTreePath *path,GtkTreeIter
 /**
  *		Collapses all folders
  */
-gboolean foreach_collapse(GtkTreeModel *model,GtkTreePath *path,GtkTreeIter *iter,gpointer data)
+gboolean foreach_collapse(GtkTreeModel *model,GtkTreePath *path,
+                          GtkTreeIter *iter,gpointer data)
 {
 	collapse_tree_row(path);
 	return FALSE;
@@ -146,8 +148,10 @@ void popup_open_file_cb()
 EXITPOINT:
 
 	if (err != NULL) {
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-			_("Could not open selected file: \n\n%s"), err->message);
+		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, 
+		                                GTK_BUTTONS_OK,
+		                                _("Could not open selected file: \n\n%s"), 
+		                                err->message);
 
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}
@@ -167,7 +171,8 @@ EXITPOINT:
  */
 void collapse_all_items_cb()
 {
-	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)),foreach_collapse,NULL);
+	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)),
+	                       foreach_collapse,NULL);
 }
 
 
@@ -205,7 +210,8 @@ void edit_options_cb()
  */
 void expand_all_items_cb()
 {
-	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)),foreach_expand,NULL);
+	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)),
+	                       foreach_expand,NULL);
 }
 
 
@@ -272,7 +278,8 @@ static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter
  * @param arg2 is not used
  * @param user_data is not used
  */
-void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter, GtkTreePath *tree_path, gpointer user_data)
+void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter, 
+                               GtkTreePath *tree_path, gpointer user_data)
 {
 	/* Switch the folder icon open/closed*/
 
@@ -313,7 +320,10 @@ void saveproject_as_menu_cb()
 	GError *err = NULL;
 
 	if (!save_project(NULL,&err)) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while saving the project: %s"), err->message);
+		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
+		                                           GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+		                                           _("An error occurred while saving the project: %s"),
+		                                           err->message);
 
 		if (dialog) {
 			gtk_dialog_run(GTK_DIALOG(dialog));
@@ -336,7 +346,10 @@ void saveproject_menu_cb()
 	gchar *temp_filepath=get_project_filepath();
 
 	if (!save_project(temp_filepath,&err)) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while saving the project: %s"), err->message);
+		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
+		                                           GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+		                                           _("An error occurred while saving the project: %s"),
+		                                           err->message);
 
 		if (dialog) {
 			gtk_dialog_run(GTK_DIALOG(dialog));
@@ -358,7 +371,10 @@ void openproject_menu_cb()
 	GError *err = NULL;
 
 	if (!load_project(NULL, &err)) {
-		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while opening project file: %s"), err->message);
+		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,
+		                                           GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+		                                           _("An error occurred while opening project file: %s"),
+		                                           err->message);
 
 		if (dialog) {
 			gtk_dialog_run(GTK_DIALOG(dialog));
@@ -390,7 +406,8 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
 	{
 		case GDK_KEY_BackSpace:
 		{
-			debug_printf((gchar*)"key_press_cb: keyval = %d = GDK_BackSpace, hardware_keycode = %d\n", event->keyval, event->hardware_keycode);
+			debug_printf((gchar*)"key_press_cb: keyval = %d = GDK_BackSpace, hardware_keycode = %d\n", 
+			             event->keyval, event->hardware_keycode);
 			break;
 		}
 
@@ -415,7 +432,8 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
 		}
 		default:
 		{
-			debug_printf("key_press_cb: keyval = %d = '%c', hardware_keycode = %d\n", event->keyval, (char) event->keyval, event->hardware_keycode);
+			debug_printf("key_press_cb: keyval = %d = '%c', hardware_keycode = %d\n", 
+			             event->keyval, (char) event->keyval, event->hardware_keycode);
 			return FALSE;
 		}
 	}
@@ -438,7 +456,9 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
  *		search function for the gtk_tree_view_set_search_equal_func
  *		@return TRUE when rows DONT match, FALSE when rows match
  */
-gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,const gchar *key,GtkTreeIter *iter,gpointer search_data)
+gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,
+                                     const gchar *key,GtkTreeIter *iter,
+                                     gpointer search_data)
 {
 	gchar *filename;
 	// For some reason this should return TRUE if the row DONT match
