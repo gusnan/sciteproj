@@ -107,7 +107,11 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 	gchar *filePath=NULL;
 	int nodeType=-1;
 
-	gtk_tree_model_get(tree_model, iter, COLUMN_FILENAME, &nodename ,COLUMN_ITEMTYPE, &nodeType, COLUMN_FILEPATH, &filePath, -1);
+	gtk_tree_model_get(tree_model, iter,
+	                   COLUMN_FILENAME, &nodename,
+	                   COLUMN_ITEMTYPE, &nodeType,
+	                   COLUMN_FILEPATH, &filePath,
+	                   -1);
 
 	gchar *number_of_files_string;
 
@@ -209,7 +213,11 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	gchar *filePath=NULL;
 	int nodeType=-1;
 
-	gtk_tree_model_get(model, iter, COLUMN_FILENAME, &nodename ,COLUMN_ITEMTYPE, &nodeType, COLUMN_FILEPATH, &filePath, -1);
+	gtk_tree_model_get(model, iter,
+	                   COLUMN_FILENAME, &nodename,
+	                   COLUMN_ITEMTYPE, &nodeType,
+	                   COLUMN_FILEPATH, &filePath,
+	                   -1);
 
 	debug_printf((gchar*)"Node name: %s\n",nodename);
 	debug_printf((gchar*)"File name: %s\n",filePath);
