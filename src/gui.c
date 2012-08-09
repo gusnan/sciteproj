@@ -71,14 +71,16 @@
 // Forward-declare static functions
 
 static gint window_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer data);
-static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkTreeViewColumn *column, gpointer userData);
+static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path,
+                                  GtkTreeViewColumn *column, gpointer userData);
 static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *event, gpointer userData);
 
 //gboolean dialog_response_is_exit(gint test);
 
 void recent_files_switch_visible();
 
-gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,const gchar *key,GtkTreeIter *iter,gpointer search_data);
+gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,const gchar *key,
+                                     GtkTreeIter *iter,gpointer search_data);
 
 gboolean is_name_valid(gchar *instring);
 
@@ -292,7 +294,8 @@ gboolean setup_gui(GError **err)
 		goto EXITPOINT;
 	}
 
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow),
+	                               GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
 
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach(GTK_GRID(grid),scrolledWindow,0,1,1,1);
@@ -396,12 +399,17 @@ gboolean setup_gui(GError **err)
 	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
 	gtk_tree_selection_set_mode(selection, GTK_SELECTION_MULTIPLE);
 
-	g_signal_connect(G_OBJECT(projectTreeView), "row-activated", G_CALLBACK(tree_row_activated_cb), NULL);
+	g_signal_connect(G_OBJECT(projectTreeView), "row-activated",
+	                 G_CALLBACK(tree_row_activated_cb), NULL);
 
-	gtk_tree_view_set_search_equal_func(GTK_TREE_VIEW(projectTreeView),tree_view_search_equal_func,NULL,NULL);
+	gtk_tree_view_set_search_equal_func(GTK_TREE_VIEW(projectTreeView),
+	                                    tree_view_search_equal_func,NULL,NULL);
 
-	gtk_tree_view_enable_model_drag_source(GTK_TREE_VIEW(projectTreeView), GDK_BUTTON1_MASK, dragTargets, 1, GDK_ACTION_MOVE);
-	gtk_tree_view_enable_model_drag_dest(GTK_TREE_VIEW(projectTreeView), dragTargets, 1, GDK_ACTION_MOVE);
+	gtk_tree_view_enable_model_drag_source(GTK_TREE_VIEW(projectTreeView),
+	                                       GDK_BUTTON1_MASK, dragTargets, 1, GDK_ACTION_MOVE);
+
+	gtk_tree_view_enable_model_drag_dest(GTK_TREE_VIEW(projectTreeView),
+	                                     dragTargets, 1, GDK_ACTION_MOVE);
 
 
 	sDragStruct.treeView = GTK_TREE_VIEW(projectTreeView);
@@ -409,14 +417,27 @@ gboolean setup_gui(GError **err)
 	sDragStruct.isLocalDrag = FALSE;
 	sDragStruct.dragNodes = NULL;
 
-	g_signal_connect(G_OBJECT(projectTreeView), "drag-data-received", G_CALLBACK(drag_data_received_cb), &sDragStruct);
-	g_signal_connect(G_OBJECT(projectTreeView), "drag-data-get", G_CALLBACK(drag_data_get_cb), &sDragStruct);
-	g_signal_connect(G_OBJECT(projectTreeView), "drag-motion", G_CALLBACK(drag_motion_cb), &sDragStruct);
-	g_signal_connect(G_OBJECT(projectTreeView), "row-expanded", G_CALLBACK(row_expand_or_collapse_cb), NULL);
-	g_signal_connect(G_OBJECT(projectTreeView), "row-collapsed", G_CALLBACK(row_expand_or_collapse_cb), NULL);
+	g_signal_connect(G_OBJECT(projectTreeView), "drag-data-received",
+	                 G_CALLBACK(drag_data_received_cb), &sDragStruct);
 
-	g_signal_connect(G_OBJECT(projectTreeView), "button-press-event", G_CALLBACK(mouse_button_pressed_cb), projectTreeView);
- 	g_signal_connect(G_OBJECT(projectTreeView), "key-press-event", G_CALLBACK(key_press_cb), projectTreeView);
+	g_signal_connect(G_OBJECT(projectTreeView), "drag-data-get",
+	                 G_CALLBACK(drag_data_get_cb), &sDragStruct);
+
+	g_signal_connect(G_OBJECT(projectTreeView), "drag-motion",
+	                 G_CALLBACK(drag_motion_cb), &sDragStruct);
+
+	g_signal_connect(G_OBJECT(projectTreeView), "row-expanded",
+	                 G_CALLBACK(row_expand_or_collapse_cb), NULL);
+
+	g_signal_connect(G_OBJECT(projectTreeView), "row-collapsed",
+	                 G_CALLBACK(row_expand_or_collapse_cb), NULL);
+
+
+	g_signal_connect(G_OBJECT(projectTreeView), "button-press-event",
+	                 G_CALLBACK(mouse_button_pressed_cb), projectTreeView);
+
+ 	g_signal_connect(G_OBJECT(projectTreeView), "key-press-event",
+	                 G_CALLBACK(key_press_cb), projectTreeView);
 
 	// --------------------------------
 	// Recent file stuff:
@@ -741,7 +762,10 @@ static void switch_folder_icon(GtkTreeView *treeView,GtkTreePath *path)
  * @param column is not used
  * @param userData is not used
  */
-static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkTreeViewColumn *column, gpointer userData)
+static void tree_row_activated_cb(GtkTreeView *treeView,
+                                  GtkTreePath *path,
+                                  GtkTreeViewColumn *column,
+                                  gpointer userData)
 {
 	GtkTreeModel *treeModel = NULL;
 	GtkTreeIter iter;
@@ -856,10 +880,14 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 
 	// Find if the user has clicked on a node
 
-	if (!gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeView), (gint) event->x, (gint) event->y, &path, NULL, NULL, NULL)) {
+	if (!gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeView),
+	                                   (gint) event->x, (gint) event->y,
+	                                   &path, NULL, NULL, NULL)) {
 		// Nope-- user clicked in the GtkTreeView, but not on a node
 
-		gtk_menu_popup(GTK_MENU(sGeneralPopupMenu), NULL, NULL, NULL, NULL, event->button, gdk_event_get_time((GdkEvent*) event));
+		gtk_menu_popup(GTK_MENU(sGeneralPopupMenu),
+		               NULL, NULL, NULL, NULL,
+		               event->button, gdk_event_get_time((GdkEvent*) event));
 
 		goto EXITPOINT;
 	}
@@ -905,10 +933,12 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	// Pop up the appropriate menu for the node type
 
 	if (nodeItemType == ITEMTYPE_FILE) {
-		gtk_menu_popup(GTK_MENU(sFilePopupMenu), NULL, NULL, NULL, NULL, event->button, gdk_event_get_time((GdkEvent*) event));
+		gtk_menu_popup(GTK_MENU(sFilePopupMenu), NULL, NULL, NULL, NULL,
+		               event->button, gdk_event_get_time((GdkEvent*) event));
 	}
 	else if (nodeItemType == ITEMTYPE_GROUP) {
-		gtk_menu_popup(GTK_MENU(sGroupPopupMenu), NULL, NULL, NULL, NULL, event->button, gdk_event_get_time((GdkEvent*) event));
+		gtk_menu_popup(GTK_MENU(sGroupPopupMenu), NULL, NULL, NULL, NULL,
+		               event->button, gdk_event_get_time((GdkEvent*) event));
 	}
 
 	// We took care of the event, so no need to propogate it
