@@ -416,7 +416,6 @@ gboolean load_project(gchar *projectPath, GError **err)
 	GtkWidget *dialog = NULL;
 	gboolean finalResult = FALSE;
 	gchar *filepath = NULL;
-	GtkFileFilter* fileFilter = NULL;
 
 
 	// Ensure the current project is saved
@@ -452,6 +451,7 @@ gboolean load_project(gchar *projectPath, GError **err)
 
 		dialog = gtk_file_chooser_dialog_new(_("Open Project"), NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
 
+		GtkFileFilter* fileFilter = NULL;
 		fileFilter = gtk_file_filter_new();
 		gtk_file_filter_set_name(fileFilter, _("Project Files (*.xml)"));
 		gtk_file_filter_add_pattern(fileFilter, "*.xml");
