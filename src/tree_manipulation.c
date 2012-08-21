@@ -40,6 +40,8 @@
 
 #include "filelist.h"
 
+#include "icon.h"
+
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_TREEMANIPULATION_ERROR")
 
@@ -897,7 +899,7 @@ gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, con
 
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_EXPANDED, FALSE, -1);
 
-
+	/*
 	if (
 		(strcmp(fileExt,"cc")==0) ||
 		(strcmp(fileExt,"c++")==0) ||
@@ -926,6 +928,11 @@ gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, con
 	} else {
 		gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, txt_file_pixbuf, -1);
 	}
+	*/
+
+	GdkPixbuf *icon_pixbuf=get_pixbuf_from_filename((gchar*)(filepath),GTK_ICON_SIZE_MENU);
+
+	gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, icon_pixbuf, -1);
 
 	if (newIter) {
 		*newIter = iter;

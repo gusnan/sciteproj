@@ -25,12 +25,6 @@
 /**
  *
  */
-extern GdkPixbuf *header_file_pixbuf;
-extern GdkPixbuf *cpp_file_pixbuf;
-extern GdkPixbuf *txt_file_pixbuf;
-extern GdkPixbuf *lua_file_pixbuf;
-extern GdkPixbuf *java_file_pixbuf;
-
 extern GdkPixbuf *directory_closed_pixbuf;
 extern GdkPixbuf *directory_open_pixbuf;
 

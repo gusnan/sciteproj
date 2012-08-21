@@ -38,6 +38,8 @@
 #include "clipboard.h"
 #include "properties_dialog.h"
 
+#include "icon.h"
+
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
 
@@ -310,33 +312,9 @@ gboolean add_file_to_recent(gchar *filepath,GError **err)
 	gtk_tree_store_set(recentTreeStore, &iter, COLUMN_EXPANDED, FALSE, -1);
 
 
-	if (
-		(strcmp(fileExt,"cc")==0) ||
-		(strcmp(fileExt,"c++")==0) ||
-		(strcmp(fileExt,"c")==0) ||
-		(strcmp(fileExt,"cpp")==0)
-		) {
-		gtk_tree_store_set(recentTreeStore, &iter, COLUMN_ICON, cpp_file_pixbuf, -1);
-	} else if (
-		(strcmp(fileExt,"hh")==0) ||
-		(strcmp(fileExt,"h++")==0) ||
-		(strcmp(fileExt,"h")==0) ||
-		(strcmp(fileExt,"hpp")==0)
-	) {
-		gtk_tree_store_set(recentTreeStore, &iter, COLUMN_ICON, header_file_pixbuf, -1);
-	} else {
-		gtk_tree_store_set(recentTreeStore, &iter, COLUMN_ICON, txt_file_pixbuf, -1);
-	}
+	GdkPixbuf *icon_pixbuf=get_pixbuf_from_filename((gchar*)(filepath),GTK_ICON_SIZE_MENU);
 
-	GtkTreePath *path;
-	if (!gPrefs.recent_add_to_bottom) {
-		path=gtk_tree_path_new_from_string("0");
-		gtk_tree_view_set_cursor_on_cell(GTK_TREE_VIEW(recentTreeView),path,NULL,NULL,FALSE);
-	} else {
-		GtkTreeModel *treeModel = gtk_tree_view_get_model(GTK_TREE_VIEW(recentTreeView));
-		path=gtk_tree_model_get_path(treeModel,&iter);
-		gtk_tree_view_set_cursor_on_cell(GTK_TREE_VIEW(recentTreeView),path,NULL,NULL,FALSE);
-	}
+	gtk_tree_store_set(recentTreeStore, &iter, COLUMN_ICON, icon_pixbuf, -1);
 
 	finalResult = TRUE;
 
