@@ -74,8 +74,5 @@
 		<file>./graphics/dir-close.xpm</file>
 		<file>./graphics/dir-open.xpm</file>
 		<file>./graphics/sciteproj.xpm</file>
-		<file>./graphics/text-x-cpp.xpm</file>
-		<file>./graphics/text-x-h.xpm</file>
-		<file>./graphics/text-x-txt.xpm</file>
 	</group>
 </root>
