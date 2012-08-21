@@ -301,7 +301,6 @@ gboolean launch_scite(gchar *instring,GError **err)
 	gchar responsePipePath[256];
 	gchar requestPipePath[256];
 
-	gchar *scite_command;
 
 	// Clean up anything open from previous attempts/activity
 
@@ -311,6 +310,7 @@ gboolean launch_scite(gchar *instring,GError **err)
 
 
 	if (scite_exists) {
+		gchar *scite_command;
 
 		char scite_arg1[256];
 		char scite_arg2[256];

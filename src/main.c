@@ -163,10 +163,9 @@ int main(int argc, char *argv[])
 	// check environment variable
 	gchar *scite_path_env=getenv("SciTE_HOME");
 
-	gchar *env_filename=NULL;
-
 	// test for scite
 	if (scite_path_env!=NULL) {
+		gchar *env_filename=NULL;
 		env_filename=g_build_filename(scite_path_env,"scite",NULL);
 		if (g_file_test(env_filename,G_FILE_TEST_EXISTS)) {
 			if (cmd.scite_filename==NULL) {
