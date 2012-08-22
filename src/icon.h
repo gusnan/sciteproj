@@ -1,4 +1,4 @@
-/*
+/**
  * icon.h - Icon helper functions
  *
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
