@@ -184,7 +184,7 @@ gchar *fix_path(char *base_dir,char *temp)
 	gchar *new_res=g_strdup_printf("%s%c%s",out_path,G_DIR_SEPARATOR,file_pointer);
 
 	g_free(curr);
-	g_free(infile);
+	//g_free(infile);
 
 	return new_res;
 }

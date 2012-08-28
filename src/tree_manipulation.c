@@ -42,6 +42,8 @@
 
 #include "icon.h"
 
+#include "file_utils.h"
+
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_TREEMANIPULATION_ERROR")
 
@@ -434,16 +436,16 @@ gboolean load_project(gchar *projectPath, GError **err)
 
 
 	if (projectPath != NULL) {
-		if (!load_parse_XML(sTreeStore, projectPath, err)) {
-			goto EXITPOINT;
-		}
-
-
 		// Keep the project filepath for later reference when saving
 
 		if (!set_project_filepath(projectPath, err)) {
 			goto EXITPOINT;
 		}
+
+		if (!load_parse_XML(sTreeStore, projectPath, err)) {
+			goto EXITPOINT;
+		}
+
 	}
 
 	else {
@@ -860,8 +862,11 @@ gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, con
 		printf("abs_path_to_relative_path FAILED!\n");
 		goto EXITPOINT;
 	}
-
-
+	
+	gchar *absolute_path=NULL;
+	
+	absolute_path=fix_path(sProjectDir,(gchar*)filepath);
+	
 	// Extract filename from filepath
 	fileName = get_filename_from_full_path((gchar*)filepath);
 
@@ -930,7 +935,7 @@ gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, con
 	}
 	*/
 
-	GdkPixbuf *icon_pixbuf=get_pixbuf_from_filename((gchar*)(filepath),GTK_ICON_SIZE_MENU);
+	GdkPixbuf *icon_pixbuf=get_pixbuf_from_filename((gchar*)(absolute_path),GTK_ICON_SIZE_MENU);
 
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, icon_pixbuf, -1);
 
@@ -945,6 +950,8 @@ gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, con
 EXITPOINT:
 
 	if (relFilename) g_free(relFilename);
+	
+	if (absolute_path) g_free(absolute_path);
 
 	return finalResult;
 }
