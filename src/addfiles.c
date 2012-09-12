@@ -35,8 +35,9 @@
 
 
 /**
- * Callback to handle "activation" message from a GtkEntry widget.  This code allows a return/enter
- * keystroke to trigger dismissal of the dialog box containing the GtkEntry.
+ * Callback to handle "activation" message from a GtkEntry widget.  This 
+ * code allows a return/enter keystroke to trigger dismissal of the dialog 
+ * box containing the GtkEntry.
  *
  * @param entry is the GtkEntry widget
  * @param dialog is the dialog that contains the GtkEntry widget
@@ -69,7 +70,8 @@ void addfile_menu_cb()
 
 	GtkTreeSelection *treeSelection = gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
 
-	GtkTreeModel *tree_model=gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)); //GTK_TREE_MODEL(get_treestore(&err));
+	GtkTreeModel *tree_model=gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)); 
+	//GTK_TREE_MODEL(get_treestore(&err));
 
 	GList *list = gtk_tree_selection_get_selected_rows(treeSelection, NULL);
 
@@ -174,7 +176,12 @@ void popup_add_files_cb()
 	}
 
 	if (!add_files_to_project(nodeIter, &err)) {
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "An error occurred while trying add files to the project: %s", err->message);
+		dialog = gtk_message_dialog_new(NULL,
+		                                GTK_DIALOG_MODAL,
+		                                GTK_MESSAGE_ERROR,
+		                                GTK_BUTTONS_OK,
+		                                "An error occurred while trying add files to the project: %s",
+		                                err->message);
 
 		gtk_dialog_run(GTK_DIALOG(dialog));
 	} else {
