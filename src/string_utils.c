@@ -316,7 +316,7 @@ EXITPOINT:
  */
 gchar *get_filename_from_full_path(gchar *src)
 {
-	gchar *pointer=NULL;
+	gchar *pointer;
 	gchar *result=NULL;
 	gboolean slashFound=FALSE;
 

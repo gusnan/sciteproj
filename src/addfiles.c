@@ -67,13 +67,11 @@ void addfile_menu_cb()
 
 	gboolean nodeValid=FALSE;
 
-	GList *list=NULL;
-
 	GtkTreeSelection *treeSelection = gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
 
 	GtkTreeModel *tree_model=gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)); //GTK_TREE_MODEL(get_treestore(&err));
 
-	list = gtk_tree_selection_get_selected_rows(treeSelection, NULL);
+	GList *list = gtk_tree_selection_get_selected_rows(treeSelection, NULL);
 
 	// is the list empty?
 	if (list) {
@@ -229,10 +227,6 @@ EXITPOINT:
 void ask_name_add_group(GtkTreeIter *nodeIter)
 {
 	GError *err = NULL;
-	GtkWidget *dialog = NULL;
-	GtkWidget* gtkEntry = NULL;
-	GtkWidget* gtkLabel = NULL;
-	GtkWidget* table = NULL;
 
 #if GTK_MAJOR_VERSION<3
 	GtkAttachOptions options = (GtkAttachOptions) (GTK_EXPAND | GTK_SHRINK | GTK_FILL);
@@ -242,21 +236,28 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 
 
 	// Create a dialog box with a nicely-centered text entry widget
-	dialog = gtk_dialog_new_with_buttons(_("Create Group"), NULL, GTK_DIALOG_MODAL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT, NULL);
+	GtkWidget *dialog = gtk_dialog_new_with_buttons(_("Create Group"),
+	                                                NULL,
+	                                                GTK_DIALOG_MODAL,
+	                                                GTK_STOCK_OK,
+	                                                GTK_RESPONSE_ACCEPT,
+	                                                GTK_STOCK_CANCEL,
+	                                                GTK_RESPONSE_REJECT,
+	                                                NULL);
 
 	g_signal_connect(dialog, "response",  G_CALLBACK(gtk_widget_hide), dialog);
 
 	gtk_container_set_border_width(GTK_CONTAINER(dialog), 0);
 #if GTK_MAJOR_VERSION>=3
-	table=gtk_grid_new();
+	GtkWidget *table=gtk_grid_new();
 	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 	gtk_grid_set_column_spacing(GTK_GRID(table),6);
 
 #else
-	table = gtk_table_new(1, 2, FALSE);
+	GtkWidget *table = gtk_table_new(1, 2, FALSE);
 #endif
 
-	gtkLabel = gtk_label_new(_("Enter name of new group:"));
+	GtkWidget *gtkLabel = gtk_label_new(_("Enter name of new group:"));
 
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach(GTK_GRID(table),gtkLabel,0,0,3,1);
@@ -264,7 +265,7 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 	gtk_table_attach(GTK_TABLE(table), gtkLabel, 0, 1, 0, 1, options, options, 5, 5);
 #endif
 
-	gtkEntry = gtk_entry_new();
+	GtkWidget *gtkEntry = gtk_entry_new();
 
 	g_signal_connect(G_OBJECT(gtkEntry), "activate", G_CALLBACK(entry_widget_activated_cb), dialog);
 
@@ -291,7 +292,11 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 	groupName = gtk_entry_get_text(GTK_ENTRY(gtkEntry));
 
 	if (groupName == NULL || *groupName == '\0') {
-		GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Invalid group name");
+		GtkWidget *errDialog = gtk_message_dialog_new(NULL,
+		                                              GTK_DIALOG_MODAL,
+		                                              GTK_MESSAGE_ERROR,
+		                                              GTK_BUTTONS_OK,
+		                                              "Invalid group name");
 
 		gtk_dialog_run(GTK_DIALOG(errDialog));
 
@@ -304,7 +309,12 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 	// Add the group
 
 	if (!add_tree_group(nodeIter, ADD_CHILD, groupName, TRUE, NULL, &err)) {
-		GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "An error occurred while adding the group: %s", err->message);
+		GtkWidget *errDialog = gtk_message_dialog_new(NULL,
+		                                              GTK_DIALOG_MODAL,
+		                                              GTK_MESSAGE_ERROR,
+		                                              GTK_BUTTONS_OK,
+		                                              "An error occurred while adding the group: %s",
+		                                              err->message);
 
 		gtk_dialog_run(GTK_DIALOG(errDialog));
 

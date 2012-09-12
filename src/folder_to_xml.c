@@ -52,12 +52,10 @@ gchar *stored_current_dir;
  */
 gchar *get_short_folder_name(gchar *base,gchar *current)
 {
-	int co=0;
-
 	gchar *result=current+strlen(base);
 
 	// make sure the returned string don't start with a dir separator
-	co=0;
+	int co=0;
 	size_t len=strlen(base);
 	do {
 		if (result[0]==G_DIR_SEPARATOR) result++;

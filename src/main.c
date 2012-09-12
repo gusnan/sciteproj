@@ -83,8 +83,7 @@ int main(int argc, char *argv[])
 	bind_textdomain_codeset(PACKAGE,"");
 	textdomain(PACKAGE);
 
-	gchar *sciteproj_description=NULL;
-	sciteproj_description=g_strdup_printf(_("SciTE Project Manager"));
+	gchar *sciteproj_description=g_strdup_printf(_("SciTE Project Manager"));
 
 	gchar *full_desc_string=g_strdup_printf("- %s",sciteproj_description);
 
@@ -165,8 +164,7 @@ int main(int argc, char *argv[])
 
 	// test for scite
 	if (scite_path_env!=NULL) {
-		gchar *env_filename=NULL;
-		env_filename=g_build_filename(scite_path_env,"scite",NULL);
+		gchar *env_filename=g_build_filename(scite_path_env,"scite",NULL);
 		if (g_file_test(env_filename,G_FILE_TEST_EXISTS)) {
 			if (cmd.scite_filename==NULL) {
 				cmd.scite_filename=g_strdup(env_filename);

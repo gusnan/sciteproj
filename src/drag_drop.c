@@ -290,8 +290,6 @@ void drag_data_get_cb(GtkWidget *widget, GdkDragContext *drag_context, GtkSelect
 	gchar *fileURI = NULL;
 	GError *err = NULL;
 	gchar** uriList = NULL;
-	GList* selectedNodeList = NULL;
-	GtkTreeSelection *treeSelection = NULL;
 	gint numSelectedRows;
 	gchar *nodeContentString = NULL;
 	TreeNodeStruct *nodeInfoPtr = NULL;
@@ -303,9 +301,9 @@ void drag_data_get_cb(GtkWidget *widget, GdkDragContext *drag_context, GtkSelect
 
 	// Get the currently-selected nodes, if possible
 
-	treeSelection = gtk_tree_view_get_selection(dragStruct->treeView);
+	GtkTreeSelection *treeSelection = gtk_tree_view_get_selection(dragStruct->treeView);
 
-	selectedNodeList = gtk_tree_selection_get_selected_rows(treeSelection, NULL);
+	GList *selectedNodeList = gtk_tree_selection_get_selected_rows(treeSelection, NULL);
 
 	if (!selectedNodeList) {
 		goto EXITPOINT;
@@ -334,14 +332,13 @@ void drag_data_get_cb(GtkWidget *widget, GdkDragContext *drag_context, GtkSelect
 	nodeInfoPtr = dragStruct->dragNodes;
 
 	for (selectionIter = g_list_first(selectedNodeList); selectionIter != NULL; selectionIter = g_list_next(selectionIter)) {
-		GtkTreePath *path = NULL;
 		gint nodeItemType;
 		GtkTreeIter nodeIter;
 
 
 		// Get the iter to the next selected node
 
-		path = (GtkTreePath *) selectionIter->data;
+		GtkTreePath *path = (GtkTreePath *) selectionIter->data;
 
 		if (!gtk_tree_model_get_iter(GTK_TREE_MODEL(dragStruct->treeStore), &nodeIter, path)) {
 			continue;

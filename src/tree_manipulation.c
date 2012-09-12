@@ -453,8 +453,7 @@ gboolean load_project(gchar *projectPath, GError **err)
 
 		dialog = gtk_file_chooser_dialog_new(_("Open Project"), NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
 
-		GtkFileFilter* fileFilter = NULL;
-		fileFilter = gtk_file_filter_new();
+		GtkFileFilter* fileFilter = gtk_file_filter_new();
 		gtk_file_filter_set_name(fileFilter, _("Project Files (*.xml)"));
 		gtk_file_filter_add_pattern(fileFilter, "*.xml");
 		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), fileFilter);
@@ -852,9 +851,6 @@ gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, con
 
 	gchar *fileExt=NULL;
 
-	relFilename = NULL; //g_strdup(filepath);
-
-
 	if (!makeRelative) {
 		relFilename = g_strdup(filepath);
 	}
@@ -863,9 +859,7 @@ gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, con
 		goto EXITPOINT;
 	}
 	
-	gchar *absolute_path=NULL;
-	
-	absolute_path=fix_path(sProjectDir,(gchar*)filepath);
+	gchar *absolute_path=fix_path(sProjectDir,(gchar*)filepath);
 	
 	// Extract filename from filepath
 	fileName = get_filename_from_full_path((gchar*)filepath);

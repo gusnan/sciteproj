@@ -202,7 +202,6 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 {
 
 	GError *err = NULL;
-	GtkWidget *dialog = NULL;
 	gchar *nodename = NULL;
 
 	GtkWidget *table;
@@ -222,7 +221,7 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	debug_printf((gchar*)"Node name: %s\n",nodename);
 	debug_printf((gchar*)"File name: %s\n",filePath);
 
-	dialog=gtk_dialog_new_with_buttons(_("File Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
+	GtkWidget *dialog=gtk_dialog_new_with_buttons(_("File Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
 
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog),GTK_RESPONSE_OK);
 

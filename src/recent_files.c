@@ -72,8 +72,15 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *pat
  */
 GtkTreeStore* create_treestore_recent(GError **err)
 {
-	GtkTreeStore *result=NULL;
-		result= gtk_tree_store_new(COLUMN_EOL, TYPE_ITEMTYPE, TYPE_FILEPATH, TYPE_FILENAME, TYPE_FILESIZE, TYPE_FONTWEIGHT, TYPE_FONTWEIGHTSET, TYPE_ICON, TYPE_EXPANDED);
+	GtkTreeStore *result= gtk_tree_store_new(COLUMN_EOL,
+	                                         TYPE_ITEMTYPE,
+	                                         TYPE_FILEPATH,
+	                                         TYPE_FILENAME,
+	                                         TYPE_FILESIZE,
+	                                         TYPE_FONTWEIGHT,
+	                                         TYPE_FONTWEIGHTSET,
+	                                         TYPE_ICON,
+	                                         TYPE_EXPANDED);
 
 	if (result == NULL) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
@@ -249,11 +256,8 @@ gboolean add_file_to_recent(gchar *filepath,GError **err)
 	gboolean finalResult = FALSE;
 	GtkTreeIter iter;
 	const gchar* fileName = NULL;
-	gchar *relFilename = NULL;
-
 	gchar *fileExt=NULL;
-
-	relFilename = NULL; //g_strdup(filepath);
+	gchar *relFilename = NULL; //g_strdup(filepath);
 
 	/*
 	if (!makeRelative) {
@@ -481,26 +485,23 @@ EXITPOINT:
  */
 static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkTreeViewColumn *column, gpointer userData)
 {
-	GtkTreeModel *treeModel = NULL;
 	GtkTreeIter iter;
 	gchar *relFilePath = NULL;
-	gchar *absFilePath = NULL;
 	gchar *command = NULL;
 	GError *err = NULL;
 	GtkWidget *dialog = NULL;
 	gint nodeItemType;
-	gchar *fixed=NULL;
 
 
 	// Get the data from the row that was activated
 
-	treeModel = gtk_tree_view_get_model(treeView);
+	GtkTreeModel *treeModel = gtk_tree_view_get_model(treeView);
 	gtk_tree_model_get_iter(treeModel, &iter, path);
 	gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType, COLUMN_FILEPATH, &relFilePath, -1);
 
-	absFilePath=fix_path((gchar*)get_project_directory(),relFilePath);
+	gchar *absFilePath=fix_path((gchar*)get_project_directory(),relFilePath);
 
-	fixed=fix_path((gchar*)get_project_directory(),relFilePath);
+	gchar *fixed=fix_path((gchar*)get_project_directory(),relFilePath);
 
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1,
@@ -521,9 +522,8 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *pat
 
 			add_file_to_recent(fixed,NULL);
 
-			gchar *statusbar_text=NULL;
-
-			statusbar_text=g_strdup_printf(_("Opened %s"),remove_newline(get_filename_from_full_path(command)));
+			gchar *statusbar_text=g_strdup_printf(_("Opened %s"),
+			                                      remove_newline(get_filename_from_full_path(command)));
 
 			set_statusbar_text(statusbar_text);
 

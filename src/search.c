@@ -608,10 +608,9 @@ static gpointer thread_func(Data *data)
 
 	if (file_error_list!=NULL) {
 
-		gchar *error_message=NULL;
 		data->error=NULL;
 
-		error_message=g_strdup_printf(_("There was problems opening the following files in the project:\n\n"));
+		gchar *error_message=g_strdup_printf(_("There was problems opening the following files in the project:\n\n"));
 
 		while((file_error_list)) {
 
@@ -749,7 +748,7 @@ gboolean search_key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer use
  */
 static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkTreeViewColumn *column, gpointer user_data)
 {
-	GtkTreeModel *treeModel = NULL;
+	GtkTreeModel *treeModel;
 	GtkTreeIter iter;
 	gchar *relFilePath = NULL;
 	gchar *absFilePath = NULL;
@@ -832,9 +831,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 
 			//GError *err;
 
-			gchar *statusbar_text=NULL;
-
-			statusbar_text=g_strdup_printf(_("Opened %s"),remove_newline(get_filename_from_full_path(command)));
+			gchar *statusbar_text=g_strdup_printf(_("Opened %s"),remove_newline(get_filename_from_full_path(command)));
 
 			set_statusbar_text(statusbar_text);
 
@@ -870,9 +867,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 
 			//GError *err;
 
-			gchar *statusbar_text=NULL;
-
-			statusbar_text=g_strdup_printf(_("Opened %s"),remove_newline(get_filename_from_full_path(command)));
+			gchar *statusbar_text=g_strdup_printf(_("Opened %s"),remove_newline(get_filename_from_full_path(command)));
 
 			set_statusbar_text(statusbar_text);
 

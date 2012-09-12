@@ -406,9 +406,9 @@ static gboolean marshal_subtree(GtkTreeModel *treeModel, GtkTreeIter *subtreeIte
 
 	gboolean finalResult = FALSE;
 	gint itemType;
-	gchar *filepathString = NULL;
+	gchar *filepathString;
 	gchar *tmpXML = NULL;
-	gchar *indentString = NULL;
+	gchar *indentString;
 	gint depth;
 
 	gboolean expanded=FALSE;

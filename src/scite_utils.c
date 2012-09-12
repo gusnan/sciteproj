@@ -177,11 +177,8 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 
 				if (g_str_has_prefix(buff, "closed:")) {
 
-					gchar *status_string=NULL;
-
 					gchar *file=get_filename_from_full_path(buff);
-
-					status_string=g_strdup_printf(_("Closed %s"),file);
+					gchar *status_string=g_strdup_printf(_("Closed %s"),file);
 
 					set_statusbar_text(status_string);
 
@@ -196,11 +193,8 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 
 				if (g_str_has_prefix(buff, "switched:")) {
 
-					gchar *status_string=NULL;
-
 					gchar *file=get_filename_from_full_path(buff);
-
-					status_string=g_strdup_printf(_("Switched to %s"),file);
+					gchar *status_string=g_strdup_printf(_("Switched to %s"),file);
 
 					set_statusbar_text(status_string);
 
@@ -209,11 +203,8 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 
 				if (g_str_has_prefix(buff, "opened:")) {
 
-					gchar *status_string=NULL;
-
 					gchar *file=get_filename_from_full_path(buff);
-
-					status_string=g_strdup_printf(_("Opened %s"),file);
+					gchar *status_string=g_strdup_printf(_("Opened %s"),file);
 
 					set_statusbar_text(status_string);
 
@@ -321,13 +312,11 @@ gboolean launch_scite(gchar *instring,GError **err)
 		static unsigned long usecsDialogDelay;
 
 		// We need our process id for use in forming the named pipe filenames
-		pid_t ourPID = 0;
 		pid_t childPID = 0;
 		gulong usecs=0;
 		int errCode;
 
-		ourPID = getpid();
-
+		pid_t ourPID = getpid();
 
 		// The response pipe will be used by Scite to send data to us
 
@@ -807,8 +796,7 @@ gboolean check_if_scite_exists()
 		if (g_file_test(sSciteExecName1,G_FILE_TEST_EXISTS)) exists=TRUE;
 
 		// Check both
-		gchar *test_filename=NULL;
-		test_filename=g_build_filename("/bin",sSciteExecName2,NULL);
+		gchar *test_filename=g_build_filename("/bin",sSciteExecName2,NULL);
 		if (g_file_test(test_filename,G_FILE_TEST_EXISTS)) exists=TRUE;
 		if (test_filename!=NULL) g_free(test_filename);
 

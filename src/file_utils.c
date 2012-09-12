@@ -195,8 +195,7 @@ gchar *fix_path(char *base_dir,char *temp)
  */
 void init_file_utils()
 {
-	gchar *temp=NULL;
-	temp=g_get_current_dir();
+	gchar *temp=g_get_current_dir();
 	current_directory=fix_separators(temp);
 
 	g_free(temp);

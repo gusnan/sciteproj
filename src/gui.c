@@ -728,13 +728,12 @@ static gint window_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer 
  */
 static void switch_folder_icon(GtkTreeView *treeView,GtkTreePath *path)
 {
-	GtkTreeModel *treeModel = NULL;
 	GtkTreeIter iter;
 	gint nodeItemType;
 
 	gchar *relFilePath = NULL;
 
-	treeModel = gtk_tree_view_get_model(treeView);
+	GtkTreeModel *treeModel = gtk_tree_view_get_model(treeView);
 	gtk_tree_model_get_iter(treeModel, &iter, path);
 	gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType, COLUMN_FILEPATH, &relFilePath, -1);
 
@@ -767,7 +766,6 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
                                   GtkTreeViewColumn *column,
                                   gpointer userData)
 {
-	GtkTreeModel *treeModel = NULL;
 	GtkTreeIter iter;
 	gchar *relFilePath = NULL;
 	gchar *absFilePath = NULL;
@@ -780,7 +778,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 
 	// Get the data from the row that was activated
 
-	treeModel = gtk_tree_view_get_model(treeView);
+	GtkTreeModel *treeModel = gtk_tree_view_get_model(treeView);
 	gtk_tree_model_get_iter(treeModel, &iter, path);
 	gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType, COLUMN_FILEPATH, &relFilePath, -1);
 
@@ -817,9 +815,8 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 
 			add_file_to_recent(fixed,NULL);
 
-			gchar *statusbar_text=NULL;
-
-			statusbar_text=g_strdup_printf(_("Opened %s"),remove_newline(get_filename_from_full_path(command)));
+			gchar *statusbar_text=g_strdup_printf(_("Opened %s"),
+			                                      remove_newline(get_filename_from_full_path(command)));
 
 			set_statusbar_text(statusbar_text);
 
