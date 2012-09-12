@@ -222,7 +222,8 @@ EXITPOINT:
 /**
  * Ask the user for the name of a group and add it to the tree
  *
- * @param nodeIter is the node the group will be added to as a child; if NULL, then the group is added to the root of the tree
+ * @param nodeIter is the node the group will be added to as a child; 
+ * if NULL, then the group is added to the root of the tree
  */
 void ask_name_add_group(GtkTreeIter *nodeIter)
 {
