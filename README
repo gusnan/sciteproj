@@ -21,7 +21,7 @@ specified by $XDG_CONFIG_HOME each program start. This is most likely
 
 or if that doesn't exist
 
-~/.config/.sciteproj
+~/.sciteproj
 
 and if no such file exists, sciteprojrc will be created in the config folder.
 See the following links:
