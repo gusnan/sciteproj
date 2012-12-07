@@ -157,7 +157,15 @@ const gchar* get_project_directory()
 GtkTreeStore* create_treestore(GError **err)
 {
 	if (sTreeStore == NULL) {
-		sTreeStore = gtk_tree_store_new(COLUMN_EOL, TYPE_ITEMTYPE, TYPE_FILEPATH, TYPE_FILENAME, TYPE_FILESIZE, TYPE_FONTWEIGHT, TYPE_FONTWEIGHTSET, TYPE_ICON, TYPE_EXPANDED);
+		sTreeStore = gtk_tree_store_new(COLUMN_EOL,
+													TYPE_ITEMTYPE,
+													TYPE_FILEPATH,
+													TYPE_FILENAME,
+													TYPE_FILESIZE,
+													TYPE_FONTWEIGHT,
+													TYPE_FONTWEIGHTSET,
+													TYPE_ICON,
+													TYPE_EXPANDED);
 
 		if (sTreeStore == NULL) {
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL", __func__);
@@ -232,7 +240,12 @@ void prompt_user_to_save_project()
 
 	// Project is dirty, so ask the user what to do about it
 
-	dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE, "Save project changes?");
+	dialog = gtk_message_dialog_new(NULL,
+												GTK_DIALOG_MODAL,
+												GTK_MESSAGE_QUESTION,
+												GTK_BUTTONS_NONE,
+												"Save project changes?");
+	
 	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_YES, GTK_RESPONSE_YES);
 	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_NO, GTK_RESPONSE_NO);
 	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
@@ -251,7 +264,12 @@ void prompt_user_to_save_project()
 		GtkWidget *errDialog = NULL;
 
 		if (!save_project(get_project_filepath(),&err)) {
-			errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "An error occurred while saving the project: %s", err->message);
+			errDialog = gtk_message_dialog_new(NULL,
+															GTK_DIALOG_MODAL,
+															GTK_MESSAGE_ERROR,
+															GTK_BUTTONS_OK,
+															"An error occurred while saving the project: %s",
+															err->message);
 
 			gtk_dialog_run(GTK_DIALOG(errDialog));
 		}
@@ -287,7 +305,14 @@ gboolean save_project(gchar *proj_filepath,GError **err)
 		GError *pathProcessErr = NULL;
 		int resultID;
 
-		dialog = gtk_file_chooser_dialog_new(_("Save Project"), NULL, GTK_FILE_CHOOSER_ACTION_SAVE, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT, NULL);
+		dialog = gtk_file_chooser_dialog_new(_("Save Project"),
+															NULL,
+															GTK_FILE_CHOOSER_ACTION_SAVE,
+															GTK_STOCK_CANCEL,
+															GTK_RESPONSE_CANCEL,
+															GTK_STOCK_SAVE,
+															GTK_RESPONSE_ACCEPT,
+															NULL);
 
 		gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(dialog), "untitled.xml");
 
@@ -312,7 +337,12 @@ gboolean save_project(gchar *proj_filepath,GError **err)
 		gtk_tree_model_foreach(GTK_TREE_MODEL(sTreeStore), make_paths_relative, &pathProcessErr);
 
 		if (pathProcessErr) {
-			GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, _("An error occurred while making project file paths relative: %s"), pathProcessErr->message);
+			GtkWidget *errDialog = gtk_message_dialog_new(NULL,
+																			GTK_DIALOG_MODAL,
+																			GTK_MESSAGE_ERROR,
+																			GTK_BUTTONS_OK, 
+																			_("An error occurred while making project file paths relative: %s"),
+																			pathProcessErr->message);
 
 			gtk_dialog_run(GTK_DIALOG(errDialog));
 
@@ -354,7 +384,10 @@ EXITPOINT:
  * @param iter is the GtkTreeIter to the node to process
  * @param data is a pointer to a GError in which any errors are returned
  */
-static gboolean make_paths_relative(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+static gboolean make_paths_relative(GtkTreeModel *model,
+												GtkTreePath *path,
+												GtkTreeIter *iter,
+												gpointer data)
 {
 	gboolean finalResult = FALSE;
 	GError **err = (GError **) data;
@@ -451,7 +484,14 @@ gboolean load_project(gchar *projectPath, GError **err)
 	else {
 		//  Pop up a file selection dialog and let the user choose a project file
 
-		dialog = gtk_file_chooser_dialog_new(_("Open Project"), NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+		dialog = gtk_file_chooser_dialog_new(_("Open Project"),
+															NULL,
+															GTK_FILE_CHOOSER_ACTION_OPEN,
+															GTK_STOCK_CANCEL,
+															GTK_RESPONSE_CANCEL,
+															GTK_STOCK_OPEN,
+															GTK_RESPONSE_ACCEPT,
+															NULL);
 
 		GtkFileFilter* fileFilter = gtk_file_filter_new();
 		gtk_file_filter_set_name(fileFilter, _("Project Files (*.xml)"));
@@ -585,7 +625,14 @@ gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err)
 
 	// Create the file selection dialog and add filters
 
-	dialog = gtk_file_chooser_dialog_new (_("Add Files"), NULL, GTK_FILE_CHOOSER_ACTION_OPEN, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
+	dialog = gtk_file_chooser_dialog_new (_("Add Files"), 
+														NULL,
+														GTK_FILE_CHOOSER_ACTION_OPEN,
+														GTK_STOCK_CANCEL,
+														GTK_RESPONSE_CANCEL,
+														GTK_STOCK_OPEN,
+														GTK_RESPONSE_ACCEPT,
+														NULL);
 
 	if (saved_file_folder!=NULL) {
 		gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), saved_file_folder);
@@ -770,13 +817,19 @@ gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **e
  *
  * @return TRUE on success, FALSE on failure (further details returned in err)
  *
- * @param parentIter is a pointer to the parent GtkTreeIter to add to, or NULL to add to the root of the tree
+ * @param parentIter is a pointer to the parent GtkTreeIter to add to, 
+ *        or NULL to add to the root of the tree
  * @param position indicates the relative position to add the file node
  * @param newIter returns the new GtkTreeIter (pass NULL if this result is not needed)
  * @param groupname is the name of the group to add to the tree
  * @param err returns any errors
  */
-gboolean add_tree_group(GtkTreeIter *parentIter, enum NodePosition position, const gchar* groupname, gboolean expanded,GtkTreeIter *newIter, GError **err)
+gboolean add_tree_group(GtkTreeIter *parentIter, 
+								enum NodePosition position,
+								const gchar* groupname,
+								gboolean expanded,
+								GtkTreeIter *newIter,
+								GError **err)
 {
 	g_assert(sTreeStore != NULL);
 	g_assert(groupname != NULL);
@@ -838,7 +891,12 @@ gboolean add_tree_group(GtkTreeIter *parentIter, enum NodePosition position, con
  * @param makeRelative indicates whether the filepath should be converted to a relative path before being added to the tree
  * @param err returns any errors
  */
-gboolean add_tree_file(GtkTreeIter *currentIter, enum NodePosition position, const gchar* filepath, GtkTreeIter *newIter, gboolean makeRelative, GError **err)
+gboolean add_tree_file(GtkTreeIter *currentIter, 
+								enum NodePosition position, 
+								const gchar* filepath,
+								GtkTreeIter *newIter,
+								gboolean makeRelative,
+								GError **err)
 {
 	g_assert(sTreeStore != NULL);
 	g_assert(filepath != NULL);
@@ -971,7 +1029,9 @@ void helper_remove(GtkTreeIter *iter)
 				gchar *nodeContents;
 				int itemType;
 
-				gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), &newIter, COLUMN_ITEMTYPE, &itemType, COLUMN_FILEPATH, &nodeContents, -1);
+				gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), &newIter, 
+											COLUMN_ITEMTYPE, &itemType,
+											COLUMN_FILEPATH, &nodeContents, -1);
 
 				gchar *fileName = get_filename_from_full_path((gchar*)nodeContents);
 
@@ -1109,7 +1169,11 @@ gboolean set_tree_node_expanded(GtkTreeIter *iter, gboolean expanded, GError **e
  * @param position indicates where copy the node, relative to srcIter
  * @param err returns any errors
  */
-gboolean copy_tree_node(GtkTreeIter *srcIter, GtkTreeIter *dstIter, enum NodePosition position, GtkTreeIter *newIter, GError **err)
+gboolean copy_tree_node(GtkTreeIter *srcIter, 
+								GtkTreeIter *dstIter, 
+								enum NodePosition position, 
+								GtkTreeIter *newIter, 
+								GError **err)
 {
 	g_assert(srcIter != NULL);
 	g_assert(position == ADD_BEFORE || position == ADD_AFTER || position == ADD_CHILD);
@@ -1127,7 +1191,9 @@ gboolean copy_tree_node(GtkTreeIter *srcIter, GtkTreeIter *dstIter, enum NodePos
 
 	// Get the node type and content
 
-	gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), srcIter, COLUMN_ITEMTYPE, &itemType, COLUMN_FILEPATH, &nodeContents, -1);
+	gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), srcIter, 
+								COLUMN_ITEMTYPE, &itemType,
+								COLUMN_FILEPATH, &nodeContents, -1);
 
 
 	// Add a file or group?
@@ -1256,7 +1322,9 @@ void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_
 
 			gchar *nodeContents;
 
-			gtk_tree_model_get(tree_model, &childIter, COLUMN_ITEMTYPE, &nodeType, COLUMN_FILEPATH, &nodeContents, -1);
+			gtk_tree_model_get(tree_model, &childIter, 
+										COLUMN_ITEMTYPE, &nodeType, 
+										COLUMN_FILEPATH, &nodeContents, -1);
 
 			if (nodeType==ITEMTYPE_FILE) {
 
