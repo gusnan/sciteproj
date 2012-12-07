@@ -5,9 +5,9 @@ GRPH=graphics
 OBJ=obj
 
 ifdef DEBUG
-	STD_CFLAGS=-c -Wall -g3 -ggdb -D_DEBUG
+	STD_CFLAGS=-Wall -g3 -ggdb -D_DEBUG
 else
-	STD_CFLAGS=-c -Wall -Wformat -Wno-format-extra-args -Wformat-security -Wformat-nonliteral -Wformat=2 -Wdeprecated-declarations
+	STD_CFLAGS=-Wall -Wformat -Wno-format-extra-args -Wformat-security -Wformat-nonliteral -Wformat=2 -Wdeprecated-declarations
 endif
 
 OBJECTS=$(OBJ)/about.o $(OBJ)/addfiles.o $(OBJ)/clipboard.o $(OBJ)/drag_drop.o\
@@ -50,7 +50,7 @@ STD_LDFLAGS=
 LIBS+=`pkg-config --libs $(PKG_GTK) pkg-config --libs gthread-2.0`
 
 LOCAL_CFLAGS=$(STD_CFLAGS) $(DEPRECATED) $(CFLAGS) $(LIB_CFLAGS)
-LOCAL_LDFLAGS=$(LDFLAGS) $(STD_LDFLAGS)
+LOCAL_LDFLAGS=$(STD_CFLAGS) $(LDFLAGS) $(STD_LDFLAGS)
 
 ifdef CHECK_GTK3
 	LOCAL_CFLAGS+=-DGTK_DISABLE_SINGLE_INCLUDES
