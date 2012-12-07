@@ -17,9 +17,14 @@ Running:
 SciteProj will load a configuration from the file .sciteproj in the directory
 specified by $XDG_CONFIG_HOME each program start. This is most likely
 
+~/.config/sciteprojrc
+
+or if that doesn't exist
+
 ~/.config/.sciteproj
 
-and if no such file exists one will be created. See the following links:
+and if no such file exists, sciteprojrc will be created in the config folder.
+See the following links:
 
 http://developer.gnome.org/glib/stable/glib-Miscellaneous-Utility-Functions.html#g-get-user-config-dir
 http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
