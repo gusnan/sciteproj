@@ -121,7 +121,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 		// Figure out the node name
 		nodename = strrchr(clicked_node.name, '/');
 
-		if (nodename != NULL) {
+		if (nodename) {
 			++nodename;
 		}
 		else {
@@ -135,7 +135,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 
 	// Confirm removal from project
 
-	if (multiple_selected==TRUE) {
+	if (multiple_selected) {
 
 		dialog=gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove all selected items?") /*, nodename*/);
 
@@ -151,14 +151,14 @@ void do_remove_node(gboolean ignore_clicked_node)
 	} else {
 
 		if (clicked_node.type == ITEMTYPE_FILE) {
-			if (nodename!=NULL) {
+			if (nodename) {
 				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove file '%s' from project?"), nodename);
 			} else {
 				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove file from project?"));
 			}
 		}
 		else {
-			if (nodename!=NULL) {
+			if (nodename) {
 				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove group '%s' and any contained files from project?"), nodename);
 			} else {
 				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_OK_CANCEL, _("Remove group and any contained files from project?"));
