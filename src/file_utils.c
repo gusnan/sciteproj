@@ -20,12 +20,14 @@
  *
  */
 
+#include <stdio.h>
 #include <string.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 
 #include <locale.h>
 
+#include "string_utils.h"
 
 #include "file_utils.h"
 
@@ -178,10 +180,21 @@ gchar *fix_path(char *base_dir,char *temp)
 	} else {
 		file_pointer=infile++;
 	}
+	
+	gchar *tempfile=infile;
+	
+	do {
+	
+		if ((tempfile[0]=='.') && (tempfile[1]==G_DIR_SEPARATOR)) {
+			tempfile+=2;
+		}
+	
+	} while(tempfile[0]=='.');
 
 	if (current_path!=0) g_free(current_path);
 
-	gchar *new_res=g_strdup_printf("%s%c%s",out_path,G_DIR_SEPARATOR,file_pointer);
+	//gchar *new_res=g_strdup_printf("%s%c%s",out_path,G_DIR_SEPARATOR,get_filename_from_full_path(file_pointer));
+	gchar *new_res=g_strdup_printf("%s%c%s",out_path,G_DIR_SEPARATOR,tempfile);
 
 	g_free(curr);
 	//g_free(infile);
