@@ -39,14 +39,19 @@ void read_folder(gchar *folder_path)
 	while ((short_filename = g_dir_read_name(dir))) {
 		
 		current_file = g_build_filename(folder_path, short_filename,NULL);
-		printf("%s  --  %s  ", short_filename, current_file);
 		
-		printf("\n");
-		
-		if (g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
-			if (short_filename[0]!='.') read_folder(current_file);
-		}
-		
+		if (short_filename[0]!='.') {
+			printf("%s  --  %s  ", short_filename, current_file);
+			
+			printf("\n");
+			
+			if (g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
+				
+				// We ignore hidden folders
+				if (short_filename[0]!='.') read_folder(current_file);
+			}
+		}	
+
 		g_free(current_file);
 	}
 		
