@@ -59,7 +59,7 @@ gchar *saved_file_folder=NULL;
 // Predeclare static functions
 
 gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **err);
-static gboolean set_project_filepath(const gchar *filepath, GError **err);
+gboolean set_project_filepath(const gchar *filepath, GError **err);
 static gboolean make_paths_relative(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data);
 
 
@@ -71,7 +71,7 @@ static gboolean make_paths_relative(GtkTreeModel *model, GtkTreePath *path, GtkT
  * @param filepath is the new project filepath
  * @param err returns any error information
  */
-static gboolean set_project_filepath(const gchar *filepath, GError **err)
+gboolean set_project_filepath(const gchar *filepath, GError **err)
 {
 	gboolean finalResult = FALSE;
 	gchar *windowTitle = NULL;

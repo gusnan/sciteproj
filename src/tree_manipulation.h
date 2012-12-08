@@ -74,6 +74,9 @@ enum {
 typedef gint(*StringCompareFunction)(gconstpointer,gconstpointer);
 
 
+// Set the Project filepath
+gboolean set_project_filepath(const gchar *filepath, GError **err);
+
 // Get the GTKTreeStore
 GtkTreeStore* create_treestore(GError **err);
 
