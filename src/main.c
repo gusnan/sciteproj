@@ -240,8 +240,6 @@ int main(int argc, char *argv[])
 
 	// Should we load a folder?
 	if (load_a_folder) {
-	
-		printf("Current folder: %s\n",g_get_current_dir());
 		
 		load_folder(current_dir,NULL);
 	}
