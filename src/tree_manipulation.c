@@ -1003,8 +1003,6 @@ EXITPOINT:
 
 	if (relFilename) g_free(relFilename);
 	
-	if (absolute_path) g_free(absolute_path);
-
 	return finalResult;
 }
 
