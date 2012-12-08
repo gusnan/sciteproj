@@ -25,6 +25,34 @@
 
 #include "load_folder.h"
 
+
+/**
+ *
+ */
+void read_folder(gchar *folder_path)
+{
+	GDir *dir=g_dir_open(folder_path, 0, NULL);
+	
+	gchar *current_file=NULL;
+	const gchar *short_filename;
+	
+	while ((short_filename = g_dir_read_name(dir))) {
+		
+		current_file = g_build_filename(folder_path, short_filename,NULL);
+		printf("%s  --  %s  ", short_filename, current_file);
+		
+		printf("\n");
+		
+		if (g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
+			if (short_filename[0]!='.') read_folder(current_file);
+		}
+		
+		g_free(current_file);
+	}
+		
+	g_dir_close(dir);
+}
+
 /**
  *
  */
@@ -37,7 +65,10 @@ gboolean load_folder(gchar *project_path, GError **err)
 		if (!set_project_filepath(project_path, err)) {
 			goto EXITPOINT;
 		}
-	} 
+	}
+	
+	read_folder(project_path);
+	
 	
 EXITPOINT:
 	
