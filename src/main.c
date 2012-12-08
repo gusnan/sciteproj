@@ -39,6 +39,7 @@
 #include "about.h"
 #include "file_utils.h"
 #include "string_utils.h"
+#include "load_folder.h"
 
 static struct CommandLineIndata {
 	const gchar *scite_filename;
@@ -61,6 +62,7 @@ int main(int argc, char *argv[])
 	//static gboolean gene
 	static gchar *generate_xml_file=NULL;
 	static int max_depth_generated=-1;
+	static gboolean load_a_folder=FALSE;
 
 	static const GOptionEntry options[]={
 		{ "version",		'v',	0, G_OPTION_ARG_NONE,		&version,
@@ -73,6 +75,8 @@ int main(int argc, char *argv[])
 		{ "max_depth",		'm',	0, G_OPTION_ARG_INT,	&max_depth_generated,
 			N_("Set maximum depth of folders to read through to MAX_DEPTH when generating project file"),
 			N_("MAX_DEPTH")},
+		{ "load_folder",	'l',	0,	G_OPTION_ARG_NONE,		&load_a_folder,
+			N_("Load a folder")}, 
 		{ NULL }
 	};
 
@@ -231,13 +235,20 @@ int main(int argc, char *argv[])
 	} else {
 		if (gPrefs.file_to_load!=NULL) file_to_load=gPrefs.file_to_load;
 	}
+		
+	gchar *current_dir=g_get_current_dir();
 
+	// Should we load a folder?
+	if (load_a_folder) {
+	
+		printf("Current folder: %s\n",g_get_current_dir());
+		
+		load_folder(current_dir,NULL);
+	}
 
 
 	// Was a project file specified on the command line?
 	if (file_to_load!=NULL) {
-		
-		gchar *current_dir=g_get_current_dir();
 		
 		gchar *built_filename=g_build_filename(current_dir,file_to_load,NULL);
 	
@@ -271,6 +282,8 @@ EXITPOINT:
 	done_prefs();
 
 	done_version_string();
+	
+	g_free(current_dir);
 
 	if (err) g_error_free(err);
 
