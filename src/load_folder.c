@@ -39,7 +39,7 @@ gboolean load_folder(gchar *project_path, GError **err)
 		}
 	} 
 	
-	EXITPOINT:
+EXITPOINT:
 	
 	return TRUE;
 }
