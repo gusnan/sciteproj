@@ -97,7 +97,6 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 					read_folder(store, current_file, parse_file, error);
 
 				}
-				//iter=&new_iter;
 
 				last_type=1;
 
