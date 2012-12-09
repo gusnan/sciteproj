@@ -45,10 +45,10 @@ else
 	PKG_GTK=gtk+-3.0
 endif
 
-LIB_CFLAGS=`pkg-config --cflags $(PKG_GTK)`
+LIB_CFLAGS=$(shell pkg-config --cflags $(PKG_GTK))
 STD_LDFLAGS=
 
-LIBS+=`pkg-config --libs $(PKG_GTK) pkg-config --libs gthread-2.0`
+LIBS+=$(shell pkg-config --libs $(PKG_GTK) pkg-config --libs gthread-2.0)
 
 LOCAL_CFLAGS=$(STD_CFLAGS) $(DEPRECATED) $(CFLAGS) $(LIB_CFLAGS)
 LOCAL_LDFLAGS=$(STD_CFLAGS) $(LDFLAGS) $(STD_LDFLAGS)
