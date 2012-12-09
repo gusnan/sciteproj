@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.7.05\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-03-19 23:48+0100\n"
+"POT-Creation-Date: 2012-12-09 15:59+0100\n"
 "PO-Revision-Date: 2012-03-19 17:12+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
@@ -74,37 +74,37 @@ msgstr ""
 msgid "version %s"
 msgstr "version %s"
 
-#: addfiles.c:245
+#: addfiles.c:247
 msgid "Create Group"
 msgstr "Skapa Grupp"
 
-#: addfiles.c:259
+#: addfiles.c:268
 msgid "Enter name of new group:"
 msgstr "Mata in namnet på den nya gruppen:"
 
-#: folder_to_xml.c:229
+#: folder_to_xml.c:227
 msgid "Error: Invalid directory!"
 msgstr "Fel: Ogiltig katalog!"
 
-#: folder_to_xml.c:235
+#: folder_to_xml.c:233
 msgid "Error: Couldn't g_chdir to directory"
 msgstr "Fel: Kunde inte byta till katalog med hjälp av g_chdir"
 
-#: folder_to_xml.c:242
+#: folder_to_xml.c:240
 #, c-format
 msgid "Couldn't create file with the name %s!"
 msgstr "Kunde inte skapa en fil med namnet '%s'!"
 
-#: gui.c:157 gui.c:960
+#: gui.c:159 gui.c:987
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:798 recent_files.c:552 scite_utils.c:216 search.c:837 search.c:875
+#: gui.c:818 recent_files.c:525 scite_utils.c:207 search.c:834 search.c:870
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
 
-#: gui.c:810 gui_callbacks.c:150 recent_files.c:564 recent_files.c:605
+#: gui.c:831 gui_callbacks.c:153 recent_files.c:538 recent_files.c:579
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -115,29 +115,29 @@ msgstr ""
 "\n"
 "%s"
 
-#: gui_callbacks.c:316 gui_callbacks.c:339
+#: gui_callbacks.c:325 gui_callbacks.c:351
 #, c-format
 msgid "An error occurred while saving the project: %s"
 msgstr "Ett fel uppstod medan projektets sparades: %s"
 
-#: gui_callbacks.c:361
+#: gui_callbacks.c:376
 #, c-format
 msgid "An error occurred while opening project file: %s"
 msgstr "Ett fel uppstod under öppning av projektfil: %s"
 
-#: main.c:67
+#: main.c:69
 msgid "Show program version and quit"
 msgstr "Visa programversion och avsluta"
 
-#: main.c:69
+#: main.c:71
 msgid "Set a filename for the instance of SciTE to open"
 msgstr "Sätt ett filnamn för instansen av SciTE du önskar köra"
 
-#: main.c:69
+#: main.c:71
 msgid "SCITE_FILENAME"
 msgstr "SCITE_FILNAMN"
 
-#: main.c:71
+#: main.c:73
 msgid ""
 "Generate a sciteproj project file with name XML_FILENAME, recursively from "
 "current folder"
@@ -145,11 +145,11 @@ msgstr ""
 "Generera en projektfil för sciteproj med namnet XML_FILNAMN, rekursivt från "
 "aktuell mapp"
 
-#: main.c:72
+#: main.c:74
 msgid "XML_FILENAME"
 msgstr "XML_FILNAMN"
 
-#: main.c:74
+#: main.c:76
 msgid ""
 "Set maximum depth of folders to read through to MAX_DEPTH when generating "
 "project file"
@@ -157,45 +157,49 @@ msgstr ""
 "Sätt maximalt djup av mappar att läsa igenom till MAX_DJUP vid generering av "
 "projektfil"
 
-#: main.c:75
+#: main.c:77
 msgid "MAX_DEPTH"
 msgstr "MAX_DJUP"
 
-#: main.c:87
+#: main.c:79
+msgid "Load a folder"
+msgstr ""
+
+#: main.c:90
 msgid "SciTE Project Manager"
 msgstr "SciTE Projekthanterare"
 
-#: main.c:94
+#: main.c:97
 #, c-format
 msgid "option parsing failed: %s"
 msgstr "tolkning av alternativ misslyckades: %s"
 
-#: main.c:124
+#: main.c:127
 #, c-format
 msgid "Generated '%s' successfully!"
 msgstr "Genererade '%s' framgångsrikt!"
 
-#: main.c:158
+#: main.c:161
 #, c-format
 msgid "Error initing preferences: %s"
 msgstr "Fel vid initiering av inställningar: %s"
 
-#: main.c:176 main.c:186
+#: main.c:177 main.c:187
 msgid ""
 "Environment variable exists, but doesn't point to a folder containing scite."
 msgstr ""
 "Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
 
-#: main.c:203
+#: main.c:204
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
 msgstr "Kunde inte hitta en körbar fil för SciTE med namnet '%s'!\n"
 
-#: main.c:204
+#: main.c:205
 msgid "Checking for SciTE in the standard locations instead.\n"
 msgstr "Kollar efter SciTE på standard-platserna istället.\n"
 
-#: main.c:217
+#: main.c:218
 msgid ""
 "Warning! Couldn't locate SciTE!\n"
 "Program will start, but you won't be able to open SciTE to edit files."
@@ -204,40 +208,40 @@ msgstr ""
 "Programmet kommer att starta, men du kommer inte kunna använda SciTE för att "
 "editera filer."
 
-#: main.c:243
+#: main.c:255
 #, c-format
 msgid "An error occurred while trying to load the specified project file: %s"
 msgstr "Ett fel uppstod vid öppning av en specifik projektfil: %s"
 
-#: properties_dialog.c:131
+#: properties_dialog.c:135
 msgid "Group Properties"
 msgstr "Mappegenskaper"
 
-#: properties_dialog.c:135
+#: properties_dialog.c:139
 msgid "Group name:"
 msgstr "Gruppnamn:"
 
-#: properties_dialog.c:136
+#: properties_dialog.c:140
 msgid "Contains number of Files:"
 msgstr "Innehåller antal filer:"
 
-#: properties_dialog.c:217
+#: properties_dialog.c:224
 msgid "File Properties"
 msgstr "Filegenskaper"
 
-#: properties_dialog.c:241
+#: properties_dialog.c:248
 msgid "Filename:"
 msgstr "Filnamn:"
 
-#: properties_dialog.c:242
+#: properties_dialog.c:249
 msgid "Path:"
 msgstr "Sökväg:"
 
-#: properties_dialog.c:243
+#: properties_dialog.c:250
 msgid "File size:"
 msgstr "Filstorlek:"
 
-#: recent_files.c:164
+#: recent_files.c:170
 msgid "Recently opened files:"
 msgstr "Nyligen öppnade filer:"
 
@@ -278,25 +282,25 @@ msgstr ""
 "\n"
 "%s"
 
-#: scite_utils.c:184
+#: scite_utils.c:181
 #, c-format
 msgid "Closed %s"
 msgstr "Stängde %s"
 
-#: scite_utils.c:193
+#: scite_utils.c:190
 msgid "Closed SciTE"
 msgstr "Stängde SciTE"
 
-#: scite_utils.c:203
+#: scite_utils.c:197
 #, c-format
 msgid "Switched to %s"
 msgstr "Växlade till %s"
 
-#: scite_utils.c:589
+#: scite_utils.c:577
 msgid "Connecting to Scite...."
 msgstr "Ansluter till Scite...."
 
-#: scite_utils.c:638
+#: scite_utils.c:626
 msgid "Launched SciTE"
 msgstr "Startade SciTE"
 
@@ -316,7 +320,7 @@ msgstr "Matcha stora/små bokstäver"
 msgid "Match whole word only"
 msgstr "Matcha endast hela ord"
 
-#: search.c:614
+#: search.c:613
 msgid ""
 "There was problems opening the following files in the project:\n"
 "\n"
@@ -324,7 +328,7 @@ msgstr ""
 "Det var problem med att öppna följande filer i projektet:\n"
 "\n"
 
-#: search.c:627
+#: search.c:626
 msgid ""
 "\n"
 "They couldn't be opened for reading in the search.\n"
@@ -332,33 +336,33 @@ msgstr ""
 "\n"
 "Dom kunde inte öppnas för läsning i sökningen.\n"
 
-#: search.c:686
+#: search.c:685
 msgid "Please enter a text to search for!\n"
 msgstr "Vänligen mata in en text att söka efter!\n"
 
-#: search.c:777 search.c:791 search.c:845 search.c:884
+#: search.c:776 search.c:790 search.c:842 search.c:879
 #, c-format
 msgid "Error:%s\n"
 msgstr "Fel:%s\n"
 
-#: search.c:929
+#: search.c:924
 msgid "Filename"
 msgstr "Filnamn"
 
-#: search.c:933
+#: search.c:928
 msgid "Line"
 msgstr "Rad"
 
-#: search.c:937
+#: search.c:932
 msgid "File contents"
 msgstr "Fil-innehåll"
 
-#: search.c:988
+#: search.c:983
 #, c-format
 msgid "Found %d elements"
 msgstr "Hittade %d element"
 
-#: search.c:997
+#: search.c:992
 msgid "The search didn't give any results."
 msgstr "Sökningen gav inga resultat."
 
@@ -366,56 +370,56 @@ msgstr "Sökningen gav inga resultat."
 msgid "Welcome to SciteProj\n"
 msgstr "Välkommen till SciteProj\n"
 
-#: tree_manipulation.c:286
+#: tree_manipulation.c:321
 msgid "Save Project"
 msgstr "Spara projekt"
 
-#: tree_manipulation.c:311
+#: tree_manipulation.c:357
 #, c-format
 msgid "An error occurred while making project file paths relative: %s"
 msgstr "Ett fel uppstod medans projektets sökvägar gjordes relativa: %s"
 
-#: tree_manipulation.c:451
+#: tree_manipulation.c:500
 msgid "Open Project"
 msgstr "Öppna projekt"
 
-#: tree_manipulation.c:454
+#: tree_manipulation.c:510
 msgid "Project Files (*.xml)"
 msgstr "Projektfiler (*.xml)"
 
-#: tree_manipulation.c:459 tree_manipulation.c:537
+#: tree_manipulation.c:515 tree_manipulation.c:593
 msgid "All Files"
 msgstr "Alla filer"
 
-#: tree_manipulation.c:505
+#: tree_manipulation.c:561
 msgid "C/C++ Files"
 msgstr "C/C++-filer"
 
-#: tree_manipulation.c:516
+#: tree_manipulation.c:572
 msgid "LAMP Script Files"
 msgstr "LAMP-skript-filer"
 
-#: tree_manipulation.c:523
+#: tree_manipulation.c:579
 msgid "Java Files"
 msgstr "Java-filer"
 
-#: tree_manipulation.c:527
+#: tree_manipulation.c:583
 msgid "JavaScript Files"
 msgstr "Javascript-filer"
 
-#: tree_manipulation.c:531
+#: tree_manipulation.c:587
 msgid "HTML Files"
 msgstr "HTML-filer"
 
-#: tree_manipulation.c:572
+#: tree_manipulation.c:628
 msgid "You need to save the project before adding files."
 msgstr "Du måste spara projektet innan du adderar filer."
 
-#: tree_manipulation.c:585
+#: tree_manipulation.c:641
 msgid "Add Files"
 msgstr "Lägg till filer"
 
-#: tree_manipulation.c:666
+#: tree_manipulation.c:729
 msgid ""
 "\n"
 "The following files:\n"
@@ -425,7 +429,7 @@ msgstr ""
 "Följande filer:\n"
 "\n"
 
-#: tree_manipulation.c:691
+#: tree_manipulation.c:754
 #, c-format
 msgid ""
 "%s\n"
@@ -439,170 +443,204 @@ msgstr ""
 msgid "%s: Not a valid sciteproj XML file!"
 msgstr "%s: Är inte en giltig sciteproj XML-fil!"
 
-#: menus.h:93
+#: menus.h:94
 msgctxt "Menu|"
 msgid "_File"
 msgstr "_Arkiv"
 
-#: menus.h:94
+#: menus.h:95
 msgctxt "Menu|"
 msgid "_Edit"
 msgstr "R_edigera"
 
-#: menus.h:95
+#: menus.h:96
 msgctxt "Menu|"
 msgid "_View"
 msgstr "_Visa"
 
-#: menus.h:96
+#: menus.h:97
 msgctxt "Menu|"
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: menus.h:98
+#: menus.h:99
 msgctxt "Menu|File|"
 msgid "_Open project"
 msgstr "_Öppna projekt"
 
-#: menus.h:100
+#: menus.h:101
 msgctxt "Menu|File|"
 msgid "_Save project"
 msgstr "_Spara projekt"
 
-#: menus.h:102
+#: menus.h:103
 msgctxt "Menu|File|"
 msgid "Save project as..."
 msgstr "Spara projekt som..."
 
-#: menus.h:104
+#: menus.h:105
 msgctxt "Menu|File|"
 msgid "_Exit"
 msgstr "_Avsluta"
 
-#: menus.h:107 menus.h:127
+#: menus.h:108
 msgctxt "Menu|Edit|"
 msgid "Create _group"
 msgstr "Skapa _grupp"
 
-#: menus.h:109
+#: menus.h:110
+#, fuzzy
 msgctxt "Menu|Edit|"
-msgid "Add _file"
-msgstr "Lägg till _fil"
+msgid "Create _file"
+msgstr "Skapa _grupp"
 
-#: menus.h:111
+#: menus.h:112
+#, fuzzy
 msgctxt "Menu|Edit|"
-msgid "Remove file(s)"
+msgid "Delete file(s)"
 msgstr "Ta bort filer"
 
-#: menus.h:114
+#: menus.h:115
 msgctxt "Menu|Edit|"
 msgid "Expand all groups"
 msgstr "Expandera alla grupper"
 
-#: menus.h:116
+#: menus.h:117
 msgctxt "Menu|Edit|"
 msgid "Collapse all groups"
 msgstr "Kollapsa alla grupper"
 
-#: menus.h:119
+#: menus.h:120
 msgctxt "Menu|Edit|"
 msgid "Search"
 msgstr "Sök"
 
-#: menus.h:122
+#: menus.h:123
 msgctxt "Menu|Help|"
 msgid "_About"
 msgstr "_Om"
 
-#: menus.h:125
+#: menus.h:126
+#, fuzzy
 msgctxt "Menu|Edit|"
-msgid "Add files"
+msgid "Create files"
+msgstr "Ta bort filer"
+
+#: menus.h:128
+#, fuzzy
+msgctxt "Menu|Edit|"
+msgid "Create folder"
+msgstr "Skapa Grupp"
+
+#: menus.h:131
+#, fuzzy
+msgctxt "Menu|Popup|Group"
+msgid "Create file"
+msgstr "Skapa Grupp"
+
+#: menus.h:133
+#, fuzzy
+msgctxt "Menu|Popup|Group"
+msgid "Add folder"
 msgstr "Lägg till filer"
 
-#: menus.h:130
+#: menus.h:135
+#, fuzzy
 msgctxt "Menu|Popup|Group"
-msgid "Add files to group"
-msgstr "Lägg till filer till grupp"
-
-#: menus.h:132
-msgctxt "Menu|Popup|Group"
-msgid "Add subgroup to group"
-msgstr "Lägg till undergrupp till grupp"
-
-#: menus.h:134
-msgctxt "Menu|Popup|Group"
-msgid "Rename group"
+msgid "Rename folder"
 msgstr "Byter namn på en grupp"
 
-#: menus.h:136
+#: menus.h:137
 msgctxt "Menu|Popup|Group"
-msgid "Remove group from project"
-msgstr "Ta bort grupp från projektet"
+msgid "Delete folder"
+msgstr ""
 
-#: menus.h:138
+#: menus.h:139
+#, fuzzy
 msgctxt "Menu|Edit|"
-msgid "Sort group ascending"
+msgid "Sort folder ascending"
 msgstr "Sortera grupp stigande"
 
-#: menus.h:140
+#: menus.h:141
+#, fuzzy
 msgctxt "Menu|Edit"
-msgid "Sort group descending"
+msgid "Sort folder descending"
 msgstr "Sortera grupp fallande"
 
-#: menus.h:142
+#: menus.h:143
 msgctxt "Menu|Popup|Group"
 msgid "Properties"
 msgstr "Egenskaper"
 
-#: menus.h:144
+#: menus.h:145
 msgctxt "Menu|Edit|"
 msgid "Edit options"
 msgstr "Editera egenskaper"
 
-#: menus.h:147
+#: menus.h:148
 msgctxt "Menu|View|"
 msgid "View recently opened files"
 msgstr "Visa nyligen öppnade filer"
 
-#: menus.h:150
+#: menus.h:151
 msgctxt "Menu|Popup|File"
 msgid "Open file in SciTE"
 msgstr "Öppna fil i SciTE"
 
-#: menus.h:152
+#: menus.h:153
 msgctxt "Menu|Popup|File"
-msgid "Remove file From project"
-msgstr "Ta bort fil från projektet"
+msgid "Delete file"
+msgstr ""
 
-#: menus.h:154
+#: menus.h:155
 msgctxt "Menu|Popup|File"
 msgid "Copy filename to clipboard"
 msgstr "Kopiera filnamn till urklipp"
 
-#: menus.h:156
+#: menus.h:157
 msgctxt "Menu|Popup|File"
 msgid "Properties"
 msgstr "Egenskaper"
 
-#: menus.h:159
+#: menus.h:160
 msgctxt "Menu|Popup|RecentFile"
 msgid "Open file in SciTE"
 msgstr "Öppnar en fil i SciTE"
 
-#: menus.h:161
+#: menus.h:162
 msgctxt "Menu|Popup|RecentFile"
 msgid "Remove file from this list"
 msgstr "Ta bort fil från denna lista"
 
-#: menus.h:163
+#: menus.h:164
 msgctxt "Menu|Popup|RecentFile"
 msgid "Copy filename to clipboard"
 msgstr "Kopiera filnamn till urklipp"
 
-#: menus.h:166
+#: menus.h:167
 msgctxt "Menu|Popup|RecentFile"
 msgid "Properties"
 msgstr "Egenskaper"
+
+#~ msgctxt "Menu|Edit|"
+#~ msgid "Add _file"
+#~ msgstr "Lägg till _fil"
+
+#~ msgctxt "Menu|Popup|Group"
+#~ msgid "Add files to group"
+#~ msgstr "Lägg till filer till grupp"
+
+#~ msgctxt "Menu|Popup|Group"
+#~ msgid "Add subgroup to group"
+#~ msgstr "Lägg till undergrupp till grupp"
+
+#~ msgctxt "Menu|Popup|Group"
+#~ msgid "Remove group from project"
+#~ msgstr "Ta bort grupp från projektet"
+
+#~ msgctxt "Menu|Popup|File"
+#~ msgid "Remove file From project"
+#~ msgstr "Ta bort fil från projektet"
 
 #~ msgid "Save Project with a specific filename"
 #~ msgstr "Spara projekt med ett specifikt filnamn"
