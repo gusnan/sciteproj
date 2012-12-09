@@ -120,6 +120,8 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 						add_tree_file(&(parse_file->current_iter), ADD_CHILD, current_file, &(prevFileIterArray[currentFilePrevFileIter]), TRUE, error);
 					}
 				}
+				
+				prevFileIterValid[currentFilePrevFileIter]=TRUE;
 			}
 		}	
 
@@ -127,19 +129,24 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 
 		g_free(current_file);
 	}
+	
+	if (currentFilePrevFileIter>0) currentFilePrevFileIter--;
+	
+	if (parse_file->depth>0) {
 
-	GtkTreeIter parent_iter;
-	GtkTreeIter temp_iter=prevFileIterArray[currentFilePrevFileIter];
+		GtkTreeIter parent_iter;
+		GtkTreeIter temp_iter=prevFileIterArray[currentFilePrevFileIter];
 
-	if (gtk_tree_model_iter_parent(GTK_TREE_MODEL(store), &parent_iter, &(temp_iter))) {
+		if (gtk_tree_model_iter_parent(GTK_TREE_MODEL(store), &parent_iter, &(temp_iter))) {
 
-		parse_file->current_iter=parent_iter;
+			parse_file->current_iter=parent_iter;
 
-		if (parse_file->depth>0) parse_file->depth-=1;
-	} else {
-		parse_file->current_iter=temp_iter;
+			if (parse_file->depth>0) parse_file->depth-=1;
+		} else {
+			parse_file->current_iter=temp_iter;
 
-		if (parse_file->depth>0) parse_file->depth-=1;
+			if (parse_file->depth>0) parse_file->depth-=1;
+		}
 	}
 
 	g_dir_close(dir);
