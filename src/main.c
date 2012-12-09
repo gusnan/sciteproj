@@ -240,6 +240,7 @@ int main(int argc, char *argv[])
 
 	// Should we load a folder?
 	if (load_a_folder) {
+		set_project_filepath(current_dir,NULL);
 		
 		load_folder(current_dir,NULL);
 	}

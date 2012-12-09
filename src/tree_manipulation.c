@@ -76,37 +76,50 @@ gboolean set_project_filepath(const gchar *filepath, GError **err)
 	gboolean finalResult = FALSE;
 	gchar *windowTitle = NULL;
 
+	
+	
 	// Clear old data
 	if (sProjectFilepath) g_free(sProjectFilepath);
 	sProjectFilepath = NULL;
-
+	
 	if (sProjectDir) g_free(sProjectDir);
 	sProjectDir = NULL;
-
 
 	// Copy the filepath
 	sProjectFilepath = g_strdup(filepath);
 
-	// Extract the project's base directory
-	if (sProjectFilepath) {
-		gchar *finalSlash = NULL;
+	/*
+	// Is filepath a directory and not a file - then leave it be
+	if (g_file_test(filepath, G_FILE_TEST_IS_DIR)) {
+		sProjectDir = g_strdup(sProjectFilepath);
+	} else {
+	*/
 
-		// Check for absolut path
-		if (g_path_is_absolute(sProjectFilepath)==TRUE) {
-			sProjectDir = g_strdup(sProjectFilepath);
-		}
-		else {
-			if (!relative_path_to_abs_path(sProjectFilepath, &sProjectDir, NULL, err)) {
-				goto EXITPOINT;
+		// Extract the project's base directory
+		if (sProjectFilepath) {
+			gchar *finalSlash = NULL;
+
+			// Check for absolut path
+			if (g_path_is_absolute(sProjectFilepath)==TRUE) {
+				sProjectDir = g_strdup(sProjectFilepath);
 			}
+			else {
+				if (!relative_path_to_abs_path(sProjectFilepath, &sProjectDir, NULL, err)) {
+					goto EXITPOINT;
+				}
+			}
+
+			if (sProjectDir[strlen(sProjectDir)-1]==G_DIR_SEPARATOR) {
+			
+				finalSlash = strrchr(sProjectDir, G_DIR_SEPARATOR);
+
+				if (finalSlash != NULL) {
+					*finalSlash = '\0';
+				};
+			}
+			
 		}
-
-		finalSlash = strrchr(sProjectDir, G_DIR_SEPARATOR);
-
-		if (finalSlash != NULL) {
-			*finalSlash = '\0';
-		};
-	}
+	//}
 
 	windowTitle=g_strdup_printf("%s",get_filename_from_full_path(sProjectFilepath));
 
@@ -917,8 +930,6 @@ gboolean add_tree_file(GtkTreeIter *currentIter,
 		goto EXITPOINT;
 	}
 	
-	gchar *absolute_path=fix_path(sProjectDir,(gchar*)filepath);
-	
 	// Extract filename from filepath
 	fileName = get_filename_from_full_path((gchar*)filepath);
 
@@ -987,7 +998,7 @@ gboolean add_tree_file(GtkTreeIter *currentIter,
 	}
 	*/
 
-	GdkPixbuf *icon_pixbuf=get_pixbuf_from_filename((gchar*)(absolute_path),GTK_ICON_SIZE_MENU);
+	GdkPixbuf *icon_pixbuf=get_pixbuf_from_filename((gchar*)(filepath),GTK_ICON_SIZE_MENU);
 
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, icon_pixbuf, -1);
 

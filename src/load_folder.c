@@ -63,10 +63,6 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 		current_file = g_build_filename(folder_path, short_filename,NULL);
 
 		if (short_filename[0]!='.') {
-			printf("%s  --  %s  ", short_filename, current_file);
-
-			printf("\n");
-
 			if (g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
 
 				folder_number++;
@@ -111,17 +107,17 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 				if (parse_file->depth<=0) {
 
 					if (prevFileIterValid[currentFilePrevFileIter]) {
-						add_tree_file(&(prevFileIterArray[currentFilePrevFileIter]), ADD_AFTER, short_filename, &(prevFileIterArray[currentFilePrevFileIter]), FALSE, error);
+						add_tree_file(&(prevFileIterArray[currentFilePrevFileIter]), ADD_AFTER, current_file, &(prevFileIterArray[currentFilePrevFileIter]), TRUE, error);
 					} else {
-						add_tree_file(NULL, ADD_CHILD, short_filename, &(prevFileIterArray[currentFilePrevFileIter]), FALSE, error);
+						add_tree_file(NULL, ADD_CHILD, current_file, &(prevFileIterArray[currentFilePrevFileIter]), TRUE, error);
 					}
 
 				} else {
 
 					if (prevFileIterValid[currentFilePrevFileIter]) {
-						add_tree_file(&(prevFileIterArray[currentFilePrevFileIter]), ADD_AFTER, short_filename, &(prevFileIterArray[currentFilePrevFileIter]), FALSE, error);
+						add_tree_file(&(prevFileIterArray[currentFilePrevFileIter]), ADD_AFTER, current_file, &(prevFileIterArray[currentFilePrevFileIter]), TRUE, error);
 					} else {
-						add_tree_file(&(parse_file->current_iter), ADD_CHILD, short_filename, &(prevFileIterArray[currentFilePrevFileIter]), FALSE, error);
+						add_tree_file(&(parse_file->current_iter), ADD_CHILD, current_file, &(prevFileIterArray[currentFilePrevFileIter]), TRUE, error);
 					}
 				}
 			}
@@ -166,8 +162,6 @@ gboolean load_folder(gchar *project_path, GError **err)
 	parse_struct.depth=0;
 
 	if (project_path) {
-		
-		printf("Project path: %s\n",project_path);
 		
 		if (!set_project_filepath(project_path, err)) {
 			goto EXITPOINT;
