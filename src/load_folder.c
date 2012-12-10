@@ -187,7 +187,6 @@ gboolean load_folder(gchar *project_path, GError **err)
 	
 	read_folder(GTK_TREE_STORE(model), project_path, &parse_struct, NULL);
 	
-	
 EXITPOINT:
 	
 	return TRUE;

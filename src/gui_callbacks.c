@@ -58,7 +58,7 @@
 /**
  *		Expands all folders
  */
-static gboolean foreach_expand(GtkTreeModel *model,GtkTreePath *path,
+gboolean foreach_expand(GtkTreeModel *model,GtkTreePath *path,
                                GtkTreeIter *iter,gpointer data)
 {
 	expand_tree_row(path,TRUE);
