@@ -35,7 +35,6 @@
 #include "clicked_node.h"
 
 #include "gui.h"
-#include "drag_drop.h"
 #include "tree_manipulation.h"
 #include "scite_utils.h"
 #include "string_utils.h"
@@ -91,8 +90,6 @@ gchar *window_saved_title=NULL;
 
 static guint sNumMenuActions = G_N_ELEMENTS(sMenuActions);
 
-static TreeViewDragStruct sDragStruct;
-
 static GtkWidget *sMainWindow = NULL;
 GtkWidget *projectTreeView = NULL;
 
@@ -133,7 +130,6 @@ gboolean setup_gui(GError **err)
 	GtkTreeSelection *selection = NULL;
 	GtkWidget *vpaned=NULL;
 
-	GtkTargetEntry dragTargets[] = { { (gchar*)"text/uri-list", 0, DND_URI_TYPE } };
 	GtkTreeStore *projectTreeStore = NULL;
 	GtkAccelGroup* accelgroup = NULL;
 	GError *tempErr = NULL;
@@ -404,27 +400,6 @@ gboolean setup_gui(GError **err)
 
 	gtk_tree_view_set_search_equal_func(GTK_TREE_VIEW(projectTreeView),
 	                                    tree_view_search_equal_func,NULL,NULL);
-
-	gtk_tree_view_enable_model_drag_source(GTK_TREE_VIEW(projectTreeView),
-	                                       GDK_BUTTON1_MASK, dragTargets, 1, GDK_ACTION_MOVE);
-
-	gtk_tree_view_enable_model_drag_dest(GTK_TREE_VIEW(projectTreeView),
-	                                     dragTargets, 1, GDK_ACTION_MOVE);
-
-
-	sDragStruct.treeView = GTK_TREE_VIEW(projectTreeView);
-	sDragStruct.treeStore = projectTreeStore;
-	sDragStruct.isLocalDrag = FALSE;
-	sDragStruct.dragNodes = NULL;
-
-	g_signal_connect(G_OBJECT(projectTreeView), "drag-data-received",
-	                 G_CALLBACK(drag_data_received_cb), &sDragStruct);
-
-	g_signal_connect(G_OBJECT(projectTreeView), "drag-data-get",
-	                 G_CALLBACK(drag_data_get_cb), &sDragStruct);
-
-	g_signal_connect(G_OBJECT(projectTreeView), "drag-motion",
-	                 G_CALLBACK(drag_motion_cb), &sDragStruct);
 
 	g_signal_connect(G_OBJECT(projectTreeView), "row-expanded",
 	                 G_CALLBACK(row_expand_or_collapse_cb), NULL);

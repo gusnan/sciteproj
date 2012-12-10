@@ -36,7 +36,6 @@
 #include "clicked_node.h"
 
 #include "gui.h"
-#include "drag_drop.h"
 #include "tree_manipulation.h"
 #include "scite_utils.h"
 #include "string_utils.h"
