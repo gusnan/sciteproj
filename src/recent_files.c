@@ -61,7 +61,10 @@ GtkWidget *recentPopupMenu=NULL;
  * forward declarations
  */
 static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *event, gpointer userData);
-static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkTreeViewColumn *column, gpointer userData);
+static void recent_tree_row_activated_cb(GtkTreeView *treeView,
+		GtkTreePath *path,
+		GtkTreeViewColumn *column,
+		gpointer userData);
 
 /**
  * Get the GTKTreeStore (evil, but necessary for setup_gui).
@@ -119,7 +122,9 @@ GtkWidget *init_recent_files(GError **err)
 		goto EXITPOINT;
 	}
 
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(recentScrolledWindow), GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(recentScrolledWindow),
+												GTK_POLICY_AUTOMATIC,
+												GTK_POLICY_ALWAYS);
 
 
 	if ((recentTreeStore=create_treestore_recent(&tempErr))==NULL) {
@@ -365,7 +370,13 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 
 	// Find if the user has clicked on a node
 
-	if (!gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeView), (gint) event->x, (gint) event->y, &path, NULL, NULL, NULL)) {
+	if (!gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeView),
+													(gint) event->x,
+													(gint) event->y,
+													&path,
+													NULL,
+													NULL,
+													NULL)) {
 		// Nope-- user clicked in the GtkTreeView, but not on a node
 
 		//gtk_menu_popup(GTK_MENU(sGeneralPopupMenu), NULL, NULL, NULL, NULL, event->button, gdk_event_get_time((GdkEvent*) event));
@@ -413,7 +424,13 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 	// Pop up the appropriate menu for the node type
 
 	//if (nodeItemType == ITEMTYPE_FILE) {
-		gtk_menu_popup(GTK_MENU(recentPopupMenu), NULL, NULL, NULL, NULL, event->button, gdk_event_get_time((GdkEvent*) event));
+		gtk_menu_popup(GTK_MENU(recentPopupMenu),
+							NULL,
+							NULL,
+							NULL,
+							NULL,
+							event->button,
+							gdk_event_get_time((GdkEvent*) event));
 	/*
 	}
 	else if (nodeItemType == ITEMTYPE_GROUP) {
@@ -462,7 +479,12 @@ void popup_open_recent_file_cb()
 EXITPOINT:
 
 	if (err != NULL) {
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, "Could not open selected file: \n\n%s", err->message);
+		dialog = gtk_message_dialog_new(NULL,
+													GTK_DIALOG_MODAL,
+													GTK_MESSAGE_ERROR,
+													GTK_BUTTONS_OK,
+													"Could not open selected file: \n\n%s",
+													err->message);
 
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}
@@ -483,7 +505,10 @@ EXITPOINT:
  * @param column is not used
  * @param userData is not used
  */
-static void recent_tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkTreeViewColumn *column, gpointer userData)
+static void recent_tree_row_activated_cb(GtkTreeView *treeView,
+														GtkTreePath *path,
+														GtkTreeViewColumn *column,
+														gpointer userData)
 {
 	GtkTreeIter iter;
 	gchar *relFilePath = NULL;
