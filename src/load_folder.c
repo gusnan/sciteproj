@@ -173,6 +173,17 @@ gboolean load_folder(gchar *project_path, GError **err)
 			goto EXITPOINT;
 		}
 	}
+
+	add_tree_group(NULL, ADD_CHILD, "." /*get_filename_from_full_path(project_path)*/ , TRUE, &(parse_struct.current_iter), NULL);
+	//add_tree_file(NULL, ADD_CHILD, project_path , &(parse_struct.current_iter), TRUE, NULL);
+
+	prevFileIterValid[currentFilePrevFileIter]=FALSE;
+	prevFileIterArray[currentFilePrevFileIter]=parse_struct.current_iter;
+
+	currentFilePrevFileIter++;
+	prevFileIterArray[currentFilePrevFileIter]=parse_struct.current_iter;
+
+	parse_struct.depth++;
 	
 	read_folder(GTK_TREE_STORE(model), project_path, &parse_struct, NULL);
 	
