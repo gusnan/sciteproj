@@ -97,7 +97,6 @@ gboolean set_project_filepath(const gchar *filepath, GError **err)
 
 		// Extract the project's base directory
 		if (sProjectFilepath) {
-			gchar *finalSlash = NULL;
 
 			// Check for absolut path
 			if (g_path_is_absolute(sProjectFilepath)==TRUE) {
@@ -110,8 +109,7 @@ gboolean set_project_filepath(const gchar *filepath, GError **err)
 			}
 
 			if (sProjectDir[strlen(sProjectDir)-1]==G_DIR_SEPARATOR) {
-			
-				finalSlash = strrchr(sProjectDir, G_DIR_SEPARATOR);
+				gchar *finalSlash = strrchr(sProjectDir, G_DIR_SEPARATOR);
 
 				if (finalSlash != NULL) {
 					*finalSlash = '\0';
