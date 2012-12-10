@@ -87,21 +87,6 @@ gchar* get_project_filepath();
 // Clear the tree
 void empty_tree(GtkTreeStore *treeStore);
 
-// Mark the project as dirty or clean (i.e. modified and in need of saving)
-void set_project_dirty_status(gboolean isDirty);
-
-// Get the status of the project
-gboolean project_is_dirty();
-
-// Prompting the user to save the project if it is dirty
-void prompt_user_to_save_project();
-
-// Save the current project, or pop up an error dialog if something bad happened
-gboolean save_project(gchar *proj_filepath,GError **err);
-
-// Allow user to select a project file to load (save current project first, if appropriate)
-gboolean load_project(gchar *projectPath, GError **err);
-
 // Allow user to select and add files to the project
 gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err);
 

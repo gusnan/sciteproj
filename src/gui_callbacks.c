@@ -295,11 +295,7 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
  */
 void quit_menu_cb()
 {
-	prompt_user_to_save_project();
-
-	if (!project_is_dirty()) {
-		gtk_main_quit();
-	}
+	gtk_main_quit();
 }
 
 

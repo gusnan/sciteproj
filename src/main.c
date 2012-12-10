@@ -247,6 +247,7 @@ int main(int argc, char *argv[])
 
 
 	// Was a project file specified on the command line?
+	/*
 	if (file_to_load!=NULL) {
 		
 		gchar *built_filename=g_build_filename(current_dir,file_to_load,NULL);
@@ -260,6 +261,7 @@ int main(int argc, char *argv[])
 			err = NULL;
 		}
 	}
+	*/
 
 	if (cmd.file_to_load!=NULL) {
 		g_free(cmd.file_to_load);

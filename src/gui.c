@@ -713,11 +713,7 @@ static gint window_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer 
 {
 	gboolean eventHandled = TRUE;
 
-	prompt_user_to_save_project();
-
-	if (!project_is_dirty()) {
-		gtk_main_quit();
-	}
+	gtk_main_quit();
 
 	return eventHandled;
 }
@@ -787,9 +783,6 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 
 	if (nodeItemType != ITEMTYPE_FILE) {
 		switch_folder_icon(treeView,path);
-		if (gPrefs.dirty_on_folder_change) {
-			set_project_dirty_status(TRUE);
-		}
 		goto EXITPOINT;
 	}
 

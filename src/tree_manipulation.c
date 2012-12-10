@@ -49,7 +49,6 @@
 
 
 GtkTreeStore *sTreeStore = NULL;
-static gboolean sProjectIsDirty = FALSE;
 static gchar *sProjectFilepath = NULL;
 static gchar *sProjectDir = NULL;
 
@@ -201,191 +200,6 @@ void empty_tree(GtkTreeStore *treeStore)
 }
 
 
-
-/**
- * Set the project "dirty" status and update the sensitivity of the "Save Project" button
- *
- * @param isDirty is the new "dirty" status for the project
- */
-void set_project_dirty_status(gboolean isDirty)
-{
-	// Save the status
-
-	sProjectIsDirty = isDirty;
-
-	update_project_is_dirty(isDirty);
-	// Enable/disable the "Save Project" button as appropriate
-
-	set_save_button_sensitivity(sProjectIsDirty);
-}
-
-
-
-/**
- * Get the "dirty" status of the project.
- *
- * @return TRUE if the project has been modified since loading; FALSE otherwise
- */
-gboolean project_is_dirty()
-{
-	return sProjectIsDirty;
-}
-
-
-
-/**
- * If the current project is dirty, Prompt the user for a decision on whether to save it.
- * Note that if the user declines to save (i.e. chooses "No"), the project is marked as clean.
- */
-void prompt_user_to_save_project()
-{
-	GtkWidget *dialog = NULL;
-	gint tempResponseID = GTK_RESPONSE_CANCEL;
-
-
-	// If the project is clean, things are simple
-	if (!project_is_dirty()) {
-		goto EXITPOINT;
-	}
-
-
-	// Project is dirty, so ask the user what to do about it
-
-	dialog = gtk_message_dialog_new(NULL,
-												GTK_DIALOG_MODAL,
-												GTK_MESSAGE_QUESTION,
-												GTK_BUTTONS_NONE,
-												"Save project changes?");
-	
-	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_YES, GTK_RESPONSE_YES);
-	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_NO, GTK_RESPONSE_NO);
-	gtk_dialog_add_button(GTK_DIALOG(dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
-
-	tempResponseID = gtk_dialog_run(GTK_DIALOG(dialog));
-
-	if (tempResponseID == GTK_RESPONSE_CANCEL) {
-		goto EXITPOINT;
-	}
-	else if (tempResponseID == GTK_RESPONSE_NO) {
-		// Yikes-- discard changes!
-		set_project_dirty_status(FALSE);
-	}
-	else if (tempResponseID == GTK_RESPONSE_YES) {
-		GError *err = NULL;
-		GtkWidget *errDialog = NULL;
-
-		if (!save_project(get_project_filepath(),&err)) {
-			errDialog = gtk_message_dialog_new(NULL,
-															GTK_DIALOG_MODAL,
-															GTK_MESSAGE_ERROR,
-															GTK_BUTTONS_OK,
-															"An error occurred while saving the project: %s",
-															err->message);
-
-			gtk_dialog_run(GTK_DIALOG(errDialog));
-		}
-
-		if (err) g_error_free(err);
-		if (errDialog) gtk_widget_destroy(errDialog);
-	}
-
-
-EXITPOINT:
-
-	if (dialog) gtk_widget_destroy(dialog);
-}
-
-
-
-/**
- * Save the project.
- *
- * @return FALSE if errors occurred during saving of the project; TRUE otherwise
- *
- * @param err returns any errors
- */
-gboolean save_project(gchar *proj_filepath,GError **err)
-{
-	GtkWidget *dialog = NULL;
-	gboolean finalResult = FALSE;
-
-	// If the project does not have a name, pick one
-
-	if (proj_filepath == NULL) {
-		gchar *filename = NULL;
-		GError *pathProcessErr = NULL;
-		int resultID;
-
-		dialog = gtk_file_chooser_dialog_new(_("Save Project"),
-															NULL,
-															GTK_FILE_CHOOSER_ACTION_SAVE,
-															GTK_STOCK_CANCEL,
-															GTK_RESPONSE_CANCEL,
-															GTK_STOCK_SAVE,
-															GTK_RESPONSE_ACCEPT,
-															NULL);
-
-		gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(dialog), "untitled.xml");
-
-		resultID = gtk_dialog_run(GTK_DIALOG(dialog));
-
-		if (resultID != GTK_RESPONSE_ACCEPT) {
-			finalResult = TRUE;
-			goto EXITPOINT;
-		}
-
-		filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
-
-		if (!set_project_filepath(filename, err)) {
-			goto EXITPOINT;
-		}
-
-		g_free(filename);
-
-
-		// Now that the project has a name, we have to make all the paths relative to it
-
-		gtk_tree_model_foreach(GTK_TREE_MODEL(sTreeStore), make_paths_relative, &pathProcessErr);
-
-		if (pathProcessErr) {
-			GtkWidget *errDialog = gtk_message_dialog_new(NULL,
-																			GTK_DIALOG_MODAL,
-																			GTK_MESSAGE_ERROR,
-																			GTK_BUTTONS_OK, 
-																			_("An error occurred while making project file paths relative: %s"),
-																			pathProcessErr->message);
-
-			gtk_dialog_run(GTK_DIALOG(errDialog));
-
-			gtk_widget_destroy(errDialog);
-
-			g_error_free(pathProcessErr);
-
-			goto EXITPOINT;
-		}
-	}
-
-
-	// Try and save the project
-
-	if (!save_tree_XML(GTK_TREE_MODEL(sTreeStore), sProjectFilepath, err)) {
-		goto EXITPOINT;
-	}
-
-	set_project_dirty_status(FALSE);
-
-	finalResult = TRUE;
-
-
-EXITPOINT:
-
-	if (dialog) gtk_widget_destroy(dialog);
-
-	return finalResult;
-}
-
-
-
 /**
  * Make a node's path relative to the current sProjectDir (assumes the node's current path is relative
  * to the current working dir)
@@ -457,6 +271,7 @@ EXITPOINT:
  * @param projectPath is a path to a project to load; if NULL, then a file selection dialog is displayed
  * @param err returns any errors
  */
+/*
 gboolean load_project(gchar *projectPath, GError **err)
 {
 	GtkWidget *dialog = NULL;
@@ -466,7 +281,7 @@ gboolean load_project(gchar *projectPath, GError **err)
 
 	// Ensure the current project is saved
 
-	prompt_user_to_save_project();
+	//prompt_user_to_save_project();
 
 	// Check if the file exists...
 	// --------
@@ -535,9 +350,6 @@ gboolean load_project(gchar *projectPath, GError **err)
 		}
 	}
 
-
-	set_project_dirty_status(FALSE);
-
 	finalResult = TRUE;
 
 
@@ -549,6 +361,7 @@ EXITPOINT:
 	return finalResult;
 }
 
+*/
 
 /*
  *
@@ -880,9 +693,6 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
 
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_EXPANDED, expanded, -1);
 
-
-	set_project_dirty_status(TRUE);
-
 	finalResult = TRUE;
 
 	return finalResult;
@@ -1004,8 +814,6 @@ gboolean add_tree_file(GtkTreeIter *currentIter,
 		*newIter = iter;
 	}
 
-	set_project_dirty_status(TRUE);
-
 	finalResult = TRUE;
 
 EXITPOINT:
@@ -1091,8 +899,6 @@ extern gboolean remove_tree_node(GtkTreeIter *iter, GError **err)
 
 	gtk_tree_store_remove(sTreeStore, iter);
 
-	set_project_dirty_status(TRUE);
-
 	return TRUE;
 }
 
@@ -1119,8 +925,6 @@ gboolean set_tree_node_name(GtkTreeIter *iter, const gchar *newContents, GError 
 
 	// What is visible in gui
 	gtk_tree_store_set(sTreeStore, iter, COLUMN_FILENAME, newContents, -1);
-
-	set_project_dirty_status(TRUE);
 
 	return TRUE;
 }
@@ -1157,10 +961,6 @@ gboolean set_tree_node_expanded(GtkTreeIter *iter, gboolean expanded, GError **e
 	g_assert(iter != NULL);
 
 	gtk_tree_store_set(sTreeStore, iter, COLUMN_EXPANDED, expanded, -1);
-
-	if (gPrefs.dirty_on_folder_change) {
-		set_project_dirty_status(TRUE);
-	}
 
 	return TRUE;
 }
@@ -1253,8 +1053,6 @@ gboolean copy_tree_node(GtkTreeIter *srcIter,
 			expand_tree_row(newPath, FALSE);
 		}
 	}
-
-	set_project_dirty_status(TRUE);
 
 	finalResult = TRUE;
 

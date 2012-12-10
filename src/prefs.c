@@ -56,7 +56,6 @@ gchar *default_config_string=(gchar*)"" \
 				"#other:\n"
 				"give_scite_focus=FALSE\n"
 				"search_give_scite_focus=TRUE\n"
-				"dirty_on_folder_change=FALSE\n"
 				"\n"
 				"allow_duplicates=TRUE\n"
 				"\n"
@@ -181,12 +180,6 @@ gboolean check_config_string(gchar *in_config)
 			}
 		}
 
-		if (g_ascii_strcasecmp(tempstring,"dirty_on_folder_change")==0) {
-			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.dirty_on_folder_change=TRUE;
-			}
-		}
-
 		if (g_ascii_strcasecmp(tempstring,"allow_duplicates")==0) {
 			if (g_ascii_strcasecmp(value,"FALSE")==0) {
 				gPrefs.allow_duplicates=FALSE;
@@ -272,7 +265,6 @@ gboolean init_prefs(GError **err)
 
 	gPrefs.give_scite_focus=FALSE;
 	gPrefs.search_give_scite_focus=TRUE;
-	gPrefs.dirty_on_folder_change=FALSE;
 
 	gPrefs.search_alert_file_warnings=TRUE;
 
