@@ -400,7 +400,10 @@ gboolean launch_scite(gchar *instring,GError **err)
 			goto EXITPOINT;
 		}
 
-		g_io_add_watch(sResponsePipeGIOChannel, (GIOCondition) (G_IO_IN | G_IO_ERR | G_IO_HUP), scite_pipe_read_ready_cb, NULL);
+		g_io_add_watch(sResponsePipeGIOChannel,
+							(GIOCondition) (G_IO_IN | G_IO_ERR | G_IO_HUP),
+							scite_pipe_read_ready_cb,
+							NULL);
 
 
 		// Also create a pipe pair so our child process can alert us if it fails to execute Scite
