@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: sciteproj 0.7.05\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
 "POT-Creation-Date: 2012-12-10 03:05+0100\n"
-"PO-Revision-Date: 2012-12-10 03:06+0100\n"
+"PO-Revision-Date: 2012-12-10 19:46+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -461,10 +461,9 @@ msgid "Create _file"
 msgstr "Skapa _grupp"
 
 #: menus.h:102
-#, fuzzy
 msgctxt "Menu|Edit|"
 msgid "Delete file(s)"
-msgstr "Ta bort filer"
+msgstr "Ta bort fil(er)"
 
 #: menus.h:105
 msgctxt "Menu|Edit|"
@@ -511,10 +510,9 @@ msgid "Add folder"
 msgstr "Lägg till filer"
 
 #: menus.h:125
-#, fuzzy
 msgctxt "Menu|Popup|Group"
 msgid "Rename folder"
-msgstr "Byter namn på en grupp"
+msgstr "Döp om mapp"
 
 #: menus.h:127
 msgctxt "Menu|Popup|Group"
