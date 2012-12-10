@@ -28,9 +28,6 @@ void row_expand_or_collapse_cb(GtkTreeView *treeview, GtkTreeIter *arg1, GtkTree
 
 void quit_menu_cb();
 void about_menu_cb();
-void saveproject_menu_cb();
-void saveproject_as_menu_cb();
-void openproject_menu_cb();
 void creategroup_menu_cb();
 
 void popup_open_file_cb();

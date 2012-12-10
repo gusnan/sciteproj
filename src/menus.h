@@ -29,10 +29,6 @@ static gchar *sMenuDefXML = (gchar*)\
 	"<ui> \
 		<menubar> \
 			<menu name=\"FileMenu\" action=\"FileMenuAction\"> \
-				<menuitem name=\"OpenProjectItem\" action=\"OpenProjectAction\" /> \
-				<menuitem name=\"SaveProjectItem\" action=\"SaveProjectAction\" /> \
-				<menuitem name=\"SaveProjectAsItem\" action=\"SaveProjectAsAction\" /> \
-				<separator/> \
 				<menuitem name=\"ExitItem\" action=\"ExitAction\" /> \
 			</menu> \
 			<menu name=\"EditMenu\" action=\"EditMenuAction\"> \
@@ -96,12 +92,6 @@ static GtkActionEntry sMenuActions[] =
 	{ "ViewMenuAction", NULL, NC_("Menu|","_View") },
 	{ "HelpMenuAction", NULL, NC_("Menu|","_Help") },
 
-	{ "OpenProjectAction", GTK_STOCK_OPEN, NC_("Menu|File|","_Open project"), "<control>O",
-		NULL, G_CALLBACK(openproject_menu_cb) },
-	{ "SaveProjectAction", GTK_STOCK_SAVE, NC_("Menu|File|","_Save project"), "<control>S",
-		NULL, G_CALLBACK(saveproject_menu_cb) },
-	{ "SaveProjectAsAction", GTK_STOCK_SAVE_AS, NC_("Menu|File|","Save project as..."), "<control><shift>S",
-		NULL, G_CALLBACK(saveproject_as_menu_cb) },
 	{ "ExitAction", GTK_STOCK_QUIT, NC_("Menu|File|","_Exit"), "<control>Q",
 		NULL, G_CALLBACK(quit_menu_cb) },
 
@@ -190,9 +180,6 @@ static struct ContextString menustrings[]= {
 	{ "Menu|","_View"},
 	{ "Menu|","_Help"},
 
-	{ "Menu|File|","_Open project"},
-	{ "Menu|File|","_Save project"},
-	{ "Menu|File|","Save project as..."},
 	{ "Menu|File|","_Exit"},
 
 	{ "Menu|Edit|","Create _group"},
