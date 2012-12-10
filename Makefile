@@ -66,7 +66,7 @@ endif
 LOCAL_CFLAGS+=-DLOCALEDIR=\"$(LOCALEDIR)\" -DPACKAGE=\"$(NAME)\" -DSCITEPROJ_VERSION=\"$(VERSION)\"
 
 all: $(BIN)/$(NAME)
-	${MAKE} -C po all
+	${MAKE} -C po -j1 all
 
 $(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(LOCAL_CFLAGS) -c $< -o $@
