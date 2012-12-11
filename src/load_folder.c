@@ -29,6 +29,9 @@
 #include "gui.h"
 
 
+#include "file_utils.h"
+
+
 static int folder_number=0;
 
 struct ParseFileStruct {
@@ -50,6 +53,28 @@ gboolean prevFileIterValid[100];
 gint file_sort_func(gconstpointer a, gconstpointer b)
 {
 	return g_ascii_strcasecmp(a,b);
+}
+
+
+/**
+ *
+ */
+gint file_sort_by_extension_func(gconstpointer a, gconstpointer b)
+{
+	gint result=0;
+
+	gchar *filename1=(gchar*)a;
+	gchar *filename2=(gchar*)b;
+
+	gchar *ext1=get_file_extension(filename1);
+	gchar *ext2=get_file_extension(filename2);
+
+	result=g_ascii_strcasecmp(ext1,ext2);
+	if (result==0) {
+		result=g_ascii_strcasecmp(filename1,filename2);
+	}
+
+	return result;
 }
 
 
@@ -81,7 +106,7 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 		}
 	};
 	
-	file_list=g_slist_sort(file_list,file_sort_func);
+	file_list=g_slist_sort(file_list,file_sort_by_extension_func);
 	folder_list=g_slist_sort(folder_list,file_sort_func);
 	
 	// Treat folders and files by themselves
