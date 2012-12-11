@@ -45,4 +45,6 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 // Convert a relative file path to an absolute file path
 gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const gchar *basePath, GError **err);
 
+gchar *get_file_extension(gchar *filename);
+
 #endif /*__HEADER_FILE_UTILS_*/

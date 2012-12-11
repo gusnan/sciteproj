@@ -487,3 +487,14 @@ EXITPOINT:
 }
 
 
+/**
+ *
+ */
+gchar *get_file_extension(gchar *filename)
+{
+	gchar *result=g_strrstr(filename,".");
+
+	if (!result) result="";
+
+	return result;
+}
