@@ -43,7 +43,6 @@
 
 static struct CommandLineIndata {
 	const gchar *scite_filename;
-	gchar *file_to_load;
 } cmd;
 
 
@@ -54,7 +53,6 @@ int main(int argc, char *argv[])
 {
 	int returnCode = EXIT_FAILURE;
 	GError *err = NULL;
-	gchar *file_to_load=NULL;
 	GOptionContext *context=NULL;
 
 	static gboolean version=FALSE;
@@ -145,10 +143,6 @@ int main(int argc, char *argv[])
 		exit(EXIT_SUCCESS);
 	}
 
-	// If there is any indata left - load it as a sciteproj project
-	if (argc>1)
-		cmd.file_to_load=g_strdup_printf("%s",argv[1]);
-
 	// Init gtk
 	gtk_init(&argc, &argv);
 
@@ -228,13 +222,6 @@ int main(int argc, char *argv[])
 		goto EXITPOINT;
 	}
 
-
-	if (cmd.file_to_load!=NULL) {
-		file_to_load=cmd.file_to_load;
-	} else {
-		if (gPrefs.file_to_load!=NULL) file_to_load=gPrefs.file_to_load;
-	}
-		
 	gchar *current_dir=g_get_current_dir();
 
 	// Should we load a folder?
@@ -242,29 +229,6 @@ int main(int argc, char *argv[])
 		set_project_filepath(current_dir,NULL);
 		
 		load_folder(current_dir,NULL);
-	}
-
-
-	// Was a project file specified on the command line?
-	/*
-	if (file_to_load!=NULL) {
-		
-		gchar *built_filename=g_build_filename(current_dir,file_to_load,NULL);
-	
-		if (!load_project(built_filename, &err)) {
-			GtkWidget *errDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,_("An error occurred while trying to load the specified project file: %s"), err->message);
-			gtk_dialog_run(GTK_DIALOG(errDialog));
-			gtk_widget_destroy(errDialog);
-
-			g_error_free(err);
-			err = NULL;
-		}
-	}
-	*/
-
-	if (cmd.file_to_load!=NULL) {
-		g_free(cmd.file_to_load);
-		cmd.file_to_load=NULL;
 	}
 
 	init_scite_connection();

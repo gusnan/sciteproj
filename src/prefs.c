@@ -190,10 +190,6 @@ gboolean check_config_string(gchar *in_config)
 			gPrefs.scite_path=g_strdup_printf("%s",value);
 		}
 
-		if (g_ascii_strcasecmp(tempstring,"file_to_load")==0) {
-			gPrefs.file_to_load=g_strdup_printf("%s",value);
-		}
-
 		if (g_ascii_strcasecmp(tempstring,"identify_sciteproj_xml")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
 				gPrefs.identify_sciteproj_xml=TRUE;
@@ -275,8 +271,6 @@ gboolean init_prefs(GError **err)
 
 	gPrefs.show_recent=FALSE;
 	gPrefs.recent_add_to_bottom=FALSE;
-
-	gPrefs.file_to_load=NULL;
 
 	gPrefs.scite_path=NULL;
 
