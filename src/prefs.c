@@ -27,6 +27,15 @@
 
 #include "string_utils.h"
 
+/**
+ *
+ */
+
+gboolean check_for_old_style_config();
+
+/**
+ *
+ */
 sciteproj_prefs gPrefs;
 
 gchar *prefs_filename;
@@ -67,7 +76,6 @@ gchar *default_config_string=(gchar*)"" \
 				"hide_statusbar=FALSE\n"
 				"\n"
 				"\n";
-
 
 /**
  *		Check config string - is it valid?
@@ -314,6 +322,11 @@ gboolean init_prefs(GError **err)
 		result=FALSE;
 		goto ERROR;
 	}
+	
+	// Check if it is an old-style config, or a new LUA one
+	if (check_for_old_style_config(config_string)) {
+		printf("old_style config!\n");
+	}
 
 	// split out the lines, and add each to the list of strings
 	list=g_strsplit(config_string,"\n",-1);
@@ -351,4 +364,27 @@ ERROR:
 void done_prefs()
 {
 	g_free(prefs_filename);
+}
+
+
+/**
+ *
+ */
+gboolean check_for_old_style_config(gchar *teststring)
+{
+	gboolean result=FALSE;
+	
+	// We stasify it by checking for the default header and assume that if
+	// that is there, we have an old-styled (non-LUA) config file
+
+	if (g_str_has_prefix(teststring,
+								"# ---------------------------\n"
+								"# Configuration for SciteProj\n"
+								"# ---------------------------\n")
+	) {
+		result=TRUE;
+		
+	}
+	
+	return result;
 }
