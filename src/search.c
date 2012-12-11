@@ -34,6 +34,7 @@
 #include "scite_utils.h"
 #include "statusbar.h"
 #include "prefs.h"
+#include "file_utils.h"
 
 #include "filelist.h"
 

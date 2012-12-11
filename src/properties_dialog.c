@@ -35,6 +35,7 @@
 #include "gui.h"
 
 #include "string_utils.h"
+#include "file_utils.h"
 
 
 /**

@@ -36,5 +36,13 @@ gboolean is_separator(gchar ch);
 
 gchar *fix_separators(gchar *source);
 
+// get the filename from a full path+filename
+gchar *get_filename_from_full_path(gchar *src);
+
+// Convert an absolute file path to a relative file path
+gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, const gchar *basePath, GError **err);
+
+// Convert a relative file path to an absolute file path
+gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const gchar *basePath, GError **err);
 
 #endif /*__HEADER_FILE_UTILS_*/

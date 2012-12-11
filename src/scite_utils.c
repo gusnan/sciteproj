@@ -49,6 +49,7 @@
 #include "graphics.h"
 #include "string_utils.h"
 #include "statusbar.h"
+#include "file_utils.h"
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_SCITEUTILS_ERROR")
 

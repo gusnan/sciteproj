@@ -27,19 +27,6 @@
 // Append a string to a (possibly) existing string
 gboolean str_append(gchar **dst, const gchar *src, GError **err);
 
-
-// Convert an absolute file path to a relative file path
-gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, const gchar *basePath, GError **err);
-
-
-// Convert a relative file path to an absolute file path
-gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const gchar *basePath, GError **err);
-
-
-// get the filename from a full path+filename
-gchar *get_filename_from_full_path(gchar *src);
-
-
 void debug_printf(const char *st, ...);
 
 char *remove_newline( char *s );
