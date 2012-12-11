@@ -359,14 +359,6 @@ gboolean load_parse_XML(GtkTreeStore *treeStore, const char *filepath, GError **
 		goto EXITPOINT;
 	}
 
-
-	if (!parseStruct.valid_file) {
-		if (gPrefs.identify_sciteproj_xml) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, _("%s: Not a valid sciteproj XML file!"), __func__);
-			goto EXITPOINT;
-		}
-	}
-
 	// Check Open/Closed?
 	gtk_tree_model_foreach(GTK_TREE_MODEL(treeStore),for_each_open_close_function,&parseStruct);
 

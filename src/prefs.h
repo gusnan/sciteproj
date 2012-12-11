@@ -47,8 +47,6 @@ typedef struct {
 
 	gchar *scite_path;
 
-	gboolean identify_sciteproj_xml;
-
 	gboolean show_recent;
 	gboolean recent_add_to_bottom;
 

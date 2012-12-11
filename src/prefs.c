@@ -69,8 +69,6 @@ gchar *default_config_string=(gchar*)"" \
 				"\n"
 				"allow_duplicates=TRUE\n"
 				"\n"
-				"identify_sciteproj_xml=TRUE\n"
-				"\n"
 				"show_recent=FALSE\n"
 				"recent_add_to_bottom=FALSE\n"
 				"\n"
@@ -197,12 +195,6 @@ gboolean check_config_string(gchar *in_config)
 
 		if (g_ascii_strcasecmp(tempstring,"scite_path")==0) {
 			gPrefs.scite_path=g_strdup_printf("%s",value);
-		}
-
-		if (g_ascii_strcasecmp(tempstring,"identify_sciteproj_xml")==0) {
-			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.identify_sciteproj_xml=TRUE;
-			}
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"show_recent")==0) {
