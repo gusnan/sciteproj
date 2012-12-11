@@ -229,7 +229,7 @@ int main(int argc, char *argv[])
 	}
 
 
-	file_to_load=NULL;
+	file_to_load;
 	if (cmd.file_to_load!=NULL) {
 		file_to_load=cmd.file_to_load;
 	} else {
