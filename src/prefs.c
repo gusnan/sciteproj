@@ -32,6 +32,7 @@
  */
 
 gboolean check_for_old_style_config();
+gboolean load_lua_config(gchar *config_string);
 
 /**
  *
@@ -325,31 +326,37 @@ gboolean init_prefs(GError **err)
 	
 	// Check if it is an old-style config, or a new LUA one
 	if (check_for_old_style_config(config_string)) {
-		printf("old_style config!\n");
-	}
+		
+		debug_printf("Old style config\n");
+		// split out the lines, and add each to the list of strings
+		list=g_strsplit(config_string,"\n",-1);
 
-	// split out the lines, and add each to the list of strings
-	list=g_strsplit(config_string,"\n",-1);
+		savedlist=list;
 
-	savedlist=list;
+		do {
+			temp=*list;
 
-	do {
-		temp=*list;
+			if (temp!=NULL) {
 
-		if (temp!=NULL) {
+				if ((temp[0]!='#') && (strcmp(temp,"")!=0)) {
+					// We got a valid string:
+					// no starting #, and not an empty string.
 
-			if ((temp[0]!='#') && (strcmp(temp,"")!=0)) {
-				// We got a valid string:
-				// no starting #, and not an empty string.
-
-				check_config_string(temp);
+					check_config_string(temp);
+				}
+				list++;
 			}
-			list++;
+
+		} while (temp!=NULL);
+
+		g_strfreev(savedlist);
+	} else {
+		// ----- New style (LUA) config
+		debug_printf("New style (LUA) config\n");
+		if (!load_lua_config(config_string)) {
+			printf("error loading LUA config!\n");
 		}
-
-	} while (temp!=NULL);
-
-	g_strfreev(savedlist);
+	}
 
 ERROR:
 
@@ -373,8 +380,9 @@ void done_prefs()
 gboolean check_for_old_style_config(gchar *teststring)
 {
 	gboolean result=FALSE;
+	int co=0;
 	
-	// We stasify it by checking for the default header and assume that if
+	// We satisfy it by checking for the default header and assume that if
 	// that is there, we have an old-styled (non-LUA) config file
 
 	if (g_str_has_prefix(teststring,
@@ -383,8 +391,31 @@ gboolean check_for_old_style_config(gchar *teststring)
 								"# ---------------------------\n")
 	) {
 		result=TRUE;
-		
 	}
+	
+	// Another way to check is to check for lines starting with # - as a comment
+	// LUA uses "--", so this is should work to identify oldstyle config.
+
+	for (co=0;co<strlen(teststring);co++) {
+		if (teststring[co]=='\n') {
+			//printf("Tecken: %c\n", teststring[co+1]);
+			
+			if (teststring[co+1]=='#') {
+				result=TRUE;
+			}
+		}
+	}		
+	
+	return result;
+}
+
+
+/**
+ *
+ */
+gboolean load_lua_config(gchar *config_string)
+{
+	gboolean result=TRUE;
 	
 	return result;
 }
