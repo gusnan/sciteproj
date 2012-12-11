@@ -225,9 +225,14 @@ gboolean load_folder(gchar *project_path, GError **err)
 			goto EXITPOINT;
 		}
 	}
+	
+	GtkTreeIter dot_folder_iterator;
+	
 
 	add_tree_group(NULL, ADD_CHILD, "." /*get_filename_from_full_path(project_path)*/ , TRUE, &(parse_struct.current_iter), NULL);
 	//add_tree_file(NULL, ADD_CHILD, project_path , &(parse_struct.current_iter), TRUE, NULL);
+
+	dot_folder_iterator=parse_struct.current_iter;
 
 	prevFileIterValid[currentFilePrevFileIter]=FALSE;
 	prevFileIterArray[currentFilePrevFileIter]=parse_struct.current_iter;
@@ -238,6 +243,16 @@ gboolean load_folder(gchar *project_path, GError **err)
 	parse_struct.depth++;
 	
 	read_folder(GTK_TREE_STORE(model), project_path, &parse_struct, NULL);
+	
+	// Expand the dot-folder
+	// void expand_tree_row(GtkTreePath *path, gboolean expandChildren);
+	
+	GtkTreePath *iter_path=gtk_tree_model_get_path(GTK_TREE_MODEL(model), &dot_folder_iterator);
+
+	if (iter_path) 
+		expand_tree_row(iter_path,FALSE);
+	
+	gtk_tree_path_free(iter_path);
 	
 EXITPOINT:
 	
