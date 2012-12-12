@@ -212,15 +212,7 @@ gboolean load_folder(gchar *project_path, GError **err)
 
 	parse_struct.depth=0;
 
-	if (project_path) {
-		
-		if (!set_project_filepath(project_path, err)) {
-			goto EXITPOINT;
-		}
-	}
-	
 	GtkTreeIter dot_folder_iterator;
-	
 
 	add_tree_group(NULL, ADD_CHILD, "." /*get_filename_from_full_path(project_path)*/ , TRUE, &(parse_struct.current_iter), NULL);
 	//add_tree_file(NULL, ADD_CHILD, project_path , &(parse_struct.current_iter), TRUE, NULL);
