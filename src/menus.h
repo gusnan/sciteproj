@@ -70,6 +70,9 @@ static gchar *sMenuDefXML = (gchar*)\
 			<menuitem name=\"SortAscendingItem\" action=\"SortAscendingAction\"/> \
 			<menuitem name=\"SortDescendingItem\" action=\"SortDescendingAction\"/> \
 			<separator/> \
+			<menuitem name=\"SortAscendingExtensionItem\" action=\"SortAscendingExtensionAction\"/> \
+			<menuitem name=\"SortDescendingExtensionItem\" action=\"SortDescendingExtensionAction\"/> \
+			<separator/> \
 			<menuitem name=\"ProperiesGroupPopupItem\" action=\"PropertiesGroupPopupAction\"/> \
 		</popup> \
 		<popup name=\"RecentPopup\" action=\"RecentPopupAction\"> \
@@ -126,9 +129,13 @@ static GtkActionEntry sMenuActions[] =
 		NULL, G_CALLBACK(popup_rename_group_cb) },
 	{ "RemoveGroupPopupAction", GTK_STOCK_DELETE, NC_("Menu|Popup|Group","Delete folder"), "",
 		NULL, G_CALLBACK(popup_remove_node_cb) },
-	{ "SortAscendingAction", GTK_STOCK_SORT_ASCENDING, NC_("Menu|Edit|","Sort folder ascending"),"",
+	{ "SortAscendingAction", GTK_STOCK_SORT_ASCENDING, NC_("Menu|Edit|","Sort folder ascending by name"),"",
 		NULL, G_CALLBACK(sort_ascending_cb) },
-	{ "SortDescendingAction", GTK_STOCK_SORT_DESCENDING, NC_("Menu|Edit","Sort folder descending"),"",
+	{ "SortDescendingAction", GTK_STOCK_SORT_DESCENDING, NC_("Menu|Edit","Sort folder descending by name"),"",
+		NULL, G_CALLBACK(sort_descending_cb) },
+	{ "SortAscendingExtensionAction", GTK_STOCK_SORT_ASCENDING, NC_("Menu|Edit|","Sort folder ascending by extension"),"",
+		NULL, G_CALLBACK(sort_ascending_cb) },
+	{ "SortDescendingExtensionAction", GTK_STOCK_SORT_DESCENDING, NC_("Menu|Edit|","Sort folder descending by extension"),"",
 		NULL, G_CALLBACK(sort_descending_cb) },
 	{ "PropertiesGroupPopupAction", GTK_STOCK_PROPERTIES, NC_("Menu|Popup|Group","Properties"), "",
 		NULL, G_CALLBACK(group_properties_cb) },
@@ -200,8 +207,10 @@ static struct ContextString menustrings[]= {
 	{ "Menu|Popup|Group","Add subgroup to group"},
 	{ "Menu|Popup|Group","Rename group"},
 	{ "Menu|Popup|Group","Remove group from project" },
-	{ "Menu|Edit|","Sort group ascending" },
-	{ "Menu|Edit","Sort group descending" },
+	{ "Menu|Edit|","Sort group ascending by name" },
+	{ "Menu|Edit|","Sort group descending by name" },
+	{ "Menu|Edit|","Sort group ascending by extension" },
+	{ "Menu|Edit|","Sort group descending by extension" },
 	{ "Menu|Popup|Group","Properties" },
 	{ "Menu|Edit|","Edit options" },
 
