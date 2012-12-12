@@ -45,27 +45,6 @@ int currentFilePrevFileIter=0;
 
 gboolean prevFileIterValid[100];
 
-/**
- *
- */
-gint file_sort_by_extension_func(gconstpointer a, gconstpointer b)
-{
-	gint result=0;
-
-	gchar *filename1=(gchar*)a;
-	gchar *filename2=(gchar*)b;
-
-	gchar *ext1=get_file_extension(filename1);
-	gchar *ext2=get_file_extension(filename2);
-
-	result=g_ascii_strcasecmp(ext1,ext2);
-	if (result==0) {
-		result=g_ascii_strcasecmp(filename1,filename2);
-	}
-
-	return result;
-}
-
 
 /**
  * @param store - the treestore where to store the data

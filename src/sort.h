@@ -28,6 +28,8 @@
 gint compare_strings_bigger(gconstpointer a,gconstpointer b);
 gint compare_strings_smaller(gconstpointer a,gconstpointer b);
 
+gint file_sort_by_extension_func(gconstpointer a, gconstpointer b);
+
 void sort_ascending_cb();
 void sort_descending_cb();
 
