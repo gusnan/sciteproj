@@ -89,3 +89,40 @@ EXITPOINT:
 	//
 	if (err) g_error_free(err);
 }
+
+
+/**
+ *
+ */
+void sort_ascending_by_extension_cb()
+{
+	GError *err=NULL;
+	
+	if (clicked_node.valid && clicked_node.type==ITEMTYPE_FILE) {
+		goto EXITPOINT;
+	}
+	
+	sort_children(&clicked_node.iter,&err,compare_strings_smaller);
+	
+EXITPOINT:
+	if (err) g_error_free(err);
+}
+
+
+/**
+ *
+ */
+void sort_descending_by_extension_cb()
+{
+	GError *err=NULL;
+	
+	if (clicked_node.valid && clicked_node.type==ITEMTYPE_FILE) {
+		goto EXITPOINT;
+	}
+	
+	sort_children(&clicked_node.iter,&err,compare_strings_bigger);
+	
+EXITPOINT:
+	if (err) g_error_free(err);
+
+}
