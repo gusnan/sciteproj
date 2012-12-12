@@ -74,7 +74,7 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 		}
 	};
 	
-	file_list=g_slist_sort(file_list,file_sort_by_extension_func);
+	file_list=g_slist_sort(file_list,file_sort_by_extension_bigger_func);
 	folder_list=g_slist_sort(folder_list,compare_strings_bigger);
 	
 	// Treat folders and files by themselves

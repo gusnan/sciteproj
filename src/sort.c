@@ -56,7 +56,7 @@ gint compare_strings_smaller(gconstpointer a,gconstpointer b)
 /**
  *
  */
-gint file_sort_by_extension_func(gconstpointer a, gconstpointer b)
+gint file_sort_by_extension_bigger_func(gconstpointer a, gconstpointer b)
 {
 	gint result=0;
 
@@ -69,6 +69,28 @@ gint file_sort_by_extension_func(gconstpointer a, gconstpointer b)
 	result=g_ascii_strcasecmp(ext1,ext2);
 	if (result==0) {
 		result=g_ascii_strcasecmp(filename1,filename2);
+	}
+
+	return result;
+}
+
+
+/**
+ *
+ */
+gint file_sort_by_extension_smaller_func(gconstpointer a, gconstpointer b)
+{
+	gint result=0;
+
+	gchar *filename1=(gchar*)a;
+	gchar *filename2=(gchar*)b;
+
+	gchar *ext1=get_file_extension(filename1);
+	gchar *ext2=get_file_extension(filename2);
+
+	result=g_ascii_strcasecmp(ext2,ext1);
+	if (result==0) {
+		result=g_ascii_strcasecmp(filename2,filename1);
 	}
 
 	return result;
@@ -125,7 +147,7 @@ void sort_ascending_by_extension_cb()
 		goto EXITPOINT;
 	}
 	
-	sort_children(&clicked_node.iter,&err,compare_strings_smaller);
+	sort_children(&clicked_node.iter,&err,file_sort_by_extension_smaller_func);
 	
 EXITPOINT:
 	if (err) g_error_free(err);
@@ -143,7 +165,7 @@ void sort_descending_by_extension_cb()
 		goto EXITPOINT;
 	}
 	
-	sort_children(&clicked_node.iter,&err,compare_strings_bigger);
+	sort_children(&clicked_node.iter,&err,file_sort_by_extension_bigger_func);
 	
 EXITPOINT:
 	if (err) g_error_free(err);
