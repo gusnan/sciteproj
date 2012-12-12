@@ -202,7 +202,7 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
  * @param err - errors are returned here
  *
  */
-gboolean load_folder(gchar *project_path, GError **err)
+gboolean load_folder(gchar *path, GError **err)
 {
 	GtkTreeModel *model;
 
@@ -227,7 +227,7 @@ gboolean load_folder(gchar *project_path, GError **err)
 
 	parse_struct.depth++;
 	
-	read_folder(GTK_TREE_STORE(model), project_path, &parse_struct, NULL);
+	read_folder(GTK_TREE_STORE(model), path, &parse_struct, NULL);
 	
 	// Expand the dot-folder
 	// void expand_tree_row(GtkTreePath *path, gboolean expandChildren);
