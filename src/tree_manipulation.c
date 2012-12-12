@@ -651,6 +651,7 @@ gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **e
 gboolean add_tree_group(GtkTreeIter *parentIter, 
 								enum NodePosition position,
 								const gchar* groupname,
+								const gchar* full_name,
 								gboolean expanded,
 								GtkTreeIter *newIter,
 								GError **err)
@@ -685,7 +686,7 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
 
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_ITEMTYPE, ITEMTYPE_GROUP, -1);
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FILENAME, groupname, -1);
-	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FILEPATH, groupname, -1);
+	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FILEPATH, full_name, -1);
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FONTWEIGHT, PANGO_WEIGHT_BOLD, -1);
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FONTWEIGHTSET, TRUE, -1);
 
@@ -1019,7 +1020,7 @@ gboolean copy_tree_node(GtkTreeIter *srcIter,
 
 		// Add the copy of the group
 
-		if (!add_tree_group(dstIter, position, nodeContents, groupIsExpanded, &newGroupIter, err)) {
+		if (!add_tree_group(dstIter, position, nodeContents, nodeContents, groupIsExpanded, &newGroupIter, err)) {
 			goto EXITPOINT;
 		}
 

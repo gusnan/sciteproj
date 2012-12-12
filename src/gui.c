@@ -646,6 +646,17 @@ gboolean tree_row_is_expanded(GtkTreePath *path)
  */
 void expand_tree_row(GtkTreePath *path, gboolean expandChildren)
 {
+	/*
+	gchar *newpath_string;
+	GtkTreeIter iter;
+	
+	newpath_string=get_project_filepath();
+	
+	remove_tree_node(&iter,NULL);
+	
+	load_folder(&iter,newpath_string,NULL);
+	*/
+	
 	if (path!=NULL) {
 		gtk_tree_view_expand_row(GTK_TREE_VIEW(projectTreeView), path, FALSE);
 	}

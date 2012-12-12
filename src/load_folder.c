@@ -92,7 +92,7 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 
 					if (parse_file->depth<=0) {
 
-						add_tree_group(NULL, ADD_CHILD, short_filename, TRUE, &(parse_file->current_iter), NULL);
+						add_tree_group(NULL, ADD_CHILD, short_filename, current_file, TRUE, &(parse_file->current_iter), NULL);
 
 						prevFileIterValid[currentFilePrevFileIter]=FALSE;
 						prevFileIterArray[currentFilePrevFileIter]=parse_file->current_iter;
@@ -102,7 +102,7 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 
 					} else {
 
-						add_tree_group(&(parse_file->current_iter), ADD_CHILD, short_filename, TRUE, &(parse_file->current_iter), NULL);
+						add_tree_group(&(parse_file->current_iter), ADD_CHILD, short_filename, current_file, TRUE, &(parse_file->current_iter), NULL);
 
 						prevFileIterValid[currentFilePrevFileIter]=FALSE;
 						prevFileIterArray[currentFilePrevFileIter]=parse_file->current_iter;
@@ -214,7 +214,7 @@ gboolean load_folder(gchar *path, GError **err)
 
 	GtkTreeIter dot_folder_iterator;
 
-	add_tree_group(NULL, ADD_CHILD, "." /*get_filename_from_full_path(project_path)*/ , TRUE, &(parse_struct.current_iter), NULL);
+	add_tree_group(NULL, ADD_CHILD, ".", path/*get_filename_from_full_path(project_path)*/ , TRUE, &(parse_struct.current_iter), NULL);
 	//add_tree_file(NULL, ADD_CHILD, project_path , &(parse_struct.current_iter), TRUE, NULL);
 
 	dot_folder_iterator=parse_struct.current_iter;

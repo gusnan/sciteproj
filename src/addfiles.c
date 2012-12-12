@@ -316,7 +316,7 @@ void ask_name_add_group(GtkTreeIter *nodeIter)
 
 	// Add the group
 
-	if (!add_tree_group(nodeIter, ADD_CHILD, groupName, TRUE, NULL, &err)) {
+	if (!add_tree_group(nodeIter, ADD_CHILD, groupName, groupName, TRUE, NULL, &err)) {
 		GtkWidget *errDialog = gtk_message_dialog_new(NULL,
 		                                              GTK_DIALOG_MODAL,
 		                                              GTK_MESSAGE_ERROR,

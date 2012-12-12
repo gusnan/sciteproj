@@ -136,7 +136,7 @@ static void start_element_cb(GMarkupParseContext *context, const gchar *element_
 		// Add to the root of the tree, or as a child of an existing group?
 		if (parseStruct->depth <= 0) {
 
-			add_tree_group(NULL, ADD_CHILD, groupname, expanded, &(parseStruct->currentIter), error);
+			add_tree_group(NULL, ADD_CHILD, groupname, groupname, expanded, &(parseStruct->currentIter), error);
 
 			set_tree_node_expanded(&(parseStruct->currentIter),expanded,error);
 
@@ -148,7 +148,7 @@ static void start_element_cb(GMarkupParseContext *context, const gchar *element_
 		}
 		else {
 
-			add_tree_group(&(parseStruct->currentIter), ADD_CHILD, groupname, expanded, &(parseStruct->currentIter), error);
+			add_tree_group(&(parseStruct->currentIter), ADD_CHILD, groupname, groupname, expanded, &(parseStruct->currentIter), error);
 
 			set_tree_node_expanded(&(parseStruct->currentIter),expanded,error);
 

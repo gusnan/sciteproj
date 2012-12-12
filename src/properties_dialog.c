@@ -102,8 +102,8 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 	gchar *nodename = NULL;
 
 	GtkWidget *table;
-	GtkWidget *label1,*label2;
-	GtkWidget *filename,*number_of_files_label;
+	GtkWidget *label1,*label2,*label3;
+	GtkWidget *filename,*number_of_files_label,*filepath_label;
 
 	gchar *filePath=NULL;
 	int nodeType=-1;
@@ -139,17 +139,21 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 
 	label1=gtk_label_new(_("Group name:"));
 	label2=gtk_label_new(_("Contains number of Files:"));
+	label3=gtk_label_new(_("Full folder:"));
 
 	filename=gtk_label_new(nodename);
 
+	filepath_label=gtk_label_new(filePath);
 
 	number_of_files_label=gtk_label_new(number_of_files_string);
 
 	gtk_misc_set_alignment(GTK_MISC(filename),0,0);
 	gtk_misc_set_alignment(GTK_MISC(number_of_files_label),0,0);
+	gtk_misc_set_alignment(GTK_MISC(filepath_label),0,0);
 
 	gtk_misc_set_alignment(GTK_MISC(label1),0,0);
 	gtk_misc_set_alignment(GTK_MISC(label2),0,0);
+	gtk_misc_set_alignment(GTK_MISC(label3),0,0);
 
 
 #if GTK_MAJOR_VERSION>=3
@@ -157,21 +161,25 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 
 	gtk_grid_attach(GTK_GRID(table),label1,0,0,1,1);
 	gtk_grid_attach(GTK_GRID(table),label2,0,1,1,1);
+	gtk_grid_attach(GTK_GRID(table),label3,1,2,1,1);
 
 	gtk_grid_attach(GTK_GRID(table),filename,1,0,4,1);
 	gtk_grid_attach(GTK_GRID(table),number_of_files_label,1,1,4,1);
+	gtk_grid_attach(GTK_GRID(table),filepath_label,1,2,4,1);
 
 	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 	gtk_grid_set_column_spacing (GTK_GRID (table), 6);
 
 #else
-	table=gtk_table_new(3,2,FALSE);
+	table=gtk_table_new(3,3,FALSE);
 
 	gtk_table_attach_defaults(GTK_TABLE(table),label1,0,1,0,1);
 	gtk_table_attach_defaults(GTK_TABLE(table),label2,0,1,1,2);
+	gtk_table_attach_defaults(GTK_TABLE(table),label3,0,1,2,3);
 
 	gtk_table_attach_defaults(GTK_TABLE(table),filename,1,2,0,1);
 	gtk_table_attach_defaults(GTK_TABLE(table),number_of_files_label,1,2,1,2);
+	gtk_table_attach_defaults(GTK_TABLE(table),filepath_label,1,2,2,3);
 
 	gtk_table_set_row_spacings(GTK_TABLE(table),5);
 	gtk_table_set_col_spacings(GTK_TABLE(table),5);

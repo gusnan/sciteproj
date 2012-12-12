@@ -105,6 +105,7 @@ gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **e
 gboolean add_tree_group(GtkTreeIter *parentIter,
 								enum NodePosition position,
 								const gchar* groupname,
+								const gchar* full_name,
 								gboolean expanded,
 								GtkTreeIter *newIter,
 								GError **err);
