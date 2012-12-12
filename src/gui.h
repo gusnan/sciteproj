@@ -33,6 +33,7 @@ extern ClickedNode clicked_node;
 
 extern GtkTreeViewColumn *column1;
 
+extern ClickedNode clicked_node;
 
 // Initialize the GUI
 gboolean setup_gui(GError **err);

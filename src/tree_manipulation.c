@@ -1082,29 +1082,6 @@ gchar *get_path_string(GtkTreeIter *iter)
 /**
  *
  */
-gint compare_strings_bigger(gconstpointer a,gconstpointer b)
-{
-	const gchar *test1=get_filename_from_full_path((gchar*)a);
-	const gchar *test2=get_filename_from_full_path((gchar*)b);
-
-	return g_ascii_strcasecmp(test1,test2);
-}
-
-/**
- *
- */
-gint compare_strings_smaller(gconstpointer a,gconstpointer b)
-{
-	const gchar *test1=get_filename_from_full_path((gchar*)a);
-	const gchar *test2=get_filename_from_full_path((gchar*)b);
-
-	return g_ascii_strcasecmp(test2,test1);
-}
-
-
-/**
- *
- */
 void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_func)
 {
 

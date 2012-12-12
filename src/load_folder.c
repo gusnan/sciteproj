@@ -24,12 +24,10 @@
 #include "tree_manipulation.h"
 
 #include "load_folder.h"
-
 #include "clicked_node.h"
 #include "gui.h"
-
-
 #include "file_utils.h"
+#include "sort.h"
 
 
 static int folder_number=0;
@@ -46,15 +44,6 @@ GtkTreeIter prevFileIterArray[100];
 int currentFilePrevFileIter=0;
 
 gboolean prevFileIterValid[100];
-
-/**
- *
- */
-gint file_sort_func(gconstpointer a, gconstpointer b)
-{
-	return g_ascii_strcasecmp(a,b);
-}
-
 
 /**
  *
@@ -107,7 +96,7 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 	};
 	
 	file_list=g_slist_sort(file_list,file_sort_by_extension_func);
-	folder_list=g_slist_sort(folder_list,file_sort_func);
+	folder_list=g_slist_sort(folder_list,compare_strings_bigger);
 	
 	// Treat folders and files by themselves
 	if (folder_list!=NULL) {

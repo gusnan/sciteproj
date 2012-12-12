@@ -56,6 +56,7 @@
 #include "filelist.h"
 
 #include "gui_callbacks.h"
+#include "sort.h"
 
 #include "menus.h"
 

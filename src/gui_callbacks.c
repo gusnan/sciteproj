@@ -51,6 +51,7 @@
 #include "remove.h"
 #include "rename.h"
 #include "filelist.h"
+#include "sort.h"
 
 #include "gtk3_compat.h"
 
@@ -76,45 +77,6 @@ gboolean foreach_collapse(GtkTreeModel *model,GtkTreePath *path,
 	return FALSE;
 }
 
-
-
-/**
- *
- */
-void sort_ascending_cb()
-{
-	GError *err = NULL;
-
-	if (clicked_node.valid && clicked_node.type==ITEMTYPE_FILE) {
-		goto EXITPOINT;
-	}
-
-	sort_children(&(clicked_node.iter),&err,compare_strings_smaller);
-
-EXITPOINT:
-	//
-	if (err) g_error_free(err);
-}
-
-
-/**
- *
- */
-void sort_descending_cb()
-{
-	GError *err = NULL;
-
-	if (clicked_node.valid && clicked_node.type==ITEMTYPE_FILE) {
-		goto EXITPOINT;
-	}
-
-	sort_children(&clicked_node.iter,&err,compare_strings_bigger);
-
-
-EXITPOINT:
-	//
-	if (err) g_error_free(err);
-}
 
 
 

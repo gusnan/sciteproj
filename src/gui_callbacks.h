@@ -38,9 +38,6 @@ void popup_open_file_cb();
 void expand_all_items_cb();
 void collapse_all_items_cb();
 
-void sort_ascending_cb();
-void sort_descending_cb();
-
 void edit_options_cb();
 
 
