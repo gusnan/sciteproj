@@ -315,9 +315,12 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 					
 					//add_tree_filelist(iter, folder_list, NULL);
 				}
-				
-				if (file_list)
+
+				if (file_list) {
+					file_list=g_slist_reverse(file_list);
+
 					add_tree_filelist(iter, file_list, NULL);
+				}
 				
 				set_tree_node_expanded(iter,TRUE, NULL);
 				
