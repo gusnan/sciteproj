@@ -309,15 +309,10 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 							
 							if (gtk_tree_model_iter_parent(tree_model, new_iter, iter)) {
 							}
-							
-							//iter=new_iter;
-
 						}
 						
 						folder_list=folder_list->next;
 					}
-					
-					//add_tree_filelist(iter, folder_list, NULL);
 				}
 
 				if (file_list) {
@@ -331,12 +326,8 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 				gtk_tree_view_expand_row(tree_view, tree_path, FALSE);
 				
 			}
-		
 		}
-		
 	}
-	
-	
 }
 
 
