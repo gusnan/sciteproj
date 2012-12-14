@@ -142,14 +142,12 @@ gchar *fix_path(char *base_dir,char *temp)
 
 	gchar *infile=fix_separators(temp);
 
-	gchar *pointer=infile;
+	//gchar *pointer=infile;
 
 
 	gchar *out_path=g_strdup_printf("%s",curr);
 	gchar *current_path=0;
 
-
-	gchar *file_pointer=pointer;
 
 	if (!g_path_is_absolute(infile)) {
 		int co;
@@ -175,7 +173,7 @@ gchar *fix_path(char *base_dir,char *temp)
 				if (strcmp(current_path,"..")==0) {
 					//g_print("Up! curr:%s\n",out_path);
 
-					file_pointer=&infile[co];
+					//file_pointer=&infile[co];
 
 					gchar *buf=path_up_string(out_path);
 
@@ -189,7 +187,7 @@ gchar *fix_path(char *base_dir,char *temp)
 			}
 		}
 	} else {
-		file_pointer=infile++;
+		infile++;
 	}
 	
 	gchar *tempfile=infile;
