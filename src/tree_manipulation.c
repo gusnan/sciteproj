@@ -59,7 +59,6 @@ gchar *saved_file_folder=NULL;
 
 gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **err);
 gboolean set_project_filepath(const gchar *filepath, GError **err);
-static gboolean make_paths_relative(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data);
 
 
 
@@ -175,7 +174,8 @@ GtkTreeStore* create_treestore(GError **err)
 													TYPE_FONTWEIGHT,
 													TYPE_FONTWEIGHTSET,
 													TYPE_ICON,
-													TYPE_EXPANDED);
+													TYPE_EXPANDED,
+													TYPE_FOLDER_CONTENT_LOADED);
 
 		if (sTreeStore == NULL) {
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not create GtkTreeStore, gtk_tree_store_new() = NULL", __func__);
@@ -198,68 +198,6 @@ void empty_tree(GtkTreeStore *treeStore)
 
 	gtk_tree_store_clear(treeStore);
 }
-
-
-/**
- * Make a node's path relative to the current sProjectDir (assumes the node's current path is relative
- * to the current working dir)
- *
- * @param model is the GtkTreeModel
- * @param path is not used
- * @param iter is the GtkTreeIter to the node to process
- * @param data is a pointer to a GError in which any errors are returned
- */
-static gboolean make_paths_relative(GtkTreeModel *model,
-												GtkTreePath *path,
-												GtkTreeIter *iter,
-												gpointer data)
-{
-	gboolean finalResult = FALSE;
-	GError **err = (GError **) data;
-	gchar *absPath = NULL;
-	gchar *origRelPath = NULL;
-	gchar *finalRelPath = NULL;
-	gint itemType;
-
-
-	// Get the node type and content
-
-	gtk_tree_model_get(model, iter, COLUMN_ITEMTYPE, &itemType, COLUMN_FILEPATH, &origRelPath, -1);
-
-
-	if (itemType == ITEMTYPE_FILE && origRelPath && origRelPath[0] != '\0') {
-		// The path is relative to the current working dir, so make it absolute
-
-		if (!relative_path_to_abs_path(origRelPath, &absPath, NULL, err)) {
-			finalResult = TRUE;
-			goto EXITPOINT;
-		}
-
-
-		// Now make it relative to sProjectDir
-
-		if (!abs_path_to_relative_path(absPath, &finalRelPath, sProjectDir, err)) {
-			finalResult = TRUE;
-			goto EXITPOINT;
-		}
-
-
-		// And stuff it back into the tree
-
-		gtk_tree_store_set(GTK_TREE_STORE(model), iter, COLUMN_FILEPATH, finalRelPath, -1);
-	}
-
-
-EXITPOINT:
-
-	if (origRelPath) g_free(origRelPath);
-	if (absPath) g_free(absPath);
-	if (finalRelPath) g_free(finalRelPath);
-
-	return finalResult;
-}
-
-
 
 
 /**
@@ -689,6 +627,7 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FILEPATH, full_name, -1);
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FONTWEIGHT, PANGO_WEIGHT_BOLD, -1);
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FONTWEIGHTSET, TRUE, -1);
+	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FOLDER_CONTENT_LOADED, FALSE, -1);
 
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, directory_closed_pixbuf, -1);
 
@@ -775,6 +714,8 @@ gboolean add_tree_file(GtkTreeIter *currentIter,
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FILENAME, fileName, -1);
 
 	gtk_tree_store_set(sTreeStore, &iter, COLUMN_EXPANDED, FALSE, -1);
+	
+	gtk_tree_store_set(sTreeStore, &iter, COLUMN_FOLDER_CONTENT_LOADED, FALSE, -1);
 
 	/*
 	if (
@@ -965,6 +906,20 @@ gboolean set_tree_node_expanded(GtkTreeIter *iter, gboolean expanded, GError **e
 
 	return TRUE;
 }
+
+
+/**
+ *
+ */
+gboolean set_tree_node_loaded(GtkTreeIter *iter, gboolean loaded, GError **err)
+{
+	g_assert(iter!=NULL);
+	
+	gtk_tree_store_set(sTreeStore, iter, COLUMN_FOLDER_CONTENT_LOADED, loaded, -1);
+	
+	return TRUE;
+}
+
 
 /**
  * Copy a node (and children) within the tree.

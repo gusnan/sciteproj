@@ -24,4 +24,7 @@
 
 gboolean load_folder(gchar *project_path, GError **err);
 
+GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GCompareFunc compare_func);
+
+
 #endif /*__HEADER_LOAD_FOLDER_*/

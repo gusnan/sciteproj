@@ -243,10 +243,7 @@ gboolean init_prefs(GError **err)
 
 	// the list of strings
 	gchar **list=NULL;
-	gchar **savedlist=NULL;
-
-	gchar *temp=NULL;
-
+	
 	// Set default values
 	gPrefs.lhs=1;
 	gPrefs.width=200;
@@ -319,13 +316,18 @@ gboolean init_prefs(GError **err)
 	// Check if it is an old-style config, or a new LUA one
 	if (check_for_old_style_config(config_string)) {
 		
+		gchar **savedlist=NULL;
+
 		debug_printf("Old style config\n");
 		// split out the lines, and add each to the list of strings
 		list=g_strsplit(config_string,"\n",-1);
 
 		savedlist=list;
+			
+		gchar *temp=NULL;
 
 		do {
+
 			temp=*list;
 
 			if (temp!=NULL) {

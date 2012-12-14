@@ -44,6 +44,7 @@ enum {
 	COLUMN_FONTWEIGHTSET,
 	COLUMN_ICON,
 	COLUMN_EXPANDED,
+	COLUMN_FOLDER_CONTENT_LOADED,
 	COLUMN_EOL
 };
 
@@ -60,14 +61,15 @@ enum {
 
 // The types for each column in the tree datamodel
 
-#define TYPE_ITEMTYPE			G_TYPE_UINT
-#define TYPE_FILEPATH			G_TYPE_STRING
-#define TYPE_FILENAME			G_TYPE_STRING
-#define TYPE_FILESIZE			G_TYPE_STRING
-#define TYPE_FONTWEIGHT			G_TYPE_INT
-#define TYPE_FONTWEIGHTSET		G_TYPE_BOOLEAN
-#define TYPE_ICON					GDK_TYPE_PIXBUF
-#define TYPE_EXPANDED			G_TYPE_BOOLEAN
+#define TYPE_ITEMTYPE					G_TYPE_UINT
+#define TYPE_FILEPATH					G_TYPE_STRING
+#define TYPE_FILENAME					G_TYPE_STRING
+#define TYPE_FILESIZE					G_TYPE_STRING
+#define TYPE_FONTWEIGHT					G_TYPE_INT
+#define TYPE_FONTWEIGHTSET				G_TYPE_BOOLEAN
+#define TYPE_ICON							GDK_TYPE_PIXBUF
+#define TYPE_EXPANDED					G_TYPE_BOOLEAN
+#define TYPE_FOLDER_CONTENT_LOADED	G_TYPE_BOOLEAN
 
 
 
@@ -119,6 +121,8 @@ gboolean set_tree_node_name(GtkTreeIter *iter, const gchar *newContents, GError 
 gboolean set_tree_node_expanded(GtkTreeIter *iter, gboolean expanded, GError **err);
 
 gboolean set_tree_node_icon(GtkTreeIter *iter, GdkPixbuf *pixbuf, GError **err);
+
+gboolean set_tree_node_loaded(GtkTreeIter *iter, gboolean loaded, GError **err);
 
 // Copy a node in the tree (including children)
 gboolean copy_tree_node(GtkTreeIter *srcIter,

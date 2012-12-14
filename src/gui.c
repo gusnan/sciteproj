@@ -657,6 +657,8 @@ void expand_tree_row(GtkTreePath *path, gboolean expandChildren)
 	load_folder(&iter,newpath_string,NULL);
 	*/
 	
+	printf("expand_tree_row...\n");
+	
 	if (path!=NULL) {
 		gtk_tree_view_expand_row(GTK_TREE_VIEW(projectTreeView), path, FALSE);
 	}

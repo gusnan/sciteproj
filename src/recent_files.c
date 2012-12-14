@@ -83,7 +83,8 @@ GtkTreeStore* create_treestore_recent(GError **err)
 	                                         TYPE_FONTWEIGHT,
 	                                         TYPE_FONTWEIGHTSET,
 	                                         TYPE_ICON,
-	                                         TYPE_EXPANDED);
+	                                         TYPE_EXPANDED,
+														  TYPE_FOLDER_CONTENT_LOADED);
 
 	if (result == NULL) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,

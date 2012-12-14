@@ -20,6 +20,7 @@
  *
  */
 #include <gtk/gtk.h>
+#include <glib.h>
 
 #include "tree_manipulation.h"
 
@@ -30,7 +31,7 @@
 #include "sort.h"
 
 
-static int folder_number=0;
+//static int folder_number=0;
 
 struct ParseFileStruct {
 	GtkTreeIter current_iter;
@@ -45,6 +46,68 @@ int currentFilePrevFileIter=0;
 
 gboolean prevFileIterValid[100];
 
+int number_of_files=0;
+
+
+/**
+ *
+ */
+void go_to_parent(GtkTreeStore *store, ParseFileStruct *parse_file)
+{
+	if (parse_file->depth>0) {
+
+		GtkTreeIter parent_iter;
+		GtkTreeIter temp_iter=prevFileIterArray[currentFilePrevFileIter];
+
+		if (gtk_tree_model_iter_parent(GTK_TREE_MODEL(store), &parent_iter, &(temp_iter))) {
+
+			parse_file->current_iter=parent_iter;
+
+			//if (parse_file->depth>0) parse_file->depth-=1;
+		} else {
+			parse_file->current_iter=temp_iter;
+
+			//if (parse_file->depth>0) parse_file->depth-=1;
+		}
+	}
+	
+}
+
+
+/**
+ *
+ */
+GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GCompareFunc compare_func)
+{
+	GSList *result_list=NULL;
+	
+	GDir *dir=g_dir_open(folder_path, 0, NULL);
+	
+	const gchar *short_filename;
+	
+	while((short_filename = g_dir_read_name(dir))) {
+		
+		gchar *temp_file=g_build_filename(folder_path, short_filename, NULL);
+		
+		if (read_directories) {
+			
+			if (g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
+				result_list=g_slist_prepend(result_list, (gpointer)short_filename);
+			}
+			
+		} else {
+						
+			if (!g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
+				result_list=g_slist_prepend(result_list, (gpointer)temp_file);
+			}
+		}
+	}
+	
+	result_list=g_slist_sort(result_list, compare_func);
+	
+	return result_list;
+}
+
 
 /**
  * @param store - the treestore where to store the data
@@ -58,24 +121,11 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 	gchar *current_file=NULL;
 	const gchar *short_filename;
 
-	int last_type=0;
-	
 	GSList *file_list=NULL;
 	GSList *folder_list=NULL;
 	
-	while ((short_filename = g_dir_read_name(dir))) {
-		
-		gchar *temp_file=g_build_filename(folder_path, short_filename, NULL);
-		
-		if (g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
-			folder_list=g_slist_prepend(folder_list,(gpointer)short_filename);
-		} else {
-			file_list=g_slist_prepend(file_list,(gpointer)short_filename);
-		}
-	};
-	
-	file_list=g_slist_sort(file_list,file_sort_by_extension_bigger_func);
-	folder_list=g_slist_sort(folder_list,compare_strings_bigger);
+	file_list=load_folder_to_list(folder_path, FALSE, file_sort_by_extension_bigger_func);
+	folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_bigger);
 	
 	// Treat folders and files by themselves
 	if (folder_list!=NULL) {
@@ -88,45 +138,29 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 			if (short_filename[0]!='.') {
 				if (g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
 
-					folder_number++;
+					//printf("parse_file->depth: %d\n", parse_file->depth);
+
+					//folder_number++;
+					number_of_files++;
 
 					if (parse_file->depth<=0) {
 
 						add_tree_group(NULL, ADD_CHILD, short_filename, current_file, TRUE, &(parse_file->current_iter), NULL);
-
-						prevFileIterValid[currentFilePrevFileIter]=FALSE;
-						prevFileIterArray[currentFilePrevFileIter]=parse_file->current_iter;
-
-						currentFilePrevFileIter++;
-						prevFileIterArray[currentFilePrevFileIter]=parse_file->current_iter;
-
 					} else {
 
 						add_tree_group(&(parse_file->current_iter), ADD_CHILD, short_filename, current_file, TRUE, &(parse_file->current_iter), NULL);
-
-						prevFileIterValid[currentFilePrevFileIter]=FALSE;
-						prevFileIterArray[currentFilePrevFileIter]=parse_file->current_iter;
-
-						currentFilePrevFileIter++;
-						prevFileIterValid[currentFilePrevFileIter]=prevFileIterValid[currentFilePrevFileIter];
 					}
-
-					parse_file->depth++;
-
-					prevFileIterValid[currentFilePrevFileIter]=FALSE;
+					
+					add_tree_file(&parse_file->current_iter, ADD_CHILD, "<loading...>", &parse_file->current_iter, FALSE, error);
 
 					// We ignore hidden folders
 					if (short_filename[0]!='.') {
-						read_folder(store, current_file, parse_file, error);
-
+						go_to_parent(store, parse_file);
 					}
-
-					last_type=1;
-
 				}
 			}	
 
-			if (folder_number>0) folder_number--;
+			//if (folder_number>0) folder_number--;
 
 			g_free(current_file);
 			
@@ -144,6 +178,7 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 			if (short_filename[0]!='.') {
 				if (!g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
 					// add as a file
+					number_of_files++;
 
 					if (parse_file->depth<=0) {
 
@@ -166,8 +201,6 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 				}
 			}	
 
-			if (folder_number>0) folder_number--;
-
 			g_free(current_file);
 			
 			file_list=file_list->next;
@@ -176,23 +209,6 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 	
 	if (currentFilePrevFileIter>0) currentFilePrevFileIter--;
 	
-	if (parse_file->depth>0) {
-
-		GtkTreeIter parent_iter;
-		GtkTreeIter temp_iter=prevFileIterArray[currentFilePrevFileIter];
-
-		if (gtk_tree_model_iter_parent(GTK_TREE_MODEL(store), &parent_iter, &(temp_iter))) {
-
-			parse_file->current_iter=parent_iter;
-
-			if (parse_file->depth>0) parse_file->depth-=1;
-		} else {
-			parse_file->current_iter=temp_iter;
-
-			if (parse_file->depth>0) parse_file->depth-=1;
-		}
-	}
-
 	g_dir_close(dir);
 }
 
@@ -211,7 +227,8 @@ gboolean load_folder(gchar *path, GError **err)
 	ParseFileStruct parse_struct;
 
 	parse_struct.depth=0;
-
+	number_of_files=0;
+	
 	GtkTreeIter dot_folder_iterator;
 
 	add_tree_group(NULL, ADD_CHILD, ".", path/*get_filename_from_full_path(project_path)*/ , TRUE, &(parse_struct.current_iter), NULL);
@@ -227,10 +244,19 @@ gboolean load_folder(gchar *path, GError **err)
 
 	parse_struct.depth++;
 	
-	read_folder(GTK_TREE_STORE(model), path, &parse_struct, NULL);
+						
+	add_tree_file(&parse_struct.current_iter, ADD_CHILD, "<loading...>", &parse_struct.current_iter, FALSE, NULL);
+
+	
+	//current_max_depth=0;
+	
+	//read_folder(GTK_TREE_STORE(model), path, &parse_struct, NULL);
 	
 	// Expand the dot-folder
 	// void expand_tree_row(GtkTreePath *path, gboolean expandChildren);
+	
+	printf("Total number: %d\n", number_of_files);
+	//printf("Max depth: %d\n", current_max_depth);
 	
 	GtkTreePath *iter_path=gtk_tree_model_get_path(GTK_TREE_MODEL(model), &dot_folder_iterator);
 
@@ -238,8 +264,6 @@ gboolean load_folder(gchar *path, GError **err)
 		expand_tree_row(iter_path,FALSE);
 	
 	gtk_tree_path_free(iter_path);
-	
-EXITPOINT:
 	
 	return TRUE;
 }

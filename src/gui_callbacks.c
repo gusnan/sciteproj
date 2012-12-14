@@ -53,6 +53,8 @@
 #include "filelist.h"
 #include "sort.h"
 
+#include "load_folder.h"
+
 #include "gtk3_compat.h"
 
 
@@ -209,6 +211,8 @@ static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter
 			} else {
 				set_tree_node_icon(&iter,directory_closed_pixbuf,&error);
 			}
+			
+			set_tree_node_expanded(&iter, groupIsExpanded, NULL);
 
 			gtk_tree_model_get(tree_model, &iter, COLUMN_FILEPATH, &relFilePath, -1);
 
@@ -244,9 +248,88 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 {
 	/* Switch the folder icon open/closed*/
 
+	GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
 
 	// make sure all icons the folder (and folders inside it) are set to a correct icon.
 	fix_folders_step_through(tree_view,*iter,tree_path);
+	
+
+	gchar *temp;
+	gboolean expanded;
+	gboolean loaded;
+	
+	gtk_tree_model_get(tree_model, iter, COLUMN_FILEPATH, &temp, -1);
+	gtk_tree_model_get(tree_model, iter, COLUMN_EXPANDED, &expanded, -1);
+	gtk_tree_model_get(tree_model, iter, COLUMN_FOLDER_CONTENT_LOADED, &loaded, -1);
+
+	//printf("%s : %d\n", temp, (int)expanded);
+	
+	if (!loaded) {
+		set_tree_node_loaded(iter, TRUE, NULL);
+		
+		// We've got the folder - get the child
+		GtkTreeIter child;
+			if (iter) {
+		
+		if (gtk_tree_model_iter_children(tree_model, &child, iter)) {
+			remove_tree_node(&child,NULL);
+			
+			gchar *folder_path;
+			
+			gtk_tree_model_get(tree_model, iter, COLUMN_FILEPATH, &folder_path, -1);
+			
+			GSList *file_list; //=load_folder_to_list(folder_path, FALSE, 
+			GSList *folder_list;
+	
+			file_list=load_folder_to_list(folder_path, FALSE, compare_strings_bigger /*file_sort_by_extension_bigger_func*/);
+			
+			folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_bigger);
+			
+			gchar *short_filename;
+			gchar *current_file;
+
+			if (folder_list)
+			{
+				while(folder_list!=NULL) {
+					
+					short_filename=(gchar*)(folder_list->data);
+					
+					current_file=g_build_filename(folder_path, short_filename, NULL);
+					
+					if (g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
+						GtkTreeIter *new_iter=gtk_tree_iter_copy(iter);
+						
+						add_tree_group(new_iter, ADD_CHILD, short_filename, current_file, TRUE, new_iter, NULL);
+						add_tree_file(new_iter, ADD_CHILD, "<loading...>", new_iter, FALSE, NULL);
+						
+						
+						if (gtk_tree_model_iter_parent(tree_model, new_iter, iter)) {
+						}
+						
+						//iter=new_iter;
+
+					}
+					
+					folder_list=folder_list->next;
+				}
+				
+				//add_tree_filelist(iter, folder_list, NULL);
+			}
+			
+			if (file_list)
+				add_tree_filelist(iter, file_list, NULL);
+			
+			set_tree_node_expanded(iter,TRUE, NULL);
+			
+			gtk_tree_view_expand_row(tree_view, tree_path, FALSE);
+			
+		}
+		
+	}
+		
+	}
+	
+	
 }
 
 
