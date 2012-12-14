@@ -151,7 +151,13 @@ void read_folder(GtkTreeStore *store, gchar *folder_path,ParseFileStruct *parse_
 						add_tree_group(&(parse_file->current_iter), ADD_CHILD, short_filename, current_file, TRUE, &(parse_file->current_iter), NULL);
 					}
 					
-					add_tree_file(&parse_file->current_iter, ADD_CHILD, "<loading...>", &parse_file->current_iter, FALSE, error);
+					// Check if the folder contains any files/folders, and only
+					// add the files to it if it does.
+					
+					if (get_number_of_files_in_folder(current_file)>0) {
+					
+						add_tree_file(&parse_file->current_iter, ADD_CHILD, "<loading...>", &parse_file->current_iter, FALSE, error);
+					}
 
 					// We ignore hidden folders
 					if (short_filename[0]!='.') {

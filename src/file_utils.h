@@ -47,4 +47,6 @@ gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const g
 
 gchar *get_file_extension(gchar *filename);
 
+int get_number_of_files_in_folder(gchar *folder_name);
+
 #endif /*__HEADER_FILE_UTILS_*/

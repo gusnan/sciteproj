@@ -300,7 +300,11 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 							GtkTreeIter *new_iter=gtk_tree_iter_copy(iter);
 							
 							add_tree_group(new_iter, ADD_CHILD, short_filename, current_file, TRUE, new_iter, NULL);
-							add_tree_file(new_iter, ADD_CHILD, "<loading...>", new_iter, FALSE, NULL);
+
+							if (get_number_of_files_in_folder(current_file)>0) {
+
+								add_tree_file(new_iter, ADD_CHILD, "<loading...>", new_iter, FALSE, NULL);
+							}
 							
 							
 							if (gtk_tree_model_iter_parent(tree_model, new_iter, iter)) {

@@ -33,8 +33,9 @@
 #include <errno.h>
 
 #include "string_utils.h"
-
 #include "file_utils.h"
+#include "load_folder.h"
+#include "sort.h"
 
 
 /**
@@ -498,3 +499,35 @@ gchar *get_file_extension(gchar *filename)
 
 	return result;
 }
+
+
+/**
+ *
+ */
+int get_number_of_files_in_folder(gchar *folder_name)
+{
+	int result=0;
+	
+	GSList *file_list;
+	GSList *folder_list;
+			
+	file_list=load_folder_to_list(folder_name, FALSE, file_sort_by_extension_bigger_func);
+	folder_list=load_folder_to_list(folder_name, TRUE, compare_strings_bigger);
+	
+	if (file_list) {
+		while (file_list)	{
+			result++;
+			file_list=file_list->next;
+		};
+	}
+	
+	if (folder_list) {
+		while (folder_list)	{
+			result++;
+			folder_list=folder_list->next;
+		};
+	}
+
+	return result;
+}
+
