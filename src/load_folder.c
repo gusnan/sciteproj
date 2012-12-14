@@ -255,9 +255,6 @@ gboolean load_folder(gchar *path, GError **err)
 	// Expand the dot-folder
 	// void expand_tree_row(GtkTreePath *path, gboolean expandChildren);
 	
-	printf("Total number: %d\n", number_of_files);
-	//printf("Max depth: %d\n", current_max_depth);
-	
 	GtkTreePath *iter_path=gtk_tree_model_get_path(GTK_TREE_MODEL(model), &dot_folder_iterator);
 
 	if (iter_path) 
