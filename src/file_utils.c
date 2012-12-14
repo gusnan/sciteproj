@@ -199,7 +199,7 @@ gchar *fix_path(char *base_dir,char *temp)
 			tempfile+=2;
 		}
 	
-	} while(tempfile[0]=='.');
+	} while((tempfile[0]=='.') && (tempfile[0]==G_DIR_SEPARATOR));
 
 	if (current_path!=0) g_free(current_path);
 
