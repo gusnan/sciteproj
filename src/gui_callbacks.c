@@ -285,13 +285,13 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 				
 				folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_bigger);
 				
-				gchar *short_filename;
-				gchar *current_file;
-
 				if (folder_list)
 				{
 					while(folder_list!=NULL) {
 						
+						gchar *short_filename;
+						gchar *current_file;
+
 						short_filename=(gchar*)(folder_list->data);
 						
 						current_file=g_build_filename(folder_path, short_filename, NULL);
