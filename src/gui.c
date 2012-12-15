@@ -97,6 +97,7 @@ GtkWidget *projectTreeView = NULL;
 static GtkWidget *sGroupPopupMenu = NULL;
 static GtkWidget *sFilePopupMenu = NULL;
 static GtkWidget *sGeneralPopupMenu = NULL;
+GtkWidget *sSortPopupMenu = NULL;
 
 ClickedNode clicked_node;
 
@@ -279,6 +280,8 @@ gboolean setup_gui(GError **err)
 	sFilePopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/FilePopup");
 
 	recentPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/RecentPopup");
+
+	sSortPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/SortPopup");
 
 	// Add a scrolled window to the main window
 

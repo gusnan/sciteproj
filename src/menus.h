@@ -67,11 +67,13 @@ static gchar *sMenuDefXML = (gchar*)\
 			<menuitem name=\"RenameGroupPopupItem\" action=\"RenameGroupPopupAction\"/> \
 			<menuitem name=\"RemoveGroupPopupItem\" action=\"RemoveGroupPopupAction\"/> \
 			<separator/> \
-			<menuitem name=\"SortAscendingItem\" action=\"SortAscendingAction\"/> \
-			<menuitem name=\"SortDescendingItem\" action=\"SortDescendingAction\"/> \
-			<separator/> \
-			<menuitem name=\"SortAscendingExtensionItem\" action=\"SortAscendingExtensionAction\"/> \
-			<menuitem name=\"SortDescendingExtensionItem\" action=\"SortDescendingExtensionAction\"/> \
+			<menu name=\"SortPopup\" action=\"SortPopupAction\">\
+				<menuitem name=\"SortAscendingItem\" action=\"SortAscendingAction\"/> \
+				<menuitem name=\"SortDescendingItem\" action=\"SortDescendingAction\"/> \
+				<separator/> \
+				<menuitem name=\"SortAscendingExtensionItem\" action=\"SortAscendingExtensionAction\"/> \
+				<menuitem name=\"SortDescendingExtensionItem\" action=\"SortDescendingExtensionAction\"/> \
+			</menu> \
 			<separator/> \
 			<menuitem name=\"ProperiesGroupPopupItem\" action=\"PropertiesGroupPopupAction\"/> \
 		</popup> \
@@ -141,6 +143,9 @@ static GtkActionEntry sMenuActions[] =
 		NULL, G_CALLBACK(group_properties_cb) },
 	{ "EditOptionsAction", GTK_STOCK_PROPERTIES, NC_("Menu|Edit|","Edit options"), "",
 		NULL, G_CALLBACK(edit_options_cb) },
+
+	{ "SortPopupAction", GTK_STOCK_SORT_ASCENDING, NC_("Menu|Sort","Sort folder content"), "",
+		NULL, NULL },
 
 	{ "ViewRecentAction" , GTK_STOCK_PROPERTIES, NC_("Menu|View|","View recently opened files"), "<control>R",
 		NULL, G_CALLBACK(recent_files_switch_visible) },
