@@ -1,0 +1,543 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sciteproj 0.8.00pre\n"
+"Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
+"POT-Creation-Date: 2012-12-15 03:31+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: about.c:194
+msgid "Information"
+msgstr ""
+
+#: about.c:195
+msgid "License"
+msgstr ""
+
+#: about.c:203
+msgid ""
+"SciteProj is free software: you can redistribute it and/or modify it under "
+"the terms of the GNU General Public License as published by the Free Software "
+"Foundation, either version 3 of the License, or (at your option) any later "
+"version.\n"
+"\n"
+"SciteProj is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR "
+"A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along with "
+"SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n"
+msgstr ""
+
+#: about.c:250
+msgid "SciteProj is based on ScitePM by"
+msgstr ""
+
+#: about.c:251
+msgid "Many thanks to"
+msgstr ""
+
+#: about.c:252
+msgid ""
+"For more information about SciteProj, see the README file that\n"
+"is provided with this package."
+msgstr ""
+
+#: about.c:383
+#, c-format
+msgid "version %s"
+msgstr ""
+
+#: addfiles.c:247
+msgid "Create Group"
+msgstr ""
+
+#: addfiles.c:268
+msgid "Enter name of new group:"
+msgstr ""
+
+#: folder_to_xml.c:227
+msgid "Error: Invalid directory!"
+msgstr ""
+
+#: folder_to_xml.c:233
+msgid "Error: Couldn't g_chdir to directory"
+msgstr ""
+
+#: folder_to_xml.c:240
+#, c-format
+msgid "Couldn't create file with the name %s!"
+msgstr ""
+
+#: gui.c:157 gui.c:959
+msgid "[UNTITLED]"
+msgstr ""
+
+#: gui.c:790 recent_files.c:551 scite_utils.c:208 search.c:835 search.c:871
+#, c-format
+msgid "Opened %s"
+msgstr ""
+
+#: gui.c:803 gui_callbacks.c:116 recent_files.c:564 recent_files.c:605
+#, c-format
+msgid ""
+"Could not open selected file: \n"
+"\n"
+"%s"
+msgstr ""
+
+#: main.c:67
+msgid "Show program version and quit"
+msgstr ""
+
+#: main.c:69
+msgid "Set a filename for the instance of SciTE to open"
+msgstr ""
+
+#: main.c:69
+msgid "SCITE_FILENAME"
+msgstr ""
+
+#: main.c:71
+msgid ""
+"Generate a sciteproj project file with name XML_FILENAME, recursively from "
+"current folder"
+msgstr ""
+
+#: main.c:72
+msgid "XML_FILENAME"
+msgstr ""
+
+#: main.c:74
+msgid ""
+"Set maximum depth of folders to read through to MAX_DEPTH when generating "
+"project file"
+msgstr ""
+
+#: main.c:75
+msgid "MAX_DEPTH"
+msgstr ""
+
+#: main.c:77
+msgid "Load a folder"
+msgstr ""
+
+#: main.c:88
+msgid "SciTE Project Manager"
+msgstr ""
+
+#: main.c:95
+#, c-format
+msgid "option parsing failed: %s"
+msgstr ""
+
+#: main.c:125
+#, c-format
+msgid "Generated '%s' successfully!"
+msgstr ""
+
+#: main.c:155
+#, c-format
+msgid "Error initing preferences: %s"
+msgstr ""
+
+#: main.c:171 main.c:181
+msgid ""
+"Environment variable exists, but doesn't point to a folder containing scite."
+msgstr ""
+
+#: main.c:198
+#, c-format
+msgid "Couldn't find a SciTE executable named '%s'!\n"
+msgstr ""
+
+#: main.c:199
+msgid "Checking for SciTE in the standard locations instead.\n"
+msgstr ""
+
+#: main.c:212
+msgid ""
+"Warning! Couldn't locate SciTE!\n"
+"Program will start, but you won't be able to open SciTE to edit files."
+msgstr ""
+
+#: properties_dialog.c:136
+msgid "Group Properties"
+msgstr ""
+
+#: properties_dialog.c:140
+msgid "Group name:"
+msgstr ""
+
+#: properties_dialog.c:141
+msgid "Contains number of Files:"
+msgstr ""
+
+#: properties_dialog.c:142
+msgid "Full folder:"
+msgstr ""
+
+#: properties_dialog.c:233
+msgid "File Properties"
+msgstr ""
+
+#: properties_dialog.c:257
+msgid "Filename:"
+msgstr ""
+
+#: properties_dialog.c:258
+msgid "Path:"
+msgstr ""
+
+#: properties_dialog.c:259
+msgid "File size:"
+msgstr ""
+
+#: recent_files.c:176
+msgid "Recently opened files:"
+msgstr ""
+
+#: remove.c:75 remove.c:80 rename.c:136 rename.c:141
+msgid "Error!!!\n"
+msgstr ""
+
+#: remove.c:144
+msgid "Remove all selected items?"
+msgstr ""
+
+#: remove.c:164
+#, c-format
+msgid "Remove file '%s' from project?"
+msgstr ""
+
+#: remove.c:171
+msgid "Remove file from project?"
+msgstr ""
+
+#: remove.c:180
+#, c-format
+msgid "Remove group '%s' and any contained files from project?"
+msgstr ""
+
+#: remove.c:187
+msgid "Remove group and any contained files from project?"
+msgstr ""
+
+#: remove.c:204
+#, c-format
+msgid ""
+"Could not remove the selected node: \n"
+"\n"
+"%s"
+msgstr ""
+
+#: scite_utils.c:182
+#, c-format
+msgid "Closed %s"
+msgstr ""
+
+#: scite_utils.c:191
+msgid "Closed SciTE"
+msgstr ""
+
+#: scite_utils.c:198
+#, c-format
+msgid "Switched to %s"
+msgstr ""
+
+#: scite_utils.c:581
+msgid "Connecting to Scite...."
+msgstr ""
+
+#: scite_utils.c:630
+msgid "Launched SciTE"
+msgstr ""
+
+#: search.c:184
+msgid "Search project"
+msgstr ""
+
+#: search.c:200
+msgid "Find What:"
+msgstr ""
+
+#: search.c:242
+msgid "Match case"
+msgstr ""
+
+#: search.c:253
+msgid "Match whole word only"
+msgstr ""
+
+#: search.c:614
+msgid ""
+"There was problems opening the following files in the project:\n"
+"\n"
+msgstr ""
+
+#: search.c:627
+msgid ""
+"\n"
+"They couldn't be opened for reading in the search.\n"
+msgstr ""
+
+#: search.c:686
+msgid "Please enter a text to search for!\n"
+msgstr ""
+
+#: search.c:777 search.c:791 search.c:843 search.c:880
+#, c-format
+msgid "Error:%s\n"
+msgstr ""
+
+#: search.c:925
+msgid "Filename"
+msgstr ""
+
+#: search.c:929
+msgid "Line"
+msgstr ""
+
+#: search.c:933
+msgid "File contents"
+msgstr ""
+
+#: search.c:984
+#, c-format
+msgid "Found %d elements"
+msgstr ""
+
+#: search.c:993
+msgid "The search didn't give any results."
+msgstr ""
+
+#: statusbar.c:57
+msgid "Welcome to SciteProj\n"
+msgstr ""
+
+#: tree_manipulation.c:310
+msgid "C/C++ Files"
+msgstr ""
+
+#: tree_manipulation.c:321
+msgid "LAMP Script Files"
+msgstr ""
+
+#: tree_manipulation.c:328
+msgid "Java Files"
+msgstr ""
+
+#: tree_manipulation.c:332
+msgid "JavaScript Files"
+msgstr ""
+
+#: tree_manipulation.c:336
+msgid "HTML Files"
+msgstr ""
+
+#: tree_manipulation.c:342
+msgid "All Files"
+msgstr ""
+
+#: tree_manipulation.c:377
+msgid "You need to save the project before adding files."
+msgstr ""
+
+#: tree_manipulation.c:390
+msgid "Add Files"
+msgstr ""
+
+#: tree_manipulation.c:478
+msgid ""
+"\n"
+"The following files:\n"
+"\n"
+msgstr ""
+
+#: tree_manipulation.c:503
+#, c-format
+msgid ""
+"%s\n"
+"couldn't be added, because they were already present in the project.\n"
+msgstr ""
+
+#: menus.h:95
+msgctxt "Menu|"
+msgid "_File"
+msgstr ""
+
+#: menus.h:96
+msgctxt "Menu|"
+msgid "_Edit"
+msgstr ""
+
+#: menus.h:97
+msgctxt "Menu|"
+msgid "_View"
+msgstr ""
+
+#: menus.h:98
+msgctxt "Menu|"
+msgid "_Help"
+msgstr ""
+
+#: menus.h:100
+msgctxt "Menu|File|"
+msgid "_Exit"
+msgstr ""
+
+#: menus.h:103
+msgctxt "Menu|Edit|"
+msgid "Create _group"
+msgstr ""
+
+#: menus.h:105
+msgctxt "Menu|Edit|"
+msgid "Create _file"
+msgstr ""
+
+#: menus.h:107
+msgctxt "Menu|Edit|"
+msgid "Delete file(s)"
+msgstr ""
+
+#: menus.h:110
+msgctxt "Menu|Edit|"
+msgid "Expand all groups"
+msgstr ""
+
+#: menus.h:112
+msgctxt "Menu|Edit|"
+msgid "Collapse all groups"
+msgstr ""
+
+#: menus.h:115
+msgctxt "Menu|Edit|"
+msgid "Search"
+msgstr ""
+
+#: menus.h:118
+msgctxt "Menu|Help|"
+msgid "_About"
+msgstr ""
+
+#: menus.h:121
+msgctxt "Menu|Edit|"
+msgid "Create files"
+msgstr ""
+
+#: menus.h:123
+msgctxt "Menu|Edit|"
+msgid "Create folder"
+msgstr ""
+
+#: menus.h:126
+msgctxt "Menu|Popup|Group"
+msgid "Create file"
+msgstr ""
+
+#: menus.h:128
+msgctxt "Menu|Popup|Group"
+msgid "Add folder"
+msgstr ""
+
+#: menus.h:130
+msgctxt "Menu|Popup|Group"
+msgid "Rename folder"
+msgstr ""
+
+#: menus.h:132
+msgctxt "Menu|Popup|Group"
+msgid "Delete folder"
+msgstr ""
+
+#: menus.h:134
+msgctxt "Menu|Edit|"
+msgid "Sort folder ascending by name"
+msgstr ""
+
+#: menus.h:136
+msgctxt "Menu|Edit"
+msgid "Sort folder descending by name"
+msgstr ""
+
+#: menus.h:138
+msgctxt "Menu|Edit|"
+msgid "Sort folder ascending by extension"
+msgstr ""
+
+#: menus.h:140
+msgctxt "Menu|Edit|"
+msgid "Sort folder descending by extension"
+msgstr ""
+
+#: menus.h:142
+msgctxt "Menu|Popup|Group"
+msgid "Properties"
+msgstr ""
+
+#: menus.h:144
+msgctxt "Menu|Edit|"
+msgid "Edit options"
+msgstr ""
+
+#: menus.h:147
+msgctxt "Menu|Sort"
+msgid "Sort folder content"
+msgstr ""
+
+#: menus.h:150
+msgctxt "Menu|View|"
+msgid "View recently opened files"
+msgstr ""
+
+#: menus.h:153
+msgctxt "Menu|Popup|File"
+msgid "Open file in SciTE"
+msgstr ""
+
+#: menus.h:155
+msgctxt "Menu|Popup|File"
+msgid "Delete file"
+msgstr ""
+
+#: menus.h:157
+msgctxt "Menu|Popup|File"
+msgid "Copy filename to clipboard"
+msgstr ""
+
+#: menus.h:159
+msgctxt "Menu|Popup|File"
+msgid "Properties"
+msgstr ""
+
+#: menus.h:162
+msgctxt "Menu|Popup|RecentFile"
+msgid "Open file in SciTE"
+msgstr ""
+
+#: menus.h:164
+msgctxt "Menu|Popup|RecentFile"
+msgid "Remove file from this list"
+msgstr ""
+
+#: menus.h:166
+msgctxt "Menu|Popup|RecentFile"
+msgid "Copy filename to clipboard"
+msgstr ""
+
+#: menus.h:169
+msgctxt "Menu|Popup|RecentFile"
+msgid "Properties"
+msgstr ""
