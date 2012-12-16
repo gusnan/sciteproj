@@ -144,7 +144,7 @@ static GtkActionEntry sMenuActions[] =
 	{ "EditOptionsAction", GTK_STOCK_PROPERTIES, NC_("Menu|Edit|","Edit options"), "",
 		NULL, G_CALLBACK(edit_options_cb) },
 
-	{ "SortPopupAction", GTK_STOCK_SORT_ASCENDING, NC_("Menu|Sort","Sort folder content"), "",
+	{ "SortPopupAction", GTK_STOCK_SORT_ASCENDING, NC_("Menu|Sort|","Sort folder content"), "",
 		NULL, NULL },
 
 	{ "ViewRecentAction" , GTK_STOCK_PROPERTIES, NC_("Menu|View|","View recently opened files"), "<control>R",
@@ -212,13 +212,14 @@ static struct ContextString menustrings[]= {
 	{ "Menu|Popup|Group","Add subgroup to group"},
 	{ "Menu|Popup|Group","Rename group"},
 	{ "Menu|Popup|Group","Remove group from project" },
-	{ "Menu|Edit|","Sort group ascending by name" },
-	{ "Menu|Edit|","Sort group descending by name" },
-	{ "Menu|Edit|","Sort group ascending by extension" },
-	{ "Menu|Edit|","Sort group descending by extension" },
+	{ "Menu|Edit|","Sort folder ascending by name" },
+	{ "Menu|Edit|","Sort folder descending by name" },
+	{ "Menu|Edit|","Sort folder ascending by extension" },
+	{ "Menu|Edit|","Sort folder descending by extension" },
 	{ "Menu|Popup|Group","Properties" },
 	{ "Menu|Edit|","Edit options" },
 
+	{ "Menu|Sort|","Sort folder content"},
 	{ "Menu|View|","View recently opened files"},
 
 	{ "Menu|Popup|File","Open file in SciTE"},
