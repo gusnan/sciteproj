@@ -57,9 +57,6 @@ int main(int argc, char *argv[])
 
 	static gboolean version=FALSE;
 	static gchar *scite_instance=NULL;
-	//static gboolean gene
-	static gchar *generate_xml_file=NULL;
-	static int max_depth_generated=-1;
 	static gboolean load_a_folder=FALSE;
 
 	static const GOptionEntry options[]={
@@ -67,12 +64,6 @@ int main(int argc, char *argv[])
 			N_("Show program version and quit")},
 		{ "scite",			's',	0, G_OPTION_ARG_STRING,		&scite_instance,
 			N_("Set a filename for the instance of SciTE to open"),	N_("SCITE_FILENAME")},
-		{ "generate",		'g',	0, G_OPTION_ARG_STRING,		&generate_xml_file,
-			N_("Generate a sciteproj project file with name XML_FILENAME, recursively from current folder"),
-			N_("XML_FILENAME")},
-		{ "max_depth",		'm',	0, G_OPTION_ARG_INT,	&max_depth_generated,
-			N_("Set maximum depth of folders to read through to MAX_DEPTH when generating project file"),
-			N_("MAX_DEPTH")},
 		{ "load_folder",	'l',	0,	G_OPTION_ARG_NONE,		&load_a_folder,
 			N_("Load a folder")}, 
 		{ NULL }
@@ -108,27 +99,6 @@ int main(int argc, char *argv[])
 	*/
 	if (scite_instance) {
 		cmd.scite_filename=scite_instance;
-	}
-
-	/*
-		Generate a project file going down at max max_depth levels in the folder
-		hierarchy
-	*/
-	if (generate_xml_file) {
-		int max_depth=4;
-		if (max_depth_generated!=-1) max_depth=max_depth_generated;
-
-		//gboolean result=folder_to_xml(folder,filename,max_depth);
-		gboolean result=folder_to_xml(".",generate_xml_file,max_depth);
-
-		if (result) {
-			printf(_("Generated '%s' successfully!"),generate_xml_file);
-			printf("\n\n");
-		} else {
-			exit(EXIT_FAILURE);
-		}
-
-		exit(EXIT_SUCCESS);
 	}
 
 	init_version_string();
@@ -223,13 +193,41 @@ int main(int argc, char *argv[])
 	}
 
 	gchar *current_dir=g_get_current_dir();
+	
+	printf("argc: %d\n", argc);
+	int co;
+	for (co=0;co<argc;co++) {
+		printf("argv[%d]: %s\n", co, argv[co]);
+	}
+
+	if (argc>2) {
+		printf("A folder is expected as parameter to sciteproj...\n");
+		return EXIT_FAILURE;
+	}
+
+	if (!is_string_folder(argv[1])) {
+		printf("Not a valid folder!\n");
+		return EXIT_FAILURE;
+	}
+
+	gchar *dir_to_load;
+	if (argc==1) { // only "sciteproj" on the command-line
+		dir_to_load=current_dir;
+
+	} else { // "sciteproj <folder_name>" on the command-line
+		dir_to_load=argv[1];
+
+		gchar *newpath;
+
+		if (relative_path_to_abs_path(dir_to_load, &newpath, current_dir, NULL)) {
+			dir_to_load=newpath;
+		}
+	}
 
 	// Should we load a folder?
-	if (load_a_folder) {
-		set_project_filepath(current_dir,NULL);
-		
-		load_folder(current_dir,NULL);
-	}
+	set_project_filepath(dir_to_load,NULL);
+
+	load_folder(dir_to_load,NULL);
 
 	init_scite_connection();
 
@@ -246,7 +244,7 @@ EXITPOINT:
 	done_prefs();
 
 	done_version_string();
-	
+
 	g_free(current_dir);
 
 	if (err) g_error_free(err);
