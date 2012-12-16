@@ -29,7 +29,6 @@
 #include <locale.h>
 
 #include "tree_manipulation.h"
-#include "xml_processing.h"
 #include "string_utils.h"
 #include "graphics.h"
 #include "prefs.h"
