@@ -49,4 +49,6 @@ gchar *get_file_extension(gchar *filename);
 
 int get_number_of_files_in_folder(gchar *folder_name);
 
+gboolean is_string_folder(gchar *instring);
+
 #endif /*__HEADER_FILE_UTILS_*/

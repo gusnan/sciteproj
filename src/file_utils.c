@@ -529,3 +529,23 @@ int get_number_of_files_in_folder(gchar *folder_name)
 	return result;
 }
 
+
+/**
+ * is_string_folder
+ * @return gboolean TRUE if the entered string represent a folder in the 
+ *         systems folder structure.
+ */
+gboolean is_string_folder(gchar *instring)
+{
+	gboolean result=FALSE;
+	
+	GDir *dir=g_dir_open(instring, 0, NULL);
+	
+	if (dir) {
+		result=TRUE;
+	}
+	
+	if (dir) g_dir_close(dir);
+	
+	return result;
+}
