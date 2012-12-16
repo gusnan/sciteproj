@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.7.05\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2012-12-15 03:31+0100\n"
-"PO-Revision-Date: 2012-12-15 03:38+0100\n"
+"POT-Creation-Date: 2012-12-16 02:59+0100\n"
+"PO-Revision-Date: 2012-12-16 03:28+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -431,10 +431,9 @@ msgid "Create _group"
 msgstr "Skapa _grupp"
 
 #: menus.h:105
-#, fuzzy
 msgctxt "Menu|Edit|"
 msgid "Create _file"
-msgstr "Skapa _grupp"
+msgstr "Skapa _fil"
 
 #: menus.h:107
 msgctxt "Menu|Edit|"
@@ -462,28 +461,24 @@ msgid "_About"
 msgstr "_Om"
 
 #: menus.h:121
-#, fuzzy
 msgctxt "Menu|Edit|"
 msgid "Create files"
-msgstr "Ta bort filer"
+msgstr "Skapa filer"
 
 #: menus.h:123
-#, fuzzy
 msgctxt "Menu|Edit|"
 msgid "Create folder"
-msgstr "Skapa Grupp"
+msgstr "Skapa mapp"
 
 #: menus.h:126
-#, fuzzy
 msgctxt "Menu|Popup|Group"
 msgid "Create file"
-msgstr "Skapa Grupp"
+msgstr "Skapa Fil"
 
 #: menus.h:128
-#, fuzzy
 msgctxt "Menu|Popup|Group"
 msgid "Add folder"
-msgstr "Lägg till filer"
+msgstr "Lägg till mapp"
 
 #: menus.h:130
 msgctxt "Menu|Popup|Group"
@@ -498,17 +493,17 @@ msgstr "Ta bort mapp"
 #: menus.h:134
 msgctxt "Menu|Edit|"
 msgid "Sort folder ascending by name"
-msgstr "Sortera grupp stigande efter namn"
+msgstr "Sortera mapp stigande efter namn"
 
 #: menus.h:136
 msgctxt "Menu|Edit"
 msgid "Sort folder descending by name"
-msgstr "Sortera grupp fallande efter namn"
+msgstr "Sortera mapp fallande efter namn"
 
 #: menus.h:138
 msgctxt "Menu|Edit|"
 msgid "Sort folder ascending by extension"
-msgstr "Sortera grupp stigande efter filändelse"
+msgstr "Sortera mapp stigande efter filändelse"
 
 #: menus.h:140
 msgctxt "Menu|Edit|"
@@ -526,7 +521,7 @@ msgid "Edit options"
 msgstr "Editera egenskaper"
 
 #: menus.h:147
-msgctxt "Menu|Sort"
+msgctxt "Menu|Sort|"
 msgid "Sort folder content"
 msgstr "Sortera mappinnehåll"
 
