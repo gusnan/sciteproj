@@ -193,12 +193,6 @@ int main(int argc, char *argv[])
 	}
 
 	gchar *current_dir=g_get_current_dir();
-	
-	printf("argc: %d\n", argc);
-	int co;
-	for (co=0;co<argc;co++) {
-		printf("argv[%d]: %s\n", co, argv[co]);
-	}
 
 	if (argc>2) {
 		printf("A folder is expected as parameter to sciteproj...\n");
