@@ -75,6 +75,8 @@ static gchar *sMenuDefXML = (gchar*)\
 				<menuitem name=\"SortDescendingExtensionItem\" action=\"SortDescendingExtensionAction\"/> \
 			</menu> \
 			<separator/> \
+			<menuitem name=\"ReloadFolderItem\" action=\"ReloadFolderAction\"/> \
+			<separator/> \
 			<menuitem name=\"ProperiesGroupPopupItem\" action=\"PropertiesGroupPopupAction\"/> \
 		</popup> \
 		<popup name=\"RecentPopup\" action=\"RecentPopupAction\"> \
@@ -146,6 +148,9 @@ static GtkActionEntry sMenuActions[] =
 
 	{ "SortPopupAction", GTK_STOCK_SORT_ASCENDING, NC_("Menu|Sort|","Sort folder content"), "",
 		NULL, NULL },
+		
+	{ "ReloadFolderAction", GTK_STOCK_REFRESH, NC_("Menu|Reload","Refresh folder content"), "",
+		NULL, G_CALLBACK(refresh_folder_cb) },
 
 	{ "ViewRecentAction" , GTK_STOCK_PROPERTIES, NC_("Menu|View|","View recently opened files"), "<control>R",
 		NULL, G_CALLBACK(recent_files_switch_visible) },
@@ -220,6 +225,8 @@ static struct ContextString menustrings[]= {
 	{ "Menu|Edit|","Edit options" },
 
 	{ "Menu|Sort|","Sort folder content"},
+	
+	{ "Menu|Reload","Refresh folder content"},
 	{ "Menu|View|","View recently opened files"},
 
 	{ "Menu|Popup|File","Open file in SciTE"},
