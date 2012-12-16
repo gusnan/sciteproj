@@ -205,11 +205,6 @@ int main(int argc, char *argv[])
 		return EXIT_FAILURE;
 	}
 
-	if (!is_string_folder(argv[1])) {
-		printf("Not a valid folder!\n");
-		return EXIT_FAILURE;
-	}
-
 	gchar *dir_to_load;
 	if (argc==1) { // only "sciteproj" on the command-line
 		dir_to_load=current_dir;
@@ -222,6 +217,11 @@ int main(int argc, char *argv[])
 		if (relative_path_to_abs_path(dir_to_load, &newpath, current_dir, NULL)) {
 			dir_to_load=newpath;
 		}
+	}
+
+	if (!is_string_folder(dir_to_load)) {
+		printf("Not a valid folder!\n");
+		return EXIT_FAILURE;
 	}
 
 	// Should we load a folder?
