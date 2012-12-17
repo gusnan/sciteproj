@@ -461,6 +461,7 @@ void refresh_folder_cb()
 		
 		if (gtk_tree_model_iter_children(tree_model, &child, &iter)) {
 			int co=0;
+			GtkTreePath *tree_path;
 
 			GtkTreeIter *temp_iter=&child;
 			do {
@@ -482,7 +483,6 @@ void refresh_folder_cb()
 			
 			GList *node;
 			for (node = list_of_items; node != NULL; node = node -> next) {
-				GtkTreePath *tree_path;
 				tree_path=gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
 				
 				if (tree_path) {
