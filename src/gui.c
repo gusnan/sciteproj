@@ -709,11 +709,13 @@ static void switch_folder_icon(GtkTreeView *treeView,GtkTreePath *path)
 	gchar *relFilePath = NULL;
 
 	GtkTreeModel *treeModel = gtk_tree_view_get_model(treeView);
-	gtk_tree_model_get_iter(treeModel, &iter, path);
-	gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType, COLUMN_FILEPATH, &relFilePath, -1);
-
 	GdkPixbuf *pixbuf;
-	gtk_tree_model_get(treeModel, &iter, COLUMN_ICON, &pixbuf,-1);
+
+	gtk_tree_model_get_iter(treeModel, &iter, path);
+	gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType,
+													 COLUMN_FILEPATH, &relFilePath,
+													 COLUMN_ICON, &pixbuf,
+													 -1);
 
 	gboolean res=gtk_tree_view_row_expanded(treeView,path);
 
