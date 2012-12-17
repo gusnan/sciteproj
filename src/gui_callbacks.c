@@ -459,5 +459,85 @@ gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,
  */
 void refresh_folder_cb()
 {
-	printf("Refresh folder\n");
+	if (!clicked_node.valid || clicked_node.type != ITEMTYPE_GROUP) {
+		return;
+	}
+	
+	gchar *folder_name;
+	GtkTreeModel *tree_model=gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
+	GtkTreeIter iter=clicked_node.iter;
+	
+	GtkTreeIter *stored_iter=gtk_tree_iter_copy(&iter);
+	
+	gboolean expanded;
+	
+	gtk_tree_model_get(tree_model, &iter, COLUMN_FILENAME, &folder_name,
+													  COLUMN_EXPANDED, &expanded, 
+													  -1);
+	
+	// If the folder is expanded
+	if (expanded) {
+			
+		// add all rows below to a list of GtkTreePath
+	
+		int co=0;
+		
+		GtkTreeIter child;
+		
+		GList *list_of_items=NULL;
+		GtkTreePath *tree_path;
+
+		// First, store all GtkTreePath in a linked list
+		
+		if (gtk_tree_model_iter_children(tree_model, &child, &iter)) {
+			
+			GtkTreeIter *temp_iter=&child;
+			do {
+				
+				gchar *temp;
+				gtk_tree_model_get(tree_model, temp_iter, COLUMN_FILENAME, &temp, -1);
+				
+				tree_path=gtk_tree_model_get_path(tree_model, temp_iter);
+				GtkTreeRowReference *row_reference=gtk_tree_row_reference_new(tree_model, tree_path);
+				
+				list_of_items=g_list_append(list_of_items, row_reference);
+				
+				gtk_tree_path_free(tree_path);
+				co++;
+				
+			} while(gtk_tree_model_iter_next(tree_model, temp_iter));
+			
+			// go through the list of row-references
+			
+			GList *node;
+			for (node = list_of_items; node != NULL; node = node -> next) {
+				tree_path=gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
+				
+				if (tree_path) {
+					GtkTreeIter iter;
+					if (gtk_tree_model_get_iter(tree_model, &iter, tree_path))
+						remove_tree_node(&iter,NULL);
+				}
+			}
+			
+			g_list_foreach(list_of_items, (GFunc) gtk_tree_row_reference_free, NULL);
+		}
+
+		GtkTreeIter *temp_iter=gtk_tree_iter_copy(stored_iter);
+
+		gchar *temp;
+		gchar *folder;
+		gtk_tree_model_get(tree_model, temp_iter, 
+									COLUMN_FILEPATH, &folder, 
+									-1);
+		
+		GtkTreeIter new_iter;
+		if (get_number_of_files_in_folder(folder)>0) {
+			add_tree_file(temp_iter, ADD_CHILD, "<loading...>", &new_iter, FALSE, NULL);
+		}
+
+		load_tree_at_iter(GTK_TREE_VIEW(projectTreeView), temp_iter);
+		//set_tree_node_loaded(temp_iter, TRUE, NULL);	
+	} else {
+	}
 }
