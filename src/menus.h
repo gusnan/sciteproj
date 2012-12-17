@@ -148,6 +148,9 @@ static GtkActionEntry sMenuActions[] =
 
 	{ "SortPopupAction", GTK_STOCK_SORT_ASCENDING, NC_("Menu|Sort|","Sort folder content"), "",
 		NULL, NULL },
+		
+	{ "ReloadFolderAction", GTK_STOCK_REFRESH, NC_("Menu|Reload","Refresh folder content"), "",
+		NULL, G_CALLBACK(refresh_folder_cb) },
 
 	{ "ReloadFolderAction", GTK_STOCK_REFRESH, NC_("Menu|Reload","Refresh folder content"), "",
 		NULL, G_CALLBACK(refresh_folder_cb) },
