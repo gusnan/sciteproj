@@ -1045,3 +1045,38 @@ gboolean tree_contains(gchar *test_string)
 	return test.found;
 }
 
+
+/**
+ *
+ */
+gboolean add_tree_folderlist(GtkTreeIter *iter, GSList *folder_list, gchar *folder_path)
+{
+	if (folder_list)
+	{
+		while(folder_list!=NULL) {
+			
+			gchar *short_filename;
+			gchar *current_file;
+
+			short_filename=(gchar*)(folder_list->data);
+			
+			current_file=g_build_filename(folder_path, short_filename, NULL);
+			
+			if (g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
+				GtkTreeIter *new_iter=gtk_tree_iter_copy(iter);
+				
+				add_tree_group(new_iter, ADD_CHILD, short_filename, current_file, TRUE, new_iter, NULL);
+
+				if (get_number_of_files_in_folder(current_file)>0) {
+
+					add_tree_file(new_iter, ADD_CHILD, "<loading...>", new_iter, FALSE, NULL);
+				}
+
+			}
+			
+			folder_list=folder_list->next;
+		}
+	}
+
+	return TRUE;
+}
