@@ -437,3 +437,11 @@ gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,
 	return res;
 }
 
+
+/**
+ *
+ */
+void refresh_folder_cb()
+{
+	printf("Refresh folder\n");
+}

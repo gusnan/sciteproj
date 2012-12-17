@@ -40,5 +40,6 @@ void collapse_all_items_cb();
 
 void edit_options_cb();
 
+void refresh_folder_cb();
 
 #endif /*__HEADER_GUI_CALLBACKS_*/
