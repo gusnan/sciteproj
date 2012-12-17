@@ -452,37 +452,37 @@ void refresh_folder_cb()
 			
 		// add all rows below to a list of GtkTreePath
 	
-		int co=0;
 		
 		GtkTreeIter child;
 		
 		GList *list_of_items=NULL;
-		GtkTreePath *tree_path;
 
 		// First, store all GtkTreePath in a linked list
 		
 		if (gtk_tree_model_iter_children(tree_model, &child, &iter)) {
-			
+			int co=0;
+
 			GtkTreeIter *temp_iter=&child;
 			do {
-				
+
 				gchar *temp;
 				gtk_tree_model_get(tree_model, temp_iter, COLUMN_FILENAME, &temp, -1);
-				
+
 				tree_path=gtk_tree_model_get_path(tree_model, temp_iter);
 				GtkTreeRowReference *row_reference=gtk_tree_row_reference_new(tree_model, tree_path);
-				
+
 				list_of_items=g_list_append(list_of_items, row_reference);
-				
+
 				gtk_tree_path_free(tree_path);
 				co++;
-				
+
 			} while(gtk_tree_model_iter_next(tree_model, temp_iter));
 			
 			// go through the list of row-references
 			
 			GList *node;
 			for (node = list_of_items; node != NULL; node = node -> next) {
+				GtkTreePath *tree_path;
 				tree_path=gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
 				
 				if (tree_path) {
@@ -497,7 +497,6 @@ void refresh_folder_cb()
 
 		GtkTreeIter *temp_iter=gtk_tree_iter_copy(stored_iter);
 
-		gchar *temp;
 		gchar *folder;
 		gtk_tree_model_get(tree_model, temp_iter, 
 									COLUMN_FILEPATH, &folder, 
