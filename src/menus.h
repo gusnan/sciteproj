@@ -152,9 +152,6 @@ static GtkActionEntry sMenuActions[] =
 	{ "ReloadFolderAction", GTK_STOCK_REFRESH, NC_("Menu|Reload","Refresh folder content"), "",
 		NULL, G_CALLBACK(refresh_folder_cb) },
 
-	{ "ReloadFolderAction", GTK_STOCK_REFRESH, NC_("Menu|Reload","Refresh folder content"), "",
-		NULL, G_CALLBACK(refresh_folder_cb) },
-
 	{ "ViewRecentAction" , GTK_STOCK_PROPERTIES, NC_("Menu|View|","View recently opened files"), "<control>R",
 		NULL, G_CALLBACK(recent_files_switch_visible) },
 
