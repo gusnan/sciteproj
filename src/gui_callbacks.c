@@ -510,6 +510,10 @@ void refresh_folder_cb()
 
 		load_tree_at_iter(GTK_TREE_VIEW(projectTreeView), temp_iter);
 		//set_tree_node_loaded(temp_iter, TRUE, NULL);	
+		
+		sort_children(stored_iter, NULL, compare_strings_smaller);
+		
 	} else {
 	}
+	
 }
