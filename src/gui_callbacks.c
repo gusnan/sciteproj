@@ -236,6 +236,81 @@ static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter
 
 
 /**
+ *
+ */
+void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
+{
+	// We've got the folder - get the child
+	GtkTreeIter child;
+	
+	GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
+
+	if (iter) {
+	
+		if (gtk_tree_model_iter_children(tree_model, &child, iter)) {
+			remove_tree_node(&child,NULL);
+			
+			gchar *folder_path;
+			
+			gtk_tree_model_get(tree_model, iter, COLUMN_FILEPATH, &folder_path, -1);
+			
+			GSList *file_list; //=load_folder_to_list(folder_path, FALSE, 
+			GSList *folder_list;
+	
+			file_list=load_folder_to_list(folder_path, FALSE, compare_strings_bigger /*file_sort_by_extension_bigger_func*/);
+			
+			folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_bigger);
+			
+			if (folder_list)
+			{
+				while(folder_list!=NULL) {
+					
+					gchar *short_filename;
+					gchar *current_file;
+
+					short_filename=(gchar*)(folder_list->data);
+					
+					current_file=g_build_filename(folder_path, short_filename, NULL);
+					
+					if (g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
+						GtkTreeIter *new_iter=gtk_tree_iter_copy(iter);
+						
+						add_tree_group(new_iter, ADD_CHILD, short_filename, current_file, TRUE, new_iter, NULL);
+
+						if (get_number_of_files_in_folder(current_file)>0) {
+
+							add_tree_file(new_iter, ADD_CHILD, "<loading...>", new_iter, FALSE, NULL);
+						}
+						
+						
+						if (gtk_tree_model_iter_parent(tree_model, new_iter, iter)) {
+						}
+					}
+					
+					folder_list=folder_list->next;
+				}
+			}
+
+			if (file_list) {
+				file_list=g_slist_reverse(file_list);
+
+				add_tree_filelist(iter, file_list, NULL);
+			}
+			
+			set_tree_node_expanded(iter,TRUE, NULL);
+			
+			GtkTreePath *tree_path = gtk_tree_model_get_path(tree_model, iter);
+			
+			gtk_tree_view_expand_row(tree_view, tree_path, FALSE);
+			
+			gtk_tree_path_free(tree_path);
+			
+		}
+	}
+}
+
+
+/**
  * Callback for expand/collapse event of GtkTreeView
  *
  * @param treeView is not used
@@ -253,7 +328,6 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 	// make sure all icons the folder (and folders inside it) are set to a correct icon.
 	fix_folders_step_through(tree_view,*iter,tree_path);
 	
-
 	gchar *temp;
 	gboolean expanded;
 	gboolean loaded;
@@ -267,66 +341,9 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 	if (!loaded) {
 		set_tree_node_loaded(iter, TRUE, NULL);
 		
-		// We've got the folder - get the child
-		GtkTreeIter child;
-		if (iter) {
+		load_tree_at_iter(tree_view, iter);
 		
-			if (gtk_tree_model_iter_children(tree_model, &child, iter)) {
-				remove_tree_node(&child,NULL);
-				
-				gchar *folder_path;
-				
-				gtk_tree_model_get(tree_model, iter, COLUMN_FILEPATH, &folder_path, -1);
-				
-				GSList *file_list; //=load_folder_to_list(folder_path, FALSE, 
-				GSList *folder_list;
 		
-				file_list=load_folder_to_list(folder_path, FALSE, compare_strings_bigger /*file_sort_by_extension_bigger_func*/);
-				
-				folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_bigger);
-				
-				if (folder_list)
-				{
-					while(folder_list!=NULL) {
-						
-						gchar *short_filename;
-						gchar *current_file;
-
-						short_filename=(gchar*)(folder_list->data);
-						
-						current_file=g_build_filename(folder_path, short_filename, NULL);
-						
-						if (g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
-							GtkTreeIter *new_iter=gtk_tree_iter_copy(iter);
-							
-							add_tree_group(new_iter, ADD_CHILD, short_filename, current_file, TRUE, new_iter, NULL);
-
-							if (get_number_of_files_in_folder(current_file)>0) {
-
-								add_tree_file(new_iter, ADD_CHILD, "<loading...>", new_iter, FALSE, NULL);
-							}
-							
-							
-							if (gtk_tree_model_iter_parent(tree_model, new_iter, iter)) {
-							}
-						}
-						
-						folder_list=folder_list->next;
-					}
-				}
-
-				if (file_list) {
-					file_list=g_slist_reverse(file_list);
-
-					add_tree_filelist(iter, file_list, NULL);
-				}
-				
-				set_tree_node_expanded(iter,TRUE, NULL);
-				
-				gtk_tree_view_expand_row(tree_view, tree_path, FALSE);
-				
-			}
-		}
 	}
 }
 
@@ -432,7 +449,6 @@ gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,
 	if (g_ascii_strncasecmp(key,filename,strlen(key))==0) res=FALSE;
 
 	g_free(filename);
-
 
 	return res;
 }
