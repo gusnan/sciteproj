@@ -27,6 +27,10 @@
 #include <string.h>
 #include <glib/gi18n.h>
 
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+
 #include <locale.h>
 
 #include "clicked_node.h"
@@ -40,6 +44,7 @@
 #include "file_utils.h"
 #include "string_utils.h"
 #include "load_folder.h"
+#include "script.h"
 
 static struct CommandLineIndata {
 	const gchar *scite_filename;

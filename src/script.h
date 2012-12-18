@@ -1,5 +1,5 @@
 /**
- * load_folder.h - folder loading support for sciteproj
+ * script.h - Script code for sciteproj
  *
  *  Copyright 2012 Andreas Rönnquist
  *
@@ -19,12 +19,19 @@
  * along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef __HEADER_LOAD_FOLDER_
-#define __HEADER_LOAD_FOLDER_
+#ifndef __HEADER_SCRIPT_
+#define __HEADER_SCRIPT_
 
-gboolean load_folder(gchar *project_path, GError **err);
+/**
+ *
+ */
+lua_State *init_script();
+void register_cfunctions(lua_State *lua);
+int load_script(lua_State *lua,char *filename);
+void run_script(lua_State *lua);
+void done_script(lua_State *lua);
 
-GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GCompareFunc compare_func, GSList *filter_list);
+GSList *load_filter_from_lua(gchar *folder_name);
 
 
-#endif /*__HEADER_LOAD_FOLDER_*/
+#endif /*__HEADER_SCRIPT_*/

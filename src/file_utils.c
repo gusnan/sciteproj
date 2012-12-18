@@ -509,8 +509,8 @@ int get_number_of_files_in_folder(gchar *folder_name)
 	GSList *file_list;
 	GSList *folder_list;
 			
-	file_list=load_folder_to_list(folder_name, FALSE, file_sort_by_extension_bigger_func);
-	folder_list=load_folder_to_list(folder_name, TRUE, compare_strings_bigger);
+	file_list=load_folder_to_list(folder_name, FALSE, file_sort_by_extension_bigger_func, NULL);
+	folder_list=load_folder_to_list(folder_name, TRUE, compare_strings_bigger, NULL);
 	
 	if (file_list) {
 		while (file_list)	{

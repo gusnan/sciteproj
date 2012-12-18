@@ -22,6 +22,8 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 
+#include <string.h>
+
 #include "tree_manipulation.h"
 
 #include "load_folder.h"
@@ -77,7 +79,38 @@ void go_to_parent(GtkTreeStore *store, ParseFileStruct *parse_file)
 /**
  *
  */
-GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GCompareFunc compare_func)
+gboolean ignore_pattern_matches(const gchar *filename, GSList *filter_list)
+{
+	gboolean result=FALSE;
+	
+	GPatternSpec *pattern_spec;
+	
+	int len=strlen(filename);
+	
+	if (filter_list) {
+		while (filter_list)	{
+			
+			pattern_spec=g_pattern_spec_new((gchar*)(filter_list->data));
+			
+			if (g_pattern_match(pattern_spec, len, filename, NULL)) {
+				result=TRUE;
+			}
+			
+			g_pattern_spec_free(pattern_spec);
+			
+			filter_list=filter_list->next;
+		};
+	}
+
+	
+	return result;
+}
+
+
+/**
+ *
+ */
+GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GCompareFunc compare_func, GSList *filter_list)
 {
 	GSList *result_list=NULL;
 	
@@ -92,13 +125,27 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 		if (read_directories) {
 			
 			if (g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
-				result_list=g_slist_prepend(result_list, (gpointer)short_filename);
+				
+				if (filter_list!=NULL) {
+					if (!ignore_pattern_matches(short_filename, filter_list)) {
+						result_list=g_slist_prepend(result_list, (gpointer)short_filename);
+					}
+				} else {
+					result_list=g_slist_prepend(result_list, (gpointer)short_filename);
+				}
 			}
 			
 		} else {
 						
 			if (!g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
-				result_list=g_slist_prepend(result_list, (gpointer)temp_file);
+				
+				if (filter_list!=NULL) {
+					if (!ignore_pattern_matches(short_filename, filter_list)) {
+						result_list=g_slist_prepend(result_list, (gpointer)temp_file);
+					}
+				} else {
+					result_list=g_slist_prepend(result_list, (gpointer)temp_file);
+				}
 			}
 		}
 	}

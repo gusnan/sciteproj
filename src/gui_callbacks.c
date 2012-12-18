@@ -32,6 +32,10 @@
 
 #include <locale.h>
 
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
+
 #include "gui_callbacks.h"
 #include "clicked_node.h"
 
@@ -56,6 +60,8 @@
 #include "load_folder.h"
 
 #include "gtk3_compat.h"
+
+#include "script.h"
 
 
 /**
@@ -254,12 +260,17 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 			
 			gtk_tree_model_get(tree_model, iter, COLUMN_FILEPATH, &folder_path, -1);
 			
+			// Load the wanted filter from the LUA config
+			GSList *filter_list=load_filter_from_lua(folder_path);
+			
 			GSList *file_list; //=load_folder_to_list(folder_path, FALSE, 
 			GSList *folder_list;
 	
-			file_list=load_folder_to_list(folder_path, FALSE, compare_strings_bigger /*file_sort_by_extension_bigger_func*/);
+			file_list=load_folder_to_list(folder_path, FALSE, compare_strings_bigger /*file_sort_by_extension_bigger_func*/, filter_list);
 			
-			folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_bigger);
+			folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_bigger, filter_list);
+			
+			// Here we should filter out the unwanted items
 			
 			add_tree_folderlist(iter, folder_list, folder_path);
 
@@ -276,6 +287,9 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 			gtk_tree_view_expand_row(tree_view, tree_path, FALSE);
 			
 			gtk_tree_path_free(tree_path);
+			
+			g_slist_foreach(filter_list, (GFunc)g_free, NULL);
+			g_slist_free(filter_list);
 			
 		}
 	}
