@@ -83,14 +83,12 @@ gboolean ignore_pattern_matches(const gchar *filename, GSList *filter_list)
 {
 	gboolean result=FALSE;
 	
-	GPatternSpec *pattern_spec;
-	
 	int len=strlen(filename);
 	
 	if (filter_list) {
 		while (filter_list)	{
 			
-			pattern_spec=g_pattern_spec_new((gchar*)(filter_list->data));
+			GPatternSpec *pattern_spec=g_pattern_spec_new((gchar*)(filter_list->data));
 			
 			if (g_pattern_match(pattern_spec, len, filename, NULL)) {
 				result=TRUE;
