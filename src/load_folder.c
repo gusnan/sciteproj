@@ -54,31 +54,6 @@ int number_of_files=0;
 /**
  *
  */
-void go_to_parent(GtkTreeStore *store, ParseFileStruct *parse_file)
-{
-	if (parse_file->depth>0) {
-
-		GtkTreeIter parent_iter;
-		GtkTreeIter temp_iter=prevFileIterArray[currentFilePrevFileIter];
-
-		if (gtk_tree_model_iter_parent(GTK_TREE_MODEL(store), &parent_iter, &(temp_iter))) {
-
-			parse_file->current_iter=parent_iter;
-
-			//if (parse_file->depth>0) parse_file->depth-=1;
-		} else {
-			parse_file->current_iter=temp_iter;
-
-			//if (parse_file->depth>0) parse_file->depth-=1;
-		}
-	}
-	
-}
-
-
-/**
- *
- */
 gboolean ignore_pattern_matches(const gchar *filename, GSList *filter_list)
 {
 	gboolean result=FALSE;
