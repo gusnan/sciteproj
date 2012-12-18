@@ -7,3 +7,5 @@ test2.xml
 obj/*.o
 Makefile.dep
 po/sv_SE.mo
+sciteprojrc.lua
+
