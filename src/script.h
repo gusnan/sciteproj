@@ -31,7 +31,7 @@ int load_script(lua_State *lua,char *filename);
 void run_script(lua_State *lua);
 void done_script(lua_State *lua);
 
-GSList *load_filter_from_lua(gchar *folder_name);
+GSList *load_filter_from_lua();
 
 
 #endif /*__HEADER_SCRIPT_*/

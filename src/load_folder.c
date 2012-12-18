@@ -54,27 +54,35 @@ int number_of_files=0;
 /**
  *
  */
-gboolean ignore_pattern_matches(const gchar *filename, GSList *filter_list)
+gboolean ignore_pattern_matches(gchar *folder_name, const gchar *filename, GSList *filter_list)
 {
 	gboolean result=FALSE;
+			
+	gchar *full_filename=g_build_filename(folder_name, filename, NULL);
 	
-	int len=strlen(filename);
-	
+	int len=strlen(full_filename);
+
 	if (filter_list) {
-		while (filter_list)	{
-			
-			GPatternSpec *pattern_spec=g_pattern_spec_new((gchar*)(filter_list->data));
-			
-			if (g_pattern_match(pattern_spec, len, filename, NULL)) {
+		while (filter_list && !result)	{
+
+			gchar *filter= (gchar *)filter_list->data;
+
+			gchar *temp_filter_string=g_build_filename(get_project_directory(), filter, NULL);
+
+			GPatternSpec *pattern_spec=g_pattern_spec_new(temp_filter_string);
+
+			if (g_pattern_match(pattern_spec, len, full_filename, NULL)) {
 				result=TRUE;
 			}
-			
+
 			g_pattern_spec_free(pattern_spec);
-			
+			g_free(temp_filter_string);
+
 			filter_list=filter_list->next;
 		};
 	}
 
+	g_free(full_filename);
 	
 	return result;
 }
@@ -90,7 +98,7 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 	GDir *dir=g_dir_open(folder_path, 0, NULL);
 	
 	const gchar *short_filename;
-	
+
 	while((short_filename = g_dir_read_name(dir))) {
 		
 		gchar *temp_file=g_build_filename(folder_path, short_filename, NULL);
@@ -100,7 +108,7 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 			if (g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
 				
 				if (filter_list!=NULL) {
-					if (!ignore_pattern_matches(short_filename, filter_list)) {
+					if (!ignore_pattern_matches(folder_path, short_filename, filter_list)) {
 						result_list=g_slist_prepend(result_list, (gpointer)short_filename);
 					}
 				} else {
@@ -113,7 +121,7 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 			if (!g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
 				
 				if (filter_list!=NULL) {
-					if (!ignore_pattern_matches(short_filename, filter_list)) {
+					if (!ignore_pattern_matches(folder_path, short_filename, filter_list)) {
 						result_list=g_slist_prepend(result_list, (gpointer)temp_file);
 					}
 				} else {

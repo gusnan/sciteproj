@@ -19,6 +19,9 @@
  * along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+ 
+#include <gtk/gtk.h>
+
 #include <glib.h>
 #include <glib/gi18n.h>
 
@@ -29,6 +32,8 @@
 #include <locale.h>
 
 #include "script.h"
+
+#include "tree_manipulation.h"
 
 /**
  *
@@ -128,17 +133,17 @@ done_script(lua_State *lua)
 /**
  *
  */
-GSList *load_filter_from_lua(gchar *folder_name)
+GSList *load_filter_from_lua()
 {
-	gchar *filename=g_build_filename(folder_name,"sciteprojrc.lua",NULL);
+	gchar *script_filename=g_build_filename(get_project_directory(),"sciteprojrc.lua",NULL);
 	lua_State *lua=NULL;
 	GSList *list=NULL;
-	
-	if (g_file_test(filename,G_FILE_TEST_EXISTS)) {
+
+	if (g_file_test(script_filename,G_FILE_TEST_EXISTS)) {
 		
 		lua=init_script();
 		
-		if (load_script(lua,filename)!=0) {
+		if (load_script(lua,script_filename)!=0) {
 			goto EXITPOINT;
 		}
 		
@@ -165,7 +170,7 @@ GSList *load_filter_from_lua(gchar *folder_name)
 	}
 	
 EXITPOINT:
-	g_free(filename);
+	g_free(script_filename);
 
 	if (lua)
 		done_script(lua);
