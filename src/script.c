@@ -73,10 +73,8 @@ register_cfunctions(lua_State *lua)
 int
 load_script(lua_State *lua,char *filename)
 {
-	int result=-1;
-	
 	if (lua) {
-		result=luaL_loadfile(lua, filename);
+		int result=luaL_loadfile(lua, filename);
 
 		if (result) {
 			// We got an error, print it
