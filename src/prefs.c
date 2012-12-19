@@ -23,16 +23,21 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
-#include "prefs.h"
+#include <lua.h>
+#include <lualib.h>
+#include <lauxlib.h>
 
+#include "prefs.h"
 #include "string_utils.h"
+#include "script.h"
+#include "file_utils.h"
 
 /**
  *
  */
 
 gboolean check_for_old_style_config();
-gboolean load_lua_config(gchar *config_string);
+int load_lua_config(gchar *config_string);
 
 /**
  *
@@ -42,17 +47,17 @@ sciteproj_prefs gPrefs;
 gchar *prefs_filename;
 
 gchar *default_config_string=(gchar*)"" \
-				"# ---------------------------\n"
-				"# Configuration for SciteProj\n"
-				"# ---------------------------\n"
+				"-----------------------------\n"
+				"-- Configuration for SciteProj\n"
+				"-----------------------------\n"
 				"\n"
-				"# Window geometry:\n"
+				"-- Window geometry:\n"
 				"xpos=40\n"
 				"ypos=40\n"
 				"width=200\n"
 				"height=400\n"
 				"\n"
-				"# Search window geometry (-1 on xpos and ypos means default center screen):\n"
+				"-- Search window geometry (-1 on xpos and ypos means default center screen):\n"
 				"search_xpos=-1\n"
 				"search_ypos=-1\n"
 				"search_width=500\n"
@@ -63,11 +68,9 @@ gchar *default_config_string=(gchar*)"" \
 				"search_match_whole_words=FALSE\n"
 				"search_trim_results=TRUE\n"
 				"\n"
-				"#other:\n"
+				"-- other:\n"
 				"give_scite_focus=FALSE\n"
 				"search_give_scite_focus=TRUE\n"
-				"\n"
-				"allow_duplicates=TRUE\n"
 				"\n"
 				"show_recent=FALSE\n"
 				"recent_add_to_bottom=FALSE\n"
@@ -187,12 +190,6 @@ gboolean check_config_string(gchar *in_config)
 			}
 		}
 
-		if (g_ascii_strcasecmp(tempstring,"allow_duplicates")==0) {
-			if (g_ascii_strcasecmp(value,"FALSE")==0) {
-				gPrefs.allow_duplicates=FALSE;
-			}
-		}
-
 		if (g_ascii_strcasecmp(tempstring,"scite_path")==0) {
 			gPrefs.scite_path=g_strdup_printf("%s",value);
 		}
@@ -265,8 +262,6 @@ gboolean init_prefs(GError **err)
 	gPrefs.search_match_case=FALSE;
 	gPrefs.search_match_whole_words=FALSE;
 
-	gPrefs.allow_duplicates=TRUE;
-
 	gPrefs.show_recent=FALSE;
 	gPrefs.recent_add_to_bottom=FALSE;
 
@@ -276,34 +271,47 @@ gboolean init_prefs(GError **err)
 
 	gPrefs.hide_statusbar=FALSE;
 
+	gchar *test_prefs_filename=g_build_filename(current_directory,"sciteprojrc.lua", NULL);
+	
+	if (!g_file_test(test_prefs_filename, G_FILE_TEST_IS_REGULAR)) {
 
-	// the result of g_get_user_config_dir doesn't need to be freed, so we
-	// dont need to put it in a pointer of its own.
-	prefs_filename=g_build_filename(g_get_user_config_dir(),"sciteprojrc",NULL);
+		// the result of g_get_user_config_dir doesn't need to be freed, so we
+		// dont need to put it in a pointer of its own.
+		prefs_filename=g_build_filename(g_get_user_config_dir(),"sciteprojrc",NULL);
 
-	// Check if a config-file exists
-	if (!g_file_test(prefs_filename,G_FILE_TEST_IS_REGULAR)) {
+		// Check if a config-file exists
+		if (!g_file_test(prefs_filename,G_FILE_TEST_IS_REGULAR)) {
+			
+			// First, check if ~/.sciteproj exists.
+			gchar *old_configfilename=g_build_filename(g_get_home_dir(),".sciteproj",NULL);
 
-		// First, check if ~/.sciteproj exists.
-		gchar *old_configfilename=g_build_filename(g_get_home_dir(),".sciteproj",NULL);
+			if (g_file_test(old_configfilename,G_FILE_TEST_IS_REGULAR)) {
 
-		if (g_file_test(old_configfilename,G_FILE_TEST_IS_REGULAR)) {
+				// config-file at the "old" position exists, copy its contents to the
+				// new file
 
-			// config-file at the "old" position exists, copy its contents to the
-			// new file
+				/*
+				gchar *old_buffer;
 
-			gchar *old_buffer;
+				g_file_get_contents(old_configfilename,&old_buffer,NULL,err);
 
-			g_file_get_contents(old_configfilename,&old_buffer,NULL,err);
+				g_file_set_contents(prefs_filename,old_buffer,-1,err);
+				*/
 
-			g_file_set_contents(prefs_filename,old_buffer,-1,err);
+			} else {
 
-		} else {
-
-			// No config-file exists, create a new one and write default values
-			g_file_set_contents(prefs_filename,default_config_string,-1,err);
+				// No config-file exists, create a new one and write default values
+				// g_file_set_contents(test_prefs_filename,default_config_string,-1,err);
+				
+				prefs_filename=g_strdup(test_prefs_filename);
+			}
 		}
+	
+	} else {
+		prefs_filename=g_strdup(test_prefs_filename);
 	}
+
+	g_free(test_prefs_filename);
 
 	// Load preferences from config dot-file
 
@@ -346,8 +354,8 @@ gboolean init_prefs(GError **err)
 		g_strfreev(savedlist);
 	} else {
 		// ----- New style (LUA) config
-		debug_printf("New style (LUA) config\n");
-		if (!load_lua_config(config_string)) {
+		//if (!load_lua_config(config_string)) {
+		if (load_lua_config(config_string)!=0) {
 			printf("error loading LUA config!\n");
 		}
 	}
@@ -371,7 +379,7 @@ void done_prefs()
 /**
  *
  */
-gboolean check_for_old_style_config(gchar *teststring)
+gboolean check_for_old_style_config(const gchar *teststring)
 {
 	gboolean result=FALSE;
 	int co=0;
@@ -407,9 +415,43 @@ gboolean check_for_old_style_config(gchar *teststring)
 /**
  *
  */
-gboolean load_lua_config(gchar *config_string)
+int load_lua_config(gchar *config_string)
 {
-	gboolean result=TRUE;
+	lua_State *lua;
+	lua=init_script();
 	
-	return result;
+	//if (load_script_buffer(lua, config_string)!=0) {
+	if (load_script_buffer(lua, config_string)!=0) {
+		printf("Error loading file :%s\n", config_string);
+		return FALSE;
+	}
+
+	run_script(lua);
+	
+	gPrefs.xpos=lua_get_number(lua, "xpos");
+	gPrefs.ypos=lua_get_number(lua, "ypos");
+	
+	gPrefs.width=lua_get_number(lua, "width");
+	gPrefs.height=lua_get_number(lua, "height");
+	
+	gPrefs.search_xpos = (int)lua_get_number(lua, "search_xpos");
+	gPrefs.search_ypos = (int)lua_get_number(lua, "search_ypos");
+	gPrefs.search_width = lua_get_number(lua, "search_width");
+	gPrefs.search_height = (int)lua_get_number(lua, "search_height");
+	
+	gPrefs.search_alert_file_warnings = lua_get_boolean(lua, "search_alert_file_warnings");
+	
+	gPrefs.search_trim_results = lua_get_boolean(lua, "search_trim_results");
+	
+	gPrefs.give_scite_focus = lua_get_boolean(lua, "give_scite_focus");
+	gPrefs.search_give_scite_focus = lua_get_boolean(lua, "search_give_scite_focus");
+
+	gPrefs.show_recent=(gboolean)lua_get_boolean(lua, "show_recent");
+	gPrefs.recent_add_to_bottom=(gboolean)lua_get_boolean(lua, "recent_add_to_bottom");
+	
+	gPrefs.hide_statusbar = lua_get_boolean(lua, "hide_statusbar");
+
+	done_script(lua);
+	
+	return 0;
 }

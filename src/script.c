@@ -31,6 +31,8 @@
 
 #include <locale.h>
 
+#include "prefs.h"
+
 #include "script.h"
 
 #include "tree_manipulation.h"
@@ -42,8 +44,13 @@ lua_State *
 init_script()
 {
 	lua_State *lua=luaL_newstate();
+	if (!lua) {
+		printf("ERROR!\n");
+		return NULL;
+	}
+	
 	luaL_openlibs(lua);
-
+	
 	register_cfunctions(lua);
 
 	return lua;
@@ -66,20 +73,19 @@ register_cfunctions(lua_State *lua)
 int
 load_script(lua_State *lua,char *filename)
 {
+	int result=-1;
+	
 	if (lua) {
-		int result=luaL_loadfile(lua,filename);
+		result=luaL_loadfile(lua, filename);
 
-		if (!result) {
-			//script_loaded=TRUE;
-		} else {
-
+		if (result) {
 			// We got an error, print it
 			printf("%s\n",lua_tostring(lua,-1));
 
 			lua_pop(lua,1);
 
 			return -1;
-		}
+		} 
 	} else {
 		return -1;
 	}
@@ -91,12 +97,32 @@ load_script(lua_State *lua,char *filename)
 /**
  *
  */
-void
-run_script(lua_State *lua)
+int load_script_buffer(lua_State *lua, const char *buffer)
+{
+	if (lua) {
+		
+		if (luaL_loadbuffer(lua, buffer, strlen(buffer), "script_buffer")) {
+			printf("\n\n\nERROR!\n\n\n");
+			return -1;
+		}
+		
+	} else {
+		printf("invalid lua state...\n");
+		return -1;
+	}
+	
+	return 0;
+}
+
+
+/**
+ *
+ */
+void run_script(lua_State *lua)
 {
 	int s = lua_pcall( lua, 0, LUA_MULTRET, 0 );
 
-	if (s) {
+	if (s>0) {
 
 		char *error_msg;
 
@@ -116,6 +142,7 @@ run_script(lua_State *lua)
 		printf(_("Error: %s"),error_msg);
 		printf("\n");
 	}
+	
 }
 
 
@@ -144,6 +171,7 @@ GSList *load_filter_from_lua()
 		lua=init_script();
 		
 		if (load_script(lua,script_filename)!=0) {
+			printf("Error loading script: %s\n", script_filename);
 			goto EXITPOINT;
 		}
 		
@@ -175,5 +203,67 @@ EXITPOINT:
 	if (lua)
 		done_script(lua);
 
-	return list;		
+	return list;
+}
+
+
+/**
+ *
+ */
+int lua_get_boolean(lua_State *lua, char *variable_name)
+{
+	lua_getglobal(lua, variable_name);
+
+	int temp=0;
+	gboolean result=FALSE;
+	
+	//if (lua_type(lua,-1)==LUA_TBOOLEAN) {
+	if (lua_isboolean(lua, -1)!=0) {
+		temp=(int)lua_toboolean(lua, -1);
+	} else {
+		printf("%s isn't a bool!\n",variable_name);
+	}
+	
+	lua_pop(lua, 1);
+	
+	if (temp!=0) result=TRUE;
+		
+	return result;
+}
+
+
+/**
+ *
+ */
+double lua_get_number(lua_State *lua, char *variable_name)
+{
+	int result=-1;
+	
+	lua_getglobal(lua, variable_name);
+	
+	if (lua_isnumber(lua, -1)!=0) {
+		result=(int)lua_tonumber(lua, -1);
+	} else {
+		printf("%s isn't a number!\n", variable_name);
+	}
+	
+	lua_pop(lua, 1);
+
+	return result;
+}
+
+
+/**
+ *
+ */
+int error(lua_State *L, const char *fmt, ...)
+{
+	va_list argp;
+	va_start(argp, fmt);
+	vfprintf(stderr, fmt, argp);
+	va_end(argp);
+	
+	lua_close(L);
+	
+	return 0;
 }

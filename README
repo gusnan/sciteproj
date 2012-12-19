@@ -51,14 +51,6 @@ Also, the following options exist:
 	Should the project be marked as "dirty" when expanding or collapsing a 
 	folder? (Defaults to FALSE)
 
-* allow_duplicates
-	Specifies wether the user shall be able to add a file that has a name that 
-	is the same as a file already included in the project? (Defaults to TRUE)
-
-* identify_sciteproj_xml
-	Specifies wether SciteProj shall try to identify the XML as saved by 
-	SciteProj? (Defaults to TRUE)
-
 * hide_statusbar
 	Don't show the statusbar to save valuable screen-space.
 

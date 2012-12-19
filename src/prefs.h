@@ -43,8 +43,6 @@ typedef struct {
 	gboolean search_match_whole_words;
 	gboolean search_match_case;
 
-	gboolean allow_duplicates;
-
 	gchar *scite_path;
 
 	gboolean show_recent;

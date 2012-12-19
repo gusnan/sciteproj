@@ -340,11 +340,7 @@ gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err)
 		newfilename=g_strdup_printf("%s",absFilename);
 		shortFileName=get_filename_from_full_path(absFilename);
 
-		if ((tree_contains(shortFileName)) && (!gPrefs.allow_duplicates)) {
-			non_added_files=g_slist_prepend(non_added_files,newfilename);
-		} else {
-			files_to_add=g_slist_prepend(files_to_add,newfilename);
-		}
+		files_to_add=g_slist_prepend(files_to_add,newfilename);
 	}
 
 	if (fileList) {
@@ -435,8 +431,6 @@ EXITPOINT:
  */
 gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **err)
 {
-	debug_printf("%s\n",__func__);
-
 	g_assert(sTreeStore != NULL);
 	g_assert(fileList != NULL);
 
