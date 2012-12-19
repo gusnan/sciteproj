@@ -133,9 +133,6 @@ gboolean copy_tree_node(GtkTreeIter *srcIter,
 
 gchar *get_path_string(GtkTreeIter *iter);
 
-gint compare_strings_smaller(gconstpointer a,gconstpointer b);
-gint compare_strings_bigger(gconstpointer a,gconstpointer b);
-
 void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_func);
 
 gboolean tree_contains(gchar *value);
