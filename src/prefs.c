@@ -37,7 +37,7 @@
  */
 
 gboolean check_for_old_style_config();
-int load_lua_config(gchar *config_string);
+int load_lua_config(gchar *filename, gchar *full_string);
 
 /**
  *
@@ -355,7 +355,7 @@ gboolean init_prefs(GError **err)
 	} else {
 		// ----- New style (LUA) config
 		//if (!load_lua_config(config_string)) {
-		if (load_lua_config(config_string)!=0) {
+		if (load_lua_config(prefs_filename, config_string)!=0) {
 			printf("error loading LUA config!\n");
 		}
 	}
@@ -415,14 +415,14 @@ gboolean check_for_old_style_config(const gchar *teststring)
 /**
  *
  */
-int load_lua_config(gchar *config_string)
+int load_lua_config(gchar *filename, gchar *full_string)
 {
 	lua_State *lua;
 	lua=init_script();
 	
 	//if (load_script_buffer(lua, config_string)!=0) {
-	if (load_script_buffer(lua, config_string)!=0) {
-		printf("Error loading file :%s\n", config_string);
+	if (load_script_buffer(lua, full_string)!=0) {
+		printf("Error loading file: %s\n", filename);
 		return FALSE;
 	}
 
