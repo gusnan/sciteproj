@@ -114,8 +114,6 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 	                   COLUMN_FILEPATH, &filePath,
 	                   -1);
 
-	gchar *number_of_files_string;
-
 	int num_of_files=0;
 
 	int number_of_files=0;
@@ -130,8 +128,6 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 		number_of_files=counter_step_through(tree_model,num,&num_of_files,newIter/*iter*/);
 
 	}
-
-	number_of_files_string=g_strdup_printf("%d",number_of_files);
 
 	dialog=gtk_dialog_new_with_buttons(_("Group Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
 
