@@ -173,7 +173,7 @@ void search_dialog()
 
 	data->search_list=list;
 
-	data->prefs=gPrefs;
+	data->prefs=prefs;
 
 	data->error=NULL;
 
@@ -184,10 +184,10 @@ void search_dialog()
 	gtk_window_set_title(GTK_WINDOW(window),_("Search project"));
 
 	// Set up size and position from prefs
-	gtk_window_resize(GTK_WINDOW(window), gPrefs.search_width, gPrefs.search_height);
+	gtk_window_resize(GTK_WINDOW(window), prefs.search_width, prefs.search_height);
 
-	if (gPrefs.search_xpos!=-1) {
-		gtk_window_move(GTK_WINDOW(window),gPrefs.search_xpos,gPrefs.search_ypos);
+	if (prefs.search_xpos!=-1) {
+		gtk_window_move(GTK_WINDOW(window),prefs.search_xpos,prefs.search_ypos);
 	}
 
 #if GTK_MAJOR_VERSION>=3
@@ -241,7 +241,7 @@ void search_dialog()
 
 	match_case_checkbutton=gtk_check_button_new_with_label(_("Match case"));
 
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case_checkbutton),gPrefs.search_match_case);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_case_checkbutton),prefs.search_match_case);
 
 	//gtk_table_attach(GTK_TABLE(table),match_case_checkbutton,0,2,1,2, GTK_SHRINK, GTK_SHRINK, 0,0);
 #if GTK_MAJOR_VERSION<3
@@ -252,7 +252,7 @@ void search_dialog()
 
 	match_whole_words_only_checkbutton=gtk_check_button_new_with_label(_("Match whole word only"));
 
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton),gPrefs.search_match_whole_words);
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(match_whole_words_only_checkbutton),prefs.search_match_whole_words);
 
 	//gtk_table_attach(GTK_TABLE(table),match_whole_words_only_checkbutton,2,4,1,2, GTK_SHRINK,GTK_SHRINK, 0,0);
 
@@ -280,7 +280,7 @@ void search_dialog()
 	gtk_tree_view_set_model(GTK_TREE_VIEW(treeview),GTK_TREE_MODEL(data->store));
 	g_object_unref(data->store);
 
-	data->search_give_scite_focus=gPrefs.search_give_scite_focus;
+	data->search_give_scite_focus=prefs.search_give_scite_focus;
 
 	g_signal_connect(G_OBJECT(treeview), "row-activated", G_CALLBACK(tree_row_activated_cb), data);
 
@@ -541,7 +541,7 @@ static gpointer thread_func(Data *data)
 
 								gchar *resulttemp=remove_newline(line);
 
-								if (gPrefs.search_trim_results) {
+								if (prefs.search_trim_results) {
 									resulttemp=g_strchug(resulttemp);
 									resulttemp=g_strchomp(resulttemp);
 								}
@@ -885,7 +885,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView, GtkTreePath *path, GtkT
 
 	debug_printf("Set scite focus...\n");
 
-	if (gPrefs.search_give_scite_focus) {
+	if (prefs.search_give_scite_focus) {
 		send_scite_command((gchar*)"focus:1",NULL);
 		/*
 		GError *err=NULL;

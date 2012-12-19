@@ -374,7 +374,7 @@ gboolean setup_gui(GError **err)
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(projectTreeView), FALSE);
 
 	gtk_tree_view_column_set_resizable(column1, TRUE);
-	gtk_tree_view_column_set_min_width(column1, (int)(gPrefs.width*.75));
+	gtk_tree_view_column_set_min_width(column1, (int)(prefs.width*.75));
 
 
 	gtk_tree_view_column_pack_start(column1, pixbuffCellRenderer, FALSE);
@@ -513,7 +513,7 @@ gboolean setup_gui(GError **err)
 
 	gtk_widget_show(GTK_WIDGET(fullGrid));
 
-	if (!gPrefs.hide_statusbar) {
+	if (!prefs.hide_statusbar) {
 		if (!init_statusbar(fullGrid,vpaned,&tempErr)) {
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s", tempErr->message,"Error initing statusbar");
 			goto EXITPOINT;
@@ -528,7 +528,7 @@ gboolean setup_gui(GError **err)
 
 	gtk_widget_show(GTK_WIDGET(fullVbox));
 
-	if (!gPrefs.hide_statusbar) {
+	if (!prefs.hide_statusbar) {
 		if (!init_statusbar(fullVbox,vpaned,&tempErr)) {
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s",
 				tempErr->message,
@@ -546,8 +546,8 @@ gboolean setup_gui(GError **err)
 #endif
 	g_signal_connect(G_OBJECT(recentTreeView), "key-press-event", G_CALLBACK(key_press_cb), recentTreeView);
 
-	gtk_window_resize(GTK_WINDOW(sMainWindow), gPrefs.width, gPrefs.height);
-	gtk_window_move(GTK_WINDOW(sMainWindow),gPrefs.xpos,gPrefs.ypos);
+	gtk_window_resize(GTK_WINDOW(sMainWindow), prefs.width, prefs.height);
+	gtk_window_move(GTK_WINDOW(sMainWindow),prefs.xpos,prefs.ypos);
 
 	int window_xsize,window_ysize;
 	gtk_window_get_size(GTK_WINDOW(sMainWindow),&window_xsize,&window_ysize);
@@ -567,7 +567,7 @@ gboolean setup_gui(GError **err)
 #else
 	gtk_widget_show(recentVbox);
 
-	if (!gPrefs.show_recent) {
+	if (!prefs.show_recent) {
 		gtk_widget_hide(recentVbox);
 	} else {
 		gtk_widget_show(recentVbox);
@@ -783,7 +783,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 
 			activate_scite(NULL);
 
-			if (gPrefs.give_scite_focus==TRUE) {
+			if (prefs.give_scite_focus==TRUE) {
 				send_scite_command((gchar*)"focus:0",NULL);
 			}
 

@@ -222,7 +222,7 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 
 	if (condition & G_IO_HUP) {
 		// This is for SciteProj :
-		if(gPrefs.verbosity>50) {
+		if(prefs.verbosity>50) {
 			g_print("%s: condition = G_IO_HUP\n", __func__);
 		}
 		finalResult = FALSE;
@@ -499,8 +499,8 @@ gboolean launch_scite(gchar *instring,GError **err)
 			close(childPipePair[0]);
 
 
-			if (gPrefs.scite_path!=NULL) {
-				execlp(gPrefs.scite_path, gPrefs.scite_path, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
+			if (prefs.scite_path!=NULL) {
+				execlp(prefs.scite_path, prefs.scite_path, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
 			} else {
 
 				// Execute Scite, if we can (Check for SciTE)
@@ -792,8 +792,8 @@ gboolean check_if_scite_exists()
 	debug_printf("gPrefs:%s\n",gPrefs.scite_path);
 #endif
 
-	if (gPrefs.scite_path!=NULL) {
-		if (g_file_test(gPrefs.scite_path,G_FILE_TEST_EXISTS)) exists=TRUE;
+	if (prefs.scite_path!=NULL) {
+		if (g_file_test(prefs.scite_path,G_FILE_TEST_EXISTS)) exists=TRUE;
 
 	} else {
 		if (g_file_test(sSciteExecName0,G_FILE_TEST_EXISTS)) exists=TRUE;
@@ -864,7 +864,7 @@ gboolean open_filename(gchar *filename,gchar *project_directory,GError **err)
 
 			activate_scite(NULL);
 
-			if (gPrefs.give_scite_focus==TRUE) {
+			if (prefs.give_scite_focus==TRUE) {
 				send_scite_command((gchar*)"focus:0",NULL);
 			}
 		}

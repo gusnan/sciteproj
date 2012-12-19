@@ -303,7 +303,7 @@ gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err)
 	// Select the choice from last time
 	if(1) {
 		fileFilter = gtk_file_filter_new();
-		build_file_filter(gPrefs.last_file_filter, fileFilter);
+		build_file_filter(prefs.last_file_filter, fileFilter);
 		gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), fileFilter);
 	}
 	for(i=0; i<6;i++) {

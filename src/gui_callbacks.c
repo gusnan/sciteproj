@@ -166,7 +166,7 @@ void edit_options_cb()
 
 			activate_scite(NULL);
 
-			if (gPrefs.give_scite_focus==TRUE) {
+			if (prefs.give_scite_focus==TRUE) {
 				send_scite_command((gchar*)"focus:0",NULL);
 			}
 		}

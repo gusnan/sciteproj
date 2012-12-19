@@ -55,7 +55,7 @@ typedef struct {
 
 } sciteproj_prefs;
 
-extern sciteproj_prefs gPrefs;
+extern sciteproj_prefs prefs;
 
 extern gchar *prefs_filename;
 

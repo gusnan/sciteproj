@@ -189,7 +189,7 @@ GtkWidget *init_recent_files(GError **err)
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(recentTreeView), TRUE);
 
 	gtk_tree_view_column_set_resizable(recentColumn1, TRUE);
-	gtk_tree_view_column_set_min_width(recentColumn1, (int)(gPrefs.width*.75));
+	gtk_tree_view_column_set_min_width(recentColumn1, (int)(prefs.width*.75));
 
 
 	gtk_tree_view_column_pack_start(recentColumn1, recentPixbuffCellRenderer , FALSE);
@@ -285,7 +285,7 @@ gboolean add_file_to_recent(gchar *filepath,GError **err)
 	// Append to root, or before/after/within an existing node?
 
 	//if (currentIter == NULL) {
-	if (!gPrefs.recent_add_to_bottom) {
+	if (!prefs.recent_add_to_bottom) {
 		gtk_tree_store_insert_after(recentTreeStore, &iter, NULL, NULL);
 	} else {
 		// get the iter of the last item
@@ -542,7 +542,7 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView,
 
 			activate_scite(NULL);
 
-			if (gPrefs.give_scite_focus==TRUE) {
+			if (prefs.give_scite_focus==TRUE) {
 				send_scite_command((gchar*)"focus:0",NULL);
 			}
 

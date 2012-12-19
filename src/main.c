@@ -164,10 +164,10 @@ int main(int argc, char *argv[])
 		if (g_file_test(cmd.scite_filename,G_FILE_TEST_IS_REGULAR)) {
 
 			// If we have already allocated memory for scite path, free it
-			if (gPrefs.scite_path!=NULL) g_free(gPrefs.scite_path);
+			if (prefs.scite_path!=NULL) g_free(prefs.scite_path);
 
 			// Set the new one
-			gPrefs.scite_path=g_strdup(cmd.scite_filename);
+			prefs.scite_path=g_strdup(cmd.scite_filename);
 
 		} else {
 			g_print(_("Couldn't find a SciTE executable named '%s'!\n"),cmd.scite_filename);

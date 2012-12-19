@@ -42,7 +42,7 @@ int load_lua_config(gchar *config_string);
 /**
  *
  */
-sciteproj_prefs gPrefs;
+sciteproj_prefs prefs;
 
 gchar *prefs_filename;
 
@@ -96,7 +96,7 @@ gboolean check_config_string(gchar *in_config)
 
 	// clear scite Path
 
-	gPrefs.scite_path=NULL;
+	prefs.scite_path=NULL;
 
 	for (co=0;co<(int)strlen(in_config);co++) {
 		if (in_config[co]=='=') pos=co;
@@ -121,100 +121,100 @@ gboolean check_config_string(gchar *in_config)
 
 		if (g_ascii_strcasecmp(tempstring,"xpos")==0) {
 			tempdouble=g_ascii_strtod(value,NULL);
-			gPrefs.xpos=(int) tempdouble;
+			prefs.xpos=(int) tempdouble;
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"ypos")==0) {
 			tempdouble=g_ascii_strtod(value,NULL);
-			gPrefs.ypos=(int)tempdouble;
+			prefs.ypos=(int)tempdouble;
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"width")==0) {
 			tempdouble=g_ascii_strtod(value,NULL);
-			gPrefs.width=(int)tempdouble;
+			prefs.width=(int)tempdouble;
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"height")==0) {
 			tempdouble=g_ascii_strtod(value,NULL);
-			gPrefs.height=(int)tempdouble;
+			prefs.height=(int)tempdouble;
 		}
 
 
 		if (g_ascii_strcasecmp(tempstring,"search_xpos")==0) {
 			tempdouble=g_ascii_strtod(value,NULL);
-			gPrefs.search_xpos=(int) tempdouble;
+			prefs.search_xpos=(int) tempdouble;
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"search_ypos")==0) {
 			tempdouble=g_ascii_strtod(value,NULL);
-			gPrefs.search_ypos=(int)tempdouble;
+			prefs.search_ypos=(int)tempdouble;
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"search_width")==0) {
 			tempdouble=g_ascii_strtod(value,NULL);
-			gPrefs.search_width=(int)tempdouble;
+			prefs.search_width=(int)tempdouble;
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"search_height")==0) {
 			tempdouble=g_ascii_strtod(value,NULL);
-			gPrefs.search_height=(int)tempdouble;
+			prefs.search_height=(int)tempdouble;
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"give_scite_focus")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.give_scite_focus=TRUE;
+				prefs.give_scite_focus=TRUE;
 			}
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"search_give_scite_focus")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.search_give_scite_focus=TRUE;
+				prefs.search_give_scite_focus=TRUE;
 			}
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"search_alert_file_warnings")==0) {
 			if (g_ascii_strcasecmp(value,"FALSE")==0) {
-				gPrefs.search_alert_file_warnings=FALSE;
+				prefs.search_alert_file_warnings=FALSE;
 			}
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"search_match_case")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.search_match_case=TRUE;
+				prefs.search_match_case=TRUE;
 			}
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"search_match_whole_words")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.search_match_whole_words=TRUE;
+				prefs.search_match_whole_words=TRUE;
 			}
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"scite_path")==0) {
-			gPrefs.scite_path=g_strdup_printf("%s",value);
+			prefs.scite_path=g_strdup_printf("%s",value);
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"show_recent")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.show_recent=TRUE;
+				prefs.show_recent=TRUE;
 			}
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"recent_add_to_bottom")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.recent_add_to_bottom=TRUE;
+				prefs.recent_add_to_bottom=TRUE;
 			}
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"search_trim_results")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.search_trim_results=TRUE;
+				prefs.search_trim_results=TRUE;
 			}
 		}
 
 		if (g_ascii_strcasecmp(tempstring,"hide_statusbar")==0) {
 			if (g_ascii_strcasecmp(value,"TRUE")==0) {
-				gPrefs.hide_statusbar=TRUE;
+				prefs.hide_statusbar=TRUE;
 			}
 		}
 	}
@@ -242,34 +242,34 @@ gboolean init_prefs(GError **err)
 	gchar **list=NULL;
 	
 	// Set default values
-	gPrefs.lhs=1;
-	gPrefs.width=200;
-	gPrefs.height=600;
-	gPrefs.verbosity=0; // No informational messages
-	gPrefs.last_file_filter=-1; // All files (my choice)
+	prefs.lhs=1;
+	prefs.width=200;
+	prefs.height=600;
+	prefs.verbosity=0; // No informational messages
+	prefs.last_file_filter=-1; // All files (my choice)
 
-	gPrefs.search_xpos=-1;
-	gPrefs.search_ypos=-1;
+	prefs.search_xpos=-1;
+	prefs.search_ypos=-1;
 
-	gPrefs.search_width=500;
-	gPrefs.search_height=400;
+	prefs.search_width=500;
+	prefs.search_height=400;
 
-	gPrefs.give_scite_focus=FALSE;
-	gPrefs.search_give_scite_focus=TRUE;
+	prefs.give_scite_focus=FALSE;
+	prefs.search_give_scite_focus=TRUE;
 
-	gPrefs.search_alert_file_warnings=TRUE;
+	prefs.search_alert_file_warnings=TRUE;
 
-	gPrefs.search_match_case=FALSE;
-	gPrefs.search_match_whole_words=FALSE;
+	prefs.search_match_case=FALSE;
+	prefs.search_match_whole_words=FALSE;
 
-	gPrefs.show_recent=FALSE;
-	gPrefs.recent_add_to_bottom=FALSE;
+	prefs.show_recent=FALSE;
+	prefs.recent_add_to_bottom=FALSE;
 
-	gPrefs.scite_path=NULL;
+	prefs.scite_path=NULL;
 
-	gPrefs.search_trim_results=FALSE;
+	prefs.search_trim_results=FALSE;
 
-	gPrefs.hide_statusbar=FALSE;
+	prefs.hide_statusbar=FALSE;
 
 	gchar *test_prefs_filename=g_build_filename(current_directory,"sciteprojrc.lua", NULL);
 	
@@ -428,28 +428,28 @@ int load_lua_config(gchar *config_string)
 
 	run_script(lua);
 	
-	gPrefs.xpos=lua_get_number(lua, "xpos");
-	gPrefs.ypos=lua_get_number(lua, "ypos");
+	prefs.xpos=lua_get_number(lua, "xpos");
+	prefs.ypos=lua_get_number(lua, "ypos");
 	
-	gPrefs.width=lua_get_number(lua, "width");
-	gPrefs.height=lua_get_number(lua, "height");
+	prefs.width=lua_get_number(lua, "width");
+	prefs.height=lua_get_number(lua, "height");
 	
-	gPrefs.search_xpos = (int)lua_get_number(lua, "search_xpos");
-	gPrefs.search_ypos = (int)lua_get_number(lua, "search_ypos");
-	gPrefs.search_width = lua_get_number(lua, "search_width");
-	gPrefs.search_height = (int)lua_get_number(lua, "search_height");
+	prefs.search_xpos = (int)lua_get_number(lua, "search_xpos");
+	prefs.search_ypos = (int)lua_get_number(lua, "search_ypos");
+	prefs.search_width = lua_get_number(lua, "search_width");
+	prefs.search_height = (int)lua_get_number(lua, "search_height");
 	
-	gPrefs.search_alert_file_warnings = lua_get_boolean(lua, "search_alert_file_warnings");
+	prefs.search_alert_file_warnings = lua_get_boolean(lua, "search_alert_file_warnings");
 	
-	gPrefs.search_trim_results = lua_get_boolean(lua, "search_trim_results");
+	prefs.search_trim_results = lua_get_boolean(lua, "search_trim_results");
 	
-	gPrefs.give_scite_focus = lua_get_boolean(lua, "give_scite_focus");
-	gPrefs.search_give_scite_focus = lua_get_boolean(lua, "search_give_scite_focus");
+	prefs.give_scite_focus = lua_get_boolean(lua, "give_scite_focus");
+	prefs.search_give_scite_focus = lua_get_boolean(lua, "search_give_scite_focus");
 
-	gPrefs.show_recent=(gboolean)lua_get_boolean(lua, "show_recent");
-	gPrefs.recent_add_to_bottom=(gboolean)lua_get_boolean(lua, "recent_add_to_bottom");
+	prefs.show_recent=(gboolean)lua_get_boolean(lua, "show_recent");
+	prefs.recent_add_to_bottom=(gboolean)lua_get_boolean(lua, "recent_add_to_bottom");
 	
-	gPrefs.hide_statusbar = lua_get_boolean(lua, "hide_statusbar");
+	prefs.hide_statusbar = lua_get_boolean(lua, "hide_statusbar");
 
 	done_script(lua);
 	
