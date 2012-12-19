@@ -39,60 +39,6 @@
 
 
 /**
- *
- */
-static int counter_step_through(GtkTreeModel *tree_model,int how_many_to_check,int *counter,GtkTreeIter newiter)
-{
-	gchar *relFilePath;
-
-	gint nodeItemType;
-
-	GtkTreeIter iter=newiter;
-
-	int foldercounter=0;
-
-	int result=0;
-
-	do {
-
-		gtk_tree_model_get(tree_model, &iter, COLUMN_ITEMTYPE, &nodeItemType, -1);
-
-		if (nodeItemType==ITEMTYPE_GROUP) {
-
-			(*counter)++;
-			result++;
-
-			if (gtk_tree_model_iter_has_child(tree_model,&iter)) {
-				GtkTreeIter newIter=iter;
-
-				int num=gtk_tree_model_iter_n_children(tree_model,&newiter);
-
-				if (num!=0) {
-
-					gtk_tree_model_iter_children(tree_model,&newIter,&iter);
-
-					result+=counter_step_through(tree_model,num,counter,newIter);
-				}
-			}
-
-			foldercounter++;
-		} else {
-
-			gtk_tree_model_get(tree_model, &iter, COLUMN_FILEPATH, &relFilePath, -1);
-
-			(*counter)++;
-			result++;
-
-
-			foldercounter++;
-		}
-	} while((gtk_tree_model_iter_next(tree_model,&iter)) && (foldercounter<how_many_to_check) );
-
-	return result;
-}
-
-
-/**
  * Group properties callback
  */
 void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
@@ -113,22 +59,6 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 	                   COLUMN_ITEMTYPE, &nodeType,
 	                   COLUMN_FILEPATH, &filePath,
 	                   -1);
-
-	int num_of_files=0;
-
-	int number_of_files=0;
-
-	if (gtk_tree_model_iter_has_child(tree_model,iter)) {
-
-		int num=gtk_tree_model_iter_n_children(tree_model,iter);
-
-		GtkTreeIter newIter;
-		gtk_tree_model_iter_children(tree_model,&newIter,iter);
-
-		number_of_files=counter_step_through(tree_model,num,&num_of_files,newIter/*iter*/);
-
-	}
-
 	dialog=gtk_dialog_new_with_buttons(_("Group Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
 
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog),GTK_RESPONSE_OK);
