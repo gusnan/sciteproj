@@ -182,7 +182,7 @@ GSList *load_filter_from_lua()
 		lua_getglobal(lua, "hide_filter");
 		
 		if (!lua_istable(lua, -1)) {
-			printf("Isn't a table!\n");
+			// We didn't find a table with the required name, then just exit
 			goto EXITPOINT;
 		}
 		
