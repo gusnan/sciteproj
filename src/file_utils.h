@@ -51,4 +51,6 @@ int get_number_of_files_in_folder(gchar *folder_name);
 
 gboolean is_string_folder(gchar *instring);
 
+gchar *clean_folder(gchar *folder_name);
+
 #endif /*__HEADER_FILE_UTILS_*/

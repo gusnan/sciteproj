@@ -549,3 +549,32 @@ gboolean is_string_folder(gchar *instring)
 	
 	return result;
 }
+
+
+/**
+ *
+ */
+gchar *clean_folder(gchar *infolder)
+{
+	gchar *result=NULL;
+	
+	gchar *temp=infolder;
+	
+	int len=strlen(infolder);
+				
+	if (temp) {
+		if ((temp[0]=='.') && (temp[1]==G_DIR_SEPARATOR)) {
+				
+			temp+=2;
+			len-=2;
+		}
+		
+		if (temp[len-1]==G_DIR_SEPARATOR) {
+			result=g_strndup(temp, len-1);
+		} else {
+			result=g_strdup(temp);
+		}
+	}
+
+	return result;
+}

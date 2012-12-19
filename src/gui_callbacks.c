@@ -265,17 +265,22 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 			
 			GSList *file_list; //=load_folder_to_list(folder_path, FALSE, 
 			GSList *folder_list;
-	
-			file_list=load_folder_to_list(folder_path, FALSE, compare_strings_bigger /*file_sort_by_extension_bigger_func*/, filter_list);
+
+			// default sorting here compare_strings_bigger - since we turn the
+			// list backwards after
 			
-			folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_bigger, filter_list);
-			
+			GCompareFunc comparer=get_sort_order_of_folder(folder_path);
+
+			file_list=load_folder_to_list(folder_path, FALSE, comparer /*file_sort_by_extension_bigger_func*/, filter_list);
+
+			folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_smaller, filter_list);
+
 			// Here we should filter out the unwanted items
 			
 			add_tree_folderlist(iter, folder_list, folder_path);
 
 			if (file_list) {
-				file_list=g_slist_reverse(file_list);
+				//file_list=g_slist_reverse(file_list);
 
 				add_tree_filelist(iter, file_list, NULL);
 			}
@@ -524,7 +529,9 @@ void refresh_folder_cb()
 		load_tree_at_iter(GTK_TREE_VIEW(projectTreeView), temp_iter);
 		//set_tree_node_loaded(temp_iter, TRUE, NULL);	
 		
-		sort_children(stored_iter, NULL, compare_strings_smaller);
+		// get the default sort order
+		
+		//sort_children(stored_iter, NULL, compare_strings_smaller);
 		
 	} else {
 	}

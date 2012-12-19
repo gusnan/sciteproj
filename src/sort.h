@@ -37,4 +37,6 @@ void sort_descending_cb();
 void sort_ascending_by_extension_cb();
 void sort_descending_by_extension_cb();
 
+GCompareFunc get_sort_order_of_folder(gchar *foler_name);
+
 #endif /*__HEADER_SORT_*/
