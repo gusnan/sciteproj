@@ -8,4 +8,5 @@ obj/*.o
 Makefile.dep
 po/sv_SE.mo
 sciteprojrc.lua
+old/
 
