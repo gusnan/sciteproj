@@ -273,7 +273,7 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 
 			file_list=load_folder_to_list(folder_path, FALSE, comparer /*file_sort_by_extension_bigger_func*/, filter_list);
 
-			folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_smaller, filter_list);
+			folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_bigger, filter_list);
 
 			// Here we should filter out the unwanted items
 			
