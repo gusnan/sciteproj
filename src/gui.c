@@ -559,7 +559,7 @@ gboolean setup_gui(GError **err)
 #if GTK_MAJOR_VERSION>=3
 	gtk_widget_show(recentGrid);
 
-	if (!gPrefs.show_recent) {
+	if (!prefs.show_recent) {
 		gtk_widget_hide(recentGrid);
 	} else {
 		gtk_widget_show(recentGrid);

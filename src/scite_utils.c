@@ -159,7 +159,7 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 
 				// This is for SciteProj :
 
-				//if(gPrefs.verbosity>50) {
+				//if(prefs.verbosity>50) {
 #ifdef DEBUG_SCITE
 				debug_printf("%s: read data '%s'\n", __func__, buff);
 #endif
@@ -789,7 +789,7 @@ gboolean check_if_scite_exists()
 	gboolean exists=FALSE;
 
 #ifdef DEBUG_SCITE
-	debug_printf("gPrefs:%s\n",gPrefs.scite_path);
+	debug_printf("prefs:%s\n",prefs.scite_path);
 #endif
 
 	if (prefs.scite_path!=NULL) {
