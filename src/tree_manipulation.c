@@ -330,16 +330,12 @@ gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err)
 	gchar *absFilename;
 
 	gchar *newfilename;
-	gchar *shortFileName;
-
 
 	// go through the list of files, check if they are already in the tree
 	for (listIter = fileList; listIter != NULL; listIter = g_slist_next(listIter)) {
 		absFilename = (gchar *) (listIter->data);
 
 		newfilename=g_strdup_printf("%s",absFilename);
-		shortFileName=get_filename_from_full_path(absFilename);
-
 		files_to_add=g_slist_prepend(files_to_add,newfilename);
 	}
 
