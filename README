@@ -102,15 +102,14 @@ SciteProj will load sciteprojrc.lua from the current folder. In this file you
 can decide what files should be hidden and shown, what sort order should be used 
 per folder, and which folders should be open when starting sciteproj and not.
 It follows LUA syntax, and uses three tables to filter hidden files, sort order,
-and to determine which folders should be open on sciteproj start.
+and to determine which folders should be open on sciteproj start. (A table is
+a lua type that implements associative arrays)
 
-First, hide_filter should look something like this (lines starting with -- is
-commented, and not read by the interpreter):
-
+First, hide_filter should look something like this (lines starting with "--" is
+comments, and not read by the interpreter):
 
 -- hide_filter
 -- filters out files from the project listing - wildcards are allowed.
-
 hide_filter = {
 	-- ".gitignore",
 	-- "src/*.h",
@@ -133,12 +132,11 @@ Second, sort-order is a table with folder-names as indexes:
 --
 -- default on folders that isn't listed here is 0 - ascending
 --
-
-
 sort_order = {
 	["./graphics/test/"] = 0,
 	["src"] = 2
 }
+
 
 a dot is the current folder, and all folder listed is below the current if a 
 full path name isn't listed.
@@ -148,9 +146,7 @@ on sciteproj program start:
 
 -- open folder - should a folder start as opened or closed?
 -- all folders default to false
-
 open_folders = {
-
 	["bin"] = true,
 	["src"] = true,
 	["src/test"] = false,
