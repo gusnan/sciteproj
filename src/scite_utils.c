@@ -154,7 +154,7 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 				(error != NULL) ? error->message : "<unknown>");
 		}
 		else {
-			if ((bytes_read-1)!=0) {
+			if ((bytes_read-1)>0) {
 				buff[bytes_read] = '\0';
 
 				// This is for SciteProj :
@@ -164,9 +164,21 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 				debug_printf("%s: read data '%s'\n", __func__, buff);
 #endif
 				//}
-
+				
+				// If the string ends with a newline, remove it!
+				int len=strlen(buff);
+				
+				char ch;
+				if (len>0) ch=buff[len-1];
+				gchar *temp;
+				
+				if (buff[len-1]=='\n') {
+					temp=g_strndup(buff,len-1);
+					g_snprintf(buff, 1024, "%s", temp);
+					g_free(temp);
+				}
+				
 				// Is it the response to an "askproperty" command?  Dunno why they are prefixed with "macro:stringinfo:" though....
-
 				static char *askpropertyResponse = (char*)"macro:stringinfo:";
 
 				if (g_str_has_prefix(buff, askpropertyResponse)) {
