@@ -168,12 +168,8 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 				// If the string ends with a newline, remove it!
 				int len=strlen(buff);
 				
-				char ch;
-				if (len>0) ch=buff[len-1];
-				gchar *temp;
-				
 				if (buff[len-1]=='\n') {
-					temp=g_strndup(buff,len-1);
+					gchar *temp = g_strndup(buff, len-1);
 					g_snprintf(buff, 1024, "%s", temp);
 					g_free(temp);
 				}
