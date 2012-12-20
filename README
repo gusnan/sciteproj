@@ -14,25 +14,28 @@ for more information. SciteProj saves the project file to disk in XML format.
 Running:
 --------
 
-SciteProj will load a configuration from the file .sciteproj in the directory
-specified by $XDG_CONFIG_HOME each program start. This is most likely
+SciteProj will load a configuration from the file sciteprojrc.lua first in the 
+directory specified by $XDG_CONFIG_HOME each program start. This is most likely
 
-~/.config/sciteprojrc
+~/.config/sciteprojrc.lua
 
-or if that doesn't exist
+or if that doesn't exist sciteproj will load config from sciteprojrc.lua in
+the current folder.
 
-~/.sciteproj
-
-and if no such file exists, sciteprojrc will be created in the config folder.
-See the following links:
+See the following links on why we use the folder ~/.config/ :
 
 http://developer.gnome.org/glib/stable/glib-Miscellaneous-Utility-Functions.html#g-get-user-config-dir
 http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
-If you have used a previous version of SciteProj, you probably still have your
-config in ~/.sciteproj - SciteProj will copy the old config to the new position,
-and when you have tested so that everything works as before you can simply 
-delete the ~/.sciteproj file.
+Version 0.8.00 of SciteProj has gone through some massive changes, and changed
+the way "projects" are handled. From now on sciteproj works directly on what
+is available in the folders, and doesn't use a project XML file. However, if
+you have a local sciteprojrc.lua in a folder, sciteproj will read information
+from it and act on that to determine how to view the folder. Please notice that
+I now use LUA, which amongst other means that boolean values are case sensitive
+and TRUE and FALSE are invalid as values. Use the lowercase values true and 
+false instead.
+
 The options availible in the file are:
 
 * The window geometry
@@ -44,12 +47,8 @@ height.
 Also, the following options exist:
 
 * give_scite_focus
-	If this is set to TRUE, the SciTE window will recieve focus when you open
-	a file from SciteProj. (Defaults to FALSE)
-
-* dirty_on_folder_change
-	Should the project be marked as "dirty" when expanding or collapsing a 
-	folder? (Defaults to FALSE)
+	If this is set to true, the SciTE window will recieve focus when you open
+	a file from SciteProj. (Defaults to false)
 
 * hide_statusbar
 	Don't show the statusbar to save valuable screen-space.
@@ -76,8 +75,8 @@ recommended to make the SciTE window focus when you double click search
 results through this option.
 
 You can open this configuration file by opening the Edit menu and select Edit 
-Options in that menu. This will open ($HOME)/.sciteproj as if it was part of 
-your project and edit it in SciTE.
+Options in that menu. This will open sciteprojrc.lua from the current folder as 
+if it was part of your project and edit it in SciTE.
 
 SciteProj will give you a warning if it isn't able to find the SciTE 
 executable on SciteProj start. As default SciTE will be searched for in 
@@ -90,23 +89,76 @@ sciteproj --scite=/bin/scite
 will look for the scite executable in the /bin/ folder. SciTE will also be
 searched for in the path pointed to by the environment variable SciTE_HOME.
 
-You will need to save a project before adding to it - this is because SciteProj
-saves the XML containing relative paths, relative to the postition your project
-file is located in.
-
-SciteProj is able to generate a project file through the --generate option - 
-using a command line like
-
-sciteproj --generate test.xml 7
-
-will create a SciteProj project file named test.xml, containing all the folders
-and files in the current dir, and 7 folder underneath in the directory 
-structure. If the depth is left out, SciteProj will default to a maximum depth
-of 4 folders.
-
 By pressing Ctrl+R or choosing "View Recently Opened Files" in the "View" menu,
 you split up the project window in two parts, and the new part contain a list
 of the most recently opened files in the project. The files in this list are 
 sorted so the ones you opened latest is at the top of the list (or bottom - 
 its configurable).
+
+Local folder settings
+=====================
+
+SciteProj will load sciteprojrc.lua from the current folder. In this file you 
+can decide what files should be hidden and shown, what sort order should be used 
+per folder, and which folders should be open when starting sciteproj and not.
+It follows LUA syntax, and uses three tables to filter hidden files, sort order,
+and to determine which folders should be open on sciteproj start.
+
+First, hide_filter should look something like this (lines starting with -- is
+commented, and not read by the interpreter):
+
+
+-- hide_filter
+-- filters out files from the project listing - wildcards are allowed.
+
+hide_filter = {
+	-- ".gitignore",
+	-- "src/*.h",
+	-- "test",
+	".git",
+	"obj",
+	"old"
+}
+
+Second, sort-order is a table with folder-names as indexes:
+
+
+-- sort_order
+-- Here you can list folders and set their individual sort order.
+--
+-- 0 - ascending
+-- 1 - descending
+-- 2 - ascending by extension
+-- 3 - descending by extension
+--
+-- default on folders that isn't listed here is 0 - ascending
+--
+
+
+sort_order = {
+	["./graphics/test/"] = 0,
+	["src"] = 2
+}
+
+a dot is the current folder, and all folder listed is below the current if a 
+full path name isn't listed.
+
+Last, open_folders is used to determine which folders should be open or closed
+on sciteproj program start:
+
+-- open folder - should a folder start as opened or closed?
+-- all folders default to false
+
+open_folders = {
+
+	["bin"] = true,
+	["src"] = true,
+	["src/test"] = false,
+	["po"] = false
+	
+}
+
+
+Thats it! Please enjoy using sciteproj!
+
 
