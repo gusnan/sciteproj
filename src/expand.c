@@ -142,9 +142,9 @@ gboolean get_expand_folder(gchar *folder_name)
 				key=temp;
 			}
 			
-			if (lua_type(lua, -1)==LUA_TNUMBER) { // value is number
+			if (lua_type(lua, -1)==LUA_TBOOLEAN) { // value is boolean
 				
-				num = lua_tonumber(lua, -1);
+				num = lua_toboolean(lua, -1);
 			}
 			
 			// gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, const gchar *basePath, GError **err);
