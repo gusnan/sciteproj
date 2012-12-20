@@ -181,6 +181,12 @@ GSList *load_filter_from_lua()
 		
 		lua_getglobal(lua, "hide_filter");
 		
+		// Make sure we got a value at all
+		if (lua_isnil(lua, -1)) {
+			goto EXITPOINT;
+		}
+
+		//	Make sure it is a table
 		if (!lua_istable(lua, -1)) {
 			// We didn't find a table with the required name, then just exit
 			goto EXITPOINT;

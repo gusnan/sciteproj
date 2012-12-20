@@ -116,7 +116,13 @@ gboolean get_expand_folder(gchar *folder_name)
 		run_script(lua);
 		
 		lua_getglobal(lua, "open_folders");
+
+		// Make sure we have a value at all
+		if (lua_isnil(lua, -1)) {
+			goto EXITPOINT;
+		}
 		
+		// And make sure that it is a table
 		if (!lua_istable(lua,-1)) {
 			printf("open_folders is supposed to be a table!\n");
 			goto EXITPOINT;

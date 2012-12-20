@@ -203,7 +203,13 @@ GCompareFunc get_sort_order_of_folder(gchar *folder_name)
 		run_script(lua);
 		
 		lua_getglobal(lua, "sort_order");
+
+		// Make sure that we have a value at all
+		if (lua_isnil(lua, -1)) {
+			goto EXITPOINT;
+		}
 		
+		// and make sure it really is a table
 		if (!lua_istable(lua, -1)) {
 			printf("sort_order is expected to be a table!\n");
 			goto EXITPOINT;
