@@ -48,7 +48,11 @@ void copy_filename_to_clipboard(GtkTreeModel *model, GtkTreeIter *iter)
 	GdkDisplay *display=NULL;
 	GtkClipboard *clipboard=NULL;
 
-	gtk_tree_model_get(model, iter, COLUMN_FILENAME, &nodename, COLUMN_ITEMTYPE, &nodeType, COLUMN_FILEPATH, &filePath, -1);
+	gtk_tree_model_get(model, iter,
+								COLUMN_FILENAME, &nodename,
+								COLUMN_ITEMTYPE, &nodeType,
+								COLUMN_FILEPATH, &filePath,
+								-1);
 
 	gchar *absFilePath = NULL; //g_strdup_printf("%s",filePath);
 
