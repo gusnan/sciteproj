@@ -32,8 +32,8 @@
 #include "file_utils.h"
 #include "sort.h"
 
+#include "expand.h"
 
-//static int folder_number=0;
 
 struct ParseFileStruct {
 	GtkTreeIter current_iter;
@@ -186,5 +186,7 @@ gboolean load_folder(gchar *path, GError **err)
 	
 	gtk_tree_path_free(iter_path);
 	
+	start_expand_tree(GTK_TREE_MODEL(model), &dot_folder_iterator);
+
 	return TRUE;
 }

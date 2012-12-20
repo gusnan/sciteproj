@@ -17,7 +17,7 @@ VERSION = $(shell cat ../VERSION)
 DATADIR = ${DESTDIR}${PREFIX}/share
 LOCALEDIR = ${DATADIR}/locale
 
-SOURCES = about.c addfiles.c clipboard.c file_utils.c filelist.c\
+SOURCES = about.c addfiles.c clipboard.c file_utils.c expand.c filelist.c\
 folder_config.c folder_to_xml.c graphics.c gui.c gui_callbacks.c load_folder.c\
 main.c prefs.c properties_dialog.c recent_files.c remove.c rename.c\
 scite_utils.c script.c search.c sort.c statusbar.c string_utils.c\
