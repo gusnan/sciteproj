@@ -269,3 +269,22 @@ int error(lua_State *L, const char *fmt, ...)
 	
 	return 0;
 }
+
+
+/**
+ *
+ */
+gboolean lua_global_exists(lua_State *lua, char *variable_name)
+{
+	gboolean result=TRUE;
+
+	lua_getglobal(lua, variable_name);
+
+	if (lua_isnil(lua, -1)!=0) {
+		result=FALSE;
+	} else {
+		lua_pop(lua, 1);
+	}
+
+	return result;
+}

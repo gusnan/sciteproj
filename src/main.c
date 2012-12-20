@@ -127,9 +127,11 @@ int main(int argc, char *argv[])
 
 	// Init preferences
 	if (!init_prefs(&err)) {
+		/*
 		g_print(_("Error initing preferences: %s"), err->message);
 		done_version_string();
 		return EXIT_FAILURE;
+		*/
 	}
 
 	// check environment variable

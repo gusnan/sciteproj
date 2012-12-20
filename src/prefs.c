@@ -271,7 +271,32 @@ gboolean init_prefs(GError **err)
 
 	prefs.hide_statusbar=FALSE;
 
-	gchar *test_prefs_filename=g_build_filename(current_directory,"sciteprojrc.lua", NULL);
+	// First, check the file ~/.config/sciteprojrc.lua
+
+	gchar *test_prefs_filename=g_build_filename(g_get_user_config_dir(), "sciteprojrc.lua",NULL);
+
+	if (g_file_test(test_prefs_filename, G_FILE_TEST_IS_REGULAR)) {
+
+		// the file exists, load it:
+
+		if (!g_file_get_contents(test_prefs_filename, &config_string, NULL, err)) {
+			result=FALSE;
+			goto ERROR;
+		}
+
+		if (load_lua_config(test_prefs_filename, config_string)!=0) {
+			printf("error loading LUA config!\n");
+		}
+
+		g_free(config_string);
+	}
+
+	g_free(test_prefs_filename);
+
+	// Otherwise, check current directory, and the directories that the previous
+	// versions used
+
+	test_prefs_filename=g_build_filename(current_directory,"sciteprojrc.lua", NULL);
 	
 	if (!g_file_test(test_prefs_filename, G_FILE_TEST_IS_REGULAR)) {
 
@@ -416,30 +441,52 @@ int load_lua_config(gchar *filename, gchar *full_string)
 
 	run_script(lua);
 	
-	prefs.xpos=lua_get_number(lua, "xpos");
-	prefs.ypos=lua_get_number(lua, "ypos");
-	
-	prefs.width=lua_get_number(lua, "width");
-	prefs.height=lua_get_number(lua, "height");
-	
-	prefs.search_xpos = (int)lua_get_number(lua, "search_xpos");
-	prefs.search_ypos = (int)lua_get_number(lua, "search_ypos");
-	prefs.search_width = lua_get_number(lua, "search_width");
-	prefs.search_height = (int)lua_get_number(lua, "search_height");
-	
-	prefs.search_alert_file_warnings = lua_get_boolean(lua, "search_alert_file_warnings");
-	
-	prefs.search_trim_results = lua_get_boolean(lua, "search_trim_results");
-	
-	prefs.give_scite_focus = lua_get_boolean(lua, "give_scite_focus");
-	prefs.search_give_scite_focus = lua_get_boolean(lua, "search_give_scite_focus");
+	if (lua_global_exists(lua, "xpos"))
+		prefs.xpos=lua_get_number(lua, "xpos");
 
-	prefs.show_recent=(gboolean)lua_get_boolean(lua, "show_recent");
-	prefs.recent_add_to_bottom=(gboolean)lua_get_boolean(lua, "recent_add_to_bottom");
-	
-	prefs.hide_statusbar = lua_get_boolean(lua, "hide_statusbar");
+	if (lua_global_exists(lua, "ypos"))
+		prefs.ypos=lua_get_number(lua, "ypos");
+
+	if (lua_global_exists(lua, "width"))
+		prefs.width=lua_get_number(lua, "width");
+
+	if (lua_global_exists(lua, "height"))
+		prefs.height=lua_get_number(lua, "height");
+
+	if (lua_global_exists(lua, "search_xpos"))
+		prefs.search_xpos = (int)lua_get_number(lua, "search_xpos");
+
+	if (lua_global_exists(lua, "search_ypos"))
+		prefs.search_ypos = (int)lua_get_number(lua, "search_ypos");
+
+	if (lua_global_exists(lua, "search_width"))
+		prefs.search_width = lua_get_number(lua, "search_width");
+
+	if (lua_global_exists(lua, "search_height"))
+		prefs.search_height = (int)lua_get_number(lua, "search_height");
+
+	if (lua_global_exists(lua, "search_alert_file_warnings"))
+		prefs.search_alert_file_warnings = lua_get_boolean(lua, "search_alert_file_warnings");
+
+	if (lua_global_exists(lua, "search_trim_results"))
+		prefs.search_trim_results = lua_get_boolean(lua, "search_trim_results");
+
+	if (lua_global_exists(lua, "give_scite_focus"))
+		prefs.give_scite_focus = lua_get_boolean(lua, "give_scite_focus");
+
+	if (lua_global_exists(lua, "search_give_scite_focus"))
+		prefs.search_give_scite_focus = lua_get_boolean(lua, "search_give_scite_focus");
+
+	if (lua_global_exists(lua, "show_recent"))
+		prefs.show_recent=(gboolean)lua_get_boolean(lua, "show_recent");
+
+	if (lua_global_exists(lua, "recent_add_to_bottom"))
+		prefs.recent_add_to_bottom=(gboolean)lua_get_boolean(lua, "recent_add_to_bottom");
+
+	if (lua_global_exists(lua, "hide_statusbar"))
+		prefs.hide_statusbar = lua_get_boolean(lua, "hide_statusbar");
 
 	done_script(lua);
-	
+
 	return 0;
 }
