@@ -131,21 +131,14 @@ gboolean get_expand_folder(gchar *folder_name)
 			if (lua_type(lua, -2)==LUA_TSTRING) { // key type is string
 				
 				key=g_strdup(lua_tostring(lua, -2));
-				
 				gchar *temp=clean_folder(key);
-				
 				g_free(key);
-				
 				key=temp;
-				
-				//printf(" key: %s\n", key);
 			}
 			
 			if (lua_type(lua, -1)==LUA_TNUMBER) { // value is number
 				
 				num = lua_tonumber(lua, -1);
-				
-				//printf(" value: %d\n", num);
 			}
 			
 			// gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, const gchar *basePath, GError **err);
