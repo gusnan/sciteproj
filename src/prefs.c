@@ -313,7 +313,7 @@ gboolean init_prefs(GError **err)
 
 	g_free(test_prefs_filename);
 
-	// Load preferences from config dot-file
+	// Load preferences from config
 
 	if (!g_file_get_contents(prefs_filename,&config_string,NULL,err)) {
 
@@ -354,6 +354,9 @@ gboolean init_prefs(GError **err)
 		g_strfreev(savedlist);
 	} else {
 		// ----- New style (LUA) config
+
+		
+		
 		//if (!load_lua_config(config_string)) {
 		if (load_lua_config(prefs_filename, config_string)!=0) {
 			printf("error loading LUA config!\n");
