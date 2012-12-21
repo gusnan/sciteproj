@@ -3,10 +3,10 @@ ChangeLog:
 ----------
 
 0.8.00
+	* Remove XML-based project file loading and saving - work directly on folder 
+	  using filters and sorting instead.
 	* Load prefs from setup file in the requested folder, instead of from user 
 	  config folder
-	* Remove project file loading and saving - work directly on folder using
-	  filters and sorting instead.
 
 0.7.05
 	* Fix menu translations context to actually work
