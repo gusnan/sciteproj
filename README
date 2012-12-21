@@ -108,8 +108,8 @@ It follows LUA syntax, and uses three tables to filter hidden files, sort order,
 and to determine which folders should be open on sciteproj start. (A table is
 a lua type that implements associative arrays)
 
-First, hide_filter should look something like this (lines starting with "--" is
-comments, and not read by the interpreter):
+First, hide_filter should look something like this (lines starting with "--" 
+are comments, and not read by the LUA interpreter):
 
 -- hide_filter
 -- filters out files from the project listing - wildcards are allowed.
