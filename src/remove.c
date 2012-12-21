@@ -90,11 +90,77 @@ void remove_selected_items ( GtkTreeView *treeview )
 /**
  *
  */
+GtkWidget *do_question_dialog(const gchar *buffer)
+{
+	
+	GtkWidget *dialog = gtk_message_dialog_new(NULL, 
+															GTK_DIALOG_MODAL, 
+															GTK_MESSAGE_QUESTION,
+															GTK_BUTTONS_OK_CANCEL,
+															"%s", buffer);
+	return dialog;
+}
+
+
+/**
+ *
+ */
+gboolean really_do_delete_question(const gchar *format, ...)
+{
+	GtkWidget *dialog = NULL;
+	gint dialog_response;
+	char buffer[256];
+	gboolean result;
+	
+	va_list args;
+	va_start(args, format);
+	vsprintf(buffer, format, args);
+
+	dialog = do_question_dialog(buffer);
+	
+	va_end(args);
+	
+	result=TRUE;
+
+	dialog_response = gtk_dialog_run(GTK_DIALOG (dialog));
+	if (dialog_response_is_exit(dialog_response)) {
+		result=FALSE;
+		goto EXITPOINT;
+	}
+	
+	// Ask again to really make sure the user knows what he/she is doing.
+	if (result) {
+		
+		gtk_widget_destroy(dialog);
+
+		gchar *extended_question_string = g_strdup_printf(
+								"Are you really really sure? \n"
+								"This will actually delete the files\n"
+								"from the filesystem.\n\n%s",buffer);
+
+		dialog = do_question_dialog(extended_question_string);
+
+		dialog_response=gtk_dialog_run(GTK_DIALOG(dialog));
+		if (dialog_response_is_exit(dialog_response)) {
+			result=FALSE;
+			goto EXITPOINT;
+		}
+	}
+	
+EXITPOINT:
+	
+	gtk_widget_destroy(dialog);
+	return result;
+}
+
+
+/**
+ *
+ */
 void do_remove_node(gboolean ignore_clicked_node)
 {
 	GError *err = NULL;
 	GtkWidget *dialog = NULL;
-	gint dialogResponse;
 	gchar *nodename = NULL;
 
 	gint selected_rows=0;
@@ -137,62 +203,38 @@ void do_remove_node(gboolean ignore_clicked_node)
 
 	if (multiple_selected) {
 
-		dialog=gtk_message_dialog_new(NULL,
-		GTK_DIALOG_MODAL,
-		GTK_MESSAGE_QUESTION,
-		GTK_BUTTONS_OK_CANCEL,
-		_("Remove all selected items?")
-		/*, nodename*/);
-
-		dialogResponse = gtk_dialog_run(GTK_DIALOG (dialog));
-
-		if (dialog_response_is_exit(dialogResponse)) {
-			goto EXITPOINT;
+		if (really_do_delete_question(_("Remove all selected items?"))) {
+			// remove them!
+			remove_selected_items(GTK_TREE_VIEW(projectTreeView));
 		}
 
-		// remove them!
-		remove_selected_items(GTK_TREE_VIEW(projectTreeView));
 
 	} else {
+		
+		gboolean really_do_delete=FALSE;
 
 		if (clicked_node.type == ITEMTYPE_FILE) {
 			if (nodename) {
-				dialog = gtk_message_dialog_new(NULL, 
-												GTK_DIALOG_MODAL, 
-												GTK_MESSAGE_QUESTION,
-												GTK_BUTTONS_OK_CANCEL,
-												_("Remove file '%s' from project?"),
-												nodename);
+				really_do_delete = really_do_delete_question(_("Delete file '%s'?"), nodename);
+				
 			} else {
-				dialog = gtk_message_dialog_new(NULL, 
-												GTK_DIALOG_MODAL, 
-												GTK_MESSAGE_QUESTION, 
-												GTK_BUTTONS_OK_CANCEL, 
-												_("Remove file from project?"));
+				really_do_delete = really_do_delete_question(_("Delete file?"));
 			}
 		}
 		else {
 			if (nodename) {
-				dialog = gtk_message_dialog_new(NULL, 
-												GTK_DIALOG_MODAL,
-												GTK_MESSAGE_QUESTION,
-												GTK_BUTTONS_OK_CANCEL,
-												_("Remove group '%s' and any contained files from project?"),
-												nodename);
+				really_do_delete = really_do_delete_question(_("Delete folder '%s' and any contained files?"),nodename);
+				
 			} else {
-				dialog = gtk_message_dialog_new(NULL,
-												GTK_DIALOG_MODAL,
-												GTK_MESSAGE_QUESTION,
-												GTK_BUTTONS_OK_CANCEL,
-												_("Remove group and any contained files from project?"));
+				really_do_delete = really_do_delete_question(_("Delete folder and any contained files?"));
 			}
 		}
 
-		dialogResponse = gtk_dialog_run(GTK_DIALOG (dialog));
-		if (dialog_response_is_exit(dialogResponse)) {
+		if (!really_do_delete) {
 			goto EXITPOINT;
 		}
 
+		// Delete the file
 
 		// Remove the node
 
