@@ -121,7 +121,6 @@ hide_filter = {
 
 Second, sort-order is a table with folder-names as indexes:
 
-
 -- sort_order
 -- Here you can list folders and set their individual sort order.
 --
