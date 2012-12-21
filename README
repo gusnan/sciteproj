@@ -8,7 +8,10 @@ it's director interface to communicate between SciteProj and SciTE. See
 
 http://www.scintilla.org/SciTEDirector.html
 
-for more information. SciteProj saves the project file to disk in XML format.
+for more information. SciteProj is used to browse folders on the harddrive in
+customizable ways. Previous versions used to load "projects" from XML files,
+but this was dropped, and now sciteproj shows and works directly on your
+harddrive contents filterable and sortable as you wish. 
 
 
 Running:
