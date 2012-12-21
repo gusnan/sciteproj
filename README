@@ -58,7 +58,8 @@ Also, the following options exist:
 * use_stock_folder_icon
 	Should we use the system folder icon, or the ones provided by sciteproj?
 	The sciteproj one are different icons for opened and closed directory,
-	while the stock ones are the same for open and closed.
+	while when using the stock ones there are only one icon for folders, open or 
+	closed.
 
 The search dialogs size and position can also be customzed via the 
 configuration file. See the variables 
