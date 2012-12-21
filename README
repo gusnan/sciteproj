@@ -1,6 +1,6 @@
 
 SciteProj
----------
+=========
 
 SciteProj is a Project Manager for usage with the SciTE text editor.
 It is based on ScitePM by Roy Wood. It is a "director" of SciTE, using
@@ -14,8 +14,8 @@ but this was dropped, and now sciteproj shows and works directly on your
 harddrive contents filterable and sortable as you wish. 
 
 
-Running:
---------
+Running
+=======
 
 SciteProj will load a configuration from the file sciteprojrc.lua first in the 
 directory specified by $XDG_CONFIG_HOME each program start. This is most likely
@@ -38,7 +38,7 @@ from it and act on that to determine how to view the folder. Please notice that
 I now use LUA, which amongst other means that boolean values are case sensitive
 for lowercase and TRUE and FALSE are invalid as values.
 
-The options availible in the file are:
+The options availible in the config file are:
 
 * The window geometry
 
@@ -158,4 +158,8 @@ open_folders = {
 
 Thats it! Please enjoy using sciteproj!
 
+Credits
+=======
 
+SciteProj is originally based on the program ScitePM by Roy Wood and Martin 
+Andrews, and now developed by Andreas Rönnquist <gusnan1 (at) gusnan (dot) se>.
