@@ -485,6 +485,9 @@ int load_lua_config(gchar *filename, gchar *full_string)
 
 	if (lua_global_exists(lua, "hide_statusbar"))
 		prefs.hide_statusbar = lua_get_boolean(lua, "hide_statusbar");
+	
+	if (lua_global_exists(lua, "use_stock_folder_icon"))
+		prefs.use_stock_folder_icon = lua_get_boolean(lua, "use_stock_folder_icon");
 
 	done_script(lua);
 

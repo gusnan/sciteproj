@@ -52,6 +52,8 @@ typedef struct {
 	gboolean search_trim_results;
 
 	gboolean hide_statusbar;
+	
+	gboolean use_stock_folder_icon;
 
 } sciteproj_prefs;
 
