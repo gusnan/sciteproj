@@ -30,7 +30,7 @@ extern GdkPixbuf *directory_open_pixbuf;
 
 extern GdkPixbuf *program_icon_pixbuf;
 
-gboolean load_graphics(GError **err);
+gboolean load_graphics(GtkWidget *widget, GError **err);
 void unload_graphics();
 
 extern GdkCursor *standard_cursor;

@@ -169,7 +169,7 @@ gboolean setup_gui(GError **err)
 
 	// TODO: call these in load_graphics instead
 
-	if (!(load_graphics(err))) {
+	if (!(load_graphics(sMainWindow, err))) {
 		goto EXITPOINT;
 	}
 

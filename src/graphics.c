@@ -55,14 +55,26 @@ GdkCursor *busy_cursor=NULL;
  *	Loads all graphics required by the program
  * @return TRUE on success, FALSE on failure
  * @param err returns any errors
+ * @param widget - we need a widget for the gtk_widget_render_icon function
+ * 
  */
-gboolean load_graphics(GError **err)
+gboolean load_graphics(GtkWidget *widget, GError **err)
 {
 	program_icon_pixbuf=gdk_pixbuf_new_from_xpm_data((const char **)sciteproj_xpm);
 
-	directory_closed_pixbuf=gdk_pixbuf_new_from_xpm_data((const char**)dir_close_xpm);
-	directory_open_pixbuf=gdk_pixbuf_new_from_xpm_data((const char **)dir_open_xpm);
+	//directory_closed_pixbuf=gdk_pixbuf_new_from_xpm_data((const char**)dir_close_xpm);
+	
 
+	// use GTK_STOCK_DIRECTORY
+#if GTK_MAJOR_VERSION>=3
+	directory_closed_pixbuf = gtk_widget_render_icon_pixbuf(widget, GTK_STOCK_DIRECTORY, GTK_ICON_SIZE_MENU);
+	directory_open_pixbuf = gtk_widget_render_icon_pixbuf(widget, GTK_STOCK_DIRECTORY, GTK_ICON_SIZE_MENU);
+#else
+	directory_closed_pixbuf = gtk_widget_render_icon(widget, GTK_STOCK_DIRECTORY, GTK_ICON_SIZE_MENU, NULL);
+	directory_open_pixbuf = gtk_widget_render_icon(widget, GTK_STOCK_DIRECTORY, GTK_ICON_SIZE_MENU, NULL);
+#endif
+	//directory_open_pixbuf=gdk_pixbuf_new_from_xpm_data((const char **)dir_open_xpm);
+	
 	standard_cursor=gdk_cursor_new(GDK_X_CURSOR);
 	busy_cursor=gdk_cursor_new(GDK_WATCH);
 
