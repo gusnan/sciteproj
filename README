@@ -140,8 +140,8 @@ sort_order = {
 }
 
 
-a dot is the current folder, and all folder listed is below the current if a 
-full path name isn't listed.
+a dot is the current folder, and all folder listed is below the "project" path
+if a full path name isn't listed.
 
 Last, open_folders is used to determine which folders should be open or closed
 on sciteproj program start:
