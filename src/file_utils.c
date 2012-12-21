@@ -561,6 +561,12 @@ gchar *clean_folder(gchar *infolder)
 	gchar *temp=infolder;
 	
 	int len=strlen(infolder);
+	
+	if (g_strcmp0(infolder,"./")==0) {
+		result=g_strdup_printf(".");
+		
+		return result;
+	}
 				
 	if (temp) {
 		if ((temp[0]=='.') && (temp[1]==G_DIR_SEPARATOR)) {
