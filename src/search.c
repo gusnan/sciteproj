@@ -124,6 +124,7 @@ static void destroy_search_dialog_cb(GtkWidget *widget,GdkEvent *event,gpointer 
 G_MODULE_EXPORT void close_button_pressed_cb(GtkWidget *widget,gpointer data);
 
 static void search_button_clicked_cb(GtkButton *button,gpointer data);
+static void cancel_button_clicked_cb(GtkButton *button,gpointer data);
 
 static gpointer thread_func(Data *data);
 
@@ -152,6 +153,7 @@ void search_dialog()
 	GtkWidget *find_label;
 
 	GtkWidget *close_button;
+	GtkWidget *cancel_button;
 
 	GtkWidget *scrolled_win;
 
@@ -223,11 +225,16 @@ void search_dialog()
 	data->number_of_results=0;
 
 	data->search_button=gtk_button_new_from_stock(GTK_STOCK_FIND);
+	
+	cancel_button = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
 
 #if GTK_MAJOR_VERSION>=3
 	gtk_grid_attach_next_to(GTK_GRID(grid),data->search_button,data->search_string_entry,GTK_POS_RIGHT,1,1);
+	
+	gtk_grid_attach_next_to(GTK_GRID(grid),cancel_button, data->search_button,GTK_POS_RIGHT,1,1);
 #else
 	gtk_box_pack_start(GTK_BOX(hbox),data->search_button,FALSE,FALSE,5);
+	gtk_box_pack_end(GTK_BOX(hbox),cancel_button,FALSE,FALSE,5);
 
 	vbox=gtk_vbox_new(FALSE,8);
 
@@ -338,6 +345,8 @@ void search_dialog()
 	g_signal_connect(G_OBJECT(close_button),"clicked",G_CALLBACK(close_button_pressed_cb),data);
 	g_signal_connect(G_OBJECT(data->search_button),"clicked",G_CALLBACK(search_button_clicked_cb),data);
 	g_signal_connect(G_OBJECT(window),"key-press-event",G_CALLBACK(search_key_press_cb),data);
+	
+	g_signal_connect(G_OBJECT(cancel_button), "clicked", G_CALLBACK(cancel_button_clicked_cb), data);
 
 	gtk_widget_show_all(window);
 }
@@ -597,6 +606,7 @@ static gpointer thread_func(Data *data)
 				if (!search_list) do_work=FALSE;
 			}
 		}
+		sleep(1);
 	}
 
 	g_async_queue_unref(data->queue);
@@ -1028,4 +1038,10 @@ G_MODULE_EXPORT void close_button_pressed_cb(GtkWidget *widget,gpointer user_dat
 
 	// close the window (calls the destroy_search_dialog_cb function)
 	gtk_widget_destroy(GTK_WIDGET(window));
+}
+
+
+static void cancel_button_clicked_cb(GtkButton *button,gpointer user_data)
+{
+	cancel_search(user_data);
 }
