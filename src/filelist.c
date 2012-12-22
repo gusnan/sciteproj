@@ -77,7 +77,7 @@ static void printitem(gpointer data,gpointer priv)
 	gchar *filename=file->filename;
 	gchar *full_path=file->full_path;
 
-	printf("File: %d - %s, %s\n",file->count,filename,full_path);
+	printf("File: %s, %s\n",filename,full_path);
 
 }
 
@@ -130,22 +130,24 @@ void add_item(gchar *filename, gchar *full_path)
 	File *newFile;
 
 //	printf("Full:%s\n",full_path);
-	newFile=exists_in_list(full_path);
+	//newFile=exists_in_list(full_path);
 
-	if (newFile==NULL) {
+	//if (newFile==NULL) {
 		// doesn't exist in list, create it
 
 		newFile=(File*)(g_malloc0(sizeof(File)));
 
 		newFile->filename=g_strdup(filename);
 		newFile->full_path=g_strdup(full_path);
-		newFile->count=1;
+		//newFile->count=1;
 
 		list=g_list_append(list,newFile);
 
+	/*
 	} else {
 		newFile->count++;
 	}
+	*/
 }
 
 
@@ -158,15 +160,8 @@ gboolean remove_item(gchar *filename, gchar *full_path)
 
 	if (file) {
 
-		if (file->count>1) {
-			// decrease the usage count
-			file->count--;
-
-		} else {
 			// if the usage count is zero, remove the object from the list
-			list=g_list_remove(list,file);
-
-		}
+		list=g_list_remove(list,file);
 		return TRUE;
 	}
 

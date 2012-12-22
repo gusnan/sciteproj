@@ -30,7 +30,7 @@
 struct File {
 	gchar *filename;
 	gchar *full_path;
-	int count;
+	//int count;
 };
 
 typedef struct File File;
