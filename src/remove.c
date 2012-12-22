@@ -398,7 +398,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 				
 				GtkWidget *dialog = gtk_message_dialog_new(NULL,
 																GTK_DIALOG_MODAL, 
-																GTK_MESSAGE_QUESTION,
+																GTK_MESSAGE_INFO,
 																GTK_BUTTONS_OK,
 																"Folder need to be empty to be able to delete it!");
 				gtk_dialog_run(GTK_DIALOG(dialog));
