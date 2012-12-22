@@ -32,14 +32,28 @@
 
 #include "remove.h"
 
+#include "file_utils.h"
+
 
 /**
  *
  */
-gboolean delete_file(gchar *full_filename)
+gboolean delete_file(gchar *filename,GError **error)
 {
-	printf("Filname: %s\n", full_filename);
-	return TRUE;
+	gboolean result=FALSE;
+	
+	gchar *abs_file_path;
+		
+	if (!relative_path_to_abs_path(filename, &abs_file_path, get_project_directory(), error)) {
+		result=FALSE;
+		goto EXITPOINT;
+	}
+
+	printf("Filname: %s\n", abs_file_path);
+	result=TRUE;
+	
+EXITPOINT:
+	return result;
 }
 
 
