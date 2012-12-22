@@ -235,11 +235,11 @@ void do_remove_node(gboolean ignore_clicked_node)
 		}
 	}
 
-	GtkTreeSelection *treeSelect;
+	GtkTreeSelection *tree_select;
 
-	treeSelect=gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
+	tree_select=gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
 
-	selected_rows=gtk_tree_selection_count_selected_rows(treeSelect);
+	selected_rows=gtk_tree_selection_count_selected_rows(tree_select);
 	if (selected_rows>1) {
 		multiple_selected=TRUE;
 	}
