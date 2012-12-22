@@ -36,6 +36,16 @@
 /**
  *
  */
+gboolean delete_file(gchar *full_filename)
+{
+	printf("Filname: %s\n", full_filename);
+	return TRUE;
+}
+
+
+/**
+ *
+ */
 GList *get_list_of_selected_items_rows(GtkTreeView *treeview)
 {
 	GtkTreeSelection *selection = gtk_tree_view_get_selection(treeview);
@@ -49,6 +59,50 @@ GList *get_list_of_selected_items_rows(GtkTreeView *treeview)
 	GList *result_list = gtk_tree_selection_get_selected_rows(selection, &model);
 	
 	return result_list;
+}
+
+
+/**
+ *
+ */
+GList *get_list_of_selected_items_string_list(GtkTreeView *treeview)
+{
+	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+	GList *row_list = get_list_of_selected_items_rows(treeview);
+	
+	GList *string_list = NULL;
+	
+	// Begin at the end, and go to the start
+	row_list = g_list_last(row_list);
+	
+	GtkTreeIter iter;
+	
+	int count=0;
+		
+	while (row_list) {
+		GtkTreePath *path = (GtkTreePath *)row_list->data;
+		
+		if (path) {
+		
+			gtk_tree_model_get_iter(model, &iter, path);
+			
+			gchar *path;
+			
+			gtk_tree_model_get(model, &iter, COLUMN_FILEPATH, &path, -1);
+			
+			string_list = g_list_prepend(string_list, path);
+			
+			count++;
+			
+		}
+		
+		row_list = row_list -> prev;
+	}
+	
+	g_list_foreach (row_list, (GFunc)gtk_tree_path_free, NULL);
+	g_list_free (row_list);
+	
+	return string_list;
 }
 
 
@@ -273,9 +327,20 @@ void do_remove_node(gboolean ignore_clicked_node)
 
 		if (really_do_delete_question(question_string)) {
 			// remove them!
+			
+			GList *string_list = get_list_of_selected_items_string_list(GTK_TREE_VIEW(projectTreeView));
+			
+			while (string_list) {
+				gchar *temp = (gchar *)string_list->data;
+				
+				delete_file(temp);
+				
+				string_list = string_list->next;
+			};
+			
 			remove_selected_items(GTK_TREE_VIEW(projectTreeView));
 		}
-		
+				
 		g_free(file_list_string);
 		
 		g_free(question_string);
@@ -307,6 +372,15 @@ void do_remove_node(gboolean ignore_clicked_node)
 		}
 
 		// Delete the file
+
+		gchar *filepath;
+		
+		GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
+		
+		gtk_tree_model_get(tree_model, &clicked_node.iter, 
+										COLUMN_FILEPATH, &filepath, -1);
+		
+		delete_file(filepath);
 
 		// Remove the node
 
