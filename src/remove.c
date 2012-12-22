@@ -346,7 +346,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 		
 		gchar *file_list_string = get_list_of_selected_items_strings(GTK_TREE_VIEW(projectTreeView));
 		
-		gchar *question_string = g_strdup_printf("%s\n%s",_("Remove all selected items?"),file_list_string);
+		gchar *question_string = g_strdup_printf("%s\n%s",_("Delete all selected items?"),file_list_string);
 
 		if (really_do_delete_question(question_string)) {
 			// remove them!
@@ -441,7 +441,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 												GTK_DIALOG_MODAL,
 												GTK_MESSAGE_ERROR,
 												GTK_BUTTONS_OK,
-												_("Could not remove the selected node: \n\n%s"),
+												_("Could not delete the selected node: \n\n%s"),
 												err->message);
 
 			gtk_dialog_run(GTK_DIALOG (errDialog));
