@@ -87,13 +87,15 @@ gchar *get_list_of_selected_items_strings(GtkTreeView *treeview)
 			
 			if (count <7) {
 				gchar *temp = g_strconcat(result_string, path, "\n", NULL);
-				
 				g_free(result_string);
-				
 				result_string=temp;
 				
-				count++;
+			} else if (count == 7) {
+				gchar *temp = g_strconcat(result_string, "...\n", NULL);
+				g_free(result_string);
+				result_string=temp;
 			}
+			count++;
 			
 		}
 		
