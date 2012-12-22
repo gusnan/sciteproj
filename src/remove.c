@@ -82,8 +82,6 @@ gchar *get_list_of_selected_items_strings(GtkTreeView *treeview)
 			
 			gtk_tree_model_get(model, &iter, 
 								COLUMN_FILEPATH, &path, -1);
-
-			//printf("Path: %s\n", path);
 			
 			if (count <7) {
 				gchar *temp = g_strconcat(result_string, path, "\n", NULL);
