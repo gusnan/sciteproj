@@ -36,20 +36,50 @@
 
 
 /**
- *
+ * delete_file
+ * 	deletes a file (or directory) from the filesystem - directories needs to
+ * be empty to be able to delete them.
  */
 gboolean delete_file(gchar *filename,GError **error)
 {
 	gboolean result=FALSE;
 	
-	gchar *abs_file_path;
+	printf("delete_file\n");
+	
+	printf("filename: %s\n", filename);
+	
+	gchar *file_to_delete;
+	
+	if (g_file_test(filename, G_FILE_TEST_IS_DIR)) {
+		printf("Foldername: ");
+		file_to_delete=filename;
+			
+		if (get_number_of_files_in_folder(file_to_delete)>0) {
+			
+			GtkWidget *dialog = gtk_message_dialog_new(NULL,
+															GTK_DIALOG_MODAL, 
+															GTK_MESSAGE_QUESTION,
+															GTK_BUTTONS_OK,
+															"Folder need to be empty to be able to delete it!");
+			gtk_dialog_run(GTK_DIALOG(dialog));
+			
+			gtk_widget_destroy(dialog);
+
+			result=FALSE;
+			goto EXITPOINT;
+		}
 		
-	if (!relative_path_to_abs_path(filename, &abs_file_path, get_project_directory(), error)) {
-		result=FALSE;
-		goto EXITPOINT;
+	} else {
+
+		printf("Filename: ");
+		
+		if (!relative_path_to_abs_path(filename, &file_to_delete, get_project_directory(), error)) {
+			result=FALSE;
+			goto EXITPOINT;
+		}
 	}
 
-	printf("Filname: %s\n", abs_file_path);
+	printf("%s\n", file_to_delete);
 	result=TRUE;
 	
 EXITPOINT:
@@ -375,6 +405,10 @@ void do_remove_node(gboolean ignore_clicked_node)
 			}
 		}
 		else {
+			
+			// TODO: check if the folder is empty already here before "confirmation" questions
+			
+			
 			if (nodename) {
 				really_do_delete = really_do_delete_question(_("Delete folder '%s' and any contained files?"),nodename);
 				
