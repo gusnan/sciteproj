@@ -266,7 +266,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 		
 		gchar *file_list_string = get_list_of_selected_items_strings(GTK_TREE_VIEW(projectTreeView));
 		
-		gchar *question_string = g_strdup_printf("%s\%s",_("Remove all selected items?"),file_list_string);
+		gchar *question_string = g_strdup_printf("%s\n%s",_("Remove all selected items?"),file_list_string);
 
 		if (really_do_delete_question(question_string)) {
 			// remove them!
