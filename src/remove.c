@@ -34,24 +34,85 @@
 
 
 /**
+ *
+ */
+GList *get_list_of_selected_items_rows(GtkTreeView *treeview)
+{
+	GtkTreeSelection *selection = gtk_tree_view_get_selection(treeview);
+	GtkTreeModel *model;
+	
+	if (gtk_tree_selection_count_selected_rows(selection) == 0)
+		return NULL;
+	
+	model = gtk_tree_view_get_model(treeview);
+	
+	GList *result_list = gtk_tree_selection_get_selected_rows(selection, &model);
+	
+	return result_list;
+}
+
+
+/**
+ * get_list_of_selected_items_strings
+ * 	Will only give the 7 first values, orelse it probably wouldn't fit in a
+ *		dialog
+ */
+gchar *get_list_of_selected_items_strings(GtkTreeView *treeview)
+{
+	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
+	GList *list = get_list_of_selected_items_rows(treeview);
+	
+	// Begin at the end, and go to the start
+	list = g_list_last(list);
+	
+	GtkTreeIter iter;
+	
+	gchar *result_string = g_strdup("\n\n");
+	
+	int count=0;
+		
+	while (list) {
+		GtkTreePath *path = (GtkTreePath *)list->data;
+		
+		if (path) {
+		
+			gtk_tree_model_get_iter(model, &iter, path);
+			
+			gchar *path;
+			
+			gtk_tree_model_get(model, &iter, 
+								COLUMN_FILEPATH, &path, -1);
+
+			//printf("Path: %s\n", path);
+			
+			if (count <7) {
+				gchar *temp = g_strconcat(result_string, path, "\n", NULL);
+				
+				g_free(result_string);
+				
+				result_string=temp;
+				
+				count++;
+			}
+			
+		}
+		
+		list = list -> prev;
+	}
+		
+	return result_string;
+}
+
+
+/**
  *		Actually remove selected nodes
  */
 void remove_selected_items ( GtkTreeView *treeview )
 {
-	GtkTreeSelection *selection = gtk_tree_view_get_selection ( treeview );
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-
-	//GtkTreeStore *store;
-
 	GError *error=NULL;
-
-	if (gtk_tree_selection_count_selected_rows(selection) == 0)
-		return;
-
-	model=gtk_tree_view_get_model(treeview);
-
-	GList *list = gtk_tree_selection_get_selected_rows( selection, &model );
+	GtkTreeIter iter;
+	GtkTreeModel *model=gtk_tree_view_get_model(treeview);
+	GList *list = get_list_of_selected_items_rows(treeview); // gtk_tree_selection_get_selected_rows( selection, &model );
 
 	int nRemoved = 0;
 
@@ -202,11 +263,19 @@ void do_remove_node(gboolean ignore_clicked_node)
 	// Confirm removal from project
 
 	if (multiple_selected) {
+		
+		gchar *file_list_string = get_list_of_selected_items_strings(GTK_TREE_VIEW(projectTreeView));
+		
+		gchar *question_string = g_strdup_printf("%s\%s",_("Remove all selected items?"),file_list_string);
 
-		if (really_do_delete_question(_("Remove all selected items?"))) {
+		if (really_do_delete_question(question_string)) {
 			// remove them!
 			remove_selected_items(GTK_TREE_VIEW(projectTreeView));
 		}
+		
+		g_free(file_list_string);
+		
+		g_free(question_string);
 
 
 	} else {
