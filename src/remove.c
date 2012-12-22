@@ -318,8 +318,11 @@ void do_remove_node(gboolean ignore_clicked_node)
 															GTK_DIALOG_MODAL, 
 															GTK_MESSAGE_INFO,
 															GTK_BUTTONS_OK,
-															"You are in write protected mode!\n"
-															"You cannot delete anything using sciteproj in this mode.");
+															"You are in write protected mode!\n\n"
+															"You cannot delete anything when using sciteproj in this mode.\n"
+															"To be able to delete files, either use your terminal, your\n"
+															"file-manager of choice, or you can set the 'write_protect'\n"
+															"variable in your sciteprojrc.lua to false.\n");
 		
 		gtk_dialog_run(GTK_DIALOG(dialog));
 		
