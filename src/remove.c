@@ -99,6 +99,9 @@ gchar *get_list_of_selected_items_strings(GtkTreeView *treeview)
 		
 		list = list -> prev;
 	}
+	
+	g_list_foreach (list, (GFunc)gtk_tree_path_free, NULL);
+	g_list_free (list);	
 		
 	return result_string;
 }
