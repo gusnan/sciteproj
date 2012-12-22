@@ -34,6 +34,8 @@
 
 #include "file_utils.h"
 
+#include "prefs.h"
+
 
 /**
  * delete_file
@@ -307,6 +309,25 @@ void do_remove_node(gboolean ignore_clicked_node)
 	gint selected_rows=0;
 
 	gboolean multiple_selected=FALSE;
+	
+	// Check if we are in "write-protect" mode
+	
+	if (prefs.write_protect) {
+			
+		dialog = gtk_message_dialog_new(NULL, 
+															GTK_DIALOG_MODAL, 
+															GTK_MESSAGE_INFO,
+															GTK_BUTTONS_OK,
+															"You are in write protected mode!\n"
+															"You cannot delete anything using sciteproj in this mode.");
+		
+		gtk_dialog_run(GTK_DIALOG(dialog));
+		
+		gtk_widget_destroy(dialog);
+		dialog=NULL;
+		
+		goto EXITPOINT;
+	}
 
 	// Make sure a node has been selected
 	if (!ignore_clicked_node) {

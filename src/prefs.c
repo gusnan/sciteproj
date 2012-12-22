@@ -489,6 +489,9 @@ int load_lua_config(gchar *filename, gchar *full_string)
 	if (lua_global_exists(lua, "use_stock_folder_icon"))
 		prefs.use_stock_folder_icon = lua_get_boolean(lua, "use_stock_folder_icon");
 
+	if (lua_global_exists(lua, "write_protect"))
+		prefs.write_protect = lua_get_boolean(lua, "write_protect");
+	
 	done_script(lua);
 
 	return 0;
