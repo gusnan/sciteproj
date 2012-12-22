@@ -333,7 +333,9 @@ void do_remove_node(gboolean ignore_clicked_node)
 			while (string_list) {
 				gchar *temp = (gchar *)string_list->data;
 				
-				delete_file(temp);
+				if (!delete_file(temp, &err)) {
+					goto EXITPOINT;
+				}
 				
 				string_list = string_list->next;
 			};
@@ -380,7 +382,9 @@ void do_remove_node(gboolean ignore_clicked_node)
 		gtk_tree_model_get(tree_model, &clicked_node.iter, 
 										COLUMN_FILEPATH, &filepath, -1);
 		
-		delete_file(filepath);
+		if (!delete_file(filepath, &err)) {
+			goto EXITPOINT;
+		}
 
 		// Remove the node
 
