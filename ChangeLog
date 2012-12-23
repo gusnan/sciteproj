@@ -7,6 +7,8 @@ ChangeLog:
 	  using filters and sorting instead.
 	* Load prefs from setup file in the requested folder, and secondarily (if an 
 	  option doesn't exist here), check in the user config folder.
+	* Remove search functionality - "Find in Files" is already available in 
+	  SciTE.
 
 0.7.05
 	* Fix menu translations context to actually work
