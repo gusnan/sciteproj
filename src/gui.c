@@ -45,7 +45,6 @@
 #include "properties_dialog.h"
 #include "file_utils.h"
 
-#include "search.h"
 #include "clipboard.h"
 
 #include "rename.h"
