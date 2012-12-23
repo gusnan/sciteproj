@@ -60,8 +60,6 @@
 
 #include "menus.h"
 
-#include "search.h"
-
 #include "gtk3_compat.h"
 
 

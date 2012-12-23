@@ -39,8 +39,6 @@ static gchar *sMenuDefXML = (gchar*)\
 				<menuitem name=\"ExpandAllGroupsItem\" action=\"ExpandAllGroupsAction\" /> \
 				<menuitem name=\"CollapseAllGroupsItem\" action=\"CollapseAllGroupsAction\" /> \
 				<separator/> \
-				<menuitem name=\"SearchItem\" action=\"SearchAction\" /> \
-				<separator/> \
 				<menuitem name=\"Edit Options\" action=\"EditOptionsAction\" /> \
 			</menu> \
 			<menu name=\"ViewMenu\" action=\"ViewMenuAction\"> \
@@ -113,9 +111,6 @@ static GtkActionEntry sMenuActions[] =
 		NULL, G_CALLBACK(expand_all_items_cb) },
 	{ "CollapseAllGroupsAction", NULL, NC_("Menu|Edit|","Collapse all groups"), "<control><shift>C",
 		NULL, G_CALLBACK(collapse_all_items_cb) },
-
-	{ "SearchAction", GTK_STOCK_FIND, NC_("Menu|Edit|","Search"), "<control>F",
-		NULL, G_CALLBACK(search_dialog_cb) },
 
 	{ "AboutAction", GTK_STOCK_ABOUT, NC_("Menu|Help|","_About"), "",
 		NULL, G_CALLBACK(about_menu_cb) },
@@ -205,8 +200,6 @@ static struct ContextString menustrings[]= {
 
 	{ "Menu|Edit|","Expand all groups"},
 	{ "Menu|Edit|","Collapse all groups"},
-
-	{ "Menu|Edit|","Search" },
 
 	{ "Menu|Help|","_About"},
 

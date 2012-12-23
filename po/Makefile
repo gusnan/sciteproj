@@ -20,8 +20,8 @@ LOCALEDIR = ${DATADIR}/locale
 SOURCES = about.c addfiles.c clipboard.c file_utils.c expand.c filelist.c\
 folder_config.c folder_to_xml.c graphics.c gui.c gui_callbacks.c load_folder.c\
 main.c prefs.c properties_dialog.c recent_files.c remove.c rename.c\
-scite_utils.c script.c search.c sort.c statusbar.c string_utils.c\
-tree_manipulation.c menus.h
+scite_utils.c script.c sort.c statusbar.c string_utils.c tree_manipulation.c\
+menus.h
 
 XG_ARGS = --keyword=_ --keyword=N_ --keyword=NC_:1c,2 -w 80 --package-name=${NAME} --package-version=${VERSION} --msgid-bugs-address=gusnan@gusnan.se
 LANGUAGES = sv_SE
