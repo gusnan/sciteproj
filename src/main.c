@@ -45,6 +45,7 @@
 #include "string_utils.h"
 #include "load_folder.h"
 #include "script.h"
+#include "filelist.h"
 
 static struct CommandLineIndata {
 	const gchar *scite_filename;
@@ -201,6 +202,7 @@ int main(int argc, char *argv[])
 
 	gchar *current_dir=g_get_current_dir();
 
+
 	if (argc>2) {
 		printf("A folder is expected as parameter to sciteproj...\n");
 		return EXIT_FAILURE;
@@ -229,6 +231,10 @@ int main(int argc, char *argv[])
 	set_project_filepath(dir_to_load,NULL);
 
 	load_folder(dir_to_load,NULL);
+	
+	// init the filelist
+	if (current_dir)
+		init_filelist(current_dir);
 
 	init_scite_connection();
 

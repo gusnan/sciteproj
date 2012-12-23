@@ -585,9 +585,6 @@ gboolean setup_gui(GError **err)
 
 	resultCode = TRUE;
 
-	// init the filelist
-	init_filelist();
-
 EXITPOINT:
 
 	if (tempErr) g_error_free(tempErr);

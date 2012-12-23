@@ -40,7 +40,7 @@ extern GList *list;
 /**
  * functions
  */
-gboolean init_filelist();
+gboolean init_filelist(gchar *folder);
 void done_filelist();
 
 void print_filelist();
