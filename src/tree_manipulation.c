@@ -37,8 +37,6 @@
 
 #include "gui.h"
 
-#include "filelist.h"
-
 #include "icon.h"
 
 #include "file_utils.h"
@@ -569,8 +567,6 @@ gboolean add_tree_file(GtkTreeIter *currentIter,
 	// Extract filename from filepath
 	fileName = get_filename_from_full_path((gchar*)filepath);
 
-	add_item((gchar*)fileName,(gchar*)relFilename);
-
 	// Append to root, or before/after/within an existing node?
 
 	if (currentIter == NULL) {
@@ -678,14 +674,14 @@ void helper_remove(GtkTreeIter *iter)
 											COLUMN_ITEMTYPE, &itemType,
 											COLUMN_FILEPATH, &nodeContents, -1);
 
-				gchar *fileName = get_filename_from_full_path((gchar*)nodeContents);
+				//gchar *fileName = get_filename_from_full_path((gchar*)nodeContents);
 
 				if (itemType==ITEMTYPE_GROUP) {
 					helper_remove(&newIter);
 				} else {
 					//printf("Removed: %s, %s\n",fileName,nodeContents);
 
-					remove_item(fileName,nodeContents);
+					//remove_item(fileName,nodeContents);
 				}
 			}
 
@@ -722,9 +718,9 @@ extern gboolean remove_tree_node(GtkTreeIter *iter, GError **err)
 
 	} else {
 
-		gchar *fileName = get_filename_from_full_path((gchar*)file_path);
+		//gchar *fileName = get_filename_from_full_path((gchar*)file_path);
 
-		remove_item(fileName,file_path);
+		//remove_item(fileName,file_path);
 	}
 
 	gtk_tree_store_remove(sTreeStore, iter);

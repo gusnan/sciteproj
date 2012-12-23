@@ -52,7 +52,6 @@
 #include "addfiles.h"
 
 #include "recent_files.h"
-#include "filelist.h"
 
 #include "gui_callbacks.h"
 #include "sort.h"
@@ -602,8 +601,6 @@ void gui_close()
 	unload_graphics();
 
 	done_statusbar();
-
-	done_filelist();
 
 	if (sMainWindow) gtk_widget_destroy(sMainWindow);
 }

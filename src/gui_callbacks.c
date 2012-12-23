@@ -54,7 +54,6 @@
 #include "recent_files.h"
 #include "remove.h"
 #include "rename.h"
-#include "filelist.h"
 #include "sort.h"
 
 #include "load_folder.h"
@@ -394,11 +393,6 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
 		{
 			do_rename_node(TRUE);
 			return TRUE;
-		}
-		case GDK_KEY_F5:
-		{
-			print_filelist();
-			break;
 		}
 		default:
 		{

@@ -45,7 +45,6 @@
 #include "string_utils.h"
 #include "load_folder.h"
 #include "script.h"
-#include "filelist.h"
 
 static struct CommandLineIndata {
 	const gchar *scite_filename;
@@ -232,10 +231,6 @@ int main(int argc, char *argv[])
 
 	load_folder(dir_to_load,NULL);
 	
-	// init the filelist
-	if (current_dir)
-		init_filelist(current_dir);
-
 	init_scite_connection();
 
 	// Run the app
