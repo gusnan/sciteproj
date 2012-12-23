@@ -40,16 +40,10 @@ typedef struct {
 	gboolean give_scite_focus;
 	gboolean search_give_scite_focus;
 
-	gboolean search_match_whole_words;
-	gboolean search_match_case;
-
 	gchar *scite_path;
 
 	gboolean show_recent;
 	gboolean recent_add_to_bottom;
-
-	gboolean search_alert_file_warnings;
-	gboolean search_trim_results;
 
 	gboolean hide_statusbar;
 	
