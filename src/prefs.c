@@ -179,7 +179,7 @@ gboolean check_config_string(gchar *in_config)
 /**
  *		init_prefs
  */
-gboolean init_prefs(GError **err)
+gboolean init_prefs(gchar *target_directory, GError **err)
 {
 	//FILE *fp;
 	//gchar buf[PREFS_BUFSIZE];
@@ -232,7 +232,7 @@ gboolean init_prefs(GError **err)
 	// Otherwise, check current directory, and the directories that the previous
 	// versions used
 
-	test_prefs_filename=g_build_filename(current_directory,"sciteprojrc.lua", NULL);
+	test_prefs_filename=g_build_filename(target_directory,"sciteprojrc.lua", NULL);
 	
 	if (!g_file_test(test_prefs_filename, G_FILE_TEST_IS_REGULAR)) {
 

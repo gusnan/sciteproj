@@ -57,7 +57,7 @@ extern sciteproj_prefs prefs;
 
 extern gchar *prefs_filename;
 
-gboolean init_prefs();
+gboolean init_prefs(gchar *target_directory, GError **error);
 void done_prefs();
 
 #endif /*__HEADER_PREFS_*/

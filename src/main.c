@@ -125,8 +125,29 @@ int main(int argc, char *argv[])
 
 	init_file_utils();
 
+	gchar *current_dir=g_get_current_dir();
+
+	if (argc>2) {
+		printf("A folder is expected as parameter to sciteproj...\n");
+		return EXIT_FAILURE;
+	}
+
+	gchar *dir_to_load;
+	if (argc==1) { // only "sciteproj" on the command-line
+		dir_to_load=current_dir;
+
+	} else { // "sciteproj <folder_name>" on the command-line
+		dir_to_load=argv[1];
+
+		gchar *newpath;
+
+		if (relative_path_to_abs_path(dir_to_load, &newpath, current_dir, NULL)) {
+			dir_to_load=newpath;
+		}
+	}
+
 	// Init preferences
-	if (!init_prefs(&err)) {
+	if (!init_prefs(dir_to_load, &err)) {
 		/*
 		g_print(_("Error initing preferences: %s"), err->message);
 		done_version_string();
@@ -197,28 +218,6 @@ int main(int argc, char *argv[])
 		g_print("Could not setup the gui: %s", err->message);
 		g_print("\n");
 		goto EXITPOINT;
-	}
-
-	gchar *current_dir=g_get_current_dir();
-
-
-	if (argc>2) {
-		printf("A folder is expected as parameter to sciteproj...\n");
-		return EXIT_FAILURE;
-	}
-
-	gchar *dir_to_load;
-	if (argc==1) { // only "sciteproj" on the command-line
-		dir_to_load=current_dir;
-
-	} else { // "sciteproj <folder_name>" on the command-line
-		dir_to_load=argv[1];
-
-		gchar *newpath;
-
-		if (relative_path_to_abs_path(dir_to_load, &newpath, current_dir, NULL)) {
-			dir_to_load=newpath;
-		}
 	}
 
 	if (!is_string_folder(dir_to_load)) {
