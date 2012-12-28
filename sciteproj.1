@@ -13,22 +13,14 @@ interface of SciTE to communicate between SciTE and SciteProj.
 Sets the filename for the instance of SciTE to open.
 .IP "-v, --version"
 Displays the version number of SciteProj
-.IP "-g, --generate=XML_FILENAME"
-Generate a sciteproj project file with the name FILENAME from the contents of 
-the current folder.  This option will not consider adding hidden files to the 
-generated project.
-.IP "-m, --max_depth=MAX_DEPTH"
-Set maximum depth of folders to read through to MAX_DEPTH when generating
-project file.
 .IP "-h, --help"
 Display a short help
 .SH CONFIG FILE
-The config file that SciteProj is using is named sciteprojrc, and is loaded from 
-the directory that the glib function g_get_user_config_dir is returning. 
-Normally this is ($HOME)/.config/ - If this file isn't found, sciteproj searches
-for the file .sciteproj located in the users $HOME directory. It is loaded on 
-every program start. There is a menuitem in the program to open the file 
-directly in SciTE for editing. 
+The config file that SciteProj is using is named sciteprojrc.lua, and is loaded
+from the directory where sciteproj is started in. - If this file isn't found, 
+sciteproj searches for the file in the users $HOME/.config/ directory. It is 
+loaded on every program start. There is a menuitem in the program to open the 
+file directly in SciTE for editing. 
 If there isn't a .sciteproj in the user home when starting SciteProj, 
 one will be created filled with default values.
 The following options are supported in the config file:
