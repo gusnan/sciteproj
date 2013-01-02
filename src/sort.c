@@ -187,7 +187,8 @@ GCompareFunc get_sort_order_of_folder(gchar *folder_name)
 	// We default to compare_strings_smaller
 	GCompareFunc result=compare_strings_smaller;
 	
-	gchar *script_filename = g_build_filename(get_project_directory(), "sciteprojrc.lua", NULL);
+	gchar *script_filename = g_build_filename(get_project_directory(), 
+															"sciteprojrc.lua", NULL);
 	
 	lua_State *lua=NULL;
 	
@@ -241,8 +242,12 @@ GCompareFunc get_sort_order_of_folder(gchar *folder_name)
 				//printf(" value: %d\n", num);
 			}
 			
-			// gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, const gchar *basePath, GError **err);
+			/* gboolean abs_path_to_relative_path(const gchar *absPath, 
+																gchar **relativePath, 
+																const gchar *basePath, 
+																GError **err);
 			// convert the absolute path to a relative path
+			*/
 			
 			gchar *relative_path=NULL;
 			
@@ -251,7 +256,10 @@ GCompareFunc get_sort_order_of_folder(gchar *folder_name)
 			}
 			
 			if (!relative_path) {
-				if (abs_path_to_relative_path(folder_name, &relative_path, get_project_directory(), NULL)) {
+				if (abs_path_to_relative_path(folder_name,
+														&relative_path,
+														get_project_directory(),
+														NULL)) {
 				
 					//printf("relative_path: %s\n", relative_path);
 				}
