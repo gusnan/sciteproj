@@ -74,10 +74,10 @@ all: $(BIN)/$(NAME)
 	${MAKE} -C po all
 
 $(OBJ)/%.o: $(SRC)/%.c
-	$(CC) $(LOCAL_CFLAGS) -c $< -o $@
+	$(CC) $(LOCAL_CFLAGS) $(LOCAL_CPPFLAGS) -c $< -o $@
 
 $(BIN)/$(NAME): $(OBJECTS)
-	$(CC) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG) $(LIBS)
+	$(CC) $(LOCAL_CFLAGS) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG) $(LIBS)
 
 clean:
 	rm -rf $(OBJECTS) $(PROG) $(DEPEND)
