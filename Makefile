@@ -52,7 +52,7 @@ endif
 LIB_CFLAGS=`pkg-config --cflags $(PKG_GTK)`
 STD_LDFLAGS=
 
-LIBS+=`pkg-config --libs $(PKG_GTK) pkg-config --libs gthread-2.0`
+LIBS+=`pkg-config --libs $(PKG_GTK) pkg-config --libs gthread-2.0` -lX11
 
 LOCAL_CFLAGS=$(STD_CFLAGS) $(DEPRECATED) $(CFLAGS) $(LIB_CFLAGS)
 LOCAL_LDFLAGS=$(LDFLAGS) $(STD_LDFLAGS)
