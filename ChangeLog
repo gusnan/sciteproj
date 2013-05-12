@@ -2,6 +2,12 @@
 ChangeLog:
 ----------
 
+0.7.08
+	* Add missing lib to link, fixing FTBFS
+
+0.7.07
+	* Fix CPPFLAGS to enable hardening
+
 0.7.05
 	* Fix menu translations context to actually work
 	* Move gui_callbacks to own sourcefiles
