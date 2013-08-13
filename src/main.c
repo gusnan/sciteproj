@@ -232,6 +232,11 @@ int main(int argc, char *argv[])
 	
 	init_scite_connection();
 
+	// open scite, if prefs says we should
+	if (prefs.start_scite == TRUE) {
+		launch_scite("", NULL);
+	}
+
 	// Run the app
 
 	gtk_main();

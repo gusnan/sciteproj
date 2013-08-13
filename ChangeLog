@@ -9,6 +9,7 @@ ChangeLog:
 	  option doesn't exist here), check in the user config folder.
 	* Remove search functionality - "Find in Files" is already available in 
 	  SciTE.
+	* Add option start_scite to start scite immediately on sciteproj start
 
 0.7.05
 	* Fix menu translations context to actually work

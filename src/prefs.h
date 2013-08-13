@@ -51,6 +51,8 @@ typedef struct {
 	
 	gboolean write_protect;
 
+	gboolean start_scite;
+
 } sciteproj_prefs;
 
 extern sciteproj_prefs prefs;

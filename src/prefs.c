@@ -167,6 +167,12 @@ gboolean check_config_string(gchar *in_config)
 				prefs.hide_statusbar=TRUE;
 			}
 		}
+
+		if (g_ascii_strcasecmp(tempstring, "start_scite")==0) {
+			if (g_ascii_strcasecmp(value, "TRUE")==0) {
+				prefs.start_scite = TRUE;
+			}
+		}
 	}
 
 	if (tempstring!=NULL) g_free(tempstring);
@@ -206,6 +212,8 @@ gboolean init_prefs(gchar *target_directory, GError **err)
 	prefs.scite_path=NULL;
 
 	prefs.hide_statusbar=FALSE;
+
+	prefs.start_scite = FALSE;
 
 	// First, check the file ~/.config/sciteprojrc.lua
 
@@ -406,6 +414,9 @@ int load_lua_config(gchar *filename, gchar *full_string)
 
 	if (lua_global_exists(lua, "write_protect"))
 		prefs.write_protect = lua_get_boolean(lua, "write_protect");
+
+	if (lua_global_exists(lua, "start_scite"))
+		prefs.start_scite = lua_get_boolean(lua, "start_scite");
 	
 	done_script(lua);
 
