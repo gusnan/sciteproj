@@ -61,6 +61,9 @@ Also, the following options exist:
 	while when using the stock ones there are only one icon for folders, open or 
 	closed.
 
+* start_scite
+	Should SciTE be started simultaneously with sciteproj?
+
 You can open this configuration file by opening the Edit menu and select Edit 
 Options in that menu. This will open sciteprojrc.lua from the current folder as 
 if it was part of your project and edit it in SciTE.
