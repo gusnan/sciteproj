@@ -63,6 +63,7 @@ int main(int argc, char *argv[])
 	static gboolean version=FALSE;
 	static gchar *scite_instance=NULL;
 	static gboolean load_a_folder=FALSE;
+	static gboolean start_scite = FALSE;
 
 	static const GOptionEntry options[]={
 		{ "version",		'v',	0, G_OPTION_ARG_NONE,		&version,
@@ -71,6 +72,8 @@ int main(int argc, char *argv[])
 			N_("Set a filename for the instance of SciTE to open"),	N_("SCITE_FILENAME")},
 		{ "load_folder",	'l',	0,	G_OPTION_ARG_NONE,		&load_a_folder,
 			N_("Load a folder")}, 
+		{ "start_scite",	't',	0,	G_OPTION_ARG_NONE,		&start_scite,
+			N_("Start SciTE automatically with SciteProj")},
 		{ NULL }
 	};
 
@@ -233,7 +236,7 @@ int main(int argc, char *argv[])
 	init_scite_connection();
 
 	// open scite, if prefs says we should
-	if (prefs.start_scite == TRUE) {
+	if (prefs.start_scite == TRUE || start_scite) {
 		launch_scite("", NULL);
 	}
 
