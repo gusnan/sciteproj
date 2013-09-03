@@ -399,7 +399,6 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 	// Save the node info for use by the popup menu callbacks
 
 	if (recent_clicked_node.name) g_free(recent_clicked_node.name);
-	recent_clicked_node.name=NULL;
 
 	recent_clicked_node.valid=TRUE;
 	recent_clicked_node.iter=iter;

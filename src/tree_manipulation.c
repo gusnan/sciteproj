@@ -131,14 +131,6 @@ EXITPOINT:
 }
 
 
-/**
- *
- */
-gchar *get_project_filepath()
-{
-	return sProjectFilepath;
-}
-
 
 
 /**
@@ -181,20 +173,6 @@ GtkTreeStore* create_treestore(GError **err)
 	}
 
 	return sTreeStore;
-}
-
-
-
-/**
- * Clear the GtkTreeStore.
- *
- * @param treeStore is the GtkTreeStore to add to
- */
-void empty_tree(GtkTreeStore *treeStore)
-{
-	g_assert(treeStore != NULL);
-
-	gtk_tree_store_clear(treeStore);
 }
 
 
@@ -432,7 +410,6 @@ gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **e
 	gboolean finalResult = FALSE;
 	GtkTreeIter newIter;
 	GSList *listIter;
-	gchar *absFilename;
 
 	// Reverse the list
 	fileList=g_slist_reverse(fileList);
@@ -440,8 +417,8 @@ gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **e
 	listIter = fileList;
 
 	for (listIter = fileList; listIter != NULL; listIter = g_slist_next(listIter)) {
-
-		absFilename = (gchar *) (listIter->data);
+		
+		gchar *absFilename = (gchar *) (listIter->data);
 
 		if (!absFilename) {
 			continue;
@@ -907,18 +884,6 @@ EXITPOINT:
 	return finalResult;
 }
 
-/**
- *
- */
-gchar *get_path_string(GtkTreeIter *iter)
-{
-	GtkTreePath *treePath=gtk_tree_model_get_path(GTK_TREE_MODEL(sTreeStore),iter);
-	gchar *buf;
-	buf=g_strdup_printf("%s",gtk_tree_path_to_string(treePath));
-
-	return buf;
-}
-
 
 /**
  *
@@ -981,9 +946,8 @@ void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_
 }
 
 
+
 /*
- *
- */
 struct TestStruct
 {
 	gchar *string_to_check_for;
@@ -991,10 +955,6 @@ struct TestStruct
 };
 
 typedef struct TestStruct TestStruct;
-
-/**
- *
- */
 gboolean foreach_finder(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
 	gint nodeType=-1;
@@ -1015,22 +975,7 @@ gboolean foreach_finder(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *ite
 
 	return res;
 }
-
-
-/**
- *
- */
-gboolean tree_contains(gchar *test_string)
-{
-	TestStruct test;
-
-	test.string_to_check_for=test_string;
-	test.found=FALSE;
-
-	gtk_tree_model_foreach(GTK_TREE_MODEL(sTreeStore),foreach_finder,(gpointer)(&test));
-
-	return test.found;
-}
+*/
 
 
 /**

@@ -53,10 +53,6 @@ gboolean tree_row_is_expanded(GtkTreePath *path);
 void expand_tree_row(GtkTreePath *path, gboolean expandChildren);
 void collapse_tree_row(GtkTreePath *path);
 
-void get_dimensions(gint *left, gint *top, gint *width, gint *height);
-
-void update_project_is_dirty(gboolean dirty);
-
 gboolean dialog_response_is_exit(gint test);
 
 void recent_files_switch_visible();

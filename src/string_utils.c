@@ -108,34 +108,3 @@ char *remove_newline( char *s )
 
 }
 
-
-/**
- * returns true if a gchar is an integer
- *	(Very limited functionality at the moment)
- */
-gboolean is_integer(gchar *string)
-{
-	int co;
-
-	for (co=0;co<(int)strlen(string);co++) {
-		// returns zero if it isn't a digit
-		if (isdigit(string[co])==0) {
-			return FALSE;
-		}
-	}
-
-	return TRUE;
-}
-
-
-/**
- *
- */
-gboolean is_word_character(char ch)
-{
-	gboolean result=FALSE;
-
-	if ((ch=='_') || (g_ascii_isalnum(ch))) result=TRUE;
-
-	return result;
-}

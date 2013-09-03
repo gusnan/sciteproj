@@ -606,15 +606,6 @@ void gui_close()
 }
 
 
-/**
- *
- */
-void get_dimensions(gint *left, gint *top, gint *width, gint *height) {
-	gtk_window_get_position(GTK_WINDOW(sMainWindow), left, top);
-	gtk_window_get_size(GTK_WINDOW(sMainWindow), width, height);
-	return;
-}
-
 
 /**
  * Determine whether a specified row in the tree is expanded.
@@ -655,20 +646,6 @@ void expand_tree_row(GtkTreePath *path, gboolean expandChildren)
 void collapse_tree_row(GtkTreePath *path)
 {
 	gtk_tree_view_collapse_row(GTK_TREE_VIEW(projectTreeView), path);
-}
-
-
-
-/**
- * Enable/disable the "Save Project" button.
- *
- * @param enabled indicates whether the button should be enabled or disabled
- */
-void set_save_button_sensitivity(gboolean enabled)
-{
-//~ 	if (sSaveProjectButton) {
-//~ 		gtk_widget_set_sensitive(GTK_WIDGET(sSaveProjectButton), enabled);
-//~ 	}
 }
 
 
@@ -869,7 +846,6 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	// Save the node info for use by the popup menu callbacks
 
 	if (clicked_node.name) g_free(clicked_node.name);
-	clicked_node.name=NULL;
 
 	clicked_node.valid=TRUE;
 	clicked_node.iter=iter;
@@ -939,31 +915,6 @@ void set_window_title(const gchar *newName)
 
 	g_free(temp_string);
 }
-
-
-/**
- *
- */
-void update_project_is_dirty(gboolean dirty)
-{
-	gchar *temp_string=g_new(gchar,512);
-
-	if ((int)strlen((char*)(window_saved_title))==0) {
-		g_snprintf(window_saved_title,512,_("[UNTITLED]"));
-	}
-
-	if (!dirty) {
-		g_snprintf(temp_string,512,"%s",window_saved_title);
-	} else {
-		g_snprintf(temp_string,512,"%s *",window_saved_title);
-	}
-
-	gtk_window_set_title(GTK_WINDOW(sMainWindow), temp_string);
-
-	g_free(temp_string);
-}
-
-
 
 
 /**

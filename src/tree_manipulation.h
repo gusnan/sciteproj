@@ -86,9 +86,6 @@ GtkTreeStore* create_treestore(GError **err);
 const gchar* get_project_directory();
 gchar* get_project_filepath();
 
-// Clear the tree
-void empty_tree(GtkTreeStore *treeStore);
-
 // Allow user to select and add files to the project
 gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err);
 
@@ -134,8 +131,6 @@ gboolean copy_tree_node(GtkTreeIter *srcIter,
 gchar *get_path_string(GtkTreeIter *iter);
 
 void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_func);
-
-gboolean tree_contains(gchar *value);
 
 gboolean add_tree_folderlist(GtkTreeIter *iter, GSList *folder_list, gchar *folder_path);
 
