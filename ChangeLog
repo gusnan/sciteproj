@@ -10,6 +10,7 @@ ChangeLog:
 	* Remove search functionality - "Find in Files" is already available in 
 	  SciTE.
 	* Add option start_scite to start scite immediately on sciteproj start
+	* Require LUA for the config file loading
 
 0.7.05
 	* Fix menu translations context to actually work
