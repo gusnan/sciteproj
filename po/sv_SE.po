@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 0.7.05\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2013-08-14 17:21+0200\n"
-"PO-Revision-Date: 2013-08-14 17:23+0100\n"
+"POT-Creation-Date: 2013-09-03 16:17+0200\n"
+"PO-Revision-Date: 2013-09-03 16:19+0100\n"
 "Last-Translator: Andreas Rönnquist <gusnan@gusnan.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
@@ -83,19 +83,6 @@ msgstr "Skapa Grupp"
 msgid "Enter name of new group:"
 msgstr "Mata in namnet på den nya gruppen:"
 
-#: folder_to_xml.c:227
-msgid "Error: Invalid directory!"
-msgstr "Fel: Ogiltig katalog!"
-
-#: folder_to_xml.c:233
-msgid "Error: Couldn't g_chdir to directory"
-msgstr "Fel: Kunde inte byta till katalog med hjälp av g_chdir"
-
-#: folder_to_xml.c:240
-#, c-format
-msgid "Couldn't create file with the name %s!"
-msgstr "Kunde inte skapa en fil med namnet '%s'!"
-
 #: gui.c:153 gui.c:952
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
@@ -116,34 +103,39 @@ msgstr ""
 "\n"
 "%s"
 
-#: main.c:70
+#: main.c:69
 msgid "Show program version and quit"
 msgstr "Visa programversion och avsluta"
 
-#: main.c:72
+#: main.c:71
 msgid "Set a filename for the instance of SciTE to open"
 msgstr "Sätt ett filnamn för instansen av SciTE du önskar köra"
 
-#: main.c:72
+#: main.c:71
 msgid "SCITE_FILENAME"
 msgstr "SCITE_FILNAMN"
 
-#: main.c:74
+#: main.c:73
 msgid "Load a folder"
 msgstr "Ladda en mapp"
 
-#: main.c:76
+#: main.c:75
 msgid "Start SciTE automatically with SciteProj"
 msgstr "Starta SciTE automatiskt med SciteProj"
 
-#: main.c:87
+#: main.c:86
 msgid "SciTE Project Manager"
 msgstr "SciTE Projekthanterare"
 
-#: main.c:94
+#: main.c:93
 #, c-format
 msgid "option parsing failed: %s"
 msgstr "tolkning av alternativ misslyckades: %s"
+
+#: main.c:133
+#, c-format
+msgid "A folder is expected as parameter to sciteproj..."
+msgstr "En mapp väntas som parameter till sciteproj..."
 
 #: main.c:172 main.c:182
 msgid ""
@@ -168,6 +160,16 @@ msgstr ""
 "Varning! Kunde inte hitta SciTE!\n"
 "Programmet kommer att starta, men du kommer inte kunna använda SciTE för att "
 "editera filer."
+
+#: main.c:221
+#, c-format
+msgid "Could not setup the gui: %s"
+msgstr "Kunde inte ställa in GUI: %s"
+
+#: main.c:227
+#, c-format
+msgid "Not a valid folder!"
+msgstr "Inte en giltig mapp!"
 
 #: properties_dialog.c:62
 msgid "Group Properties"
@@ -489,6 +491,15 @@ msgstr "Kopiera filnamn till urklipp"
 msgctxt "Menu|Popup|RecentFile"
 msgid "Properties"
 msgstr "Egenskaper"
+
+#~ msgid "Error: Invalid directory!"
+#~ msgstr "Fel: Ogiltig katalog!"
+
+#~ msgid "Error: Couldn't g_chdir to directory"
+#~ msgstr "Fel: Kunde inte byta till katalog med hjälp av g_chdir"
+
+#~ msgid "Couldn't create file with the name %s!"
+#~ msgstr "Kunde inte skapa en fil med namnet '%s'!"
 
 #~ msgid ""
 #~ "Generate a sciteproj project file with name XML_FILENAME, recursively "
