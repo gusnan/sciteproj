@@ -37,7 +37,6 @@
 #include "gui.h"
 #include "tree_manipulation.h"
 #include "prefs.h"
-#include "folder_to_xml.h"
 #include "graphics.h"
 #include "scite_utils.h"
 #include "about.h"

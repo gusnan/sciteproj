@@ -11,7 +11,7 @@ else
 endif
 
 OBJECTS=$(OBJ)/about.o $(OBJ)/addfiles.o $(OBJ)/clipboard.o $(OBJ)/expand.o\
-$(OBJ)/file_utils.o $(OBJ)/folder_config.o $(OBJ)/folder_to_xml.o\
+$(OBJ)/file_utils.o $(OBJ)/folder_config.o\
 $(OBJ)/graphics.o $(OBJ)/gui.o $(OBJ)/gui_callbacks.o\
 $(OBJ)/icon.o $(OBJ)/load_folder.o $(OBJ)/main.o $(OBJ)/prefs.o\
 $(OBJ)/properties_dialog.o $(OBJ)/recent_files.o $(OBJ)/remove.o\
