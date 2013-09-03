@@ -18,7 +18,7 @@ DATADIR = ${DESTDIR}${PREFIX}/share
 LOCALEDIR = ${DATADIR}/locale
 
 SOURCES = about.c addfiles.c clipboard.c file_utils.c expand.c\
-folder_config.c folder_to_xml.c graphics.c gui.c gui_callbacks.c load_folder.c\
+folder_config.c graphics.c gui.c gui_callbacks.c load_folder.c\
 main.c prefs.c properties_dialog.c recent_files.c remove.c rename.c\
 scite_utils.c script.c sort.c statusbar.c string_utils.c tree_manipulation.c\
 menus.h
