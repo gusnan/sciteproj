@@ -130,7 +130,8 @@ int main(int argc, char *argv[])
 	gchar *current_dir=g_get_current_dir();
 
 	if (argc>2) {
-		printf("A folder is expected as parameter to sciteproj...\n");
+		printf(_("A folder is expected as parameter to sciteproj..."));
+		printf("\n");
 		return EXIT_FAILURE;
 	}
 
@@ -217,13 +218,14 @@ int main(int argc, char *argv[])
 
 	// Set up the GUI
 	if (!setup_gui(&err)) {
-		g_print("Could not setup the gui: %s", err->message);
+		g_print(_("Could not setup the gui: %s"), err->message);
 		g_print("\n");
 		goto EXITPOINT;
 	}
 
 	if (!is_string_folder(dir_to_load)) {
-		printf("Not a valid folder!\n");
+		printf(_("Not a valid folder!"));
+		printf("\n");
 		return EXIT_FAILURE;
 	}
 
