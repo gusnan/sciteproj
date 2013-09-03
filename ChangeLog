@@ -2,7 +2,7 @@
 ChangeLog:
 ----------
 
-0.8.00
+0.7.95
 	* Remove XML-based project file loading and saving - work directly on folder 
 	  using filters and sorting instead.
 	* Load prefs from setup file in the requested folder, and secondarily (if an 
