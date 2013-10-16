@@ -6,7 +6,7 @@ test.xml
 test2.xml
 obj/*.o
 Makefile.dep
-po/sv_SE.mo
+po/sv.mo
 sciteprojrc.lua
 old/
 
