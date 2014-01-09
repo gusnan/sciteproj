@@ -55,7 +55,7 @@ get_pixbuf_from_icon(GIcon *icon, GtkIconSize size)
 		return NULL;
 
 	result=gtk_icon_info_load_icon(info,NULL);
-	gtk_icon_info_free(info);
+	g_object_unref(info);
 
 	return result;
 }
