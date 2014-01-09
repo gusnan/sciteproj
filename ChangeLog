@@ -12,7 +12,6 @@ ChangeLog:
 	* Add option start_scite to start scite immediately on sciteproj start
 	* Require LUA for the config file loading
 	* Remove some functions for deleting files and creating folders
-	* Fix icon removal unref instead of free
 	* Don't use g_type_init on newer versions of glib
 
 0.7.05
