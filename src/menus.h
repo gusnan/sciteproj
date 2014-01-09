@@ -44,13 +44,8 @@ static gchar *sMenuDefXML = (gchar*)\
 				<menuitem name=\"AboutItem\" action=\"AboutAction\"/> \
 			</menu> \
 		</menubar> \
-		<popup name=\"GeneralPopup\" action=\"GeneralPopupAction\"> \
-			<menuitem name=\"AddFilesPopupItem\" action=\"AddFilesPopupAction\"/> \
-			<menuitem name=\"AddGroupPopupItem\" action=\"AddGroupPopupAction\"/> \
-		</popup> \
 		<popup name=\"FilePopup\" action=\"FilePopupAction\"> \
 			<menuitem name=\"OpenFilePopupItem\" action=\"OpenFilePopupAction\"/> \
-			<menuitem name=\"RemoveFilePopupItem\" action=\"RemoveFilePopupAction\"/> \
 			<menuitem name=\"CopyFilenameToClipBoard\" action=\"CopyFilenameToClipBoardAction\"/> \
 			<separator/> \
 			<menuitem name=\"PropertiesPopupItem\" action=\"PropertiesPopupAction\"/> \
