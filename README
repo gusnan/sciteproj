@@ -30,7 +30,7 @@ See the following links on why we use the folder ~/.config/ :
 http://developer.gnome.org/glib/stable/glib-Miscellaneous-Utility-Functions.html#g-get-user-config-dir
 http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
-Version 0.8.00 of SciteProj has gone through some massive changes, and changed
+Between 0.7 and 0.8 SciteProj has gone through some big changes, and changed
 the way "projects" are handled. From now on sciteproj works directly on what
 is available on the harddrive, and doesn't use a project XML file. However, if
 you have a local sciteprojrc.lua in a folder, sciteproj will read information
