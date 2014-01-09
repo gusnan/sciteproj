@@ -123,8 +123,12 @@ int main(int argc, char *argv[])
 	// Init gtk
 	gtk_init(&argc, &argv);
 
+	// Since glib 2.36, this isn't needed
+#if GLIB_MAJOR_VERSION<=2 && GLIB_MINOR_VERSION<36
 	g_type_init();
-
+#endif
+	
+	
 	init_file_utils();
 
 	gchar *current_dir=g_get_current_dir();
