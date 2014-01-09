@@ -52,6 +52,8 @@ LIBS=-lX11 $(shell pkg-config --libs --silence-errors $(PKG_GTK) $(PKG_WNCK) lua
 LOCAL_CFLAGS=$(STD_CFLAGS) $(DEPRECATED) $(CFLAGS) $(LIB_CFLAGS)
 LOCAL_LDFLAGS=$(STD_CFLAGS) $(LDFLAGS) $(STD_LDFLAGS)
 
+LOCAL_CPPFLAGS=$(CPPFLAGS)
+
 ifdef CHECK_GTK3
 	LOCAL_CFLAGS+=-DGTK_DISABLE_SINGLE_INCLUDES
 	LOCAL_CFLAGS+=-DGSEAL_ENABLE
@@ -69,10 +71,10 @@ all: $(BIN)/$(NAME)
 	${MAKE} -C po -j1 all
 
 $(OBJ)/%.o: $(SRC)/%.c
-	$(CC) $(LOCAL_CFLAGS) -c $< -o $@
+	$(CC) $(LOCAL_CFLAGS) $(LOCAL_CPPFLAGS) -c $< -o $@
 
 $(BIN)/$(NAME): $(OBJECTS)
-	$(CC) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG) $(LIBS)
+	$(CC) $(LOCAL_CFLAGS) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG) $(LIBS)
 
 clean:
 	rm -rf $(OBJECTS) $(PROG) $(DEPEND)
