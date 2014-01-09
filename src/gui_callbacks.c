@@ -357,14 +357,6 @@ void about_menu_cb()
 }
 
 
-/**
- * Callback for "Create Group" menu item
- */
-void creategroup_menu_cb()
-{
-	ask_name_add_group(NULL);
-}
-
 
 /**
  *

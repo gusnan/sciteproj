@@ -481,22 +481,4 @@ EXITPOINT:
 }
 
 
-/**
- * Remove the selected file/group.
- */
-void popup_remove_node_cb()
-{
-	do_remove_node(FALSE);
-}
-
-
-/**
- * Callback for Remove Item(s) menu item
- */
-void removeitem_menu_cb()
-{
-	do_remove_node(TRUE);
-}
-
-
 

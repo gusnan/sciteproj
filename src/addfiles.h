@@ -25,11 +25,8 @@
 /**
  *
  */
-void popup_add_files_cb();
-void popup_add_group_cb();
 void ask_name_add_group(GtkTreeIter *nodeIter);
 
-void addfile_menu_cb();
 void menu_add_widget_cb(GtkUIManager *ui, GtkWidget *widget, GtkContainer *container);
 
 
