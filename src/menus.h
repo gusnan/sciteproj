@@ -32,10 +32,6 @@ static gchar *sMenuDefXML = (gchar*)\
 				<menuitem name=\"ExitItem\" action=\"ExitAction\" /> \
 			</menu> \
 			<menu name=\"EditMenu\" action=\"EditMenuAction\"> \
-				<menuitem name=\"CreateGroupItem\" action=\"CreateGroupAction\" /> \
-				<menuitem name=\"AddFileItem\" action=\"AddFileAction\" /> \
-				<menuitem name=\"RemoveFileItem\" action=\"RemoveFileAction\"/> \
-				<separator/> \
 				<menuitem name=\"ExpandAllGroupsItem\" action=\"ExpandAllGroupsAction\" /> \
 				<menuitem name=\"CollapseAllGroupsItem\" action=\"CollapseAllGroupsAction\" /> \
 				<separator/> \
@@ -60,10 +56,6 @@ static gchar *sMenuDefXML = (gchar*)\
 			<menuitem name=\"PropertiesPopupItem\" action=\"PropertiesPopupAction\"/> \
 		</popup> \
 		<popup name=\"GroupPopup\" action=\"GroupPopupAction\"> \
-			<menuitem name=\"AddFilesToGroupPopupItem\" action=\"AddFilestoGroupPopupAction\"/> \
-			<menuitem name=\"AddSubgroupPopupItem\" action=\"AddSubgroupPopupAction\"/> \
-			<menuitem name=\"RenameGroupPopupItem\" action=\"RenameGroupPopupAction\"/> \
-			<menuitem name=\"RemoveGroupPopupItem\" action=\"RemoveGroupPopupAction\"/> \
 			<separator/> \
 			<menu name=\"SortPopup\" action=\"SortPopupAction\">\
 				<menuitem name=\"SortAscendingItem\" action=\"SortAscendingAction\"/> \
@@ -100,13 +92,6 @@ static GtkActionEntry sMenuActions[] =
 	{ "ExitAction", GTK_STOCK_QUIT, NC_("Menu|File|","_Exit"), "<control>Q",
 		NULL, G_CALLBACK(quit_menu_cb) },
 
-	{ "CreateGroupAction", GTK_STOCK_DIRECTORY, NC_("Menu|Edit|","Create _group"), "",
-		NULL, G_CALLBACK(creategroup_menu_cb) },
-	{ "AddFileAction", GTK_STOCK_FILE, NC_("Menu|Edit|","Create _file"), "",
-		NULL, G_CALLBACK(addfile_menu_cb) },
-	{ "RemoveFileAction", GTK_STOCK_DELETE, NC_("Menu|Edit|","Delete file(s)"), "",
-		NULL, G_CALLBACK(removeitem_menu_cb) },
-
 	{ "ExpandAllGroupsAction", NULL, NC_("Menu|Edit|","Expand all groups"), "<control><shift>E",
 		NULL, G_CALLBACK(expand_all_items_cb) },
 	{ "CollapseAllGroupsAction", NULL, NC_("Menu|Edit|","Collapse all groups"), "<control><shift>C",
@@ -115,19 +100,6 @@ static GtkActionEntry sMenuActions[] =
 	{ "AboutAction", GTK_STOCK_ABOUT, NC_("Menu|Help|","_About"), "",
 		NULL, G_CALLBACK(about_menu_cb) },
 
-	{ "AddFilesPopupAction", GTK_STOCK_FILE, NC_("Menu|Edit|","Create files"), "",
-		NULL, G_CALLBACK(popup_add_files_cb) },
-	{ "AddGroupPopupAction", GTK_STOCK_DIRECTORY, NC_("Menu|Edit|","Create folder"), "",
-		NULL, G_CALLBACK(popup_add_group_cb) },
-
-	{ "AddFilestoGroupPopupAction", GTK_STOCK_FILE, NC_("Menu|Popup|Group","Create file"), "",
-		NULL, G_CALLBACK(popup_add_files_cb) },
-	{ "AddSubgroupPopupAction", GTK_STOCK_DIRECTORY, NC_("Menu|Popup|Group","Add folder"), "",
-		NULL, G_CALLBACK(popup_add_group_cb) },
-	{ "RenameGroupPopupAction", GTK_STOCK_EDIT, NC_("Menu|Popup|Group","Rename folder"), "",
-		NULL, G_CALLBACK(popup_rename_group_cb) },
-	{ "RemoveGroupPopupAction", GTK_STOCK_DELETE, NC_("Menu|Popup|Group","Delete folder"), "",
-		NULL, G_CALLBACK(popup_remove_node_cb) },
 	{ "SortAscendingAction", GTK_STOCK_SORT_ASCENDING, NC_("Menu|Edit|","Sort folder ascending by name"),"",
 		NULL, G_CALLBACK(sort_ascending_cb) },
 	{ "SortDescendingAction", GTK_STOCK_SORT_DESCENDING, NC_("Menu|Edit","Sort folder descending by name"),"",
@@ -152,8 +124,6 @@ static GtkActionEntry sMenuActions[] =
 
 	{ "OpenFilePopupAction", GTK_STOCK_OPEN, NC_("Menu|Popup|File","Open file in SciTE"), "",
 		NULL, G_CALLBACK(popup_open_file_cb) },
-	{ "RemoveFilePopupAction", GTK_STOCK_DELETE, NC_("Menu|Popup|File","Delete file"), "",
-		NULL, G_CALLBACK(popup_remove_node_cb) },
 	{ "CopyFilenameToClipBoardAction", GTK_STOCK_COPY, NC_("Menu|Popup|File","Copy filename to clipboard"), "",
 		NULL, G_CALLBACK(copy_filename_to_clipboard_cb) },
 	{ "PropertiesPopupAction", GTK_STOCK_PROPERTIES, NC_("Menu|Popup|File","Properties"), "",
@@ -194,22 +164,11 @@ static struct ContextString menustrings[]= {
 
 	{ "Menu|File|","_Exit"},
 
-	{ "Menu|Edit|","Create _group"},
-	{ "Menu|Edit|","Add _file"},
-	{ "Menu|Edit|","Remove file(s)"},
-
 	{ "Menu|Edit|","Expand all groups"},
 	{ "Menu|Edit|","Collapse all groups"},
 
 	{ "Menu|Help|","_About"},
 
-	{ "Menu|Edit|","Add files"},
-	{ "Menu|Edit|","Create _group"},
-
-	{ "Menu|Popup|Group","Add files to group"},
-	{ "Menu|Popup|Group","Add subgroup to group"},
-	{ "Menu|Popup|Group","Rename group"},
-	{ "Menu|Popup|Group","Remove group from project" },
 	{ "Menu|Edit|","Sort folder ascending by name" },
 	{ "Menu|Edit|","Sort folder descending by name" },
 	{ "Menu|Edit|","Sort folder ascending by extension" },
@@ -223,7 +182,6 @@ static struct ContextString menustrings[]= {
 	{ "Menu|View|","View recently opened files"},
 
 	{ "Menu|Popup|File","Open file in SciTE"},
-	{ "Menu|Popup|File","Remove file from project"},
 	{ "Menu|Popup|File","Copy filename to clipboard"},
 	{ "Menu|Popup|File","Properties"},
 

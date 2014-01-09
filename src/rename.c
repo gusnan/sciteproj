@@ -151,27 +151,3 @@ void do_rename_node(gboolean ignore_clicked_node)
 }
 
 
-/**
- * Rename a group
- */
-void popup_rename_group_cb()
-{
-	GError *err = NULL;
-	// We can only rename groups!
-
-	if (!clicked_node.valid || clicked_node.type != ITEMTYPE_GROUP) {
-		goto EXITPOINT;
-	}
-
-	do_rename_iter(clicked_node.iter);
-
-EXITPOINT:
-
-	// Destroying the dialog should also destroy the table, label, and entry widgets
-
-	if (err) g_error_free(err);
-
-	// Do NOT free newGroupName, since that is owned by the GtkEntry widget!
-}
-
-

@@ -25,7 +25,6 @@
 /**
  *
  */
-void popup_rename_group_cb();
 void do_rename_node(gboolean ignore_clicked_node);
 void do_rename_iter(GtkTreeIter iter);
 void rename_cb(gchar *new_text, gchar *path_string,gpointer user_data);
