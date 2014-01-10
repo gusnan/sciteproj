@@ -2,6 +2,9 @@
 ChangeLog:
 ----------
 
+0.7.97
+	* Remove functionality to rename and the required files
+
 0.7.96
 	* Fix build system not including CPPFLAGS
 

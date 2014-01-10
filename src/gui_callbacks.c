@@ -53,7 +53,6 @@
 #include "addfiles.h"
 #include "recent_files.h"
 #include "remove.h"
-#include "rename.h"
 #include "sort.h"
 
 #include "load_folder.h"
@@ -381,11 +380,13 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
 		{
 			break;
 		}
+		/*
 		case GDK_KEY_F2:
 		{
 			do_rename_node(TRUE);
 			return TRUE;
 		}
+		*/
 		default:
 		{
 			debug_printf("key_press_cb: keyval = %d = '%c', hardware_keycode = %d\n", 

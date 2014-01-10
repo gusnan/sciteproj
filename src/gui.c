@@ -47,7 +47,6 @@
 
 #include "clipboard.h"
 
-#include "rename.h"
 #include "remove.h"
 #include "addfiles.h"
 
@@ -382,7 +381,7 @@ gboolean setup_gui(GError **err)
 	gtk_tree_view_column_add_attribute(column1, textCellRenderer, "weight", COLUMN_FONTWEIGHT);
 	gtk_tree_view_column_add_attribute(column1, textCellRenderer, "weight-set", COLUMN_FONTWEIGHTSET);
 
-	g_signal_connect(G_OBJECT(textCellRenderer), "edited", G_CALLBACK(rename_cb), NULL);
+	//g_signal_connect(G_OBJECT(textCellRenderer), "edited", G_CALLBACK(rename_cb), NULL);
 
 	gtk_tree_view_append_column(GTK_TREE_VIEW(projectTreeView), column1);
 
