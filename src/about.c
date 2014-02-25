@@ -304,7 +304,9 @@ void create_about_dialog()
 	gtk_text_buffer_select_range (textbuffer_info,&iter,&iter);
 
 	// Create an ok button
-	ok_button=gtk_button_new_from_stock(GTK_STOCK_OK);
+	ok_button = gtk_button_new();
+	gtk_button_set_use_underline(GTK_BUTTON(ok_button), TRUE);
+	gtk_button_set_label(GTK_BUTTON(ok_button), "_OK");
 
 #if GTK_MAJOR_VERSION>=3
 	gtk_widget_set_halign(ok_button,GTK_ALIGN_END);
