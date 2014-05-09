@@ -41,7 +41,7 @@
 /**
  * Group properties callback
  */
-void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
+void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 {
 	GError *err = NULL;
 	GtkWidget *dialog = NULL;
@@ -59,9 +59,15 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 	                   COLUMN_ITEMTYPE, &nodeType,
 	                   COLUMN_FILEPATH, &filePath,
 	                   -1);
-	dialog=gtk_dialog_new_with_buttons(_("Group Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
 
-	gtk_dialog_set_default_response(GTK_DIALOG(dialog),GTK_RESPONSE_OK);
+#if GTK_MAJOR_VERSION>=3
+	dialog=gtk_dialog_new_with_buttons(_("Group Properties"), NULL, GTK_DIALOG_MODAL,
+		_("OK"), GTK_RESPONSE_ACCEPT,NULL);
+#else
+	dialog=gtk_dialog_new_with_buttons(_("Group Properties"), NULL, GTK_DIALOG_MODAL, GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
+#endif
+
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 
 	label1=gtk_label_new(_("Group name:"));
 	label2=gtk_label_new(_("Full folder:"));
@@ -70,41 +76,41 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 
 	filepath_label=gtk_label_new(filePath);
 
-	gtk_misc_set_alignment(GTK_MISC(filename),0,0);
-	gtk_misc_set_alignment(GTK_MISC(filepath_label),0,0);
+	gtk_misc_set_alignment(GTK_MISC(filename), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(filepath_label), 0, 0);
 
-	gtk_misc_set_alignment(GTK_MISC(label1),0,0);
-	gtk_misc_set_alignment(GTK_MISC(label2),0,0);
+	gtk_misc_set_alignment(GTK_MISC(label1), 0, 0);
+	gtk_misc_set_alignment(GTK_MISC(label2), 0, 0);
 
 
 #if GTK_MAJOR_VERSION>=3
-	table=gtk_grid_new();
+	table = gtk_grid_new();
 
-	gtk_grid_attach(GTK_GRID(table),label1,0,0,1,1);
-	gtk_grid_attach(GTK_GRID(table),label2,0,1,1,1);
-	
-	gtk_grid_attach(GTK_GRID(table),filename,1,0,4,1);
+	gtk_grid_attach(GTK_GRID(table), label1, 0, 0, 1, 1);
+	gtk_grid_attach(GTK_GRID(table), label2, 0, 1, 1, 1);
+
+	gtk_grid_attach(GTK_GRID(table),filename, 1, 0, 4, 1);
 	gtk_grid_attach(GTK_GRID(table),filepath_label,1,1,4,1);
 
 	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 	gtk_grid_set_column_spacing (GTK_GRID (table), 6);
 
 #else
-	table=gtk_table_new(3,3,FALSE);
+	table = gtk_table_new(3,3,FALSE);
 
-	gtk_table_attach_defaults(GTK_TABLE(table),label1,0,1,0,1);
-	gtk_table_attach_defaults(GTK_TABLE(table),label2,0,1,1,2);
+	gtk_table_attach_defaults(GTK_TABLE(table), label1, 0, 1, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(table), label2, 0, 1, 1, 2);
 
-	gtk_table_attach_defaults(GTK_TABLE(table),filename,1,2,0,1);
-	gtk_table_attach_defaults(GTK_TABLE(table),filepath_label,1,2,1,2);
+	gtk_table_attach_defaults(GTK_TABLE(table), filename, 1, 2, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(table), filepath_label, 1, 2, 1, 2);
 
-	gtk_table_set_row_spacings(GTK_TABLE(table),5);
-	gtk_table_set_col_spacings(GTK_TABLE(table),5);
+	gtk_table_set_row_spacings(GTK_TABLE(table), 5);
+	gtk_table_set_col_spacings(GTK_TABLE(table), 5);
 
-	gtk_container_set_border_width(GTK_CONTAINER(table),5);
+	gtk_container_set_border_width(GTK_CONTAINER(table), 5);
 #endif
-	GtkWidget *container_vbox=gtk_dialog_get_content_area(GTK_DIALOG(dialog));
-	gtk_box_pack_start(GTK_BOX(container_vbox),table,TRUE,TRUE,0);
+	GtkWidget *container_vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
 
 
 	gtk_widget_show_all(dialog);
@@ -124,7 +130,7 @@ void group_properties_gui(GtkTreeModel *tree_model,GtkTreeIter *iter)
 /**
  * File properties callback
  */
-void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
+void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 {
 
 	GError *err = NULL;
@@ -133,7 +139,8 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	GtkWidget *table;
 	GtkWidget *label1,*label2,*label3;
 	GtkWidget *path,*filename,*filesize_label;
-	GtkWidget *container_vbox=NULL;
+	GtkWidget *container_vbox = NULL;
+	GtkWidget *dialog = NULL;
 
 	gchar *filePath=NULL;
 	int nodeType=-1;
@@ -147,8 +154,12 @@ void file_properties_gui(GtkTreeModel *model,GtkTreeIter *iter)
 	debug_printf((gchar*)"Node name: %s\n",nodename);
 	debug_printf((gchar*)"File name: %s\n",filePath);
 
-	GtkWidget *dialog=gtk_dialog_new_with_buttons(_("File Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
-
+#if GTK_MAJOR_VERSION>=3
+	dialog=gtk_dialog_new_with_buttons(_("File Properties"), NULL, GTK_DIALOG_MODAL,
+		_("OK"), GTK_RESPONSE_ACCEPT,NULL);
+#else
+	dialog=gtk_dialog_new_with_buttons(_("File Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
+#endif
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog),GTK_RESPONSE_OK);
 
 	gchar *absFilePath = NULL; //g_strdup_printf("%s",filePath);

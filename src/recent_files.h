@@ -27,7 +27,7 @@
  *
  */
 extern GtkWidget *recentTreeView;
-extern GtkWidget *recentPopupMenu;
+//extern GtkWidget *recentPopupMenu;
 
 GtkWidget *init_recent_files(GError **err);
 

@@ -37,6 +37,7 @@
 #include "scite_utils.h"
 #include "clipboard.h"
 #include "properties_dialog.h"
+#include "menus.h"
 
 #include "icon.h"
 
@@ -54,7 +55,7 @@ GtkTreeStore *recentTreeStore = NULL;
 
 ClickedNode recent_clicked_node;
 
-GtkWidget *recentPopupMenu=NULL;
+//GtkWidget *recentPopupMenu=NULL;
 
 
 /**
