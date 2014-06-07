@@ -35,6 +35,8 @@
 #include "clicked_node.h"
 #include "gui.h"
 
+#include "sort.h"
+
 GtkWidget *menuBar = NULL;
 
 
@@ -163,6 +165,8 @@ int init_menus(GtkWidget *window)
 	openFileMenuItem = gtk_menu_item_new_with_mnemonic("Open file in SciTE");
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), openFileMenuItem);
 
+	g_signal_connect(G_OBJECT(openFileMenuItem), "activate", G_CALLBACK(popup_open_file_cb), NULL);
+
 	copyFilenameMenuItem = gtk_menu_item_new_with_mnemonic("Copy filename to clipboard");
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), copyFilenameMenuItem);
 
@@ -191,6 +195,13 @@ int init_menus(GtkWidget *window)
 	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortSeparator);
 	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortAscendingExtensionMenuItem);
 	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortDescendingExtensionMenuItem);
+	
+	g_signal_connect(G_OBJECT(sortAscendingMenuItem), "activate", G_CALLBACK(sort_ascending_cb), NULL);
+	g_signal_connect(G_OBJECT(sortDescendingMenuItem), "activate", G_CALLBACK(sort_descending_cb), NULL);
+	g_signal_connect(G_OBJECT(sortAscendingExtensionMenuItem), "activate", G_CALLBACK(sort_ascending_by_extension_cb), NULL);
+	g_signal_connect(G_OBJECT(sortDescendingExtensionMenuItem), "activate", G_CALLBACK(sort_descending_by_extension_cb), NULL);
+	
+	
 
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(sortMenuItem), sortPopupMenu);
 
