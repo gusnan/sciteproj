@@ -131,8 +131,13 @@ int init_menus(GtkWidget *window)
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(filePopupMenu), quitMenuItem);
 
+	//expandMenuItem = gtk_menu_item_new_with_mnemonic("Expand all groups");
+	//collapseMenuItem = gtk_menu_item_new_with_mnemonic("Collapse all groups");
 	propertiesMenuItem = gtk_menu_item_new_with_mnemonic("Edit properties");
 
+	//gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), expandMenuItem);
+	//gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), collapseMenuItem);
+	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), menuSeparator);
 	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), propertiesMenuItem);
 
 	showRecentFileMenuItem = gtk_menu_item_new_with_mnemonic("Show Recent Files");
@@ -158,6 +163,7 @@ int init_menus(GtkWidget *window)
 	openFileMenuItem = gtk_menu_item_new_with_mnemonic("Open file in SciTE");
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), openFileMenuItem);
 
+	g_signal_connect(G_OBJECT(openFileMenuItem), "activate", G_CALLBACK(popup_open_file_cb), NULL);
 	copyFilenameMenuItem = gtk_menu_item_new_with_mnemonic("Copy filename to clipboard");
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), copyFilenameMenuItem);
 

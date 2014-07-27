@@ -44,7 +44,6 @@ extern GtkWidget *sortPopupMenu;
 
 extern GtkWidget *recentPopupMenu;
 
-
 extern GtkWidget *quitMenuItem;
 
 int init_menus(GtkWidget* widget);
