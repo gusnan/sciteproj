@@ -1,7 +1,7 @@
 /**
  * gui.c - GUI code for SciteProj
  *
- *  Copyright 2006 Roy Wood, 2009-2012 Andreas Rönnquist
+ *  Copyright 2006 Roy Wood, 2009-2014 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -81,23 +81,12 @@ gboolean is_name_valid(gchar *instring);
 
 gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData);
 
-gchar *window_saved_title=NULL;
-
-
-static guint sNumMenuActions = G_N_ELEMENTS(sMenuActions);
+gchar *window_saved_title = NULL;
 
 static GtkWidget *sMainWindow = NULL;
 GtkWidget *projectTreeView = NULL;
 
-static GtkWidget *sGroupPopupMenu = NULL;
-static GtkWidget *sFilePopupMenu = NULL;
-static GtkWidget *sGeneralPopupMenu = NULL;
-GtkWidget *sSortPopupMenu = NULL;
-
 ClickedNode clicked_node;
-
-static GtkActionGroup *sActionGroup = NULL;
-static GtkUIManager *sGtkUIManager = NULL;
 
 GtkCellRenderer *textCellRenderer = NULL;
 GtkCellRenderer *pixbuffCellRenderer = NULL;
@@ -107,12 +96,13 @@ GtkWidget *scrolledWindow = NULL;
 GtkTreeViewColumn *column1 = NULL;
 
 #if GTK_MAJOR_VERSION>=3
-GtkWidget *recentGrid=NULL;
+GtkWidget *recentGrid = NULL;
 #else
 GtkWidget *recentVbox=NULL;
 #endif
 
-GtkWidget *recentHbox=NULL;
+GtkWidget *recentHbox = NULL;
+
 
 /**
  * Initialize globals (i.e. create the main window and populate it).  This is a long chunk of code.
@@ -125,15 +115,15 @@ gboolean setup_gui(GError **err)
 {
 	gboolean resultCode = FALSE;
 	GtkTreeSelection *selection = NULL;
-	GtkWidget *vpaned=NULL;
+	GtkWidget *vpaned = NULL;
 
 	GtkTreeStore *projectTreeStore = NULL;
-	GtkAccelGroup* accelgroup = NULL;
+	//GtkAccelGroup* accelgroup = NULL;
 	GError *tempErr = NULL;
 
 #if GTK_MAJOR_VERSION>=3
 	GtkWidget *grid;
-	GtkWidget *fullGrid=NULL;
+	GtkWidget *fullGrid = NULL;
 #else
 	GtkWidget *vbox=NULL;
 	GtkWidget *hbox=NULL;
@@ -142,12 +132,12 @@ gboolean setup_gui(GError **err)
 	GtkWidget *fullVbox=NULL;
 #endif
 
-	GtkWidget *recentScrolledWindow=NULL;
+	GtkWidget *recentScrolledWindow = NULL;
 
 
-	clicked_node.valid=FALSE;
-	clicked_node.name=NULL;
-	clicked_node.type=-1;
+	clicked_node.valid = FALSE;
+	clicked_node.name = NULL;
+	clicked_node.type = -1;
 
 	window_saved_title=g_strdup_printf(_("[UNTITLED]"));
 
@@ -168,7 +158,7 @@ gboolean setup_gui(GError **err)
 		goto EXITPOINT;
 	}
 
-	gtk_window_set_icon(GTK_WINDOW(sMainWindow),program_icon_pixbuf);
+	gtk_window_set_icon(GTK_WINDOW(sMainWindow), program_icon_pixbuf);
 	gtk_window_set_default_icon(program_icon_pixbuf);
 
 	gtk_window_set_title(GTK_WINDOW(sMainWindow), window_saved_title);
@@ -204,6 +194,7 @@ gboolean setup_gui(GError **err)
 
 	// Create menus
 
+	/*
 	if (!(sActionGroup = gtk_action_group_new("SciteProjActions"))) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_action_group_new() = NULL",
 			__func__,
@@ -212,7 +203,9 @@ gboolean setup_gui(GError **err)
 
 		goto EXITPOINT;
 	}
+	*/
 
+	/*
 	if (!(sGtkUIManager = gtk_ui_manager_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_ui_manager_new() = NULL",
 			__func__,
@@ -221,15 +214,19 @@ gboolean setup_gui(GError **err)
 
 		goto EXITPOINT;
 	}
+	*/
+
+
 
 #if GTK_MAJOR_VERSION>=3
-	g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), grid);
+	//g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), grid);
 #else
 	//g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), vpaned);
-	g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), vbox);
+	// g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), vbox);
 #endif
 
 	// Fix the context-based translations for the menu strings
+	/*
 	int co=0;
 	gchar *temp=NULL;
 	gchar *context=NULL;
@@ -244,7 +241,9 @@ gboolean setup_gui(GError **err)
 			}
 		}
 	} while (context!=NULL);
+	*/
 
+/*
 	gtk_action_group_set_translation_domain(sActionGroup,PACKAGE);
 
 	gtk_action_group_add_actions(sActionGroup, sMenuActions, sNumMenuActions, NULL);
@@ -262,21 +261,35 @@ gboolean setup_gui(GError **err)
 	}
 
 	gtk_ui_manager_ensure_update(sGtkUIManager);
-
+*/
 	// Activate the keyboard accelerators
 
-	accelgroup = gtk_ui_manager_get_accel_group(sGtkUIManager);
-	gtk_window_add_accel_group(GTK_WINDOW(sMainWindow), accelgroup);
+	accelerator_group = gtk_accel_group_new();
+	gtk_window_add_accel_group(GTK_WINDOW(sMainWindow), accelerator_group);
 
+/*
 	// Create popup menus (shown when user right-clicks in gui elements)
 
 	sGeneralPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/GeneralPopup");
 	sGroupPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/GroupPopup");
-	sFilePopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/FilePopup");
 
+	//sFilePopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/FilePopup");
+*/
+	//sFilePopupMenu = gtk_menu_new();
+
+	if (init_menus(sMainWindow)!=0) {
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
+			__func__,
+			"Couldn't init menus"
+		);
+		goto EXITPOINT;
+	}
+
+/*
 	recentPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/RecentPopup");
 
 	sSortPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/SortPopup");
+*/
 
 	// Add a scrolled window to the main window
 
@@ -293,10 +306,10 @@ gboolean setup_gui(GError **err)
 	                               GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
 
 #if GTK_MAJOR_VERSION>=3
-	gtk_grid_attach(GTK_GRID(grid),scrolledWindow,0,1,1,1);
+	gtk_grid_attach(GTK_GRID(grid), scrolledWindow, 0, 1, 1, 1);
 
-	gtk_widget_set_vexpand(scrolledWindow,TRUE);
-	gtk_widget_set_hexpand(scrolledWindow,TRUE);
+	gtk_widget_set_vexpand(scrolledWindow, TRUE);
+	gtk_widget_set_hexpand(scrolledWindow, TRUE);
 #else
 	gtk_box_pack_start(GTK_BOX(vbox), scrolledWindow, TRUE, TRUE, 0);
 
@@ -328,9 +341,9 @@ gboolean setup_gui(GError **err)
 		goto EXITPOINT;
 	}
 
-	g_object_unref(G_OBJECT(projectTreeStore));
+	//g_object_unref(G_OBJECT(projectTreeStore));
 
-	gtk_tree_view_set_enable_search(GTK_TREE_VIEW(projectTreeView),TRUE);
+	gtk_tree_view_set_enable_search(GTK_TREE_VIEW(projectTreeView), TRUE);
 
 	if (!(textCellRenderer = gtk_cell_renderer_text_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_cell_renderer_text_new() = NULL",
@@ -455,6 +468,7 @@ gboolean setup_gui(GError **err)
 		goto EXITPOINT;
 	}
 
+
 #if GTK_MAJOR_VERSION>=3
 	gtk_widget_set_vexpand(recentScrolledWindow,TRUE);
 	gtk_widget_set_hexpand(recentScrolledWindow,TRUE);
@@ -504,7 +518,15 @@ gboolean setup_gui(GError **err)
 
 
 #if GTK_MAJOR_VERSION>=3
+
+
+	gtk_grid_insert_row(GTK_GRID(fullGrid), 0);
 	gtk_grid_attach(GTK_GRID(fullGrid),vpaned,0,0,1,1);
+
+	gtk_grid_insert_row(GTK_GRID(fullGrid), 0);
+	gtk_grid_attach(GTK_GRID(fullGrid), menuBar, 0,0,1,1);
+
+	gtk_widget_show(menuBar);
 
 	gtk_widget_show(GTK_WIDGET(fullGrid));
 
@@ -519,9 +541,14 @@ gboolean setup_gui(GError **err)
 
 
 #else
+
+	gtk_box_pack_start(GTK_BOX(fullVbox),menuBar, FALSE, FALSE, 0);
+
+	gtk_widget_show(menuBar);
 	gtk_box_pack_start(GTK_BOX(fullVbox),vpaned,TRUE,TRUE,0);
 
 	gtk_widget_show(GTK_WIDGET(fullVbox));
+
 
 	if (!prefs.hide_statusbar) {
 		if (!init_statusbar(fullVbox,vpaned,&tempErr)) {
@@ -717,7 +744,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 	GError *err = NULL;
 	GtkWidget *dialog = NULL;
 	gint nodeItemType;
-	gchar *fixed=NULL;
+	gchar *fixed = NULL;
 
 
 	// Get the data from the row that was activated
@@ -815,7 +842,6 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 		goto EXITPOINT;
 	}
 
-
 	// Find if the user has clicked on a node
 
 	if (!gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeView),
@@ -823,13 +849,12 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	                                   &path, NULL, NULL, NULL)) {
 		// Nope-- user clicked in the GtkTreeView, but not on a node
 
-		gtk_menu_popup(GTK_MENU(sGeneralPopupMenu),
+		gtk_menu_popup(GTK_MENU(generalPopupMenu),
 		               NULL, NULL, NULL, NULL,
 		               event->button, gdk_event_get_time((GdkEvent*) event));
 
 		goto EXITPOINT;
 	}
-
 
 	// User clicked on a node, so retrieve the particulars
 
@@ -870,11 +895,11 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	// Pop up the appropriate menu for the node type
 
 	if (nodeItemType == ITEMTYPE_FILE) {
-		gtk_menu_popup(GTK_MENU(sFilePopupMenu), NULL, NULL, NULL, NULL,
+		gtk_menu_popup(GTK_MENU(fileRightClickPopupMenu), NULL, NULL, NULL, NULL,
 		               event->button, gdk_event_get_time((GdkEvent*) event));
 	}
 	else if (nodeItemType == ITEMTYPE_GROUP) {
-		gtk_menu_popup(GTK_MENU(sGroupPopupMenu), NULL, NULL, NULL, NULL,
+		gtk_menu_popup(GTK_MENU(groupRightClickPopupMenu), NULL, NULL, NULL, NULL,
 		               event->button, gdk_event_get_time((GdkEvent*) event));
 	}
 
