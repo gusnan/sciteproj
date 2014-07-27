@@ -62,9 +62,11 @@ GdkCursor *busy_cursor=NULL;
  */
 gboolean load_graphics(GtkWidget *widget, GError **err)
 {
+#if GTK_MAJOR_VERSION>=3
 	GtkIconTheme *icon_theme;
 
 	icon_theme = gtk_icon_theme_get_default();
+#endif
 
 	program_icon_pixbuf=gdk_pixbuf_new_from_xpm_data((const char **)sciteproj_xpm);
 
