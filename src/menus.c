@@ -55,8 +55,6 @@ GtkWidget *generalPopupMenu = NULL;
 GtkWidget *sortPopupMenu = NULL;
 
 GtkWidget *quitMenuItem = NULL;
-GtkWidget *expandMenuItem = NULL;
-GtkWidget *collapseMenuItem = NULL;
 GtkWidget *aboutMenuItem = NULL;
 
 GtkWidget *sortMenuItem = NULL;
@@ -131,13 +129,8 @@ int init_menus(GtkWidget *window)
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(filePopupMenu), quitMenuItem);
 
-	expandMenuItem = gtk_menu_item_new_with_mnemonic("Expand all groups");
-	collapseMenuItem = gtk_menu_item_new_with_mnemonic("Collapse all groups");
 	propertiesMenuItem = gtk_menu_item_new_with_mnemonic("Edit properties");
 
-	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), expandMenuItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), collapseMenuItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), menuSeparator);
 	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), propertiesMenuItem);
 
 	showRecentFileMenuItem = gtk_menu_item_new_with_mnemonic("Show Recent Files");
