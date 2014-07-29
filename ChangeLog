@@ -4,6 +4,8 @@ ChangeLog:
 
 0.7.97
 	* Remove functionality to rename and the required files
+	* Remove GTK_STOCK stuff to make it build cleanly on GTK3
+	* Simplify menus
 
 0.7.96
 	* Fix build system not including CPPFLAGS
