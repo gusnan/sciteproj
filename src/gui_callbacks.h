@@ -38,7 +38,7 @@ void popup_open_file_cb();
 void expand_all_items_cb();
 void collapse_all_items_cb();
 
-void edit_options_cb();
+void edit_properties_cb();
 
 void refresh_folder_cb();
 

@@ -143,14 +143,14 @@ void collapse_all_items_cb()
 }
 
 
+
 /**
- *		edit_options_cb
- *			opens the user-specific options-file ($HOME/.sciteproj) in SciTE.
+ *	Open the LUA rc file for the project folder
  */
-void edit_options_cb()
+void edit_properties_cb()
 {
-	GError *err=NULL;
-	gchar *command=NULL;
+	GError *err = NULL;
+	gchar *command = NULL;
 
 	if ((command = g_strdup_printf("open:%s\n", prefs_filename)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1,
@@ -524,3 +524,4 @@ void refresh_folder_cb()
 	}
 	
 }
+
