@@ -137,7 +137,7 @@ int init_menus(GtkWidget *window)
 
 	//gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), expandMenuItem);
 	//gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), collapseMenuItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), menuSeparator);
+	//gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), menuSeparator);
 	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), propertiesMenuItem);
 
 	showRecentFileMenuItem = gtk_menu_item_new_with_mnemonic("Show Recent Files");
