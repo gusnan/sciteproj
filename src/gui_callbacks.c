@@ -105,7 +105,7 @@ void popup_open_file_cb()
 		goto EXITPOINT;
 	}
 
-	if (!open_filename(clicked_node.name,(gchar*)(get_project_directory()),&err)) {
+	if (!open_filename(clicked_node.name, (gchar*)(get_project_directory()), &err)) {
 		goto EXITPOINT;
 	}
 
@@ -139,7 +139,7 @@ EXITPOINT:
 void collapse_all_items_cb()
 {
 	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)),
-	                       foreach_collapse,NULL);
+	                       foreach_collapse, NULL);
 }
 
 
@@ -165,7 +165,7 @@ void edit_options_cb()
 			activate_scite(NULL);
 
 			if (prefs.give_scite_focus==TRUE) {
-				send_scite_command((gchar*)"focus:0",NULL);
+				send_scite_command((gchar*)"focus:0", NULL);
 			}
 		}
 	}
@@ -189,7 +189,7 @@ void expand_all_items_cb()
  * @param newiter
  * @param tree_path
  */
-static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter,GtkTreePath *tree_path)
+static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter, GtkTreePath *tree_path)
 {
 	GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
 
@@ -211,20 +211,20 @@ static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter
 			gboolean groupIsExpanded = tree_row_is_expanded(srcPath);
 
 			if (groupIsExpanded) {
-				set_tree_node_icon(&iter,directory_open_pixbuf,&error);
+				set_tree_node_icon(&iter, directory_open_pixbuf, &error);
 			} else {
-				set_tree_node_icon(&iter,directory_closed_pixbuf,&error);
+				set_tree_node_icon(&iter, directory_closed_pixbuf, &error);
 			}
 			
 			set_tree_node_expanded(&iter, groupIsExpanded, NULL);
 
 			gtk_tree_model_get(tree_model, &iter, COLUMN_FILEPATH, &relFilePath, -1);
 
-			if (gtk_tree_model_iter_has_child(tree_model,&iter)) {
+			if (gtk_tree_model_iter_has_child(tree_model, &iter)) {
 
 				GtkTreeIter newIter;
-				gtk_tree_model_iter_children(tree_model,&newIter,&iter);
-				fix_folders_step_through(tree_view,newIter,tree_path);
+				gtk_tree_model_iter_children(tree_model, &newIter, &iter);
+				fix_folders_step_through(tree_view,newIter, tree_path);
 			}
 
 			g_free(relFilePath);
