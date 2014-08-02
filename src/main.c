@@ -234,9 +234,9 @@ int main(int argc, char *argv[])
 	}
 
 	// Should we load a folder?
-	set_project_filepath(dir_to_load,NULL);
+	set_project_filepath(dir_to_load, NULL);
 
-	load_folder(dir_to_load,NULL);
+	load_folder(dir_to_load, NULL);
 	
 	init_scite_connection();
 
