@@ -24,9 +24,6 @@
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
-gboolean foreach_expand(GtkTreeModel *model,GtkTreePath *path,
-                               GtkTreeIter *iter,gpointer data);
-
 void row_expand_or_collapse_cb(GtkTreeView *treeview, GtkTreeIter *arg1, GtkTreePath *arg2, gpointer user_data);
 
 void quit_menu_cb();
@@ -34,9 +31,6 @@ void about_menu_cb();
 void creategroup_menu_cb();
 
 void popup_open_file_cb();
-
-void expand_all_items_cb();
-void collapse_all_items_cb();
 
 void edit_properties_cb();
 

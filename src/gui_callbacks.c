@@ -63,30 +63,6 @@
 
 
 /**
- *		Expands all folders
- */
-gboolean foreach_expand(GtkTreeModel *model,GtkTreePath *path,
-                               GtkTreeIter *iter,gpointer data)
-{
-	expand_tree_row(path,TRUE);
-	return FALSE;
-}
-
-
-/**
- *		Collapses all folders
- */
-gboolean foreach_collapse(GtkTreeModel *model,GtkTreePath *path,
-                          GtkTreeIter *iter,gpointer data)
-{
-	collapse_tree_row(path);
-	return FALSE;
-}
-
-
-
-
-/**
  * Open the selected file.
  *	This is called when a file is rightclicked and open is selected in the menu
  */
@@ -131,19 +107,6 @@ EXITPOINT:
 
 
 
-
-
-/**
- *
- */
-void collapse_all_items_cb()
-{
-	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)),
-	                       foreach_collapse, NULL);
-}
-
-
-
 /**
  *	Open the LUA rc file for the project folder
  */
@@ -169,16 +132,6 @@ void edit_properties_cb()
 			}
 		}
 	}
-}
-
-
-/**
- *
- */
-void expand_all_items_cb()
-{
-	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)),
-	                       foreach_expand,NULL);
 }
 
 

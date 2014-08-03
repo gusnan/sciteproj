@@ -51,7 +51,6 @@ gboolean tree_row_is_expanded(GtkTreePath *path);
 
 // Expand a row
 void expand_tree_row(GtkTreePath *path, gboolean expandChildren);
-void collapse_tree_row(GtkTreePath *path);
 
 gboolean dialog_response_is_exit(gint test);
 

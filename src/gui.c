@@ -663,17 +663,6 @@ void expand_tree_row(GtkTreePath *path, gboolean expandChildren)
 }
 
 
-/**
- * Expand a row in the tree.
- *
- * @param path is the GtkTreePath referencing the row
- * @param expandChildren indicates whether all children should be expanded
- */
-void collapse_tree_row(GtkTreePath *path)
-{
-	gtk_tree_view_collapse_row(GTK_TREE_VIEW(projectTreeView), path);
-}
-
 
 /**
  * Callback for Gtk "delete_event" message for the top-level application window.
