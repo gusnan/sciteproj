@@ -74,8 +74,8 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 
 void recent_files_switch_visible();
 
-gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,const gchar *key,
-                                     GtkTreeIter *iter,gpointer search_data);
+gboolean tree_view_search_equal_func(GtkTreeModel *model, gint column, const gchar *key,
+                                     GtkTreeIter *iter, gpointer search_data);
 
 gboolean is_name_valid(gchar *instring);
 
@@ -169,10 +169,10 @@ gboolean setup_gui(GError **err)
 	// Main content of the window is a vpaned
 
 #if GTK_MAJOR_VERSION>=3
-	vpaned=gtk_paned_new(GTK_ORIENTATION_VERTICAL);
+	vpaned = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
 
 	// Then we need a grid
-	grid=gtk_grid_new();
+	grid = gtk_grid_new();
 
 #else
 	vpaned=gtk_vpaned_new();
@@ -233,10 +233,10 @@ gboolean setup_gui(GError **err)
 	do {
 		context=menustrings[co].context;
 		if (context!=NULL) {
-			temp=(gchar*)g_dpgettext2(PACKAGE,menustrings[co].context,menustrings[co].string);
+			temp = (gchar*)g_dpgettext2(PACKAGE,menustrings[co].context,menustrings[co].string);
 
 			if (temp!=NULL) {
-				sMenuActions[co].label=g_strdup_printf("%s",temp);
+				sMenuActions[co].label = g_strdup_printf("%s",temp);
 				++co;
 			}
 		}
@@ -355,8 +355,8 @@ gboolean setup_gui(GError **err)
 	}
 
 	g_object_set(G_OBJECT(textCellRenderer),
-			"editable",FALSE,
-			"mode",GTK_CELL_RENDERER_MODE_EDITABLE,
+			"editable", FALSE,
+			"mode", GTK_CELL_RENDERER_MODE_EDITABLE,
 			NULL);
 
 	if (!(pixbuffCellRenderer = gtk_cell_renderer_pixbuf_new())) {
@@ -431,7 +431,7 @@ gboolean setup_gui(GError **err)
 
 #if GTK_MAJOR_VERSION>=3
 
-	if (!(recentGrid=gtk_grid_new())) {
+	if (!(recentGrid = gtk_grid_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR,-1,
 			"%s: %s, gtk_grid_new() = NULL",
 			"Couldn't init recent grid",
@@ -451,7 +451,7 @@ gboolean setup_gui(GError **err)
 #endif
 
 #if GTK_MAJOR_VERSION>=3
-	if (!(recentHbox=gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0))) {
+	if (!(recentHbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0))) {
 #else
 	if (!(recentHbox=gtk_hbox_new(FALSE,0))) {
 #endif
@@ -463,19 +463,19 @@ gboolean setup_gui(GError **err)
 		goto EXITPOINT;
 	}
 
-	if ((recentScrolledWindow=init_recent_files(&tempErr)) == NULL) {
+	if ((recentScrolledWindow = init_recent_files(&tempErr)) == NULL) {
 
 		goto EXITPOINT;
 	}
 
 
 #if GTK_MAJOR_VERSION>=3
-	gtk_widget_set_vexpand(recentScrolledWindow,TRUE);
-	gtk_widget_set_hexpand(recentScrolledWindow,TRUE);
+	gtk_widget_set_vexpand(recentScrolledWindow, TRUE);
+	gtk_widget_set_hexpand(recentScrolledWindow, TRUE);
 
-	gtk_grid_attach(GTK_GRID(recentGrid),recentScrolledWindow,0,0,1,1);
+	gtk_grid_attach(GTK_GRID(recentGrid), recentScrolledWindow, 0, 0, 1, 1);
 
-	fullGrid=gtk_grid_new();
+	fullGrid = gtk_grid_new();
 
 #else
 
@@ -507,8 +507,8 @@ gboolean setup_gui(GError **err)
 
 
 #if GTK_MAJOR_VERSION>=3
-	gtk_paned_pack1(GTK_PANED(vpaned),grid,TRUE,FALSE);
-	gtk_paned_pack2(GTK_PANED(vpaned),recentGrid,TRUE,TRUE);
+	gtk_paned_pack1(GTK_PANED(vpaned), grid, TRUE, FALSE);
+	gtk_paned_pack2(GTK_PANED(vpaned), recentGrid, TRUE, TRUE);
 #else
 	gtk_paned_pack1(GTK_PANED(vpaned),vbox,TRUE,FALSE);
 	gtk_paned_pack2(GTK_PANED(vpaned),recentVbox,TRUE,TRUE);
@@ -521,17 +521,17 @@ gboolean setup_gui(GError **err)
 
 
 	gtk_grid_insert_row(GTK_GRID(fullGrid), 0);
-	gtk_grid_attach(GTK_GRID(fullGrid),vpaned,0,0,1,1);
+	gtk_grid_attach(GTK_GRID(fullGrid), vpaned, 0, 0, 1, 1);
 
 	gtk_grid_insert_row(GTK_GRID(fullGrid), 0);
-	gtk_grid_attach(GTK_GRID(fullGrid), menuBar, 0,0,1,1);
+	gtk_grid_attach(GTK_GRID(fullGrid), menuBar, 0, 0, 1, 1);
 
 	gtk_widget_show(menuBar);
 
 	gtk_widget_show(GTK_WIDGET(fullGrid));
 
 	if (!prefs.hide_statusbar) {
-		if (!init_statusbar(fullGrid,vpaned,&tempErr)) {
+		if (!init_statusbar(fullGrid,vpaned, &tempErr)) {
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s", tempErr->message,"Error initing statusbar");
 			goto EXITPOINT;
 		}
@@ -569,12 +569,12 @@ gboolean setup_gui(GError **err)
 	g_signal_connect(G_OBJECT(recentTreeView), "key-press-event", G_CALLBACK(key_press_cb), recentTreeView);
 
 	gtk_window_resize(GTK_WINDOW(sMainWindow), prefs.width, prefs.height);
-	gtk_window_move(GTK_WINDOW(sMainWindow),prefs.xpos,prefs.ypos);
+	gtk_window_move(GTK_WINDOW(sMainWindow), prefs.xpos, prefs.ypos);
 
-	int window_xsize,window_ysize;
-	gtk_window_get_size(GTK_WINDOW(sMainWindow),&window_xsize,&window_ysize);
+	int window_xsize, window_ysize;
+	gtk_window_get_size(GTK_WINDOW(sMainWindow), &window_xsize, &window_ysize);
 
-	gtk_paned_set_position(GTK_PANED(vpaned),(int)(window_ysize*0.75));
+	gtk_paned_set_position(GTK_PANED(vpaned), (int)(window_ysize*0.75));
 
 	// Show it all....
 
@@ -750,9 +750,9 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 		goto EXITPOINT;
 	}
 
-	absFilePath=fix_path((gchar*)get_project_directory(),relFilePath);
+	absFilePath=fix_path((gchar*)get_project_directory(), relFilePath);
 
-	fixed=fix_path((gchar*)get_project_directory(),relFilePath);
+	fixed=fix_path((gchar*)get_project_directory(), relFilePath);
 
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1,
@@ -767,12 +767,12 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 			activate_scite(NULL);
 
 			if (prefs.give_scite_focus==TRUE) {
-				send_scite_command((gchar*)"focus:0",NULL);
+				send_scite_command((gchar*)"focus:0", NULL);
 			}
 
 			add_file_to_recent(fixed,NULL);
 
-			gchar *statusbar_text=g_strdup_printf(_("Opened %s"),
+			gchar *statusbar_text = g_strdup_printf(_("Opened %s"),
 			                                      remove_newline(get_filename_from_full_path(command)));
 
 			set_statusbar_text(statusbar_text);
@@ -860,10 +860,10 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 
 	if (clicked_node.name) g_free(clicked_node.name);
 
-	clicked_node.valid=TRUE;
-	clicked_node.iter=iter;
-	clicked_node.type=nodeItemType;
-	clicked_node.name=nodeName;
+	clicked_node.valid = TRUE;
+	clicked_node.iter = iter;
+	clicked_node.type = nodeItemType;
+	clicked_node.name = nodeName;
 	nodeName = NULL;
 
 	// Check if something is selected
@@ -917,14 +917,14 @@ void set_window_title(const gchar *newName)
 {
 	g_assert(newName != NULL);
 
-	gchar *temp_string=g_new(gchar,512);
+	gchar *temp_string = g_new(gchar,512);
 	g_snprintf(temp_string,512,"%s",newName);
 
 	gtk_window_set_title(GTK_WINDOW(sMainWindow), temp_string);
 
 	g_free(window_saved_title);
 
-	window_saved_title=g_strdup_printf("%s",newName);
+	window_saved_title = g_strdup_printf("%s",newName);
 
 	g_free(temp_string);
 }
@@ -935,11 +935,11 @@ void set_window_title(const gchar *newName)
  */
 gboolean dialog_response_is_exit(gint test)
 {
-	gboolean result=FALSE;
+	gboolean result = FALSE;
 
 	if ((test==GTK_RESPONSE_REJECT) || (test==GTK_RESPONSE_CANCEL) ||
 		 (test==GTK_RESPONSE_DELETE_EVENT) || (test==GTK_RESPONSE_NONE)) {
-		result=TRUE;
+		result = TRUE;
 	}
 
 	return result;
@@ -951,10 +951,10 @@ gboolean dialog_response_is_exit(gint test)
  */
 void recent_files_switch_visible()
 {
-	gboolean visible=FALSE;
+	gboolean visible = FALSE;
 
 #if GTK_MAJOR_VERSION>=3
-	g_object_get(G_OBJECT(recentGrid),"visible", &visible,NULL);
+	g_object_get(G_OBJECT(recentGrid), "visible", &visible, NULL);
 
 	if (visible) {
 		gtk_widget_hide(recentGrid);
