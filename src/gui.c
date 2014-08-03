@@ -815,7 +815,7 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	gchar *nodeName = NULL;
 	gint nodeItemType;
 	GtkTreeIter iter;
-	GtkTreeSelection *tree_selection=NULL;
+	GtkTreeSelection *tree_selection = NULL;
 
 	g_assert(treeView != NULL);
 	g_assert(event != NULL);
