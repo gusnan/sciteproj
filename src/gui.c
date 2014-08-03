@@ -872,12 +872,12 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	if (tree_selection!=NULL) {
 		// Check if clicked on something in the selection, otherwise make the clicked one the selection.
 
-		if (gtk_tree_selection_path_is_selected(tree_selection,path)==FALSE) {
+		if (gtk_tree_selection_path_is_selected(tree_selection, path)==FALSE) {
 			// clear selection and make current line selected
 
 			gtk_tree_selection_unselect_all(tree_selection);
 
-			gtk_tree_selection_select_path (tree_selection,path);
+			gtk_tree_selection_select_path (tree_selection, path);
 		}
 	}
 
