@@ -37,6 +37,8 @@
 
 #include "sort.h"
 
+#include "recent_files.h"
+
 GtkWidget *menuBar = NULL;
 
 
@@ -239,6 +241,11 @@ int init_menus(GtkWidget *window)
 	recentMenuPropertiesItem = gtk_menu_item_new_with_mnemonic("Properties");
 
 	recentMenuSeparator = gtk_separator_menu_item_new();
+	
+	g_signal_connect(G_OBJECT(recentMenuOpenFileItem), "activate", G_CALLBACK(popup_open_recent_file_cb), NULL);
+	g_signal_connect(G_OBJECT(recentMenuRemoveFileItem), "activate", G_CALLBACK(popup_remove_recent_file_cb), NULL);
+	g_signal_connect(G_OBJECT(recentMenuCopyFilenameItem), "activate", G_CALLBACK(copy_recent_filename_to_clipboard_cb), NULL);
+	g_signal_connect(G_OBJECT(recentMenuPropertiesItem), "activate", G_CALLBACK(properties_recent_file_cb), NULL);
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuOpenFileItem);
 	gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuRemoveFileItem);
