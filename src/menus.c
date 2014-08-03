@@ -37,6 +37,7 @@
 
 #include "sort.h"
 
+#include "clipboard.h"
 #include "recent_files.h"
 
 GtkWidget *menuBar = NULL;
@@ -167,7 +168,6 @@ int init_menus(GtkWidget *window)
 	openFileMenuItem = gtk_menu_item_new_with_mnemonic("Open file in SciTE");
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), openFileMenuItem);
 
-	g_signal_connect(G_OBJECT(openFileMenuItem), "activate", G_CALLBACK(popup_open_file_cb), NULL);
 	copyFilenameMenuItem = gtk_menu_item_new_with_mnemonic("Copy filename to clipboard");
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), copyFilenameMenuItem);
 
@@ -177,6 +177,8 @@ int init_menus(GtkWidget *window)
 	propertiesFileMenuItem = gtk_menu_item_new_with_mnemonic("Properties");
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), propertiesFileMenuItem);
 
+	g_signal_connect(G_OBJECT(openFileMenuItem), "activate", G_CALLBACK(popup_open_file_cb), NULL);
+	g_signal_connect(G_OBJECT(copyFilenameMenuItem), "activate", G_CALLBACK(copy_filename_to_clipboard_cb), NULL);
 	g_signal_connect(G_OBJECT(propertiesFileMenuItem), "activate", G_CALLBACK(file_properties_cb), NULL);
 
 
