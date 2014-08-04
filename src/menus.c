@@ -24,6 +24,12 @@
 #include <glib.h>
 #include <gtk/gtk.h>
 
+#include <glib.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
+
+
 #include <gdk/gdkkeysyms.h>
 
 #include "gui_callbacks.h"
@@ -108,10 +114,10 @@ int init_menus(GtkWidget *window)
 {
 	menuBar = gtk_menu_bar_new();
 
-	fileMenuEntry = gtk_menu_item_new_with_mnemonic("_File");
-	editMenuEntry = gtk_menu_item_new_with_mnemonic("_Edit");
-	viewMenuEntry = gtk_menu_item_new_with_mnemonic("_View");
-	helpMenuEntry = gtk_menu_item_new_with_mnemonic("_Help");
+	fileMenuEntry = gtk_menu_item_new_with_mnemonic(_("_File"));
+	editMenuEntry = gtk_menu_item_new_with_mnemonic(_("_Edit"));
+	viewMenuEntry = gtk_menu_item_new_with_mnemonic(_("_View"));
+	helpMenuEntry = gtk_menu_item_new_with_mnemonic(_("_Help"));
 
 	filePopupMenu = gtk_menu_new();
 	editPopupMenu = gtk_menu_new();
@@ -120,7 +126,7 @@ int init_menus(GtkWidget *window)
 
 	menuSeparator = gtk_separator_menu_item_new();
 
-	quitMenuItem = gtk_menu_item_new_with_mnemonic("_Quit");
+	quitMenuItem = gtk_menu_item_new_with_mnemonic(_("_Quit"));
 
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(fileMenuEntry), filePopupMenu);
 	gtk_menu_item_set_submenu(GTK_MENU_ITEM(editMenuEntry), editPopupMenu);
@@ -129,20 +135,20 @@ int init_menus(GtkWidget *window)
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(filePopupMenu), quitMenuItem);
 
-	propertiesMenuItem = gtk_menu_item_new_with_mnemonic("Edit properties");
+	propertiesMenuItem = gtk_menu_item_new_with_mnemonic(_("Edit properties"));
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), propertiesMenuItem);
 	
 	g_signal_connect(G_OBJECT(propertiesMenuItem), "activate", G_CALLBACK(edit_properties_cb), NULL);
 
-	showRecentFileMenuItem = gtk_menu_item_new_with_mnemonic("Show Recent Files");
+	showRecentFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Show Recent Files"));
 
 	g_signal_connect(G_OBJECT(showRecentFileMenuItem), "activate", G_CALLBACK(recent_files_switch_visible), NULL);
 	gtk_widget_add_accelerator(showRecentFileMenuItem, "activate", accelerator_group, GDK_KEY_r, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(viewPopupMenu), showRecentFileMenuItem);
 
-	aboutMenuItem = gtk_menu_item_new_with_mnemonic("About");
+	aboutMenuItem = gtk_menu_item_new_with_mnemonic(_("About"));
 
 	g_signal_connect(G_OBJECT(aboutMenuItem), "activate", G_CALLBACK(about_menu_cb), NULL);
 
@@ -155,16 +161,16 @@ int init_menus(GtkWidget *window)
 
 	fileRightClickPopupMenu = gtk_menu_new();
 
-	openFileMenuItem = gtk_menu_item_new_with_mnemonic("Open file in SciTE");
+	openFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Open file in SciTE"));
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), openFileMenuItem);
 
-	copyFilenameMenuItem = gtk_menu_item_new_with_mnemonic("Copy filename to clipboard");
+	copyFilenameMenuItem = gtk_menu_item_new_with_mnemonic(_("Copy filename to clipboard"));
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), copyFilenameMenuItem);
 
 	fileRightClickSeparator = gtk_separator_menu_item_new();
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), fileRightClickSeparator);
 
-	propertiesFileMenuItem = gtk_menu_item_new_with_mnemonic("Properties");
+	propertiesFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), propertiesFileMenuItem);
 
 	g_signal_connect(G_OBJECT(openFileMenuItem), "activate", G_CALLBACK(popup_open_file_cb), NULL);
@@ -174,13 +180,13 @@ int init_menus(GtkWidget *window)
 
 	sortPopupMenu = gtk_menu_new();
 
-	sortMenuItem = gtk_menu_item_new_with_mnemonic("Sort folder contents");
+	sortMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort folder contents"));
 
-	sortAscendingMenuItem = gtk_menu_item_new_with_mnemonic("Sort ascending by name");
-	sortDescendingMenuItem = gtk_menu_item_new_with_mnemonic("Sort descending by name");
+	sortAscendingMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort ascending by name"));
+	sortDescendingMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort descending by name"));
 
-	sortAscendingExtensionMenuItem = gtk_menu_item_new_with_mnemonic("Sort ascending by extension");
-	sortDescendingExtensionMenuItem = gtk_menu_item_new_with_mnemonic("Sort descending by extension");
+	sortAscendingExtensionMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort ascending by extension"));
+	sortDescendingExtensionMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort descending by extension"));
 	sortSeparator = gtk_separator_menu_item_new();
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortAscendingMenuItem);
@@ -201,9 +207,9 @@ int init_menus(GtkWidget *window)
 	folderPopupSeparator1 = gtk_separator_menu_item_new();
 	folderPopupSeparator2 = gtk_separator_menu_item_new();
 
-	propertiesGroupMenuItem = gtk_menu_item_new_with_mnemonic("Properties");
+	propertiesGroupMenuItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
 
-	updateFolderContentMenuItem = gtk_menu_item_new_with_mnemonic("Update folder content");
+	updateFolderContentMenuItem = gtk_menu_item_new_with_mnemonic(_("Update folder content"));
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), sortMenuItem);
 	gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator1);
@@ -227,10 +233,10 @@ int init_menus(GtkWidget *window)
 
 	recentPopupMenu = gtk_menu_new();
 
-	recentMenuOpenFileItem = gtk_menu_item_new_with_mnemonic("Open file in SciTE");
-	recentMenuRemoveFileItem = gtk_menu_item_new_with_mnemonic("Remove file from this list");
-	recentMenuCopyFilenameItem = gtk_menu_item_new_with_mnemonic("Copy filename to clipboard");
-	recentMenuPropertiesItem = gtk_menu_item_new_with_mnemonic("Properties");
+	recentMenuOpenFileItem = gtk_menu_item_new_with_mnemonic(_("Open file in SciTE"));
+	recentMenuRemoveFileItem = gtk_menu_item_new_with_mnemonic(_("Remove file from this list"));
+	recentMenuCopyFilenameItem = gtk_menu_item_new_with_mnemonic(_("Copy filename to clipboard"));
+	recentMenuPropertiesItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
 
 	recentMenuSeparator = gtk_separator_menu_item_new();
 	
