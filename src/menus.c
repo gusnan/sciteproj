@@ -106,12 +106,7 @@ GtkWidget *recentMenuSeparator = NULL;
  */
 int init_menus(GtkWidget *window)
 {
-	//accelerator_group = gtk_accel_group_new();
-
 	menuBar = gtk_menu_bar_new();
-
-	//gtk_menu_item_set_submenu(GTK_MENU_ITEM(sFilePopupMenu),menuBar);
-
 
 	fileMenuEntry = gtk_menu_item_new_with_mnemonic("_File");
 	editMenuEntry = gtk_menu_item_new_with_mnemonic("_Edit");
@@ -134,13 +129,8 @@ int init_menus(GtkWidget *window)
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(filePopupMenu), quitMenuItem);
 
-	//expandMenuItem = gtk_menu_item_new_with_mnemonic("Expand all groups");
-	//collapseMenuItem = gtk_menu_item_new_with_mnemonic("Collapse all groups");
 	propertiesMenuItem = gtk_menu_item_new_with_mnemonic("Edit properties");
 
-	//gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), expandMenuItem);
-	//gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), collapseMenuItem);
-	//gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), menuSeparator);
 	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), propertiesMenuItem);
 	
 	g_signal_connect(G_OBJECT(propertiesMenuItem), "activate", G_CALLBACK(edit_properties_cb), NULL);
@@ -256,8 +246,6 @@ int init_menus(GtkWidget *window)
 	gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuPropertiesItem);
 
 	gtk_widget_show_all(GTK_WIDGET(recentPopupMenu));
-
-	//gtk_window_add_accel_group(GTK_WINDOW(window), accelerator_group);
 
 	return 0;
 }
