@@ -6,6 +6,8 @@ ChangeLog:
 	* Remove functionality to rename and the required files
 	* Remove GTK_STOCK stuff to make it build cleanly on GTK3
 	* Simplify menus
+	* Make sure menu items are translated
+	* Update Swedish translation
 
 0.7.96
 	* Fix build system not including CPPFLAGS
