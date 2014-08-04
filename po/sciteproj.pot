@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: sciteproj 0.7.95alpha\n"
+"Project-Id-Version: sciteproj 1.00\n"
 "Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
-"POT-Creation-Date: 2013-09-03 16:17+0200\n"
+"POT-Creation-Date: 2014-08-04 20:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,29 +54,21 @@ msgid ""
 "is provided with this package."
 msgstr ""
 
-#: about.c:383
+#: about.c:385
 #, c-format
 msgid "version %s"
 msgstr ""
 
-#: addfiles.c:247
-msgid "Create Group"
-msgstr ""
-
-#: addfiles.c:268
-msgid "Enter name of new group:"
-msgstr ""
-
-#: gui.c:153 gui.c:952
+#: gui.c:142
 msgid "[UNTITLED]"
 msgstr ""
 
-#: gui.c:783 recent_files.c:551 scite_utils.c:216
+#: gui.c:775 recent_files.c:551 scite_utils.c:216
 #, c-format
 msgid "Opened %s"
 msgstr ""
 
-#: gui.c:796 gui_callbacks.c:121 recent_files.c:564 recent_files.c:605
+#: gui.c:788 gui_callbacks.c:96 recent_files.c:564 recent_files.c:605
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -113,74 +105,150 @@ msgstr ""
 msgid "option parsing failed: %s"
 msgstr ""
 
-#: main.c:133
+#: main.c:137
 #, c-format
 msgid "A folder is expected as parameter to sciteproj..."
 msgstr ""
 
-#: main.c:172 main.c:182
+#: main.c:176 main.c:186
 msgid ""
 "Environment variable exists, but doesn't point to a folder containing scite."
 msgstr ""
 
-#: main.c:199
+#: main.c:203
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
 msgstr ""
 
-#: main.c:200
+#: main.c:204
 msgid "Checking for SciTE in the standard locations instead.\n"
 msgstr ""
 
-#: main.c:213
+#: main.c:217
 msgid ""
 "Warning! Couldn't locate SciTE!\n"
 "Program will start, but you won't be able to open SciTE to edit files."
 msgstr ""
 
-#: main.c:221
+#: main.c:225
 #, c-format
 msgid "Could not setup the gui: %s"
 msgstr ""
 
-#: main.c:227
+#: main.c:231
 #, c-format
 msgid "Not a valid folder!"
 msgstr ""
 
-#: properties_dialog.c:62
+#: menus.c:117
+msgid "_File"
+msgstr ""
+
+#: menus.c:118
+msgid "_Edit"
+msgstr ""
+
+#: menus.c:119
+msgid "_View"
+msgstr ""
+
+#: menus.c:120
+msgid "_Help"
+msgstr ""
+
+#: menus.c:129
+msgid "_Quit"
+msgstr ""
+
+#: menus.c:138
+msgid "Edit properties"
+msgstr ""
+
+#: menus.c:144
+msgid "Show Recent Files"
+msgstr ""
+
+#: menus.c:151
+msgid "About"
+msgstr ""
+
+#: menus.c:164 menus.c:236
+msgid "Open file in SciTE"
+msgstr ""
+
+#: menus.c:167 menus.c:238
+msgid "Copy filename to clipboard"
+msgstr ""
+
+#: menus.c:173 menus.c:210 menus.c:239
+msgid "Properties"
+msgstr ""
+
+#: menus.c:183
+msgid "Sort folder contents"
+msgstr ""
+
+#: menus.c:185
+msgid "Sort ascending by name"
+msgstr ""
+
+#: menus.c:186
+msgid "Sort descending by name"
+msgstr ""
+
+#: menus.c:188
+msgid "Sort ascending by extension"
+msgstr ""
+
+#: menus.c:189
+msgid "Sort descending by extension"
+msgstr ""
+
+#: menus.c:212
+msgid "Update folder content"
+msgstr ""
+
+#: menus.c:237
+msgid "Remove file from this list"
+msgstr ""
+
+#: properties_dialog.c:64 properties_dialog.c:67
 msgid "Group Properties"
 msgstr ""
 
-#: properties_dialog.c:66
+#: properties_dialog.c:65 properties_dialog.c:159
+msgid "OK"
+msgstr ""
+
+#: properties_dialog.c:72
 msgid "Group name:"
 msgstr ""
 
-#: properties_dialog.c:67
+#: properties_dialog.c:73
 msgid "Full folder:"
 msgstr ""
 
-#: properties_dialog.c:150
+#: properties_dialog.c:158 properties_dialog.c:161
 msgid "File Properties"
 msgstr ""
 
-#: properties_dialog.c:174
+#: properties_dialog.c:185
 msgid "Filename:"
 msgstr ""
 
-#: properties_dialog.c:175
+#: properties_dialog.c:186
 msgid "Path:"
 msgstr ""
 
-#: properties_dialog.c:176
+#: properties_dialog.c:187
 msgid "File size:"
 msgstr ""
 
-#: recent_files.c:176
+#: recent_files.c:177
 msgid "Recently opened files:"
 msgstr ""
 
-#: remove.c:218 remove.c:223 rename.c:136 rename.c:141
+#: remove.c:218 remove.c:223
 msgid "Error!!!\n"
 msgstr ""
 
@@ -243,220 +311,4 @@ msgstr ""
 
 #: statusbar.c:57
 msgid "Welcome to SciteProj\n"
-msgstr ""
-
-#: tree_manipulation.c:207
-msgid "C/C++ Files"
-msgstr ""
-
-#: tree_manipulation.c:218
-msgid "LAMP Script Files"
-msgstr ""
-
-#: tree_manipulation.c:225
-msgid "Java Files"
-msgstr ""
-
-#: tree_manipulation.c:229
-msgid "JavaScript Files"
-msgstr ""
-
-#: tree_manipulation.c:233
-msgid "HTML Files"
-msgstr ""
-
-#: tree_manipulation.c:239
-msgid "All Files"
-msgstr ""
-
-#: tree_manipulation.c:274
-msgid "You need to save the project before adding files."
-msgstr ""
-
-#: tree_manipulation.c:287
-msgid "Add Files"
-msgstr ""
-
-#: tree_manipulation.c:367
-msgid ""
-"\n"
-"The following files:\n"
-"\n"
-msgstr ""
-
-#: tree_manipulation.c:392
-#, c-format
-msgid ""
-"%s\n"
-"couldn't be added, because they were already present in the project.\n"
-msgstr ""
-
-#: menus.h:95
-msgctxt "Menu|"
-msgid "_File"
-msgstr ""
-
-#: menus.h:96
-msgctxt "Menu|"
-msgid "_Edit"
-msgstr ""
-
-#: menus.h:97
-msgctxt "Menu|"
-msgid "_View"
-msgstr ""
-
-#: menus.h:98
-msgctxt "Menu|"
-msgid "_Help"
-msgstr ""
-
-#: menus.h:100
-msgctxt "Menu|File|"
-msgid "_Exit"
-msgstr ""
-
-#: menus.h:103
-msgctxt "Menu|Edit|"
-msgid "Create _group"
-msgstr ""
-
-#: menus.h:105
-msgctxt "Menu|Edit|"
-msgid "Create _file"
-msgstr ""
-
-#: menus.h:107
-msgctxt "Menu|Edit|"
-msgid "Delete file(s)"
-msgstr ""
-
-#: menus.h:110
-msgctxt "Menu|Edit|"
-msgid "Expand all groups"
-msgstr ""
-
-#: menus.h:112
-msgctxt "Menu|Edit|"
-msgid "Collapse all groups"
-msgstr ""
-
-#: menus.h:115
-msgctxt "Menu|Help|"
-msgid "_About"
-msgstr ""
-
-#: menus.h:118
-msgctxt "Menu|Edit|"
-msgid "Create files"
-msgstr ""
-
-#: menus.h:120
-msgctxt "Menu|Edit|"
-msgid "Create folder"
-msgstr ""
-
-#: menus.h:123
-msgctxt "Menu|Popup|Group"
-msgid "Create file"
-msgstr ""
-
-#: menus.h:125
-msgctxt "Menu|Popup|Group"
-msgid "Add folder"
-msgstr ""
-
-#: menus.h:127
-msgctxt "Menu|Popup|Group"
-msgid "Rename folder"
-msgstr ""
-
-#: menus.h:129
-msgctxt "Menu|Popup|Group"
-msgid "Delete folder"
-msgstr ""
-
-#: menus.h:131
-msgctxt "Menu|Edit|"
-msgid "Sort folder ascending by name"
-msgstr ""
-
-#: menus.h:133
-msgctxt "Menu|Edit"
-msgid "Sort folder descending by name"
-msgstr ""
-
-#: menus.h:135
-msgctxt "Menu|Edit|"
-msgid "Sort folder ascending by extension"
-msgstr ""
-
-#: menus.h:137
-msgctxt "Menu|Edit|"
-msgid "Sort folder descending by extension"
-msgstr ""
-
-#: menus.h:139
-msgctxt "Menu|Popup|Group"
-msgid "Properties"
-msgstr ""
-
-#: menus.h:141
-msgctxt "Menu|Edit|"
-msgid "Edit options"
-msgstr ""
-
-#: menus.h:144
-msgctxt "Menu|Sort|"
-msgid "Sort folder content"
-msgstr ""
-
-#: menus.h:147
-msgctxt "Menu|Reload"
-msgid "Refresh folder content"
-msgstr ""
-
-#: menus.h:150
-msgctxt "Menu|View|"
-msgid "View recently opened files"
-msgstr ""
-
-#: menus.h:153
-msgctxt "Menu|Popup|File"
-msgid "Open file in SciTE"
-msgstr ""
-
-#: menus.h:155
-msgctxt "Menu|Popup|File"
-msgid "Delete file"
-msgstr ""
-
-#: menus.h:157
-msgctxt "Menu|Popup|File"
-msgid "Copy filename to clipboard"
-msgstr ""
-
-#: menus.h:159
-msgctxt "Menu|Popup|File"
-msgid "Properties"
-msgstr ""
-
-#: menus.h:162
-msgctxt "Menu|Popup|RecentFile"
-msgid "Open file in SciTE"
-msgstr ""
-
-#: menus.h:164
-msgctxt "Menu|Popup|RecentFile"
-msgid "Remove file from this list"
-msgstr ""
-
-#: menus.h:166
-msgctxt "Menu|Popup|RecentFile"
-msgid "Copy filename to clipboard"
-msgstr ""
-
-#: menus.h:169
-msgctxt "Menu|Popup|RecentFile"
-msgid "Properties"
 msgstr ""
