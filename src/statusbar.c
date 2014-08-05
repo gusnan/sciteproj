@@ -1,7 +1,7 @@
 /**
  * statusbar.c - statusbar for SciteProj
  *
- *  Copyright 2009-2012 Andreas Rönnquist
+ *  Copyright 2009-2014 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -31,7 +31,7 @@
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
-GtkWidget *statusbar=NULL;
+GtkWidget *statusbar = NULL;
 
 guint context_id;
 
@@ -41,7 +41,7 @@ guint context_id;
  */
 gboolean init_statusbar(GtkWidget *widget,GtkWidget *next_to,GError **err)
 {
-	statusbar=gtk_statusbar_new();
+	statusbar = gtk_statusbar_new();
 
 	if (!statusbar) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not init statusbar", __func__);
@@ -78,30 +78,30 @@ void set_statusbar_text(const gchar *text)
 {
 	if (statusbar) {
 
-		int co=0;
+		int co = 0;
 		// new string - fill it with characters from text indata, but skip
 		// non-showable characters.
 
 		gchar *newstring=(gchar*)(g_malloc((int)(strlen(text)+1)));
 
-		int newco=0;
-		for (co=0;co<(int)strlen(text);co++) {
+		int newco = 0;
+		for (co = 0; co < (int)strlen(text); co++) {
 			if (text[co]!='\n') {
 				newstring[newco]=text[co];
 				newco++;
 			}
 		}
 
-		newstring[newco]='\0';
+		newstring[newco] = '\0';
 
 		// Pop what message that was previously on the statusbar stack
-		gtk_statusbar_pop(GTK_STATUSBAR(statusbar),context_id);
+		gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id);
 
 		// Push the new message (the statusbar will show the message that
 		// is on top of the statusbar stack, the one pushed will be shown)
 		// We popped the last one, because we don't take advantage of the
 		// context_id system of the statusbar.
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar),context_id,newstring);
+		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id, newstring);
 
 		g_free(newstring);
 	}
