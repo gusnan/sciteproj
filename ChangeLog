@@ -2,6 +2,11 @@
 ChangeLog:
 ----------
 
+1.01
+	* Add GPL header in several more places
+	* Remove date and version from man-page
+	* Some formatting fixes
+	
 1.00
 	* Remove functionality to rename and the required files
 	* Remove GTK_STOCK stuff to make it build cleanly on GTK3
