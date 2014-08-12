@@ -13,12 +13,14 @@ to build are:
 
 pkg-config
 libgtk-3-dev
+liblua5.1-0-dev
 gettext
 
 or if you are still using GTK version 2:
 
 pkg-config
 libgtk2.0-dev
+liblua5.1-0-dev
 gettext
 
 Then the build process is simple - to build the program, just type
