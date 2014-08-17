@@ -1,8 +1,8 @@
 #
-# Sciteproj po makefile
-# $Id$
+#   Copyright (C) 2009-2014 Andreas Rönnquist
+#   This file is distributed under the same license
+#   as the sciteproj package, see COPYING file.
 #
-
 
 ifndef PREFIX
 	ifdef INSTALL_PREFIX
