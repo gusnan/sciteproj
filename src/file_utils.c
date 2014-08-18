@@ -393,7 +393,7 @@ gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const g
 		}
 	}
 
-	// On linux check if first character is '/', and on windows check for something
+	// On GNU/Linux check if first character is '/', and on windows check for something
 	// like "C:" in the beginning of the string
 	if (relativePath[0] == G_DIR_SEPARATOR) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Specified path, '%s', is absolute", __func__ , relativePath);

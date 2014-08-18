@@ -1,5 +1,5 @@
 /**
- * scite_utils_linux.c - Code for working with Scite (Linux version)
+ * scite_utils_linux.c - Code for working with Scite (GNU/Linux version)
  *
  *  Copyright 2006 Roy Wood, 2009-2012 Andreas Rönnquist
  *
@@ -841,7 +841,7 @@ gboolean check_if_scite_exists()
 
 /**
  *		init_scite_connection
- *		currently doesn't do anything on Linux
+ *		currently doesn't do anything on GNU/Linux
  */
 void init_scite_connection()
 {
