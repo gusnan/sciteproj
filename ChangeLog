@@ -2,6 +2,9 @@
 ChangeLog:
 ----------
 
+1.03
+	* Fix manpage commenting
+
 1.02
 	* Also mention installing required liblua5.1-0-dev in INSTALL
 	* Fix copyright headers and specify licenses
