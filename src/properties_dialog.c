@@ -37,6 +37,18 @@
 #include "string_utils.h"
 #include "file_utils.h"
 
+/**
+ * My set align
+ */
+void my_set_align(GtkWidget *widget)
+{
+#if GTK_MAJOR_VERSION>=3
+	gtk_widget_set_halign(widget, GTK_ALIGN_START);
+	gtk_widget_set_valign(widget, GTK_ALIGN_START);
+#else
+	gtk_misc_set_alignment(GTK_MISC(widget), 0, 0);
+#endif
+}
 
 /**
  * Group properties callback
@@ -76,12 +88,11 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 
 	filepath_label=gtk_label_new(filePath);
 
-	gtk_misc_set_alignment(GTK_MISC(filename), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(filepath_label), 0, 0);
+	my_set_align(filename);
+	my_set_align(filepath_label);
 
-	gtk_misc_set_alignment(GTK_MISC(label1), 0, 0);
-	gtk_misc_set_alignment(GTK_MISC(label2), 0, 0);
-
+	my_set_align(label1);
+	my_set_align(label2);
 
 #if GTK_MAJOR_VERSION>=3
 	table = gtk_grid_new();
@@ -190,13 +201,13 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	path=gtk_label_new(absFilePath/*sClickedNodeName*/);
 	filesize_label=gtk_label_new(size_string);
 
-	gtk_misc_set_alignment(GTK_MISC(filename),0,0);
-	gtk_misc_set_alignment(GTK_MISC(path),0,0);
-	gtk_misc_set_alignment(GTK_MISC(filesize_label),0,0);
+	my_set_align(filename);
+	my_set_align(path);
+	my_set_align(filesize_label);
 
-	gtk_misc_set_alignment(GTK_MISC(label1),0,0);
-	gtk_misc_set_alignment(GTK_MISC(label2),0,0);
-	gtk_misc_set_alignment(GTK_MISC(label3),0,0);
+	my_set_align(label1);
+	my_set_align(label2);
+	my_set_align(label3);
 
 #if GTK_MAJOR_VERSION>=3
 	table=gtk_grid_new();
