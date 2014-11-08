@@ -4,7 +4,9 @@
 #   as the sciteproj package, see COPYING file.
 #
 
-CC=gcc
+ifndef CC
+	CC=gcc
+endif
 SRC=src
 BIN=bin
 GRPH=graphics
@@ -99,6 +101,6 @@ uninstall:
 	${MAKE} -C po uninstall
 
 $(DEPEND):
-	$(CC) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" > $(DEPEND)
+	$(CC) $(LOCAL_CFLAGS) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" > $(DEPEND)
 
 -include $(DEPEND)
