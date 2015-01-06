@@ -34,7 +34,7 @@ following "_" is  the keyboard shortcut for that menu item.
 Checking your translation for errors and completeness
 -----------------------------------------------------
 
-	msgfmt -c --statistics sv_SE.po -o /dev/null
+	msgfmt -c --statistics sv.po -o /dev/null
 
 
 Building SciteProj with your translation included
@@ -57,6 +57,6 @@ make sciteproj.pot
 
 Next issue the following command to update your po file:
 
-	msgmerge --update sv_SE.po sciteproj.pot
+	msgmerge --update sv.po sciteproj.pot
 	
 Then open your file and locate the strings that need updating.
