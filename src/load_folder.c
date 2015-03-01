@@ -44,7 +44,7 @@ struct ParseFileStruct {
 typedef struct ParseFileStruct ParseFileStruct;
 
 GtkTreeIter prevFileIterArray[100];
-int currentFilePrevFileIter=0;
+int currentFilePrevFileIter = 0;
 
 gboolean prevFileIterValid[100];
 
@@ -56,29 +56,29 @@ int number_of_files=0;
  */
 gboolean ignore_pattern_matches(gchar *folder_name, const gchar *filename, GSList *filter_list)
 {
-	gboolean result=FALSE;
+	gboolean result = FALSE;
 
 	gchar *full_filename=g_build_filename(folder_name, filename, NULL);
 
-	int len=strlen(full_filename);
+	int len = strlen(full_filename);
 
 	if (filter_list) {
 		while (filter_list && !result)	{
 
-			gchar *filter= (gchar *)filter_list->data;
+			gchar *filter = (gchar *)filter_list->data;
 
-			gchar *temp_filter_string=g_build_filename(get_project_directory(), filter, NULL);
+			gchar *temp_filter_string = g_build_filename(get_project_directory(), filter, NULL);
 
-			GPatternSpec *pattern_spec=g_pattern_spec_new(temp_filter_string);
+			GPatternSpec *pattern_spec = g_pattern_spec_new(temp_filter_string);
 
 			if (g_pattern_match(pattern_spec, len, full_filename, NULL)) {
-				result=TRUE;
+				result = TRUE;
 			}
 
 			g_pattern_spec_free(pattern_spec);
 			g_free(temp_filter_string);
 
-			filter_list=filter_list->next;
+			filter_list = filter_list->next;
 		};
 	}
 
@@ -93,7 +93,7 @@ gboolean ignore_pattern_matches(gchar *folder_name, const gchar *filename, GSLis
  */
 GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GCompareFunc compare_func, GSList *filter_list)
 {
-	GSList *result_list=NULL;
+	GSList *result_list = NULL;
 
 	GDir *dir=g_dir_open(folder_path, 0, NULL);
 
@@ -101,18 +101,18 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 
 	while((short_filename = g_dir_read_name(dir))) {
 
-		gchar *temp_file=g_build_filename(folder_path, short_filename, NULL);
+		gchar *temp_file = g_build_filename(folder_path, short_filename, NULL);
 
 		if (read_directories) {
 
 			if (g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
 
-				if (filter_list!=NULL) {
+				if (filter_list != NULL) {
 					if (!ignore_pattern_matches(folder_path, short_filename, filter_list)) {
-						result_list=g_slist_prepend(result_list, (gpointer)short_filename);
+						result_list = g_slist_prepend(result_list, (gpointer)short_filename);
 					}
 				} else {
-					result_list=g_slist_prepend(result_list, (gpointer)short_filename);
+					result_list = g_slist_prepend(result_list, (gpointer)short_filename);
 				}
 			}
 
@@ -120,18 +120,18 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 
 			if (!g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
 
-				if (filter_list!=NULL) {
+				if (filter_list != NULL) {
 					if (!ignore_pattern_matches(folder_path, short_filename, filter_list)) {
-						result_list=g_slist_prepend(result_list, (gpointer)temp_file);
+						result_list = g_slist_prepend(result_list, (gpointer)temp_file);
 					}
 				} else {
-					result_list=g_slist_prepend(result_list, (gpointer)temp_file);
+					result_list = g_slist_prepend(result_list, (gpointer)temp_file);
 				}
 			}
 		}
 	}
 
-	result_list=g_slist_sort(result_list, compare_func);
+	result_list = g_slist_sort(result_list, compare_func);
 
 	return result_list;
 }
@@ -146,12 +146,12 @@ gboolean load_folder(gchar *path, GError **err)
 {
 	GtkTreeModel *model;
 
-	model=gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
 
 	ParseFileStruct parse_struct;
 
-	parse_struct.depth=0;
-	number_of_files=0;
+	parse_struct.depth = 0;
+	number_of_files = 0;
 
 	GtkTreeIter dot_folder_iterator;
 
@@ -160,11 +160,11 @@ gboolean load_folder(gchar *path, GError **err)
 
 	dot_folder_iterator=parse_struct.current_iter;
 
-	prevFileIterValid[currentFilePrevFileIter]=FALSE;
-	prevFileIterArray[currentFilePrevFileIter]=parse_struct.current_iter;
+	prevFileIterValid[currentFilePrevFileIter] = FALSE;
+	prevFileIterArray[currentFilePrevFileIter] = parse_struct.current_iter;
 
 	currentFilePrevFileIter++;
-	prevFileIterArray[currentFilePrevFileIter]=parse_struct.current_iter;
+	prevFileIterArray[currentFilePrevFileIter] = parse_struct.current_iter;
 
 	parse_struct.depth++;
 
@@ -179,10 +179,10 @@ gboolean load_folder(gchar *path, GError **err)
 	// Expand the dot-folder
 	// void expand_tree_row(GtkTreePath *path, gboolean expandChildren);
 
-	GtkTreePath *iter_path=gtk_tree_model_get_path(GTK_TREE_MODEL(model), &dot_folder_iterator);
+	GtkTreePath *iter_path = gtk_tree_model_get_path(GTK_TREE_MODEL(model), &dot_folder_iterator);
 
 	if (iter_path)
-		expand_tree_row(iter_path,FALSE);
+		expand_tree_row(iter_path, FALSE);
 
 	gtk_tree_path_free(iter_path);
 

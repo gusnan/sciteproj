@@ -39,7 +39,7 @@ guint context_id;
 /**
  *		init_statusbar
  */
-gboolean init_statusbar(GtkWidget *widget,GtkWidget *next_to,GError **err)
+gboolean init_statusbar(GtkWidget *widget, GtkWidget *next_to, GError **err)
 {
 	statusbar = gtk_statusbar_new();
 
@@ -52,16 +52,16 @@ gboolean init_statusbar(GtkWidget *widget,GtkWidget *next_to,GError **err)
 
 	gtk_widget_set_size_request(statusbar, 1, -1);
 
-	context_id=gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar),"Info");
+	context_id = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "Info");
 
 	set_statusbar_text(_("Welcome to SciteProj\n"));
 
 	gtk_widget_set_size_request(statusbar, -1, 20);
 
-#if GTK_MAJOR_VERSION>=3
-	gtk_grid_attach_next_to(GTK_GRID(widget),statusbar,next_to,GTK_POS_BOTTOM,1,1);
+#if GTK_MAJOR_VERSION >= 3
+	gtk_grid_attach_next_to(GTK_GRID(widget), statusbar, next_to, GTK_POS_BOTTOM, 1, 1);
 #else
-	gtk_box_pack_end (GTK_BOX (widget), statusbar,FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (widget), statusbar, FALSE, FALSE, 0);
 #endif
 
 	gtk_widget_show (statusbar);
@@ -82,12 +82,12 @@ void set_statusbar_text(const gchar *text)
 		// new string - fill it with characters from text indata, but skip
 		// non-showable characters.
 
-		gchar *newstring=(gchar*)(g_malloc((int)(strlen(text)+1)));
+		gchar *newstring = (gchar*)(g_malloc((int)(strlen(text) + 1)));
 
 		int newco = 0;
 		for (co = 0; co < (int)strlen(text); co++) {
-			if (text[co]!='\n') {
-				newstring[newco]=text[co];
+			if (text[co] != '\n') {
+				newstring[newco] = text[co];
 				newco++;
 			}
 		}

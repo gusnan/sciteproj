@@ -25,8 +25,8 @@
 /**
  *
  */
-gint compare_strings_bigger(gconstpointer a,gconstpointer b);
-gint compare_strings_smaller(gconstpointer a,gconstpointer b);
+gint compare_strings_bigger(gconstpointer a, gconstpointer b);
+gint compare_strings_smaller(gconstpointer a, gconstpointer b);
 
 gint file_sort_by_extension_bigger_func(gconstpointer a, gconstpointer b);
 gint file_sort_by_extension_smaller_func(gconstpointer a, gconstpointer b);
@@ -37,6 +37,6 @@ void sort_descending_cb();
 void sort_ascending_by_extension_cb();
 void sort_descending_by_extension_cb();
 
-GCompareFunc get_sort_order_of_folder(gchar *foler_name);
+GCompareFunc get_sort_order_of_folder(gchar *folder_name);
 
 #endif /*__HEADER_SORT_*/

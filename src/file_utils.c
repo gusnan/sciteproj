@@ -46,7 +46,7 @@
 /**
  *
  */
-gchar *current_directory=0;
+gchar *current_directory = 0;
 
 
 /**
@@ -54,10 +54,10 @@ gchar *current_directory=0;
  */
 gboolean is_separator(gchar ch)
 {
-	gboolean result=FALSE;
+	gboolean result = FALSE;
 
-	if ((ch=='/') || (ch==G_DIR_SEPARATOR) || (ch=='\\')) {
-		result=TRUE;
+	if ((ch == '/') || (ch == G_DIR_SEPARATOR) || (ch == '\\')) {
+		result = TRUE;
 	}
 	return result;
 }
@@ -68,26 +68,26 @@ gboolean is_separator(gchar ch)
  */
 gchar *path_up_string(gchar *instring)
 {
-	int len=(int)strlen(instring);
+	int len = (int)strlen(instring);
 	int co;
 
-	int start=len--;
+	int start = len--;
 
 	if (is_separator(instring[start])) {
 		start--;
 	}
 
-	int res=-1;
-	for (co=start; co>0; co--) {
+	int res = -1;
+	for (co = start; co > 0; co--) {
 		if (is_separator(instring[co])) {
-			if (res==-1) res=co;
+			if (res == -1) res = co;
 		}
 	}
 
-	gchar *resstring=g_strdup_printf("%s",instring);
+	gchar *resstring = g_strdup_printf("%s", instring);
 
-	if (res!=-1) {
-		resstring[res]='\0';
+	if (res != -1) {
+		resstring[res] = '\0';
 	}
 
 	return resstring;
@@ -101,31 +101,31 @@ gchar *path_up_string(gchar *instring)
  */
 gchar *fix_separators(gchar *source)
 {
-	gchar *result=g_strdup(source);
-	gchar *pointer=result;
+	gchar *result = g_strdup(source);
+	gchar *pointer = result;
 
 	if (pointer) {
-		int co=0;
-		for (co=0; co<strlen(source); co++) {
+		int co = 0;
+		for (co = 0; co < strlen(source); co++) {
 			if (is_separator(source[co])) {
-				// if ((*pointer==G_DIR_SEPARATOR) || (*pointer=='\\') || (*pointer=='/')) {
+				// if ((*pointer == G_DIR_SEPARATOR) || (*pointer == '\\') || (*pointer == '/')) {
 
-				*pointer='/';
+				*pointer = '/';
 
 				// skip /./ and similar
-				if ((source[co+1]=='.') && (is_separator(source[co+2]))) {
+				if ((source[co+1] == '.') && (is_separator(source[co+2]))) {
 					co+=2;
 				}
 
 
 			} else {
-				*pointer=source[co];
+				*pointer = source[co];
 			}
 			pointer++;
 
 		}
 
-		*pointer='\0';
+		*pointer = '\0';
 	}
 
 	return result;
@@ -138,50 +138,50 @@ gchar *fix_separators(gchar *source)
 gchar *fix_path(char *base_dir,char *temp)
 {
 	// first, make slashes real ones for the platform.
-	gchar *curr=g_strdup(base_dir);
+	gchar *curr = g_strdup(base_dir);
 
-	gchar *infile=fix_separators(temp);
+	gchar *infile = fix_separators(temp);
 
-	//gchar *pointer=infile;
+	//gchar *pointer = infile;
 
 
-	gchar *out_path=g_strdup_printf("%s",curr);
-	gchar *current_path=0;
+	gchar *out_path = g_strdup_printf("%s",curr);
+	gchar *current_path = 0;
 
 
 	if (!g_path_is_absolute(infile)) {
 		int co;
-		for (co=0; co<(int)strlen(infile); co++) {
-			char ch=infile[co];
+		for (co = 0; co<(int)strlen(infile); co++) {
+			char ch = infile[co];
 
 			if (!is_separator(ch)) {
 
-				if (current_path!=NULL) {
-					gchar *buf=g_strdup_printf("%s%c",current_path,ch);
+				if (current_path != NULL) {
+					gchar *buf = g_strdup_printf("%s%c",current_path,ch);
 
 					g_free(current_path);
 
-					current_path=buf;
+					current_path = buf;
 
 				} else {
-					current_path=g_strdup_printf("%c",ch);
+					current_path = g_strdup_printf("%c",ch);
 				}
 
 			} else {
 				//g_print("%s\n",current_path);
 
-				if (strcmp(current_path,"..")==0) {
+				if (strcmp(current_path,"..") == 0) {
 					//g_print("Up! curr:%s\n",out_path);
 
-					//file_pointer=&infile[co];
+					//file_pointer = &infile[co];
 
-					gchar *buf=path_up_string(out_path);
+					gchar *buf = path_up_string(out_path);
 
 					g_free(out_path);
-					out_path=buf;
+					out_path = buf;
 
 					g_free(current_path);
-					current_path=0;
+					current_path = 0;
 
 				}
 			}
@@ -190,20 +190,20 @@ gchar *fix_path(char *base_dir,char *temp)
 		infile++;
 	}
 
-	gchar *tempfile=infile;
+	gchar *tempfile = infile;
 
 	do {
 
-		if ((tempfile[0]=='.') && (tempfile[1]==G_DIR_SEPARATOR)) {
+		if ((tempfile[0] == '.') && (tempfile[1] == G_DIR_SEPARATOR)) {
 			tempfile+=2;
 		}
 
-	} while((tempfile[0]=='.') && (tempfile[0]==G_DIR_SEPARATOR));
+	} while((tempfile[0] == '.') && (tempfile[0] == G_DIR_SEPARATOR));
 
-	if (current_path!=0) g_free(current_path);
+	if (current_path != 0) g_free(current_path);
 
-	//gchar *new_res=g_strdup_printf("%s%c%s",out_path,G_DIR_SEPARATOR,get_filename_from_full_path(file_pointer));
-	gchar *new_res=g_strdup_printf("%s%c%s",out_path,G_DIR_SEPARATOR,tempfile);
+	//gchar *new_res = g_strdup_printf("%s%c%s",out_path,G_DIR_SEPARATOR,get_filename_from_full_path(file_pointer));
+	gchar *new_res = g_strdup_printf("%s%c%s", out_path, G_DIR_SEPARATOR, tempfile);
 
 	g_free(curr);
 	//g_free(infile);
@@ -217,12 +217,12 @@ gchar *fix_path(char *base_dir,char *temp)
  */
 void init_file_utils()
 {
-	gchar *temp=g_get_current_dir();
-	current_directory=fix_separators(temp);
+	gchar *temp = g_get_current_dir();
+	current_directory = fix_separators(temp);
 
 	g_free(temp);
 
-	if (current_directory[strlen(current_directory)-1]!=G_DIR_SEPARATOR) {
+	if (current_directory[strlen(current_directory)-1] != G_DIR_SEPARATOR) {
 
 	}
 }
@@ -234,26 +234,26 @@ void init_file_utils()
 gchar *get_filename_from_full_path(gchar *src)
 {
 	gchar *pointer;
-	gchar *result=NULL;
-	gboolean slashFound=FALSE;
+	gchar *result = NULL;
+	gboolean slashFound = FALSE;
 
-	g_assert(src!=NULL);
+	g_assert(src != NULL);
 
-	pointer=src;
+	pointer = src;
 
 	do {
-		if ((*pointer==G_DIR_SEPARATOR) || (*pointer=='\\') || (*pointer=='/')) {
+		if ((*pointer == G_DIR_SEPARATOR) || (*pointer == '\\') || (*pointer == '/')) {
 
 			// point to the character after the slash
-			result=++pointer;
-			slashFound=TRUE;
+			result = ++pointer;
+			slashFound = TRUE;
 		}
 
 		pointer++;
 
-	} while((*pointer)!='\0');
+	} while((*pointer) != '\0');
 
-	if (!slashFound) result=src;
+	if (!slashFound) result = src;
 
 	return result;
 }
@@ -491,9 +491,9 @@ EXITPOINT:
  */
 gchar *get_file_extension(gchar *filename)
 {
-	gchar *result=g_strrstr(filename,".");
+	gchar *result = g_strrstr(filename, ".");
 
-	if (!result) result="";
+	if (!result) result = "";
 
 	return result;
 }
@@ -504,25 +504,25 @@ gchar *get_file_extension(gchar *filename)
  */
 int get_number_of_files_in_folder(gchar *folder_name)
 {
-	int result=0;
+	int result = 0;
 
 	GSList *file_list;
 	GSList *folder_list;
 
-	file_list=load_folder_to_list(folder_name, FALSE, file_sort_by_extension_bigger_func, NULL);
-	folder_list=load_folder_to_list(folder_name, TRUE, compare_strings_bigger, NULL);
+	file_list = load_folder_to_list(folder_name, FALSE, file_sort_by_extension_bigger_func, NULL);
+	folder_list = load_folder_to_list(folder_name, TRUE, compare_strings_bigger, NULL);
 
 	if (file_list) {
 		while (file_list)	{
 			result++;
-			file_list=file_list->next;
+			file_list = file_list->next;
 		};
 	}
 
 	if (folder_list) {
 		while (folder_list)	{
 			result++;
-			folder_list=folder_list->next;
+			folder_list = folder_list->next;
 		};
 	}
 
@@ -537,12 +537,12 @@ int get_number_of_files_in_folder(gchar *folder_name)
  */
 gboolean is_string_folder(gchar *instring)
 {
-	gboolean result=FALSE;
+	gboolean result = FALSE;
 
-	GDir *dir=g_dir_open(instring, 0, NULL);
+	GDir *dir = g_dir_open(instring, 0, NULL);
 
 	if (dir) {
-		result=TRUE;
+		result = TRUE;
 	}
 
 	if (dir) g_dir_close(dir);
@@ -556,29 +556,29 @@ gboolean is_string_folder(gchar *instring)
  */
 gchar *clean_folder(gchar *infolder)
 {
-	gchar *result=NULL;
+	gchar *result = NULL;
 
-	gchar *temp=infolder;
+	gchar *temp = infolder;
 
-	int len=strlen(infolder);
+	int len = strlen(infolder);
 
-	if (g_strcmp0(infolder,"./")==0) {
-		result=g_strdup_printf(".");
+	if (g_strcmp0(infolder, "./")==0) {
+		result = g_strdup_printf(".");
 
 		return result;
 	}
 
 	if (temp) {
-		if ((temp[0]=='.') && (temp[1]==G_DIR_SEPARATOR)) {
+		if ((temp[0] == '.') && (temp[1] == G_DIR_SEPARATOR)) {
 
-			temp+=2;
-			len-=2;
+			temp += 2;
+			len -= 2;
 		}
 
-		if (temp[len-1]==G_DIR_SEPARATOR) {
-			result=g_strndup(temp, len-1);
+		if (temp[len-1] == G_DIR_SEPARATOR) {
+			result = g_strndup(temp, len-1);
 		} else {
-			result=g_strdup(temp);
+			result = g_strdup(temp);
 		}
 	}
 

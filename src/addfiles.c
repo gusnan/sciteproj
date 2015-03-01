@@ -46,8 +46,8 @@
 void menu_add_widget_cb(GtkUIManager *ui, GtkWidget *widget, GtkContainer *container)
 {
 	// use Grid instead of box packing on GTK3
-#if GTK_MAJOR_VERSION>=3
-	gtk_grid_attach(GTK_GRID(container),widget,0,0,1,1);
+#if GTK_MAJOR_VERSION >= 3
+	gtk_grid_attach(GTK_GRID(container), widget, 0, 0, 1, 1);
 #else
 	gtk_box_pack_start(GTK_BOX(container), widget, FALSE, FALSE, 0);
 #endif
