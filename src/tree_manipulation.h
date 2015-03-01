@@ -27,33 +27,33 @@
 // Node relative-position indicators
 
 enum NodePosition {
-	ADD_BEFORE,
-	ADD_AFTER,
-	ADD_CHILD
+    ADD_BEFORE,
+    ADD_AFTER,
+    ADD_CHILD
 };
 
 
 // Mnemonic identifiers for the columns in the GtkTreeStore
 
 enum {
-	COLUMN_ITEMTYPE = 0,
-	COLUMN_FILEPATH,
-	COLUMN_FILENAME,
-	COLUMN_FILESIZE,
-	COLUMN_FONTWEIGHT,
-	COLUMN_FONTWEIGHTSET,
-	COLUMN_ICON,
-	COLUMN_EXPANDED,
-	COLUMN_FOLDER_CONTENT_LOADED,
-	COLUMN_EOL
+    COLUMN_ITEMTYPE = 0,
+    COLUMN_FILEPATH,
+    COLUMN_FILENAME,
+    COLUMN_FILESIZE,
+    COLUMN_FONTWEIGHT,
+    COLUMN_FONTWEIGHTSET,
+    COLUMN_ICON,
+    COLUMN_EXPANDED,
+    COLUMN_FOLDER_CONTENT_LOADED,
+    COLUMN_EOL
 };
 
 
 // The type of each row in the tree datamodel
 
 enum {
-	ITEMTYPE_GROUP,
-	ITEMTYPE_FILE
+    ITEMTYPE_GROUP,
+    ITEMTYPE_FILE
 };
 
 
@@ -91,23 +91,23 @@ gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err);
 
 // Add a file node to a GtkTreeModel
 gboolean add_tree_file(GtkTreeIter *currentIter,
-								enum NodePosition position,
-								const gchar* filepath,
-								GtkTreeIter *newIter,
-								gboolean makeRelative,
-								GError **err);
+                       enum NodePosition position,
+                       const gchar* filepath,
+                       GtkTreeIter *newIter,
+                       gboolean makeRelative,
+                       GError **err);
 
 //gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **err);
 gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **err);
 
 // Add a group node to a GtkTreeModel
 gboolean add_tree_group(GtkTreeIter *parentIter,
-								enum NodePosition position,
-								const gchar* groupname,
-								const gchar* full_name,
-								gboolean expanded,
-								GtkTreeIter *newIter,
-								GError **err);
+                        enum NodePosition position,
+                        const gchar* groupname,
+                        const gchar* full_name,
+                        gboolean expanded,
+                        GtkTreeIter *newIter,
+                        GError **err);
 
 // Remove a node from a GtkTreeModel
 gboolean remove_tree_node(GtkTreeIter *iter, GError **err);
@@ -123,10 +123,10 @@ gboolean set_tree_node_loaded(GtkTreeIter *iter, gboolean loaded, GError **err);
 
 // Copy a node in the tree (including children)
 gboolean copy_tree_node(GtkTreeIter *srcIter,
-								GtkTreeIter *dstIter,
-								enum NodePosition position,
-								GtkTreeIter *newIter,
-								GError **err);
+                        GtkTreeIter *dstIter,
+                        enum NodePosition position,
+                        GtkTreeIter *newIter,
+                        GError **err);
 
 gchar *get_path_string(GtkTreeIter *iter);
 

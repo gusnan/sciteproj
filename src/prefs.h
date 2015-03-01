@@ -28,30 +28,30 @@
  *
  */
 typedef struct {
-	int lhs;
-	int width, height;
-	int verbosity;
-	int last_file_filter;
-	int xpos,ypos;
+    int lhs;
+    int width, height;
+    int verbosity;
+    int last_file_filter;
+    int xpos,ypos;
 
-	int search_xpos,search_ypos;
-	int search_width,search_height;
+    int search_xpos,search_ypos;
+    int search_width,search_height;
 
-	gboolean give_scite_focus;
-	gboolean search_give_scite_focus;
+    gboolean give_scite_focus;
+    gboolean search_give_scite_focus;
 
-	gchar *scite_path;
+    gchar *scite_path;
 
-	gboolean show_recent;
-	gboolean recent_add_to_bottom;
+    gboolean show_recent;
+    gboolean recent_add_to_bottom;
 
-	gboolean hide_statusbar;
-	
-	gboolean use_stock_folder_icon;
-	
-	gboolean write_protect;
+    gboolean hide_statusbar;
 
-	gboolean start_scite;
+    gboolean use_stock_folder_icon;
+
+    gboolean write_protect;
+
+    gboolean start_scite;
 
 } sciteproj_prefs;
 

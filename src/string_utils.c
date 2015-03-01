@@ -48,32 +48,32 @@
  */
 gboolean str_append(gchar **dst, const gchar *src, GError **err)
 {
-	gboolean finalResult = FALSE;
+    gboolean finalResult = FALSE;
 
-	g_assert(dst != NULL);
-	g_assert(src != NULL);
+    g_assert(dst != NULL);
+    g_assert(src != NULL);
 
-	gulong dstLength = (*dst == NULL) ? 0 : strlen(*dst);
-	gulong srcLength = strlen(src);
-	gulong totalLength = dstLength + srcLength + 1;
+    gulong dstLength = (*dst == NULL) ? 0 : strlen(*dst);
+    gulong srcLength = strlen(src);
+    gulong totalLength = dstLength + srcLength + 1;
 
-	gchar *newDst = (gchar *) g_try_realloc(*dst, totalLength);
+    gchar *newDst = (gchar *) g_try_realloc(*dst, totalLength);
 
-	if (newDst == NULL) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not allocate memory, g_try_realloc(%ld) = NULL", __func__, totalLength);
+    if (newDst == NULL) {
+        g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not allocate memory, g_try_realloc(%ld) = NULL", __func__, totalLength);
 
-		goto EXITPOINT;
-	}
+        goto EXITPOINT;
+    }
 
-	g_memmove(newDst + dstLength, src, srcLength + 1);
+    g_memmove(newDst + dstLength, src, srcLength + 1);
 
-	*dst = newDst;
+    *dst = newDst;
 
-	finalResult = TRUE;
+    finalResult = TRUE;
 
 EXITPOINT:
 
-	return finalResult;
+    return finalResult;
 }
 
 
@@ -82,14 +82,14 @@ EXITPOINT:
  */
 void debug_printf(const char *st, ...)
 {
-	va_list ap;
-	va_start(ap,st);
+    va_list ap;
+    va_start(ap,st);
 
 #ifdef _DEBUG
-	vprintf(st,ap);
+    vprintf(st,ap);
 #endif
 
-	va_end(ap);
+    va_end(ap);
 }
 
 
@@ -98,13 +98,13 @@ void debug_printf(const char *st, ...)
  */
 char *remove_newline( char *s )
 {
-	int len=strlen(s);
+    int len=strlen(s);
 
-	if (s[len-1]=='\n') {
-		s[len-1]='\0';
-	}
+    if (s[len-1]=='\n') {
+        s[len-1]='\0';
+    }
 
-	return s;
+    return s;
 
 }
 
