@@ -27,33 +27,33 @@
 // Node relative-position indicators
 
 enum NodePosition {
-    ADD_BEFORE,
-    ADD_AFTER,
-    ADD_CHILD
+	ADD_BEFORE,
+	ADD_AFTER,
+	ADD_CHILD
 };
 
 
 // Mnemonic identifiers for the columns in the GtkTreeStore
 
 enum {
-    COLUMN_ITEMTYPE = 0,
-    COLUMN_FILEPATH,
-    COLUMN_FILENAME,
-    COLUMN_FILESIZE,
-    COLUMN_FONTWEIGHT,
-    COLUMN_FONTWEIGHTSET,
-    COLUMN_ICON,
-    COLUMN_EXPANDED,
-    COLUMN_FOLDER_CONTENT_LOADED,
-    COLUMN_EOL
+	COLUMN_ITEMTYPE = 0,
+	COLUMN_FILEPATH,
+	COLUMN_FILENAME,
+	COLUMN_FILESIZE,
+	COLUMN_FONTWEIGHT,
+	COLUMN_FONTWEIGHTSET,
+	COLUMN_ICON,
+	COLUMN_EXPANDED,
+	COLUMN_FOLDER_CONTENT_LOADED,
+	COLUMN_EOL
 };
 
 
 // The type of each row in the tree datamodel
 
 enum {
-    ITEMTYPE_GROUP,
-    ITEMTYPE_FILE
+	ITEMTYPE_GROUP,
+	ITEMTYPE_FILE
 };
 
 
