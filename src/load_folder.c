@@ -158,7 +158,7 @@ gboolean load_folder(gchar *path, GError **err)
 	add_tree_group(NULL, ADD_CHILD, ".", path/*get_filename_from_full_path(project_path)*/ , TRUE, &(parse_struct.current_iter), NULL);
 	//add_tree_file(NULL, ADD_CHILD, project_path , &(parse_struct.current_iter), TRUE, NULL);
 
-	dot_folder_iterator=parse_struct.current_iter;
+	dot_folder_iterator = parse_struct.current_iter;
 
 	prevFileIterValid[currentFilePrevFileIter] = FALSE;
 	prevFileIterArray[currentFilePrevFileIter] = parse_struct.current_iter;
