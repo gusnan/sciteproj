@@ -2,6 +2,9 @@
 ChangeLog:
 ----------
 
+1.05
+	* Remove unused Swedish translations, cleaning up the po-file
+	
 1.04
 	* Fix manpage commenting
 
