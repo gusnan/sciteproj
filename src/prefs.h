@@ -46,9 +46,9 @@ typedef struct {
 	gboolean recent_add_to_bottom;
 
 	gboolean hide_statusbar;
-	
+
 	gboolean use_stock_folder_icon;
-	
+
 	gboolean write_protect;
 
 	gboolean start_scite;

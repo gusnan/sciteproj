@@ -57,40 +57,44 @@ int main(int argc, char *argv[])
 {
 	int returnCode = EXIT_FAILURE;
 	GError *err = NULL;
-	GOptionContext *context=NULL;
+	GOptionContext *context = NULL;
 
-	static gboolean version=FALSE;
-	static gchar *scite_instance=NULL;
-	static gboolean load_a_folder=FALSE;
+	static gboolean version = FALSE;
+	static gchar *scite_instance = NULL;
+	static gboolean load_a_folder = FALSE;
 	static gboolean start_scite = FALSE;
 
-	static const GOptionEntry options[]={
-		{ "version",		'v',	0, G_OPTION_ARG_NONE,		&version,
-			N_("Show program version and quit")},
-		{ "scite",			's',	0, G_OPTION_ARG_STRING,		&scite_instance,
-			N_("Set a filename for the instance of SciTE to open"),	N_("SCITE_FILENAME")},
-		{ "load_folder",	'l',	0,	G_OPTION_ARG_NONE,		&load_a_folder,
-			N_("Load a folder")}, 
-		{ "start_scite",	't',	0,	G_OPTION_ARG_NONE,		&start_scite,
-			N_("Start SciTE automatically with SciteProj")},
+	static const GOptionEntry options[] = {
+		{	"version",		'v',	0, G_OPTION_ARG_NONE,		&version,
+			N_("Show program version and quit")
+		},
+		{	"scite",			's',	0, G_OPTION_ARG_STRING,		&scite_instance,
+			N_("Set a filename for the instance of SciTE to open"),	N_("SCITE_FILENAME")
+		},
+		{	"load_folder",	'l',	0,	G_OPTION_ARG_NONE,		&load_a_folder,
+			N_("Load a folder")
+		},
+		{	"start_scite",	't',	0,	G_OPTION_ARG_NONE,		&start_scite,
+			N_("Start SciTE automatically with SciteProj")
+		},
 		{ NULL }
 	};
 
 	// Init gettext stuff
 	setlocale(LC_ALL,"");
 
-	bindtextdomain(PACKAGE,LOCALEDIR);
-	bind_textdomain_codeset(PACKAGE,"");
+	bindtextdomain(PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset(PACKAGE, "");
 	textdomain(PACKAGE);
 
-	gchar *sciteproj_description=g_strdup_printf(_("SciTE Project Manager"));
+	gchar *sciteproj_description = g_strdup_printf(_("SciTE Project Manager"));
 
-	gchar *full_desc_string=g_strdup_printf("- %s",sciteproj_description);
+	gchar *full_desc_string = g_strdup_printf("- %s",sciteproj_description);
 
 	context=g_option_context_new(full_desc_string);
-	g_option_context_add_main_entries(context,options,NULL);
+	g_option_context_add_main_entries(context, options, NULL);
 	if (!g_option_context_parse(context, &argc, &argv, &err)) {
-		g_print(_("option parsing failed: %s"),err->message);
+		g_print(_("option parsing failed: %s"), err->message);
 		printf("\n");
 		exit(EXIT_FAILURE);
 	}
@@ -105,7 +109,7 @@ int main(int argc, char *argv[])
 		set instance of SciTE to run
 	*/
 	if (scite_instance) {
-		cmd.scite_filename=scite_instance;
+		cmd.scite_filename = scite_instance;
 	}
 
 	init_version_string();
@@ -127,29 +131,29 @@ int main(int argc, char *argv[])
 #if GLIB_MAJOR_VERSION<=2 && GLIB_MINOR_VERSION<36
 	g_type_init();
 #endif
-	
-	
+
+
 	init_file_utils();
 
-	gchar *current_dir=g_get_current_dir();
+	gchar *current_dir = g_get_current_dir();
 
-	if (argc>2) {
+	if (argc > 2) {
 		printf(_("A folder is expected as parameter to sciteproj..."));
 		printf("\n");
 		return EXIT_FAILURE;
 	}
 
 	gchar *dir_to_load;
-	if (argc==1) { // only "sciteproj" on the command-line
-		dir_to_load=current_dir;
+	if (argc == 1) { // only "sciteproj" on the command-line
+		dir_to_load = current_dir;
 
 	} else { // "sciteproj <folder_name>" on the command-line
-		dir_to_load=argv[1];
+		dir_to_load = argv[1];
 
 		gchar *newpath;
 
 		if (relative_path_to_abs_path(dir_to_load, &newpath, current_dir, NULL)) {
-			dir_to_load=newpath;
+			dir_to_load = newpath;
 		}
 	}
 
@@ -163,24 +167,24 @@ int main(int argc, char *argv[])
 	}
 
 	// check environment variable
-	gchar *scite_path_env=getenv("SciTE_HOME");
+	gchar *scite_path_env = getenv("SciTE_HOME");
 
 	// test for scite
-	if (scite_path_env!=NULL) {
-		gchar *env_filename=g_build_filename(scite_path_env,"scite",NULL);
-		if (g_file_test(env_filename,G_FILE_TEST_EXISTS)) {
-			if (cmd.scite_filename==NULL) {
-				cmd.scite_filename=g_strdup(env_filename);
+	if (scite_path_env != NULL) {
+		gchar *env_filename = g_build_filename(scite_path_env, "scite", NULL);
+		if (g_file_test(env_filename, G_FILE_TEST_EXISTS)) {
+			if (cmd.scite_filename == NULL) {
+				cmd.scite_filename = g_strdup(env_filename);
 			}
 		} else {
 			g_warning(_("Environment variable exists, but doesn't point to a folder containing scite."));
 		}
 
-		if (env_filename!=NULL) g_free(env_filename);
-		env_filename=g_build_filename(scite_path_env,"SciTE",NULL);
-		if (g_file_test(env_filename,G_FILE_TEST_EXISTS)) {
-			if (cmd.scite_filename==NULL) {
-				cmd.scite_filename=g_strdup(env_filename);
+		if (env_filename != NULL) g_free(env_filename);
+		env_filename = g_build_filename(scite_path_env,"SciTE",NULL);
+		if (g_file_test(env_filename, G_FILE_TEST_EXISTS)) {
+			if (cmd.scite_filename == NULL) {
+				cmd.scite_filename = g_strdup(env_filename);
 			}
 		} else {
 			g_warning(_("Environment variable exists, but doesn't point to a folder containing scite."));
@@ -188,19 +192,19 @@ int main(int argc, char *argv[])
 	}
 
 	// do we have a custom scite executable string as command line option?
-	if (cmd.scite_filename!=NULL) {
+	if (cmd.scite_filename != NULL) {
 
 		// Does SciTE exist at that location?
-		if (g_file_test(cmd.scite_filename,G_FILE_TEST_IS_REGULAR)) {
+		if (g_file_test(cmd.scite_filename, G_FILE_TEST_IS_REGULAR)) {
 
 			// If we have already allocated memory for scite path, free it
-			if (prefs.scite_path!=NULL) g_free(prefs.scite_path);
+			if (prefs.scite_path != NULL) g_free(prefs.scite_path);
 
 			// Set the new one
 			prefs.scite_path=g_strdup(cmd.scite_filename);
 
 		} else {
-			g_print(_("Couldn't find a SciTE executable named '%s'!\n"),cmd.scite_filename);
+			g_print(_("Couldn't find a SciTE executable named '%s'!\n"), cmd.scite_filename);
 			g_print(_("Checking for SciTE in the standard locations instead.\n"));
 		}
 	}
@@ -214,8 +218,8 @@ int main(int argc, char *argv[])
 	// Check for SciTE
 	if (!check_if_scite_exists()) {
 		GtkWidget *warningDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,
-				_("Warning! Couldn't locate SciTE!\n"
-				"Program will start, but you won't be able to open SciTE to edit files."));
+		                           _("Warning! Couldn't locate SciTE!\n"
+		                             "Program will start, but you won't be able to open SciTE to edit files."));
 		gtk_dialog_run(GTK_DIALOG(warningDialog));
 		gtk_widget_destroy(warningDialog);
 	}
@@ -237,7 +241,7 @@ int main(int argc, char *argv[])
 	set_project_filepath(dir_to_load, NULL);
 
 	load_folder(dir_to_load, NULL);
-	
+
 	init_scite_connection();
 
 	// open scite, if prefs says we should

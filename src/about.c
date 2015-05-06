@@ -63,7 +63,7 @@ void show_about_dialog()
  */
 void create_about_dialog()
 {
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	GtkWidget *grid;
 #else
 	GtkWidget *vbox;
@@ -90,13 +90,13 @@ void create_about_dialog()
 
 
 	// Make the dialog
-	window=gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_container_set_border_width(GTK_CONTAINER(window), 8);
 
 	gtk_widget_set_size_request(window, 500, 400);
 
 	// Make a container
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	grid = gtk_grid_new();
 
 	gtk_grid_set_row_spacing (GTK_GRID (grid), 6);
@@ -110,7 +110,7 @@ void create_about_dialog()
 
 	logo_image = gtk_image_new_from_pixbuf(program_icon_pixbuf);
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_grid_attach(GTK_GRID(grid), logo_image, 0, 0, 5, 1);
 #else
 	gtk_box_pack_start(GTK_BOX(vbox), logo_image, FALSE, FALSE, 0);
@@ -132,7 +132,7 @@ void create_about_dialog()
 	gchar *about_dialog_version_string;
 
 #ifdef _DEBUG
-	about_dialog_version_string=g_strdup_printf("%s DEBUG",version_string);
+	about_dialog_version_string = g_strdup_printf("%s DEBUG",version_string);
 #else
 	about_dialog_version_string = g_strdup_printf("%s", version_string);
 #endif
@@ -140,7 +140,7 @@ void create_about_dialog()
 	version_string_label = gtk_label_new(about_dialog_version_string);
 	gtk_label_set_selectable(GTK_LABEL(version_string_label), FALSE);
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_grid_attach_next_to(GTK_GRID(grid), version_string_label, sciteproj_label, GTK_POS_BOTTOM, 5, 1);
 #else
 	gtk_box_pack_start(GTK_BOX(vbox), version_string_label, FALSE, FALSE, 0);
@@ -152,7 +152,7 @@ void create_about_dialog()
 	copyright_label = gtk_label_new(copyrightstring);
 	gtk_label_set_selectable(GTK_LABEL(copyright_label), FALSE);
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_grid_attach_next_to(GTK_GRID(grid), copyright_label, version_string_label, GTK_POS_BOTTOM, 5, 1);
 #else
 	gtk_box_pack_start(GTK_BOX(vbox), copyright_label, FALSE, FALSE, 0);
@@ -168,7 +168,7 @@ void create_about_dialog()
 
 	gtk_label_set_selectable(GTK_LABEL(gtk_version_label), FALSE);
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_grid_attach_next_to(GTK_GRID(grid), gtk_version_label, copyright_label, GTK_POS_BOTTOM, 5, 1);
 #else
 	gtk_box_pack_start(GTK_BOX(vbox), gtk_version_label, FALSE, FALSE, 0);
@@ -201,17 +201,17 @@ void create_about_dialog()
 
 
 	gchar *sLicense =	_("SciteProj is free software: you can redistribute it and/or modify "
-											  "it under the terms of the GNU General Public License as published by "
-											  "the Free Software Foundation, either version 3 of the License, or "
-											  "(at your option) any later version.\n"
-											  "\n"
-											  "SciteProj is distributed in the hope that it will be useful, "
-											  "but WITHOUT ANY WARRANTY; without even the implied warranty of "
-											  "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
-											  "GNU General Public License for more details.\n"
-											  "\n"
-											  "You should have received a copy of the GNU General Public License "
-											  "along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n");
+	                      "it under the terms of the GNU General Public License as published by "
+	                      "the Free Software Foundation, either version 3 of the License, or "
+	                      "(at your option) any later version.\n"
+	                      "\n"
+	                      "SciteProj is distributed in the hope that it will be useful, "
+	                      "but WITHOUT ANY WARRANTY; without even the implied warranty of "
+	                      "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
+	                      "GNU General Public License for more details.\n"
+	                      "\n"
+	                      "You should have received a copy of the GNU General Public License "
+	                      "along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n");
 
 
 
@@ -258,8 +258,8 @@ void create_about_dialog()
 
 	gchar *prefs_dir_string = g_strdup_printf("Preferences loaded from %s",prefs_filename);
 
-	text_to_add=g_strdup_printf("%s\n\n%s", about_text2,
-									prefs_dir_string);
+	text_to_add = g_strdup_printf("%s\n\n%s", about_text2,
+	                            prefs_dir_string);
 
 #else
 	text_to_add = about_text2;
@@ -290,7 +290,7 @@ void create_about_dialog()
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), scrolled_window_info, notebook_label1);
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), scrolled_window_license, notebook_label2);
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_widget_set_vexpand(notebook, TRUE);
 
 	gtk_widget_set_hexpand(notebook, TRUE);
@@ -308,7 +308,7 @@ void create_about_dialog()
 	gtk_button_set_use_underline(GTK_BUTTON(ok_button), TRUE);
 	gtk_button_set_label(GTK_BUTTON(ok_button), "_OK");
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_widget_set_halign(ok_button, GTK_ALIGN_END);
 	gtk_widget_set_hexpand(ok_button, FALSE);
 #endif
@@ -316,7 +316,7 @@ void create_about_dialog()
 	//gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 	//	gtk_grid_attach_next_to(GTK_GRID(grid), hbox, notebook, GTK_POS_BOTTOM, 5, 1);
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_grid_attach_next_to(GTK_GRID(grid), ok_button, notebook, GTK_POS_BOTTOM, 5, 1);
 #else
 	GtkWidget *ok_button_hbox = gtk_hbox_new(FALSE,0);
@@ -332,9 +332,9 @@ void create_about_dialog()
 	gtk_text_buffer_place_cursor(textbuffer_info, &iter);
 
 	g_signal_connect_closure
-		(G_OBJECT(ok_button), "clicked",
-		 g_cclosure_new_swap(G_CALLBACK(gtk_widget_hide_on_delete),
-				     window, NULL), FALSE);
+	(G_OBJECT(ok_button), "clicked",
+	 g_cclosure_new_swap(G_CALLBACK(gtk_widget_hide_on_delete),
+	                     window, NULL), FALSE);
 
 
 	g_signal_connect(G_OBJECT(window), "delete-event", G_CALLBACK(handle_about_close_event), window);

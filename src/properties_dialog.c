@@ -76,7 +76,7 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	dialog = gtk_dialog_new_with_buttons(_("Group Properties"), NULL, GTK_DIALOG_MODAL,
 		_("OK"), GTK_RESPONSE_ACCEPT, NULL);
 #else
-	dialog=gtk_dialog_new_with_buttons(_("Group Properties"), NULL, GTK_DIALOG_MODAL, GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
+	dialog = gtk_dialog_new_with_buttons(_("Group Properties"), NULL, GTK_DIALOG_MODAL, GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
 #endif
 
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
@@ -192,7 +192,7 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 		//goto EXITPOINT;
 	}
 
-	size_string = g_strdup_printf("%d bytes",(int)(file_status.st_size));
+	size_string = g_strdup_printf("%d bytes", (int)(file_status.st_size));
 
 	label1 = gtk_label_new(_("Filename:"));
 	label2 = gtk_label_new(_("Path:"));
@@ -210,7 +210,7 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	my_set_align(label2);
 	my_set_align(label3);
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	table = gtk_grid_new();
 
 	gtk_grid_attach(GTK_GRID(table), label1, 0, 0, 1, 1);
@@ -241,7 +241,7 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	gtk_container_set_border_width(GTK_CONTAINER(table), 5);
 #endif
 
-	container_vbox=gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	container_vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
 
 	gtk_widget_show_all(dialog);

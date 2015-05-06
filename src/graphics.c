@@ -35,20 +35,20 @@
 
 
 
-GdkPixbuf *header_file_pixbuf=NULL;
-GdkPixbuf *cpp_file_pixbuf=NULL;
-GdkPixbuf *txt_file_pixbuf=NULL;
-GdkPixbuf *java_file_pixbuf=NULL;
-GdkPixbuf *lua_file_pixbuf=NULL;
+GdkPixbuf *header_file_pixbuf = NULL;
+GdkPixbuf *cpp_file_pixbuf = NULL;
+GdkPixbuf *txt_file_pixbuf = NULL;
+GdkPixbuf *java_file_pixbuf = NULL;
+GdkPixbuf *lua_file_pixbuf = NULL;
 
-GdkPixbuf *directory_closed_pixbuf=NULL;
-GdkPixbuf *directory_open_pixbuf=NULL;
+GdkPixbuf *directory_closed_pixbuf = NULL;
+GdkPixbuf *directory_open_pixbuf = NULL;
 
-GdkPixbuf *program_icon_pixbuf=NULL;
+GdkPixbuf *program_icon_pixbuf = NULL;
 
 
-GdkCursor *standard_cursor=NULL;
-GdkCursor *busy_cursor=NULL;
+GdkCursor *standard_cursor = NULL;
+GdkCursor *busy_cursor = NULL;
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GRAPHICS_ERROR")
 
@@ -58,33 +58,33 @@ GdkCursor *busy_cursor=NULL;
  * @return TRUE on success, FALSE on failure
  * @param err returns any errors
  * @param widget - we need a widget for the gtk_widget_render_icon function
- * 
+ *
  */
 gboolean load_graphics(GtkWidget *widget, GError **err)
 {
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	GtkIconTheme *icon_theme;
 
 	icon_theme = gtk_icon_theme_get_default();
 #endif
 
-	program_icon_pixbuf=gdk_pixbuf_new_from_xpm_data((const char **)sciteproj_xpm);
+	program_icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)sciteproj_xpm);
 
 	if (prefs.use_stock_folder_icon) {
 
 		// use GTK_STOCK_DIRECTORY
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 		directory_closed_pixbuf = gtk_icon_theme_load_icon(icon_theme, "folder", 14, 0, NULL);
 		directory_open_pixbuf = gtk_icon_theme_load_icon(icon_theme, "folder", 14, 0, NULL);
 #else
 		directory_closed_pixbuf = gtk_widget_render_icon(widget, GTK_STOCK_DIRECTORY, GTK_ICON_SIZE_MENU, NULL);
 		directory_open_pixbuf = gtk_widget_render_icon(widget, GTK_STOCK_DIRECTORY, GTK_ICON_SIZE_MENU, NULL);
 #endif
-		
+
 	} else {
 		directory_open_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)dir_open_xpm);
 		directory_closed_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)dir_close_xpm);
-		
+
 	}
 
 	standard_cursor=gdk_cursor_new(GDK_X_CURSOR);
@@ -99,8 +99,8 @@ gboolean load_graphics(GtkWidget *widget, GError **err)
  */
 void unload_graphics()
 {
-	if (program_icon_pixbuf!=NULL) g_object_unref(program_icon_pixbuf);
+	if (program_icon_pixbuf != NULL) g_object_unref(program_icon_pixbuf);
 
-	if (directory_closed_pixbuf!=NULL) g_object_unref(directory_closed_pixbuf);
-	if (directory_open_pixbuf!=NULL) g_object_unref(directory_open_pixbuf);
+	if (directory_closed_pixbuf != NULL) g_object_unref(directory_closed_pixbuf);
+	if (directory_open_pixbuf != NULL) g_object_unref(directory_open_pixbuf);
 }

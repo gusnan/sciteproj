@@ -27,7 +27,7 @@
  */
 lua_State *init_script();
 void register_cfunctions(lua_State *lua);
-int load_script(lua_State *lua,char *filename);
+int load_script(lua_State *lua, char *filename);
 void run_script(lua_State *lua);
 void done_script(lua_State *lua);
 

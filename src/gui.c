@@ -145,9 +145,9 @@ gboolean setup_gui(GError **err)
 
 	if (!(sMainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL))) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_window_new() = NULL",
-			__func__,
-			"Couldn't init main window"
-		);
+		            __func__,
+		            "Couldn't init main window"
+		           );
 
 		goto EXITPOINT;
 	}
@@ -181,9 +181,9 @@ gboolean setup_gui(GError **err)
 
 	if (!(vbox = gtk_vbox_new(FALSE, 0))) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_vbox_new() = NULL",
-			__func__,
-			"Couldn't init main vbox"
-		);
+		            __func__,
+		            "Couldn't init main vbox"
+		           );
 		goto EXITPOINT;
 	}
 
@@ -243,61 +243,61 @@ gboolean setup_gui(GError **err)
 	} while (context!=NULL);
 	*/
 
-/*
-	gtk_action_group_set_translation_domain(sActionGroup,PACKAGE);
+	/*
+		gtk_action_group_set_translation_domain(sActionGroup,PACKAGE);
 
-	gtk_action_group_add_actions(sActionGroup, sMenuActions, sNumMenuActions, NULL);
+		gtk_action_group_add_actions(sActionGroup, sMenuActions, sNumMenuActions, NULL);
 
-	gtk_ui_manager_insert_action_group(sGtkUIManager, sActionGroup, 0);
+		gtk_ui_manager_insert_action_group(sGtkUIManager, sActionGroup, 0);
 
-	if (gtk_ui_manager_add_ui_from_string(sGtkUIManager, sMenuDefXML, strlen(sMenuDefXML), &tempErr) == 0) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_ui_manager_add_ui_from_string() = %s",
-			__func__,
-			"Couldn't init menus from XML",
-			tempErr->message
-		);
+		if (gtk_ui_manager_add_ui_from_string(sGtkUIManager, sMenuDefXML, strlen(sMenuDefXML), &tempErr) == 0) {
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_ui_manager_add_ui_from_string() = %s",
+				__func__,
+				"Couldn't init menus from XML",
+				tempErr->message
+			);
 
-		goto EXITPOINT;
-	}
+			goto EXITPOINT;
+		}
 
-	gtk_ui_manager_ensure_update(sGtkUIManager);
-*/
+		gtk_ui_manager_ensure_update(sGtkUIManager);
+	*/
 	// Activate the keyboard accelerators
 
 	accelerator_group = gtk_accel_group_new();
 	gtk_window_add_accel_group(GTK_WINDOW(sMainWindow), accelerator_group);
 
-/*
-	// Create popup menus (shown when user right-clicks in gui elements)
+	/*
+		// Create popup menus (shown when user right-clicks in gui elements)
 
-	sGeneralPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/GeneralPopup");
-	sGroupPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/GroupPopup");
+		sGeneralPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/GeneralPopup");
+		sGroupPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/GroupPopup");
 
-	//sFilePopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/FilePopup");
-*/
+		//sFilePopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/FilePopup");
+	*/
 	//sFilePopupMenu = gtk_menu_new();
 
 	if (init_menus(sMainWindow)!=0) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
-			__func__,
-			"Couldn't init menus"
-		);
+		            __func__,
+		            "Couldn't init menus"
+		           );
 		goto EXITPOINT;
 	}
 
-/*
-	recentPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/RecentPopup");
+	/*
+		recentPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/RecentPopup");
 
-	sSortPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/SortPopup");
-*/
+		sSortPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/SortPopup");
+	*/
 
 	// Add a scrolled window to the main window
 
 	if (!(scrolledWindow = gtk_scrolled_window_new(NULL, NULL))) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
-			__func__,
-			"Couldn't init main scrolled window"
-		);
+		            __func__,
+		            "Couldn't init main scrolled window"
+		           );
 
 		goto EXITPOINT;
 	}
@@ -324,9 +324,9 @@ gboolean setup_gui(GError **err)
 
 	if ((projectTreeStore = create_treestore(&tempErr)) == NULL) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s",
-			tempErr->message,
-			"Couldn't init treestore"
-		);
+		            tempErr->message,
+		            "Couldn't init treestore"
+		           );
 		goto EXITPOINT;
 	}
 
@@ -334,9 +334,9 @@ gboolean setup_gui(GError **err)
 
 	if (!(projectTreeView = gtk_tree_view_new_with_model(GTK_TREE_MODEL(projectTreeStore)))) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_tree_view_new_with_model() = NULL",
-			__func__,
-			"Couldn't init gtk_tree_view"
-		);
+		            __func__,
+		            "Couldn't init gtk_tree_view"
+		           );
 
 		goto EXITPOINT;
 	}
@@ -347,34 +347,34 @@ gboolean setup_gui(GError **err)
 
 	if (!(textCellRenderer = gtk_cell_renderer_text_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_cell_renderer_text_new() = NULL",
-			__func__,
-			"Couldn't init cell renderer"
-		);
+		            __func__,
+		            "Couldn't init cell renderer"
+		           );
 
 		goto EXITPOINT;
 	}
 
 	g_object_set(G_OBJECT(textCellRenderer),
-			"editable", FALSE,
-			"mode", GTK_CELL_RENDERER_MODE_EDITABLE,
-			NULL);
+	             "editable", FALSE,
+	             "mode", GTK_CELL_RENDERER_MODE_EDITABLE,
+	             NULL);
 
 	if (!(pixbuffCellRenderer = gtk_cell_renderer_pixbuf_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_cell_renderer_pixbuf_new() = NULL",
-			__func__,
-			"Couldn't init gtk_cell_renderer_pixbuf"
-		);
+		            "%s: %s, gtk_cell_renderer_pixbuf_new() = NULL",
+		            __func__,
+		            "Couldn't init gtk_cell_renderer_pixbuf"
+		           );
 
 		goto EXITPOINT;
 	}
 
 	if (!(column1 = gtk_tree_view_column_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_tree_view_column_new() = NULL",
-			__func__,
-			"Couldn't init gtk_tree_view_column"
-		);
+		            "%s: %s, gtk_tree_view_column_new() = NULL",
+		            __func__,
+		            "Couldn't init gtk_tree_view_column"
+		           );
 
 		goto EXITPOINT;
 	}
@@ -423,7 +423,7 @@ gboolean setup_gui(GError **err)
 	g_signal_connect(G_OBJECT(projectTreeView), "button-press-event",
 	                 G_CALLBACK(mouse_button_pressed_cb), projectTreeView);
 
- 	g_signal_connect(G_OBJECT(projectTreeView), "key-press-event",
+	g_signal_connect(G_OBJECT(projectTreeView), "key-press-event",
 	                 G_CALLBACK(key_press_cb), projectTreeView);
 
 	// --------------------------------
@@ -433,19 +433,19 @@ gboolean setup_gui(GError **err)
 
 	if (!(recentGrid = gtk_grid_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR,-1,
-			"%s: %s, gtk_grid_new() = NULL",
-			"Couldn't init recent grid",
-			__func__);
+		            "%s: %s, gtk_grid_new() = NULL",
+		            "Couldn't init recent grid",
+		            __func__);
 		goto EXITPOINT;
 	}
 
 #else
 	if (!(recentVbox=gtk_vbox_new(FALSE, 0))) {
 		g_set_error(err, APP_SCITEPROJ_ERROR,-1,
-			"%s: %s, gtk_vbox_new() = NULL",
-			__func__,
-			"Couldn't init recent grid"
-			);
+		            "%s: %s, gtk_vbox_new() = NULL",
+		            __func__,
+		            "Couldn't init recent grid"
+		           );
 		goto EXITPOINT;
 	}
 #endif
@@ -456,10 +456,10 @@ gboolean setup_gui(GError **err)
 	if (!(recentHbox=gtk_hbox_new(FALSE,0))) {
 #endif
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_hbox_new() = NULL",
-			__func__,
-			"Couldn't init main vbox"
-			);
+		            "%s: %s, gtk_hbox_new() = NULL",
+		            __func__,
+		            "Couldn't init main vbox"
+		           );
 		goto EXITPOINT;
 	}
 
@@ -480,14 +480,14 @@ gboolean setup_gui(GError **err)
 #else
 
 	if (!(fullVbox=gtk_vbox_new(FALSE,0))) {
- 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_hbox_new() = NULL",
-			__func__,
-			"Couldn't init full_vbox"
-			);
+		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+		            "%s: %s, gtk_hbox_new() = NULL",
+		            __func__,
+		            "Couldn't init full_vbox"
+		           );
 
- 		goto EXITPOINT;
- 	}
+		goto EXITPOINT;
+	}
 
 	gtk_box_pack_start(GTK_BOX(recentVbox),recentScrolledWindow, TRUE,TRUE,0);
 	gtk_box_pack_end(GTK_BOX(recentVbox),recentHbox,FALSE,TRUE,0);
@@ -497,10 +497,10 @@ gboolean setup_gui(GError **err)
 
 	if (!statusBarVbox) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_hbox_new() = NULL",
-			__func__,
-			"Couldn't init statusbar_vbox"
-			);
+		            "%s: %s, gtk_hbox_new() = NULL",
+		            __func__,
+		            "Couldn't init statusbar_vbox"
+		           );
 		goto EXITPOINT;
 	}
 #endif
@@ -553,9 +553,9 @@ gboolean setup_gui(GError **err)
 	if (!prefs.hide_statusbar) {
 		if (!init_statusbar(fullVbox,vpaned,&tempErr)) {
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s",
-				tempErr->message,
-				"Couldn't init statusbar"
-			);
+			            tempErr->message,
+			            "Couldn't init statusbar"
+			           );
 			goto EXITPOINT;
 		}
 	}
@@ -696,9 +696,9 @@ static void switch_folder_icon(GtkTreeView *treeView,GtkTreePath *path)
 
 	gtk_tree_model_get_iter(treeModel, &iter, path);
 	gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType,
-													 COLUMN_FILEPATH, &relFilePath,
-													 COLUMN_ICON, &pixbuf,
-													 -1);
+	                   COLUMN_FILEPATH, &relFilePath,
+	                   COLUMN_ICON, &pixbuf,
+	                   -1);
 
 	gboolean res=gtk_tree_view_row_expanded(treeView,path);
 
@@ -756,9 +756,9 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, g_strdup_printf() = NULL",
-			"Error formatting SciTE command",
-			__func__);
+		            "%s: %s, g_strdup_printf() = NULL",
+		            "Error formatting SciTE command",
+		            __func__);
 	}
 	else {
 		if (send_scite_command(command, &err)) {
@@ -773,7 +773,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 			add_file_to_recent(fixed,NULL);
 
 			gchar *statusbar_text = g_strdup_printf(_("Opened %s"),
-			                                      remove_newline(get_filename_from_full_path(command)));
+			                                        remove_newline(get_filename_from_full_path(command)));
 
 			set_statusbar_text(statusbar_text);
 
@@ -785,7 +785,7 @@ EXITPOINT:
 
 	if (err != NULL) {
 		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-			_("Could not open selected file: \n\n%s"), err->message);
+		                                _("Could not open selected file: \n\n%s"), err->message);
 
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}
@@ -938,7 +938,7 @@ gboolean dialog_response_is_exit(gint test)
 	gboolean result = FALSE;
 
 	if ((test==GTK_RESPONSE_REJECT) || (test==GTK_RESPONSE_CANCEL) ||
-		 (test==GTK_RESPONSE_DELETE_EVENT) || (test==GTK_RESPONSE_NONE)) {
+	        (test==GTK_RESPONSE_DELETE_EVENT) || (test==GTK_RESPONSE_NONE)) {
 		result = TRUE;
 	}
 

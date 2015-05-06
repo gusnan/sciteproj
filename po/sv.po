@@ -210,7 +210,7 @@ msgstr "Sortera mapp stigande efter namn"
 
 #: menus.c:186
 msgid "Sort descending by name"
-msgstr "Sortera mapp stigande efter namn"
+msgstr "Sortera mapp fallande efter namn"
 
 #: menus.c:188
 msgid "Sort ascending by extension"
@@ -218,7 +218,7 @@ msgstr "Sortera mapp stigande efter filändelse"
 
 #: menus.c:189
 msgid "Sort descending by extension"
-msgstr "Sortera mapp stigande efter filändelse"
+msgstr "Sortera mapp fallande efter filändelse"
 
 #: menus.c:212
 msgid "Update folder content"

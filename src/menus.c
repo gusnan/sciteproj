@@ -138,7 +138,7 @@ int init_menus(GtkWidget *window)
 	propertiesMenuItem = gtk_menu_item_new_with_mnemonic(_("Edit properties"));
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), propertiesMenuItem);
-	
+
 	g_signal_connect(G_OBJECT(propertiesMenuItem), "activate", G_CALLBACK(edit_properties_cb), NULL);
 
 	showRecentFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Show Recent Files"));
@@ -194,7 +194,7 @@ int init_menus(GtkWidget *window)
 	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortSeparator);
 	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortAscendingExtensionMenuItem);
 	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortDescendingExtensionMenuItem);
-	
+
 	g_signal_connect(G_OBJECT(sortAscendingMenuItem), "activate", G_CALLBACK(sort_ascending_cb), NULL);
 	g_signal_connect(G_OBJECT(sortDescendingMenuItem), "activate", G_CALLBACK(sort_descending_cb), NULL);
 	g_signal_connect(G_OBJECT(sortAscendingExtensionMenuItem), "activate", G_CALLBACK(sort_ascending_by_extension_cb), NULL);
@@ -239,7 +239,7 @@ int init_menus(GtkWidget *window)
 	recentMenuPropertiesItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
 
 	recentMenuSeparator = gtk_separator_menu_item_new();
-	
+
 	g_signal_connect(G_OBJECT(recentMenuOpenFileItem), "activate", G_CALLBACK(popup_open_recent_file_cb), NULL);
 	g_signal_connect(G_OBJECT(recentMenuRemoveFileItem), "activate", G_CALLBACK(popup_remove_recent_file_cb), NULL);
 	g_signal_connect(G_OBJECT(recentMenuCopyFilenameItem), "activate", G_CALLBACK(copy_recent_filename_to_clipboard_cb), NULL);

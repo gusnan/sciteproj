@@ -63,9 +63,9 @@ ClickedNode recent_clicked_node;
  */
 static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *event, gpointer userData);
 static void recent_tree_row_activated_cb(GtkTreeView *treeView,
-		GtkTreePath *path,
-		GtkTreeViewColumn *column,
-		gpointer userData);
+        GtkTreePath *path,
+        GtkTreeViewColumn *column,
+        gpointer userData);
 
 /**
  * Get the GTKTreeStore (evil, but necessary for setup_gui).
@@ -76,23 +76,23 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView,
  */
 GtkTreeStore* create_treestore_recent(GError **err)
 {
-	GtkTreeStore *result= gtk_tree_store_new(COLUMN_EOL,
-	                                         TYPE_ITEMTYPE,
-	                                         TYPE_FILEPATH,
-	                                         TYPE_FILENAME,
-	                                         TYPE_FILESIZE,
-	                                         TYPE_FONTWEIGHT,
-	                                         TYPE_FONTWEIGHTSET,
-	                                         TYPE_ICON,
-	                                         TYPE_EXPANDED,
-														  TYPE_FOLDER_CONTENT_LOADED);
+	GtkTreeStore *result = gtk_tree_store_new(COLUMN_EOL,
+	                      TYPE_ITEMTYPE,
+	                      TYPE_FILEPATH,
+	                      TYPE_FILENAME,
+	                      TYPE_FILESIZE,
+	                      TYPE_FONTWEIGHT,
+	                      TYPE_FONTWEIGHTSET,
+	                      TYPE_ICON,
+	                      TYPE_EXPANDED,
+	                      TYPE_FOLDER_CONTENT_LOADED);
 
 	if (result == NULL) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_tree_store_new() = NULL",
-			__func__,
-			"Couldn't init treestore"
-		);
+		            "%s: %s, gtk_tree_store_new() = NULL",
+		            __func__,
+		            "Couldn't init treestore"
+		           );
 	}
 
 	return result;
@@ -110,42 +110,42 @@ GtkWidget *init_recent_files(GError **err)
 	GtkTreeViewColumn *recentColumn1 = NULL;
 	GtkWidget *recentScrolledWindow = NULL;
 
-	GError *tempErr=NULL;
+	GError *tempErr = NULL;
 
 
 	// add a scrolledwindow for recent files
-	if (!(recentScrolledWindow=gtk_scrolled_window_new(NULL,NULL))) {
+	if (!(recentScrolledWindow = gtk_scrolled_window_new(NULL,NULL))) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_scrolled_window_new() = NULL",
-			__func__,
-			"Couldn't init recent scrolled window"
-		);
+		            "%s: %s, gtk_scrolled_window_new() = NULL",
+		            __func__,
+		            "Couldn't init recent scrolled window"
+		           );
 
 		goto EXITPOINT;
 	}
 
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(recentScrolledWindow),
-												GTK_POLICY_AUTOMATIC,
-												GTK_POLICY_ALWAYS);
+	                               GTK_POLICY_AUTOMATIC,
+	                               GTK_POLICY_ALWAYS);
 
 
-	if ((recentTreeStore=create_treestore_recent(&tempErr))==NULL) {
+	if ((recentTreeStore = create_treestore_recent(&tempErr)) == NULL) {
 		if (tempErr) {
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1 ,
-				"%s: %s",
-				tempErr->message,
-				"Coudn't init recent treestore"
-			);
+			            "%s: %s",
+			            tempErr->message,
+			            "Coudn't init recent treestore"
+			           );
 		}
 		goto EXITPOINT;
 	}
 
-	if (!(recentTreeView=gtk_tree_view_new_with_model(GTK_TREE_MODEL(recentTreeStore)))) {
+	if (!(recentTreeView = gtk_tree_view_new_with_model(GTK_TREE_MODEL(recentTreeStore)))) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_tree_view_new_with_model() = NULL",
-			__func__,
-			"Couldn't init recent gtk_tree_view"
-			);
+		            "%s: %s, gtk_tree_view_new_with_model() = NULL",
+		            __func__,
+		            "Couldn't init recent gtk_tree_view"
+		           );
 
 		goto EXITPOINT;
 	}
@@ -156,32 +156,32 @@ GtkWidget *init_recent_files(GError **err)
 
 	if (!(recentCellRenderer = gtk_cell_renderer_text_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_cell_renderer_text_new() = NULL",
-			__func__,
-			"Couldn't init recent gtk_cell_renderer"
-		);
+		            "%s: %s, gtk_cell_renderer_text_new() = NULL",
+		            __func__,
+		            "Couldn't init recent gtk_cell_renderer"
+		           );
 
 		goto EXITPOINT;
 	}
 
 	if (!(recentColumn1 = gtk_tree_view_column_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_tree_view_column_new() = NULL",
-			__func__,
-			"Couldn't init recent gtk_tree_view_column"
-		);
+		            "%s: %s, gtk_tree_view_column_new() = NULL",
+		            __func__,
+		            "Couldn't init recent gtk_tree_view_column"
+		           );
 
 		goto EXITPOINT;
 	}
 
-	g_object_set(recentColumn1,"title",_("Recently opened files:"),NULL);
+	g_object_set(recentColumn1, "title", _("Recently opened files:"), NULL);
 
 	if (!(recentPixbuffCellRenderer = gtk_cell_renderer_pixbuf_new())) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, gtk_cell_renderer_pixbuf_new() = NULL",
-			__func__,
-			"Couldn't init recent gtk_cell_renderer_pixbuf"
-		);
+		            "%s: %s, gtk_cell_renderer_pixbuf_new() = NULL",
+		            __func__,
+		            "Couldn't init recent gtk_cell_renderer_pixbuf"
+		           );
 
 		goto EXITPOINT;
 	}
@@ -224,16 +224,16 @@ gboolean tree_for_each(GtkTreeModel *model,GtkTreePath *path,GtkTreeIter *iter,g
 {
 
 	gchar *filepath,*filename;
-	gchar *inFile=(gchar*)(data);
+	gchar *inFile = (gchar*)(data);
 
 	gtk_tree_model_get(model, iter, COLUMN_FILEPATH, &filename, -1);
 
-	filepath= get_filename_from_full_path((gchar*)filename);
+	filepath = get_filename_from_full_path((gchar*)filename);
 
-	if (g_strcmp0(filepath,inFile)==0) {
+	if (g_strcmp0(filepath,inFile) == 0) {
 		//savedIter=iter;
 
-		gtk_tree_store_remove(recentTreeStore,iter);
+		gtk_tree_store_remove(recentTreeStore, iter);
 		return TRUE;
 	}
 
@@ -246,7 +246,7 @@ gboolean tree_for_each(GtkTreeModel *model,GtkTreePath *path,GtkTreeIter *iter,g
  */
 void remove_if_already_exists(const gchar *filepath)
 {
-	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(recentTreeView)),tree_for_each,(gpointer)(filepath));
+	gtk_tree_model_foreach(gtk_tree_view_get_model(GTK_TREE_VIEW(recentTreeView)), tree_for_each, (gpointer)(filepath));
 }
 
 
@@ -254,7 +254,7 @@ void remove_if_already_exists(const gchar *filepath)
  * add_file
  *	@returns TRUE if added the file successfully, FALSE otherwise
  */
-gboolean add_file_to_recent(gchar *filepath,GError **err)
+gboolean add_file_to_recent(gchar *filepath, GError **err)
 {
 	g_assert(recentTreeStore != NULL);
 	g_assert(filepath != NULL);
@@ -263,7 +263,7 @@ gboolean add_file_to_recent(gchar *filepath,GError **err)
 	gboolean finalResult = FALSE;
 	GtkTreeIter iter;
 	const gchar* fileName = NULL;
-	gchar *fileExt=NULL;
+	gchar *fileExt = NULL;
 	gchar *relFilename = NULL; //g_strdup(filepath);
 
 	/*
@@ -305,9 +305,9 @@ gboolean add_file_to_recent(gchar *filepath,GError **err)
 	}
 	*/
 
-	fileExt=strrchr(fileName,'.');
+	fileExt=strrchr(fileName, '.');
 
-	if (fileExt!=NULL) {
+	if (fileExt != NULL) {
 		++fileExt;
 	}
 
@@ -323,7 +323,7 @@ gboolean add_file_to_recent(gchar *filepath,GError **err)
 	gtk_tree_store_set(recentTreeStore, &iter, COLUMN_EXPANDED, FALSE, -1);
 
 
-	GdkPixbuf *icon_pixbuf=get_pixbuf_from_filename((gchar*)(filepath),GTK_ICON_SIZE_MENU);
+	GdkPixbuf *icon_pixbuf=get_pixbuf_from_filename((gchar*)(filepath), GTK_ICON_SIZE_MENU);
 
 	gtk_tree_store_set(recentTreeStore, &iter, COLUMN_ICON, icon_pixbuf, -1);
 
@@ -353,14 +353,14 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 	gchar *nodeName = NULL;
 	gint nodeItemType;
 	GtkTreeIter iter;
-	GtkTreeSelection *tree_selection=NULL;
+	GtkTreeSelection *tree_selection = NULL;
 
 	g_assert(treeView != NULL);
 	g_assert(event != NULL);
 
 	// Until we know for sure, assume that the user has not clicked on a node
 
-	recent_clicked_node.valid=FALSE;
+	recent_clicked_node.valid = FALSE;
 
 
 	// If it is not a right-click, then ignore it
@@ -373,12 +373,12 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 	// Find if the user has clicked on a node
 
 	if (!gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeView),
-													(gint) event->x,
-													(gint) event->y,
-													&path,
-													NULL,
-													NULL,
-													NULL)) {
+	                                   (gint) event->x,
+	                                   (gint) event->y,
+	                                   &path,
+	                                   NULL,
+	                                   NULL,
+	                                   NULL)) {
 		// Nope-- user clicked in the GtkTreeView, but not on a node
 
 		//gtk_menu_popup(GTK_MENU(sGeneralPopupMenu), NULL, NULL, NULL, NULL, event->button, gdk_event_get_time((GdkEvent*) event));
@@ -401,19 +401,19 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 
 	if (recent_clicked_node.name) g_free(recent_clicked_node.name);
 
-	recent_clicked_node.valid=TRUE;
-	recent_clicked_node.iter=iter;
-	recent_clicked_node.type=nodeItemType;
-	recent_clicked_node.name=nodeName;
+	recent_clicked_node.valid = TRUE;
+	recent_clicked_node.iter = iter;
+	recent_clicked_node.type = nodeItemType;
+	recent_clicked_node.name = nodeName;
 	nodeName = NULL;
 
 	// Check if something is selected
-	tree_selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(treeView));
+	tree_selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeView));
 
-	if (tree_selection!=NULL) {
+	if (tree_selection != NULL) {
 		// Check if clicked on something in the selection, otherwise make the clicked one the selection.
 
-		if (gtk_tree_selection_path_is_selected(tree_selection,path)==FALSE) {
+		if (gtk_tree_selection_path_is_selected(tree_selection,path) == FALSE) {
 			// clear selection and make current line selected
 
 			gtk_tree_selection_unselect_all(tree_selection);
@@ -425,13 +425,13 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 	// Pop up the appropriate menu for the node type
 
 	//if (nodeItemType == ITEMTYPE_FILE) {
-		gtk_menu_popup(GTK_MENU(recentPopupMenu),
-							NULL,
-							NULL,
-							NULL,
-							NULL,
-							event->button,
-							gdk_event_get_time((GdkEvent*) event));
+	gtk_menu_popup(GTK_MENU(recentPopupMenu),
+	               NULL,
+	               NULL,
+	               NULL,
+	               NULL,
+	               event->button,
+	               gdk_event_get_time((GdkEvent*) event));
 	/*
 	}
 	else if (nodeItemType == ITEMTYPE_GROUP) {
@@ -472,7 +472,7 @@ void popup_open_recent_file_cb()
 
 	//debug_printf("name:%s\n",recent_clicked_node.name);
 
-	if (!open_filename(recent_clicked_node.name,(gchar*)get_project_directory(),&err)) {
+	if (!open_filename(recent_clicked_node.name, (gchar*)get_project_directory(), &err)) {
 		goto EXITPOINT;
 	}
 
@@ -481,11 +481,11 @@ EXITPOINT:
 
 	if (err != NULL) {
 		dialog = gtk_message_dialog_new(NULL,
-													GTK_DIALOG_MODAL,
-													GTK_MESSAGE_ERROR,
-													GTK_BUTTONS_OK,
-													"Could not open selected file: \n\n%s",
-													err->message);
+		                                GTK_DIALOG_MODAL,
+		                                GTK_MESSAGE_ERROR,
+		                                GTK_BUTTONS_OK,
+		                                "Could not open selected file: \n\n%s",
+		                                err->message);
 
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}
@@ -507,9 +507,9 @@ EXITPOINT:
  * @param userData is not used
  */
 static void recent_tree_row_activated_cb(GtkTreeView *treeView,
-														GtkTreePath *path,
-														GtkTreeViewColumn *column,
-														gpointer userData)
+        GtkTreePath *path,
+        GtkTreeViewColumn *column,
+        gpointer userData)
 {
 	GtkTreeIter iter;
 	gchar *relFilePath = NULL;
@@ -525,16 +525,16 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView,
 	gtk_tree_model_get_iter(treeModel, &iter, path);
 	gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType, COLUMN_FILEPATH, &relFilePath, -1);
 
-	gchar *absFilePath=fix_path((gchar*)get_project_directory(),relFilePath);
+	gchar *absFilePath = fix_path((gchar*)get_project_directory(),relFilePath);
 
-	gchar *fixed=fix_path((gchar*)get_project_directory(),relFilePath);
+	gchar *fixed = fix_path((gchar*)get_project_directory(),relFilePath);
 
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1,
-			"%s: %s, g_strdup_printf() = NULL",
-			__func__,
-			"Error formatting SciTE command"
-		);
+		            "%s: %s, g_strdup_printf() = NULL",
+		            __func__,
+		            "Error formatting SciTE command"
+		           );
 	}
 	else {
 		if (send_scite_command(command, &err)) {
@@ -542,7 +542,7 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView,
 
 			activate_scite(NULL);
 
-			if (prefs.give_scite_focus==TRUE) {
+			if (prefs.give_scite_focus == TRUE) {
 				send_scite_command((gchar*)"focus:0",NULL);
 			}
 
@@ -561,9 +561,9 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView,
 
 	if (err != NULL) {
 		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-			_("Could not open selected file: \n\n%s"),
-			err->message
-		);
+		                                _("Could not open selected file: \n\n%s"),
+		                                err->message
+		                               );
 
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}
@@ -586,7 +586,7 @@ void popup_remove_recent_file_cb()
 	GError *err = NULL;
 	GtkWidget *dialog = NULL;
 	gchar *absFilePath = NULL;
-	gchar *fileName=NULL;
+	gchar *fileName = NULL;
 
 	// There are only files in this list
 
@@ -602,9 +602,9 @@ EXITPOINT:
 
 	if (err != NULL) {
 		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-			_("Could not open selected file: \n\n%s"),
-			err->message
-		);
+		                                _("Could not open selected file: \n\n%s"),
+		                                err->message
+		                               );
 
 		gtk_dialog_run(GTK_DIALOG (dialog));
 	}

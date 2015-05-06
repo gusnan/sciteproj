@@ -44,25 +44,25 @@
  */
 gboolean delete_file(gchar *filename,GError **error)
 {
-	gboolean result=FALSE;
-	
+	gboolean result = FALSE;
+
 	gchar *file_to_delete;
-	
+
 	if (g_file_test(filename, G_FILE_TEST_IS_DIR)) {
-		file_to_delete=filename;
-			
+		file_to_delete = filename;
+
 		// We have already checked if the folder is empty
 	} else {
-		
+
 		if (!relative_path_to_abs_path(filename, &file_to_delete, get_project_directory(), error)) {
-			result=FALSE;
+			result = FALSE;
 			goto EXITPOINT;
 		}
 	}
 
 	printf("%s\n", file_to_delete);
 	result=TRUE;
-	
+
 EXITPOINT:
 	return result;
 }
@@ -75,14 +75,14 @@ GList *get_list_of_selected_items_rows(GtkTreeView *treeview)
 {
 	GtkTreeSelection *selection = gtk_tree_view_get_selection(treeview);
 	GtkTreeModel *model;
-	
+
 	if (gtk_tree_selection_count_selected_rows(selection) == 0)
 		return NULL;
-	
+
 	model = gtk_tree_view_get_model(treeview);
-	
+
 	GList *result_list = gtk_tree_selection_get_selected_rows(selection, &model);
-	
+
 	return result_list;
 }
 
@@ -94,39 +94,39 @@ GList *get_list_of_selected_items_string_list(GtkTreeView *treeview)
 {
 	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 	GList *row_list = get_list_of_selected_items_rows(treeview);
-	
+
 	GList *string_list = NULL;
-	
+
 	// Begin at the end, and go to the start
 	row_list = g_list_last(row_list);
-	
+
 	GtkTreeIter iter;
-	
-	int count=0;
-		
+
+	int count = 0;
+
 	while (row_list) {
 		GtkTreePath *path = (GtkTreePath *)row_list->data;
-		
+
 		if (path) {
-		
+
 			gtk_tree_model_get_iter(model, &iter, path);
-			
+
 			gchar *path;
-			
+
 			gtk_tree_model_get(model, &iter, COLUMN_FILEPATH, &path, -1);
-			
+
 			string_list = g_list_prepend(string_list, path);
-			
+
 			count++;
-			
+
 		}
-		
+
 		row_list = row_list -> prev;
 	}
-	
+
 	g_list_foreach (row_list, (GFunc)gtk_tree_path_free, NULL);
 	g_list_free (row_list);
-	
+
 	return string_list;
 }
 
@@ -140,48 +140,48 @@ gchar *get_list_of_selected_items_strings(GtkTreeView *treeview)
 {
 	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 	GList *list = get_list_of_selected_items_rows(treeview);
-	
+
 	// Begin at the end, and go to the start
 	list = g_list_last(list);
-	
+
 	GtkTreeIter iter;
-	
+
 	gchar *result_string = g_strdup("\n\n");
-	
-	int count=0;
-		
+
+	int count = 0;
+
 	while (list) {
 		GtkTreePath *path = (GtkTreePath *)list->data;
-		
+
 		if (path) {
-		
+
 			gtk_tree_model_get_iter(model, &iter, path);
-			
+
 			gchar *path;
-			
-			gtk_tree_model_get(model, &iter, 
-								COLUMN_FILEPATH, &path, -1);
-			
+
+			gtk_tree_model_get(model, &iter,
+			                   COLUMN_FILEPATH, &path, -1);
+
 			if (count <7) {
 				gchar *temp = g_strconcat(result_string, path, "\n", NULL);
 				g_free(result_string);
 				result_string=temp;
-				
+
 			} else if (count == 7) {
 				gchar *temp = g_strconcat(result_string, "...\n", NULL);
 				g_free(result_string);
 				result_string=temp;
 			}
 			count++;
-			
+
 		}
-		
+
 		list = list -> prev;
 	}
-	
+
 	g_list_foreach (list, (GFunc)gtk_tree_path_free, NULL);
-	g_list_free (list);	
-		
+	g_list_free (list);
+
 	return result_string;
 }
 
@@ -211,7 +211,7 @@ void remove_selected_items ( GtkTreeView *treeview )
 		if (path) {
 			if ( gtk_tree_model_get_iter ( model, &iter, path) ) { // get iter from specified path
 
-				remove_tree_node(&iter,&error);
+				remove_tree_node(&iter, &error);
 				nRemoved++;
 			}
 			else { // invalid path
@@ -235,12 +235,12 @@ void remove_selected_items ( GtkTreeView *treeview )
  */
 GtkWidget *do_question_dialog(const gchar *buffer)
 {
-	
-	GtkWidget *dialog = gtk_message_dialog_new(NULL, 
-															GTK_DIALOG_MODAL, 
-															GTK_MESSAGE_QUESTION,
-															GTK_BUTTONS_OK_CANCEL,
-															"%s", buffer);
+
+	GtkWidget *dialog = gtk_message_dialog_new(NULL,
+	                    GTK_DIALOG_MODAL,
+	                    GTK_MESSAGE_QUESTION,
+	                    GTK_BUTTONS_OK_CANCEL,
+	                    "%s", buffer);
 	return dialog;
 }
 
@@ -254,44 +254,44 @@ gboolean really_do_delete_question(const gchar *format, ...)
 	gint dialog_response;
 	char buffer[256];
 	gboolean result;
-	
+
 	va_list args;
 	va_start(args, format);
 	vsprintf(buffer, format, args);
 
 	dialog = do_question_dialog(buffer);
-	
+
 	va_end(args);
-	
+
 	result=TRUE;
 
 	dialog_response = gtk_dialog_run(GTK_DIALOG (dialog));
 	if (dialog_response_is_exit(dialog_response)) {
-		result=FALSE;
+		result = FALSE;
 		goto EXITPOINT;
 	}
-	
+
 	// Ask again to really make sure the user knows what he/she is doing.
 	if (result) {
-		
+
 		gtk_widget_destroy(dialog);
 
 		gchar *extended_question_string = g_strdup_printf(
-								"Are you really really sure? \n"
-								"This will actually delete the files\n"
-								"from the filesystem.\n\n%s",buffer);
+		                                      "Are you really really sure? \n"
+		                                      "This will actually delete the files\n"
+		                                      "from the filesystem.\n\n%s",buffer);
 
 		dialog = do_question_dialog(extended_question_string);
 
 		dialog_response=gtk_dialog_run(GTK_DIALOG(dialog));
 		if (dialog_response_is_exit(dialog_response)) {
-			result=FALSE;
+			result = FALSE;
 			goto EXITPOINT;
 		}
 	}
-	
+
 EXITPOINT:
-	
+
 	gtk_widget_destroy(dialog);
 	return result;
 }
@@ -306,29 +306,29 @@ void do_remove_node(gboolean ignore_clicked_node)
 	GtkWidget *dialog = NULL;
 	gchar *nodename = NULL;
 
-	gint selected_rows=0;
+	gint selected_rows = 0;
 
-	gboolean multiple_selected=FALSE;
-	
+	gboolean multiple_selected = FALSE;
+
 	// Check if we are in "write-protect" mode
-	
+
 	if (prefs.write_protect) {
-			
-		dialog = gtk_message_dialog_new(NULL, 
-															GTK_DIALOG_MODAL, 
-															GTK_MESSAGE_INFO,
-															GTK_BUTTONS_OK,
-															"You are in write protected mode!\n\n"
-															"You cannot delete anything when using sciteproj in this mode.\n"
-															"To be able to delete files, either use your terminal, your\n"
-															"file-manager of choice, or you can set the 'write_protect'\n"
-															"variable in your sciteprojrc.lua to false.\n");
-		
+
+		dialog = gtk_message_dialog_new(NULL,
+		                                GTK_DIALOG_MODAL,
+		                                GTK_MESSAGE_INFO,
+		                                GTK_BUTTONS_OK,
+		                                "You are in write protected mode!\n\n"
+		                                "You cannot delete anything when using sciteproj in this mode.\n"
+		                                "To be able to delete files, either use your terminal, your\n"
+		                                "file-manager of choice, or you can set the 'write_protect'\n"
+		                                "variable in your sciteprojrc.lua to false.\n");
+
 		gtk_dialog_run(GTK_DIALOG(dialog));
-		
+
 		gtk_widget_destroy(dialog);
 		dialog=NULL;
-		
+
 		goto EXITPOINT;
 	}
 
@@ -341,11 +341,11 @@ void do_remove_node(gboolean ignore_clicked_node)
 
 	GtkTreeSelection *tree_select;
 
-	tree_select=gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
+	tree_select = gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
 
-	selected_rows=gtk_tree_selection_count_selected_rows(tree_select);
+	selected_rows = gtk_tree_selection_count_selected_rows(tree_select);
 	if (selected_rows>1) {
-		multiple_selected=TRUE;
+		multiple_selected = TRUE;
 	}
 
 	if (!ignore_clicked_node) {
@@ -367,75 +367,75 @@ void do_remove_node(gboolean ignore_clicked_node)
 	// Confirm removal from project
 
 	if (multiple_selected) {
-		
+
 		gchar *file_list_string = get_list_of_selected_items_strings(GTK_TREE_VIEW(projectTreeView));
-		
+
 		gchar *question_string = g_strdup_printf("%s\n%s",_("Delete all selected items?"),file_list_string);
 
 		if (really_do_delete_question(question_string)) {
 			// remove them!
-			
+
 			GList *string_list = get_list_of_selected_items_string_list(GTK_TREE_VIEW(projectTreeView));
-			
+
 			while (string_list) {
 				gchar *temp = (gchar *)string_list->data;
-				
+
 				if (!delete_file(temp, &err)) {
 					goto EXITPOINT;
 				}
-				
+
 				string_list = string_list->next;
 			};
-			
+
 			remove_selected_items(GTK_TREE_VIEW(projectTreeView));
 		}
-				
+
 		g_free(file_list_string);
-		
+
 		g_free(question_string);
 
 
 	} else {
-		
+
 		gboolean really_do_delete=FALSE;
 
 		if (clicked_node.type == ITEMTYPE_FILE) {
 			if (nodename) {
 				really_do_delete = really_do_delete_question(_("Delete file '%s'?"), nodename);
-				
+
 			} else {
 				really_do_delete = really_do_delete_question(_("Delete file?"));
 			}
 		}
 		else {
-			
+
 			// TODO: check if the folder is empty already here before "confirmation" questions
-			
+
 			gchar *filepath;
-					
+
 			GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
-		
-			gtk_tree_model_get(tree_model, &clicked_node.iter, 
-										COLUMN_FILEPATH, &filepath, -1);
-				
-			if (get_number_of_files_in_folder(filepath)>0) {
-				
+
+			gtk_tree_model_get(tree_model, &clicked_node.iter,
+			                   COLUMN_FILEPATH, &filepath, -1);
+
+			if (get_number_of_files_in_folder(filepath) > 0) {
+
 				GtkWidget *dialog = gtk_message_dialog_new(NULL,
-																GTK_DIALOG_MODAL, 
-																GTK_MESSAGE_INFO,
-																GTK_BUTTONS_OK,
-																"Folder need to be empty to be able to delete it!");
+				                    GTK_DIALOG_MODAL,
+				                    GTK_MESSAGE_INFO,
+				                    GTK_BUTTONS_OK,
+				                    "Folder need to be empty to be able to delete it!");
 				gtk_dialog_run(GTK_DIALOG(dialog));
-				
+
 				gtk_widget_destroy(dialog);
 
 				goto EXITPOINT;
 			}
 
-			
+
 			if (nodename) {
 				really_do_delete = really_do_delete_question(_("Delete folder '%s' and any contained files?"),nodename);
-				
+
 			} else {
 				really_do_delete = really_do_delete_question(_("Delete folder and any contained files?"));
 			}
@@ -448,12 +448,12 @@ void do_remove_node(gboolean ignore_clicked_node)
 		// Delete the file
 
 		gchar *filepath;
-		
+
 		GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
-		
-		gtk_tree_model_get(tree_model, &clicked_node.iter, 
-										COLUMN_FILEPATH, &filepath, -1);
-		
+
+		gtk_tree_model_get(tree_model, &clicked_node.iter,
+		                   COLUMN_FILEPATH, &filepath, -1);
+
 		if (!delete_file(filepath, &err)) {
 			goto EXITPOINT;
 		}
@@ -461,12 +461,12 @@ void do_remove_node(gboolean ignore_clicked_node)
 		// Remove the node
 
 		if (!remove_tree_node(&(clicked_node.iter), &err)) {
-			GtkWidget *errDialog = gtk_message_dialog_new(NULL, 
-												GTK_DIALOG_MODAL,
-												GTK_MESSAGE_ERROR,
-												GTK_BUTTONS_OK,
-												_("Could not delete the selected node: \n\n%s"),
-												err->message);
+			GtkWidget *errDialog = gtk_message_dialog_new(NULL,
+			                       GTK_DIALOG_MODAL,
+			                       GTK_MESSAGE_ERROR,
+			                       GTK_BUTTONS_OK,
+			                       _("Could not delete the selected node: \n\n%s"),
+			                       err->message);
 
 			gtk_dialog_run(GTK_DIALOG (errDialog));
 
