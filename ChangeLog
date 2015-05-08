@@ -2,6 +2,12 @@
 ChangeLog:
 ----------
 
+1.05
+	* Update copyright years
+	* Fix gtk_misc_set_alignment warnings
+	* Fix Swedish translation of descending
+	* Update translation example with valid language code
+
 1.04
 	* Fix manpage commenting
 
