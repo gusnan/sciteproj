@@ -3,16 +3,12 @@ ChangeLog:
 ----------
 
 1.05
-<<<<<<< HEAD
 	* Update copyright years
 	* Fix gtk_misc_set_alignment warnings
 	* Fix Swedish translation of descending
 	* Update translation example with valid language code
-
-=======
 	* Remove unused Swedish translations, cleaning up the po-file
 	
->>>>>>> ce1e595e477a4e62bc9bc517e8c4e9cb10c1551d
 1.04
 	* Fix manpage commenting
 
