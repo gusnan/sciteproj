@@ -61,7 +61,7 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 
 	GtkWidget *table;
 	GtkWidget *label1,*label2;
-	GtkWidget *filename,*filepath_label;
+	GtkWidget *filename, *filepath_label;
 
 	gchar *filePath = NULL;
 	int nodeType = -1;
@@ -72,13 +72,14 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	                   COLUMN_FILEPATH, &filePath,
 	                   -1);
 
-#if GTK_MAJOR_VERSION >= 3
+#if GTK_MAJOR_VERSION>=3
 	dialog = gtk_dialog_new_with_buttons(_("Group Properties"), NULL, GTK_DIALOG_MODAL,
-	                                   _("OK"), GTK_RESPONSE_ACCEPT,NULL);
+		_("OK"), GTK_RESPONSE_ACCEPT, NULL);
 #else
 	dialog = gtk_dialog_new_with_buttons(_("Group Properties"), NULL, GTK_DIALOG_MODAL, GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
 #endif
 
+	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 
 	label1 = gtk_label_new(_("Group name:"));
@@ -148,13 +149,13 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	gchar *nodename = NULL;
 
 	GtkWidget *table;
-	GtkWidget *label1,*label2,*label3;
-	GtkWidget *path,*filename,*filesize_label;
+	GtkWidget *label1, *label2, *label3;
+	GtkWidget *path, *filename, *filesize_label;
 	GtkWidget *container_vbox = NULL;
 	GtkWidget *dialog = NULL;
 
-	gchar *filePath=NULL;
-	int nodeType=-1;
+	gchar *filePath = NULL;
+	int nodeType = -1;
 
 	gtk_tree_model_get(model, iter,
 	                   COLUMN_FILENAME, &nodename,
@@ -166,10 +167,10 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	debug_printf((gchar*)"File name: %s\n", filePath);
 
 #if GTK_MAJOR_VERSION>=3
-	dialog=gtk_dialog_new_with_buttons(_("File Properties"), NULL, GTK_DIALOG_MODAL,
-	                                   _("OK"), GTK_RESPONSE_ACCEPT,NULL);
+	dialog = gtk_dialog_new_with_buttons(_("File Properties"), NULL, GTK_DIALOG_MODAL,
+		_("OK"), GTK_RESPONSE_ACCEPT,NULL);
 #else
-	dialog=gtk_dialog_new_with_buttons(_("File Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
+	dialog = gtk_dialog_new_with_buttons(_("File Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
 #endif
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 

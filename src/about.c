@@ -93,7 +93,7 @@ void create_about_dialog()
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_container_set_border_width(GTK_CONTAINER(window), 8);
 
-	gtk_widget_set_size_request(window,500,400);
+	gtk_widget_set_size_request(window, 500, 400);
 
 	// Make a container
 #if GTK_MAJOR_VERSION >= 3
@@ -105,7 +105,7 @@ void create_about_dialog()
 #else
 	vbox = gtk_vbox_new(FALSE,5);
 
-	gtk_container_add(GTK_CONTAINER(window),vbox);
+	gtk_container_add(GTK_CONTAINER(window), vbox);
 #endif
 
 	logo_image = gtk_image_new_from_pixbuf(program_icon_pixbuf);
@@ -121,10 +121,10 @@ void create_about_dialog()
 	gtk_label_set_markup(GTK_LABEL(sciteproj_label), "<big><b>SciteProj</b></big>");
 
 
-#if GTK_MAJOR_VERSION >= 3
-	gtk_grid_attach_next_to(GTK_GRID(grid), sciteproj_label, logo_image,G TK_POS_BOTTOM, 5, 1);
+#if GTK_MAJOR_VERSION>=3
+	gtk_grid_attach_next_to(GTK_GRID(grid), sciteproj_label, logo_image, GTK_POS_BOTTOM, 5, 1);
 #else
-	gtk_box_pack_start(GTK_BOX(vbox),sciteproj_label,FALSE,FALSE,0);
+	gtk_box_pack_start(GTK_BOX(vbox), sciteproj_label, FALSE, FALSE, 0);
 #endif
 
 	// Show version of SciteProj
@@ -143,7 +143,7 @@ void create_about_dialog()
 #if GTK_MAJOR_VERSION >= 3
 	gtk_grid_attach_next_to(GTK_GRID(grid), version_string_label, sciteproj_label, GTK_POS_BOTTOM, 5, 1);
 #else
-	gtk_box_pack_start(GTK_BOX(vbox),version_string_label,FALSE,FALSE,0);
+	gtk_box_pack_start(GTK_BOX(vbox), version_string_label, FALSE, FALSE, 0);
 #endif
 
 	// Show SciteProj copyrights
@@ -155,14 +155,14 @@ void create_about_dialog()
 #if GTK_MAJOR_VERSION >= 3
 	gtk_grid_attach_next_to(GTK_GRID(grid), copyright_label, version_string_label, GTK_POS_BOTTOM, 5, 1);
 #else
-	gtk_box_pack_start(GTK_BOX(vbox),copyright_label,FALSE,FALSE,0);
+	gtk_box_pack_start(GTK_BOX(vbox), copyright_label, FALSE, FALSE, 0);
 #endif
 
 	// show GTK versions
 	gchar *gtk_string = g_strdup_printf("GTK+ %d.%d.%d / GLib %d.%d.%d",
-	                                  //"Operating System: unknown",
-	                                  gtk_major_version, gtk_minor_version, gtk_micro_version,
-	                                  glib_major_version, glib_minor_version, glib_micro_version);
+		   //"Operating System: unknown",
+		   gtk_major_version, gtk_minor_version, gtk_micro_version,
+		   glib_major_version, glib_minor_version, glib_micro_version);
 
 	gtk_version_label = gtk_label_new(gtk_string);
 
@@ -171,7 +171,7 @@ void create_about_dialog()
 #if GTK_MAJOR_VERSION >= 3
 	gtk_grid_attach_next_to(GTK_GRID(grid), gtk_version_label, copyright_label, GTK_POS_BOTTOM, 5, 1);
 #else
-	gtk_box_pack_start(GTK_BOX(vbox),gtk_version_label,FALSE,FALSE,0);
+	gtk_box_pack_start(GTK_BOX(vbox), gtk_version_label, FALSE, FALSE, 0);
 
 	GtkWidget *hbox = gtk_hbox_new(FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
@@ -179,10 +179,10 @@ void create_about_dialog()
 
 
 	// Show a link to the SciteProj homepage
-	linkbutton = gtk_link_button_new_with_label(homepage_string,homepage_string);
+	linkbutton = gtk_link_button_new_with_label(homepage_string, homepage_string);
 
-#if GTK_MAJOR_VERSION >= 3
-	gtk_grid_attach_next_to(GTK_GRID(grid),linkbutton, gtk_version_label, GTK_POS_BOTTOM, 5, 1);
+#if GTK_MAJOR_VERSION>=3
+	gtk_grid_attach_next_to(GTK_GRID(grid), linkbutton, gtk_version_label, GTK_POS_BOTTOM, 5, 1);
 #else
 	gtk_box_pack_start(GTK_BOX(hbox), linkbutton, TRUE, FALSE, 0);
 #endif
@@ -240,17 +240,17 @@ void create_about_dialog()
 	gtk_text_buffer_get_start_iter(textbuffer_info, &iter);
 
 	gchar *about_text2 = g_strdup_printf(""
-	                                   "%s\n"
-	                                   "Roy Wood <roy.wood@gmail.com> and\n"
-	                                   "Martin Andrews <ScitePM@PLATFORMedia.com>\n\n"
-	                                   "%s\n"
-	                                   "Mattias Wecksten <wecksten@gmail.com>\n"
-	                                   "Frank Wunderlich\n\n"
-	                                   "%s",
-	                                   _("SciteProj is based on ScitePM by"),
-	                                   _("Many thanks to"),
-	                                   _("For more information about SciteProj, see the README file that\n"
-	                                     "is provided with this package."));
+		"%s\n"
+		"Roy Wood <roy.wood@gmail.com> and\n"
+		"Martin Andrews <ScitePM@PLATFORMedia.com>\n\n"
+		"%s\n"
+		"Mattias Wecksten <wecksten@gmail.com>\n"
+		"Frank Wunderlich\n\n"
+		"%s",
+		_("SciteProj is based on ScitePM by"),
+		_("Many thanks to"),
+		_("For more information about SciteProj, see the README file that\n"
+											"is provided with this package."));
 
 	gchar *text_to_add;
 
@@ -258,7 +258,7 @@ void create_about_dialog()
 
 	gchar *prefs_dir_string = g_strdup_printf("Preferences loaded from %s",prefs_filename);
 
-	text_to_add = g_strdup_printf("%s\n\n%s",about_text2,
+	text_to_add = g_strdup_printf("%s\n\n%s", about_text2,
 	                            prefs_dir_string);
 
 #else
@@ -297,11 +297,11 @@ void create_about_dialog()
 
 	gtk_grid_attach_next_to(GTK_GRID(grid), notebook, linkbutton/*gtk_version_label*/, GTK_POS_BOTTOM, 5, 1);
 #else
-	gtk_box_pack_start(GTK_BOX(vbox), notebook,TRUE,TRUE,0);
+	gtk_box_pack_start(GTK_BOX(vbox), notebook, TRUE, TRUE, 0);
 #endif
 
 	gtk_text_buffer_place_cursor(textbuffer_info, &iter);
-	gtk_text_buffer_select_range (textbuffer_info, &iter, &iter);
+	gtk_text_buffer_select_range(textbuffer_info, &iter, &iter);
 
 	// Create an ok button
 	ok_button = gtk_button_new();
@@ -313,17 +313,17 @@ void create_about_dialog()
 	gtk_widget_set_hexpand(ok_button, FALSE);
 #endif
 
-	//gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,FALSE,0);
-	//	gtk_grid_attach_next_to(GTK_GRID(grid),hbox,notebook,GTK_POS_BOTTOM,5,1);
+	//gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+	//	gtk_grid_attach_next_to(GTK_GRID(grid), hbox, notebook, GTK_POS_BOTTOM, 5, 1);
 
 #if GTK_MAJOR_VERSION >= 3
-	gtk_grid_attach_next_to(GTK_GRID(grid),ok_button,notebook,GTK_POS_BOTTOM,5,1);
+	gtk_grid_attach_next_to(GTK_GRID(grid), ok_button, notebook, GTK_POS_BOTTOM, 5, 1);
 #else
 	GtkWidget *ok_button_hbox = gtk_hbox_new(FALSE,0);
 
-	gtk_box_pack_end(GTK_BOX(ok_button_hbox),ok_button,FALSE,FALSE,0);
+	gtk_box_pack_end(GTK_BOX(ok_button_hbox), ok_button, FALSE, FALSE, 0);
 
-	gtk_box_pack_start(GTK_BOX(vbox),ok_button_hbox,FALSE,FALSE,0);
+	gtk_box_pack_start(GTK_BOX(vbox), ok_button_hbox, FALSE, FALSE, 0);
 #endif
 
 	gtk_widget_grab_focus(ok_button);
@@ -369,7 +369,7 @@ gboolean handle_about_close_event(GtkWidget *widget, GdkEvent *event, gpointer u
  *	Callback for the link button, Without this, it would color the text purple when the
  *	link is followed, which I found really ugly.
  */
-void link_button_cb(GtkButton *button,gpointer user_data)
+void link_button_cb(GtkButton *button, gpointer user_data)
 {
 	GtkWidget *linkbutton = (GtkWidget*)(user_data);
 
