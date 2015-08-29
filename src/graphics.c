@@ -86,9 +86,13 @@ gboolean load_graphics(GtkWidget *widget, GError **err)
 		directory_closed_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)dir_close_xpm);
 
 	}
+	
+	GdkDisplay *default_display = NULL;
+	
+	default_display = gdk_display_get_default();
 
-	standard_cursor=gdk_cursor_new(GDK_X_CURSOR);
-	busy_cursor=gdk_cursor_new(GDK_WATCH);
+	standard_cursor=gdk_cursor_new_for_display(default_display, GDK_X_CURSOR);
+	busy_cursor=gdk_cursor_new_for_display(default_display, GDK_WATCH);
 
 	return TRUE;
 }
