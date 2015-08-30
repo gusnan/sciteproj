@@ -78,7 +78,7 @@ load_script(lua_State *lua, char *filename)
 
 		if (result) {
 			// We got an error, print it
-			printf("%s\n", lua_tostring(lua,-1));
+			printf("%s\n", lua_tostring(lua, -1));
 
 			lua_pop(lua, 1);
 
@@ -124,7 +124,7 @@ void run_script(lua_State *lua)
 {
 	int s = lua_pcall( lua, 0, LUA_MULTRET, 0 );
 
-	if (s>0) {
+	if (s > 0) {
 
 		char *error_msg;
 
@@ -245,12 +245,12 @@ int lua_get_boolean(lua_State *lua, char *variable_name)
  */
 double lua_get_number(lua_State *lua, char *variable_name)
 {
-	int result=-1;
+	int result = -1;
 
 	lua_getglobal(lua, variable_name);
 
-	if (lua_isnumber(lua, -1)!=0) {
-		result=(int)lua_tonumber(lua, -1);
+	if (lua_isnumber(lua, -1) != 0) {
+		result = (int)lua_tonumber(lua, -1);
 	} else {
 		printf("%s isn't a number!\n", variable_name);
 	}
@@ -286,7 +286,7 @@ gboolean lua_global_exists(lua_State *lua, char *variable_name)
 
 	lua_getglobal(lua, variable_name);
 
-	if (lua_isnil(lua, -1)!=0) {
+	if (lua_isnil(lua, -1) != 0) {
 		result = FALSE;
 	} else {
 		lua_pop(lua, 1);
