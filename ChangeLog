@@ -8,6 +8,9 @@ ChangeLog:
 	* Fix Swedish translation of descending
 	* Update translation example with valid language code
 	* Remove unused Swedish translations, cleaning up the po-file
+	* Don't use deprecated cursor functions
+	* Formatting and whitespace fixes
+	* Makefile: make CC customizable
 	
 1.04
 	* Fix manpage commenting
