@@ -85,7 +85,7 @@ void popup_open_file_cb()
 		goto EXITPOINT;
 	}
 
-	add_file_to_recent(clicked_node.name,NULL);
+	add_file_to_recent(clicked_node.name, NULL);
 
 
 EXITPOINT:
@@ -127,7 +127,7 @@ void edit_properties_cb()
 
 			activate_scite(NULL);
 
-			if (prefs.give_scite_focus==TRUE) {
+			if (prefs.give_scite_focus == TRUE) {
 				send_scite_command((gchar*)"focus:0", NULL);
 			}
 		}
@@ -151,14 +151,14 @@ static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter
 	GError *error;
 	gint nodeItemType;
 
-	GtkTreeIter iter=newiter;
+	GtkTreeIter iter = newiter;
 
 	do {
 
 		gtk_tree_model_get(tree_model, &iter, COLUMN_ITEMTYPE, &nodeItemType, -1);
 
 
-		if (nodeItemType==ITEMTYPE_GROUP) {
+		if (nodeItemType == ITEMTYPE_GROUP) {
 
 			GtkTreePath *srcPath = gtk_tree_model_get_path(tree_model, &iter);
 			gboolean groupIsExpanded = tree_row_is_expanded(srcPath);
@@ -177,7 +177,7 @@ static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter
 
 				GtkTreeIter newIter;
 				gtk_tree_model_iter_children(tree_model, &newIter, &iter);
-				fix_folders_step_through(tree_view,newIter, tree_path);
+				fix_folders_step_through(tree_view, newIter, tree_path);
 			}
 
 			g_free(relFilePath);
@@ -372,12 +372,12 @@ gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,
 {
 	gchar *filename;
 	// For some reason this should return TRUE if the row DONT match
-	gboolean res=TRUE;
+	gboolean res = TRUE;
 
 	gtk_tree_model_get(model, iter, COLUMN_FILENAME, &filename, -1);
 
 	// zero when matches, which means we should return FALSE
-	if (g_ascii_strncasecmp(key,filename,strlen(key))==0) res=FALSE;
+	if (g_ascii_strncasecmp(key, filename, strlen(key)) == 0) res = FALSE;
 
 	g_free(filename);
 
@@ -395,10 +395,10 @@ void refresh_folder_cb()
 	}
 
 	gchar *folder_name;
-	GtkTreeModel *tree_model=gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
-	GtkTreeIter iter=clicked_node.iter;
+	GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
+	GtkTreeIter iter = clicked_node.iter;
 
-	GtkTreeIter *stored_iter=gtk_tree_iter_copy(&iter);
+	GtkTreeIter *stored_iter = gtk_tree_iter_copy(&iter);
 
 	gboolean expanded;
 
@@ -414,7 +414,7 @@ void refresh_folder_cb()
 
 		GtkTreeIter child;
 
-		GList *list_of_items=NULL;
+		GList *list_of_items = NULL;
 
 		// First, store all GtkTreePath in a linked list
 
@@ -422,7 +422,7 @@ void refresh_folder_cb()
 			int co=0;
 			GtkTreePath *tree_path;
 
-			GtkTreeIter *temp_iter=&child;
+			GtkTreeIter *temp_iter = &child;
 			do {
 
 				gchar *temp;
@@ -454,7 +454,7 @@ void refresh_folder_cb()
 			g_list_foreach(list_of_items, (GFunc) gtk_tree_row_reference_free, NULL);
 		}
 
-		GtkTreeIter *temp_iter=gtk_tree_iter_copy(stored_iter);
+		GtkTreeIter *temp_iter = gtk_tree_iter_copy(stored_iter);
 
 		gchar *folder;
 		gtk_tree_model_get(tree_model, temp_iter,

@@ -83,7 +83,7 @@ get_pixbuf_from_file(GFile *file, GtkIconSize size)
 	icon=g_file_info_get_icon(info);
 
 	if (icon != NULL) {
-		result=get_pixbuf_from_icon(icon,size);
+		result=get_pixbuf_from_icon(icon, size);
 	}
 
 	g_object_unref(info);
