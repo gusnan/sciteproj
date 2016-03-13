@@ -1,7 +1,7 @@
 /**
  * string_utils.h - misc string utils for SciteProj
  *
- *  Copyright 2006 Roy Wood, 2009-2012 Andreas Rönnquist
+ *  Copyright 2006 Roy Wood, 2009-2016 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
