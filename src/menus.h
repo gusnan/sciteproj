@@ -47,8 +47,6 @@ extern GtkWidget *recentPopupMenu;
 extern GtkWidget *quitMenuItem;
 
 int init_menus(GtkWidget* widget);
-void done_menus();
-
 
 
 #endif /*__HEADER_MENUS_*/

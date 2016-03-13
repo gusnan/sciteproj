@@ -255,10 +255,3 @@ int init_menus(GtkWidget *window)
 
 	return 0;
 }
-
-/**
- *
- */
-void done_menus()
-{
-}
