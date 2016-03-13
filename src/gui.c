@@ -48,7 +48,6 @@
 #include "clipboard.h"
 
 #include "remove.h"
-#include "addfiles.h"
 
 #include "recent_files.h"
 

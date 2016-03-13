@@ -1,7 +1,7 @@
 /**
  * tree_manipulation.h - GtkTreeView manipulation code for SciteProj
  *
- *  Copyright 2006 Roy Wood, 2009-2012 Andreas Rönnquist
+ *  Copyright 2006 Roy Wood, 2009-2016 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -111,9 +111,6 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
 
 // Remove a node from a GtkTreeModel
 gboolean remove_tree_node(GtkTreeIter *iter, GError **err);
-
-// Remove a node from a GtkTreeModel
-gboolean set_tree_node_name(GtkTreeIter *iter, const gchar *newContents, GError **err);
 
 gboolean set_tree_node_expanded(GtkTreeIter *iter, gboolean expanded, GError **err);
 

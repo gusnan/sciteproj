@@ -1,7 +1,7 @@
 /**
  * tree_manipulation.c - GtkTreeView manipulation code for SciteProj
  *
- *  Copyright 2006 Roy Wood, 2009-2012 Andreas Rönnquist
+ *  Copyright 2006 Roy Wood, 2009-2016 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -491,32 +491,6 @@ extern gboolean remove_tree_node(GtkTreeIter *iter, GError **err)
 	return TRUE;
 }
 
-
-
-/**
- * Set the contents of a node. (Should only be used for directories, and not for
- * adding files)
- *
- * @return TRUE on success, FALSE on failure (further details returned in err)
- *
- * @param iter is a reference to the node to change
- * @param newContents is the new content for the node
- * @param err returns any errors
- */
-gboolean set_tree_node_name(GtkTreeIter *iter, const gchar *newContents, GError **err)
-{
-	g_assert(iter != NULL);
-	g_assert(newContents != NULL);
-
-
-	// What is saved on disk
-	gtk_tree_store_set(sTreeStore, iter, COLUMN_FILEPATH, newContents, -1);
-
-	// What is visible in gui
-	gtk_tree_store_set(sTreeStore, iter, COLUMN_FILENAME, newContents, -1);
-
-	return TRUE;
-}
 
 
 /**

@@ -50,7 +50,6 @@
 #include "properties_dialog.h"
 #include "file_utils.h"
 
-#include "addfiles.h"
 #include "recent_files.h"
 #include "remove.h"
 #include "sort.h"
