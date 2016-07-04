@@ -1,7 +1,7 @@
 /**
  * scite_utils_linux.h - Code for working with Scite (GNU/Linux version)
  *
- *  Copyright 2006 Roy Wood, 2009-2011 Andreas Rönnquist
+ *  Copyright 2006 Roy Wood, 2009-2016 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *

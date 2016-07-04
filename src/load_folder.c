@@ -1,7 +1,7 @@
 /**
  * load_folder.c - folder loading support for sciteproj
  *
- *  Copyright 2012 Andreas Rönnquist
+ *  Copyright 2012-2016 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *

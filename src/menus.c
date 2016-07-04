@@ -1,7 +1,7 @@
 /**
  * menus.c - Menus for SciteProj
  *
- *  Copyright 2009-2014 Andreas Rönnquist
+ *  Copyright 2009-2016 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -254,11 +254,4 @@ int init_menus(GtkWidget *window)
 	gtk_widget_show_all(GTK_WIDGET(recentPopupMenu));
 
 	return 0;
-}
-
-/**
- *
- */
-void done_menus()
-{
 }

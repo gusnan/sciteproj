@@ -1,5 +1,5 @@
 #
-#   Copyright (C) 2009-2014 Andreas Rönnquist
+#   Copyright (C) 2009-2016 Andreas Rönnquist
 #   This file is distributed under the same license
 #   as the sciteproj package, see COPYING file.
 #
@@ -18,7 +18,7 @@ else
 	STD_CFLAGS=-Wall -Wformat -Wno-format-extra-args -Wformat-security -Wformat-nonliteral -Wformat=2 -Wdeprecated-declarations
 endif
 
-OBJECTS=$(OBJ)/about.o $(OBJ)/addfiles.o $(OBJ)/clipboard.o $(OBJ)/expand.o\
+OBJECTS=$(OBJ)/about.o $(OBJ)/clipboard.o $(OBJ)/expand.o\
 $(OBJ)/file_utils.o $(OBJ)/folder_config.o\
 $(OBJ)/graphics.o $(OBJ)/gui.o $(OBJ)/gui_callbacks.o\
 $(OBJ)/icon.o $(OBJ)/load_folder.o $(OBJ)/menus.o $(OBJ)/main.o $(OBJ)/prefs.o\
