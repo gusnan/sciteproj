@@ -837,10 +837,15 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	                                   &path, NULL, NULL, NULL)) {
 		// Nope-- user clicked in the GtkTreeView, but not on a node
 
+#if ((GTK_MAJOR_VERSION >= 3) && (GTK_MINOR_VERSION >= 22))
+		gtk_menu_popup_at_pointer(GTK_MENU(generalPopupMenu), (GdkEvent*)event);
+													
+#else
 		gtk_menu_popup(GTK_MENU(generalPopupMenu),
 		               NULL, NULL, NULL, NULL,
 		               event->button, gdk_event_get_time((GdkEvent*) event));
-
+#endif
+													  
 		goto EXITPOINT;
 	}
 
@@ -883,12 +888,20 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	// Pop up the appropriate menu for the node type
 
 	if (nodeItemType == ITEMTYPE_FILE) {
+#if ((GTK_MAJOR_VERSION >= 3) && (GTK_MINOR_VERSION >= 22))
+		gtk_menu_popup_at_pointer(GTK_MENU(fileRightClickPopupMenu), (GdkEvent*)event);
+#else
 		gtk_menu_popup(GTK_MENU(fileRightClickPopupMenu), NULL, NULL, NULL, NULL,
 		               event->button, gdk_event_get_time((GdkEvent*) event));
+#endif
 	}
 	else if (nodeItemType == ITEMTYPE_GROUP) {
+#if ((GTK_MAJOR_VERSION >= 3) && (GTK_MINOR_VERSION >= 22))
+		gtk_menu_popup_at_pointer(GTK_MENU(groupRightClickPopupMenu), (GdkEvent*)event);
+#else
 		gtk_menu_popup(GTK_MENU(groupRightClickPopupMenu), NULL, NULL, NULL, NULL,
 		               event->button, gdk_event_get_time((GdkEvent*) event));
+#endif
 	}
 
 	// We took care of the event, so no need to propogate it
