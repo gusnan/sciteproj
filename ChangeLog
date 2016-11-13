@@ -2,6 +2,10 @@
 ChangeLog:
 ----------
 
+1.06
+	* Various formatting fixes, source cleanups
+	* Add GTK 3.22 versions of menu popups
+
 1.05
 	* Update copyright years
 	* Fix gtk_misc_set_alignment warnings
