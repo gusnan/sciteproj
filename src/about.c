@@ -147,7 +147,7 @@ void create_about_dialog()
 #endif
 
 	// Show SciteProj copyrights
-	copyrightstring = g_strdup_printf("Copyright (C) 2008-2014 Andreas Rönnquist <gusnan@gusnan.se>");
+	copyrightstring = g_strdup_printf("Copyright (C) 2008-2016 Andreas Rönnquist <gusnan@openmailbox.org>");
 
 	copyright_label = gtk_label_new(copyrightstring);
 	gtk_label_set_selectable(GTK_LABEL(copyright_label), FALSE);
