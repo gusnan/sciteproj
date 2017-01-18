@@ -1,7 +1,7 @@
 /**
  * gtk3_compat.h - GTK3 compatibility definitions
  *
- *  Copyright 2011-2016 Andreas Rönnquist
+ *  Copyright 2011-2017 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *

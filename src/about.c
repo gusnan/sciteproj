@@ -1,7 +1,7 @@
 /**
  * about.c - about dialog for SciteProj
  *
- *	 Copyright 2008-2016 Andreas Rönnquist
+ *	 Copyright 2008-2017 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -147,7 +147,7 @@ void create_about_dialog()
 #endif
 
 	// Show SciteProj copyrights
-	copyrightstring = g_strdup_printf("Copyright (C) 2008-2016 Andreas Rönnquist <gusnan@openmailbox.org>");
+	copyrightstring = g_strdup_printf("Copyright (C) 2008-2017 Andreas Rönnquist <gusnan@openmailbox.org>");
 
 	copyright_label = gtk_label_new(copyrightstring);
 	gtk_label_set_selectable(GTK_LABEL(copyright_label), FALSE);

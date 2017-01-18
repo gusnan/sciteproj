@@ -1,7 +1,7 @@
 /**
  * script.h - Script code for sciteproj
  *
- *  Copyright 2012-2016 Andreas Rönnquist
+ *  Copyright 2012-2017 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *

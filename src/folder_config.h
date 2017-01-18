@@ -1,7 +1,7 @@
 /**
  * folder_config.h - per folder configuration loaded from LUA
  *
- *  Copyright 2012-2016 Andreas Rönnquist
+ *  Copyright 2012-2017 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
