@@ -1,13 +1,13 @@
 # sciteproj pot
-# Copyright (C) 2014, Andreas Rönnquist <gusnan@gusnan.se>
+# Copyright (C) 2014, Andreas Rönnquist <gusnan@openmailbox.org>
 # This file is distributed under the same license as the sciteproj package.
-# Andreas Rönnquist <gusnan@gusnan.se>, 2014.
+# Andreas Rönnquist <gusnan@openmailbox.org>, 2014.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.00\n"
-"Report-Msgid-Bugs-To: gusnan@gusnan.se\n"
+"Report-Msgid-Bugs-To: gusnan@openmailbox.org\n"
 "POT-Creation-Date: 2014-08-04 20:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
