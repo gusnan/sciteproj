@@ -838,12 +838,15 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 		// Nope-- user clicked in the GtkTreeView, but not on a node
 
 #if ((GTK_MAJOR_VERSION >= 3) && (GTK_MINOR_VERSION >= 22))
-		gtk_menu_popup_at_pointer(GTK_MENU(generalPopupMenu), (GdkEvent*)event);
-													
+		if (generalPopupMenu) {
+			gtk_menu_popup_at_pointer(GTK_MENU(generalPopupMenu), (GdkEvent*)event);													
+		}
 #else
-		gtk_menu_popup(GTK_MENU(generalPopupMenu),
+		if (generalPopupMenu) {
+			gtk_menu_popup(GTK_MENU(generalPopupMenu),
 		               NULL, NULL, NULL, NULL,
 		               event->button, gdk_event_get_time((GdkEvent*) event));
+		}
 #endif
 													  
 		goto EXITPOINT;
@@ -889,18 +892,26 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 
 	if (nodeItemType == ITEMTYPE_FILE) {
 #if ((GTK_MAJOR_VERSION >= 3) && (GTK_MINOR_VERSION >= 22))
-		gtk_menu_popup_at_pointer(GTK_MENU(fileRightClickPopupMenu), (GdkEvent*)event);
+		if (fileRightClickPopupMenu) {
+			gtk_menu_popup_at_pointer(GTK_MENU(fileRightClickPopupMenu), (GdkEvent*)event);
+		}
 #else
-		gtk_menu_popup(GTK_MENU(fileRightClickPopupMenu), NULL, NULL, NULL, NULL,
-		               event->button, gdk_event_get_time((GdkEvent*) event));
+		if (fileRightClickPopupMenu) {
+			gtk_menu_popup(GTK_MENU(fileRightClickPopupMenu), NULL, NULL, NULL, NULL,
+						event->button, gdk_event_get_time((GdkEvent*) event));
+		}
 #endif
 	}
 	else if (nodeItemType == ITEMTYPE_GROUP) {
 #if ((GTK_MAJOR_VERSION >= 3) && (GTK_MINOR_VERSION >= 22))
-		gtk_menu_popup_at_pointer(GTK_MENU(groupRightClickPopupMenu), (GdkEvent*)event);
+		if (groupRightClickPopupMenu) {
+			gtk_menu_popup_at_pointer(GTK_MENU(groupRightClickPopupMenu), (GdkEvent*)event);
+		}
 #else
-		gtk_menu_popup(GTK_MENU(groupRightClickPopupMenu), NULL, NULL, NULL, NULL,
+		if (groupRightClickPopupMenu) {
+			gtk_menu_popup(GTK_MENU(groupRightClickPopupMenu), NULL, NULL, NULL, NULL,
 		               event->button, gdk_event_get_time((GdkEvent*) event));
+		}
 #endif
 	}
 
