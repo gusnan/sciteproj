@@ -426,7 +426,9 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 
 	//if (nodeItemType == ITEMTYPE_FILE) {
 #if ((GTK_MAJOR_VERSION >= 3) && (GTK_MINOR_VERSION >= 22))
-	gtk_menu_popup_at_pointer(GTK_MENU(recentPopupMenu), (GdkEvent*)event);
+	if (recentPopupMenu) {
+		gtk_menu_popup_at_pointer(GTK_MENU(recentPopupMenu), (GdkEvent*)event);
+	}
 #else
 	gtk_menu_popup(GTK_MENU(recentPopupMenu),
 	               NULL,
