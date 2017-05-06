@@ -120,7 +120,7 @@ gboolean setup_gui(GError **err)
 	//GtkAccelGroup* accelgroup = NULL;
 	GError *tempErr = NULL;
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	GtkWidget *grid;
 	GtkWidget *fullGrid = NULL;
 #else
@@ -217,7 +217,7 @@ gboolean setup_gui(GError **err)
 
 
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	//g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), grid);
 #else
 	//g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), vpaned);
@@ -381,7 +381,7 @@ gboolean setup_gui(GError **err)
 	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(projectTreeView), FALSE);
 
 	gtk_tree_view_column_set_resizable(column1, TRUE);
-	gtk_tree_view_column_set_min_width(column1, (int)(prefs.width*.75));
+	gtk_tree_view_column_set_min_width(column1, (int)(prefs.width * .75));
 
 
 	gtk_tree_view_column_pack_start(column1, pixbuffCellRenderer, FALSE);
@@ -410,7 +410,7 @@ gboolean setup_gui(GError **err)
 	                 G_CALLBACK(tree_row_activated_cb), NULL);
 
 	gtk_tree_view_set_search_equal_func(GTK_TREE_VIEW(projectTreeView),
-	                                    tree_view_search_equal_func,NULL,NULL);
+	                                    tree_view_search_equal_func, NULL, NULL);
 
 	g_signal_connect(G_OBJECT(projectTreeView), "row-expanded",
 	                 G_CALLBACK(row_expand_or_collapse_cb), NULL);
@@ -468,7 +468,7 @@ gboolean setup_gui(GError **err)
 	}
 
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_widget_set_vexpand(recentScrolledWindow, TRUE);
 	gtk_widget_set_hexpand(recentScrolledWindow, TRUE);
 
@@ -505,7 +505,7 @@ gboolean setup_gui(GError **err)
 #endif
 
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_paned_pack1(GTK_PANED(vpaned), grid, TRUE, FALSE);
 	gtk_paned_pack2(GTK_PANED(vpaned), recentGrid, TRUE, TRUE);
 #else
@@ -516,7 +516,7 @@ gboolean setup_gui(GError **err)
 	gtk_widget_show(vpaned);
 
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 
 
 	gtk_grid_insert_row(GTK_GRID(fullGrid), 0);
@@ -530,8 +530,8 @@ gboolean setup_gui(GError **err)
 	gtk_widget_show(GTK_WIDGET(fullGrid));
 
 	if (!prefs.hide_statusbar) {
-		if (!init_statusbar(fullGrid,vpaned, &tempErr)) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s", tempErr->message,"Error initing statusbar");
+		if (!init_statusbar(fullGrid, vpaned, &tempErr)) {
+			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s", tempErr->message, "Error initing statusbar");
 			goto EXITPOINT;
 		}
 	}
@@ -577,7 +577,7 @@ gboolean setup_gui(GError **err)
 
 	// Show it all....
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_widget_show(recentGrid);
 
 	if (!prefs.show_recent) {
@@ -597,7 +597,7 @@ gboolean setup_gui(GError **err)
 
 	gtk_widget_show(projectTreeView);
 	gtk_widget_show(scrolledWindow);
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	gtk_widget_show(grid);
 #else
 	gtk_widget_show(vbox);
@@ -683,7 +683,7 @@ static gint window_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer 
 /**
  *
  */
-static void switch_folder_icon(GtkTreeView *treeView,GtkTreePath *path)
+static void switch_folder_icon(GtkTreeView *treeView, GtkTreePath *path)
 {
 	GtkTreeIter iter;
 	gint nodeItemType;
@@ -699,13 +699,13 @@ static void switch_folder_icon(GtkTreeView *treeView,GtkTreePath *path)
 	                   COLUMN_ICON, &pixbuf,
 	                   -1);
 
-	gboolean res=gtk_tree_view_row_expanded(treeView,path);
+	gboolean res=gtk_tree_view_row_expanded(treeView, path);
 
 	if (res) {
-		gtk_tree_view_collapse_row(treeView,path);
+		gtk_tree_view_collapse_row(treeView, path);
 	} else {
 
-		gtk_tree_view_expand_row(treeView,path,FALSE);
+		gtk_tree_view_expand_row(treeView, path, FALSE);
 	}
 
 	g_free(relFilePath);
@@ -871,17 +871,17 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	nodeName = NULL;
 
 	// Check if something is selected
-	tree_selection=gtk_tree_view_get_selection(GTK_TREE_VIEW(treeView));
+	tree_selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeView));
 
 	if (tree_selection!=NULL) {
 		// Check if clicked on something in the selection, otherwise make the clicked one the selection.
 
-		if (gtk_tree_selection_path_is_selected(tree_selection, path)==FALSE) {
+		if (gtk_tree_selection_path_is_selected(tree_selection, path) == FALSE) {
 			// clear selection and make current line selected
 
 			gtk_tree_selection_unselect_all(tree_selection);
 
-			gtk_tree_selection_select_path (tree_selection, path);
+			gtk_tree_selection_select_path(tree_selection, path);
 		}
 	}
 
@@ -929,14 +929,14 @@ void set_window_title(const gchar *newName)
 {
 	g_assert(newName != NULL);
 
-	gchar *temp_string = g_new(gchar,512);
-	g_snprintf(temp_string,512,"%s",newName);
+	gchar *temp_string = g_new(gchar, 512);
+	g_snprintf(temp_string,512, "%s", newName);
 
 	gtk_window_set_title(GTK_WINDOW(sMainWindow), temp_string);
 
 	g_free(window_saved_title);
 
-	window_saved_title = g_strdup_printf("%s",newName);
+	window_saved_title = g_strdup_printf("%s", newName);
 
 	g_free(temp_string);
 }
@@ -949,8 +949,8 @@ gboolean dialog_response_is_exit(gint test)
 {
 	gboolean result = FALSE;
 
-	if ((test==GTK_RESPONSE_REJECT) || (test==GTK_RESPONSE_CANCEL) ||
-	        (test==GTK_RESPONSE_DELETE_EVENT) || (test==GTK_RESPONSE_NONE)) {
+	if ((test == GTK_RESPONSE_REJECT) || (test == GTK_RESPONSE_CANCEL) ||
+	        (test == GTK_RESPONSE_DELETE_EVENT) || (test == GTK_RESPONSE_NONE)) {
 		result = TRUE;
 	}
 
@@ -965,7 +965,7 @@ void recent_files_switch_visible()
 {
 	gboolean visible = FALSE;
 
-#if GTK_MAJOR_VERSION>=3
+#if GTK_MAJOR_VERSION >= 3
 	g_object_get(G_OBJECT(recentGrid), "visible", &visible, NULL);
 
 	if (visible) {
