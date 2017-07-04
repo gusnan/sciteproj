@@ -49,7 +49,7 @@
  */
 GtkCellRenderer *recentPixbuffCellRenderer = NULL;
 
-GtkWidget *recentTreeView=NULL;
+GtkWidget *recentTreeView = NULL;
 
 GtkTreeStore *recentTreeStore = NULL;
 
@@ -290,7 +290,7 @@ gboolean add_file_to_recent(gchar *filepath, GError **err)
 		gtk_tree_store_insert_after(recentTreeStore, &iter, NULL, NULL);
 	} else {
 		// get the iter of the last item
-		gtk_tree_store_append(recentTreeStore,&iter,NULL);
+		gtk_tree_store_append(recentTreeStore, &iter, NULL);
 	}
 	//}
 	/*
@@ -305,14 +305,14 @@ gboolean add_file_to_recent(gchar *filepath, GError **err)
 	}
 	*/
 
-	fileExt=strrchr(fileName, '.');
+	fileExt = strrchr(fileName, '.');
 
 	if (fileExt != NULL) {
 		++fileExt;
 	}
 
 	if (fileExt == NULL || strlen(fileExt) <= 0) {
-		fileExt=(gchar*)fileName;
+		fileExt = (gchar*)fileName;
 	}
 
 
@@ -323,7 +323,7 @@ gboolean add_file_to_recent(gchar *filepath, GError **err)
 	gtk_tree_store_set(recentTreeStore, &iter, COLUMN_EXPANDED, FALSE, -1);
 
 
-	GdkPixbuf *icon_pixbuf=get_pixbuf_from_filename((gchar*)(filepath), GTK_ICON_SIZE_MENU);
+	GdkPixbuf *icon_pixbuf = get_pixbuf_from_filename((gchar*)(filepath), GTK_ICON_SIZE_MENU);
 
 	gtk_tree_store_set(recentTreeStore, &iter, COLUMN_ICON, icon_pixbuf, -1);
 
@@ -413,12 +413,12 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 	if (tree_selection != NULL) {
 		// Check if clicked on something in the selection, otherwise make the clicked one the selection.
 
-		if (gtk_tree_selection_path_is_selected(tree_selection,path) == FALSE) {
+		if (gtk_tree_selection_path_is_selected(tree_selection, path) == FALSE) {
 			// clear selection and make current line selected
 
 			gtk_tree_selection_unselect_all(tree_selection);
 
-			gtk_tree_selection_select_path (tree_selection,path);
+			gtk_tree_selection_select_path(tree_selection, path);
 		}
 	}
 
@@ -549,12 +549,12 @@ static void recent_tree_row_activated_cb(GtkTreeView *treeView,
 			activate_scite(NULL);
 
 			if (prefs.give_scite_focus == TRUE) {
-				send_scite_command((gchar*)"focus:0",NULL);
+				send_scite_command((gchar*)"focus:0", NULL);
 			}
 
-			add_file_to_recent(fixed,NULL);
+			add_file_to_recent(fixed, NULL);
 
-			gchar *statusbar_text=g_strdup_printf(_("Opened %s"),
+			gchar *statusbar_text = g_strdup_printf(_("Opened %s"),
 			                                      remove_newline(get_filename_from_full_path(command)));
 
 			set_statusbar_text(statusbar_text);
@@ -631,7 +631,7 @@ void copy_recent_filename_to_clipboard_cb()
 	if (!recent_clicked_node.valid || recent_clicked_node.type != ITEMTYPE_FILE) {
 		//goto EXITPOINT;
 	} else {
-		copy_filename_to_clipboard(gtk_tree_view_get_model(GTK_TREE_VIEW(recentTreeView)),&(recent_clicked_node.iter));
+		copy_filename_to_clipboard(gtk_tree_view_get_model(GTK_TREE_VIEW(recentTreeView)), &(recent_clicked_node.iter));
 
 	}
 }
@@ -645,7 +645,7 @@ void properties_recent_file_cb()
 	if (!recent_clicked_node.valid || recent_clicked_node.type != ITEMTYPE_FILE) {
 		//goto EXITPOINT;
 	} else {
-		file_properties_gui(gtk_tree_view_get_model(GTK_TREE_VIEW(recentTreeView)),&(recent_clicked_node.iter));
+		file_properties_gui(gtk_tree_view_get_model(GTK_TREE_VIEW(recentTreeView)), &(recent_clicked_node.iter));
 
 	}
 }
