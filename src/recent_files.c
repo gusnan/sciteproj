@@ -134,7 +134,7 @@ GtkWidget *init_recent_files(GError **err)
 			g_set_error(err, APP_SCITEPROJ_ERROR, -1 ,
 			            "%s: %s",
 			            tempErr->message,
-			            "Coudn't init recent treestore"
+			            "Couldn't init recent treestore"
 			           );
 		}
 		goto EXITPOINT;
