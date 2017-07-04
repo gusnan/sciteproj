@@ -1,22 +1,22 @@
 # Swedish translation of SciteProj
-# Copyright (C) 2012 Andreas Rönnquist <gusnan@openmailbox.org>
+# Copyright (C) 2012-2017 Andreas Rönnquist <gusnan@openmailbox.org>
 # This file is distributed under the same license as the sciteproj package.
-# Andreas Rönnquist <gusnan@openmailbox.org>, 2012.
+# Andreas Rönnquist <gusnan@openmailbox.org>, 2012-2017.
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sciteproj 0.7.05\n"
+"Project-Id-Version: sciteproj 1.07\n"
 "Report-Msgid-Bugs-To: gusnan@openmailbox.org\n"
 "POT-Creation-Date: 2014-08-04 20:02+0200\n"
-"PO-Revision-Date: 2014-08-04 20:04+0100\n"
+"PO-Revision-Date: 2017-07-04 02:11+0200\n"
 "Last-Translator: Andreas Rönnquist <gusnan@openmailbox.org>\n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: about.c:194
 msgid "Information"
@@ -65,17 +65,12 @@ msgstr "version %s"
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:775
-#: recent_files.c:551
-#: scite_utils.c:216
+#: gui.c:775 recent_files.c:551 scite_utils.c:216
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
 
-#: gui.c:788
-#: gui_callbacks.c:96
-#: recent_files.c:564
-#: recent_files.c:605
+#: gui.c:788 gui_callbacks.c:96 recent_files.c:564 recent_files.c:605
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -120,8 +115,7 @@ msgstr "tolkning av alternativ misslyckades: %s"
 msgid "A folder is expected as parameter to sciteproj..."
 msgstr "En mapp väntas som parameter till sciteproj..."
 
-#: main.c:176
-#: main.c:186
+#: main.c:176 main.c:186
 msgid "Environment variable exists, but doesn't point to a folder containing scite."
 msgstr "Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
 
@@ -184,19 +178,15 @@ msgstr "Visa senaste filer"
 msgid "About"
 msgstr "_Om"
 
-#: menus.c:164
-#: menus.c:236
+#: menus.c:164 menus.c:236
 msgid "Open file in SciTE"
 msgstr "Öppna fil i SciTE"
 
-#: menus.c:167
-#: menus.c:238
+#: menus.c:167 menus.c:238
 msgid "Copy filename to clipboard"
 msgstr "Kopiera filnamn till urklipp"
 
-#: menus.c:173
-#: menus.c:210
-#: menus.c:239
+#: menus.c:173 menus.c:210 menus.c:239
 msgid "Properties"
 msgstr "Egenskaper"
 
@@ -228,13 +218,11 @@ msgstr "Uppdatera mappinnehåll"
 msgid "Remove file from this list"
 msgstr "Ta bort fil från denna lista"
 
-#: properties_dialog.c:64
-#: properties_dialog.c:67
+#: properties_dialog.c:64 properties_dialog.c:67
 msgid "Group Properties"
 msgstr "Mappegenskaper"
 
-#: properties_dialog.c:65
-#: properties_dialog.c:159
+#: properties_dialog.c:65 properties_dialog.c:159
 msgid "OK"
 msgstr "OK"
 
@@ -246,8 +234,7 @@ msgstr "Gruppnamn:"
 msgid "Full folder:"
 msgstr "Fullt mappnamn:"
 
-#: properties_dialog.c:158
-#: properties_dialog.c:161
+#: properties_dialog.c:158 properties_dialog.c:161
 msgid "File Properties"
 msgstr "Filegenskaper"
 
@@ -267,8 +254,7 @@ msgstr "Filstorlek:"
 msgid "Recently opened files:"
 msgstr "Nyligen öppnade filer:"
 
-#: remove.c:218
-#: remove.c:223
+#: remove.c:218 remove.c:223
 msgid "Error!!!\n"
 msgstr "Fel!!!\n"
 
@@ -335,4 +321,3 @@ msgstr "Fel:%s"
 #: statusbar.c:57
 msgid "Welcome to SciteProj\n"
 msgstr "Välkommen till SciteProj\n"
-
