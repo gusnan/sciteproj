@@ -191,7 +191,7 @@ gchar *get_list_of_selected_items_strings(GtkTreeView *treeview)
  */
 void remove_selected_items ( GtkTreeView *treeview )
 {
-	GError *error=NULL;
+	GError *error = NULL;
 	GtkTreeIter iter;
 	GtkTreeModel *model=gtk_tree_view_get_model(treeview);
 	GList *list = get_list_of_selected_items_rows(treeview); // gtk_tree_selection_get_selected_rows( selection, &model );
@@ -217,7 +217,7 @@ void remove_selected_items ( GtkTreeView *treeview )
 			else { // invalid path
 				g_error(_("Error!!!\n"));
 			}
-			gtk_tree_path_free (path);
+			gtk_tree_path_free(path);
 		}
 		else {
 			g_error(_("Error!!!\n"));
@@ -263,7 +263,7 @@ gboolean really_do_delete_question(const gchar *format, ...)
 
 	va_end(args);
 
-	result=TRUE;
+	result = TRUE;
 
 	dialog_response = gtk_dialog_run(GTK_DIALOG (dialog));
 	if (dialog_response_is_exit(dialog_response)) {
@@ -327,7 +327,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 		gtk_dialog_run(GTK_DIALOG(dialog));
 
 		gtk_widget_destroy(dialog);
-		dialog=NULL;
+		dialog = NULL;
 
 		goto EXITPOINT;
 	}
@@ -360,8 +360,8 @@ void do_remove_node(gboolean ignore_clicked_node)
 		}
 	} else {
 		// if there is only one selected, get its name
-		nodename=NULL;
-		multiple_selected=TRUE;
+		nodename = NULL;
+		multiple_selected = TRUE;
 	}
 
 	// Confirm removal from project
@@ -397,7 +397,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 
 	} else {
 
-		gboolean really_do_delete=FALSE;
+		gboolean really_do_delete = FALSE;
 
 		if (clicked_node.type == ITEMTYPE_FILE) {
 			if (nodename) {
