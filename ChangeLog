@@ -2,6 +2,10 @@
 ChangeLog:
 ----------
 
+1.07
+	* Fix typo Coudn't/Couldn't
+	* Fixed more missing NULL-checks
+
 1.06
 	* Various formatting fixes, source cleanups
 	* Add GTK 3.22 versions of menu popups
