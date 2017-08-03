@@ -141,7 +141,7 @@ int init_menus(GtkWidget *window)
 
 	g_signal_connect(G_OBJECT(propertiesMenuItem), "activate", G_CALLBACK(edit_properties_cb), NULL);
 
-	showRecentFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Show Recent Files"));
+	showRecentFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Show Recently Opened Files"));
 
 	g_signal_connect(G_OBJECT(showRecentFileMenuItem), "activate", G_CALLBACK(recent_files_switch_visible), NULL);
 	gtk_widget_add_accelerator(showRecentFileMenuItem, "activate", accelerator_group, GDK_KEY_r, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
