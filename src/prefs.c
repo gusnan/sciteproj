@@ -85,20 +85,20 @@ gchar *default_config_string = (gchar*)"" \
 gboolean check_config_string(gchar *in_config)
 {
 	gboolean result = FALSE;
-	int co=0;
+	int co = 0;
 	gdouble tempdouble;
 
 	gchar *tempstring = NULL;
 
-	int pos=-1;
+	int pos = -1;
 
-	gchar *value=in_config;
+	gchar *value = in_config;
 
 	// clear scite Path
 
 	prefs.scite_path = NULL;
 
-	for (co=0; co < (int)strlen(in_config); co++) {
+	for (co = 0; co < (int)strlen(in_config); co++) {
 		if (in_config[co] == '=') pos=co;
 
 		if (pos == -1) {
@@ -217,7 +217,7 @@ gboolean init_prefs(gchar *target_directory, GError **err)
 
 	// First, check the file ~/.config/sciteprojrc.lua
 
-	gchar *test_prefs_filename = g_build_filename(g_get_user_config_dir(), "sciteprojrc.lua",NULL);
+	gchar *test_prefs_filename = g_build_filename(g_get_user_config_dir(), "sciteprojrc.lua", NULL);
 
 	if (g_file_test(test_prefs_filename, G_FILE_TEST_IS_REGULAR)) {
 
@@ -355,7 +355,7 @@ gboolean check_for_old_style_config(const gchar *teststring)
 	// Another way to check is to check for lines starting with # - as a comment
 	// LUA uses "--", so this is should work to identify oldstyle config.
 
-	for (co=0; co < strlen(teststring); co++) {
+	for (co = 0; co < strlen(teststring); co++) {
 		if (teststring[co] == '\n') {
 			//printf("Tecken: %c\n", teststring[co+1]);
 

@@ -58,7 +58,7 @@ gboolean ignore_pattern_matches(gchar *folder_name, const gchar *filename, GSLis
 {
 	gboolean result = FALSE;
 
-	gchar *full_filename=g_build_filename(folder_name, filename, NULL);
+	gchar *full_filename = g_build_filename(folder_name, filename, NULL);
 
 	int len = strlen(full_filename);
 

@@ -98,7 +98,7 @@ get_pixbuf_from_file(GFile *file, GtkIconSize size)
 GdkPixbuf *
 get_pixbuf_from_filename(gchar *filename, GtkIconSize size)
 {
-	GFile *tempfile=g_file_new_for_path(filename);
+	GFile *tempfile = g_file_new_for_path(filename);
 
 	GdkPixbuf *result=get_pixbuf_from_file(tempfile, size);
 

@@ -102,7 +102,7 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	gtk_grid_attach(GTK_GRID(table), label2, 0, 1, 1, 1);
 
 	gtk_grid_attach(GTK_GRID(table),filename, 1, 0, 4, 1);
-	gtk_grid_attach(GTK_GRID(table),filepath_label,1,1,4,1);
+	gtk_grid_attach(GTK_GRID(table),filepath_label, 1, 1, 4, 1);
 
 	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 	gtk_grid_set_column_spacing (GTK_GRID (table), 6);

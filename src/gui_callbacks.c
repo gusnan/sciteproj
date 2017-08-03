@@ -211,7 +211,7 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 			gtk_tree_model_get(tree_model, iter, COLUMN_FILEPATH, &folder_path, -1);
 
 			// Load the wanted filter from the LUA config
-			GSList *filter_list=load_filter_from_lua(folder_path);
+			GSList *filter_list = load_filter_from_lua(folder_path);
 
 			GSList *file_list; //=load_folder_to_list(folder_path, FALSE,
 			GSList *folder_list;
@@ -219,7 +219,7 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 			// default sorting here compare_strings_bigger - since we turn the
 			// list backwards after
 
-			GCompareFunc comparer=get_sort_order_of_folder(folder_path);
+			GCompareFunc comparer = get_sort_order_of_folder(folder_path);
 
 			file_list=load_folder_to_list(folder_path, FALSE, comparer /*file_sort_by_extension_bigger_func*/, filter_list);
 
@@ -418,7 +418,7 @@ void refresh_folder_cb()
 		// First, store all GtkTreePath in a linked list
 
 		if (gtk_tree_model_iter_children(tree_model, &child, &iter)) {
-			int co=0;
+			int co = 0;
 			GtkTreePath *tree_path;
 
 			GtkTreeIter *temp_iter = &child;
@@ -461,7 +461,7 @@ void refresh_folder_cb()
 		                   -1);
 
 		GtkTreeIter new_iter;
-		if (get_number_of_files_in_folder(folder)>0) {
+		if (get_number_of_files_in_folder(folder) > 0) {
 			add_tree_file(temp_iter, ADD_CHILD, "<loading...>", &new_iter, FALSE, NULL);
 		}
 
