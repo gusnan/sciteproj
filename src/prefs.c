@@ -246,7 +246,7 @@ gboolean init_prefs(gchar *target_directory, GError **err)
 
 		// the result of g_get_user_config_dir doesn't need to be freed, so we
 		// dont need to put it in a pointer of its own.
-		prefs_filename = g_build_filename(g_get_user_config_dir(), "sciteprojrc",NULL);
+		prefs_filename = g_build_filename(g_get_user_config_dir(), "sciteprojrc", NULL);
 
 		// Check if a config-file exists
 		if (!g_file_test(prefs_filename, G_FILE_TEST_IS_REGULAR)) {
@@ -294,7 +294,7 @@ gboolean init_prefs(gchar *target_directory, GError **err)
 
 			if (temp != NULL) {
 
-				if ((temp[0] != '#') && (strcmp(temp, "")!=0)) {
+				if ((temp[0] != '#') && (strcmp(temp, "") != 0)) {
 					// We got a valid string:
 					// no starting #, and not an empty string.
 
@@ -312,7 +312,7 @@ gboolean init_prefs(gchar *target_directory, GError **err)
 
 
 		//if (!load_lua_config(config_string)) {
-		if (load_lua_config(prefs_filename, config_string)!=0) {
+		if (load_lua_config(prefs_filename, config_string) != 0) {
 			printf("error loading LUA config!\n");
 		}
 	}
@@ -355,7 +355,7 @@ gboolean check_for_old_style_config(const gchar *teststring)
 	// Another way to check is to check for lines starting with # - as a comment
 	// LUA uses "--", so this is should work to identify oldstyle config.
 
-	for (co=0; co<strlen(teststring); co++) {
+	for (co=0; co < strlen(teststring); co++) {
 		if (teststring[co] == '\n') {
 			//printf("Tecken: %c\n", teststring[co+1]);
 
@@ -378,7 +378,7 @@ int load_lua_config(gchar *filename, gchar *full_string)
 	lua = init_script();
 
 	//if (load_script_buffer(lua, config_string)!=0) {
-	if (load_script_buffer(lua, full_string)!=0) {
+	if (load_script_buffer(lua, full_string) != 0) {
 		printf("Error loading file: %s\n", filename);
 		return FALSE;
 	}
