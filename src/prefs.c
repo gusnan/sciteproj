@@ -119,34 +119,34 @@ gboolean check_config_string(gchar *in_config)
 		value = g_strchug(value);
 		value = g_strchomp(value);
 
-		if (g_ascii_strcasecmp(tempstring, "xpos")==0) {
+		if (g_ascii_strcasecmp(tempstring, "xpos") == 0) {
 			tempdouble = g_ascii_strtod(value, NULL);
 			prefs.xpos = (int) tempdouble;
 		}
 
-		if (g_ascii_strcasecmp(tempstring, "ypos")==0) {
+		if (g_ascii_strcasecmp(tempstring, "ypos") == 0) {
 			tempdouble = g_ascii_strtod(value, NULL);
 			prefs.ypos = (int)tempdouble;
 		}
 
-		if (g_ascii_strcasecmp(tempstring, "width")==0) {
+		if (g_ascii_strcasecmp(tempstring, "width") == 0) {
 			tempdouble = g_ascii_strtod(value, NULL);
 			prefs.width = (int)tempdouble;
 		}
 
-		if (g_ascii_strcasecmp(tempstring, "height")==0) {
+		if (g_ascii_strcasecmp(tempstring, "height") == 0) {
 			tempdouble = g_ascii_strtod(value, NULL);
 			prefs.height = (int)tempdouble;
 		}
 
-		if (g_ascii_strcasecmp(tempstring, "give_scite_focus")==0) {
-			if (g_ascii_strcasecmp(value, "TRUE")==0) {
+		if (g_ascii_strcasecmp(tempstring, "give_scite_focus") == 0) {
+			if (g_ascii_strcasecmp(value, "TRUE") == 0) {
 				prefs.give_scite_focus = TRUE;
 			}
 		}
 
 
-		if (g_ascii_strcasecmp(tempstring, "scite_path")==0) {
+		if (g_ascii_strcasecmp(tempstring, "scite_path") == 0) {
 			prefs.scite_path = g_strdup_printf("%s", value);
 		}
 
@@ -156,7 +156,7 @@ gboolean check_config_string(gchar *in_config)
 			}
 		}
 
-		if (g_ascii_strcasecmp(tempstring, "recent_add_to_bottom")==0) {
+		if (g_ascii_strcasecmp(tempstring, "recent_add_to_bottom") == 0) {
 			if (g_ascii_strcasecmp(value, "TRUE") == 0) {
 				prefs.recent_add_to_bottom = TRUE;
 			}
