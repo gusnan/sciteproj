@@ -10,20 +10,20 @@ SciteProj
 
 SciteProj is a Project Manager for usage with the SciTE text editor.
 It is based on ScitePM by Roy Wood. It is a "director" of SciTE, using
-it's director interface to communicate between SciteProj and SciTE. See 
+it's director interface to communicate between SciteProj and SciTE. See
 
 http://www.scintilla.org/SciTEDirector.html
 
 for more information. SciteProj is used to browse folders on the harddrive in
 customizable ways. Previous versions used to load "projects" from XML files,
 but this was dropped, and now sciteproj shows and works directly on your
-harddrive contents filterable and sortable as you wish. 
+harddrive contents filterable and sortable as you wish.
 
 
 Running
 =======
 
-SciteProj will load a configuration from the file sciteprojrc.lua first in the 
+SciteProj will load a configuration from the file sciteprojrc.lua first in the
 directory specified by $XDG_CONFIG_HOME each program start. This is most likely
 
 ~/.config/sciteprojrc.lua
@@ -48,7 +48,7 @@ The options availible in the config file are:
 
 * The window geometry
 
-You can enter wanted window geometry/positioning, which will be applied to 
+You can enter wanted window geometry/positioning, which will be applied to
 the program upon next program start. The variables are xpos, ypos, width and
 height.
 
@@ -64,31 +64,31 @@ Also, the following options exist:
 * use_stock_folder_icon
 	Should we use the system folder icon, or the ones provided by sciteproj?
 	The sciteproj one are different icons for opened and closed directory,
-	while when using the stock ones there are only one icon for folders, open or 
+	while when using the stock ones there are only one icon for folders, open or
 	closed.
 
 * start_scite
 	Should SciTE be started simultaneously with sciteproj?
 
-You can open this configuration file by opening the Edit menu and select Edit 
-Options in that menu. This will open sciteprojrc.lua from the current folder as 
+You can open this configuration file by opening the Edit menu and select Edit
+Options in that menu. This will open sciteprojrc.lua from the current folder as
 if it was part of your project and edit it in SciTE.
 
-SciteProj will give you a warning if it isn't able to find the SciTE 
-executable on SciteProj start. As default SciTE will be searched for in 
-/usr/bin, /bin, and /usr/local/bin, under the names scite and SciTE. If it 
-isn't found there you will get a warning upon running. You can also use the 
---scite flag when running to locate SciTE, for example 
+SciteProj will give you a warning if it isn't able to find the SciTE
+executable on SciteProj start. As default SciTE will be searched for in
+/usr/bin, /bin, and /usr/local/bin, under the names scite and SciTE. If it
+isn't found there you will get a warning upon running. You can also use the
+--scite flag when running to locate SciTE, for example
 
-sciteproj --scite=/bin/scite 
+sciteproj --scite=/bin/scite
 
 will look for the scite executable in the /bin/ folder. SciTE will also be
 searched for in the path pointed to by the environment variable SciTE_HOME.
 
 By pressing Ctrl+R or choosing "View Recently Opened Files" in the "View" menu,
 you split up the project window in two parts, and the new part contain a list
-of the most recently opened files in the project. The files in this list are 
-sorted so the ones you opened latest is at the top of the list (or bottom - 
+of the most recently opened files in the project. The files in this list are
+sorted so the ones you opened latest is at the top of the list (or bottom -
 its configurable).
 
 Local folder settings
@@ -155,7 +155,7 @@ Thats it! Enjoy using sciteproj!
 Credits
 =======
 
-SciteProj is based on the program ScitePM written by Roy Wood and Martin 
+SciteProj is based on the program ScitePM written by Roy Wood and Martin
 Andrews, and is developed by Andreas Rönnquist <andreas (at) ronnquist (dot) net>.
 
 -----------------------------------
