@@ -2,6 +2,12 @@
 ChangeLog:
 ----------
 
+1.08
+	* Fix sizes of properties dialog
+	* Fix output of GTK warnings in terminal
+	* Update the text of the recent file menu item
+	* Update Swedish translation
+
 1.07
 	* Fix typo Coudn't/Couldn't
 	* Fixed more missing NULL-checks
