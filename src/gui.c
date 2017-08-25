@@ -997,3 +997,12 @@ void recent_files_switch_visible()
 #endif
 
 }
+
+
+/**
+ *
+ */
+void set_dialog_transient(GtkWidget *dialog)
+{
+	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(sMainWindow));
+}

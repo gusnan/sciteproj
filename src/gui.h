@@ -56,4 +56,6 @@ gboolean dialog_response_is_exit(gint test);
 
 void recent_files_switch_visible();
 
+void set_dialog_transient(GtkWidget *dialog);
+
 #endif /*__HEADER_GUI_*/

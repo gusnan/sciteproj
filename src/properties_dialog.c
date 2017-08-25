@@ -124,6 +124,7 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	GtkWidget *container_vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
 
+	set_dialog_transient(dialog);
 
 	gtk_widget_show_all(dialog);
 
@@ -243,6 +244,8 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 
 	container_vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
+	
+	set_dialog_transient(dialog);
 
 	gtk_widget_show_all(dialog);
 
