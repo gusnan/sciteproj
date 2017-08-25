@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.07\n"
 "Report-Msgid-Bugs-To: gusnan@openmailbox.org\n"
-"POT-Creation-Date: 2014-08-04 20:02+0200\n"
-"PO-Revision-Date: 2017-07-04 02:11+0200\n"
+"POT-Creation-Date: 2017-08-25 18:00+0200\n"
+"PO-Revision-Date: 2017-08-25 18:01+0200\n"
 "Last-Translator: Andreas Rönnquist <gusnan@openmailbox.org>\n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -28,17 +28,31 @@ msgstr "Licens"
 
 #: about.c:203
 msgid ""
-"SciteProj is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n"
+"SciteProj is free software: you can redistribute it and/or modify it under "
+"the terms of the GNU General Public License as published by the Free "
+"Software Foundation, either version 3 of the License, or (at your option) "
+"any later version.\n"
 "\n"
-"SciteProj is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.\n"
+"SciteProj is distributed in the hope that it will be useful, but WITHOUT ANY "
+"WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
+"FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more "
+"details.\n"
 "\n"
-"You should have received a copy of the GNU General Public License along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n"
+"You should have received a copy of the GNU General Public License along with "
+"SciteProj.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
-"SciteProj är fri mjukvara: du kan redistribuera det och/eller modifiera det enligt villkoren i GNU General Public License som publicerad av the Free Software Foundation; enligt version 3, eller (efter ditt eget val) någon senare version.\n"
+"SciteProj är fri mjukvara: du kan redistribuera det och/eller modifiera det "
+"enligt villkoren i GNU General Public License som publicerad av the Free "
+"Software Foundation; enligt version 3, eller (efter ditt eget val) någon "
+"senare version.\n"
 "\n"
-"SciteProj distribueras med förhoppningen att det kommer att vara användbart, men UTAN NÅGON SOM HELST GARANTI; utan ens den implicita garantin av SÄLJBARHET eller ÄNDAMÅLSENLIGHET FÖR NÅGOT SÄRSKILT SYFTE. Se GNU General Public License för fler detaljer.\n"
+"SciteProj distribueras med förhoppningen att det kommer att vara användbart, "
+"men UTAN NÅGON SOM HELST GARANTI; utan ens den implicita garantin av "
+"SÄLJBARHET eller ÄNDAMÅLSENLIGHET FÖR NÅGOT SÄRSKILT SYFTE. Se GNU General "
+"Public License för fler detaljer.\n"
 "\n"
-"Du bör ha fått en kopia av GNU General Public License tillsammans med detta program; om inte, se <http://www.gnu.org/licenses/>.\n"
+"Du bör ha fått en kopia av GNU General Public License tillsammans med detta "
+"program; om inte, se <http://www.gnu.org/licenses/>.\n"
 
 #: about.c:250
 msgid "SciteProj is based on ScitePM by"
@@ -61,16 +75,16 @@ msgstr ""
 msgid "version %s"
 msgstr "version %s"
 
-#: gui.c:142
+#: gui.c:141
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:775 recent_files.c:551 scite_utils.c:216
+#: gui.c:774 recent_files.c:557 scite_utils.c:216
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
 
-#: gui.c:788 gui_callbacks.c:96 recent_files.c:564 recent_files.c:605
+#: gui.c:787 gui_callbacks.c:95 recent_files.c:570 recent_files.c:611
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -85,63 +99,66 @@ msgstr ""
 msgid "Show program version and quit"
 msgstr "Visa programversion och avsluta"
 
-#: main.c:71
+#: main.c:72
 msgid "Set a filename for the instance of SciTE to open"
 msgstr "Sätt ett filnamn för instansen av SciTE du önskar köra"
 
-#: main.c:71
+#: main.c:72
 msgid "SCITE_FILENAME"
 msgstr "SCITE_FILNAMN"
 
-#: main.c:73
+#: main.c:75
 msgid "Load a folder"
 msgstr "Ladda en mapp"
 
-#: main.c:75
+#: main.c:78
 msgid "Start SciTE automatically with SciteProj"
 msgstr "Starta SciTE automatiskt med SciteProj"
 
-#: main.c:86
+#: main.c:90
 msgid "SciTE Project Manager"
 msgstr "SciTE Projekthanterare"
 
-#: main.c:93
+#: main.c:97
 #, c-format
 msgid "option parsing failed: %s"
 msgstr "tolkning av alternativ misslyckades: %s"
 
-#: main.c:137
+#: main.c:141
 #, c-format
 msgid "A folder is expected as parameter to sciteproj..."
 msgstr "En mapp väntas som parameter till sciteproj..."
 
-#: main.c:176 main.c:186
-msgid "Environment variable exists, but doesn't point to a folder containing scite."
-msgstr "Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
+#: main.c:180 main.c:190
+msgid ""
+"Environment variable exists, but doesn't point to a folder containing scite."
+msgstr ""
+"Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
 
-#: main.c:203
+#: main.c:207
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
 msgstr "Kunde inte hitta en körbar fil för SciTE med namnet '%s'!\n"
 
-#: main.c:204
+#: main.c:208
 msgid "Checking for SciTE in the standard locations instead.\n"
 msgstr "Kollar efter SciTE på standard-platserna istället.\n"
 
-#: main.c:217
+#: main.c:221
 msgid ""
 "Warning! Couldn't locate SciTE!\n"
 "Program will start, but you won't be able to open SciTE to edit files."
 msgstr ""
 "Varning! Kunde inte hitta SciTE!\n"
-"Programmet kommer att starta, men du kommer inte kunna använda SciTE för att editera filer."
+"Programmet kommer att starta, men du kommer inte kunna använda SciTE för att "
+"editera filer."
 
-#: main.c:225
+#: main.c:229
 #, c-format
 msgid "Could not setup the gui: %s"
 msgstr "Kunde inte ställa in GUI: %s"
 
-#: main.c:231
+#: main.c:235
 #, c-format
 msgid "Not a valid folder!"
 msgstr "Inte en giltig mapp!"
@@ -171,8 +188,8 @@ msgid "Edit properties"
 msgstr "Editera egenskaper"
 
 #: menus.c:144
-msgid "Show Recent Files"
-msgstr "Visa senaste filer"
+msgid "Show Recently Opened Files"
+msgstr "Visa nyligen öppnade filer"
 
 #: menus.c:151
 msgid "About"
@@ -218,35 +235,35 @@ msgstr "Uppdatera mappinnehåll"
 msgid "Remove file from this list"
 msgstr "Ta bort fil från denna lista"
 
-#: properties_dialog.c:64 properties_dialog.c:67
+#: properties_dialog.c:76 properties_dialog.c:79
 msgid "Group Properties"
 msgstr "Mappegenskaper"
 
-#: properties_dialog.c:65 properties_dialog.c:159
+#: properties_dialog.c:77 properties_dialog.c:171
 msgid "OK"
 msgstr "OK"
 
-#: properties_dialog.c:72
+#: properties_dialog.c:85
 msgid "Group name:"
 msgstr "Gruppnamn:"
 
-#: properties_dialog.c:73
+#: properties_dialog.c:86
 msgid "Full folder:"
 msgstr "Fullt mappnamn:"
 
-#: properties_dialog.c:158 properties_dialog.c:161
+#: properties_dialog.c:170 properties_dialog.c:173
 msgid "File Properties"
 msgstr "Filegenskaper"
 
-#: properties_dialog.c:185
+#: properties_dialog.c:197
 msgid "Filename:"
 msgstr "Filnamn:"
 
-#: properties_dialog.c:186
+#: properties_dialog.c:198
 msgid "Path:"
 msgstr "Sökväg:"
 
-#: properties_dialog.c:187
+#: properties_dialog.c:199
 msgid "File size:"
 msgstr "Filstorlek:"
 
@@ -321,3 +338,6 @@ msgstr "Fel:%s"
 #: statusbar.c:57
 msgid "Welcome to SciteProj\n"
 msgstr "Välkommen till SciteProj\n"
+
+#~ msgid "Show Recent Files"
+#~ msgstr "Visa senaste filer"
