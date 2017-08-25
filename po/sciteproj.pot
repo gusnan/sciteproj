@@ -1,14 +1,14 @@
-# sciteproj pot
-# Copyright (C) 2014, Andreas Rönnquist <gusnan@openmailbox.org>
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the sciteproj package.
-# Andreas Rönnquist <gusnan@openmailbox.org>, 2014.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: sciteproj 1.00\n"
+"Project-Id-Version: sciteproj 1.07\n"
 "Report-Msgid-Bugs-To: gusnan@openmailbox.org\n"
-"POT-Creation-Date: 2014-08-04 20:02+0200\n"
+"POT-Creation-Date: 2017-08-25 18:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,16 +59,16 @@ msgstr ""
 msgid "version %s"
 msgstr ""
 
-#: gui.c:142
+#: gui.c:141
 msgid "[UNTITLED]"
 msgstr ""
 
-#: gui.c:775 recent_files.c:551 scite_utils.c:216
+#: gui.c:774 recent_files.c:557 scite_utils.c:216
 #, c-format
 msgid "Opened %s"
 msgstr ""
 
-#: gui.c:788 gui_callbacks.c:96 recent_files.c:564 recent_files.c:605
+#: gui.c:787 gui_callbacks.c:95 recent_files.c:570 recent_files.c:611
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -80,62 +80,62 @@ msgstr ""
 msgid "Show program version and quit"
 msgstr ""
 
-#: main.c:71
+#: main.c:72
 msgid "Set a filename for the instance of SciTE to open"
 msgstr ""
 
-#: main.c:71
+#: main.c:72
 msgid "SCITE_FILENAME"
 msgstr ""
 
-#: main.c:73
+#: main.c:75
 msgid "Load a folder"
 msgstr ""
 
-#: main.c:75
+#: main.c:78
 msgid "Start SciTE automatically with SciteProj"
 msgstr ""
 
-#: main.c:86
+#: main.c:90
 msgid "SciTE Project Manager"
 msgstr ""
 
-#: main.c:93
+#: main.c:97
 #, c-format
 msgid "option parsing failed: %s"
 msgstr ""
 
-#: main.c:137
+#: main.c:141
 #, c-format
 msgid "A folder is expected as parameter to sciteproj..."
 msgstr ""
 
-#: main.c:176 main.c:186
+#: main.c:180 main.c:190
 msgid ""
 "Environment variable exists, but doesn't point to a folder containing scite."
 msgstr ""
 
-#: main.c:203
+#: main.c:207
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
 msgstr ""
 
-#: main.c:204
+#: main.c:208
 msgid "Checking for SciTE in the standard locations instead.\n"
 msgstr ""
 
-#: main.c:217
+#: main.c:221
 msgid ""
 "Warning! Couldn't locate SciTE!\n"
 "Program will start, but you won't be able to open SciTE to edit files."
 msgstr ""
 
-#: main.c:225
+#: main.c:229
 #, c-format
 msgid "Could not setup the gui: %s"
 msgstr ""
 
-#: main.c:231
+#: main.c:235
 #, c-format
 msgid "Not a valid folder!"
 msgstr ""
@@ -165,7 +165,7 @@ msgid "Edit properties"
 msgstr ""
 
 #: menus.c:144
-msgid "Show Recent Files"
+msgid "Show Recently Opened Files"
 msgstr ""
 
 #: menus.c:151
@@ -212,35 +212,35 @@ msgstr ""
 msgid "Remove file from this list"
 msgstr ""
 
-#: properties_dialog.c:64 properties_dialog.c:67
+#: properties_dialog.c:76 properties_dialog.c:79
 msgid "Group Properties"
 msgstr ""
 
-#: properties_dialog.c:65 properties_dialog.c:159
+#: properties_dialog.c:77 properties_dialog.c:171
 msgid "OK"
 msgstr ""
 
-#: properties_dialog.c:72
+#: properties_dialog.c:85
 msgid "Group name:"
 msgstr ""
 
-#: properties_dialog.c:73
+#: properties_dialog.c:86
 msgid "Full folder:"
 msgstr ""
 
-#: properties_dialog.c:158 properties_dialog.c:161
+#: properties_dialog.c:170 properties_dialog.c:173
 msgid "File Properties"
 msgstr ""
 
-#: properties_dialog.c:185
+#: properties_dialog.c:197
 msgid "Filename:"
 msgstr ""
 
-#: properties_dialog.c:186
+#: properties_dialog.c:198
 msgid "Path:"
 msgstr ""
 
-#: properties_dialog.c:187
+#: properties_dialog.c:199
 msgid "File size:"
 msgstr ""
 
