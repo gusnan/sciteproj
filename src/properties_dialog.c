@@ -125,6 +125,9 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
 
 	set_dialog_transient(dialog);
+	
+	gtk_window_set_default_size(GTK_WINDOW(dialog), 500, 100);
+	gtk_window_set_resizable (GTK_WINDOW(dialog), FALSE);
 
 	gtk_widget_show_all(dialog);
 
@@ -246,6 +249,9 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
 	
 	set_dialog_transient(dialog);
+	
+	gtk_window_set_default_size(GTK_WINDOW(dialog), 500, 100);
+	gtk_window_set_resizable (GTK_WINDOW(dialog), FALSE);
 
 	gtk_widget_show_all(dialog);
 
