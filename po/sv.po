@@ -1,16 +1,16 @@
 # Swedish translation of SciteProj
-# Copyright (C) 2012-2017 Andreas Rönnquist <gusnan@openmailbox.org>
+# Copyright (C) 2012-2017 Andreas Rönnquist <andreas@ronnquist.net>
 # This file is distributed under the same license as the sciteproj package.
-# Andreas Rönnquist <gusnan@openmailbox.org>, 2012-2017.
+# Andreas Rönnquist <andreas@ronnquist.net>, 2012-2017.
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.07\n"
-"Report-Msgid-Bugs-To: gusnan@openmailbox.org\n"
+"Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
 "POT-Creation-Date: 2017-08-25 18:00+0200\n"
 "PO-Revision-Date: 2017-08-25 18:01+0200\n"
-"Last-Translator: Andreas Rönnquist <gusnan@openmailbox.org>\n"
+"Last-Translator: Andreas Rönnquist <andreas@ronnquist.net>\n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"

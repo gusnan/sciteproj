@@ -23,7 +23,7 @@ main.c menus.c prefs.c properties_dialog.c recent_files.c remove.c\
 scite_utils.c script.c sort.c statusbar.c string_utils.c tree_manipulation.c\
 menus.h
 
-XG_ARGS = --keyword=_ --keyword=N_ --keyword=NC_:1c,2 -w 80 --package-name=${NAME} --package-version=${VERSION} --msgid-bugs-address=gusnan@openmailbox.org
+XG_ARGS = --keyword=_ --keyword=N_ --keyword=NC_:1c,2 -w 80 --package-name=${NAME} --package-version=${VERSION} --msgid-bugs-address=andreas@ronnquist.net
 LANGUAGES = sv
 
 # 
