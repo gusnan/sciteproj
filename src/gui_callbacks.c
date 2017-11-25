@@ -418,7 +418,6 @@ void refresh_folder_cb()
 		// First, store all GtkTreePath in a linked list
 
 		if (gtk_tree_model_iter_children(tree_model, &child, &iter)) {
-			int co = 0;
 			GtkTreePath *tree_path;
 
 			GtkTreeIter *temp_iter = &child;
@@ -433,7 +432,6 @@ void refresh_folder_cb()
 				list_of_items=g_list_append(list_of_items, row_reference);
 
 				gtk_tree_path_free(tree_path);
-				co++;
 
 			} while(gtk_tree_model_iter_next(tree_model, temp_iter));
 

@@ -56,7 +56,7 @@ void my_set_align(GtkWidget *widget)
 void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 {
 	GError *err = NULL;
-	GtkWidget *dialog = NULL;
+	GtkWidget *dialog;
 	gchar *nodename = NULL;
 
 	GtkWidget *table;
@@ -156,7 +156,7 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	GtkWidget *label1, *label2, *label3;
 	GtkWidget *path, *filename, *filesize_label;
 	GtkWidget *container_vbox = NULL;
-	GtkWidget *dialog = NULL;
+	GtkWidget *dialog;
 
 	gchar *filePath = NULL;
 	int nodeType = -1;

@@ -351,7 +351,7 @@ gboolean add_tree_file(GtkTreeIter *currentIter,
 		++fileExt;
 	}
 
-	if (fileExt == NULL || strlen(fileExt) <= 0) {
+	if (fileExt == NULL || strlen(fileExt) == 0) {
 		fileExt = (gchar*)fileName;
 	}
 

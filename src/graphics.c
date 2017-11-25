@@ -87,7 +87,7 @@ gboolean load_graphics(GtkWidget *widget, GError **err)
 
 	}
 
-	GdkDisplay *default_display = NULL;
+	GdkDisplay *default_display;
 
 	default_display = gdk_display_get_default();
 

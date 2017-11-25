@@ -278,7 +278,7 @@ gboolean init_prefs(gchar *target_directory, GError **err)
 	// Check if it is an old-style config, or a new LUA one
 	if (check_for_old_style_config(config_string)) {
 
-		gchar **savedlist = NULL;
+		gchar **savedlist;
 
 		debug_printf("Old style config\n");
 		// split out the lines, and add each to the list of strings

@@ -102,8 +102,6 @@ GList *get_list_of_selected_items_string_list(GtkTreeView *treeview)
 
 	GtkTreeIter iter;
 
-	int count = 0;
-
 	while (row_list) {
 		GtkTreePath *path = (GtkTreePath *)row_list->data;
 
@@ -116,9 +114,6 @@ GList *get_list_of_selected_items_string_list(GtkTreeView *treeview)
 			gtk_tree_model_get(model, &iter, COLUMN_FILEPATH, &path, -1);
 
 			string_list = g_list_prepend(string_list, path);
-
-			count++;
-
 		}
 
 		row_list = row_list -> prev;
@@ -193,14 +188,12 @@ void remove_selected_items ( GtkTreeView *treeview )
 {
 	GError *error = NULL;
 	GtkTreeIter iter;
-	GtkTreeModel *model=gtk_tree_view_get_model(treeview);
+	GtkTreeModel *model = gtk_tree_view_get_model(treeview);
 	GList *list = get_list_of_selected_items_rows(treeview); // gtk_tree_selection_get_selected_rows( selection, &model );
-
-	int nRemoved = 0;
 
 	// Begin at the end and go to the start
 
-	list=g_list_last(list);
+	list = g_list_last(list);
 	while(list) {
 		GString *fixed_path = g_string_new("");
 		g_string_printf(fixed_path, "%s", gtk_tree_path_to_string((GtkTreePath*)list->data)/*ipath*/);
@@ -212,7 +205,6 @@ void remove_selected_items ( GtkTreeView *treeview )
 			if ( gtk_tree_model_get_iter ( model, &iter, path) ) { // get iter from specified path
 
 				remove_tree_node(&iter, &error);
-				nRemoved++;
 			}
 			else { // invalid path
 				g_error(_("Error!!!\n"));
@@ -222,7 +214,7 @@ void remove_selected_items ( GtkTreeView *treeview )
 		else {
 			g_error(_("Error!!!\n"));
 		}
-		list=list->prev;
+		list = list->prev;
 	}
 
 	g_list_foreach (list, (GFunc)gtk_tree_path_free, NULL);
@@ -250,7 +242,7 @@ GtkWidget *do_question_dialog(const gchar *buffer)
  */
 gboolean really_do_delete_question(const gchar *format, ...)
 {
-	GtkWidget *dialog = NULL;
+	GtkWidget *dialog;
 	gint dialog_response;
 	char buffer[256];
 	gboolean result;
