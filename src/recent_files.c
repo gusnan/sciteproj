@@ -311,7 +311,7 @@ gboolean add_file_to_recent(gchar *filepath, GError **err)
 		++fileExt;
 	}
 
-	if (fileExt == NULL || strlen(fileExt) <= 0) {
+	if (fileExt == NULL || (int)strlen(fileExt) <= 0) {
 		fileExt = (gchar*)fileName;
 	}
 
