@@ -217,7 +217,7 @@ int main(int argc, char *argv[])
 
 	// Check for SciTE
 	if (!check_if_scite_exists()) {
-		GtkWidget *warningDialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,
+		GtkWidget *warningDialog = gtk_message_dialog_new(get_main_window(), GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,
 		                           _("Warning! Couldn't locate SciTE!\n"
 		                             "Program will start, but you won't be able to open SciTE to edit files."));
 		gtk_dialog_run(GTK_DIALOG(warningDialog));

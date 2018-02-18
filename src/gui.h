@@ -58,4 +58,6 @@ void recent_files_switch_visible();
 
 void set_dialog_transient(GtkWidget *dialog);
 
+extern GtkWindow *get_main_window();
+
 #endif /*__HEADER_GUI_*/

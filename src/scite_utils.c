@@ -586,7 +586,7 @@ gboolean launch_scite(gchar *instring,GError **err)
 			// No luck yet, so display a progress dialog and wait a bit longer
 
 			if (usecs > usecsDialogDelay && !dialog) {
-				dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CANCEL, _("Connecting to Scite...."));
+				dialog = gtk_message_dialog_new(get_main_window(), GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CANCEL, _("Connecting to Scite...."));
 				g_signal_connect(dialog, "response", G_CALLBACK(cancel_button_cb), (void *) &userClickedCancel);
 				gtk_widget_show_all(dialog);
 			}
