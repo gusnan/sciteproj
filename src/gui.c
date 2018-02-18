@@ -749,9 +749,9 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 		goto EXITPOINT;
 	}
 
-	absFilePath=fix_path((gchar*)get_project_directory(), relFilePath);
+	absFilePath = fix_path((gchar*)get_project_directory(), relFilePath);
 
-	fixed=fix_path((gchar*)get_project_directory(), relFilePath);
+	fixed = fix_path((gchar*)get_project_directory(), relFilePath);
 
 	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
 		g_set_error(&err, APP_SCITEPROJ_ERROR, -1,
@@ -765,7 +765,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 
 			activate_scite(NULL);
 
-			if (prefs.give_scite_focus==TRUE) {
+			if (prefs.give_scite_focus == TRUE) {
 				send_scite_command((gchar*)"focus:0", NULL);
 			}
 
