@@ -32,7 +32,7 @@
 
 #include "prefs.h"
 
-gchar *homepage_string=(gchar*)"http://www.gusnan.se/sciteproj";
+gchar *homepage_string=(gchar*)"https://www.nongnu.org/sciteproj";
 
 gchar *sVersion = (gchar*)SCITEPROJ_VERSION;
 
