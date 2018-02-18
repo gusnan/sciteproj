@@ -2,6 +2,11 @@
 ChangeLog:
 ----------
 
+1.09
+	* Fix transient parent to dialogs, fixes warnings to stdout
+	* Clean up cppcheck output
+	* Various small fixes
+
 1.08
 	* Fix sizes of properties dialog
 	* Fix output of GTK warnings in terminal
