@@ -2,6 +2,9 @@
 ChangeLog:
 ----------
 
+1.10
+	* Fix webpage link in about dialog
+
 1.09
 	* Fix transient parent to dialogs, fixes warnings to stdout
 	* Clean up cppcheck output
