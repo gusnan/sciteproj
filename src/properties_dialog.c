@@ -55,7 +55,6 @@ void my_set_align(GtkWidget *widget)
  */
 void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 {
-	GError *err = NULL;
 	GtkWidget *dialog;
 	gchar *nodename = NULL;
 
@@ -134,10 +133,6 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 
 	gtk_dialog_run(GTK_DIALOG(dialog));
 
-
-//EXITPOINT:
-
-	if (err) g_error_free(err);
 	if (dialog) gtk_widget_destroy(dialog);
 
 }
