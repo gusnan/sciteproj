@@ -1,7 +1,7 @@
 /**
  * gui_callbacks.c - GUI callback code for SciteProj
  *
- *  Copyright 2006 Roy Wood, 2009-2017 Andreas Rönnquist
+ *  Copyright 2006 Roy Wood, 2009-2018 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
