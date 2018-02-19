@@ -221,9 +221,9 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 
 			GCompareFunc comparer = get_sort_order_of_folder(folder_path);
 
-			file_list=load_folder_to_list(folder_path, FALSE, comparer /*file_sort_by_extension_bigger_func*/, filter_list);
+			file_list = load_folder_to_list(folder_path, FALSE, comparer /*file_sort_by_extension_bigger_func*/, filter_list);
 
-			folder_list=load_folder_to_list(folder_path, TRUE, compare_strings_bigger, filter_list);
+			folder_list = load_folder_to_list(folder_path, TRUE, compare_strings_bigger, filter_list);
 
 			// Here we should filter out the unwanted items
 
@@ -235,7 +235,7 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 				add_tree_filelist(iter, file_list, NULL);
 			}
 
-			set_tree_node_expanded(iter,TRUE, NULL);
+			set_tree_node_expanded(iter, TRUE, NULL);
 
 			GtkTreePath *tree_path = gtk_tree_model_get_path(tree_model, iter);
 
@@ -426,10 +426,10 @@ void refresh_folder_cb()
 				gchar *temp;
 				gtk_tree_model_get(tree_model, temp_iter, COLUMN_FILENAME, &temp, -1);
 
-				tree_path=gtk_tree_model_get_path(tree_model, temp_iter);
-				GtkTreeRowReference *row_reference=gtk_tree_row_reference_new(tree_model, tree_path);
+				tree_path = gtk_tree_model_get_path(tree_model, temp_iter);
+				GtkTreeRowReference *row_reference = gtk_tree_row_reference_new(tree_model, tree_path);
 
-				list_of_items=g_list_append(list_of_items, row_reference);
+				list_of_items = g_list_append(list_of_items, row_reference);
 
 				gtk_tree_path_free(tree_path);
 
@@ -439,7 +439,7 @@ void refresh_folder_cb()
 
 			GList *node;
 			for (node = list_of_items; node != NULL; node = node -> next) {
-				tree_path=gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
+				tree_path = gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
 
 				if (tree_path) {
 					GtkTreeIter iter;
@@ -448,7 +448,7 @@ void refresh_folder_cb()
 				}
 			}
 
-			g_list_foreach(list_of_items, (GFunc) gtk_tree_row_reference_free, NULL);
+			g_list_foreach(list_of_items, (GFunc)gtk_tree_row_reference_free, NULL);
 		}
 
 		GtkTreeIter *temp_iter = gtk_tree_iter_copy(stored_iter);
