@@ -204,7 +204,7 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 	if (iter) {
 
 		if (gtk_tree_model_iter_children(tree_model, &child, iter)) {
-			remove_tree_node(&child,NULL);
+			remove_tree_node(&child, NULL);
 
 			gchar *folder_path;
 
@@ -230,7 +230,7 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 			add_tree_folderlist(iter, folder_list, folder_path);
 
 			if (file_list) {
-				//file_list=g_slist_reverse(file_list);
+				//file_list = g_slist_reverse(file_list);
 
 				add_tree_filelist(iter, file_list, NULL);
 			}
