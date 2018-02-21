@@ -25,6 +25,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 
+/*
 #ifndef GDK_KEY_Return
 #define GDK_KEY_BackSpace GDK_BackSpace
 #define GDK_KEY_Delete GDK_Delete
@@ -35,6 +36,7 @@
 #define GDK_KEY_F2 GDK_F2
 #define GDK_KEY_F5 GDK_F5
 #endif
+*/
 
 #endif /*__HEADER_GTK3_COMPAT_*/
 

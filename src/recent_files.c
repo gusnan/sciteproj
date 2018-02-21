@@ -425,19 +425,9 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 	// Pop up the appropriate menu for the node type
 
 	//if (nodeItemType == ITEMTYPE_FILE) {
-#if ((GTK_MAJOR_VERSION >= 3) && (GTK_MINOR_VERSION >= 22))
 	if (recentPopupMenu) {
 		gtk_menu_popup_at_pointer(GTK_MENU(recentPopupMenu), (GdkEvent*)event);
 	}
-#else
-	gtk_menu_popup(GTK_MENU(recentPopupMenu),
-	               NULL,
-	               NULL,
-	               NULL,
-	               NULL,
-	               event->button,
-	               gdk_event_get_time((GdkEvent*) event));
-#endif
 	/*
 	}
 	else if (nodeItemType == ITEMTYPE_GROUP) {

@@ -71,12 +71,8 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	                   COLUMN_FILEPATH, &filePath,
 	                   -1);
 
-#if GTK_MAJOR_VERSION>=3
 	dialog = gtk_dialog_new_with_buttons(_("Group Properties"), NULL, GTK_DIALOG_MODAL,
 		_("OK"), GTK_RESPONSE_ACCEPT, NULL);
-#else
-	dialog = gtk_dialog_new_with_buttons(_("Group Properties"), NULL, GTK_DIALOG_MODAL, GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
-#endif
 
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
@@ -94,7 +90,6 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	my_set_align(label1);
 	my_set_align(label2);
 
-#if GTK_MAJOR_VERSION>=3
 	table = gtk_grid_new();
 
 	gtk_grid_attach(GTK_GRID(table), label1, 0, 0, 1, 1);
@@ -106,20 +101,6 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 	gtk_grid_set_column_spacing (GTK_GRID (table), 6);
 
-#else
-	table = gtk_table_new(3,3,FALSE);
-
-	gtk_table_attach_defaults(GTK_TABLE(table), label1, 0, 1, 0, 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), label2, 0, 1, 1, 2);
-
-	gtk_table_attach_defaults(GTK_TABLE(table), filename, 1, 2, 0, 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), filepath_label, 1, 2, 1, 2);
-
-	gtk_table_set_row_spacings(GTK_TABLE(table), 5);
-	gtk_table_set_col_spacings(GTK_TABLE(table), 5);
-
-	gtk_container_set_border_width(GTK_CONTAINER(table), 5);
-#endif
 	GtkWidget *container_vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
 
@@ -165,12 +146,8 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	debug_printf((gchar*)"Node name: %s\n", nodename);
 	debug_printf((gchar*)"File name: %s\n", filePath);
 
-#if GTK_MAJOR_VERSION>=3
 	dialog = gtk_dialog_new_with_buttons(_("File Properties"), NULL, GTK_DIALOG_MODAL,
 		_("OK"), GTK_RESPONSE_ACCEPT,NULL);
-#else
-	dialog = gtk_dialog_new_with_buttons(_("File Properties"),NULL,GTK_DIALOG_MODAL,GTK_STOCK_OK,GTK_RESPONSE_OK,NULL);
-#endif
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 
 	gchar *absFilePath = NULL; //g_strdup_printf("%s",filePath);
@@ -209,7 +186,6 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	my_set_align(label2);
 	my_set_align(label3);
 
-#if GTK_MAJOR_VERSION >= 3
 	table = gtk_grid_new();
 
 	gtk_grid_attach(GTK_GRID(table), label1, 0, 0, 1, 1);
@@ -223,22 +199,6 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
 	gtk_grid_set_column_spacing (GTK_GRID (table), 6);
 
-#else
-	table=gtk_table_new(3,2,FALSE);
-
-	gtk_table_attach_defaults(GTK_TABLE(table), label1, 0, 1, 0, 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), label2, 0, 1, 1, 2);
-	gtk_table_attach_defaults(GTK_TABLE(table), label3, 0, 1, 2, 3);
-
-	gtk_table_attach_defaults(GTK_TABLE(table), filename, 1, 2, 0, 1);
-	gtk_table_attach_defaults(GTK_TABLE(table), path, 1, 2, 1, 2);
-	gtk_table_attach_defaults(GTK_TABLE(table), filesize_label, 1, 2, 2, 3);
-
-	gtk_table_set_row_spacings(GTK_TABLE(table), 5);
-	gtk_table_set_col_spacings(GTK_TABLE(table), 5);
-
-	gtk_container_set_border_width(GTK_CONTAINER(table), 5);
-#endif
 
 	container_vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
