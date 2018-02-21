@@ -49,9 +49,9 @@ VERSION=$(shell cat ./VERSION)
 PKG_GTK=gtk+-3.0
 CHECK_GTK3=1
 
-LIB_CFLAGS=$(shell pkg-config --cflags --silence-errors $(PKG_GTK) $(PKG_WNCK) lua5.1 || pkg-config --cflags $(PKG_GTK) $(PKG_WNCK) lua)
+LIB_CFLAGS=$(shell pkg-config --cflags --silence-errors $(PKG_GTK) $(PKG_WNCK) lua5.3 || pkg-config --cflags $(PKG_GTK) $(PKG_WNCK) lua)
 STD_LDFLAGS=
-LIBS=-lX11 $(shell pkg-config --libs --silence-errors $(PKG_GTK) $(PKG_WNCK) lua5.1 || pkg-config --libs $(PKG_GTK) $(PKG_WNCK) lua)
+LIBS=-lX11 $(shell pkg-config --libs --silence-errors $(PKG_GTK) $(PKG_WNCK) lua5.3 || pkg-config --libs $(PKG_GTK) $(PKG_WNCK) lua)
 
 LOCAL_CFLAGS=$(STD_CFLAGS) $(DEPRECATED) $(CFLAGS) $(LIB_CFLAGS)
 LOCAL_LDFLAGS=$(STD_CFLAGS) $(LDFLAGS) $(STD_LDFLAGS)
