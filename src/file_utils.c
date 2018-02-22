@@ -575,7 +575,7 @@ gchar *clean_folder(gchar *infolder)
 			len -= 2;
 		}
 
-		if (temp[len-1] == G_DIR_SEPARATOR) {
+		if (temp[len - 1] == G_DIR_SEPARATOR) {
 			result = g_strndup(temp, len - 1);
 		} else {
 			result = g_strdup(temp);
