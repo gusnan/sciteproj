@@ -22,12 +22,12 @@
 #ifndef __HEADER_FILE_UTILS_
 #define __HEADER_FILE_UTILS_
 
-/*
+/**
  *
  */
 extern gchar *current_directory;
 
-/*
+/**
  *
  */
 void init_file_utils();
