@@ -42,12 +42,8 @@
  */
 void my_set_align(GtkWidget *widget)
 {
-#if GTK_MAJOR_VERSION>=3
 	gtk_widget_set_halign(widget, GTK_ALIGN_START);
 	gtk_widget_set_valign(widget, GTK_ALIGN_START);
-#else
-	gtk_misc_set_alignment(GTK_MISC(widget), 0, 0);
-#endif
 }
 
 /**
