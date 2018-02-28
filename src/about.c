@@ -285,8 +285,6 @@ void create_about_dialog()
 
 	gtk_container_add(GTK_CONTAINER(scrolled_window_info), textview_info);
 
-	//gtk_box_pack_start(GTK_BOX(vbox), scrolled_window, TRUE, TRUE, 0);
-
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), scrolled_window_info, notebook_label1);
 	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), scrolled_window_license, notebook_label2);
 

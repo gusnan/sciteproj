@@ -158,85 +158,10 @@ gboolean setup_gui(GError **err)
 	// Then we need a grid
 	grid = gtk_grid_new();
 
-	// Create menus
-
-	/*
-	if (!(sActionGroup = gtk_action_group_new("SciteProjActions"))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_action_group_new() = NULL",
-			__func__,
-			"Couldn't init gtk_action_group"
-		);
-
-		goto EXITPOINT;
-	}
-	*/
-
-	/*
-	if (!(sGtkUIManager = gtk_ui_manager_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_ui_manager_new() = NULL",
-			__func__,
-			"Couldn't init gtk_ui_manager"
-		);
-
-		goto EXITPOINT;
-	}
-	*/
-
-
-
-	//g_signal_connect(sGtkUIManager, "add_widget", G_CALLBACK(menu_add_widget_cb), grid);
-
-	// Fix the context-based translations for the menu strings
-	/*
-	int co=0;
-	gchar *temp=NULL;
-	gchar *context=NULL;
-	do {
-		context=menustrings[co].context;
-		if (context!=NULL) {
-			temp = (gchar*)g_dpgettext2(PACKAGE,menustrings[co].context,menustrings[co].string);
-
-			if (temp!=NULL) {
-				sMenuActions[co].label = g_strdup_printf("%s",temp);
-				++co;
-			}
-		}
-	} while (context!=NULL);
-	*/
-
-	/*
-		gtk_action_group_set_translation_domain(sActionGroup,PACKAGE);
-
-		gtk_action_group_add_actions(sActionGroup, sMenuActions, sNumMenuActions, NULL);
-
-		gtk_ui_manager_insert_action_group(sGtkUIManager, sActionGroup, 0);
-
-		if (gtk_ui_manager_add_ui_from_string(sGtkUIManager, sMenuDefXML, strlen(sMenuDefXML), &tempErr) == 0) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_ui_manager_add_ui_from_string() = %s",
-				__func__,
-				"Couldn't init menus from XML",
-				tempErr->message
-			);
-
-			goto EXITPOINT;
-		}
-
-		gtk_ui_manager_ensure_update(sGtkUIManager);
-	*/
 	// Activate the keyboard accelerators
 
 	accelerator_group = gtk_accel_group_new();
 	gtk_window_add_accel_group(GTK_WINDOW(sMainWindow), accelerator_group);
-
-	/*
-		// Create popup menus (shown when user right-clicks in gui elements)
-
-		sGeneralPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/GeneralPopup");
-		sGroupPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/GroupPopup");
-
-		//sFilePopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/FilePopup");
-	*/
-	//sFilePopupMenu = gtk_menu_new();
 
 	if (init_menus(sMainWindow)!=0) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
@@ -246,14 +171,7 @@ gboolean setup_gui(GError **err)
 		goto EXITPOINT;
 	}
 
-	/*
-		recentPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/RecentPopup");
-
-		sSortPopupMenu = gtk_ui_manager_get_widget(sGtkUIManager, "/ui/SortPopup");
-	*/
-
 	// Add a scrolled window to the main window
-
 	if (!(scrolledWindow = gtk_scrolled_window_new(NULL, NULL))) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
 		            __func__,
@@ -291,8 +209,6 @@ gboolean setup_gui(GError **err)
 
 		goto EXITPOINT;
 	}
-
-	//g_object_unref(G_OBJECT(projectTreeStore));
 
 	gtk_tree_view_set_enable_search(GTK_TREE_VIEW(projectTreeView), TRUE);
 
@@ -344,8 +260,6 @@ gboolean setup_gui(GError **err)
 	gtk_tree_view_column_add_attribute(column1, textCellRenderer, "text", COLUMN_FILENAME);
 	gtk_tree_view_column_add_attribute(column1, textCellRenderer, "weight", COLUMN_FONTWEIGHT);
 	gtk_tree_view_column_add_attribute(column1, textCellRenderer, "weight-set", COLUMN_FONTWEIGHTSET);
-
-	//g_signal_connect(G_OBJECT(textCellRenderer), "edited", G_CALLBACK(rename_cb), NULL);
 
 	gtk_tree_view_append_column(GTK_TREE_VIEW(projectTreeView), column1);
 
