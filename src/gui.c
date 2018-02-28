@@ -96,6 +96,8 @@ GtkTreeViewColumn *column1 = NULL;
 
 GtkWidget *recentGrid = NULL;
 
+GtkWidget *recentHbox = NULL;
+
 
 /**
  * Initialize globals (i.e. create the main window and populate it).  This is a long chunk of code.
