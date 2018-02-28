@@ -100,8 +100,6 @@ GtkWidget *recentGrid = NULL;
 GtkWidget *recentVbox=NULL;
 #endif
 
-GtkWidget *recentHbox = NULL;
-
 
 /**
  * Initialize globals (i.e. create the main window and populate it).  This is a long chunk of code.
@@ -391,15 +389,6 @@ gboolean setup_gui(GError **err)
 		            "%s: %s, gtk_grid_new() = NULL",
 		            "Couldn't init recent grid",
 		            __func__);
-		goto EXITPOINT;
-	}
-
-	if (!(recentHbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,0))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-		            "%s: %s, gtk_hbox_new() = NULL",
-		            __func__,
-		            "Couldn't init main vbox"
-		           );
 		goto EXITPOINT;
 	}
 
