@@ -94,11 +94,7 @@ GtkWidget *scrolledWindow = NULL;
 
 GtkTreeViewColumn *column1 = NULL;
 
-#if GTK_MAJOR_VERSION>=3
 GtkWidget *recentGrid = NULL;
-#else
-GtkWidget *recentVbox=NULL;
-#endif
 
 
 /**
