@@ -37,6 +37,7 @@
 #include "string_utils.h"
 #include "file_utils.h"
 
+
 /**
  * My set align
  */
@@ -45,6 +46,7 @@ void my_set_align(GtkWidget *widget)
 	gtk_widget_set_halign(widget, GTK_ALIGN_START);
 	gtk_widget_set_valign(widget, GTK_ALIGN_START);
 }
+
 
 /**
  * Group properties callback
@@ -55,7 +57,7 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	gchar *nodename = NULL;
 
 	GtkWidget *table;
-	GtkWidget *label1,*label2;
+	GtkWidget *label1, *label2;
 	GtkWidget *filename, *filepath_label;
 
 	gchar *filePath = NULL;
@@ -91,11 +93,11 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	gtk_grid_attach(GTK_GRID(table), label1, 0, 0, 1, 1);
 	gtk_grid_attach(GTK_GRID(table), label2, 0, 1, 1, 1);
 
-	gtk_grid_attach(GTK_GRID(table),filename, 1, 0, 4, 1);
-	gtk_grid_attach(GTK_GRID(table),filepath_label, 1, 1, 4, 1);
+	gtk_grid_attach(GTK_GRID(table), filename, 1, 0, 4, 1);
+	gtk_grid_attach(GTK_GRID(table), filepath_label, 1, 1, 4, 1);
 
-	gtk_grid_set_row_spacing (GTK_GRID (table), 6);
-	gtk_grid_set_column_spacing (GTK_GRID (table), 6);
+	gtk_grid_set_row_spacing(GTK_GRID (table), 6);
+	gtk_grid_set_column_spacing(GTK_GRID (table), 6);
 
 	GtkWidget *container_vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
