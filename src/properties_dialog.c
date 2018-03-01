@@ -130,7 +130,7 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	GtkWidget *table;
 	GtkWidget *label1, *label2, *label3;
 	GtkWidget *path, *filename, *filesize_label;
-	GtkWidget *container_vbox = NULL;
+	GtkWidget *container_box = NULL;
 	GtkWidget *dialog;
 
 	gchar *filePath = NULL;
@@ -199,8 +199,8 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	gtk_grid_set_column_spacing (GTK_GRID (table), 6);
 
 
-	container_vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
-	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
+	container_box = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	gtk_box_pack_start(GTK_BOX(container_box), table, TRUE, TRUE, 0);
 	
 	set_dialog_transient(dialog);
 	
