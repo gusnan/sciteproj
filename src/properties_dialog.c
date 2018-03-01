@@ -59,6 +59,7 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	GtkWidget *table;
 	GtkWidget *label1, *label2;
 	GtkWidget *filename, *filepath_label;
+	GtkWidget *container_box = NULL;
 
 	gchar *filePath = NULL;
 	int nodeType = -1;
@@ -99,8 +100,8 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	gtk_grid_set_row_spacing(GTK_GRID (table), 6);
 	gtk_grid_set_column_spacing(GTK_GRID (table), 6);
 
-	GtkWidget *container_vbox = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
-	gtk_box_pack_start(GTK_BOX(container_vbox), table, TRUE, TRUE, 0);
+	container_box = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+	gtk_box_pack_start(GTK_BOX(container_box), table, TRUE, TRUE, 0);
 
 	set_dialog_transient(dialog);
 	
