@@ -2,6 +2,10 @@
 ChangeLog:
 ----------
 
+1.11
+	* Remove checks for GTK version, we require GTK 3 from now on
+	* Update required LUA version to 5.3
+
 1.10
 	* Fix webpage link in about dialog
 
