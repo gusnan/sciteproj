@@ -113,7 +113,11 @@ void create_about_dialog()
 
 	gchar *about_dialog_version_string;
 
+ #ifdef _DEBUG
 	about_dialog_version_string = g_strdup_printf("%s DEBUG",version_string);
+#else
+	about_dialog_version_string = g_strdup_printf("%s", version_string);
+#endif
 
 	version_string_label = gtk_label_new(about_dialog_version_string);
 	gtk_label_set_selectable(GTK_LABEL(version_string_label), FALSE);
