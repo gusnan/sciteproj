@@ -91,6 +91,6 @@ uninstall:
 	${MAKE} -C po uninstall
 
 $(DEPEND):
-	$(CC) $(LOCAL_CFLAGS) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" > $(DEPEND)
+	$(CC) $(LOCAL_CFLAGS) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" -e "s/obj\/C\:/\/C/g" > $(DEPEND)
 
 -include $(DEPEND)
