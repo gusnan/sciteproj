@@ -59,7 +59,7 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	GtkWidget *table;
 	GtkWidget *label1, *label2;
 	GtkWidget *filename, *filepath_label;
-	GtkWidget *container_box = NULL;
+	GtkWidget *container_box;
 
 	gchar *filePath = NULL;
 	int nodeType = -1;
