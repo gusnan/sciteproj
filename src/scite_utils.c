@@ -852,7 +852,7 @@ void init_scite_connection()
 /**
  *
  */
-gboolean open_filename(gchar *filename,gchar *project_directory,GError **err)
+gboolean open_filename(gchar *filename, gchar *project_directory, GError **err)
 {
 	gchar *command = NULL;
 
