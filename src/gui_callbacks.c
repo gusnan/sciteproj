@@ -56,8 +56,6 @@
 
 #include "load_folder.h"
 
-#include "gtk3_compat.h"
-
 #include "script.h"
 
 

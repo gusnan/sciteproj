@@ -56,10 +56,6 @@
 
 #include "menus.h"
 
-#include "gtk3_compat.h"
-
-
-
 
 
 // Forward-declare static functions
