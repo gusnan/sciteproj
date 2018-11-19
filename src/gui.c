@@ -599,11 +599,6 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	                                   (gint) event->x, (gint) event->y,
 	                                   &path, NULL, NULL, NULL)) {
 		// Nope-- user clicked in the GtkTreeView, but not on a node
-
-		if (generalPopupMenu) {
-			gtk_menu_popup_at_pointer(GTK_MENU(generalPopupMenu), (GdkEvent*)event);													
-		}
-													  
 		goto EXITPOINT;
 	}
 

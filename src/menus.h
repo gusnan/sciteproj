@@ -39,7 +39,6 @@ extern GtkWidget *helpMenuEntry;
 extern GtkWidget *filePopupMenu;
 extern GtkWidget *fileRightClickPopupMenu;
 extern GtkWidget *groupRightClickPopupMenu;
-extern GtkWidget *generalPopupMenu;
 extern GtkWidget *sortPopupMenu;
 
 extern GtkWidget *recentPopupMenu;

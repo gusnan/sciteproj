@@ -61,7 +61,6 @@ GtkWidget *helpPopupMenu = NULL;
 
 GtkWidget *fileRightClickPopupMenu = NULL;
 GtkWidget *groupRightClickPopupMenu = NULL;
-GtkWidget *generalPopupMenu = NULL;
 
 GtkWidget *sortPopupMenu = NULL;
 

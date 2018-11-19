@@ -381,8 +381,6 @@ static gboolean recent_mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButt
 	                                   NULL)) {
 		// Nope-- user clicked in the GtkTreeView, but not on a node
 
-		//gtk_menu_popup(GTK_MENU(sGeneralPopupMenu), NULL, NULL, NULL, NULL, event->button, gdk_event_get_time((GdkEvent*) event));
-
 		goto EXITPOINT;
 	}
 
