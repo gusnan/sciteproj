@@ -161,7 +161,7 @@ gboolean setup_gui(GError **err)
 	accelerator_group = gtk_accel_group_new();
 	gtk_window_add_accel_group(GTK_WINDOW(sMainWindow), accelerator_group);
 
-	if (init_menus(sMainWindow)!=0) {
+	if (init_menus(sMainWindow) != 0) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
 		            __func__,
 		            "Couldn't init menus"
@@ -419,7 +419,7 @@ gboolean tree_row_is_expanded(GtkTreePath *path)
  */
 void expand_tree_row(GtkTreePath *path, gboolean expandChildren)
 {
-	if (path!=NULL) {
+	if (path != NULL) {
 		gtk_tree_view_expand_row(GTK_TREE_VIEW(projectTreeView), path, FALSE);
 	}
 }
@@ -584,7 +584,7 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 
 	// Until we know for sure, assume that the user has not clicked on a node
 
-	clicked_node.valid=FALSE;
+	clicked_node.valid = FALSE;
 
 
 	// If it is not a right-click, then ignore it
@@ -626,7 +626,7 @@ static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *eve
 	// Check if something is selected
 	tree_selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeView));
 
-	if (tree_selection!=NULL) {
+	if (tree_selection != NULL) {
 		// Check if clicked on something in the selection, otherwise make the clicked one the selection.
 
 		if (gtk_tree_selection_path_is_selected(tree_selection, path) == FALSE) {
