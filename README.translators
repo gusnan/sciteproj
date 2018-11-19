@@ -13,21 +13,21 @@ Starting fresh
 
 Get a copy of the sciteproj sources, and create a sciteproj.pot file:
 
-cd po 
+cd po
 make sciteproj.pot
 
 Generate a new po for your language with sciteproj.pot as input:
 
 msginit --input=sciteproj.pot
 
-This will read your environment, and init the translation meta information with 
+This will read your environment, and init the translation meta information with
 values based on that info. See msginit --help for more info.
 
-Then start translating all strings in the po using your favourite texteditor, 
-or a "gettext catalogs (.po files) editor" like poedit (which can be found at 
+Then start translating all strings in the po using your favourite texteditor,
+or a "gettext catalogs (.po files) editor" like poedit (which can be found at
 http://www.poedit.net.)
 
-Note that hot-keys are illustrated with the "_" character, the character 
+Note that hot-keys are illustrated with the "_" character, the character
 following "_" is  the keyboard shortcut for that menu item.
 
 
@@ -40,7 +40,7 @@ Checking your translation for errors and completeness
 Building SciteProj with your translation included
 --------------------------------------------------
 
-Edit the Makefile in the po folder to include your translation in the listing 
+Edit the Makefile in the po folder to include your translation in the listing
 under the LANGUAGES variable.
 Then build sciteproj as usual with make and install using make install as root.
 
@@ -48,7 +48,7 @@ Then build sciteproj as usual with make and install using make install as root.
 Updating your translation
 -------------------------
 
-When it is time to update your translation, get the latest git version of 
+When it is time to update your translation, get the latest git version of
 sciteproj, and then do the following:
 
 cd po
