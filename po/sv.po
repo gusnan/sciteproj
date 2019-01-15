@@ -338,6 +338,3 @@ msgstr "Fel:%s"
 #: statusbar.c:57
 msgid "Welcome to SciteProj\n"
 msgstr "Välkommen till SciteProj\n"
-
-#~ msgid "Show Recent Files"
-#~ msgstr "Visa senaste filer"
