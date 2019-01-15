@@ -68,7 +68,7 @@ LOCAL_CFLAGS+=-DGDK_PIXBUF_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DIS
 
 LOCAL_CFLAGS+=-DLOCALEDIR=\"$(LOCALEDIR)\" -DPACKAGE=\"$(NAME)\" -DSCITEPROJ_VERSION=\"$(VERSION)\"
 
-all: $(BIN)/$(NAME)
+all: $(BIN)/$(NAME) sciteproj.1.gz
 	${MAKE} -C po -j1 all
 
 $(OBJ)/%.o: $(SRC)/%.c
@@ -77,8 +77,12 @@ $(OBJ)/%.o: $(SRC)/%.c
 $(BIN)/$(NAME): $(OBJECTS)
 	$(CC) $(LOCAL_CFLAGS) $(LOCAL_LDFLAGS) $(OBJECTS) -o $(PROG) $(LIBS)
 
+sciteproj.1.gz: sciteproj.1
+	gzip -k sciteproj.1
+
 clean:
 	rm -rf $(OBJECTS) $(PROG) $(DEPEND)
+	rm sciteproj.1.gz
 	${MAKE} -C po clean
 
 install:
@@ -86,11 +90,13 @@ install:
 	install -m 755 $(PROG) $(DESTDIR)$(PREFIX)/bin
 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
 	install -m 644 graphics/sciteproj.xpm $(DESTDIR)$(PREFIX)/share/pixmaps
+	install -m 644 sciteproj.1.gz $(DESTDIR)$(PREFIX)/share/man/man1
 	${MAKE} -C po install
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/$(PROG)
 	rm -f $(DESTDIR)$(PREFIX)/share/pixmaps/sciteproj.xpm
+	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/sciteproj.1.gz
 	${MAKE} -C po uninstall
 
 $(DEPEND):
