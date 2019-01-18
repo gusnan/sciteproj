@@ -440,7 +440,6 @@ void refresh_folder_cb()
 				tree_path = gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
 
 				if (tree_path) {
-					GtkTreeIter iter;
 					if (gtk_tree_model_get_iter(tree_model, &iter, tree_path))
 						remove_tree_node(&iter,NULL);
 				}

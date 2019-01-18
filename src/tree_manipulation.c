@@ -199,8 +199,6 @@ gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **e
 	// Reverse the list
 	fileList = g_slist_reverse(fileList);
 
-	listIter = fileList;
-
 	for (listIter = fileList; listIter != NULL; listIter = g_slist_next(listIter)) {
 
 		gchar *absFilename = (gchar *) (listIter->data);

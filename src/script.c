@@ -98,10 +98,8 @@ load_script(lua_State *lua, char *filename)
 int load_script_buffer(lua_State *lua, const char *buffer)
 {
 	if (lua) {
-		int error;
-
-		error = luaL_loadbuffer(lua, buffer, strlen(buffer), "script_buffer");
-		if (error) {
+		int err = luaL_loadbuffer(lua, buffer, strlen(buffer), "script_buffer");
+		if (err) {
 			//printf("\n\n\nERROR!\n\n\n");
 			fprintf(stderr, "%s\n", lua_tostring(lua, -1));
 			lua_pop(lua, -1);

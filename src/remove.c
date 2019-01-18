@@ -109,11 +109,11 @@ GList *get_list_of_selected_items_string_list(GtkTreeView *treeview)
 
 			gtk_tree_model_get_iter(model, &iter, path);
 
-			gchar *path;
+			gchar *path_string;
 
-			gtk_tree_model_get(model, &iter, COLUMN_FILEPATH, &path, -1);
+			gtk_tree_model_get(model, &iter, COLUMN_FILEPATH, &path_string, -1);
 
-			string_list = g_list_prepend(string_list, path);
+			string_list = g_list_prepend(string_list, path_string);
 		}
 
 		row_list = row_list -> prev;
@@ -152,13 +152,13 @@ gchar *get_list_of_selected_items_strings(GtkTreeView *treeview)
 
 			gtk_tree_model_get_iter(model, &iter, path);
 
-			gchar *path;
+			gchar *path_string;
 
 			gtk_tree_model_get(model, &iter,
-			                   COLUMN_FILEPATH, &path, -1);
+			                   COLUMN_FILEPATH, &path_string, -1);
 
 			if (count <7) {
-				gchar *temp = g_strconcat(result_string, path, "\n", NULL);
+				gchar *temp = g_strconcat(result_string, path_string, "\n", NULL);
 				g_free(result_string);
 				result_string=temp;
 
@@ -412,7 +412,7 @@ void do_remove_node(gboolean ignore_clicked_node)
 
 			if (get_number_of_files_in_folder(filepath) > 0) {
 
-				GtkWidget *dialog = gtk_message_dialog_new(NULL,
+				dialog = gtk_message_dialog_new(NULL,
 				                    GTK_DIALOG_MODAL,
 				                    GTK_MESSAGE_INFO,
 				                    GTK_BUTTONS_OK,
