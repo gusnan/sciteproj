@@ -82,7 +82,7 @@ sciteproj.1.gz: sciteproj.1
 
 clean:
 	rm -rf $(OBJECTS) $(PROG) $(DEPEND)
-	rm sciteproj.1.gz
+	rm -f sciteproj.1.gz
 	${MAKE} -C po clean
 
 install:
