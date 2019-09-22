@@ -40,8 +40,8 @@ static GtkWidget *window;
 
 void create_about_dialog();
 
-gboolean handle_about_close_event(GtkWidget *widget,GdkEvent *event,gpointer user_data);
-void link_button_cb(GtkButton *button,gpointer user_data);
+gboolean handle_about_close_event(GtkWidget *widget, GdkEvent *event, gpointer user_data);
+void link_button_cb(GtkButton *button, gpointer user_data);
 
 gchar *version_string = NULL;
 
