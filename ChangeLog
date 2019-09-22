@@ -2,6 +2,11 @@
 ChangeLog:
 ----------
 
+1.13
+    * Pack and install man-page
+    * Make it possible to close about dialog using ESC
+    * Various minor code fixes
+
 1.12
 	* Remove GTK2 compatibility header file
 	* Minor fixes
