@@ -59,6 +59,21 @@ void show_about_dialog()
 
 
 /**
+ *  Handle keyboard pressing escape in about dialog
+ */
+gboolean handle_keyboard_event_cb(GtkWidget *widget, GdkEventKey *event, gpointer data)
+{
+    if (event->keyval == GDK_KEY_Escape) {
+        // printf("Escape pressed.\n");
+        gtk_widget_hide(window);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+
+/**
  *	creates a new dialog box, and fills it will all necessary information
  */
 void create_about_dialog()
@@ -283,6 +298,11 @@ void create_about_dialog()
 
 	g_signal_connect(G_OBJECT(window), "delete-event", G_CALLBACK(handle_about_close_event), window);
 	g_signal_connect(G_OBJECT(linkbutton), "released", G_CALLBACK(link_button_cb), linkbutton);
+
+    // Handle ESC in about window
+    gtk_widget_add_events(window, GDK_KEY_PRESS_MASK);
+
+    g_signal_connect(G_OBJECT(window), "key_press_event", G_CALLBACK(handle_keyboard_event_cb), NULL);
 
 	gtk_widget_show_all(window);
 
