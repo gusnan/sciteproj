@@ -2,10 +2,14 @@
 ChangeLog:
 ----------
 
+1.14
+	* Create folder for man page in Makefile
+	* Minor formatting fixes
+
 1.13
-    * Pack and install man-page
-    * Make it possible to close about dialog using ESC
-    * Various minor code fixes
+	* Pack and install man-page
+	* Make it possible to close about dialog using ESC
+	* Various minor code fixes
 
 1.12
 	* Remove GTK2 compatibility header file
