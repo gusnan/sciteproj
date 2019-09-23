@@ -90,6 +90,7 @@ install:
 	install -m 755 $(PROG) $(DESTDIR)$(PREFIX)/bin
 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
 	install -m 644 graphics/sciteproj.xpm $(DESTDIR)$(PREFIX)/share/pixmaps
+	install -d $(DESTDIR)$(PREFIX)/share/man/man1
 	install -m 644 sciteproj.1.gz $(DESTDIR)$(PREFIX)/share/man/man1
 	${MAKE} -C po install
 
