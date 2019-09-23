@@ -63,13 +63,13 @@ void show_about_dialog()
  */
 gboolean handle_keyboard_event_cb(GtkWidget *widget, GdkEventKey *event, gpointer data)
 {
-    if (event->keyval == GDK_KEY_Escape) {
-        // printf("Escape pressed.\n");
-        gtk_widget_hide(window);
-        return TRUE;
-    }
+	if (event->keyval == GDK_KEY_Escape) {
+		// printf("Escape pressed.\n");
+		gtk_widget_hide(window);
+		return TRUE;
+	}
 
-    return FALSE;
+	return FALSE;
 }
 
 
