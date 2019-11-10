@@ -65,7 +65,7 @@ gboolean str_append(gchar **dst, const gchar *src, GError **err)
 		goto EXITPOINT;
 	}
 
-	g_memmove(newDst + dstLength, src, srcLength + 1);
+	memmove(newDst + dstLength, src, srcLength + 1);
 
 	*dst = newDst;
 

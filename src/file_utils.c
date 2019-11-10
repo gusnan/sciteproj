@@ -462,7 +462,7 @@ gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const g
 		}
 
 		if (tail != NULL) {
-			g_memmove(localAbsPath + i, tail, tailLength);
+			memmove(localAbsPath + i, tail, tailLength);
 
 			absPathLength -= (tail - localAbsPath - i);
 		}
