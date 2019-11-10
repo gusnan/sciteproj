@@ -543,9 +543,8 @@ gboolean is_string_folder(gchar *instring)
 
 	if (dir) {
 		result = TRUE;
+		g_dir_close(dir);
 	}
-
-	if (dir) g_dir_close(dir);
 
 	return result;
 }
