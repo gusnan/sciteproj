@@ -563,7 +563,7 @@ gchar *clean_folder(gchar *infolder)
 		return result;
 	}
 
-	if (temp) {
+	if (infolder) {
 
 		gchar *temp = infolder;
 
