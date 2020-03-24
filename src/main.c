@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 	};
 
 	// Init gettext stuff
-	setlocale(LC_ALL,"");
+	setlocale(LC_ALL, "");
 
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset(PACKAGE, "");
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 
 	gchar *full_desc_string = g_strdup_printf("- %s",sciteproj_description);
 
-	context=g_option_context_new(full_desc_string);
+	context = g_option_context_new(full_desc_string);
 	g_option_context_add_main_entries(context, options, NULL);
 	if (!g_option_context_parse(context, &argc, &argv, &err)) {
 		g_print(_("option parsing failed: %s"), err->message);
@@ -202,7 +202,7 @@ int main(int argc, char *argv[])
 			if (prefs.scite_path != NULL) g_free(prefs.scite_path);
 
 			// Set the new one
-			prefs.scite_path=g_strdup(cmd.scite_filename);
+			prefs.scite_path = g_strdup(cmd.scite_filename);
 
 		} else {
 			g_print(_("Couldn't find a SciTE executable named '%s'!\n"), cmd.scite_filename);
