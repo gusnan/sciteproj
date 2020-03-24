@@ -44,7 +44,7 @@ from it and act on that to determine how to view the folder. Please notice that
 I now use LUA, which amongst other means that boolean values are case sensitive
 for lowercase and TRUE and FALSE are invalid as values.
 
-The options availible in the config file are:
+The options available in the config file are:
 
 * The window geometry
 
