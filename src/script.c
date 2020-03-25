@@ -126,7 +126,7 @@ void run_script(lua_State *lua)
 
 		char *error_msg;
 
-		error_msg=(char*)lua_tostring( lua, -1 );
+		error_msg = (char*)lua_tostring( lua, -1 );
 
 		//std::string luaErrorString=getLuaErrorString(s);
 
@@ -196,11 +196,11 @@ GSList *load_filter_from_lua()
 			if (lua_isstring(lua, -1)) {
 				char *temp = (char *)lua_tostring(lua, -1);
 
-				list = g_slist_append(list,g_strdup(temp));
+				list = g_slist_append(list, g_strdup(temp));
 			}
-			lua_pop(lua,1);
+			lua_pop(lua, 1);
 		}
-		lua_pop(lua,1);
+		lua_pop(lua, 1);
 	}
 
 EXITPOINT:

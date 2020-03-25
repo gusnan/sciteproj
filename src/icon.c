@@ -54,7 +54,7 @@ get_pixbuf_from_icon(GIcon *icon, GtkIconSize size)
 	if (!info)
 		return NULL;
 
-	result=gtk_icon_info_load_icon(info, NULL);
+	result = gtk_icon_info_load_icon(info, NULL);
 
 	return result;
 }
@@ -83,7 +83,7 @@ get_pixbuf_from_file(GFile *file, GtkIconSize size)
 	icon = g_file_info_get_icon(info);
 
 	if (icon != NULL) {
-		result=get_pixbuf_from_icon(icon, size);
+		result = get_pixbuf_from_icon(icon, size);
 	}
 
 	g_object_unref(info);
@@ -100,7 +100,7 @@ get_pixbuf_from_filename(gchar *filename, GtkIconSize size)
 {
 	GFile *tempfile = g_file_new_for_path(filename);
 
-	GdkPixbuf *result=get_pixbuf_from_file(tempfile, size);
+	GdkPixbuf *result = get_pixbuf_from_file(tempfile, size);
 
 	return result;
 }

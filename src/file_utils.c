@@ -113,8 +113,8 @@ gchar *fix_separators(gchar *source)
 				*pointer = '/';
 
 				// skip /./ and similar
-				if ((source[co+1] == '.') && (is_separator(source[co+2]))) {
-					co+=2;
+				if ((source[co + 1] == '.') && (is_separator(source[co + 2]))) {
+					co += 2;
 				}
 
 
@@ -157,20 +157,20 @@ gchar *fix_path(char *base_dir,char *temp)
 			if (!is_separator(ch)) {
 
 				if (current_path != NULL) {
-					gchar *buf = g_strdup_printf("%s%c",current_path,ch);
+					gchar *buf = g_strdup_printf("%s%c", current_path, ch);
 
 					g_free(current_path);
 
 					current_path = buf;
 
 				} else {
-					current_path = g_strdup_printf("%c",ch);
+					current_path = g_strdup_printf("%c", ch);
 				}
 
 			} else {
 				//g_print("%s\n",current_path);
 
-				if (strcmp(current_path,"..") == 0) {
+				if (strcmp(current_path, "..") == 0) {
 					//g_print("Up! curr:%s\n",out_path);
 
 					//file_pointer = &infile[co];
@@ -222,7 +222,7 @@ void init_file_utils()
 
 	g_free(temp);
 
-	if (current_directory[strlen(current_directory)-1] != G_DIR_SEPARATOR) {
+	if (current_directory[strlen(current_directory) - 1] != G_DIR_SEPARATOR) {
 
 	}
 }

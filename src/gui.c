@@ -508,7 +508,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 	// We can only open files
 
 	if (nodeItemType != ITEMTYPE_FILE) {
-		switch_folder_icon(treeView,path);
+		switch_folder_icon(treeView, path);
 		goto EXITPOINT;
 	}
 
@@ -532,7 +532,7 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
 				send_scite_command((gchar*)"focus:0", NULL);
 			}
 
-			add_file_to_recent(fixed,NULL);
+			add_file_to_recent(fixed, NULL);
 
 			gchar *statusbar_text = g_strdup_printf(_("Opened %s"),
 			                                        remove_newline(get_filename_from_full_path(command)));
@@ -682,7 +682,7 @@ void set_window_title(const gchar *newName)
 	g_assert(newName != NULL);
 
 	gchar *temp_string = g_new(gchar, 512);
-	g_snprintf(temp_string,512, "%s", newName);
+	g_snprintf(temp_string, 512, "%s", newName);
 
 	gtk_window_set_title(GTK_WINDOW(sMainWindow), temp_string);
 

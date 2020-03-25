@@ -114,7 +114,7 @@ GtkWidget *init_recent_files(GError **err)
 
 
 	// add a scrolledwindow for recent files
-	if (!(recentScrolledWindow = gtk_scrolled_window_new(NULL,NULL))) {
+	if (!(recentScrolledWindow = gtk_scrolled_window_new(NULL, NULL))) {
 		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
 		            "%s: %s, gtk_scrolled_window_new() = NULL",
 		            __func__,
@@ -223,14 +223,14 @@ EXITPOINT:
 gboolean tree_for_each(GtkTreeModel *model,GtkTreePath *path,GtkTreeIter *iter,gpointer data)
 {
 
-	gchar *filepath,*filename;
+	gchar *filepath, *filename;
 	gchar *inFile = (gchar*)(data);
 
 	gtk_tree_model_get(model, iter, COLUMN_FILEPATH, &filename, -1);
 
 	filepath = get_filename_from_full_path((gchar*)filename);
 
-	if (g_strcmp0(filepath,inFile) == 0) {
+	if (g_strcmp0(filepath, inFile) == 0) {
 		//savedIter=iter;
 
 		gtk_tree_store_remove(recentTreeStore, iter);

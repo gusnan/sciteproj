@@ -315,7 +315,7 @@ gboolean add_tree_file(GtkTreeIter *currentIter,
 	const gchar* fileName = NULL;
 	gchar *relFilename = NULL;
 
-	gchar *fileExt=NULL;
+	gchar *fileExt = NULL;
 
 	if (!makeRelative) {
 		relFilename = g_strdup(filepath);
@@ -340,7 +340,7 @@ gboolean add_tree_file(GtkTreeIter *currentIter,
 		gtk_tree_store_insert_after(sTreeStore, &iter, NULL, currentIter);
 	}
 	else if (position == ADD_CHILD) {
-		gtk_tree_store_insert(sTreeStore,&iter,currentIter,1000);
+		gtk_tree_store_insert(sTreeStore, &iter, currentIter, 1000);
 	}
 
 	fileExt=strrchr(fileName, '.');
@@ -648,7 +648,7 @@ EXITPOINT:
 void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_func)
 {
 
-	GtkTreeIter *saved_iter=node;
+	GtkTreeIter *saved_iter = node;
 
 	GtkTreeIter childIter;
 
@@ -656,12 +656,12 @@ void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_
 
 	gint nodeType = -1;
 
-	GSList *itemList=NULL;
+	GSList *itemList = NULL;
 
 
-	if (gtk_tree_model_iter_children(tree_model,&childIter,node)) {
+	if (gtk_tree_model_iter_children(tree_model, &childIter, node)) {
 
-		int q = gtk_tree_model_iter_n_children(tree_model,node);
+		int q = gtk_tree_model_iter_n_children(tree_model, node);
 
 		while (q > 0) {
 
@@ -684,10 +684,10 @@ void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_
 					itemList = g_slist_insert_sorted(itemList, newAbsPath, compare_func);
 				}
 
-				gtk_tree_store_remove(sTreeStore,&childIter);
+				gtk_tree_store_remove(sTreeStore, &childIter);
 			} else {
 
-				gtk_tree_model_iter_next(tree_model,&childIter);
+				gtk_tree_model_iter_next(tree_model, &childIter);
 			}
 
 			q--;
@@ -698,7 +698,7 @@ void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_
 	if (itemList != NULL)
 		add_tree_filelist(saved_iter, itemList, err);
 
-	GtkTreePath *path = gtk_tree_model_get_path(tree_model,saved_iter);
+	GtkTreePath *path = gtk_tree_model_get_path(tree_model, saved_iter);
 	expand_tree_row(path, TRUE);
 }
 

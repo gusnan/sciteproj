@@ -60,7 +60,7 @@ gboolean init_statusbar(GtkWidget *widget, GtkWidget *next_to, GError **err)
 
 	gtk_grid_attach_next_to(GTK_GRID(widget), statusbar, next_to, GTK_POS_BOTTOM, 1, 1);
 
-	gtk_widget_show (statusbar);
+	gtk_widget_show(statusbar);
 
 
 	return TRUE;
@@ -109,5 +109,5 @@ void set_statusbar_text(const gchar *text)
  */
 void done_statusbar()
 {
-	if (statusbar!=NULL) gtk_widget_destroy(statusbar);
+	if (statusbar != NULL) gtk_widget_destroy(statusbar);
 }
