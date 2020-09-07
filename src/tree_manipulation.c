@@ -103,7 +103,7 @@ gboolean set_project_filepath(const gchar *filepath, GError **err)
 			}
 		}
 
-		if (sProjectDir[strlen(sProjectDir)-1] == G_DIR_SEPARATOR) {
+		if (sProjectDir[strlen(sProjectDir) - 1] == G_DIR_SEPARATOR) {
 			gchar *finalSlash = strrchr(sProjectDir, G_DIR_SEPARATOR);
 
 			if (finalSlash != NULL) {
@@ -114,7 +114,7 @@ gboolean set_project_filepath(const gchar *filepath, GError **err)
 	}
 	//}
 
-	windowTitle=g_strdup_printf("%s", get_filename_from_full_path(sProjectFilepath));
+	windowTitle = g_strdup_printf("%s", get_filename_from_full_path(sProjectFilepath));
 
 	set_window_title(windowTitle);
 
@@ -262,7 +262,7 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
 		gtk_tree_store_insert_after(sTreeStore, &iter, NULL, parentIter);
 	}
 	else if (position == ADD_CHILD) {
-		gtk_tree_store_insert(sTreeStore,&iter,parentIter,1000);
+		gtk_tree_store_insert(sTreeStore, &iter, parentIter, 1000);
 	}
 
 	if (newIter) {
@@ -420,7 +420,7 @@ void helper_remove(GtkTreeIter *iter)
 	GtkTreeIter *tempIter = gtk_tree_iter_copy(iter);
 	GtkTreeIter newIter;
 
-	if (gtk_tree_model_iter_children(GTK_TREE_MODEL(sTreeStore),&newIter,tempIter)) {
+	if (gtk_tree_model_iter_children(GTK_TREE_MODEL(sTreeStore), &newIter, tempIter)) {
 
 		gboolean next_valid = TRUE;
 

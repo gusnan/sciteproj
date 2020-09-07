@@ -182,7 +182,7 @@ int main(int argc, char *argv[])
 		}
 
 		if (env_filename != NULL) g_free(env_filename);
-		env_filename = g_build_filename(scite_path_env,"SciTE",NULL);
+		env_filename = g_build_filename(scite_path_env, "SciTE", NULL);
 		if (g_file_test(env_filename, G_FILE_TEST_EXISTS)) {
 			if (cmd.scite_filename == NULL) {
 				cmd.scite_filename = g_strdup(env_filename);

@@ -99,7 +99,7 @@ gboolean check_config_string(gchar *in_config)
 	prefs.scite_path = NULL;
 
 	for (co = 0; co < (int)strlen(in_config); co++) {
-		if (in_config[co] == '=') pos=co;
+		if (in_config[co] == '=') pos = co;
 
 		if (pos == -1) {
 			value++;
@@ -359,7 +359,7 @@ gboolean check_for_old_style_config(const gchar *teststring)
 		if (teststring[co] == '\n') {
 			//printf("Tecken: %c\n", teststring[co+1]);
 
-			if (teststring[co+1] == '#') {
+			if (teststring[co + 1] == '#') {
 				result = TRUE;
 			}
 		}
