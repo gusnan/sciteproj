@@ -203,6 +203,9 @@ GSList *load_filter_from_lua()
 		lua_pop(lua, 1);
 	}
 
+	// TODO: Also check in user config in ~/.config/sciteprojrc for
+	// any settings for current folder
+
 EXITPOINT:
 	g_free(script_filename);
 
