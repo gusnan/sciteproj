@@ -140,7 +140,7 @@ void create_about_dialog()
 	gtk_grid_attach_next_to(GTK_GRID(grid), version_string_label, sciteproj_label, GTK_POS_BOTTOM, 5, 1);
 
 	// Show SciteProj copyrights
-	copyrightstring = g_strdup_printf("Copyright (C) 2008-2017 Andreas Rönnquist <andreas@ronnquist.net>");
+	copyrightstring = g_strdup_printf("Copyright (C) 2008-2020 Andreas Rönnquist <andreas@ronnquist.net>");
 
 	copyright_label = gtk_label_new(copyrightstring);
 	gtk_label_set_selectable(GTK_LABEL(copyright_label), FALSE);
