@@ -39,5 +39,6 @@ double lua_get_number(lua_State *lua, char *variable_name);
 gboolean lua_global_exists(lua_State *lua, char *variable_name);
 
 GSList *load_filter_from_lua();
+GSList *load_filter_from_global_settings_file();
 
 #endif /*__HEADER_SCRIPT_*/

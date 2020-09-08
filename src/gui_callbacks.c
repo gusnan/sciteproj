@@ -189,6 +189,26 @@ static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter
 }
 
 
+gchar *remove_trailing_dot_folder(gchar *infolder)
+{
+	gchar *result = NULL;
+
+	if (g_str_has_suffix(infolder, "/.") == TRUE) {
+
+		int len = strlen(infolder);
+
+
+		result = g_strdup(infolder);
+
+		result[len - 2] = '\0';
+
+	} else {
+		result = g_strdup(infolder);
+	}
+
+	return result;
+}
+
 /**
  *
  */
@@ -204,12 +224,31 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 		if (gtk_tree_model_iter_children(tree_model, &child, iter)) {
 			remove_tree_node(&child, NULL);
 
-			gchar *folder_path;
+			gchar *temp_folder_path;
 
-			gtk_tree_model_get(tree_model, iter, COLUMN_FILEPATH, &folder_path, -1);
+			gtk_tree_model_get(tree_model, iter, COLUMN_FILEPATH, &temp_folder_path, -1);
+
+			gchar *folder_path = g_path_get_dirname(temp_folder_path);
+
+			folder_path = remove_trailing_dot_folder(folder_path);
 
 			// Load the wanted filter from the LUA config
 			GSList *filter_list = load_filter_from_lua(folder_path);
+
+			GSList *global_filter_list = load_filter_from_global_settings_file();
+
+			GSList *iterator;
+
+			for (iterator = global_filter_list; iterator; iterator = iterator->next) {
+
+				gchar *temp = (gchar*)(iterator->data);
+
+				gchar *temp_base = g_path_get_basename(temp);
+
+				filter_list = g_slist_append(filter_list , (gpointer)(temp_base));
+			}
+
+			GSList *final_filter_list = filter_list;
 
 			GSList *file_list; //=load_folder_to_list(folder_path, FALSE,
 			GSList *folder_list;
@@ -217,15 +256,18 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 			// default sorting here compare_strings_bigger - since we turn the
 			// list backwards after
 
-			GCompareFunc comparer = get_sort_order_of_folder(folder_path);
+			GCompareFunc comparer = get_sort_order_of_folder(temp_folder_path);
 
-			file_list = load_folder_to_list(folder_path, FALSE, comparer /*file_sort_by_extension_bigger_func*/, filter_list);
+			file_list = load_folder_to_list(temp_folder_path,
+													  FALSE,
+													  comparer /*file_sort_by_extension_bigger_func*/,
+													  final_filter_list);
 
-			folder_list = load_folder_to_list(folder_path, TRUE, compare_strings_bigger, filter_list);
+			folder_list = load_folder_to_list(temp_folder_path, TRUE, compare_strings_bigger, final_filter_list);
 
 			// Here we should filter out the unwanted items
 
-			add_tree_folderlist(iter, folder_list, folder_path);
+			add_tree_folderlist(iter, folder_list, temp_folder_path);
 
 			if (file_list) {
 				//file_list = g_slist_reverse(file_list);

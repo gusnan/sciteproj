@@ -219,6 +219,79 @@ EXITPOINT:
 /**
  *
  */
+GSList *load_filter_from_global_settings_file()
+{
+	GSList *list = NULL;
+	lua_State *lua = NULL;
+	gchar *test_prefs_filename = g_build_filename(g_get_user_config_dir(), "sciteprojrc.lua", NULL);
+
+	if (g_file_test(test_prefs_filename, G_FILE_TEST_IS_REGULAR)) {
+
+		// the file exists, load it:
+		lua = init_script();
+
+		if (load_script(lua, test_prefs_filename) != 0) {
+			printf("Error loading script: %s\n", test_prefs_filename);
+			goto EXITPOINT;
+		}
+
+		run_script(lua);
+
+		lua_getglobal(lua, "hide_filter_global");
+
+		if (lua_isnil(lua, -1)) {
+			printf("hide_filter_global not existing in preferences...\n");
+			goto EXITPOINT;
+		}
+
+		//	Make sure it is a table
+		if (!lua_istable(lua, -1)) {
+			// We didn't find a table with the required name, then just exit
+			printf("Expected a table...\n");
+			goto EXITPOINT;
+		}
+
+		lua_pushnil(lua);
+
+		while(lua_next(lua, -2)) {
+
+			if (lua_istable(lua, -1)) {
+				lua_pushnil(lua);
+
+				while (lua_next(lua, -2)) {
+
+					// stack now contains: -1 => value; -2 => key; -3 => table
+					// copy the key so that lua_tostring does not modify the original
+					lua_pushvalue(lua, -2);
+					// stack now contains: -1 => key; -2 => value; -3 => key; -4 => table
+					const char *value = lua_tostring(lua, -2);
+
+					// printf("Prepend: %s\n", value);
+					list = g_slist_append(list, (gpointer)value);
+
+					// pop value + copy of key, leaving original key
+					lua_pop(lua, 2);
+					// stack now contains: -1 => key; -2 => table
+				}
+			}
+			lua_pop(lua, 1);
+		}
+
+	}
+
+EXITPOINT:
+	g_free(test_prefs_filename);
+
+	if (lua)
+		done_script(lua);
+
+	return list;
+}
+
+
+/**
+ *
+ */
 int lua_get_boolean(lua_State *lua, char *variable_name)
 {
 	lua_getglobal(lua, variable_name);
