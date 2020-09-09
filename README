@@ -55,20 +55,20 @@ height.
 Also, the following options exist:
 
 * give_scite_focus
-	If this is set to true, the SciTE window will recieve focus when you open
-	a file from SciteProj. (Defaults to false)
+   If this is set to true, the SciTE window will recieve focus when you open
+   a file from SciteProj. (Defaults to false)
 
 * hide_statusbar
-	Don't show the statusbar to save valuable screen-space.
+   Don't show the statusbar to save valuable screen-space.
 
 * use_stock_folder_icon
-	Should we use the system folder icon, or the ones provided by sciteproj?
-	The sciteproj one are different icons for opened and closed directory,
-	while when using the stock ones there are only one icon for folders, open or
-	closed.
+   Should we use the system folder icon, or the ones provided by sciteproj?
+   The sciteproj one are different icons for opened and closed directory,
+   while when using the stock ones there are only one icon for folders, open or
+   closed.
 
 * start_scite
-	Should SciTE be started simultaneously with sciteproj?
+   Should SciTE be started simultaneously with sciteproj?
 
 You can open this configuration file by opening the Edit menu and select Edit
 Options in that menu. This will open sciteprojrc.lua from the current folder as
@@ -107,12 +107,12 @@ are comments, and not read by the LUA interpreter):
 -- hide_filter
 -- filters out files from the project listing - wildcards are allowed.
 hide_filter = {
-	-- ".gitignore",
-	-- "src/*.h",
-	-- "test",
-	".git",
-	"obj",
-	"old"
+   -- ".gitignore",
+   -- "src/*.h",
+   -- "test",
+   ".git",
+   "obj",
+   "old"
 }
 
 Second, sort-order is a table with folder-names as indexes:
@@ -128,8 +128,8 @@ Second, sort-order is a table with folder-names as indexes:
 -- default on folders that isn't listed here is 0 - ascending
 --
 sort_order = {
-	["./graphics/test/"] = 0,
-	["src"] = 2
+   ["./graphics/test/"] = 0,
+   ["src"] = 2
 }
 
 
@@ -142,11 +142,11 @@ on sciteproj program start:
 -- open folder - should a folder start as opened or closed?
 -- all folders default to false
 open_folders = {
-	["bin"] = true,
-	["src"] = true,
-	["src/test"] = false,
-	["po"] = false
-	
+   ["bin"] = true,
+   ["src"] = true,
+   ["src/test"] = false,
+   ["po"] = false
+
 }
 
 If you want to use sciteproj and filter out files in project where you for
