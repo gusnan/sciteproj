@@ -255,26 +255,21 @@ GSList *load_filter_from_global_settings_file()
 
 		while(lua_next(lua, -2)) {
 
-			if (lua_istable(lua, -1)) {
-				lua_pushnil(lua);
 
-				while (lua_next(lua, -2)) {
+			// stack now contains: -1 => value; -2 => key; -3 => table
+			// copy the key so that lua_tostring does not modify the original
+			lua_pushvalue(lua, -2);
+			// stack now contains: -1 => key; -2 => value; -3 => key; -4 => table
+			const char *value = lua_tostring(lua, -2);
 
-					// stack now contains: -1 => value; -2 => key; -3 => table
-					// copy the key so that lua_tostring does not modify the original
-					lua_pushvalue(lua, -2);
-					// stack now contains: -1 => key; -2 => value; -3 => key; -4 => table
-					const char *value = lua_tostring(lua, -2);
+			if (value != NULL) {
 
-					// printf("Prepend: %s\n", value);
-					list = g_slist_append(list, (gpointer)value);
+				list = g_slist_append(list, (gpointer)value);
 
-					// pop value + copy of key, leaving original key
-					lua_pop(lua, 2);
-					// stack now contains: -1 => key; -2 => table
-				}
 			}
-			lua_pop(lua, 1);
+			// pop value + copy of key, leaving original key
+			lua_pop(lua, 2);
+			// stack now contains: -1 => key; -2 => table
 		}
 
 	}
