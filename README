@@ -155,7 +155,7 @@ global file in ~/.config/sciteprojrc.lua and add a variable like this:
 
 hide_filter_global = {
                      "/home/gusnan/kod/git/sciteproj/sciteproj/obj"
-							}
+                     }
 
 This will hide the set folders in sciteproj.
 
