@@ -149,6 +149,16 @@ open_folders = {
 	
 }
 
+If you want to use sciteproj and filter out files in project where you for
+some reason don't want to (or can) add a sciteprojrc.lua, you can use a
+global file in ~/.config/sciteprojrc.lua and add a variable like this:
+
+hide_filter_global = {
+                     "/home/gusnan/kod/git/sciteproj/sciteproj/obj"
+							}
+
+This will hide the set folders in sciteproj.
+
 
 Thats it! Enjoy using sciteproj!
 
