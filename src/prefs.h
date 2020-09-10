@@ -53,6 +53,8 @@ typedef struct {
 
 	gboolean start_scite;
 
+	GSList *hide_filter_global;
+
 } sciteproj_prefs;
 
 extern sciteproj_prefs prefs;

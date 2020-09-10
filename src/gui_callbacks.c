@@ -235,7 +235,7 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 			// Load the wanted filter from the LUA config
 			GSList *filter_list = load_filter_from_lua(folder_path);
 
-			GSList *global_filter_list = load_filter_from_global_settings_file();
+			GSList *global_filter_list = prefs.hide_filter_global;
 
 			GSList *iterator;
 

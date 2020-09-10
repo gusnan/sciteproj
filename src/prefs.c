@@ -215,6 +215,8 @@ gboolean init_prefs(gchar *target_directory, GError **err)
 
 	prefs.start_scite = FALSE;
 
+	prefs.hide_filter_global = NULL;
+
 	// First, check the file ~/.config/sciteprojrc.lua
 
 	gchar *test_prefs_filename = g_build_filename(g_get_user_config_dir(), "sciteprojrc.lua", NULL);
@@ -418,7 +420,48 @@ int load_lua_config(gchar *filename, gchar *full_string)
 	if (lua_global_exists(lua, "start_scite"))
 		prefs.start_scite = lua_get_boolean(lua, "start_scite");
 
-	done_script(lua);
+	if (lua_global_exists(lua, "hide_filter_global")) {
+
+		lua_getglobal(lua, "hide_filter_global");
+
+		if (lua_isnil(lua, -1)) {
+			printf("hide_filter_global not available in preferences.\n");
+			goto EXITPOINT;
+		}
+
+		//	Make sure it is a table
+		if (!lua_istable(lua, -1)) {
+			// We didn't find a table with the required name, then just exit
+			printf("Expected a table...\n");
+			goto EXITPOINT;
+		}
+
+		lua_pushnil(lua);
+
+		while(lua_next(lua, -2)) {
+
+			// stack now contains: -1 => value; -2 => key; -3 => table
+			// copy the key so that lua_tostring does not modify the original
+			lua_pushvalue(lua, -2);
+			// stack now contains: -1 => key; -2 => value; -3 => key; -4 => table
+			const gchar *value = lua_tostring(lua, -2);
+
+			if (value != NULL) {
+
+				gchar *temp_string = g_strdup((gchar*)(value));
+
+				prefs.hide_filter_global = g_slist_append(prefs.hide_filter_global, (gchar*)temp_string);
+			}
+			// pop value + copy of key, leaving original key
+			lua_pop(lua, 2);
+			// stack now contains: -1 => key; -2 => table
+		}
+
+	}
+
+EXITPOINT:
+	if (lua)
+		done_script(lua);
 
 	return 0;
 }
