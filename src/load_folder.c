@@ -133,6 +133,8 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 
 	result_list = g_slist_sort(result_list, compare_func);
 
+	g_dir_close(dir);
+
 	return result_list;
 }
 
