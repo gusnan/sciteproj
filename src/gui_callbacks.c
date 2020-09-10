@@ -405,9 +405,9 @@ gboolean key_press_cb(GtkWidget *widget, GdkEventKey *event, gpointer userData)
  *		search function for the gtk_tree_view_set_search_equal_func
  *		@return TRUE when rows DONT match, FALSE when rows match
  */
-gboolean tree_view_search_equal_func(GtkTreeModel *model,gint column,
-                                     const gchar *key,GtkTreeIter *iter,
-                                     gpointer search_data)
+gboolean tree_view_search_equal_func(GtkTreeModel *model, gint column,
+												 const gchar *key, GtkTreeIter *iter,
+												 gpointer search_data)
 {
 	gchar *filename;
 	// For some reason this should return TRUE if the row DONT match
@@ -442,8 +442,8 @@ void refresh_folder_cb()
 	gboolean expanded;
 
 	gtk_tree_model_get(tree_model, &iter, COLUMN_FILENAME, &folder_name,
-	                   COLUMN_EXPANDED, &expanded,
-	                   -1);
+							 COLUMN_EXPANDED, &expanded,
+							 -1);
 
 	// If the folder is expanded
 	if (expanded) {
@@ -483,7 +483,7 @@ void refresh_folder_cb()
 
 				if (tree_path) {
 					if (gtk_tree_model_get_iter(tree_model, &iter, tree_path))
-						remove_tree_node(&iter,NULL);
+						remove_tree_node(&iter, NULL);
 				}
 			}
 
