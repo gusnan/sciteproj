@@ -95,7 +95,7 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 {
 	GSList *result_list = NULL;
 
-	GDir *dir=g_dir_open(folder_path, 0, NULL);
+	GDir *dir = g_dir_open(folder_path, 0, NULL);
 
 	const gchar *short_filename;
 
