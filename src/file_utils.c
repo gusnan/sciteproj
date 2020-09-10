@@ -151,7 +151,7 @@ gchar *fix_path(char *base_dir,char *temp)
 
 	if (!g_path_is_absolute(infile)) {
 		int co;
-		for (co = 0; co<(int)strlen(infile); co++) {
+		for (co = 0; co < (int)strlen(infile); co++) {
 			char ch = infile[co];
 
 			if (!is_separator(ch)) {
@@ -387,8 +387,8 @@ gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const g
 	int absPathLength;
 	int co;
 
-	for (co=0; co<strlen(relativePath); co++) {
-		if ((relativePath[co]=='/') || (relativePath[co]=='\\')) {
+	for (co = 0; co < strlen(relativePath); co++) {
+		if ((relativePath[co] == '/') || (relativePath[co] == '\\')) {
 			relativePath[co]=G_DIR_SEPARATOR;
 		}
 	}

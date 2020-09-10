@@ -749,7 +749,7 @@ gboolean add_tree_folderlist(GtkTreeIter *iter, GSList *folder_list, gchar *fold
 
 			short_filename = (gchar*)(folder_list->data);
 
-			current_file=g_build_filename(folder_path, short_filename, NULL);
+			current_file = g_build_filename(folder_path, short_filename, NULL);
 
 			if (g_file_test(current_file, G_FILE_TEST_IS_DIR)) {
 				GtkTreeIter *new_iter = gtk_tree_iter_copy(iter);
