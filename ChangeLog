@@ -2,6 +2,12 @@
 ChangeLog:
 ----------
 
+1.15
+	* Add option to hide files globally using hide_filter_global in
+	  ~/.config/sciteprojrc
+	* Spelling fixes
+	* Minor fixes, formatting and other
+
 1.14
 	* Create folder for man page in Makefile
 	* Minor formatting fixes
