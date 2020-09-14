@@ -389,7 +389,7 @@ gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const g
 
 	for (co = 0; co < strlen(relativePath); co++) {
 		if ((relativePath[co] == '/') || (relativePath[co] == '\\')) {
-			relativePath[co]=G_DIR_SEPARATOR;
+			relativePath[co] = G_DIR_SEPARATOR;
 		}
 	}
 
