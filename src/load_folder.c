@@ -101,7 +101,9 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 
 	while((short_filename = g_dir_read_name(dir))) {
 
-		gchar *temp_file = g_build_filename(folder_path, short_filename, NULL);
+		gchar *current_filename = g_strdup(short_filename);
+
+		gchar *temp_file = g_build_filename(folder_path, current_filename, NULL);
 
 		if (read_directories) {
 
@@ -109,10 +111,10 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 
 				if (filter_list != NULL) {
 					if (!ignore_pattern_matches(folder_path, short_filename, filter_list)) {
-						result_list = g_slist_prepend(result_list, (gpointer)short_filename);
+						result_list = g_slist_prepend(result_list, (gpointer)current_filename);
 					}
 				} else {
-					result_list = g_slist_prepend(result_list, (gpointer)short_filename);
+					result_list = g_slist_prepend(result_list, (gpointer)current_filename);
 				}
 			}
 
@@ -130,6 +132,8 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
 			}
 		}
 	}
+
+	g_dir_close(dir);
 
 	result_list = g_slist_sort(result_list, compare_func);
 
