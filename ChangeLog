@@ -2,6 +2,10 @@
 ChangeLog:
 ----------
 
+1.16
+	* Remove a superfluous g_close_dir which causes the program to not
+	  read folders properly
+
 1.15
 	* Add option to hide files globally using hide_filter_global in
 	  ~/.config/sciteprojrc
