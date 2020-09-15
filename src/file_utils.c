@@ -205,6 +205,8 @@ gchar *fix_path(char *base_dir, char *temp)
 	//gchar *new_res = g_strdup_printf("%s%c%s",out_path,G_DIR_SEPARATOR,get_filename_from_full_path(file_pointer));
 	gchar *new_res = g_strdup_printf("%s%c%s", out_path, G_DIR_SEPARATOR, tempfile);
 
+	if (infile != 0) g_free(infile);
+
 	g_free(curr);
 	//g_free(infile);
 
