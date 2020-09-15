@@ -135,7 +135,7 @@ gchar *fix_separators(gchar *source)
 /**
  *
  */
-gchar *fix_path(char *base_dir,char *temp)
+gchar *fix_path(char *base_dir, char *temp)
 {
 	// first, make slashes real ones for the platform.
 	gchar *curr = g_strdup(base_dir);
