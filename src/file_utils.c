@@ -528,6 +528,12 @@ int get_number_of_files_in_folder(gchar *folder_name)
 		};
 	}
 
+	g_slist_foreach(file_list, (GFunc)g_free, NULL);
+	g_slist_free(file_list);
+
+	g_slist_foreach(folder_list, (GFunc)g_free, NULL);
+	g_slist_free(folder_list);
+
 	return result;
 }
 
