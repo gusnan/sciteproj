@@ -218,6 +218,7 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 	GtkTreeIter child;
 
 	GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
+	gchar *temp = NULL;
 
 	if (iter) {
 
@@ -230,7 +231,9 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 
 			gchar *folder_path = g_path_get_dirname(temp_folder_path);
 
-			folder_path = remove_trailing_dot_folder(folder_path);
+			temp = folder_path;
+			folder_path = remove_trailing_dot_folder(temp);
+			g_free(temp);
 
 			// Load the wanted filter from the LUA config
 			GSList *filter_list = load_filter_from_lua(folder_path);
@@ -241,7 +244,7 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 
 			for (iterator = global_filter_list; iterator; iterator = iterator->next) {
 
-				gchar *temp = (gchar*)(iterator->data);
+				temp = (gchar*)(iterator->data);
 
 				gchar *temp_base = g_path_get_basename(temp);
 
