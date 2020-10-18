@@ -38,7 +38,7 @@ ${NAME}.pot:
 update-pot: ${NAME}.pot
 
 %.pox: %.po
-	msgmerge -o $@ --previous $< ${NAME}.pot 
+	msgmerge -o $@ --previous $< ${NAME}.pot
 
 build: $(LANGUAGES_MO)
 	
@@ -46,7 +46,11 @@ $(LANGUAGES_MO): $(LANGUAGES_PO)
 	for po in ${LANGUAGES}; \
 	do msgfmt -v --statistics -c -o t-$${po} $${po}.po && mv -f t-$${po} $${po}.mo; \
 	done
-	
+
+update-po:
+	for po in ${LANGUAGES}; \
+	do msgmerge -o $${po}.po $${po}.po ${NAME}.pot; \
+	done
 
 install: all install-dirs
 	for po in ${LANGUAGES}; \
@@ -72,5 +76,5 @@ clean-pox:
 clean: clean-build
 	rm -f *~
 
-.PHONY: all build install install-dirs uninstall clean clean-pox clean-build update-pot
+.PHONY: all build install install-dirs uninstall clean clean-pox clean-build update-pot update-po
 
