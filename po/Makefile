@@ -1,5 +1,5 @@
 #
-#   Copyright (C) 2009-2017 Andreas Rönnquist
+#   Copyright (C) 2009-2020 Andreas Rönnquist
 #   This file is distributed under the same license
 #   as the sciteproj package, see COPYING file.
 #
