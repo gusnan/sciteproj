@@ -551,7 +551,7 @@ EXITPOINT:
 		could_not_open_string = g_strdup_printf(_("Could not open selected file:"));
 
 		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-		                                _("%s\n\n%s"), could_not_open_string, err->message);
+		                                "%s\n\n%s", could_not_open_string, err->message);
 
 		gtk_dialog_run(GTK_DIALOG (dialog));
 
