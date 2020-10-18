@@ -111,6 +111,8 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	gtk_widget_set_halign(filepath_entry, GTK_ALIGN_FILL);
 	gtk_widget_set_hexpand(filepath_entry, TRUE);
 
+	gtk_widget_set_valign(label2, GTK_ALIGN_CENTER);
+
 	container_box = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
 	gtk_box_pack_start(GTK_BOX(container_box), table, TRUE, TRUE, 0);
 
