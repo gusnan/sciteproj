@@ -77,7 +77,7 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 	gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
 
 	label1 = gtk_label_new(_("Group name:"));
-	label2 = gtk_label_new(_("Full folder:"));
+	label2 = gtk_label_new(_("Complete folder:"));
 
 	filename = gtk_label_new(nodename);
 
