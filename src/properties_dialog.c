@@ -88,6 +88,7 @@ void group_properties_gui(GtkTreeModel *tree_model, GtkTreeIter *iter)
 
 	gtk_entry_set_text(GTK_ENTRY(filepath_entry), filePath);
 	gtk_editable_set_editable(GTK_EDITABLE(filepath_entry), FALSE);
+	gtk_widget_set_can_focus(GTK_WIDGET(filepath_entry), FALSE);
 
 	my_set_align(filename);
 	my_set_align(filepath_entry);
@@ -195,6 +196,7 @@ void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter)
 	gtk_entry_set_text(GTK_ENTRY(path), absFilePath);
 
 	gtk_editable_set_editable(GTK_EDITABLE(path), FALSE);
+	gtk_widget_set_can_focus(GTK_WIDGET(path), FALSE);
 
 	//gtk_widget_show(buffer);
 	gtk_widget_show(path);
