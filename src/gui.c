@@ -1,7 +1,7 @@
 /**
  * gui.c - GUI code for SciteProj
  *
- *  Copyright 2006 Roy Wood, 2009-2019 Andreas Rönnquist
+ *  Copyright 2006 Roy Wood, 2009-2020 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
