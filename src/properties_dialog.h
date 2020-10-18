@@ -1,7 +1,7 @@
 /**
  * properties_dialog.h - Properties Dialogs code for SciteProj
  *
- *  Copyright 2009-2018 Andreas Rönnquist
+ *  Copyright 2009-2020 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
