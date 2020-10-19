@@ -2,6 +2,11 @@
 ChangeLog:
 ----------
 
+1.17
+	* Make it possible to copy full filename + folder from properties dialog,
+	  for both files and folders
+	* Various fixes and clean-ups
+
 1.16
 	* Remove a superfluous g_close_dir which causes the program to not
 	  read folders properly
