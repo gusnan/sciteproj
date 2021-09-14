@@ -37,8 +37,6 @@
 
 struct ParseFileStruct {
 	GtkTreeIter current_iter;
-
-	int depth;
 };
 
 typedef struct ParseFileStruct ParseFileStruct;
@@ -154,7 +152,6 @@ gboolean load_folder(gchar *path, GError **err)
 
 	ParseFileStruct parse_struct;
 
-	parse_struct.depth = 0;
 	number_of_files = 0;
 
 	GtkTreeIter dot_folder_iterator;
@@ -169,8 +166,6 @@ gboolean load_folder(gchar *path, GError **err)
 
 	currentFilePrevFileIter++;
 	prevFileIterArray[currentFilePrevFileIter] = parse_struct.current_iter;
-
-	parse_struct.depth++;
 
 
 	add_tree_file(&parse_struct.current_iter, ADD_CHILD, "<loading...>", &parse_struct.current_iter, FALSE, NULL);
