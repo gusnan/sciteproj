@@ -59,11 +59,7 @@ void launch_default_for_uri(GtkTreeModel *model, GtkTreeIter *iter)
 		goto EXITPOINT;
 	}
 
-	printf("Filename: %s\n", absFilePath);
-
 	gchar *newString = g_strdup_printf("%s%s", "file://", absFilePath);
-
-	printf("Newstring: %s\n", newString);
 
 	g_app_info_launch_default_for_uri((const gchar*)newString, NULL, &err);
 
