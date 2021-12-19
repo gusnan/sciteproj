@@ -44,6 +44,7 @@
 #include "sort.h"
 
 #include "clipboard.h"
+#include "launch_external.h"
 #include "recent_files.h"
 
 GtkWidget *menuBar = NULL;
@@ -78,6 +79,7 @@ GtkWidget *sortDescendingExtensionMenuItem = NULL;
 
 GtkWidget *openFileMenuItem = NULL;
 GtkWidget *copyFilenameMenuItem = NULL;
+GtkWidget *launchDefaultForUriMenuItem = NULL;
 
 GtkWidget *propertiesMenuItem = NULL;
 GtkWidget *propertiesFileMenuItem = NULL;
@@ -166,6 +168,9 @@ int init_menus(GtkWidget *window)
 	copyFilenameMenuItem = gtk_menu_item_new_with_mnemonic(_("Copy filename to clipboard"));
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), copyFilenameMenuItem);
 
+	launchDefaultForUriMenuItem = gtk_menu_item_new_with_mnemonic(_("Launch default program for uri"));
+	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), launchDefaultForUriMenuItem);
+
 	fileRightClickSeparator = gtk_separator_menu_item_new();
 	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), fileRightClickSeparator);
 
@@ -174,6 +179,7 @@ int init_menus(GtkWidget *window)
 
 	g_signal_connect(G_OBJECT(openFileMenuItem), "activate", G_CALLBACK(popup_open_file_cb), NULL);
 	g_signal_connect(G_OBJECT(copyFilenameMenuItem), "activate", G_CALLBACK(copy_filename_to_clipboard_cb), NULL);
+	g_signal_connect(G_OBJECT(launchDefaultForUriMenuItem), "activate", G_CALLBACK(launch_default_for_uri_cb), NULL);
 	g_signal_connect(G_OBJECT(propertiesFileMenuItem), "activate", G_CALLBACK(file_properties_cb), NULL);
 
 
