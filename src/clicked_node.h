@@ -27,10 +27,10 @@
  */
 struct ClickedNode
 {
-	gboolean valid;
-	GtkTreeIter iter;
-	gchar *name;
-	gint type;
+   gboolean valid;
+   GtkTreeIter iter;
+   gchar *name;
+   gint type;
 };
 
 typedef struct ClickedNode ClickedNode;

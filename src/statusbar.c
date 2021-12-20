@@ -41,29 +41,29 @@ guint context_id;
  */
 gboolean init_statusbar(GtkWidget *widget, GtkWidget *next_to, GError **err)
 {
-	statusbar = gtk_statusbar_new();
+   statusbar = gtk_statusbar_new();
 
-	if (!statusbar) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not init statusbar", __func__);
-		return FALSE;
-	}
+   if (!statusbar) {
+      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not init statusbar", __func__);
+      return FALSE;
+   }
 
-	// gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(statusbar),TRUE);
+   // gtk_statusbar_set_has_resize_grip(GTK_STATUSBAR(statusbar),TRUE);
 
-	gtk_widget_set_size_request(statusbar, 1, -1);
+   gtk_widget_set_size_request(statusbar, 1, -1);
 
-	context_id = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "Info");
+   context_id = gtk_statusbar_get_context_id(GTK_STATUSBAR(statusbar), "Info");
 
-	set_statusbar_text(_("Welcome to SciteProj\n"));
+   set_statusbar_text(_("Welcome to SciteProj\n"));
 
-	gtk_widget_set_size_request(statusbar, -1, 20);
+   gtk_widget_set_size_request(statusbar, -1, 20);
 
-	gtk_grid_attach_next_to(GTK_GRID(widget), statusbar, next_to, GTK_POS_BOTTOM, 1, 1);
+   gtk_grid_attach_next_to(GTK_GRID(widget), statusbar, next_to, GTK_POS_BOTTOM, 1, 1);
 
-	gtk_widget_show(statusbar);
+   gtk_widget_show(statusbar);
 
 
-	return TRUE;
+   return TRUE;
 }
 
 
@@ -72,35 +72,35 @@ gboolean init_statusbar(GtkWidget *widget, GtkWidget *next_to, GError **err)
  */
 void set_statusbar_text(const gchar *text)
 {
-	if (statusbar) {
+   if (statusbar) {
 
-		int co = 0;
-		// new string - fill it with characters from text indata, but skip
-		// non-showable characters.
+      int co = 0;
+      // new string - fill it with characters from text indata, but skip
+      // non-showable characters.
 
-		gchar *newstring = (gchar*)(g_malloc((int)(strlen(text) + 1)));
+      gchar *newstring = (gchar*)(g_malloc((int)(strlen(text) + 1)));
 
-		int newco = 0;
-		for (co = 0; co < (int)strlen(text); co++) {
-			if (text[co] != '\n') {
-				newstring[newco] = text[co];
-				newco++;
-			}
-		}
+      int newco = 0;
+      for (co = 0; co < (int)strlen(text); co++) {
+         if (text[co] != '\n') {
+            newstring[newco] = text[co];
+            newco++;
+         }
+      }
 
-		newstring[newco] = '\0';
+      newstring[newco] = '\0';
 
-		// Pop what message that was previously on the statusbar stack
-		gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id);
+      // Pop what message that was previously on the statusbar stack
+      gtk_statusbar_pop(GTK_STATUSBAR(statusbar), context_id);
 
-		// Push the new message (the statusbar will show the message that
-		// is on top of the statusbar stack, the one pushed will be shown)
-		// We popped the last one, because we don't take advantage of the
-		// context_id system of the statusbar.
-		gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id, newstring);
+      // Push the new message (the statusbar will show the message that
+      // is on top of the statusbar stack, the one pushed will be shown)
+      // We popped the last one, because we don't take advantage of the
+      // context_id system of the statusbar.
+      gtk_statusbar_push(GTK_STATUSBAR(statusbar), context_id, newstring);
 
-		g_free(newstring);
-	}
+      g_free(newstring);
+   }
 }
 
 
@@ -109,5 +109,5 @@ void set_statusbar_text(const gchar *text)
  */
 void done_statusbar()
 {
-	if (statusbar != NULL) gtk_widget_destroy(statusbar);
+   if (statusbar != NULL) gtk_widget_destroy(statusbar);
 }

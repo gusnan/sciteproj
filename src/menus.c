@@ -113,150 +113,150 @@ GtkWidget *recentMenuSeparator = NULL;
  */
 int init_menus(GtkWidget *window)
 {
-	menuBar = gtk_menu_bar_new();
+   menuBar = gtk_menu_bar_new();
 
-	fileMenuEntry = gtk_menu_item_new_with_mnemonic(_("_File"));
-	editMenuEntry = gtk_menu_item_new_with_mnemonic(_("_Edit"));
-	viewMenuEntry = gtk_menu_item_new_with_mnemonic(_("_View"));
-	helpMenuEntry = gtk_menu_item_new_with_mnemonic(_("_Help"));
+   fileMenuEntry = gtk_menu_item_new_with_mnemonic(_("_File"));
+   editMenuEntry = gtk_menu_item_new_with_mnemonic(_("_Edit"));
+   viewMenuEntry = gtk_menu_item_new_with_mnemonic(_("_View"));
+   helpMenuEntry = gtk_menu_item_new_with_mnemonic(_("_Help"));
 
-	filePopupMenu = gtk_menu_new();
-	editPopupMenu = gtk_menu_new();
-	viewPopupMenu = gtk_menu_new();
-	helpPopupMenu = gtk_menu_new();
+   filePopupMenu = gtk_menu_new();
+   editPopupMenu = gtk_menu_new();
+   viewPopupMenu = gtk_menu_new();
+   helpPopupMenu = gtk_menu_new();
 
-	menuSeparator = gtk_separator_menu_item_new();
+   menuSeparator = gtk_separator_menu_item_new();
 
-	quitMenuItem = gtk_menu_item_new_with_mnemonic(_("_Quit"));
+   quitMenuItem = gtk_menu_item_new_with_mnemonic(_("_Quit"));
 
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(fileMenuEntry), filePopupMenu);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(editMenuEntry), editPopupMenu);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(viewMenuEntry), viewPopupMenu);
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(helpMenuEntry), helpPopupMenu);
+   gtk_menu_item_set_submenu(GTK_MENU_ITEM(fileMenuEntry), filePopupMenu);
+   gtk_menu_item_set_submenu(GTK_MENU_ITEM(editMenuEntry), editPopupMenu);
+   gtk_menu_item_set_submenu(GTK_MENU_ITEM(viewMenuEntry), viewPopupMenu);
+   gtk_menu_item_set_submenu(GTK_MENU_ITEM(helpMenuEntry), helpPopupMenu);
 
-	gtk_menu_shell_append(GTK_MENU_SHELL(filePopupMenu), quitMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(filePopupMenu), quitMenuItem);
 
-	propertiesMenuItem = gtk_menu_item_new_with_mnemonic(_("Edit properties"));
+   propertiesMenuItem = gtk_menu_item_new_with_mnemonic(_("Edit properties"));
 
-	gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), propertiesMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(editPopupMenu), propertiesMenuItem);
 
-	g_signal_connect(G_OBJECT(propertiesMenuItem), "activate", G_CALLBACK(edit_properties_cb), NULL);
+   g_signal_connect(G_OBJECT(propertiesMenuItem), "activate", G_CALLBACK(edit_properties_cb), NULL);
 
-	showRecentFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Show Recently Opened Files"));
+   showRecentFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Show Recently Opened Files"));
 
-	g_signal_connect(G_OBJECT(showRecentFileMenuItem), "activate", G_CALLBACK(recent_files_switch_visible), NULL);
-	gtk_widget_add_accelerator(showRecentFileMenuItem, "activate", accelerator_group, GDK_KEY_r, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+   g_signal_connect(G_OBJECT(showRecentFileMenuItem), "activate", G_CALLBACK(recent_files_switch_visible), NULL);
+   gtk_widget_add_accelerator(showRecentFileMenuItem, "activate", accelerator_group, GDK_KEY_r, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
-	gtk_menu_shell_append(GTK_MENU_SHELL(viewPopupMenu), showRecentFileMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(viewPopupMenu), showRecentFileMenuItem);
 
-	aboutMenuItem = gtk_menu_item_new_with_mnemonic(_("About"));
+   aboutMenuItem = gtk_menu_item_new_with_mnemonic(_("About"));
 
-	g_signal_connect(G_OBJECT(aboutMenuItem), "activate", G_CALLBACK(about_menu_cb), NULL);
+   g_signal_connect(G_OBJECT(aboutMenuItem), "activate", G_CALLBACK(about_menu_cb), NULL);
 
-	gtk_menu_shell_append(GTK_MENU_SHELL(helpPopupMenu), aboutMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(helpPopupMenu), aboutMenuItem);
 
-	gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), fileMenuEntry);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), editMenuEntry);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), viewMenuEntry);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), helpMenuEntry);
+   gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), fileMenuEntry);
+   gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), editMenuEntry);
+   gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), viewMenuEntry);
+   gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), helpMenuEntry);
 
-	fileRightClickPopupMenu = gtk_menu_new();
+   fileRightClickPopupMenu = gtk_menu_new();
 
-	openFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Open file in SciTE"));
-	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), openFileMenuItem);
+   openFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Open file in SciTE"));
+   gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), openFileMenuItem);
 
-	copyFilenameMenuItem = gtk_menu_item_new_with_mnemonic(_("Copy filename to clipboard"));
-	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), copyFilenameMenuItem);
+   copyFilenameMenuItem = gtk_menu_item_new_with_mnemonic(_("Copy filename to clipboard"));
+   gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), copyFilenameMenuItem);
 
-	launchDefaultForUriMenuItem = gtk_menu_item_new_with_mnemonic(_("Launch default program for uri"));
-	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), launchDefaultForUriMenuItem);
+   launchDefaultForUriMenuItem = gtk_menu_item_new_with_mnemonic(_("Launch default program for uri"));
+   gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), launchDefaultForUriMenuItem);
 
-	fileRightClickSeparator = gtk_separator_menu_item_new();
-	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), fileRightClickSeparator);
+   fileRightClickSeparator = gtk_separator_menu_item_new();
+   gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), fileRightClickSeparator);
 
-	propertiesFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
-	gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), propertiesFileMenuItem);
+   propertiesFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
+   gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), propertiesFileMenuItem);
 
-	g_signal_connect(G_OBJECT(openFileMenuItem), "activate", G_CALLBACK(popup_open_file_cb), NULL);
-	g_signal_connect(G_OBJECT(copyFilenameMenuItem), "activate", G_CALLBACK(copy_filename_to_clipboard_cb), NULL);
-	g_signal_connect(G_OBJECT(launchDefaultForUriMenuItem), "activate", G_CALLBACK(launch_default_for_uri_cb), NULL);
-	g_signal_connect(G_OBJECT(propertiesFileMenuItem), "activate", G_CALLBACK(file_properties_cb), NULL);
+   g_signal_connect(G_OBJECT(openFileMenuItem), "activate", G_CALLBACK(popup_open_file_cb), NULL);
+   g_signal_connect(G_OBJECT(copyFilenameMenuItem), "activate", G_CALLBACK(copy_filename_to_clipboard_cb), NULL);
+   g_signal_connect(G_OBJECT(launchDefaultForUriMenuItem), "activate", G_CALLBACK(launch_default_for_uri_cb), NULL);
+   g_signal_connect(G_OBJECT(propertiesFileMenuItem), "activate", G_CALLBACK(file_properties_cb), NULL);
 
 
-	sortPopupMenu = gtk_menu_new();
+   sortPopupMenu = gtk_menu_new();
 
-	sortMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort folder contents"));
+   sortMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort folder contents"));
 
-	sortAscendingMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort ascending by name"));
-	sortDescendingMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort descending by name"));
+   sortAscendingMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort ascending by name"));
+   sortDescendingMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort descending by name"));
 
-	sortAscendingExtensionMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort ascending by extension"));
-	sortDescendingExtensionMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort descending by extension"));
-	sortSeparator = gtk_separator_menu_item_new();
+   sortAscendingExtensionMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort ascending by extension"));
+   sortDescendingExtensionMenuItem = gtk_menu_item_new_with_mnemonic(_("Sort descending by extension"));
+   sortSeparator = gtk_separator_menu_item_new();
 
-	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortAscendingMenuItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortDescendingMenuItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortSeparator);
-	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortAscendingExtensionMenuItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortDescendingExtensionMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortAscendingMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortDescendingMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortSeparator);
+   gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortAscendingExtensionMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(sortPopupMenu), sortDescendingExtensionMenuItem);
 
-	g_signal_connect(G_OBJECT(sortAscendingMenuItem), "activate", G_CALLBACK(sort_ascending_cb), NULL);
-	g_signal_connect(G_OBJECT(sortDescendingMenuItem), "activate", G_CALLBACK(sort_descending_cb), NULL);
-	g_signal_connect(G_OBJECT(sortAscendingExtensionMenuItem), "activate", G_CALLBACK(sort_ascending_by_extension_cb), NULL);
-	g_signal_connect(G_OBJECT(sortDescendingExtensionMenuItem), "activate", G_CALLBACK(sort_descending_by_extension_cb), NULL);
+   g_signal_connect(G_OBJECT(sortAscendingMenuItem), "activate", G_CALLBACK(sort_ascending_cb), NULL);
+   g_signal_connect(G_OBJECT(sortDescendingMenuItem), "activate", G_CALLBACK(sort_descending_cb), NULL);
+   g_signal_connect(G_OBJECT(sortAscendingExtensionMenuItem), "activate", G_CALLBACK(sort_ascending_by_extension_cb), NULL);
+   g_signal_connect(G_OBJECT(sortDescendingExtensionMenuItem), "activate", G_CALLBACK(sort_descending_by_extension_cb), NULL);
 
-	gtk_menu_item_set_submenu(GTK_MENU_ITEM(sortMenuItem), sortPopupMenu);
+   gtk_menu_item_set_submenu(GTK_MENU_ITEM(sortMenuItem), sortPopupMenu);
 
-	groupRightClickPopupMenu = gtk_menu_new();
+   groupRightClickPopupMenu = gtk_menu_new();
 
-	folderPopupSeparator1 = gtk_separator_menu_item_new();
-	folderPopupSeparator2 = gtk_separator_menu_item_new();
+   folderPopupSeparator1 = gtk_separator_menu_item_new();
+   folderPopupSeparator2 = gtk_separator_menu_item_new();
 
-	propertiesGroupMenuItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
+   propertiesGroupMenuItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
 
-	updateFolderContentMenuItem = gtk_menu_item_new_with_mnemonic(_("Update folder content"));
+   updateFolderContentMenuItem = gtk_menu_item_new_with_mnemonic(_("Update folder content"));
 
-	gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), sortMenuItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator1);
-	gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), updateFolderContentMenuItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator2);
-	gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), propertiesGroupMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), sortMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator1);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), updateFolderContentMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator2);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), propertiesGroupMenuItem);
 
-	g_signal_connect(G_OBJECT(propertiesGroupMenuItem), "activate", G_CALLBACK(group_properties_cb), NULL);
+   g_signal_connect(G_OBJECT(propertiesGroupMenuItem), "activate", G_CALLBACK(group_properties_cb), NULL);
 
-	g_signal_connect(G_OBJECT(updateFolderContentMenuItem), "activate", G_CALLBACK(refresh_folder_cb), NULL);
+   g_signal_connect(G_OBJECT(updateFolderContentMenuItem), "activate", G_CALLBACK(refresh_folder_cb), NULL);
 
-	gtk_widget_show_all(groupRightClickPopupMenu);
+   gtk_widget_show_all(groupRightClickPopupMenu);
 
-	gtk_widget_show_all(fileRightClickPopupMenu);
+   gtk_widget_show_all(fileRightClickPopupMenu);
 
-	gtk_widget_show_all(GTK_WIDGET(menuBar));
+   gtk_widget_show_all(GTK_WIDGET(menuBar));
 
-	gtk_widget_add_accelerator(quitMenuItem, "activate", accelerator_group, GDK_KEY_q, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+   gtk_widget_add_accelerator(quitMenuItem, "activate", accelerator_group, GDK_KEY_q, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
 
-	g_signal_connect(G_OBJECT(quitMenuItem), "activate", G_CALLBACK(quit_menu_cb), NULL);
+   g_signal_connect(G_OBJECT(quitMenuItem), "activate", G_CALLBACK(quit_menu_cb), NULL);
 
-	recentPopupMenu = gtk_menu_new();
+   recentPopupMenu = gtk_menu_new();
 
-	recentMenuOpenFileItem = gtk_menu_item_new_with_mnemonic(_("Open file in SciTE"));
-	recentMenuRemoveFileItem = gtk_menu_item_new_with_mnemonic(_("Remove file from this list"));
-	recentMenuCopyFilenameItem = gtk_menu_item_new_with_mnemonic(_("Copy filename to clipboard"));
-	recentMenuPropertiesItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
+   recentMenuOpenFileItem = gtk_menu_item_new_with_mnemonic(_("Open file in SciTE"));
+   recentMenuRemoveFileItem = gtk_menu_item_new_with_mnemonic(_("Remove file from this list"));
+   recentMenuCopyFilenameItem = gtk_menu_item_new_with_mnemonic(_("Copy filename to clipboard"));
+   recentMenuPropertiesItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
 
-	recentMenuSeparator = gtk_separator_menu_item_new();
+   recentMenuSeparator = gtk_separator_menu_item_new();
 
-	g_signal_connect(G_OBJECT(recentMenuOpenFileItem), "activate", G_CALLBACK(popup_open_recent_file_cb), NULL);
-	g_signal_connect(G_OBJECT(recentMenuRemoveFileItem), "activate", G_CALLBACK(popup_remove_recent_file_cb), NULL);
-	g_signal_connect(G_OBJECT(recentMenuCopyFilenameItem), "activate", G_CALLBACK(copy_recent_filename_to_clipboard_cb), NULL);
-	g_signal_connect(G_OBJECT(recentMenuPropertiesItem), "activate", G_CALLBACK(properties_recent_file_cb), NULL);
+   g_signal_connect(G_OBJECT(recentMenuOpenFileItem), "activate", G_CALLBACK(popup_open_recent_file_cb), NULL);
+   g_signal_connect(G_OBJECT(recentMenuRemoveFileItem), "activate", G_CALLBACK(popup_remove_recent_file_cb), NULL);
+   g_signal_connect(G_OBJECT(recentMenuCopyFilenameItem), "activate", G_CALLBACK(copy_recent_filename_to_clipboard_cb), NULL);
+   g_signal_connect(G_OBJECT(recentMenuPropertiesItem), "activate", G_CALLBACK(properties_recent_file_cb), NULL);
 
-	gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuOpenFileItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuRemoveFileItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuCopyFilenameItem);
-	gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuSeparator);
-	gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuPropertiesItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuOpenFileItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuRemoveFileItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuCopyFilenameItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuSeparator);
+   gtk_menu_shell_append(GTK_MENU_SHELL(recentPopupMenu),recentMenuPropertiesItem);
 
-	gtk_widget_show_all(GTK_WIDGET(recentPopupMenu));
+   gtk_widget_show_all(GTK_WIDGET(recentPopupMenu));
 
-	return 0;
+   return 0;
 }

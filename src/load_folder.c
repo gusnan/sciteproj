@@ -36,7 +36,7 @@
 
 
 struct ParseFileStruct {
-	GtkTreeIter current_iter;
+   GtkTreeIter current_iter;
 };
 
 typedef struct ParseFileStruct ParseFileStruct;
@@ -54,35 +54,35 @@ int number_of_files=0;
  */
 gboolean ignore_pattern_matches(gchar *folder_name, const gchar *filename, GSList *filter_list)
 {
-	gboolean result = FALSE;
+   gboolean result = FALSE;
 
-	gchar *full_filename = g_build_filename(folder_name, filename, NULL);
+   gchar *full_filename = g_build_filename(folder_name, filename, NULL);
 
-	int len = strlen(full_filename);
+   int len = strlen(full_filename);
 
-	if (filter_list) {
-		while (filter_list && !result)	{
+   if (filter_list) {
+      while (filter_list && !result)	{
 
-			gchar *filter = (gchar *)filter_list->data;
+         gchar *filter = (gchar *)filter_list->data;
 
-			gchar *temp_filter_string = g_build_filename(get_project_directory(), filter, NULL);
+         gchar *temp_filter_string = g_build_filename(get_project_directory(), filter, NULL);
 
-			GPatternSpec *pattern_spec = g_pattern_spec_new(temp_filter_string);
+         GPatternSpec *pattern_spec = g_pattern_spec_new(temp_filter_string);
 
-			if (g_pattern_match(pattern_spec, len, full_filename, NULL)) {
-				result = TRUE;
-			}
+         if (g_pattern_match(pattern_spec, len, full_filename, NULL)) {
+            result = TRUE;
+         }
 
-			g_pattern_spec_free(pattern_spec);
-			g_free(temp_filter_string);
+         g_pattern_spec_free(pattern_spec);
+         g_free(temp_filter_string);
 
-			filter_list = filter_list->next;
-		};
-	}
+         filter_list = filter_list->next;
+      };
+   }
 
-	g_free(full_filename);
+   g_free(full_filename);
 
-	return result;
+   return result;
 }
 
 
@@ -91,51 +91,51 @@ gboolean ignore_pattern_matches(gchar *folder_name, const gchar *filename, GSLis
  */
 GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GCompareFunc compare_func, GSList *filter_list)
 {
-	GSList *result_list = NULL;
+   GSList *result_list = NULL;
 
-	GDir *dir = g_dir_open(folder_path, 0, NULL);
+   GDir *dir = g_dir_open(folder_path, 0, NULL);
 
-	const gchar *short_filename;
+   const gchar *short_filename;
 
-	while((short_filename = g_dir_read_name(dir))) {
+   while((short_filename = g_dir_read_name(dir))) {
 
-		gchar *current_filename = g_strdup(short_filename);
+      gchar *current_filename = g_strdup(short_filename);
 
-		gchar *temp_file = g_build_filename(folder_path, current_filename, NULL);
+      gchar *temp_file = g_build_filename(folder_path, current_filename, NULL);
 
-		if (read_directories) {
+      if (read_directories) {
 
-			if (g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
+         if (g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
 
-				if (filter_list != NULL) {
-					if (!ignore_pattern_matches(folder_path, short_filename, filter_list)) {
-						result_list = g_slist_prepend(result_list, (gpointer)current_filename);
-					}
-				} else {
-					result_list = g_slist_prepend(result_list, (gpointer)current_filename);
-				}
-			}
+            if (filter_list != NULL) {
+               if (!ignore_pattern_matches(folder_path, short_filename, filter_list)) {
+                  result_list = g_slist_prepend(result_list, (gpointer)current_filename);
+               }
+            } else {
+               result_list = g_slist_prepend(result_list, (gpointer)current_filename);
+            }
+         }
 
-		} else {
+      } else {
 
-			if (!g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
+         if (!g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
 
-				if (filter_list != NULL) {
-					if (!ignore_pattern_matches(folder_path, short_filename, filter_list)) {
-						result_list = g_slist_prepend(result_list, (gpointer)temp_file);
-					}
-				} else {
-					result_list = g_slist_prepend(result_list, (gpointer)temp_file);
-				}
-			}
-		}
-	}
+            if (filter_list != NULL) {
+               if (!ignore_pattern_matches(folder_path, short_filename, filter_list)) {
+                  result_list = g_slist_prepend(result_list, (gpointer)temp_file);
+               }
+            } else {
+               result_list = g_slist_prepend(result_list, (gpointer)temp_file);
+            }
+         }
+      }
+   }
 
-	g_dir_close(dir);
+   g_dir_close(dir);
 
-	result_list = g_slist_sort(result_list, compare_func);
+   result_list = g_slist_sort(result_list, compare_func);
 
-	return result_list;
+   return result_list;
 }
 
 
@@ -146,46 +146,46 @@ GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GComp
  */
 gboolean load_folder(gchar *path, GError **err)
 {
-	GtkTreeModel *model;
+   GtkTreeModel *model;
 
-	model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
+   model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
 
-	ParseFileStruct parse_struct;
+   ParseFileStruct parse_struct;
 
-	number_of_files = 0;
+   number_of_files = 0;
 
-	GtkTreeIter dot_folder_iterator;
+   GtkTreeIter dot_folder_iterator;
 
-	add_tree_group(NULL, ADD_CHILD, ".", path/*get_filename_from_full_path(project_path)*/ , TRUE, &(parse_struct.current_iter), NULL);
-	//add_tree_file(NULL, ADD_CHILD, project_path , &(parse_struct.current_iter), TRUE, NULL);
+   add_tree_group(NULL, ADD_CHILD, ".", path/*get_filename_from_full_path(project_path)*/ , TRUE, &(parse_struct.current_iter), NULL);
+   //add_tree_file(NULL, ADD_CHILD, project_path , &(parse_struct.current_iter), TRUE, NULL);
 
-	dot_folder_iterator = parse_struct.current_iter;
+   dot_folder_iterator = parse_struct.current_iter;
 
-	prevFileIterValid[currentFilePrevFileIter] = FALSE;
-	prevFileIterArray[currentFilePrevFileIter] = parse_struct.current_iter;
+   prevFileIterValid[currentFilePrevFileIter] = FALSE;
+   prevFileIterArray[currentFilePrevFileIter] = parse_struct.current_iter;
 
-	currentFilePrevFileIter++;
-	prevFileIterArray[currentFilePrevFileIter] = parse_struct.current_iter;
-
-
-	add_tree_file(&parse_struct.current_iter, ADD_CHILD, "<loading...>", &parse_struct.current_iter, FALSE, NULL);
+   currentFilePrevFileIter++;
+   prevFileIterArray[currentFilePrevFileIter] = parse_struct.current_iter;
 
 
-	//current_max_depth=0;
+   add_tree_file(&parse_struct.current_iter, ADD_CHILD, "<loading...>", &parse_struct.current_iter, FALSE, NULL);
 
-	//read_folder(GTK_TREE_STORE(model), path, &parse_struct, NULL);
 
-	// Expand the dot-folder
-	// void expand_tree_row(GtkTreePath *path, gboolean expandChildren);
+   //current_max_depth=0;
 
-	GtkTreePath *iter_path = gtk_tree_model_get_path(GTK_TREE_MODEL(model), &dot_folder_iterator);
+   //read_folder(GTK_TREE_STORE(model), path, &parse_struct, NULL);
 
-	if (iter_path)
-		expand_tree_row(iter_path, FALSE);
+   // Expand the dot-folder
+   // void expand_tree_row(GtkTreePath *path, gboolean expandChildren);
 
-	gtk_tree_path_free(iter_path);
+   GtkTreePath *iter_path = gtk_tree_model_get_path(GTK_TREE_MODEL(model), &dot_folder_iterator);
 
-	start_expand_tree(GTK_TREE_MODEL(model), &dot_folder_iterator);
+   if (iter_path)
+      expand_tree_row(iter_path, FALSE);
 
-	return TRUE;
+   gtk_tree_path_free(iter_path);
+
+   start_expand_tree(GTK_TREE_MODEL(model), &dot_folder_iterator);
+
+   return TRUE;
 }

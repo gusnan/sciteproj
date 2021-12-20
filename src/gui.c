@@ -104,276 +104,276 @@ GtkWidget *recentHbox = NULL;
  */
 gboolean setup_gui(GError **err)
 {
-	gboolean resultCode = FALSE;
-	GtkTreeSelection *selection = NULL;
-	GtkWidget *vpaned = NULL;
+   gboolean resultCode = FALSE;
+   GtkTreeSelection *selection = NULL;
+   GtkWidget *vpaned = NULL;
 
-	GtkTreeStore *projectTreeStore = NULL;
-	//GtkAccelGroup* accelgroup = NULL;
-	GError *tempErr = NULL;
+   GtkTreeStore *projectTreeStore = NULL;
+   //GtkAccelGroup* accelgroup = NULL;
+   GError *tempErr = NULL;
 
-	GtkWidget *grid;
-	GtkWidget *fullGrid = NULL;
+   GtkWidget *grid;
+   GtkWidget *fullGrid = NULL;
 
-	GtkWidget *recentScrolledWindow = NULL;
+   GtkWidget *recentScrolledWindow = NULL;
 
 
-	clicked_node.valid = FALSE;
-	clicked_node.name = NULL;
-	clicked_node.type = -1;
+   clicked_node.valid = FALSE;
+   clicked_node.name = NULL;
+   clicked_node.type = -1;
 
-	window_saved_title=g_strdup_printf(_("[UNTITLED]"));
+   window_saved_title=g_strdup_printf(_("[UNTITLED]"));
 
-	// Create top-level window, configure it
+   // Create top-level window, configure it
 
-	if (!(sMainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_window_new() = NULL",
-		            __func__,
-		            "Couldn't init main window"
-		           );
+   if (!(sMainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL))) {
+      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_window_new() = NULL",
+                  __func__,
+                  "Couldn't init main window"
+                 );
 
-		goto EXITPOINT;
-	}
+      goto EXITPOINT;
+   }
 
-	// TODO: call these in load_graphics instead
+   // TODO: call these in load_graphics instead
 
-	if (!(load_graphics(sMainWindow, err))) {
-		goto EXITPOINT;
-	}
+   if (!(load_graphics(sMainWindow, err))) {
+      goto EXITPOINT;
+   }
 
-	gtk_window_set_icon(GTK_WINDOW(sMainWindow), program_icon_pixbuf);
-	gtk_window_set_default_icon(program_icon_pixbuf);
+   gtk_window_set_icon(GTK_WINDOW(sMainWindow), program_icon_pixbuf);
+   gtk_window_set_default_icon(program_icon_pixbuf);
 
-	gtk_window_set_title(GTK_WINDOW(sMainWindow), window_saved_title);
+   gtk_window_set_title(GTK_WINDOW(sMainWindow), window_saved_title);
 
-	gtk_container_set_border_width(GTK_CONTAINER(sMainWindow), 0);	//3
-	g_signal_connect(G_OBJECT(sMainWindow), "delete_event", G_CALLBACK(window_delete_event_cb), NULL);
+   gtk_container_set_border_width(GTK_CONTAINER(sMainWindow), 0);	//3
+   g_signal_connect(G_OBJECT(sMainWindow), "delete_event", G_CALLBACK(window_delete_event_cb), NULL);
 
-	// Main content of the window is a vpaned
+   // Main content of the window is a vpaned
 
-	vpaned = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
+   vpaned = gtk_paned_new(GTK_ORIENTATION_VERTICAL);
 
-	// Then we need a grid
-	grid = gtk_grid_new();
+   // Then we need a grid
+   grid = gtk_grid_new();
 
-	// Activate the keyboard accelerators
+   // Activate the keyboard accelerators
 
-	accelerator_group = gtk_accel_group_new();
-	gtk_window_add_accel_group(GTK_WINDOW(sMainWindow), accelerator_group);
+   accelerator_group = gtk_accel_group_new();
+   gtk_window_add_accel_group(GTK_WINDOW(sMainWindow), accelerator_group);
 
-	if (init_menus(sMainWindow) != 0) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
-		            __func__,
-		            "Couldn't init menus"
-		           );
-		goto EXITPOINT;
-	}
+   if (init_menus(sMainWindow) != 0) {
+      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
+                  __func__,
+                  "Couldn't init menus"
+                 );
+      goto EXITPOINT;
+   }
 
-	// Add a scrolled window to the main window
-	if (!(scrolledWindow = gtk_scrolled_window_new(NULL, NULL))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
-		            __func__,
-		            "Couldn't init main scrolled window"
-		           );
+   // Add a scrolled window to the main window
+   if (!(scrolledWindow = gtk_scrolled_window_new(NULL, NULL))) {
+      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_scrolled_window_new() = NULL",
+                  __func__,
+                  "Couldn't init main scrolled window"
+                 );
 
-		goto EXITPOINT;
-	}
+      goto EXITPOINT;
+   }
 
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow),
-	                               GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
+   gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow),
+                                  GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
 
-	gtk_grid_attach(GTK_GRID(grid), scrolledWindow, 0, 1, 1, 1);
+   gtk_grid_attach(GTK_GRID(grid), scrolledWindow, 0, 1, 1, 1);
 
-	gtk_widget_set_vexpand(scrolledWindow, TRUE);
-	gtk_widget_set_hexpand(scrolledWindow, TRUE);
+   gtk_widget_set_vexpand(scrolledWindow, TRUE);
+   gtk_widget_set_hexpand(scrolledWindow, TRUE);
 
-	// Create the tree datastore
+   // Create the tree datastore
 
-	if ((projectTreeStore = create_treestore(&tempErr)) == NULL) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s",
-		            tempErr->message,
-		            "Couldn't init treestore"
-		           );
-		goto EXITPOINT;
-	}
+   if ((projectTreeStore = create_treestore(&tempErr)) == NULL) {
+      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s",
+                  tempErr->message,
+                  "Couldn't init treestore"
+                 );
+      goto EXITPOINT;
+   }
 
-	// Create the treeview, set it up to render the tree datastore, and add it to the hbox
+   // Create the treeview, set it up to render the tree datastore, and add it to the hbox
 
-	if (!(projectTreeView = gtk_tree_view_new_with_model(GTK_TREE_MODEL(projectTreeStore)))) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_tree_view_new_with_model() = NULL",
-		            __func__,
-		            "Couldn't init gtk_tree_view"
-		           );
+   if (!(projectTreeView = gtk_tree_view_new_with_model(GTK_TREE_MODEL(projectTreeStore)))) {
+      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_tree_view_new_with_model() = NULL",
+                  __func__,
+                  "Couldn't init gtk_tree_view"
+                 );
 
-		goto EXITPOINT;
-	}
+      goto EXITPOINT;
+   }
 
-	gtk_tree_view_set_enable_search(GTK_TREE_VIEW(projectTreeView), TRUE);
+   gtk_tree_view_set_enable_search(GTK_TREE_VIEW(projectTreeView), TRUE);
 
-	if (!(textCellRenderer = gtk_cell_renderer_text_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_cell_renderer_text_new() = NULL",
-		            __func__,
-		            "Couldn't init cell renderer"
-		           );
+   if (!(textCellRenderer = gtk_cell_renderer_text_new())) {
+      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s, gtk_cell_renderer_text_new() = NULL",
+                  __func__,
+                  "Couldn't init cell renderer"
+                 );
 
-		goto EXITPOINT;
-	}
+      goto EXITPOINT;
+   }
 
-	g_object_set(G_OBJECT(textCellRenderer),
-	             "editable", FALSE,
-	             "mode", GTK_CELL_RENDERER_MODE_EDITABLE,
-	             NULL);
+   g_object_set(G_OBJECT(textCellRenderer),
+                "editable", FALSE,
+                "mode", GTK_CELL_RENDERER_MODE_EDITABLE,
+                NULL);
 
-	if (!(pixbuffCellRenderer = gtk_cell_renderer_pixbuf_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-		            "%s: %s, gtk_cell_renderer_pixbuf_new() = NULL",
-		            __func__,
-		            "Couldn't init gtk_cell_renderer_pixbuf"
-		           );
+   if (!(pixbuffCellRenderer = gtk_cell_renderer_pixbuf_new())) {
+      g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+                  "%s: %s, gtk_cell_renderer_pixbuf_new() = NULL",
+                  __func__,
+                  "Couldn't init gtk_cell_renderer_pixbuf"
+                 );
 
-		goto EXITPOINT;
-	}
+      goto EXITPOINT;
+   }
 
-	if (!(column1 = gtk_tree_view_column_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR, -1,
-		            "%s: %s, gtk_tree_view_column_new() = NULL",
-		            __func__,
-		            "Couldn't init gtk_tree_view_column"
-		           );
+   if (!(column1 = gtk_tree_view_column_new())) {
+      g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+                  "%s: %s, gtk_tree_view_column_new() = NULL",
+                  __func__,
+                  "Couldn't init gtk_tree_view_column"
+                 );
 
-		goto EXITPOINT;
-	}
+      goto EXITPOINT;
+   }
 
-	gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(projectTreeView), FALSE);
+   gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(projectTreeView), FALSE);
 
-	gtk_tree_view_column_set_resizable(column1, TRUE);
-	gtk_tree_view_column_set_min_width(column1, (int)(prefs.width * .75));
+   gtk_tree_view_column_set_resizable(column1, TRUE);
+   gtk_tree_view_column_set_min_width(column1, (int)(prefs.width * .75));
 
 
-	gtk_tree_view_column_pack_start(column1, pixbuffCellRenderer, FALSE);
-	gtk_tree_view_column_add_attribute(column1, pixbuffCellRenderer, "pixbuf", COLUMN_ICON);
+   gtk_tree_view_column_pack_start(column1, pixbuffCellRenderer, FALSE);
+   gtk_tree_view_column_add_attribute(column1, pixbuffCellRenderer, "pixbuf", COLUMN_ICON);
 
 
-	gtk_tree_view_column_pack_start(column1, textCellRenderer, TRUE);
-	gtk_tree_view_column_add_attribute(column1, textCellRenderer, "text", COLUMN_FILENAME);
-	gtk_tree_view_column_add_attribute(column1, textCellRenderer, "weight", COLUMN_FONTWEIGHT);
-	gtk_tree_view_column_add_attribute(column1, textCellRenderer, "weight-set", COLUMN_FONTWEIGHTSET);
+   gtk_tree_view_column_pack_start(column1, textCellRenderer, TRUE);
+   gtk_tree_view_column_add_attribute(column1, textCellRenderer, "text", COLUMN_FILENAME);
+   gtk_tree_view_column_add_attribute(column1, textCellRenderer, "weight", COLUMN_FONTWEIGHT);
+   gtk_tree_view_column_add_attribute(column1, textCellRenderer, "weight-set", COLUMN_FONTWEIGHTSET);
 
-	gtk_tree_view_append_column(GTK_TREE_VIEW(projectTreeView), column1);
+   gtk_tree_view_append_column(GTK_TREE_VIEW(projectTreeView), column1);
 
-	// Stoopid gtk always expands the last column
+   // Stoopid gtk always expands the last column
 
-	gtk_container_add(GTK_CONTAINER(scrolledWindow), projectTreeView);
+   gtk_container_add(GTK_CONTAINER(scrolledWindow), projectTreeView);
 
-	// Get tree events
+   // Get tree events
 
-	selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
-	gtk_tree_selection_set_mode(selection, GTK_SELECTION_MULTIPLE);
+   selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(projectTreeView));
+   gtk_tree_selection_set_mode(selection, GTK_SELECTION_MULTIPLE);
 
-	g_signal_connect(G_OBJECT(projectTreeView), "row-activated",
-	                 G_CALLBACK(tree_row_activated_cb), NULL);
+   g_signal_connect(G_OBJECT(projectTreeView), "row-activated",
+                    G_CALLBACK(tree_row_activated_cb), NULL);
 
-	gtk_tree_view_set_search_equal_func(GTK_TREE_VIEW(projectTreeView),
-	                                    tree_view_search_equal_func, NULL, NULL);
+   gtk_tree_view_set_search_equal_func(GTK_TREE_VIEW(projectTreeView),
+                                       tree_view_search_equal_func, NULL, NULL);
 
-	g_signal_connect(G_OBJECT(projectTreeView), "row-expanded",
-	                 G_CALLBACK(row_expand_or_collapse_cb), NULL);
+   g_signal_connect(G_OBJECT(projectTreeView), "row-expanded",
+                    G_CALLBACK(row_expand_or_collapse_cb), NULL);
 
-	g_signal_connect(G_OBJECT(projectTreeView), "row-collapsed",
-	                 G_CALLBACK(row_expand_or_collapse_cb), NULL);
+   g_signal_connect(G_OBJECT(projectTreeView), "row-collapsed",
+                    G_CALLBACK(row_expand_or_collapse_cb), NULL);
 
 
-	g_signal_connect(G_OBJECT(projectTreeView), "button-press-event",
-	                 G_CALLBACK(mouse_button_pressed_cb), projectTreeView);
+   g_signal_connect(G_OBJECT(projectTreeView), "button-press-event",
+                    G_CALLBACK(mouse_button_pressed_cb), projectTreeView);
 
-	g_signal_connect(G_OBJECT(projectTreeView), "key-press-event",
-	                 G_CALLBACK(key_press_cb), projectTreeView);
+   g_signal_connect(G_OBJECT(projectTreeView), "key-press-event",
+                    G_CALLBACK(key_press_cb), projectTreeView);
 
-	// --------------------------------
-	// Recent file stuff:
+   // --------------------------------
+   // Recent file stuff:
 
-	if (!(recentGrid = gtk_grid_new())) {
-		g_set_error(err, APP_SCITEPROJ_ERROR,-1,
-		            "%s: %s, gtk_grid_new() = NULL",
-		            "Couldn't init recent grid",
-		            __func__);
-		goto EXITPOINT;
-	}
+   if (!(recentGrid = gtk_grid_new())) {
+      g_set_error(err, APP_SCITEPROJ_ERROR,-1,
+                  "%s: %s, gtk_grid_new() = NULL",
+                  "Couldn't init recent grid",
+                  __func__);
+      goto EXITPOINT;
+   }
 
-	if ((recentScrolledWindow = init_recent_files(&tempErr)) == NULL) {
+   if ((recentScrolledWindow = init_recent_files(&tempErr)) == NULL) {
 
-		goto EXITPOINT;
-	}
+      goto EXITPOINT;
+   }
 
 
-	gtk_widget_set_vexpand(recentScrolledWindow, TRUE);
-	gtk_widget_set_hexpand(recentScrolledWindow, TRUE);
+   gtk_widget_set_vexpand(recentScrolledWindow, TRUE);
+   gtk_widget_set_hexpand(recentScrolledWindow, TRUE);
 
-	gtk_grid_attach(GTK_GRID(recentGrid), recentScrolledWindow, 0, 0, 1, 1);
+   gtk_grid_attach(GTK_GRID(recentGrid), recentScrolledWindow, 0, 0, 1, 1);
 
-	fullGrid = gtk_grid_new();
+   fullGrid = gtk_grid_new();
 
 
 
-	gtk_paned_pack1(GTK_PANED(vpaned), grid, TRUE, FALSE);
-	gtk_paned_pack2(GTK_PANED(vpaned), recentGrid, TRUE, TRUE);
+   gtk_paned_pack1(GTK_PANED(vpaned), grid, TRUE, FALSE);
+   gtk_paned_pack2(GTK_PANED(vpaned), recentGrid, TRUE, TRUE);
 
-	gtk_widget_show(vpaned);
+   gtk_widget_show(vpaned);
 
 
 
-	gtk_grid_insert_row(GTK_GRID(fullGrid), 0);
-	gtk_grid_attach(GTK_GRID(fullGrid), vpaned, 0, 0, 1, 1);
+   gtk_grid_insert_row(GTK_GRID(fullGrid), 0);
+   gtk_grid_attach(GTK_GRID(fullGrid), vpaned, 0, 0, 1, 1);
 
-	gtk_grid_insert_row(GTK_GRID(fullGrid), 0);
-	gtk_grid_attach(GTK_GRID(fullGrid), menuBar, 0, 0, 1, 1);
+   gtk_grid_insert_row(GTK_GRID(fullGrid), 0);
+   gtk_grid_attach(GTK_GRID(fullGrid), menuBar, 0, 0, 1, 1);
 
-	gtk_widget_show(menuBar);
+   gtk_widget_show(menuBar);
 
-	gtk_widget_show(GTK_WIDGET(fullGrid));
+   gtk_widget_show(GTK_WIDGET(fullGrid));
 
-	if (!prefs.hide_statusbar) {
-		if (!init_statusbar(fullGrid, vpaned, &tempErr)) {
-			g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s", tempErr->message, "Error initing statusbar");
-			goto EXITPOINT;
-		}
-	}
+   if (!prefs.hide_statusbar) {
+      if (!init_statusbar(fullGrid, vpaned, &tempErr)) {
+         g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: %s", tempErr->message, "Error initing statusbar");
+         goto EXITPOINT;
+      }
+   }
 
-	gtk_container_add(GTK_CONTAINER(sMainWindow), fullGrid);
+   gtk_container_add(GTK_CONTAINER(sMainWindow), fullGrid);
 
 
-	g_signal_connect(G_OBJECT(recentTreeView), "key-press-event", G_CALLBACK(key_press_cb), recentTreeView);
+   g_signal_connect(G_OBJECT(recentTreeView), "key-press-event", G_CALLBACK(key_press_cb), recentTreeView);
 
-	gtk_window_resize(GTK_WINDOW(sMainWindow), prefs.width, prefs.height);
-	gtk_window_move(GTK_WINDOW(sMainWindow), prefs.xpos, prefs.ypos);
+   gtk_window_resize(GTK_WINDOW(sMainWindow), prefs.width, prefs.height);
+   gtk_window_move(GTK_WINDOW(sMainWindow), prefs.xpos, prefs.ypos);
 
-	int window_xsize, window_ysize;
-	gtk_window_get_size(GTK_WINDOW(sMainWindow), &window_xsize, &window_ysize);
+   int window_xsize, window_ysize;
+   gtk_window_get_size(GTK_WINDOW(sMainWindow), &window_xsize, &window_ysize);
 
-	gtk_paned_set_position(GTK_PANED(vpaned), (int)(window_ysize*0.75));
+   gtk_paned_set_position(GTK_PANED(vpaned), (int)(window_ysize*0.75));
 
-	// Show it all....
+   // Show it all....
 
-	gtk_widget_show(recentGrid);
+   gtk_widget_show(recentGrid);
 
-	if (!prefs.show_recent) {
-		gtk_widget_hide(recentGrid);
-	} else {
-		gtk_widget_show(recentGrid);
-	}
+   if (!prefs.show_recent) {
+      gtk_widget_hide(recentGrid);
+   } else {
+      gtk_widget_show(recentGrid);
+   }
 
-	gtk_widget_show(projectTreeView);
-	gtk_widget_show(scrolledWindow);
-	gtk_widget_show(grid);
-	gtk_widget_show(sMainWindow);
+   gtk_widget_show(projectTreeView);
+   gtk_widget_show(scrolledWindow);
+   gtk_widget_show(grid);
+   gtk_widget_show(sMainWindow);
 
-	resultCode = TRUE;
+   resultCode = TRUE;
 
 EXITPOINT:
 
-	if (tempErr) g_error_free(tempErr);
+   if (tempErr) g_error_free(tempErr);
 
-	return resultCode;
+   return resultCode;
 }
 
 
@@ -382,15 +382,15 @@ EXITPOINT:
  */
 void gui_close()
 {
-	if (window_saved_title) g_free(window_saved_title);
+   if (window_saved_title) g_free(window_saved_title);
 
-	if (scrolledWindow) gtk_widget_destroy(scrolledWindow);
+   if (scrolledWindow) gtk_widget_destroy(scrolledWindow);
 
-	unload_graphics();
+   unload_graphics();
 
-	done_statusbar();
+   done_statusbar();
 
-	if (sMainWindow) gtk_widget_destroy(sMainWindow);
+   if (sMainWindow) gtk_widget_destroy(sMainWindow);
 }
 
 
@@ -404,9 +404,9 @@ void gui_close()
  */
 gboolean tree_row_is_expanded(GtkTreePath *path)
 {
-	g_assert(path != NULL);
+   g_assert(path != NULL);
 
-	return gtk_tree_view_row_expanded(GTK_TREE_VIEW(projectTreeView), path);
+   return gtk_tree_view_row_expanded(GTK_TREE_VIEW(projectTreeView), path);
 }
 
 
@@ -419,9 +419,9 @@ gboolean tree_row_is_expanded(GtkTreePath *path)
  */
 void expand_tree_row(GtkTreePath *path, gboolean expandChildren)
 {
-	if (path != NULL) {
-		gtk_tree_view_expand_row(GTK_TREE_VIEW(projectTreeView), path, FALSE);
-	}
+   if (path != NULL) {
+      gtk_tree_view_expand_row(GTK_TREE_VIEW(projectTreeView), path, FALSE);
+   }
 }
 
 
@@ -435,11 +435,11 @@ void expand_tree_row(GtkTreePath *path, gboolean expandChildren)
  */
 static gint window_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer data)
 {
-	gboolean eventHandled = TRUE;
+   gboolean eventHandled = TRUE;
 
-	gtk_main_quit();
+   gtk_main_quit();
 
-	return eventHandled;
+   return eventHandled;
 }
 
 
@@ -448,30 +448,30 @@ static gint window_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer 
  */
 static void switch_folder_icon(GtkTreeView *treeView, GtkTreePath *path)
 {
-	GtkTreeIter iter;
-	gint nodeItemType;
+   GtkTreeIter iter;
+   gint nodeItemType;
 
-	gchar *relFilePath = NULL;
+   gchar *relFilePath = NULL;
 
-	GtkTreeModel *treeModel = gtk_tree_view_get_model(treeView);
-	GdkPixbuf *pixbuf;
+   GtkTreeModel *treeModel = gtk_tree_view_get_model(treeView);
+   GdkPixbuf *pixbuf;
 
-	gtk_tree_model_get_iter(treeModel, &iter, path);
-	gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType,
-	                   COLUMN_FILEPATH, &relFilePath,
-	                   COLUMN_ICON, &pixbuf,
-	                   -1);
+   gtk_tree_model_get_iter(treeModel, &iter, path);
+   gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType,
+                      COLUMN_FILEPATH, &relFilePath,
+                      COLUMN_ICON, &pixbuf,
+                      -1);
 
-	gboolean res=gtk_tree_view_row_expanded(treeView, path);
+   gboolean res=gtk_tree_view_row_expanded(treeView, path);
 
-	if (res) {
-		gtk_tree_view_collapse_row(treeView, path);
-	} else {
+   if (res) {
+      gtk_tree_view_collapse_row(treeView, path);
+   } else {
 
-		gtk_tree_view_expand_row(treeView, path, FALSE);
-	}
+      gtk_tree_view_expand_row(treeView, path, FALSE);
+   }
 
-	g_free(relFilePath);
+   g_free(relFilePath);
 }
 
 
@@ -488,82 +488,82 @@ static void tree_row_activated_cb(GtkTreeView *treeView,
                                   GtkTreeViewColumn *column,
                                   gpointer userData)
 {
-	GtkTreeIter iter;
-	gchar *relFilePath = NULL;
-	gchar *absFilePath = NULL;
-	gchar *command = NULL;
-	GError *err = NULL;
-	GtkWidget *dialog = NULL;
-	gint nodeItemType;
-	gchar *fixed = NULL;
+   GtkTreeIter iter;
+   gchar *relFilePath = NULL;
+   gchar *absFilePath = NULL;
+   gchar *command = NULL;
+   GError *err = NULL;
+   GtkWidget *dialog = NULL;
+   gint nodeItemType;
+   gchar *fixed = NULL;
 
 
-	// Get the data from the row that was activated
+   // Get the data from the row that was activated
 
-	GtkTreeModel *treeModel = gtk_tree_view_get_model(treeView);
-	gtk_tree_model_get_iter(treeModel, &iter, path);
-	gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType, COLUMN_FILEPATH, &relFilePath, -1);
+   GtkTreeModel *treeModel = gtk_tree_view_get_model(treeView);
+   gtk_tree_model_get_iter(treeModel, &iter, path);
+   gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType, COLUMN_FILEPATH, &relFilePath, -1);
 
 
-	// We can only open files
+   // We can only open files
 
-	if (nodeItemType != ITEMTYPE_FILE) {
-		switch_folder_icon(treeView, path);
-		goto EXITPOINT;
-	}
+   if (nodeItemType != ITEMTYPE_FILE) {
+      switch_folder_icon(treeView, path);
+      goto EXITPOINT;
+   }
 
-	absFilePath = fix_path((gchar*)get_project_directory(), relFilePath);
+   absFilePath = fix_path((gchar*)get_project_directory(), relFilePath);
 
-	fixed = fix_path((gchar*)get_project_directory(), relFilePath);
+   fixed = fix_path((gchar*)get_project_directory(), relFilePath);
 
-	if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
-		g_set_error(&err, APP_SCITEPROJ_ERROR, -1,
-		            "%s: %s, g_strdup_printf() = NULL",
-		            "Error formatting SciTE command",
-		            __func__);
-	}
-	else {
-		if (send_scite_command(command, &err)) {
-			// Try to activate SciTE; ignore errors
+   if ((command = g_strdup_printf("open:%s\n", fixed)) == NULL) {
+      g_set_error(&err, APP_SCITEPROJ_ERROR, -1,
+                  "%s: %s, g_strdup_printf() = NULL",
+                  "Error formatting SciTE command",
+                  __func__);
+   }
+   else {
+      if (send_scite_command(command, &err)) {
+         // Try to activate SciTE; ignore errors
 
-			activate_scite(NULL);
+         activate_scite(NULL);
 
-			if (prefs.give_scite_focus == TRUE) {
-				send_scite_command((gchar*)"focus:0", NULL);
-			}
+         if (prefs.give_scite_focus == TRUE) {
+            send_scite_command((gchar*)"focus:0", NULL);
+         }
 
-			add_file_to_recent(fixed, NULL);
+         add_file_to_recent(fixed, NULL);
 
-			gchar *statusbar_text = g_strdup_printf(_("Opened %s"),
-			                                        remove_newline(get_filename_from_full_path(command)));
+         gchar *statusbar_text = g_strdup_printf(_("Opened %s"),
+                                                 remove_newline(get_filename_from_full_path(command)));
 
-			set_statusbar_text(statusbar_text);
+         set_statusbar_text(statusbar_text);
 
-			g_free(statusbar_text);
-		}
-	}
+         g_free(statusbar_text);
+      }
+   }
 
 EXITPOINT:
 
-	if (err != NULL) {
+   if (err != NULL) {
 
-		gchar *could_not_open_string;
-		could_not_open_string = g_strdup_printf(_("Could not open selected file:"));
+      gchar *could_not_open_string;
+      could_not_open_string = g_strdup_printf(_("Could not open selected file:"));
 
-		dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-		                                "%s\n\n%s", could_not_open_string, err->message);
+      dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+                                      "%s\n\n%s", could_not_open_string, err->message);
 
-		gtk_dialog_run(GTK_DIALOG (dialog));
+      gtk_dialog_run(GTK_DIALOG (dialog));
 
-		g_free(could_not_open_string);
-	}
+      g_free(could_not_open_string);
+   }
 
-	if (relFilePath) g_free(relFilePath);
-	if (absFilePath) g_free(absFilePath);
-	if (command) g_free(command);
-	if (err) g_error_free(err);
-	if (dialog) gtk_widget_destroy(dialog);
-	if (fixed) g_free(fixed);
+   if (relFilePath) g_free(relFilePath);
+   if (absFilePath) g_free(absFilePath);
+   if (command) g_free(command);
+   if (err) g_error_free(err);
+   if (dialog) gtk_widget_destroy(dialog);
+   if (fixed) g_free(fixed);
 }
 
 
@@ -577,96 +577,96 @@ EXITPOINT:
  */
 static gboolean mouse_button_pressed_cb(GtkWidget *treeView, GdkEventButton *event, gpointer userData)
 {
-	gboolean eventHandled = FALSE;
-	GtkTreePath *path = NULL;
-	GtkTreeModel *treeModel = NULL;
-	gchar *nodeName = NULL;
-	gint nodeItemType;
-	GtkTreeIter iter;
-	GtkTreeSelection *tree_selection = NULL;
+   gboolean eventHandled = FALSE;
+   GtkTreePath *path = NULL;
+   GtkTreeModel *treeModel = NULL;
+   gchar *nodeName = NULL;
+   gint nodeItemType;
+   GtkTreeIter iter;
+   GtkTreeSelection *tree_selection = NULL;
 
-	g_assert(treeView != NULL);
-	g_assert(event != NULL);
+   g_assert(treeView != NULL);
+   g_assert(event != NULL);
 
-	// Until we know for sure, assume that the user has not clicked on a node
+   // Until we know for sure, assume that the user has not clicked on a node
 
-	clicked_node.valid = FALSE;
-
-
-	// If it is not a right-click, then ignore it
-
-	if (event->type != GDK_BUTTON_PRESS || event->button != 3) {
-		goto EXITPOINT;
-	}
-
-	// Find if the user has clicked on a node
-
-	if (!gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeView),
-	                                   (gint) event->x, (gint) event->y,
-	                                   &path, NULL, NULL, NULL)) {
-		// Nope-- user clicked in the GtkTreeView, but not on a node
-		goto EXITPOINT;
-	}
-
-	// User clicked on a node, so retrieve the particulars
-
-	treeModel = gtk_tree_view_get_model(GTK_TREE_VIEW(treeView));
-
-	if (!gtk_tree_model_get_iter(treeModel, &iter, path)) {
-		goto EXITPOINT;
-	}
-
-	gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType, COLUMN_FILEPATH, &nodeName, -1);
+   clicked_node.valid = FALSE;
 
 
-	// Save the node info for use by the popup menu callbacks
+   // If it is not a right-click, then ignore it
 
-	if (clicked_node.name) g_free(clicked_node.name);
+   if (event->type != GDK_BUTTON_PRESS || event->button != 3) {
+      goto EXITPOINT;
+   }
 
-	clicked_node.valid = TRUE;
-	clicked_node.iter = iter;
-	clicked_node.type = nodeItemType;
-	clicked_node.name = nodeName;
-	nodeName = NULL;
+   // Find if the user has clicked on a node
 
-	// Check if something is selected
-	tree_selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeView));
+   if (!gtk_tree_view_get_path_at_pos(GTK_TREE_VIEW(treeView),
+                                      (gint) event->x, (gint) event->y,
+                                      &path, NULL, NULL, NULL)) {
+      // Nope-- user clicked in the GtkTreeView, but not on a node
+      goto EXITPOINT;
+   }
 
-	if (tree_selection != NULL) {
-		// Check if clicked on something in the selection, otherwise make the clicked one the selection.
+   // User clicked on a node, so retrieve the particulars
 
-		if (gtk_tree_selection_path_is_selected(tree_selection, path) == FALSE) {
-			// clear selection and make current line selected
+   treeModel = gtk_tree_view_get_model(GTK_TREE_VIEW(treeView));
 
-			gtk_tree_selection_unselect_all(tree_selection);
+   if (!gtk_tree_model_get_iter(treeModel, &iter, path)) {
+      goto EXITPOINT;
+   }
 
-			gtk_tree_selection_select_path(tree_selection, path);
-		}
-	}
+   gtk_tree_model_get(treeModel, &iter, COLUMN_ITEMTYPE, &nodeItemType, COLUMN_FILEPATH, &nodeName, -1);
 
-	// Pop up the appropriate menu for the node type
 
-	if (nodeItemType == ITEMTYPE_FILE) {
-		if (fileRightClickPopupMenu) {
-			gtk_menu_popup_at_pointer(GTK_MENU(fileRightClickPopupMenu), (GdkEvent*)event);
-		}
-	}
-	else if (nodeItemType == ITEMTYPE_GROUP) {
-		if (groupRightClickPopupMenu) {
-			gtk_menu_popup_at_pointer(GTK_MENU(groupRightClickPopupMenu), (GdkEvent*)event);
-		}
-	}
+   // Save the node info for use by the popup menu callbacks
 
-	
-	eventHandled = TRUE;
+   if (clicked_node.name) g_free(clicked_node.name);
+
+   clicked_node.valid = TRUE;
+   clicked_node.iter = iter;
+   clicked_node.type = nodeItemType;
+   clicked_node.name = nodeName;
+   nodeName = NULL;
+
+   // Check if something is selected
+   tree_selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeView));
+
+   if (tree_selection != NULL) {
+      // Check if clicked on something in the selection, otherwise make the clicked one the selection.
+
+      if (gtk_tree_selection_path_is_selected(tree_selection, path) == FALSE) {
+         // clear selection and make current line selected
+
+         gtk_tree_selection_unselect_all(tree_selection);
+
+         gtk_tree_selection_select_path(tree_selection, path);
+      }
+   }
+
+   // Pop up the appropriate menu for the node type
+
+   if (nodeItemType == ITEMTYPE_FILE) {
+      if (fileRightClickPopupMenu) {
+         gtk_menu_popup_at_pointer(GTK_MENU(fileRightClickPopupMenu), (GdkEvent*)event);
+      }
+   }
+   else if (nodeItemType == ITEMTYPE_GROUP) {
+      if (groupRightClickPopupMenu) {
+         gtk_menu_popup_at_pointer(GTK_MENU(groupRightClickPopupMenu), (GdkEvent*)event);
+      }
+   }
+
+   
+   eventHandled = TRUE;
 
 
 EXITPOINT:
 
-	if (path) gtk_tree_path_free(path);
-	if (nodeName) g_free(nodeName);
+   if (path) gtk_tree_path_free(path);
+   if (nodeName) g_free(nodeName);
 
-	return eventHandled;
+   return eventHandled;
 }
 
 
@@ -679,18 +679,18 @@ EXITPOINT:
  */
 void set_window_title(const gchar *newName)
 {
-	g_assert(newName != NULL);
+   g_assert(newName != NULL);
 
-	gchar *temp_string = g_new(gchar, 512);
-	g_snprintf(temp_string, 512, "%s", newName);
+   gchar *temp_string = g_new(gchar, 512);
+   g_snprintf(temp_string, 512, "%s", newName);
 
-	gtk_window_set_title(GTK_WINDOW(sMainWindow), temp_string);
+   gtk_window_set_title(GTK_WINDOW(sMainWindow), temp_string);
 
-	g_free(window_saved_title);
+   g_free(window_saved_title);
 
-	window_saved_title = g_strdup_printf("%s", newName);
+   window_saved_title = g_strdup_printf("%s", newName);
 
-	g_free(temp_string);
+   g_free(temp_string);
 }
 
 
@@ -699,14 +699,14 @@ void set_window_title(const gchar *newName)
  */
 gboolean dialog_response_is_exit(gint test)
 {
-	gboolean result = FALSE;
+   gboolean result = FALSE;
 
-	if ((test == GTK_RESPONSE_REJECT) || (test == GTK_RESPONSE_CANCEL) ||
-	        (test == GTK_RESPONSE_DELETE_EVENT) || (test == GTK_RESPONSE_NONE)) {
-		result = TRUE;
-	}
+   if ((test == GTK_RESPONSE_REJECT) || (test == GTK_RESPONSE_CANCEL) ||
+           (test == GTK_RESPONSE_DELETE_EVENT) || (test == GTK_RESPONSE_NONE)) {
+      result = TRUE;
+   }
 
-	return result;
+   return result;
 }
 
 
@@ -715,16 +715,16 @@ gboolean dialog_response_is_exit(gint test)
  */
 void recent_files_switch_visible()
 {
-	gboolean visible = FALSE;
+   gboolean visible = FALSE;
 
-	g_object_get(G_OBJECT(recentGrid), "visible", &visible, NULL);
+   g_object_get(G_OBJECT(recentGrid), "visible", &visible, NULL);
 
-	if (visible) {
-		gtk_widget_hide(recentGrid);
-		gtk_widget_grab_focus(projectTreeView);
-	} else {
-		gtk_widget_show(recentGrid);
-	}
+   if (visible) {
+      gtk_widget_hide(recentGrid);
+      gtk_widget_grab_focus(projectTreeView);
+   } else {
+      gtk_widget_show(recentGrid);
+   }
 
 }
 
@@ -734,7 +734,7 @@ void recent_files_switch_visible()
  */
 void set_dialog_transient(GtkWidget *dialog)
 {
-	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(sMainWindow));
+   gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(sMainWindow));
 }
 
 
@@ -743,6 +743,6 @@ void set_dialog_transient(GtkWidget *dialog)
  */
 GtkWindow *get_main_window()
 {
-	return GTK_WINDOW(sMainWindow);
+   return GTK_WINDOW(sMainWindow);
 }
 

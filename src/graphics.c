@@ -62,32 +62,32 @@ GdkCursor *busy_cursor = NULL;
  */
 gboolean load_graphics(GtkWidget *widget, GError **err)
 {
-	GtkIconTheme *icon_theme;
+   GtkIconTheme *icon_theme;
 
-	icon_theme = gtk_icon_theme_get_default();
+   icon_theme = gtk_icon_theme_get_default();
 
-	program_icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)sciteproj_xpm);
+   program_icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)sciteproj_xpm);
 
-	if (prefs.use_stock_folder_icon) {
+   if (prefs.use_stock_folder_icon) {
 
-		// use GTK_STOCK_DIRECTORY
-		directory_closed_pixbuf = gtk_icon_theme_load_icon(icon_theme, "folder", 14, 0, NULL);
-		directory_open_pixbuf = gtk_icon_theme_load_icon(icon_theme, "folder", 14, 0, NULL);
+      // use GTK_STOCK_DIRECTORY
+      directory_closed_pixbuf = gtk_icon_theme_load_icon(icon_theme, "folder", 14, 0, NULL);
+      directory_open_pixbuf = gtk_icon_theme_load_icon(icon_theme, "folder", 14, 0, NULL);
 
-	} else {
-		directory_open_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)dir_open_xpm);
-		directory_closed_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)dir_close_xpm);
+   } else {
+      directory_open_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)dir_open_xpm);
+      directory_closed_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)dir_close_xpm);
 
-	}
+   }
 
-	GdkDisplay *default_display;
+   GdkDisplay *default_display;
 
-	default_display = gdk_display_get_default();
+   default_display = gdk_display_get_default();
 
-	standard_cursor = gdk_cursor_new_for_display(default_display, GDK_X_CURSOR);
-	busy_cursor = gdk_cursor_new_for_display(default_display, GDK_WATCH);
+   standard_cursor = gdk_cursor_new_for_display(default_display, GDK_X_CURSOR);
+   busy_cursor = gdk_cursor_new_for_display(default_display, GDK_WATCH);
 
-	return TRUE;
+   return TRUE;
 }
 
 
@@ -96,8 +96,8 @@ gboolean load_graphics(GtkWidget *widget, GError **err)
  */
 void unload_graphics()
 {
-	if (program_icon_pixbuf != NULL) g_object_unref(program_icon_pixbuf);
+   if (program_icon_pixbuf != NULL) g_object_unref(program_icon_pixbuf);
 
-	if (directory_closed_pixbuf != NULL) g_object_unref(directory_closed_pixbuf);
-	if (directory_open_pixbuf != NULL) g_object_unref(directory_open_pixbuf);
+   if (directory_closed_pixbuf != NULL) g_object_unref(directory_closed_pixbuf);
+   if (directory_open_pixbuf != NULL) g_object_unref(directory_open_pixbuf);
 }

@@ -27,33 +27,33 @@
 // Node relative-position indicators
 
 enum NodePosition {
-	ADD_BEFORE,
-	ADD_AFTER,
-	ADD_CHILD
+   ADD_BEFORE,
+   ADD_AFTER,
+   ADD_CHILD
 };
 
 
 // Mnemonic identifiers for the columns in the GtkTreeStore
 
 enum {
-	COLUMN_ITEMTYPE = 0,
-	COLUMN_FILEPATH,
-	COLUMN_FILENAME,
-	COLUMN_FILESIZE,
-	COLUMN_FONTWEIGHT,
-	COLUMN_FONTWEIGHTSET,
-	COLUMN_ICON,
-	COLUMN_EXPANDED,
-	COLUMN_FOLDER_CONTENT_LOADED,
-	COLUMN_EOL
+   COLUMN_ITEMTYPE = 0,
+   COLUMN_FILEPATH,
+   COLUMN_FILENAME,
+   COLUMN_FILESIZE,
+   COLUMN_FONTWEIGHT,
+   COLUMN_FONTWEIGHTSET,
+   COLUMN_ICON,
+   COLUMN_EXPANDED,
+   COLUMN_FOLDER_CONTENT_LOADED,
+   COLUMN_EOL
 };
 
 
 // The type of each row in the tree datamodel
 
 enum {
-	ITEMTYPE_GROUP,
-	ITEMTYPE_FILE
+   ITEMTYPE_GROUP,
+   ITEMTYPE_FILE
 };
 
 
@@ -61,15 +61,15 @@ enum {
 
 // The types for each column in the tree datamodel
 
-#define TYPE_ITEMTYPE					G_TYPE_UINT
-#define TYPE_FILEPATH					G_TYPE_STRING
-#define TYPE_FILENAME					G_TYPE_STRING
-#define TYPE_FILESIZE					G_TYPE_STRING
-#define TYPE_FONTWEIGHT					G_TYPE_INT
-#define TYPE_FONTWEIGHTSET				G_TYPE_BOOLEAN
-#define TYPE_ICON						GDK_TYPE_PIXBUF
-#define TYPE_EXPANDED					G_TYPE_BOOLEAN
-#define TYPE_FOLDER_CONTENT_LOADED		G_TYPE_BOOLEAN
+#define TYPE_ITEMTYPE                G_TYPE_UINT
+#define TYPE_FILEPATH                G_TYPE_STRING
+#define TYPE_FILENAME                G_TYPE_STRING
+#define TYPE_FILESIZE                G_TYPE_STRING
+#define TYPE_FONTWEIGHT              G_TYPE_INT
+#define TYPE_FONTWEIGHTSET           G_TYPE_BOOLEAN
+#define TYPE_ICON                    GDK_TYPE_PIXBUF
+#define TYPE_EXPANDED                G_TYPE_BOOLEAN
+#define TYPE_FOLDER_CONTENT_LOADED   G_TYPE_BOOLEAN
 
 
 

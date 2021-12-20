@@ -38,33 +38,33 @@
 
 void launch_default_for_uri(GtkTreeModel *model, GtkTreeIter *iter)
 {
-	GError *err = NULL;
+   GError *err = NULL;
 
-	gchar *nodename = NULL;
-	gchar *filePath = NULL;
-	int nodeType = -1;
+   gchar *nodename = NULL;
+   gchar *filePath = NULL;
+   int nodeType = -1;
 
-	gtk_tree_model_get(model, iter,
-	                   COLUMN_FILENAME, &nodename,
-	                   COLUMN_ITEMTYPE, &nodeType,
-	                   COLUMN_FILEPATH, &filePath,
-	                   -1);
+   gtk_tree_model_get(model, iter,
+                      COLUMN_FILENAME, &nodename,
+                      COLUMN_ITEMTYPE, &nodeType,
+                      COLUMN_FILEPATH, &filePath,
+                      -1);
 
-	gchar *absFilePath = NULL; //g_strdup_printf("%s",filePath);
+   gchar *absFilePath = NULL; //g_strdup_printf("%s",filePath);
 
-	// filePath is NULL?
-	//if (!relative_path_to_abs_path(sClickedNodeName, &absFilePath, get_project_directory(), &err)) {
+   // filePath is NULL?
+   //if (!relative_path_to_abs_path(sClickedNodeName, &absFilePath, get_project_directory(), &err)) {
 
-	if (!relative_path_to_abs_path(filePath, &absFilePath, get_project_directory(), &err)) {
-		goto EXITPOINT;
-	}
+   if (!relative_path_to_abs_path(filePath, &absFilePath, get_project_directory(), &err)) {
+      goto EXITPOINT;
+   }
 
-	gchar *newString = g_strdup_printf("%s%s", "file://", absFilePath);
+   gchar *newString = g_strdup_printf("%s%s", "file://", absFilePath);
 
-	g_app_info_launch_default_for_uri((const gchar*)newString, NULL, &err);
+   g_app_info_launch_default_for_uri((const gchar*)newString, NULL, &err);
 
 EXITPOINT:
-	if (err) g_error_free(err);
+   if (err) g_error_free(err);
 }
 
 /**
@@ -73,11 +73,11 @@ EXITPOINT:
 void launch_default_for_uri_cb()
 {
 
-	if (!clicked_node.valid || clicked_node.type != ITEMTYPE_FILE) {
-		//goto EXITPOINT;
-	} else {
-		launch_default_for_uri(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)), &(clicked_node.iter));
+   if (!clicked_node.valid || clicked_node.type != ITEMTYPE_FILE) {
+      //goto EXITPOINT;
+   } else {
+      launch_default_for_uri(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)), &(clicked_node.iter));
 
-	}
-	// printf("Filename: %s\n", filename);
+   }
+   // printf("Filename: %s\n", filename);
 }
