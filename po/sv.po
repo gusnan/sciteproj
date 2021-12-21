@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.07\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2020-10-18 15:02+0200\n"
-"PO-Revision-Date: 2020-10-18 15:03+0200\n"
+"POT-Creation-Date: 2021-12-21 19:20+0100\n"
+"PO-Revision-Date: 2021-12-21 19:22+0100\n"
 "Last-Translator: Andreas Rönnquist <andreas@ronnquist.net>\n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: about.c:172
 msgid "Information"
@@ -167,75 +167,79 @@ msgstr "Kunde inte ställa in GUI: %s"
 msgid "Not a valid folder!"
 msgstr "Inte en giltig mapp!"
 
-#: menus.c:116
+#: menus.c:118
 msgid "_File"
 msgstr "_Arkiv"
 
-#: menus.c:117
+#: menus.c:119
 msgid "_Edit"
 msgstr "R_edigera"
 
-#: menus.c:118
+#: menus.c:120
 msgid "_View"
 msgstr "_Visa"
 
-#: menus.c:119
+#: menus.c:121
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: menus.c:128
+#: menus.c:130
 msgid "_Quit"
 msgstr "Avsluta"
 
-#: menus.c:137
+#: menus.c:139
 msgid "Edit properties"
 msgstr "Editera egenskaper"
 
-#: menus.c:143
+#: menus.c:145
 msgid "Show Recently Opened Files"
 msgstr "Visa nyligen öppnade filer"
 
-#: menus.c:150
+#: menus.c:152
 msgid "About"
 msgstr "_Om"
 
-#: menus.c:163 menus.c:235
+#: menus.c:165 menus.c:241
 msgid "Open file in SciTE"
 msgstr "Öppna fil i SciTE"
 
-#: menus.c:166 menus.c:237
+#: menus.c:168 menus.c:243
 msgid "Copy filename to clipboard"
 msgstr "Kopiera filnamn till urklipp"
 
-#: menus.c:172 menus.c:209 menus.c:238
+#: menus.c:171
+msgid "Launch default program for uri"
+msgstr "Starta standardprogram för uri"
+
+#: menus.c:177 menus.c:215 menus.c:244
 msgid "Properties"
 msgstr "Egenskaper"
 
-#: menus.c:182
+#: menus.c:188
 msgid "Sort folder contents"
 msgstr "Sortera mappinnehåll"
 
-#: menus.c:184
+#: menus.c:190
 msgid "Sort ascending by name"
 msgstr "Sortera mapp stigande efter namn"
 
-#: menus.c:185
+#: menus.c:191
 msgid "Sort descending by name"
 msgstr "Sortera mapp fallande efter namn"
 
-#: menus.c:187
+#: menus.c:193
 msgid "Sort ascending by extension"
 msgstr "Sortera mapp stigande efter filändelse"
 
-#: menus.c:188
+#: menus.c:194
 msgid "Sort descending by extension"
 msgstr "Sortera mapp fallande efter filändelse"
 
-#: menus.c:211
+#: menus.c:217
 msgid "Update folder content"
 msgstr "Uppdatera mappinnehåll"
 
-#: menus.c:236
+#: menus.c:242
 msgid "Remove file from this list"
 msgstr "Ta bort fil från denna lista"
 
@@ -243,7 +247,7 @@ msgstr "Ta bort fil från denna lista"
 msgid "Group Properties"
 msgstr "Mappegenskaper"
 
-#: properties_dialog.c:74 properties_dialog.c:149
+#: properties_dialog.c:74 properties_dialog.c:163
 msgid "OK"
 msgstr "OK"
 
@@ -255,19 +259,19 @@ msgstr "Gruppnamn:"
 msgid "Complete folder:"
 msgstr "Fullständigt mappnamn:"
 
-#: properties_dialog.c:148
+#: properties_dialog.c:162
 msgid "File Properties"
 msgstr "Filegenskaper"
 
-#: properties_dialog.c:172
+#: properties_dialog.c:186
 msgid "Filename:"
 msgstr "Filnamn:"
 
-#: properties_dialog.c:173
+#: properties_dialog.c:187
 msgid "Path:"
 msgstr "Sökväg:"
 
-#: properties_dialog.c:174
+#: properties_dialog.c:188
 msgid "File size:"
 msgstr "Filstorlek:"
 
