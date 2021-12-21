@@ -4,6 +4,7 @@ ChangeLog:
 
 1.18
 	* Add menu item to launch default program for uri
+   * Update Swedish translation
 
 1.17
 	* Make it possible to copy full filename + folder from properties dialog,
