@@ -3,404 +3,404 @@ ChangeLog:
 ----------
 
 1.18
-	* Add menu item to launch default program for uri
+   * Add menu item to launch default program for uri
    * Update Swedish translation
 
 1.17
-	* Make it possible to copy full filename + folder from properties dialog,
-	  for both files and folders
-	* Various fixes and clean-ups
+   * Make it possible to copy full filename + folder from properties dialog,
+     for both files and folders
+   * Various fixes and clean-ups
 
 1.16
-	* Remove a superfluous g_close_dir which causes the program to not
-	  read folders properly
+   * Remove a superfluous g_close_dir which causes the program to not
+     read folders properly
 
 1.15
-	* Add option to hide files globally using hide_filter_global in
-	  ~/.config/sciteprojrc
-	* Spelling fixes
-	* Minor fixes, formatting and other
+   * Add option to hide files globally using hide_filter_global in
+     ~/.config/sciteprojrc
+   * Spelling fixes
+   * Minor fixes, formatting and other
 
 1.14
-	* Create folder for man page in Makefile
-	* Minor formatting fixes
+   * Create folder for man page in Makefile
+   * Minor formatting fixes
 
 1.13
-	* Pack and install man-page
-	* Make it possible to close about dialog using ESC
-	* Various minor code fixes
+   * Pack and install man-page
+   * Make it possible to close about dialog using ESC
+   * Various minor code fixes
 
 1.12
-	* Remove GTK2 compatibility header file
-	* Minor fixes
-	* Make pkg-config substitutable
-	* Make it easier to build on Windows
+   * Remove GTK2 compatibility header file
+   * Minor fixes
+   * Make pkg-config substitutable
+   * Make it easier to build on Windows
 
 1.11
-	* Remove checks for GTK version, we require GTK 3 from now on
-	* Update required LUA version to 5.3
+   * Remove checks for GTK version, we require GTK 3 from now on
+   * Update required LUA version to 5.3
 
 1.10
-	* Fix webpage link in about dialog
+   * Fix webpage link in about dialog
 
 1.09
-	* Fix transient parent to dialogs, fixes warnings to stdout
-	* Clean up cppcheck output
-	* Various small fixes
+   * Fix transient parent to dialogs, fixes warnings to stdout
+   * Clean up cppcheck output
+   * Various small fixes
 
 1.08
-	* Fix sizes of properties dialog
-	* Fix output of GTK warnings in terminal
-	* Update the text of the recent file menu item
-	* Update my email address
-	* Update Swedish translation
+   * Fix sizes of properties dialog
+   * Fix output of GTK warnings in terminal
+   * Update the text of the recent file menu item
+   * Update my email address
+   * Update Swedish translation
 
 1.07
-	* Fix typo Coudn't/Couldn't
-	* Fixed more missing NULL-checks
+   * Fix typo Coudn't/Couldn't
+   * Fixed more missing NULL-checks
 
 1.06
-	* Various formatting fixes, source cleanups
-	* Add GTK 3.22 versions of menu popups
+   * Various formatting fixes, source cleanups
+   * Add GTK 3.22 versions of menu popups
 
 1.05
-	* Update copyright years
-	* Fix gtk_misc_set_alignment warnings
-	* Fix Swedish translation of descending
-	* Update translation example with valid language code
-	* Remove unused Swedish translations, cleaning up the po-file
-	* Don't use deprecated cursor functions
-	* Formatting and whitespace fixes
-	* Makefile: make CC customizable
-	
+   * Update copyright years
+   * Fix gtk_misc_set_alignment warnings
+   * Fix Swedish translation of descending
+   * Update translation example with valid language code
+   * Remove unused Swedish translations, cleaning up the po-file
+   * Don't use deprecated cursor functions
+   * Formatting and whitespace fixes
+   * Makefile: make CC customizable
+
 1.04
-	* Fix manpage commenting
+   * Fix manpage commenting
 
 1.02
-	* Also mention installing required liblua5.1-0-dev in INSTALL
-	* Fix copyright headers and specify licenses
-	* Fix homepage address
+   * Also mention installing required liblua5.1-0-dev in INSTALL
+   * Fix copyright headers and specify licenses
+   * Fix homepage address
 
 1.01
-	* Add GPL header in several more places
-	* Remove date and version from man-page
-	* Some formatting fixes
-	
+   * Add GPL header in several more places
+   * Remove date and version from man-page
+   * Some formatting fixes
+
 1.00
-	* Remove functionality to rename and the required files
-	* Remove GTK_STOCK stuff to make it build cleanly on GTK3
-	* Simplify menus
-	* Make sure menu items are translated
-	* Update Swedish translation
+   * Remove functionality to rename and the required files
+   * Remove GTK_STOCK stuff to make it build cleanly on GTK3
+   * Simplify menus
+   * Make sure menu items are translated
+   * Update Swedish translation
 
 0.7.96
-	* Fix build system not including CPPFLAGS
+   * Fix build system not including CPPFLAGS
 
 0.7.95
-	* Remove XML-based project file loading and saving - work directly on folder 
-	  using filters and sorting instead.
-	* Load prefs from setup file in the requested folder, and secondarily (if an 
-	  option doesn't exist here), check in the user config folder.
-	* Remove search functionality - "Find in Files" is already available in 
-	  SciTE.
-	* Add option start_scite to start scite immediately on sciteproj start
-	* Require LUA for the config file loading
-	* Remove some functions for deleting files and creating folders
-	* Don't use g_type_init on newer versions of glib
+   * Remove XML-based project file loading and saving - work directly on folder
+     using filters and sorting instead.
+   * Load prefs from setup file in the requested folder, and secondarily (if an
+     option doesn't exist here), check in the user config folder.
+   * Remove search functionality - "Find in Files" is already available in
+     SciTE.
+   * Add option start_scite to start scite immediately on sciteproj start
+   * Require LUA for the config file loading
+   * Remove some functions for deleting files and creating folders
+   * Don't use g_type_init on newer versions of glib
 
 0.7.05
-	* Fix menu translations context to actually work
-	* Move gui_callbacks to own sourcefiles
-	* Move menu stuff to a header
-	* Update manpage
+   * Fix menu translations context to actually work
+   * Move gui_callbacks to own sourcefiles
+   * Move menu stuff to a header
+   * Update manpage
 
 0.7.04
-	* Remove translation context from a string where it isn't required (and 
-	  causes build failure)
+   * Remove translation context from a string where it isn't required (and
+     causes build failure)
 
 0.7.03
-	* Add context to menu translatable strings
-	* Updated build instructions with gettext info
-	* Removed printing non-informational error numbers
+   * Add context to menu translatable strings
+   * Updated build instructions with gettext info
+   * Removed printing non-informational error numbers
 
 0.7.02
-	* Really fix the dependency generation
+   * Really fix the dependency generation
 
 0.7.01
-	* Add LIB_CFLAGS to dependency generation in Makefile
+   * Add LIB_CFLAGS to dependency generation in Makefile
 
 0.7.00
-	* Make it possible to hide the statusbar to save screen space
-	* Made SciteProj translatable using gettext
-	* Complete GTK3 migration
-	* Add linking on gthread-2.0
+   * Make it possible to hide the statusbar to save screen space
+   * Made SciteProj translatable using gettext
+   * Complete GTK3 migration
+   * Add linking on gthread-2.0
 
 0.6.06
-	* Update makefile to nicely use obj folder again
+   * Update makefile to nicely use obj folder again
 
 0.6.05
-	* Make build use INSTALL_PREFIX flag to simplify packaging
+   * Make build use INSTALL_PREFIX flag to simplify packaging
 
 0.6.04
-	* Move libraries to after objects in linker call, allowing to build 
-	  with --as-needed
-	* Whitespace fixes
-	
+   * Move libraries to after objects in linker call, allowing to build
+     with --as-needed
+   * Whitespace fixes
+
 0.6.03
-	* More makefile fixes to support both prefix and DESTDIR
+   * More makefile fixes to support both prefix and DESTDIR
 
 0.6.02
-	* Fixes to the makefile, fixing the depends, fixed flags order
+   * Fixes to the makefile, fixing the depends, fixed flags order
 
 0.6.01
-	* Update build flags to include standard system build flags
-	* install sciteproj icon to correct place
+   * Update build flags to include standard system build flags
+   * install sciteproj icon to correct place
 
 0.6.00
-	* Use g_get_user_config_dir to get where to put the config file, if it 
-	  doesn't exist, copy the configfile from ~/.sciteproj
-	* Make code GTK3 compatible
-	* Remove Cmake stuff and use a basic Makefile instead
-	* Update makefile to use GTK3 by default (add GTK2=1 to make command to use 
-	  GTK2 during compilation)
-	
+   * Use g_get_user_config_dir to get where to put the config file, if it
+     doesn't exist, copy the configfile from ~/.sciteproj
+   * Make code GTK3 compatible
+   * Remove Cmake stuff and use a basic Makefile instead
+   * Update makefile to use GTK3 by default (add GTK2=1 to make command to use
+     GTK2 during compilation)
+
 0.5.11
-	* Added icons for lua and java files
-	* Fix minor warning (-Wformat-security)
+   * Added icons for lua and java files
+   * Fix minor warning (-Wformat-security)
 
 0.5.10
-	* Removed a debug printf
-	* Fixed warnings caused by new version of gcc
-	* Added missing clicked_node.h to project file
-	* Removed making a busy cursor in the search code, one was already
-	  created in the graphics codes
-	* Fixed homepage in the about dialog
-	* Some minor code cleanups
-	* Fix minus-sign in the man page
+   * Removed a debug printf
+   * Fixed warnings caused by new version of gcc
+   * Added missing clicked_node.h to project file
+   * Removed making a busy cursor in the search code, one was already
+     created in the graphics codes
+   * Fixed homepage in the about dialog
+   * Some minor code cleanups
+   * Fix minus-sign in the man page
 
 0.5.01
-	* Fix a cppcheck warning (writing to non-initialized char pointer)
-	* Man-page updates
+   * Fix a cppcheck warning (writing to non-initialized char pointer)
+   * Man-page updates
 
 0.5.00
-	* Added a search dialog
-	* Fixed problems with the prefs system
-	* Documentation updates
+   * Added a search dialog
+   * Fixed problems with the prefs system
+   * Documentation updates
 
 0.4.10
-	* Added a "Recently opened files" box
-	* Updated in-source commenting
-	* Updated documentation
-	* Split up the GUI code into several files
-	* Redesigned the About-dialog
-	* Removed the TODO file - it kept getting invalid
+   * Added a "Recently opened files" box
+   * Updated in-source commenting
+   * Updated documentation
+   * Split up the GUI code into several files
+   * Redesigned the About-dialog
+   * Removed the TODO file - it kept getting invalid
 
 0.4.01
-	* Made the rename functionality rename in the treeview, instead of using
-	  another dialog
+   * Made the rename functionality rename in the treeview, instead of using
+     another dialog
 
 0.4.00
-	* Implemented Treeview quick search
-	* Updated desktop comment wording
-	* Mem leaks fixed
-	* Code cleanups
-	* Split the clipboard stuff to files of their own
-	* Fixed a problem with the --generate option
-	
+   * Implemented Treeview quick search
+   * Updated desktop comment wording
+   * Mem leaks fixed
+   * Code cleanups
+   * Split the clipboard stuff to files of their own
+   * Fixed a problem with the --generate option
+
 0.3.22
-	* Fixed slash problems
-	* Spelling fixes
+   * Fixed slash problems
+   * Spelling fixes
 
 0.3.21
-	* Fixed double slash in generated project files
-	* Minor updates to documentation
-	* Rephrased warnings
-	* Debug updates
-	
+   * Fixed double slash in generated project files
+   * Minor updates to documentation
+   * Rephrased warnings
+   * Debug updates
+
 0.3.20
-	* Better checks for return values of changedirs
+   * Better checks for return values of changedirs
 
 0.3.19
-	* Fixed exit codes
-	* Fixed cppcheck reports
-	* Many minor fixes (unused variables removed and stuff like that)
+   * Fixed exit codes
+   * Fixed cppcheck reports
+   * Many minor fixes (unused variables removed and stuff like that)
 
 0.3.18
-	* Added and implemented --generate option
-	* Fixed minor memory leaks
-	
+   * Added and implemented --generate option
+   * Fixed minor memory leaks
+
 0.3.17
-	* Added menu item to copy filename+full path to clipboard
-	* man-page updates
-	* Documentation updates
+   * Added menu item to copy filename+full path to clipboard
+   * man-page updates
+   * Documentation updates
 
 0.3.16
-	* Remove mms-bitfields build option
+   * Remove mms-bitfields build option
 
 0.3.15
-	* Fixed stuff that was deprecated in newer GTK
-	* Update version in man-page
+   * Fixed stuff that was deprecated in newer GTK
+   * Update version in man-page
 
 0.3.14
-	* Even more fixes to build system
+   * Even more fixes to build system
 
 0.3.12
-	* Fixes to build system
+   * Fixes to build system
 
 0.3.11
-	* Fixed includes and libraries
-	
+   * Fixed includes and libraries
+
 0.3.10
-	* Added /usr/include/gdk-pixbuf-2.0 to CFLAGS
-	* Completely removed search dialog
+   * Added /usr/include/gdk-pixbuf-2.0 to CFLAGS
+   * Completely removed search dialog
 
 0.3.9
-	* Documentation updates
-	* Split INSTALL from the README file
-	* Cleaned up statusbar code
+   * Documentation updates
+   * Split INSTALL from the README file
+   * Cleaned up statusbar code
 
 0.3.8
-	* Documentation fixes
-	* Updated .desktop file
-	* Check for Scite in more places
+   * Documentation fixes
+   * Updated .desktop file
+   * Check for Scite in more places
 
 0.3.7
-	* Tweaked CMakeLists.txt to avoid GTK-related debuild build warnings
-	* Updated homepage in the about-dialog
+   * Tweaked CMakeLists.txt to avoid GTK-related debuild build warnings
+   * Updated homepage in the about-dialog
 
 0.3.6
-	* Added man page
-	* Removed unnecessary Apache license
+   * Added man page
+   * Removed unnecessary Apache license
 
 0.3.5
-	* Removed GTK modules (they are included in Cmake in debian post lenny)
+   * Removed GTK modules (they are included in Cmake in debian post lenny)
 
 0.3.4
-	* Fixed the SciteProj xml project file referencing removed stuff
-	* Fixed copyright details
+   * Fixed the SciteProj xml project file referencing removed stuff
+   * Fixed copyright details
 
 0.3.3
-	* Remove homepage from source control
-	* Cleaned up gui.c
+   * Remove homepage from source control
+   * Cleaned up gui.c
 
 0.3.2
-	* Put GPL in header files too
-	* Desktop file fixes
+   * Put GPL in header files too
+   * Desktop file fixes
 
 0.3.1
-	* Windows version
-	* Removed Scite connection checkbox
-	* Removed everything that isn't portable
-	* Removed C++ stuff - code is purely C now
-	* Made delete button work to remove items too.
-	* Moved rename code to a source file of its own
-	* Fixed order of added files
+   * Windows version
+   * Removed Scite connection checkbox
+   * Removed everything that isn't portable
+   * Removed C++ stuff - code is purely C now
+   * Made delete button work to remove items too.
+   * Moved rename code to a source file of its own
+   * Fixed order of added files
 
 0.3.0
-	* Streamlined CMakeLists
-	* Made homepage XHTML Transitional
-	* Removed gfileutils_local files (Upping the GLib requirement)
-	* Show SciTE status in SciteProj statusbar
-	* Updates to statusbar infotext
-	* Search dialog
-	* Better checks for SciTE existance
-	* Added file_to_load option to config file
-	* More memory leaks fixed
+   * Streamlined CMakeLists
+   * Made homepage XHTML Transitional
+   * Removed gfileutils_local files (Upping the GLib requirement)
+   * Show SciTE status in SciteProj statusbar
+   * Updates to statusbar infotext
+   * Search dialog
+   * Better checks for SciTE existance
+   * Added file_to_load option to config file
+   * More memory leaks fixed
 
 0.2.7
-	* minor bugs
-	* went from GTK's command line options to own code (easier to translate?)
-	* moved show_version to about.c
-	* Fixed image and desktop file
+   * minor bugs
+   * went from GTK's command line options to own code (easier to translate?)
+   * moved show_version to about.c
+   * Fixed image and desktop file
 
-0.2.6 
-	* Added more places to check for SciTE
-	* Made it possible to use customized SciTE executable filename
-	* Documentation updates
-	* Made it check for Scite in SciTE_HOME too
+0.2.6
+   * Added more places to check for SciTE
+   * Made it possible to use customized SciTE executable filename
+   * Documentation updates
+   * Made it check for Scite in SciTE_HOME too
 
 0.2.5
-	* Several memory leaks fixed
-	* More comments in source
-	* Documentation updates
-	* Updates to the add file error dialog
-	* Compilation warnings fixed
-	* Fixed cmake stuff
-	* No cmake check for c++
+   * Several memory leaks fixed
+   * More comments in source
+   * Documentation updates
+   * Updates to the add file error dialog
+   * Compilation warnings fixed
+   * Fixed cmake stuff
+   * No cmake check for c++
 
 0.2.4
-	* Fixed memory leaks
-	* Made icons compiled into the executable instead of external PNG's
-	* Minor bugs fixed
-	* Documentation updates
-	* Made error reporting when adding files better
+   * Fixed memory leaks
+   * Made icons compiled into the executable instead of external PNG's
+   * Minor bugs fixed
+   * Documentation updates
+   * Made error reporting when adding files better
 
 0.2.3
-	* Switched to g_option_context
-	* Added commandline setting for customizable graphics folder
-	* Added menu item for opening the options file
-	* Fixed location of files that are added through main menu add item
-	* Debug information in about dialog
-	* Documentation updates
-	* Made it possible to delete via keyboard
-	* Removed ChangeLog from homepage
-	* Added allow_duplicates option
+   * Switched to g_option_context
+   * Added commandline setting for customizable graphics folder
+   * Added menu item for opening the options file
+   * Fixed location of files that are added through main menu add item
+   * Debug information in about dialog
+   * Documentation updates
+   * Made it possible to delete via keyboard
+   * Removed ChangeLog from homepage
+   * Added allow_duplicates option
 
 0.2.2
-	* Fixed graphics search folders
-	* Removed unused variables
-	* Made the file selector remember last folder it added from
-	* Added abort_add_on_duplicate preference
-	* Added folder sorting functionality
-	* Minor changes
-	
+   * Fixed graphics search folders
+   * Removed unused variables
+   * Made the file selector remember last folder it added from
+   * Added abort_add_on_duplicate preference
+   * Added folder sorting functionality
+   * Minor changes
+
 0.2.1
-	* Added dirty_on_folder_change preference
-	* Added Expand All Groups and Collapse All Groups menu items
-	* Fixed about dialog scrollbar policy and usage dialog scrollbar policy
-	* Added checkbox showing if there is an active connection to SciTE
-	* Added Save As menu item
-	* Added some system information to about dialog
-	* Added ChangeLog
+   * Added dirty_on_folder_change preference
+   * Added Expand All Groups and Collapse All Groups menu items
+   * Fixed about dialog scrollbar policy and usage dialog scrollbar policy
+   * Added checkbox showing if there is an active connection to SciTE
+   * Added Save As menu item
+   * Added some system information to about dialog
+   * Added ChangeLog
 
 0.2.0
-	* Made the program save info about folder open/closed status to the 
-	  project XML file.
-	
+   * Made the program save info about folder open/closed status to the
+     project XML file.
+
 0.1.7
    * Fixed folder icon bugs
-	* Group properties dialog 
-	
+   * Group properties dialog
+
 0.1.6
-	* Fixed order of files in the XML project file 
-	* Debug mode warnings removed 
-	* File properties dialog 
-	
+   * Fixed order of files in the XML project file
+   * Debug mode warnings removed
+   * File properties dialog
+
 0.1.5
-	* Fixed project file sorting 
+   * Fixed project file sorting
 
 0.1.4
-	* Fixed errorhandling in preferences bug
-	
-0.1.3
-	* Removed calls to unfinished code
-	
-0.1.2
-	* Changed scrollbar policy
-	* Began on folder-structure to XML converter
-	* New About-dialog
-	
-0.1.1
-	* Made it possible to open several items in one go using the rightclick 
-	  menu
-	* Various string code fixes
-	* Homepage updates
-	
-0.1
-	* Initial release
+   * Fixed errorhandling in preferences bug
 
--------------------------------------------------------------------------------- 
+0.1.3
+   * Removed calls to unfinished code
+
+0.1.2
+   * Changed scrollbar policy
+   * Began on folder-structure to XML converter
+   * New About-dialog
+
+0.1.1
+   * Made it possible to open several items in one go using the rightclick
+     menu
+   * Various string code fixes
+   * Homepage updates
+
+0.1
+   * Initial release
+
+--------------------------------------------------------------------------------
    Copyright (C) 2010-2020 Andreas Rönnquist
    This file is distributed under the same license
    as the sciteproj package, see COPYING file.
--------------------------------------------------------------------------------- 
+--------------------------------------------------------------------------------
