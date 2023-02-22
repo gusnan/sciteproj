@@ -69,7 +69,11 @@ gboolean ignore_pattern_matches(gchar *folder_name, const gchar *filename, GSLis
 
          GPatternSpec *pattern_spec = g_pattern_spec_new(temp_filter_string);
 
+#if GLIB_MAJOR_VERSION >= 2 && GLIB_MINOR_VERSION >= 70
+         if (g_pattern_spec_match(pattern_spec, len, full_filename, NULL)) {
+#else
          if (g_pattern_match(pattern_spec, len, full_filename, NULL)) {
+#endif
             result = TRUE;
          }
 
