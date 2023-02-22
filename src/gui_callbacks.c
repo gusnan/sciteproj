@@ -36,8 +36,8 @@
 #include <lualib.h>
 #include <lauxlib.h>
 
-#include "gui_callbacks.h"
 #include "clicked_node.h"
+#include "gui_callbacks.h"
 
 #include "gui.h"
 #include "tree_manipulation.h"
@@ -153,7 +153,6 @@ static void fix_folders_step_through(GtkTreeView *tree_view, GtkTreeIter newiter
    do {
 
       gtk_tree_model_get(tree_model, &iter, COLUMN_ITEMTYPE, &nodeItemType, -1);
-
 
       if (nodeItemType == ITEMTYPE_GROUP) {
 
@@ -309,8 +308,19 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 
    GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
 
+   /*
+   GtkTreeIter newIter;
+
+   gchar *new_path_string;
+
+      gtk_tree_model_get(tree_model, &iter, COLUMN_FILENAME, &new_path_string ,
+                      -1);
+
+   printf("Path string: %s\n", new_path_string);
+   */
+
    // make sure all icons the folder (and folders inside it) are set to a correct icon.
-   fix_folders_step_through(tree_view, *iter,tree_path);
+   fix_folders_step_through(tree_view, *iter, tree_path);
 
    gchar *temp;
    gboolean expanded;
@@ -320,13 +330,32 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
    gtk_tree_model_get(tree_model, iter, COLUMN_EXPANDED, &expanded, -1);
    gtk_tree_model_get(tree_model, iter, COLUMN_FOLDER_CONTENT_LOADED, &loaded, -1);
 
-   //printf("%s : %d\n", temp, (int)expanded);
+   printf("%s : %d\n", temp, (int)expanded);
 
    if (!loaded) {
       set_tree_node_loaded(iter, TRUE, NULL);
 
       load_tree_at_iter(tree_view, iter);
 
+
+      // char *fpath = g_file_get_path(temp);
+
+      struct ClickedNode
+      {
+         gboolean valid;
+         GtkTreeIter iter;
+         gchar *name;
+         gint type;
+      };
+
+      ClickedNode new_node;
+
+      new_node.valid = TRUE;
+      new_node.iter = *iter;
+      new_node.name = temp;
+      new_node.type = ITEMTYPE_GROUP;
+
+      refresh_folder(&new_node, FALSE);
 
    }
 }
@@ -430,15 +459,17 @@ gboolean tree_view_search_equal_func(GtkTreeModel *model, gint column,
 /**
  *
  */
-void refresh_folder_cb()
+void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
 {
-   if (!clicked_node.valid || clicked_node.type != ITEMTYPE_GROUP) {
+   printf("Refresh folder...\n");
+   if (!inNode->valid || inNode->type != ITEMTYPE_GROUP) {
       return;
    }
+   printf("We really have a folder...\n");
 
    gchar *folder_name;
    GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
-   GtkTreeIter iter = clicked_node.iter;
+   GtkTreeIter iter = inNode->iter;
 
    GtkTreeIter *stored_iter = gtk_tree_iter_copy(&iter);
 
@@ -449,11 +480,9 @@ void refresh_folder_cb()
                       -1);
 
    // If the folder is expanded
-   if (expanded) {
+   if (expanded && extern_expanded) {
 
       // add all rows below to a list of GtkTreePath
-
-
       GtkTreeIter child;
 
       GList *list_of_items = NULL;
@@ -511,9 +540,16 @@ void refresh_folder_cb()
       // get the default sort order
 
       //sort_children(stored_iter, NULL, compare_strings_smaller);
-
-   } else {
    }
 
+}
+
+
+/**
+ *
+ */
+void refresh_folder_cb()
+{
+   refresh_folder(&clicked_node, TRUE);
 }
 

@@ -41,7 +41,10 @@
 
 #include "file_utils.h"
 
+#include "gui_callbacks.h"
 
+
+#undef APP_SCITEPROJ_ERROR
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_TREEMANIPULATION_ERROR")
 
 
@@ -56,7 +59,7 @@ gchar *saved_file_folder = NULL;
 
 gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **err);
 gboolean set_project_filepath(const gchar *filepath, GError **err);
-
+void helper_remove(GtkTreeIter *iter, GList **items_to_remove);
 
 
 
@@ -221,6 +224,108 @@ gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **e
 }
 
 
+struct FolderMonitor {
+   GtkTreeIter *iter;
+};
+
+
+void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMonitorEvent evtype, gpointer user_data)
+{
+   printf("File changed...\n");
+   char *fpath = g_file_get_path(file);
+   char *opath = NULL;
+   if (other) {
+      opath = g_file_get_path(other);
+   }
+
+   if (opath) {
+      g_free(opath);
+   }
+
+   gchar *tree_path_string = (gchar*)(user_data);
+
+   GtkTreePath *tree_path = gtk_tree_path_new_from_string(tree_path_string);
+
+   GtkTreeIter iter;
+
+   gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &iter, tree_path);
+
+   struct ClickedNode
+   {
+      gboolean valid;
+      GtkTreeIter iter;
+      gchar *name;
+      gint type;
+   };
+
+   ClickedNode new_node;
+
+   new_node.valid = TRUE;
+   new_node.iter = iter;
+   new_node.name = fpath;
+   new_node.type = ITEMTYPE_GROUP;
+
+   GList *items_to_remove = NULL;
+
+   helper_remove(&iter, &items_to_remove);
+
+   GList *node;
+   for (node = items_to_remove; node != NULL; node = node -> next) {
+      tree_path = gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
+
+      if (tree_path) {
+         GtkTreeIter newIter;
+         if (gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &newIter, tree_path))
+            remove_tree_node(&newIter, NULL);
+      }
+   }
+
+   printf("Tree path string: %s\n", tree_path_string);
+
+   gchar *new_path_string = NULL;
+   GtkTreeIter newIter;
+
+   tree_path = gtk_tree_path_new_from_string(tree_path_string);
+
+   gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &newIter, tree_path);
+
+   // ClickedNode new_node;
+
+   printf("File path: %s\n", fpath);
+
+   GFile *parent;
+
+   parent = g_file_get_parent(file);
+
+   printf("Path: %s\n", (gchar*)(g_file_get_path(parent)));
+
+   GtkTreePath *parent_path = gtk_tree_path_copy(tree_path);
+
+   gtk_tree_path_up(parent_path);
+
+   GtkTreeIter parent_iter;
+
+   gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &parent_iter, parent_path);
+
+   new_node.valid = TRUE;
+   new_node.iter = parent_iter;
+   new_node.name = fpath;
+   new_node.type = ITEMTYPE_GROUP;
+
+   // printf("
+
+   // g_list_foreach(items_to_remove, (GFunc)gtk_tree_row_reference_free, NULL);
+
+   // set_tree_node_loaded(&(new_node.iter), FALSE, NULL);
+
+   refresh_folder(&new_node, TRUE);
+
+   // load_tree_at_iter(GTK_TREE_VIEW(sTreeStore), &iter);
+   // load_tree_at_iter(GTK_TREE_VIEW(projectTreeView), &iter);
+
+   g_free(fpath);
+}
+
 /**
  * Add a group node to an existing parent node, or to the root of the GtkTreeStore.
  *
@@ -247,6 +352,13 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
    gboolean finalResult = FALSE;
    GtkTreeIter iter;
 
+   GError *monitor_err = NULL;
+
+   gchar *temp_name = g_strdup_printf("%s/", full_name);
+
+   GFile *new_file = g_file_new_for_path(temp_name);
+
+   GFileMonitor *new_monitor = g_file_monitor(new_file, G_FILE_MONITOR_WATCH_MOVES, NULL, &monitor_err);
 
    // Append to root, or before/after/within an existing node?
 
@@ -268,6 +380,14 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
    if (newIter) {
       *newIter = iter;
    }
+   GtkTreePath *path = gtk_tree_model_get_path(GTK_TREE_MODEL(sTreeStore), newIter);
+
+   gchar *tree_path = gtk_tree_path_to_string(path);
+
+
+   // attach the signal with the iter 
+   g_signal_connect(G_OBJECT(new_monitor), "changed", G_CALLBACK(file_changed_cb), (gpointer)tree_path);
+
 
    gtk_tree_store_set(sTreeStore, &iter, COLUMN_ITEMTYPE, ITEMTYPE_GROUP, -1);
    gtk_tree_store_set(sTreeStore, &iter, COLUMN_FILENAME, groupname, -1);
@@ -414,7 +534,7 @@ EXITPOINT:
 /**
  *
  */
-void helper_remove(GtkTreeIter *iter)
+void helper_remove(GtkTreeIter *iter, GList **items_to_remove)
 {
 
    GtkTreeIter *tempIter = gtk_tree_iter_copy(iter);
@@ -435,14 +555,31 @@ void helper_remove(GtkTreeIter *iter)
                                COLUMN_ITEMTYPE, &itemType,
                                COLUMN_FILEPATH, &nodeContents, -1);
 
-            //gchar *fileName = get_filename_from_full_path((gchar*)nodeContents);
+            gchar *fileName = get_filename_from_full_path((gchar*)nodeContents);
 
             if (itemType == ITEMTYPE_GROUP) {
-               helper_remove(&newIter);
+               helper_remove(&newIter, items_to_remove);
             } else {
-               //printf("Removed: %s, %s\n",fileName,nodeContents);
+               printf("Removed: %s, %s\n", fileName, nodeContents);
 
-               //remove_item(fileName,nodeContents);
+               // remove_item(fileName,nodeContents);
+
+               GtkTreePath *tree_path = gtk_tree_model_get_path(GTK_TREE_MODEL(sTreeStore), &newIter);
+
+               GtkTreeRowReference *rowref;
+
+               rowref = gtk_tree_row_reference_new(GTK_TREE_MODEL(sTreeStore), tree_path);
+
+               // if (items_to_remove != NULL) {
+
+                  *items_to_remove = g_list_append(*items_to_remove, rowref);
+
+
+               /*
+               } else {
+                  printf("Items_to_remove is NULL\n");
+               }
+               */
             }
          }
 
@@ -475,7 +612,36 @@ extern gboolean remove_tree_node(GtkTreeIter *iter, GError **err)
 
    if (itemType == ITEMTYPE_GROUP) {
 
-      helper_remove(iter);
+      GList *items_to_remove = NULL;
+
+      GList *node;
+
+      helper_remove(iter, &items_to_remove);
+
+      if (items_to_remove == NULL) {
+         printf("___\n");
+      }
+
+      for (node = items_to_remove; node != NULL; node = node->next) {
+         GtkTreePath *path;
+
+         path = gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
+         //path = (GtkTreeRowReference*)(node->data);
+
+         if (path)
+         {
+            GtkTreeIter iter;
+
+            printf("-\n");
+
+            if (gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &iter, path))
+               gtk_tree_store_remove(sTreeStore, &iter);
+
+            gtk_tree_path_free(path);
+         }
+      }
+
+      g_list_free_full(items_to_remove, (GDestroyNotify)gtk_tree_row_reference_free);
 
    } else {
 
