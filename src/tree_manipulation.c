@@ -281,7 +281,6 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
 {
    char *fpath = g_file_get_path(file);
    char *opath = NULL;
-   gboolean group_is_expanded = FALSE;
 
    if (other) {
       opath = g_file_get_path(other);
@@ -329,20 +328,11 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
       }
    }
 
-   gchar *new_path_string = NULL;
    GtkTreeIter newIter;
 
    tree_path = gtk_tree_path_new_from_string(tree_path_string);
 
-   group_is_expanded = tree_row_is_expanded(tree_path);
-
    gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &newIter, tree_path);
-
-   // ClickedNode new_node;
-
-   GFile *parent;
-
-   parent = g_file_get_parent(file);
 
    GtkTreePath *parent_path = gtk_tree_path_copy(tree_path);
 
@@ -361,9 +351,6 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
    gtk_tree_model_get_iter_first(GTK_TREE_MODEL(sTreeStore), &tempIter);
    GtkTreePath *temp_tree_path = gtk_tree_path_new_first();
    fix_expanded_folders(tempIter, temp_tree_path);
-
-   // load_tree_at_iter(GTK_TREE_VIEW(sTreeStore), &iter);
-   // load_tree_at_iter(GTK_TREE_VIEW(projectTreeView), &iter);
 
    g_free(fpath);
 }
@@ -596,8 +583,6 @@ void helper_remove(GtkTreeIter *iter, GList **items_to_remove)
             gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), &newIter,
                                COLUMN_ITEMTYPE, &itemType,
                                COLUMN_FILEPATH, &nodeContents, -1);
-
-            gchar *fileName = get_filename_from_full_path((gchar*)nodeContents);
 
             if (itemType == ITEMTYPE_GROUP) {
                helper_remove(&newIter, items_to_remove);
