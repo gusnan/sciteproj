@@ -32,13 +32,13 @@
 
 #include <gdk/gdkkeysyms.h>
 
+#include "clicked_node.h"
 #include "gui_callbacks.h"
 
 #include "properties_dialog.h"
 
 #include "menus.h"
 
-#include "clicked_node.h"
 #include "gui.h"
 
 #include "sort.h"

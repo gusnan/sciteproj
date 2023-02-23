@@ -308,8 +308,6 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
 
    GList *items_to_remove = NULL;
 
-   int number_result = helper_remove(&iter, &items_to_remove);
-
    int antal_removed = 0;
 
    GList *node;
