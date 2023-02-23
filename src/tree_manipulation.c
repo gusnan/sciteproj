@@ -306,13 +306,6 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
       gint type;
    };
 
-   ClickedNode new_node;
-
-   new_node.valid = TRUE;
-   new_node.iter = iter;
-   new_node.name = fpath;
-   new_node.type = ITEMTYPE_GROUP;
-
    GList *items_to_remove = NULL;
 
    helper_remove(&iter, &items_to_remove);
@@ -339,6 +332,8 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
    GtkTreeIter parent_iter;
 
    gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &parent_iter, parent_path);
+
+   ClickedNode new_node;
 
    new_node.valid = TRUE;
    new_node.iter = parent_iter;
