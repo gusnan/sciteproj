@@ -330,8 +330,6 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
    gtk_tree_model_get(tree_model, iter, COLUMN_EXPANDED, &expanded, -1);
    gtk_tree_model_get(tree_model, iter, COLUMN_FOLDER_CONTENT_LOADED, &loaded, -1);
 
-   printf("%s : %d\n", temp, (int)expanded);
-
    if (!loaded) {
       set_tree_node_loaded(iter, TRUE, NULL);
 
@@ -461,11 +459,9 @@ gboolean tree_view_search_equal_func(GtkTreeModel *model, gint column,
  */
 void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
 {
-   printf("Refresh folder...\n");
    if (!inNode->valid || inNode->type != ITEMTYPE_GROUP) {
       return;
    }
-   printf("We really have a folder...\n");
 
    gchar *folder_name;
    GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
