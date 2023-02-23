@@ -59,7 +59,7 @@ gchar *saved_file_folder = NULL;
 
 gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **err);
 gboolean set_project_filepath(const gchar *filepath, GError **err);
-void helper_remove(GtkTreeIter *iter, GList **items_to_remove);
+int helper_remove(GtkTreeIter *iter, GList **items_to_remove);
 
 
 
@@ -308,7 +308,9 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
 
    GList *items_to_remove = NULL;
 
-   helper_remove(&iter, &items_to_remove);
+   int number_result = helper_remove(&iter, &items_to_remove);
+
+   int antal_removed = 0;
 
    GList *node;
    for (node = items_to_remove; node != NULL; node = node -> next) {
@@ -316,8 +318,10 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
 
       if (tree_path) {
          GtkTreeIter newIter;
-         if (gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &newIter, tree_path))
+         if (gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &newIter, tree_path)) {
             remove_tree_node(&newIter, NULL);
+            antal_removed++;
+         }
       }
    }
 
@@ -558,11 +562,13 @@ EXITPOINT:
 /**
  *
  */
-void helper_remove(GtkTreeIter *iter, GList **items_to_remove)
+int helper_remove(GtkTreeIter *iter, GList **items_to_remove)
 {
-
+   int res = 0;
    GtkTreeIter *tempIter = gtk_tree_iter_copy(iter);
    GtkTreeIter newIter;
+
+   int number = 0;
 
    if (gtk_tree_model_iter_children(GTK_TREE_MODEL(sTreeStore), &newIter, tempIter)) {
 
@@ -580,8 +586,11 @@ void helper_remove(GtkTreeIter *iter, GList **items_to_remove)
                                COLUMN_FILEPATH, &nodeContents, -1);
 
             if (itemType == ITEMTYPE_GROUP) {
-               helper_remove(&newIter, items_to_remove);
+               res += helper_remove(&newIter, items_to_remove);
             } else {
+
+               if (g_strcmp0(nodeContents, "<loading...>") != 0) {
+
                GtkTreePath *tree_path = gtk_tree_model_get_path(GTK_TREE_MODEL(sTreeStore), &newIter);
 
                GtkTreeRowReference *rowref;
@@ -589,6 +598,10 @@ void helper_remove(GtkTreeIter *iter, GList **items_to_remove)
                rowref = gtk_tree_row_reference_new(GTK_TREE_MODEL(sTreeStore), tree_path);
 
                *items_to_remove = g_list_append(*items_to_remove, rowref);
+
+               number++;
+               res++;
+               }
             }
          }
 
@@ -598,6 +611,9 @@ void helper_remove(GtkTreeIter *iter, GList **items_to_remove)
 
    }
 
+   printf("Number: %d\n", number);
+
+   return res;
 }
 
 

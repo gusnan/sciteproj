@@ -308,16 +308,14 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 
    GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
 
-   /*
-   GtkTreeIter newIter;
+   //GtkTreeIter newIter;
 
    gchar *new_path_string;
 
-      gtk_tree_model_get(tree_model, &iter, COLUMN_FILENAME, &new_path_string ,
+      gtk_tree_model_get(tree_model, iter, COLUMN_FILENAME, &new_path_string ,
                       -1);
 
    printf("Path string: %s\n", new_path_string);
-   */
 
    // make sure all icons the folder (and folders inside it) are set to a correct icon.
    fix_folders_step_through(tree_view, *iter, tree_path);
@@ -330,31 +328,77 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
    gtk_tree_model_get(tree_model, iter, COLUMN_EXPANDED, &expanded, -1);
    gtk_tree_model_get(tree_model, iter, COLUMN_FOLDER_CONTENT_LOADED, &loaded, -1);
 
-   if (!loaded) {
-      set_tree_node_loaded(iter, TRUE, NULL);
+   if (expanded) {
+      if (!loaded) {
+         set_tree_node_loaded(iter, TRUE, NULL);
 
-      load_tree_at_iter(tree_view, iter);
+         load_tree_at_iter(tree_view, iter);
 
 
-      // char *fpath = g_file_get_path(temp);
+         // char *fpath = g_file_get_path(temp);
 
-      struct ClickedNode
-      {
-         gboolean valid;
-         GtkTreeIter iter;
-         gchar *name;
-         gint type;
-      };
+         struct ClickedNode
+         {
+            gboolean valid;
+            GtkTreeIter iter;
+            gchar *name;
+            gint type;
+         };
 
-      ClickedNode new_node;
+         ClickedNode new_node;
 
-      new_node.valid = TRUE;
-      new_node.iter = *iter;
-      new_node.name = temp;
-      new_node.type = ITEMTYPE_GROUP;
+         new_node.valid = TRUE;
+         new_node.iter = *iter;
+         new_node.name = temp;
+         new_node.type = ITEMTYPE_GROUP;
 
-      refresh_folder(&new_node, FALSE);
+         refresh_folder(&new_node, FALSE);
 
+      }
+
+   } else {
+
+      set_tree_node_loaded(iter, FALSE, NULL);
+
+      GList *list_of_items = NULL;
+      GtkTreeIter newIter;
+
+      GtkTreeIter child;
+
+      if (gtk_tree_model_iter_children(tree_model, &child, iter)) {
+         GtkTreePath *tree_path;
+
+         GtkTreeIter *temp_iter = &child;
+         do {
+
+            gchar *temp;
+            gtk_tree_model_get(tree_model, temp_iter, COLUMN_FILENAME, &temp, -1);
+
+            tree_path = gtk_tree_model_get_path(tree_model, temp_iter);
+            GtkTreeRowReference *row_reference = gtk_tree_row_reference_new(tree_model, tree_path);
+
+            list_of_items = g_list_append(list_of_items, row_reference);
+
+            gtk_tree_path_free(tree_path);
+
+         } while(gtk_tree_model_iter_next(tree_model, temp_iter));
+
+         // go through the list of row-references
+
+         GList *node;
+         for (node = list_of_items; node != NULL; node = node -> next) {
+            tree_path = gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
+
+            if (tree_path) {
+               if (gtk_tree_model_get_iter(tree_model, &newIter, tree_path))
+                  remove_tree_node(&newIter, NULL);
+            }
+         }
+
+         g_list_foreach(list_of_items, (GFunc)gtk_tree_row_reference_free, NULL);
+      }
+
+      add_tree_file(iter, ADD_CHILD, "<loading...>", iter, FALSE, NULL);
    }
 }
 
