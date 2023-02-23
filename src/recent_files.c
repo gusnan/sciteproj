@@ -263,7 +263,7 @@ gboolean add_file_to_recent(gchar *filepath, GError **err)
    gboolean finalResult = FALSE;
    GtkTreeIter iter;
    const gchar* fileName = NULL;
-   gchar *fileExt = NULL;
+   // gchar *fileExt = NULL;
    gchar *relFilename = NULL; //g_strdup(filepath);
 
    /*
@@ -305,6 +305,7 @@ gboolean add_file_to_recent(gchar *filepath, GError **err)
    }
    */
 
+   /*
    fileExt = strrchr(fileName, '.');
 
    if (fileExt != NULL) {
@@ -314,6 +315,7 @@ gboolean add_file_to_recent(gchar *filepath, GError **err)
    if (fileExt == NULL || (int)strlen(fileExt) <= 0) {
       fileExt = (gchar*)fileName;
    }
+   */
 
 
    gtk_tree_store_set(recentTreeStore, &iter, COLUMN_ITEMTYPE, ITEMTYPE_FILE, -1);

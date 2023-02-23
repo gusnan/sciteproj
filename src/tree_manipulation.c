@@ -223,15 +223,8 @@ gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **e
    return finalResult;
 }
 
-
-struct FolderMonitor {
-   GtkTreeIter *iter;
-};
-
 void fix_expanded_folders(GtkTreeIter newiter, GtkTreePath *tree_path)
 {
-   // GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
-
    gchar *relFilePath;
 
    GError *error;
@@ -461,8 +454,6 @@ gboolean add_tree_file(GtkTreeIter *currentIter,
    const gchar* fileName = NULL;
    gchar *relFilename = NULL;
 
-   gchar *fileExt = NULL;
-
    if (!makeRelative) {
       relFilename = g_strdup(filepath);
    }
@@ -488,17 +479,6 @@ gboolean add_tree_file(GtkTreeIter *currentIter,
    else if (position == ADD_CHILD) {
       gtk_tree_store_insert(sTreeStore, &iter, currentIter, 1000);
    }
-
-   fileExt=strrchr(fileName, '.');
-
-   if (fileExt != NULL) {
-      ++fileExt;
-   }
-
-   if (fileExt == NULL || strlen(fileExt) == 0) {
-      fileExt = (gchar*)fileName;
-   }
-
 
    gtk_tree_store_set(sTreeStore, &iter, COLUMN_ITEMTYPE, ITEMTYPE_FILE, -1);
    gtk_tree_store_set(sTreeStore, &iter, COLUMN_FILEPATH, relFilename, -1);
@@ -649,10 +629,10 @@ extern gboolean remove_tree_node(GtkTreeIter *iter, GError **err)
 
          if (path)
          {
-            GtkTreeIter iter;
+            GtkTreeIter temp_iter;
 
-            if (gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &iter, path))
-               gtk_tree_store_remove(sTreeStore, &iter);
+            if (gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &temp_iter, path))
+               gtk_tree_store_remove(sTreeStore, &temp_iter);
 
             gtk_tree_path_free(path);
          }

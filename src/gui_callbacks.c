@@ -366,20 +366,20 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
       GtkTreeIter child;
 
       if (gtk_tree_model_iter_children(tree_model, &child, iter)) {
-         GtkTreePath *tree_path;
+         GtkTreePath *temp_tree_path;
 
          GtkTreeIter *temp_iter = &child;
          do {
 
-            gchar *temp;
-            gtk_tree_model_get(tree_model, temp_iter, COLUMN_FILENAME, &temp, -1);
+            gchar *filename_temp;
+            gtk_tree_model_get(tree_model, temp_iter, COLUMN_FILENAME, &filename_temp, -1);
 
-            tree_path = gtk_tree_model_get_path(tree_model, temp_iter);
-            GtkTreeRowReference *row_reference = gtk_tree_row_reference_new(tree_model, tree_path);
+            temp_tree_path = gtk_tree_model_get_path(tree_model, temp_iter);
+            GtkTreeRowReference *row_reference = gtk_tree_row_reference_new(tree_model, temp_tree_path);
 
             list_of_items = g_list_append(list_of_items, row_reference);
 
-            gtk_tree_path_free(tree_path);
+            gtk_tree_path_free(temp_tree_path);
 
          } while(gtk_tree_model_iter_next(tree_model, temp_iter));
 
@@ -387,10 +387,10 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 
          GList *node;
          for (node = list_of_items; node != NULL; node = node -> next) {
-            tree_path = gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
+            temp_tree_path = gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
 
-            if (tree_path) {
-               if (gtk_tree_model_get_iter(tree_model, &newIter, tree_path))
+            if (temp_tree_path) {
+               if (gtk_tree_model_get_iter(tree_model, &newIter, temp_tree_path))
                   remove_tree_node(&newIter, NULL);
             }
          }

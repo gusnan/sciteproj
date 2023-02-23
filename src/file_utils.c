@@ -71,7 +71,7 @@ gchar *path_up_string(gchar *instring)
    int len = (int)strlen(instring);
    int co;
 
-   int start = len--;
+   int start = len - 1;
 
    if (is_separator(instring[start])) {
       start--;
