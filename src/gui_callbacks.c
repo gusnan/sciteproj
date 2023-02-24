@@ -308,15 +308,6 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 
    GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
 
-   //GtkTreeIter newIter;
-
-   gchar *new_path_string;
-
-      gtk_tree_model_get(tree_model, iter, COLUMN_FILENAME, &new_path_string ,
-                      -1);
-
-   printf("Path string: %s\n", new_path_string);
-
    // make sure all icons the folder (and folders inside it) are set to a correct icon.
    fix_folders_step_through(tree_view, *iter, tree_path);
 
