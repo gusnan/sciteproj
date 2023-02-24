@@ -1,7 +1,7 @@
 /**
  * expand.c - expand a folder in the treeview
  *
- *	 Copyright 2012-2017 Andreas Rönnquist
+ *	 Copyright 2012-2023 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
