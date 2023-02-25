@@ -93,9 +93,6 @@ GtkWidget *sortSeparator = NULL;
 GtkWidget *fileRightClickSeparator = NULL;
 
 GtkWidget *folderPopupSeparator1 = NULL;
-GtkWidget *folderPopupSeparator2 = NULL;
-
-GtkWidget *updateFolderContentMenuItem = NULL;
 
 GtkAccelGroup *accelerator_group = NULL;
 
@@ -210,21 +207,14 @@ int init_menus(GtkWidget *window)
    groupRightClickPopupMenu = gtk_menu_new();
 
    folderPopupSeparator1 = gtk_separator_menu_item_new();
-   folderPopupSeparator2 = gtk_separator_menu_item_new();
 
    propertiesGroupMenuItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
 
-   updateFolderContentMenuItem = gtk_menu_item_new_with_mnemonic(_("Update folder content"));
-
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), sortMenuItem);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator1);
-   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), updateFolderContentMenuItem);
-   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator2);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), propertiesGroupMenuItem);
 
    g_signal_connect(G_OBJECT(propertiesGroupMenuItem), "activate", G_CALLBACK(group_properties_cb), NULL);
-
-   g_signal_connect(G_OBJECT(updateFolderContentMenuItem), "activate", G_CALLBACK(refresh_folder_cb), NULL);
 
    gtk_widget_show_all(groupRightClickPopupMenu);
 
