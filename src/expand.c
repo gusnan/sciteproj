@@ -49,7 +49,7 @@
  */
 void expand_tree_with_expanded_list(GtkTreeModel *tree_model, GtkTreeIter *start_iter, GList *folder_status_list)
 {
- GtkTreeIter child_iter;
+   GtkTreeIter child_iter;
 
    gint type;
    gchar *filepath;
