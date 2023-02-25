@@ -162,6 +162,16 @@ This will hide the set folders in sciteproj.
 
 Thats it! Enjoy using sciteproj!
 
+Development
+===========
+
+To use cppcheck in a painless way, use the following command line:
+
+cppcheck --suppress=missingIncludeSystem --enable=all ./src/
+
+The suppress part will make it possible without using a whole lot of
+-I parameters, which would otherwise be necessary.
+
 Credits
 =======
 
