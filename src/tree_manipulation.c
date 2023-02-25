@@ -546,8 +546,6 @@ int helper_remove(GtkTreeIter *iter, GList **items_to_remove)
    GtkTreeIter *tempIter = gtk_tree_iter_copy(iter);
    GtkTreeIter newIter;
 
-   int number = 0;
-
    if (gtk_tree_model_iter_children(GTK_TREE_MODEL(sTreeStore), &newIter, tempIter)) {
 
       gboolean next_valid = TRUE;
@@ -577,7 +575,6 @@ int helper_remove(GtkTreeIter *iter, GList **items_to_remove)
 
                *items_to_remove = g_list_append(*items_to_remove, rowref);
 
-               number++;
                res++;
                }
             }
@@ -588,8 +585,6 @@ int helper_remove(GtkTreeIter *iter, GList **items_to_remove)
       } while(next_valid);
 
    }
-
-   printf("Number: %d\n", number);
 
    return res;
 }

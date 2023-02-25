@@ -47,6 +47,52 @@
 /**
  *
  */
+void expand_tree_with_expanded_list(GtkTreeModel *tree_model, GtkTreeIter *start_iter, GList *folder_status_list)
+{
+ GtkTreeIter child_iter;
+
+   gint type;
+   gchar *filepath;
+   gchar *filename;
+
+   if (start_iter) {
+      if (gtk_tree_model_iter_children(tree_model, &child_iter, start_iter)) {
+
+         do {
+
+            gtk_tree_model_get(tree_model, &child_iter,
+                               COLUMN_ITEMTYPE, &type,
+                               COLUMN_FILEPATH, &filepath,
+                               COLUMN_FILENAME, &filename,
+                              -1);
+
+            if (type == ITEMTYPE_GROUP) {
+
+               // Check if we should expand this row
+               GtkTreePath *path = gtk_tree_model_get_path(tree_model, &child_iter);
+
+               if (folder_status_list != NULL) {
+
+                  GList *node;
+                  for (node = folder_status_list; node != NULL; node = node -> next) {
+                     struct FolderStatus *folder_status = node->data;
+
+                     if (g_strcmp0(folder_status->folder_name, filename) == 0) {
+                        expand_tree_row(path, FALSE);
+                        expand_tree(tree_model, &child_iter);
+
+                     }
+                  }
+               }
+            }
+         } while (gtk_tree_model_iter_next(tree_model, &child_iter));
+      }
+   }
+}
+
+/**
+ *
+ */
 void expand_tree(GtkTreeModel *tree_model, GtkTreeIter *start_iter)
 {
    GtkTreeIter child_iter;
@@ -66,8 +112,6 @@ void expand_tree(GtkTreeModel *tree_model, GtkTreeIter *start_iter)
             if (type == ITEMTYPE_GROUP) {
 
                // Check if we should expand this row
-               //printf("filepath :%s\n", filepath);
-
                GtkTreePath *path = gtk_tree_model_get_path(tree_model, &child_iter);
 
                if (get_expand_folder(filepath)) {

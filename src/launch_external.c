@@ -79,5 +79,4 @@ void launch_default_for_uri_cb()
       launch_default_for_uri(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)), &(clicked_node.iter));
 
    }
-   // printf("Filename: %s\n", filename);
 }

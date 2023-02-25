@@ -22,9 +22,22 @@
 #ifndef __HEADER_EXPAND_
 #define __HEADER_EXPAND_
 
+
 /**
  *
  */
+typedef struct FolderStatus {
+   gchar *folder_name;
+   gboolean folder_expanded;
+} FolderStatus;
+
+
+
+/**
+ *
+ */
+void expand_tree_with_expanded_list(GtkTreeModel *tree_model, GtkTreeIter *start_iter, GList *folder_status_list);
+
 void expand_tree(GtkTreeModel *tree_model, GtkTreeIter *start_iter);
 void start_expand_tree(GtkTreeModel *tree_model, GtkTreeIter *iter);
 gboolean get_expand_folder(gchar *folder_name);

@@ -58,6 +58,8 @@
 
 #include "script.h"
 
+#include "expand.h"
+
 
 /**
  * Open the selected file.
@@ -488,7 +490,6 @@ gboolean tree_view_search_equal_func(GtkTreeModel *model, gint column,
    return res;
 }
 
-
 /**
  *
  */
@@ -510,8 +511,12 @@ void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
                       COLUMN_EXPANDED, &expanded,
                       -1);
 
+   GList *folder_status_list = NULL;
+
+   // TODO: check if the folder filename is in the ignored list
+
    // If the folder is expanded
-   if (expanded && extern_expanded) {
+   if (expanded /* || extern_expanded */) {
 
       // add all rows below to a list of GtkTreePath
       GtkTreeIter child;
@@ -528,6 +533,28 @@ void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
 
             gchar *temp;
             gtk_tree_model_get(tree_model, temp_iter, COLUMN_FILENAME, &temp, -1);
+
+            int node_item_type;
+            gboolean temp_exp = FALSE;
+
+            gtk_tree_model_get(tree_model, temp_iter, COLUMN_ITEMTYPE, &node_item_type, -1);
+
+            gtk_tree_model_get(tree_model, temp_iter, COLUMN_EXPANDED, &temp_exp, -1);
+
+            if (node_item_type == ITEMTYPE_GROUP) {
+
+               if (temp_exp) {
+
+                  struct FolderStatus *folder_status;
+
+                  folder_status = g_malloc(sizeof(FolderStatus));
+
+                  folder_status->folder_name = temp;
+                  folder_status->folder_expanded = temp_exp;
+
+                  folder_status_list = g_list_append(folder_status_list, folder_status);
+               }
+            }
 
             tree_path = gtk_tree_model_get_path(tree_model, temp_iter);
             GtkTreeRowReference *row_reference = gtk_tree_row_reference_new(tree_model, tree_path);
@@ -566,11 +593,26 @@ void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
       }
 
       load_tree_at_iter(GTK_TREE_VIEW(projectTreeView), temp_iter);
-      //set_tree_node_loaded(temp_iter, TRUE, NULL);
 
-      // get the default sort order
+
+      // restore folders open or closed here.
+
+      if (folder_status_list != NULL) {
+         expand_tree_with_expanded_list(tree_model, stored_iter, folder_status_list);
+      } else {
+
+         expand_tree(tree_model, stored_iter);
+      }
 
       //sort_children(stored_iter, NULL, compare_strings_smaller);
+
+      // Free memory of folder_status_list
+      GList *node;
+      for (node = folder_status_list; node != NULL; node = node -> next) {
+         struct FolderStatus *temp = node->data;
+
+         g_free(temp);
+      }
    }
 
 }
