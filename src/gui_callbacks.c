@@ -614,5 +614,4 @@ void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
          g_free(temp);
       }
    }
-
 }
