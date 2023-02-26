@@ -311,8 +311,6 @@ GCompareFunc get_sort_order_of_folder(gchar *folder_name)
             g_free(key);
 
             key = temp;
-
-            //printf(" key: %s\n", key);
          }
 
          if (lua_type(lua, -1) == LUA_TNUMBER) { // value is number
@@ -340,16 +338,10 @@ GCompareFunc get_sort_order_of_folder(gchar *folder_name)
                                           &relative_path,
                                           get_project_directory(),
                                           NULL)) {
-
-               //printf("relative_path: %s\n", relative_path);
             }
          }
 
-         //printf("Relative path: %s\n", relative_path);
-
          gchar *folder_cleaned = clean_folder(relative_path);
-
-         //printf("folder_cleaned: %s\n", folder_cleaned);
 
          if (g_strcmp0(key, folder_cleaned) == 0) {
 
