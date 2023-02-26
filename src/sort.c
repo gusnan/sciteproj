@@ -126,15 +126,8 @@ void sort_ascending_cb()
    set_tree_node_sort_order(clicked_iter, SORT_ORDER_NAME_INCREASING, &call_error);
 
    sort_children(clicked_iter_copy, &err, compare_strings_smaller);
-
-   ClickedNode new_node;
-
-   new_node.valid = TRUE;
-   new_node.iter = *clicked_iter;
-   // new_node.name = fpath;
-   new_node.type = ITEMTYPE_GROUP;
-
-   refresh_folder(&new_node, TRUE);
+   
+   refresh_folder_with_iter(clicked_iter);
 
 EXITPOINT:
    //
@@ -164,14 +157,7 @@ void sort_descending_cb()
 
    sort_children(clicked_iter_copy, &err, compare_strings_bigger);
 
-   ClickedNode new_node;
-
-   new_node.valid = TRUE;
-   new_node.iter = *clicked_iter;
-   //new_node.name = fpath;
-   new_node.type = ITEMTYPE_GROUP;
-
-   refresh_folder(&new_node, TRUE);
+   refresh_folder_with_iter(clicked_iter);
 
 
 EXITPOINT:
@@ -194,9 +180,13 @@ void sort_ascending_by_extension_cb()
    // SORT_ORDER_EXTENSION_INREASING
    GError *call_error = NULL;
 
+   GtkTreeIter *clicked_iter = &(clicked_node.iter);
+
    set_tree_node_sort_order(&(clicked_node.iter), SORT_ORDER_EXTENSION_INREASING, &call_error);
 
    sort_children(&clicked_node.iter, &err, file_sort_by_extension_smaller_func);
+
+   refresh_folder_with_iter(clicked_iter);
 
 EXITPOINT:
    if (err) g_error_free(err);
@@ -217,9 +207,13 @@ void sort_descending_by_extension_cb()
    // SORT_ORDER_EXTENSION_DECREASING
    GError *call_error = NULL;
 
+   GtkTreeIter *clicked_iter = &(clicked_node.iter);
+
    set_tree_node_sort_order(&(clicked_node.iter), SORT_ORDER_EXTENSION_DECREASING, &call_error);
 
    sort_children(&clicked_node.iter, &err, file_sort_by_extension_bigger_func);
+
+   refresh_folder_with_iter(clicked_iter);
 
 EXITPOINT:
    if (err) g_error_free(err);

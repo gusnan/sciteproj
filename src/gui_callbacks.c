@@ -345,7 +345,7 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
          new_node.name = temp;
          new_node.type = ITEMTYPE_GROUP;
 
-         refresh_folder(&new_node, FALSE);
+         refresh_folder(&new_node);
 
       }
 
@@ -493,21 +493,16 @@ gboolean tree_view_search_equal_func(GtkTreeModel *model, gint column,
 /**
  *
  */
-void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
+void refresh_folder_with_iter(GtkTreeIter *iter)
 {
-   if (!inNode->valid || inNode->type != ITEMTYPE_GROUP) {
-      return;
-   }
+   GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
+   GtkTreeIter *stored_iter = gtk_tree_iter_copy(iter);
 
    gchar *folder_name;
-   GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
-   GtkTreeIter iter = inNode->iter;
-
-   GtkTreeIter *stored_iter = gtk_tree_iter_copy(&iter);
 
    gboolean expanded;
 
-   gtk_tree_model_get(tree_model, &iter, COLUMN_FILENAME, &folder_name,
+   gtk_tree_model_get(tree_model, iter, COLUMN_FILENAME, &folder_name,
                       COLUMN_EXPANDED, &expanded,
                       -1);
 
@@ -525,7 +520,7 @@ void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
 
       // First, store all GtkTreePath in a linked list
 
-      if (gtk_tree_model_iter_children(tree_model, &child, &iter)) {
+      if (gtk_tree_model_iter_children(tree_model, &child, iter)) {
          GtkTreePath *tree_path;
 
          GtkTreeIter *temp_iter = &child;
@@ -572,8 +567,8 @@ void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
             tree_path = gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
 
             if (tree_path) {
-               if (gtk_tree_model_get_iter(tree_model, &iter, tree_path))
-                  remove_tree_node(&iter, NULL);
+               if (gtk_tree_model_get_iter(tree_model, iter, tree_path))
+                  remove_tree_node(iter, NULL);
             }
          }
 
@@ -614,4 +609,19 @@ void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
          g_free(temp);
       }
    }
+
+}
+
+/**
+ *
+ */
+void refresh_folder(ClickedNode *inNode)
+{
+   if (!inNode->valid || inNode->type != ITEMTYPE_GROUP) {
+      return;
+   }
+   
+   GtkTreeIter iter = inNode->iter;
+   
+   refresh_folder_with_iter(&iter);
 }

@@ -341,7 +341,7 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
    new_node.name = fpath;
    new_node.type = ITEMTYPE_GROUP;
 
-   refresh_folder(&new_node, TRUE);
+   refresh_folder(&new_node);
 
    GtkTreeIter tempIter;
    gtk_tree_model_get_iter_first(GTK_TREE_MODEL(sTreeStore), &tempIter);
