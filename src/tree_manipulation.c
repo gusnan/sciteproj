@@ -824,10 +824,10 @@ EXITPOINT:
 /**
  *
  */
-void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_func)
+void sort_children(GtkTreeIter *node, GError **err, StringCompareFunction compare_func)
 {
 
-   GtkTreeIter *saved_iter = node;
+   GtkTreeIter *saved_iter = gtk_tree_iter_copy(node);
 
    GtkTreeIter childIter;
 
@@ -836,7 +836,6 @@ void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_
    gint nodeType = -1;
 
    GSList *itemList = NULL;
-
 
    if (gtk_tree_model_iter_children(tree_model, &childIter, node)) {
 
@@ -854,7 +853,7 @@ void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_
 
             gchar *newAbsPath = NULL;
 
-            relative_path_to_abs_path(nodeContents, &newAbsPath, get_project_directory(),err);
+            relative_path_to_abs_path(nodeContents, &newAbsPath, get_project_directory(), err);
 
             if (itemList == NULL) {
                itemList = g_slist_append(itemList, newAbsPath);
@@ -947,4 +946,34 @@ gboolean add_tree_folderlist(GtkTreeIter *iter, GSList *folder_list, gchar *fold
    }
 
    return TRUE;
+}
+
+
+void print_node(GtkTreeIter *iter)
+{
+   gchar *node_contents;
+   int item_type;
+   gchar *item_name;
+
+   gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), iter,
+                   COLUMN_ITEMTYPE, &item_type,
+                   COLUMN_FILEPATH, &node_contents,
+                   COLUMN_FILENAME, &item_name,
+                   -1);
+
+   gchar *type_string;
+
+   switch (item_type) {
+      case ITEMTYPE_GROUP:
+         type_string = g_strdup("Group");
+         break;
+      case ITEMTYPE_FILE:
+         type_string = g_strdup("File");
+         break;
+   };
+
+   printf("Type: %s\n", type_string);
+   printf("Contents: '%s'\n", node_contents);
+   printf("File name: '%s'\n", item_name);
+   printf("-----\n");
 }

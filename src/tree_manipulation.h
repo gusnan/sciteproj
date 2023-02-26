@@ -131,8 +131,10 @@ gboolean copy_tree_node(GtkTreeIter *srcIter,
 
 gchar *get_path_string(GtkTreeIter *iter);
 
-void sort_children(GtkTreeIter *node,GError **err,StringCompareFunction compare_func);
+void sort_children(GtkTreeIter *node, GError **err, StringCompareFunction compare_func);
 
 gboolean add_tree_folderlist(GtkTreeIter *iter, GSList *folder_list, gchar *folder_path);
+
+void print_node(GtkTreeIter *iter);
 
 #endif /*__HEADER_TREE_MANIPULATION_*/

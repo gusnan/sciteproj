@@ -117,9 +117,22 @@ void sort_ascending_cb()
    // SORT_ORDER_NAME_INCREASING
    GError *call_error = NULL;
 
-   set_tree_node_sort_order(&(clicked_node.iter), SORT_ORDER_NAME_INCREASING, &call_error);
+   GtkTreeIter *clicked_iter = &(clicked_node.iter);
 
-   sort_children(&(clicked_node.iter), &err, compare_strings_smaller);
+   GtkTreeIter *clicked_iter_copy = gtk_tree_iter_copy(clicked_iter);
+
+   set_tree_node_sort_order(clicked_iter, SORT_ORDER_NAME_INCREASING, &call_error);
+
+   sort_children(clicked_iter_copy, &err, compare_strings_smaller);
+
+   ClickedNode new_node;
+
+   new_node.valid = TRUE;
+   new_node.iter = *clicked_iter;
+   // new_node.name = fpath;
+   new_node.type = ITEMTYPE_GROUP;
+
+   refresh_folder(&new_node, TRUE);
 
 EXITPOINT:
    //
@@ -141,9 +154,22 @@ void sort_descending_cb()
    // SORT_ORDER_NAME_DECREASING
    GError *call_error = NULL;
 
-   set_tree_node_sort_order(&(clicked_node.iter), SORT_ORDER_NAME_DECREASING, &call_error);
+   GtkTreeIter *clicked_iter = &(clicked_node.iter);
 
-   sort_children(&clicked_node.iter, &err, compare_strings_bigger);
+   GtkTreeIter *clicked_iter_copy = gtk_tree_iter_copy(clicked_iter);
+
+   set_tree_node_sort_order(clicked_iter, SORT_ORDER_NAME_DECREASING, &call_error);
+
+   sort_children(clicked_iter_copy, &err, compare_strings_bigger);
+
+   ClickedNode new_node;
+
+   new_node.valid = TRUE;
+   new_node.iter = *clicked_iter;
+   //new_node.name = fpath;
+   new_node.type = ITEMTYPE_GROUP;
+
+   refresh_folder(&new_node, TRUE);
 
 
 EXITPOINT:
