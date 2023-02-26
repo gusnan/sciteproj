@@ -34,6 +34,8 @@
 
 #include "script.h"
 
+#include "gui_callbacks.h"
+
 /**
  *
  */
