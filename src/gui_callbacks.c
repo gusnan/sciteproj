@@ -616,13 +616,3 @@ void refresh_folder(ClickedNode *inNode, gboolean extern_expanded)
    }
 
 }
-
-
-/**
- *
- */
-void refresh_folder_cb()
-{
-   refresh_folder(&clicked_node, TRUE);
-}
-

@@ -35,6 +35,5 @@ void popup_open_file_cb();
 void edit_properties_cb();
 
 void refresh_folder(ClickedNode *inNode, gboolean extern_expanded);
-void refresh_folder_cb();
 
 #endif /*__HEADER_GUI_CALLBACKS_*/
