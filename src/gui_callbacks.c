@@ -260,7 +260,7 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
          // default sorting here compare_strings_bigger - since we turn the
          // list backwards after
 
-         GCompareFunc comparer = get_sort_order_of_folder(temp_folder_path);
+         GCompareFunc comparer = get_sort_order_from_iter(tree_view, iter);
 
          file_list = load_folder_to_list(temp_folder_path,
                                          FALSE,

@@ -120,6 +120,8 @@ gboolean set_tree_node_icon(GtkTreeIter *iter, GdkPixbuf *pixbuf, GError **err);
 
 gboolean set_tree_node_loaded(GtkTreeIter *iter, gboolean loaded, GError **err);
 
+gboolean set_tree_node_sort_order(GtkTreeIter *iter, gint sort_order, GError **err);
+
 // Copy a node in the tree (including children)
 gboolean copy_tree_node(GtkTreeIter *srcIter,
                         GtkTreeIter *dstIter,

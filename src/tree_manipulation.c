@@ -43,6 +43,8 @@
 
 #include "gui_callbacks.h"
 
+#include "sort.h"
+
 
 #undef APP_SCITEPROJ_ERROR
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_TREEMANIPULATION_ERROR")
@@ -271,6 +273,9 @@ void fix_expanded_folders(GtkTreeIter newiter, GtkTreePath *tree_path)
 }
 
 
+/**
+ *
+ */
 void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMonitorEvent evtype, gpointer user_data)
 {
    char *fpath = g_file_get_path(file);
@@ -419,6 +424,8 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
    gtk_tree_store_set(sTreeStore, &iter, COLUMN_ICON, directory_closed_pixbuf, -1);
 
    gtk_tree_store_set(sTreeStore, &iter, COLUMN_EXPANDED, expanded, -1);
+
+   gtk_tree_store_set(sTreeStore, &iter, COLUMN_FOLDER_SORT_ORDER, SORT_ORDER_NAME_INCREASING, -1);
 
    finalResult = TRUE;
 

@@ -49,5 +49,6 @@ void sort_ascending_by_extension_cb();
 void sort_descending_by_extension_cb();
 
 GCompareFunc get_sort_order_of_folder(gchar *folder_name);
+GCompareFunc get_sort_order_from_iter(GtkTreeView *tree_view, GtkTreeIter *iter);
 
 #endif /*__HEADER_SORT_*/

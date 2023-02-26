@@ -114,6 +114,11 @@ void sort_ascending_cb()
       goto EXITPOINT;
    }
 
+   // SORT_ORDER_NAME_INCREASING
+   GError *call_error = NULL;
+
+   set_tree_node_sort_order(&(clicked_node.iter), SORT_ORDER_NAME_INCREASING, &call_error);
+
    sort_children(&(clicked_node.iter), &err, compare_strings_smaller);
 
 EXITPOINT:
@@ -132,6 +137,11 @@ void sort_descending_cb()
    if (clicked_node.valid && clicked_node.type == ITEMTYPE_FILE) {
       goto EXITPOINT;
    }
+
+   // SORT_ORDER_NAME_DECREASING
+   GError *call_error = NULL;
+
+   set_tree_node_sort_order(&(clicked_node.iter), SORT_ORDER_NAME_DECREASING, &call_error);
 
    sort_children(&clicked_node.iter, &err, compare_strings_bigger);
 
@@ -153,6 +163,11 @@ void sort_ascending_by_extension_cb()
       goto EXITPOINT;
    }
 
+   // SORT_ORDER_EXTENSION_INREASING
+   GError *call_error = NULL;
+
+   set_tree_node_sort_order(&(clicked_node.iter), SORT_ORDER_EXTENSION_INREASING, &call_error);
+
    sort_children(&clicked_node.iter, &err, file_sort_by_extension_smaller_func);
 
 EXITPOINT:
@@ -171,6 +186,11 @@ void sort_descending_by_extension_cb()
       goto EXITPOINT;
    }
 
+   // SORT_ORDER_EXTENSION_DECREASING
+   GError *call_error = NULL;
+
+   set_tree_node_sort_order(&(clicked_node.iter), SORT_ORDER_EXTENSION_DECREASING, &call_error);
+
    sort_children(&clicked_node.iter, &err, file_sort_by_extension_bigger_func);
 
 EXITPOINT:
@@ -178,6 +198,44 @@ EXITPOINT:
 
 }
 
+
+
+GCompareFunc get_sort_order_from_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
+{
+   GCompareFunc result = compare_strings_smaller;
+   int sort_order = 0;
+
+   GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
+
+   int item_type = -1;
+
+   gtk_tree_model_get(GTK_TREE_MODEL(tree_model), iter, COLUMN_ITEMTYPE, &item_type, -1);
+
+   if (item_type != ITEMTYPE_GROUP) {
+      goto EXITPOINT;
+   }
+
+   gtk_tree_model_get(GTK_TREE_MODEL(tree_model), iter, COLUMN_FOLDER_SORT_ORDER, &sort_order, -1);
+
+   switch (sort_order)
+   {
+   case 0:
+      result = compare_strings_smaller;
+      break;
+   case 1:
+      result = compare_strings_bigger;
+      break;
+   case 2:
+      result = file_sort_by_extension_smaller_func;
+      break;
+   case 3:
+      result = file_sort_by_extension_bigger_func;
+      break;
+   };
+
+EXITPOINT:
+   return result;
+}
 
 /**
  *
