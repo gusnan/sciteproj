@@ -25,6 +25,17 @@
 /**
  *
  */
+enum {
+   SORT_ORDER_NAME_INCREASING =       0,
+   SORT_ORDER_NAME_DECREASING =       1,
+   SORT_ORDER_EXTENSION_INREASING =   2,
+   SORT_ORDER_EXTENSION_DECREASING =  3,
+};
+
+
+/**
+ *
+ */
 gint compare_strings_bigger(gconstpointer a, gconstpointer b);
 gint compare_strings_smaller(gconstpointer a, gconstpointer b);
 

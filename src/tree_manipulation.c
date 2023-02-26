@@ -700,6 +700,19 @@ gboolean set_tree_node_loaded(GtkTreeIter *iter, gboolean loaded, GError **err)
 
 
 /**
+ *
+ */
+gboolean set_tree_node_sort_order(GtkTreeIter *iter, gint sort_order, GError **err)
+{
+   g_assert(iter != NULL);
+
+   gtk_tree_store_set(sTreeStore, iter, COLUMN_FOLDER_SORT_ORDER, sort_order, -1);
+
+   return TRUE;
+}
+
+
+/**
  * Copy a node (and children) within the tree.
  *
  * @return TRUE on success, FALSE on failure (further details returned in err)
