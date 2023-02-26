@@ -167,7 +167,8 @@ GtkTreeStore* create_treestore(GError **err)
                                       TYPE_FONTWEIGHTSET,
                                       TYPE_ICON,
                                       TYPE_EXPANDED,
-                                      TYPE_FOLDER_CONTENT_LOADED);
+                                      TYPE_FOLDER_CONTENT_LOADED,
+                                      TYPE_FOLDER_SORT_ORDER);
 
       if (sTreeStore == NULL) {
          g_set_error(err,
