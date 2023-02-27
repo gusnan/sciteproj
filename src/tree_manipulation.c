@@ -944,7 +944,7 @@ gboolean add_tree_folderlist(GtkTreeIter *iter, GSList *folder_list, gchar *fold
    return TRUE;
 }
 
-
+// cppcheck-suppress [unusedFunction]
 void print_node(GtkTreeIter *iter)
 {
    gchar *node_contents;
