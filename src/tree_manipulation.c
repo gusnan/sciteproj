@@ -279,17 +279,14 @@ void fix_expanded_folders(GtkTreeIter newiter, GtkTreePath *tree_path)
 void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMonitorEvent evtype, gpointer user_data)
 {
    char *fpath = g_file_get_path(file);
-   char *opath = NULL;
-
-   if (other) {
-      opath = g_file_get_path(other);
-   }
-
-   if (opath) {
-      g_free(opath);
-   }
 
    gchar *tree_path_string = (gchar*)(user_data);
+
+   // save the current cursor position
+   GtkTreePath *saved_cursor;
+   GtkTreeViewColumn *focus_column;
+
+   gtk_tree_view_get_cursor(GTK_TREE_VIEW(projectTreeView), &saved_cursor, &focus_column);
 
    GtkTreePath *tree_path = gtk_tree_path_new_from_string(tree_path_string);
 
@@ -347,6 +344,9 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
    gtk_tree_model_get_iter_first(GTK_TREE_MODEL(sTreeStore), &tempIter);
    GtkTreePath *temp_tree_path = gtk_tree_path_new_first();
    fix_expanded_folders(tempIter, temp_tree_path);
+
+   // restore cursor position
+   gtk_tree_view_set_cursor(GTK_TREE_VIEW(projectTreeView), saved_cursor, focus_column, FALSE);
 
    g_free(fpath);
 }
