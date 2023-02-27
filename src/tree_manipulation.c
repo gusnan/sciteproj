@@ -331,14 +331,10 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
 
    gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &parent_iter, parent_path);
 
-   ClickedNode new_node;
+   ClickedNode *new_node;
+   new_node = create_clicked_node(TRUE, parent_iter, fpath, ITEMTYPE_GROUP);
 
-   new_node.valid = TRUE;
-   new_node.iter = parent_iter;
-   new_node.name = fpath;
-   new_node.type = ITEMTYPE_GROUP;
-
-   refresh_folder(&new_node);
+   refresh_folder(new_node);
 
    GtkTreeIter tempIter;
    gtk_tree_model_get_iter_first(GTK_TREE_MODEL(sTreeStore), &tempIter);

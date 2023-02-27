@@ -1,7 +1,7 @@
 /**
  * clicked_node.h - clicked node struct for SciteProj
  *
- *  Copyright 2006 Roy Wood, 2009-2017 Andreas Rönnquist
+ *  Copyright 2006 Roy Wood, 2009-2023 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -19,22 +19,20 @@
  * along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef __HEADER_CLICKED_NODE_
-#define __HEADER_CLICKED_NODE_
+#include <glib.h>
+#include <gtk/gtk.h>
+#include <glib/gi18n.h>
 
-/**
- *
- */
-struct ClickedNode
+#include "clicked_node.h"
+
+ClickedNode *create_clicked_node(gboolean valid, GtkTreeIter iter, gchar *name, gint type)
 {
-   gboolean valid;
-   GtkTreeIter iter;
-   gchar *name;
-   gint type;
-};
+   ClickedNode *new_node = g_malloc(sizeof(ClickedNode));
 
-typedef struct ClickedNode ClickedNode;
+   new_node->valid = valid;
+   new_node->iter = iter;
+   new_node->name = name;
+   new_node->type = type;
 
-ClickedNode *create_clicked_node(gboolean valid, GtkTreeIter iter, gchar *name, gint type);
-
-#endif /*__HEADER_CLICKED_NODE_*/
+   return new_node;
+}
