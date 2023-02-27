@@ -72,11 +72,7 @@ EXITPOINT:
  */
 void launch_default_for_uri_cb()
 {
-
-   if (!clicked_node.valid || clicked_node.type != ITEMTYPE_FILE) {
-      //goto EXITPOINT;
-   } else {
+   if (clicked_node.valid && clicked_node.type == ITEMTYPE_FILE) {
       launch_default_for_uri(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)), &(clicked_node.iter));
-
    }
 }
