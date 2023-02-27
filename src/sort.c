@@ -261,7 +261,9 @@ int get_sort_order_from_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 
    gtk_tree_model_get(GTK_TREE_MODEL(tree_model), iter, COLUMN_FOLDER_SORT_ORDER, &sort_order, -1);
 
+#ifdef _DEBUG
    printf("Sort order: %d\n", sort_order);
+#endif
 
 EXITPOINT:
    return sort_order;
