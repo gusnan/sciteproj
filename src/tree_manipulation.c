@@ -944,6 +944,7 @@ gboolean add_tree_folderlist(GtkTreeIter *iter, GSList *folder_list, gchar *fold
    return TRUE;
 }
 
+#ifdef _DEBUG
 // cppcheck-suppress [unusedFunction]
 void print_node(GtkTreeIter *iter)
 {
@@ -973,3 +974,4 @@ void print_node(GtkTreeIter *iter)
    printf("File name: '%s'\n", item_name);
    printf("-----\n");
 }
+#endif
