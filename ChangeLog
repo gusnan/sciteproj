@@ -4,7 +4,10 @@ ChangeLog:
 
 1.50 (WIP)
    * Make file tree update automatically when files are added and removed
-     outside of sciteproj/scite
+     outside of sciteproj/scite. No need to right click on a folder and
+     press "Update" any more!
+   * Properly update folder sort order from sciteprojrc of the folder, and
+     in-program menu in correct order of priority
 
 1.18
    * Add menu item to launch default program for uri
