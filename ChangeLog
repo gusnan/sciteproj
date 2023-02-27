@@ -2,6 +2,10 @@
 ChangeLog:
 ----------
 
+1.50 (WIP)
+   * Make file tree update automatically when files are added and removed
+     outside of sciteproj/scite
+
 1.18
    * Add menu item to launch default program for uri
    * Update Swedish translation
