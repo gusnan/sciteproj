@@ -421,7 +421,7 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
 
    gtk_tree_store_set(sTreeStore, &iter, COLUMN_EXPANDED, expanded, -1);
 
-   gtk_tree_store_set(sTreeStore, &iter, COLUMN_FOLDER_SORT_ORDER, SORT_ORDER_NAME_INCREASING, -1);
+   gtk_tree_store_set(sTreeStore, &iter, COLUMN_FOLDER_SORT_ORDER, SORT_ORDER_INVALID, -1);
 
    finalResult = TRUE;
 

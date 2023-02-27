@@ -221,11 +221,33 @@ EXITPOINT:
 }
 
 
-
-GCompareFunc get_sort_order_from_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
+GCompareFunc get_compare_func_from_sort_order_value(int sort_order)
 {
-   GCompareFunc result = compare_strings_smaller;
-   int sort_order = 0;
+   GCompareFunc result = NULL;
+
+   switch (sort_order)
+   {
+   case SORT_ORDER_NAME_INCREASING:
+      result = compare_strings_smaller;
+      break;
+   case SORT_ORDER_NAME_DECREASING:
+      result = compare_strings_bigger;
+      break;
+   case SORT_ORDER_EXTENSION_INREASING:
+      result = file_sort_by_extension_smaller_func;
+      break;
+   case SORT_ORDER_EXTENSION_DECREASING:
+      result = file_sort_by_extension_bigger_func;
+      break;
+   };
+
+   return result;
+}
+
+
+int get_sort_order_from_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
+{
+   int sort_order = SORT_ORDER_INVALID;
 
    GtkTreeModel *tree_model = gtk_tree_view_get_model(tree_view);
 
@@ -239,33 +261,20 @@ GCompareFunc get_sort_order_from_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
 
    gtk_tree_model_get(GTK_TREE_MODEL(tree_model), iter, COLUMN_FOLDER_SORT_ORDER, &sort_order, -1);
 
-   switch (sort_order)
-   {
-   case 0:
-      result = compare_strings_smaller;
-      break;
-   case 1:
-      result = compare_strings_bigger;
-      break;
-   case 2:
-      result = file_sort_by_extension_smaller_func;
-      break;
-   case 3:
-      result = file_sort_by_extension_bigger_func;
-      break;
-   };
+   printf("Sort order: %d\n", sort_order);
 
 EXITPOINT:
-   return result;
+   return sort_order;
 }
 
 /**
  *
  */
-GCompareFunc get_sort_order_of_folder(gchar *folder_name)
+int get_sort_order_of_folder(gchar *folder_name)
 {
    // We default to compare_strings_smaller
-   GCompareFunc result = compare_strings_smaller;
+   // GCompareFunc result = NULL;
+   int result = SORT_ORDER_INVALID;
 
    gchar *script_filename = g_build_filename(get_project_directory(),
                             "sciteprojrc.lua", NULL);
@@ -343,24 +352,7 @@ GCompareFunc get_sort_order_of_folder(gchar *folder_name)
 
          gchar *folder_cleaned = clean_folder(relative_path);
 
-         if (g_strcmp0(key, folder_cleaned) == 0) {
-
-            switch (num)
-            {
-            case 0:
-               result = compare_strings_smaller;
-               break;
-            case 1:
-               result = compare_strings_bigger;
-               break;
-            case 2:
-               result = file_sort_by_extension_smaller_func;
-               break;
-            case 3:
-               result = file_sort_by_extension_bigger_func;
-               break;
-            };
-         }
+         if (g_strcmp0(key, folder_cleaned) == 0) result = num;
 
          if (key) g_free(key);
 

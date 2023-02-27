@@ -26,6 +26,7 @@
  *
  */
 enum {
+   SORT_ORDER_INVALID =               -1,
    SORT_ORDER_NAME_INCREASING =       0,
    SORT_ORDER_NAME_DECREASING =       1,
    SORT_ORDER_EXTENSION_INREASING =   2,
@@ -48,7 +49,9 @@ void sort_descending_cb();
 void sort_ascending_by_extension_cb();
 void sort_descending_by_extension_cb();
 
-GCompareFunc get_sort_order_of_folder(gchar *folder_name);
-GCompareFunc get_sort_order_from_iter(GtkTreeView *tree_view, GtkTreeIter *iter);
+GCompareFunc get_compare_func_from_sort_order_value(int sort_order);
+
+int get_sort_order_of_folder(gchar *folder_name);
+int get_sort_order_from_iter(GtkTreeView *tree_view, GtkTreeIter *iter);
 
 #endif /*__HEADER_SORT_*/

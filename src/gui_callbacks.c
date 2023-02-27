@@ -257,10 +257,26 @@ void load_tree_at_iter(GtkTreeView *tree_view, GtkTreeIter *iter)
          GSList *file_list; //=load_folder_to_list(folder_path, FALSE,
          GSList *folder_list;
 
-         // default sorting here compare_strings_bigger - since we turn the
-         // list backwards after
+         int sort_order = get_sort_order_from_iter(tree_view, iter);
 
-         GCompareFunc comparer = get_sort_order_from_iter(tree_view, iter);
+         // Doesn't the iterator have a sort value (it doesn't/shouldn't have
+         // if we havn't set sort order by right clicking it and selecting there
+         if (sort_order == SORT_ORDER_INVALID) {
+#ifdef _DEBUG
+            printf("Folder: %s\n", temp_folder_path);
+#endif
+            // In that case get sort order from a .sciteprojrc.lua, where
+            // we also can set this value.
+            sort_order = get_sort_order_of_folder(temp_folder_path);
+         }
+
+         // If sort order still is invalid, then default to a reasonable
+         // value, in this case, sort increasing by name.
+         if (sort_order == SORT_ORDER_INVALID) {
+            sort_order = SORT_ORDER_NAME_INCREASING;
+         }
+
+         GCompareFunc comparer = get_compare_func_from_sort_order_value(sort_order);
 
          file_list = load_folder_to_list(temp_folder_path,
                                          FALSE,
