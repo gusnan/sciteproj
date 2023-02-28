@@ -21,7 +21,7 @@ Then the build process is simple - to build the program, just type
 make
 
 which will in the end create an executable in the bin folder. If you want to
-build an executable with debug symbols enable, run
+build an executable with debug symbols enabled, run
 
 make DEBUG=1
 
