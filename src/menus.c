@@ -1,7 +1,7 @@
 /**
  * menus.c - Menus for SciteProj
  *
- *  Copyright 2009-2017 Andreas Rönnquist
+ *  Copyright 2009-2023 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
