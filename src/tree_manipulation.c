@@ -294,14 +294,6 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
 
    gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &iter, tree_path);
 
-   struct ClickedNode
-   {
-      gboolean valid;
-      GtkTreeIter iter;
-      gchar *name;
-      gint type;
-   };
-
    GList *items_to_remove = NULL;
 
    int antal_removed = 0;

@@ -343,28 +343,13 @@ void row_expand_or_collapse_cb(GtkTreeView *tree_view, GtkTreeIter *iter,
 
          load_tree_at_iter(tree_view, iter);
 
+         ClickedNode *new_node;
+         new_node = create_clicked_node(TRUE, *iter, temp, ITEMTYPE_GROUP);
 
-         // char *fpath = g_file_get_path(temp);
+         refresh_folder(new_node);
 
-         struct ClickedNode
-         {
-            gboolean valid;
-            GtkTreeIter iter;
-            gchar *name;
-            gint type;
-         };
-
-         ClickedNode new_node;
-
-         new_node.valid = TRUE;
-         new_node.iter = *iter;
-         new_node.name = temp;
-         new_node.type = ITEMTYPE_GROUP;
-
-         refresh_folder(&new_node);
-
+         g_free(new_node);
       }
-
    } else {
 
       set_tree_node_loaded(iter, FALSE, NULL);
