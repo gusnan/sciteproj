@@ -33,9 +33,9 @@
 #include "launch_external.h"
 
 
-
-
-
+/**
+ *
+ */
 void launch_default_for_uri(GtkTreeModel *model, GtkTreeIter *iter)
 {
    GError *err = NULL;
@@ -52,9 +52,6 @@ void launch_default_for_uri(GtkTreeModel *model, GtkTreeIter *iter)
 
    gchar *absFilePath = NULL; //g_strdup_printf("%s",filePath);
 
-   // filePath is NULL?
-   //if (!relative_path_to_abs_path(sClickedNodeName, &absFilePath, get_project_directory(), &err)) {
-
    if (!relative_path_to_abs_path(filePath, &absFilePath, get_project_directory(), &err)) {
       goto EXITPOINT;
    }
@@ -67,12 +64,35 @@ EXITPOINT:
    if (err) g_error_free(err);
 }
 
+
+/**
+ *
+ */
+void launch_file_browser(gchar *folder_name)
+{
+   GError *err = NULL;
+
+   gchar *newString = g_strdup_printf("%s%s", "file://", folder_name);
+
+   g_app_info_launch_default_for_uri((const gchar*)newString, NULL, &err);
+}
+
+
 /**
  *
  */
 void launch_default_for_uri_cb()
 {
-   if (clicked_node.valid && clicked_node.type == ITEMTYPE_FILE) {
-      launch_default_for_uri(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)), &(clicked_node.iter));
+   if (clicked_node.valid) {
+      if (clicked_node.type == ITEMTYPE_FILE) {
+         launch_default_for_uri(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)), &(clicked_node.iter));
+      } else {
+         gchar *name = clicked_node.name;
+         gchar *newname = g_strdup_printf("%s", name);
+
+         launch_file_browser(newname);
+
+         g_free(newname);
+      }
    }
 }

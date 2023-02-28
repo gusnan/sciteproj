@@ -70,6 +70,8 @@ GtkWidget *aboutMenuItem = NULL;
 
 GtkWidget *sortMenuItem = NULL;
 
+GtkWidget *browseFolderMenuItem = NULL;
+
 GtkWidget *sortAscendingMenuItem = NULL;
 GtkWidget *sortDescendingMenuItem = NULL;
 
@@ -93,6 +95,7 @@ GtkWidget *sortSeparator = NULL;
 GtkWidget *fileRightClickSeparator = NULL;
 
 GtkWidget *folderPopupSeparator1 = NULL;
+GtkWidget *folderPopupSeparator2 = NULL;
 
 GtkAccelGroup *accelerator_group = NULL;
 
@@ -208,11 +211,19 @@ int init_menus(GtkWidget *window)
 
    folderPopupSeparator1 = gtk_separator_menu_item_new();
 
+   browseFolderMenuItem = gtk_menu_item_new_with_mnemonic(_("Browse folder"));
+
+   folderPopupSeparator2 = gtk_separator_menu_item_new();
+
    propertiesGroupMenuItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
 
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), sortMenuItem);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator1);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), browseFolderMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator2);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), propertiesGroupMenuItem);
+
+   g_signal_connect(G_OBJECT(browseFolderMenuItem), "activate", G_CALLBACK(launch_default_for_uri_cb), NULL);
 
    g_signal_connect(G_OBJECT(propertiesGroupMenuItem), "activate", G_CALLBACK(group_properties_cb), NULL);
 
