@@ -471,6 +471,3 @@ EXITPOINT:
    if (err) g_error_free(err);
    if (dialog) gtk_widget_destroy(dialog);
 }
-
-
-
