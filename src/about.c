@@ -299,10 +299,10 @@ void create_about_dialog()
    g_signal_connect(G_OBJECT(window), "delete-event", G_CALLBACK(handle_about_close_event), window);
    g_signal_connect(G_OBJECT(linkbutton), "released", G_CALLBACK(link_button_cb), linkbutton);
 
-    // Handle ESC in about window
-    gtk_widget_add_events(window, GDK_KEY_PRESS_MASK);
+   // Handle ESC in about window
+   gtk_widget_add_events(window, GDK_KEY_PRESS_MASK);
 
-    g_signal_connect(G_OBJECT(window), "key_press_event", G_CALLBACK(handle_keyboard_event_cb), NULL);
+   g_signal_connect(G_OBJECT(window), "key_press_event", G_CALLBACK(handle_keyboard_event_cb), NULL);
 
    gtk_widget_show_all(window);
 
