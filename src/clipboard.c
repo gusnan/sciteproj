@@ -80,10 +80,7 @@ EXITPOINT:
  */
 void copy_filename_to_clipboard_cb()
 {
-   if (!clicked_node.valid || clicked_node.type != ITEMTYPE_FILE) {
-      //goto EXITPOINT;
-   } else {
+   if (clicked_node.valid && clicked_node.type == ITEMTYPE_FILE) {
       copy_filename_to_clipboard(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)), &(clicked_node.iter));
-
    }
 }
