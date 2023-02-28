@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: sciteproj 1.18\n"
+"Project-Id-Version: sciteproj 1.50pre\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2021-12-21 19:20+0100\n"
+"POT-Creation-Date: 2023-02-28 16:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,7 +63,7 @@ msgstr ""
 msgid "[UNTITLED]"
 msgstr ""
 
-#: gui.c:537 recent_files.c:545 scite_utils.c:216
+#: gui.c:537 recent_files.c:548 scite_utils.c:216
 #, c-format
 msgid "Opened %s"
 msgstr ""
@@ -72,7 +72,7 @@ msgstr ""
 msgid "Could not open selected file:"
 msgstr ""
 
-#: gui_callbacks.c:93 recent_files.c:558 recent_files.c:599
+#: gui_callbacks.c:95 recent_files.c:561 recent_files.c:602
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -176,11 +176,11 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: menus.c:165 menus.c:241
+#: menus.c:165 menus.c:242
 msgid "Open file in SciTE"
 msgstr ""
 
-#: menus.c:168 menus.c:243
+#: menus.c:168 menus.c:244
 msgid "Copy filename to clipboard"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgstr ""
 msgid "Launch default program for uri"
 msgstr ""
 
-#: menus.c:177 menus.c:215 menus.c:244
+#: menus.c:177 menus.c:218 menus.c:245
 msgid "Properties"
 msgstr ""
 
@@ -212,11 +212,11 @@ msgstr ""
 msgid "Sort descending by extension"
 msgstr ""
 
-#: menus.c:217
-msgid "Update folder content"
+#: menus.c:214
+msgid "Browse folder"
 msgstr ""
 
-#: menus.c:242
+#: menus.c:243
 msgid "Remove file from this list"
 msgstr ""
 
@@ -252,7 +252,7 @@ msgstr ""
 msgid "File size:"
 msgstr ""
 
-#: recent_files.c:177
+#: recent_files.c:178
 msgid "Recently opened files:"
 msgstr ""
 
