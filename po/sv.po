@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.07\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2021-12-21 19:20+0100\n"
+"POT-Creation-Date: 2023-02-28 16:40+0100\n"
 "PO-Revision-Date: 2021-12-21 19:22+0100\n"
 "Last-Translator: Andreas Rönnquist <andreas@ronnquist.net>\n"
 "Language-Team: Swedish\n"
@@ -79,7 +79,7 @@ msgstr "version %s"
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:537 recent_files.c:545 scite_utils.c:216
+#: gui.c:537 recent_files.c:548 scite_utils.c:216
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
@@ -88,7 +88,7 @@ msgstr "Öppnade %s"
 msgid "Could not open selected file:"
 msgstr "Kunde inte öppna vald fil:"
 
-#: gui_callbacks.c:93 recent_files.c:558 recent_files.c:599
+#: gui_callbacks.c:95 recent_files.c:561 recent_files.c:602
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -199,11 +199,11 @@ msgstr "Visa nyligen öppnade filer"
 msgid "About"
 msgstr "_Om"
 
-#: menus.c:165 menus.c:241
+#: menus.c:165 menus.c:242
 msgid "Open file in SciTE"
 msgstr "Öppna fil i SciTE"
 
-#: menus.c:168 menus.c:243
+#: menus.c:168 menus.c:244
 msgid "Copy filename to clipboard"
 msgstr "Kopiera filnamn till urklipp"
 
@@ -211,7 +211,7 @@ msgstr "Kopiera filnamn till urklipp"
 msgid "Launch default program for uri"
 msgstr "Starta standardprogram för uri"
 
-#: menus.c:177 menus.c:215 menus.c:244
+#: menus.c:177 menus.c:218 menus.c:245
 msgid "Properties"
 msgstr "Egenskaper"
 
@@ -235,11 +235,11 @@ msgstr "Sortera mapp stigande efter filändelse"
 msgid "Sort descending by extension"
 msgstr "Sortera mapp fallande efter filändelse"
 
-#: menus.c:217
-msgid "Update folder content"
-msgstr "Uppdatera mappinnehåll"
+#: menus.c:214
+msgid "Browse folder"
+msgstr "Bläddra i mappen"
 
-#: menus.c:242
+#: menus.c:243
 msgid "Remove file from this list"
 msgstr "Ta bort fil från denna lista"
 
@@ -275,7 +275,7 @@ msgstr "Sökväg:"
 msgid "File size:"
 msgstr "Filstorlek:"
 
-#: recent_files.c:177
+#: recent_files.c:178
 msgid "Recently opened files:"
 msgstr "Nyligen öppnade filer:"
 
@@ -346,3 +346,6 @@ msgstr "Fel:%s"
 #: statusbar.c:57
 msgid "Welcome to SciteProj\n"
 msgstr "Välkommen till SciteProj\n"
+
+#~ msgid "Update folder content"
+#~ msgstr "Uppdatera mappinnehåll"
