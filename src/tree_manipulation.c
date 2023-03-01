@@ -397,6 +397,9 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
 
    gchar *tree_path = gtk_tree_path_to_string(path);
 
+   // TODO:
+   // Check if this really is a new folder that we need to add, or it has
+   // already been added.
 
    // attach the signal with the iter 
    g_signal_connect(G_OBJECT(new_monitor), "changed", G_CALLBACK(file_changed_cb), (gpointer)tree_path);
