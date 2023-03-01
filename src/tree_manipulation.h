@@ -84,6 +84,8 @@ gboolean set_project_filepath(const gchar *filepath, GError **err);
 // Get the GTKTreeStore
 GtkTreeStore* create_treestore(GError **err);
 
+void done_treestore();
+
 // Get the project file directory
 const gchar* get_project_directory();
 gchar* get_project_filepath();

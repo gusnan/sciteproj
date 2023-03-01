@@ -262,6 +262,9 @@ EXITPOINT:
 
    done_prefs();
 
+   // to release the file monitor list
+   done_treestore();
+
    done_version_string();
 
    g_free(current_dir);

@@ -183,6 +183,18 @@ GtkTreeStore* create_treestore(GError **err)
 }
 
 
+/**
+ *
+ */
+void done_treestore()
+{
+   debug_printf("Done treestore...\n");
+
+   // free the memory allocated by the monitor_list
+   g_list_free_full(monitor_list, g_free);
+}
+
+
 
 /**
  * Add a list of files to a GtkTreeStore.
@@ -419,7 +431,7 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
 
       monitor_list = g_list_append(monitor_list, checked_string);
 
-      printf("%s\n", checked_string);
+      debug_printf("%s\n", checked_string);
 
       // attach the signal with the iter
       g_signal_connect(G_OBJECT(new_monitor), "changed", G_CALLBACK(file_changed_cb), (gpointer)tree_path);
