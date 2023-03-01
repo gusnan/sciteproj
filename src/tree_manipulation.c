@@ -54,6 +54,7 @@ GtkTreeStore *sTreeStore = NULL;
 static gchar *sProjectFilepath = NULL;
 static gchar *sProjectDir = NULL;
 
+GList *monitor_list = NULL;
 
 gchar *saved_file_folder = NULL;
 
@@ -397,12 +398,32 @@ gboolean add_tree_group(GtkTreeIter *parentIter,
 
    gchar *tree_path = gtk_tree_path_to_string(path);
 
-   // TODO:
    // Check if this really is a new folder that we need to add, or it has
    // already been added.
+   gchar *checked_string = g_strdup_printf("'%s' -- '%s'", tree_path, full_name);
 
-   // attach the signal with the iter 
-   g_signal_connect(G_OBJECT(new_monitor), "changed", G_CALLBACK(file_changed_cb), (gpointer)tree_path);
+   gboolean already_in_list = FALSE;
+
+   if (monitor_list != NULL) {
+      GList *node;
+      for (node = monitor_list; node != NULL; node = node -> next) {
+         gchar *current_item = (gchar *)node->data;
+
+         if (g_strcmp0(current_item, checked_string) == 0) {
+            already_in_list = TRUE;
+         }
+      }
+   }
+
+   if (!already_in_list) {
+
+      monitor_list = g_list_append(monitor_list, checked_string);
+
+      printf("%s\n", checked_string);
+
+      // attach the signal with the iter
+      g_signal_connect(G_OBJECT(new_monitor), "changed", G_CALLBACK(file_changed_cb), (gpointer)tree_path);
+   }
 
 
    gtk_tree_store_set(sTreeStore, &iter, COLUMN_ITEMTYPE, ITEMTYPE_GROUP, -1);
