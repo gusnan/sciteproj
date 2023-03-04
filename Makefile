@@ -104,7 +104,7 @@ uninstall:
 	${MAKE} -C src/icons uninstall
 
 cppcheck:
-	cppcheck --suppress=missingIncludeSystem -i src/icons/icons_resources.c --inline-suppr --enable=all ./src/
+	cppcheck --suppress=missingIncludeSystem --suppress=unmatchedSuppression:src/script.c -i src/icons/icons_resources.c --inline-suppr --enable=all ./src/
 
 $(DEPEND): src/icons/icons_resources.c
 	$(CC) $(LOCAL_CFLAGS) -MM $(SRC)/*.c src/icons/icons_resources.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" -e "s/obj\/C\:/\/C/g" > $(DEPEND)

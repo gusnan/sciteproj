@@ -265,6 +265,7 @@ double lua_get_number(lua_State *lua, char *variable_name)
 /**
  *
  */
+// cppcheck-suppress [unusedFunction]
 int error(lua_State *L, const char *fmt, ...)
 {
    va_list argp;
