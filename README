@@ -165,12 +165,13 @@ Thats it! Enjoy using sciteproj!
 Development
 ===========
 
-To use cppcheck in a painless way, use the following command line:
+To use cppcheck in a painless way on the sourcecode, I have added a Makefile
+target to make it really simple. Simply run
 
-cppcheck --suppress=missingIncludeSystem --inline-suppr --enable=all ./src/
+make cppcheck
 
-The suppress part will make it possible without using a whole lot of
--I parameters, which would otherwise be necessary.
+and it will run a cppcheck with the proper supressions and exclusions.
+s
 
 Credits
 =======
