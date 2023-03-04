@@ -45,8 +45,6 @@
 #include "load_folder.h"
 #include "script.h"
 
-#include "icon.h"
-
 static struct CommandLineIndata {
    const gchar *scite_filename;
 } cmd;

@@ -37,8 +37,6 @@
 
 #include "gui.h"
 
-#include "icon.h"
-
 #include "file_utils.h"
 
 #include "gui_callbacks.h"

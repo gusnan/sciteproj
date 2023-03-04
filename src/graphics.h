@@ -26,12 +26,20 @@
  *
  */
 
+#define PIXBUF_INLINE_DIRECTORY_OPEN         "dir-open"
+#define PIXBUF_INLINE_DIRECTORY_CLOSED       "dir-close"
+#define PIXBUF_INLINE_PROGRAM_ICON           "sciteproj"
+
 #define SP_RESOURCE_PATH_ICONS "/org/sciteproj/icons"
 
 extern GdkPixbuf *directory_closed_pixbuf;
 extern GdkPixbuf *directory_open_pixbuf;
 
 extern GdkPixbuf *program_icon_pixbuf;
+
+//
+GdkPixbuf *get_pixbuf_from_file(GFile *file, GtkIconSize size);
+GdkPixbuf *get_pixbuf_from_filename(gchar *filename, GtkIconSize size);
 
 gboolean load_graphics(GtkWidget *widget, GError **err);
 void unload_graphics();

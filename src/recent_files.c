@@ -39,8 +39,6 @@
 #include "properties_dialog.h"
 #include "menus.h"
 
-#include "icon.h"
-
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
 

@@ -29,8 +29,6 @@
 
 #include "icons/icons_resources.h"
 
-#include "icon.h"
-
 #include "prefs.h"
 
 
@@ -121,4 +119,81 @@ void unload_graphics()
 
    if (directory_closed_pixbuf != NULL) g_object_unref(directory_closed_pixbuf);
    if (directory_open_pixbuf != NULL) g_object_unref(directory_open_pixbuf);
+}
+
+
+/**
+ *
+ */
+GdkPixbuf *
+get_pixbuf_from_icon(GIcon *icon, GtkIconSize size)
+{
+   GdkPixbuf *result = NULL;
+   GtkIconTheme *theme;
+   GtkIconInfo *info;
+   gint width;
+
+   if (!icon)
+      return NULL;
+
+   theme = gtk_icon_theme_get_default();
+   gtk_icon_size_lookup(size, &width, NULL);
+
+   info = gtk_icon_theme_lookup_by_gicon(theme,
+                                       icon,
+                                       width,
+                                       GTK_ICON_LOOKUP_USE_BUILTIN);
+
+   if (!info)
+      return NULL;
+
+   result = gtk_icon_info_load_icon(info, NULL);
+
+   return result;
+}
+
+
+/**
+ *
+ */
+GdkPixbuf *
+get_pixbuf_from_file(GFile *file, GtkIconSize size)
+{
+   GIcon *icon;
+   GFileInfo *info;
+
+   GdkPixbuf *result = NULL;
+
+   info = g_file_query_info(file,
+                          G_FILE_ATTRIBUTE_STANDARD_ICON,
+                          G_FILE_QUERY_INFO_NONE,
+                          NULL,
+                          NULL);
+
+   if (!info)
+      return NULL;
+
+   icon = g_file_info_get_icon(info);
+
+   if (icon != NULL) {
+      result = get_pixbuf_from_icon(icon, size);
+   }
+
+   g_object_unref(info);
+
+   return result;
+}
+
+
+/**
+ *
+ */
+GdkPixbuf *
+get_pixbuf_from_filename(gchar *filename, GtkIconSize size)
+{
+   GFile *tempfile = g_file_new_for_path(filename);
+
+   GdkPixbuf *result = get_pixbuf_from_file(tempfile, size);
+
+   return result;
 }
