@@ -30,11 +30,6 @@ $(OBJ)/remove.o $(OBJ)/scite_utils.o $(OBJ)/script.o $(OBJ)/sort.o\
 $(OBJ)/statusbar.o $(OBJ)/string_utils.o $(OBJ)/tree_manipulation.o \
 src/icons/icons_resources.o
 
-#GRAPHICS_INCLUDES=$(GRPH)/dir-close.xpm \
-#$(GRPH)/dir-open.xpm \
-#$(GRPH)/sciteproj.xpm
-
-
 ifndef PREFIX
 	ifdef INSTALL_PREFIX
 		PREFIX=$(INSTALL_PREFIX)
@@ -98,14 +93,12 @@ install:
 	install -d $(DESTDIR)$(PREFIX)/bin
 	install -m 755 $(PROG) $(DESTDIR)$(PREFIX)/bin
 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
-#	install -m 644 graphics/sciteproj.xpm $(DESTDIR)$(PREFIX)/share/pixmaps
 	install -d $(DESTDIR)$(PREFIX)/share/man/man1
 	install -m 644 sciteproj.1.gz $(DESTDIR)$(PREFIX)/share/man/man1
 	${MAKE} -C po install
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/$(PROG)
-#	rm -f $(DESTDIR)$(PREFIX)/share/pixmaps/sciteproj.xpm
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/sciteproj.1.gz
 	${MAKE} -C po uninstall
 	${MAKE} -C src/icons uninstall
