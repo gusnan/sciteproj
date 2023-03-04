@@ -2,7 +2,7 @@
  * icon.h - Icon helper functions
  *
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
- *           (C) 2012-2017 - Andreas Rönnquist
+ *           (C) 2012-2023 - Andreas Rönnquist
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,12 +24,14 @@
 #ifndef __HEADER_ICON_
 #define __HEADER_ICON_
 
-/**
- *
- */
+#define PIXBUF_INLINE_DIRECTORY_OPEN         "dir-open"
+#define PIXBUF_INLINE_DIRECTORY_CLOSED       "dir-close"
+#define PIXBUF_INLINE_PROGRAM_ICON           "sciteproj"
 
 GdkPixbuf *get_pixbuf_from_file(GFile *file, GtkIconSize size);
 GdkPixbuf *get_pixbuf_from_filename(gchar *filename, GtkIconSize size);
+
+// void pixbuf_inline_register_stock_icons(void);
 
 #endif /*__HEADER_ICON_*/
 

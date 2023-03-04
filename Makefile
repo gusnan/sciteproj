@@ -1,5 +1,5 @@
 #
-#   Copyright (C) 2009-2021 Andreas Rönnquist
+#   Copyright (C) 2009-2023 Andreas Rönnquist
 #   This file is distributed under the same license
 #   as the sciteproj package, see COPYING file.
 #
@@ -27,11 +27,12 @@ $(OBJ)/graphics.o $(OBJ)/gui.o $(OBJ)/gui_callbacks.o\
 $(OBJ)/icon.o $(OBJ)/load_folder.o $(OBJ)/launch_external.o $(OBJ)/menus.o \
 $(OBJ)/main.o $(OBJ)/prefs.o $(OBJ)/properties_dialog.o $(OBJ)/recent_files.o \
 $(OBJ)/remove.o $(OBJ)/scite_utils.o $(OBJ)/script.o $(OBJ)/sort.o\
-$(OBJ)/statusbar.o $(OBJ)/string_utils.o $(OBJ)/tree_manipulation.o
+$(OBJ)/statusbar.o $(OBJ)/string_utils.o $(OBJ)/tree_manipulation.o \
+src/icons/icons_resources.o
 
-GRAPHICS_INCLUDES=$(GRPH)/dir-close.xpm \
-$(GRPH)/dir-open.xpm \
-$(GRPH)/sciteproj.xpm
+#GRAPHICS_INCLUDES=$(GRPH)/dir-close.xpm \
+#$(GRPH)/dir-open.xpm \
+#$(GRPH)/sciteproj.xpm
 
 
 ifndef PREFIX
@@ -71,6 +72,10 @@ LOCAL_CFLAGS+=-DLOCALEDIR=\"$(LOCALEDIR)\" -DPACKAGE=\"$(NAME)\" -DSCITEPROJ_VER
 all: $(BIN)/$(NAME) sciteproj.1.gz
 	${MAKE} -C po -j1 all
 
+
+src/icons/icons_resources.o: src/icons/icons_resources.c src/icons/icons_resources.h
+	$(CC) $(LOCAL_CFLAGS) $(LOCAL_CPPFLAGS) -c $< -o $@
+
 $(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(LOCAL_CFLAGS) $(LOCAL_CPPFLAGS) -c $< -o $@
 
@@ -80,27 +85,32 @@ $(BIN)/$(NAME): $(OBJECTS)
 sciteproj.1.gz: sciteproj.1
 	gzip -k sciteproj.1
 
+src/icons/icons_resources.c: ./src/icons/icons.gresource.xml
+	${MAKE} -C src/icons
+
 clean:
-	rm -rf $(OBJECTS) $(PROG) $(DEPEND)
+	rm -rf $(OBJECTS) $(PROG)
 	rm -f sciteproj.1.gz
 	${MAKE} -C po clean
+	${MAKE} -C src/icons clean
 
 install:
 	install -d $(DESTDIR)$(PREFIX)/bin
 	install -m 755 $(PROG) $(DESTDIR)$(PREFIX)/bin
 	install -d $(DESTDIR)$(PREFIX)/share/pixmaps
-	install -m 644 graphics/sciteproj.xpm $(DESTDIR)$(PREFIX)/share/pixmaps
+#	install -m 644 graphics/sciteproj.xpm $(DESTDIR)$(PREFIX)/share/pixmaps
 	install -d $(DESTDIR)$(PREFIX)/share/man/man1
 	install -m 644 sciteproj.1.gz $(DESTDIR)$(PREFIX)/share/man/man1
 	${MAKE} -C po install
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/$(PROG)
-	rm -f $(DESTDIR)$(PREFIX)/share/pixmaps/sciteproj.xpm
+#	rm -f $(DESTDIR)$(PREFIX)/share/pixmaps/sciteproj.xpm
 	rm -f $(DESTDIR)$(PREFIX)/share/man/man1/sciteproj.1.gz
 	${MAKE} -C po uninstall
+	${MAKE} -C src/icons uninstall
 
-$(DEPEND):
-	$(CC) $(LOCAL_CFLAGS) -MM $(SRC)/*.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" -e "s/obj\/C\:/\/C/g" > $(DEPEND)
+$(DEPEND): src/icons/icons_resources.c
+	$(CC) $(LOCAL_CFLAGS) -MM $(SRC)/*.c src/icons/icons_resources.c | sed -e "s/\([A-Za-z0-9+-0._&+-]*:\)/\$(OBJ)\/\1/g" -e "s/obj\/C\:/\/C/g" > $(DEPEND)
 
 -include $(DEPEND)

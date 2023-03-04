@@ -1,7 +1,7 @@
 /**
  * main.c - main for SciteProj
  *
- *  Copyright 2006 Roy Wood, 2009-2018 Andreas Rönnquist
+ *  Copyright 2006 Roy Wood, 2009-2023 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -44,6 +44,8 @@
 #include "string_utils.h"
 #include "load_folder.h"
 #include "script.h"
+
+#include "icon.h"
 
 static struct CommandLineIndata {
    const gchar *scite_filename;
@@ -126,6 +128,8 @@ int main(int argc, char *argv[])
 
    // Init gtk
    gtk_init(&argc, &argv);
+
+   gtk_icon_theme_add_resource_path(gtk_icon_theme_get_default(), SP_RESOURCE_PATH_ICONS);
 
    // Since glib 2.36, this isn't needed
    /*

@@ -2,7 +2,7 @@
  * icon.c - Icon helper functions
  *
  * Copyright (C) 2006 - Jesse van den Kieboom <jesse@icecrew.nl>
- *           (C) 2012-2017 - Andreas Rönnquist
+ *           (C) 2012-2023 - Andreas Rönnquist
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,6 +23,10 @@
  */
 
 #include <gtk/gtk.h>
+
+#include "graphics.h"
+
+#include "icon.h"
 
 /**
  *

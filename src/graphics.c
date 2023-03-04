@@ -1,7 +1,7 @@
 /**
  * graphics.c - graphics code for SciteProj
  *
- *  Copyright 2009-2017 Andreas Rönnquist
+ *  Copyright 2009-2023 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -27,9 +27,9 @@
 
 #include "about.h"
 
-#include "../graphics/dir-close.xpm"
-#include "../graphics/dir-open.xpm"
-#include "../graphics/sciteproj.xpm"
+#include "icons/icons_resources.h"
+
+#include "icon.h"
 
 #include "prefs.h"
 
@@ -66,18 +66,39 @@ gboolean load_graphics(GtkWidget *widget, GError **err)
 
    icon_theme = gtk_icon_theme_get_default();
 
-   program_icon_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)sciteproj_xpm);
+   gchar *program_icon_resource;
+   program_icon_resource = g_build_filename(SP_RESOURCE_PATH_ICONS,
+                                            PIXBUF_INLINE_PROGRAM_ICON
+                                            ".png", NULL);
+
+   program_icon_pixbuf = gdk_pixbuf_new_from_resource(program_icon_resource, NULL);
+   g_free(program_icon_resource);
 
    if (prefs.use_stock_folder_icon) {
-
+      printf("Use stock folder icon!\n");
       // use GTK_STOCK_DIRECTORY
       directory_closed_pixbuf = gtk_icon_theme_load_icon(icon_theme, "folder", 14, 0, NULL);
       directory_open_pixbuf = gtk_icon_theme_load_icon(icon_theme, "folder", 14, 0, NULL);
 
    } else {
-      directory_open_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)dir_open_xpm);
-      directory_closed_pixbuf = gdk_pixbuf_new_from_xpm_data((const char **)dir_close_xpm);
 
+      gchar *resource_path_directory_open;
+
+      resource_path_directory_open = g_build_filename(SP_RESOURCE_PATH_ICONS,
+                                                      PIXBUF_INLINE_DIRECTORY_OPEN
+                                                      ".png", NULL);
+
+      directory_open_pixbuf = gdk_pixbuf_new_from_resource(resource_path_directory_open, NULL);
+      g_free(resource_path_directory_open);
+
+      gchar *resource_path_directory_closed;
+
+      resource_path_directory_closed = g_build_filename(SP_RESOURCE_PATH_ICONS,
+                                                        PIXBUF_INLINE_DIRECTORY_CLOSED
+                                                        ".png", NULL);
+
+      directory_closed_pixbuf = gdk_pixbuf_new_from_resource(resource_path_directory_closed, NULL);
+      g_free(resource_path_directory_closed);
    }
 
    GdkDisplay *default_display;

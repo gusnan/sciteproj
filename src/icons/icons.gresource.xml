@@ -1,7 +1,9 @@
-/**
- * graphics.h - graphics code for SciteProj
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ * icons.gresource.xml
  *
- *  Copyright 2009-2023 Andreas Rönnquist
+ *  Copyright 2023 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -18,26 +20,12 @@
  * You should have received a copy of the GNU General Public License
  * along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.
  *
- */
-#ifndef __HEADER_GRAPHICS_
-#define __HEADER_GRAPHICS_
+-->
 
-/**
- *
- */
-
-#define SP_RESOURCE_PATH_ICONS "/org/sciteproj/icons"
-
-extern GdkPixbuf *directory_closed_pixbuf;
-extern GdkPixbuf *directory_open_pixbuf;
-
-extern GdkPixbuf *program_icon_pixbuf;
-
-gboolean load_graphics(GtkWidget *widget, GError **err);
-void unload_graphics();
-
-extern GdkCursor *standard_cursor;
-extern GdkCursor *busy_cursor;
-
-
-#endif /*__HEADER_GRAPHICS_*/
+<gresources>
+   <gresource prefix="/org/sciteproj/icons">
+      <file>dir-close.png</file>
+      <file>dir-open.png</file>
+      <file>sciteproj.png</file>
+   </gresource>
+</gresources>
