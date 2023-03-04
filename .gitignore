@@ -11,3 +11,6 @@ sciteprojrc.lua
 old/
 sciteproj.1.gz
 sciteproj_output.txt
+src/icons/icons_resources.c
+src/icons/icons_resources.o
+src/icons/icons_resources.h
