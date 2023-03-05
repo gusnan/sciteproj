@@ -1,6 +1,10 @@
 
 ChangeLog:
 ----------
+
+1.53
+   * Do a proper release
+
 1.52
    * Remove makefile.dep in clean target in makefile
 
