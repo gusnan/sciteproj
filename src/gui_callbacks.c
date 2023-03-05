@@ -624,5 +624,7 @@ void refresh_folder(ClickedNode *inNode)
    
    GtkTreeIter iter = inNode->iter;
    
-   refresh_folder_with_iter(&iter);
+   if (tree_iter_is_valid(&iter)) {
+      refresh_folder_with_iter(&iter);
+   }
 }

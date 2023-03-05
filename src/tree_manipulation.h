@@ -90,6 +90,8 @@ void done_treestore();
 const gchar* get_project_directory();
 gchar* get_project_filepath();
 
+gboolean tree_iter_is_valid(GtkTreeIter *iter);
+
 // Allow user to select and add files to the project
 gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err);
 

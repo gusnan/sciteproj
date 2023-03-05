@@ -995,3 +995,12 @@ void print_node(GtkTreeIter *iter)
    printf("-----\n");
 }
 #endif
+
+
+/**
+ *
+ */
+gboolean tree_iter_is_valid(GtkTreeIter *iter)
+{
+   return gtk_tree_store_iter_is_valid(sTreeStore, iter);
+}
