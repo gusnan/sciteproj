@@ -1,6 +1,9 @@
 
 ChangeLog:
 ----------
+1.51
+   * Add a check to make sure an iter is valid
+   * Fix a bug where the wrong folder could be referenced
 
 1.50
    * Make file tree update automatically when files are added and removed
