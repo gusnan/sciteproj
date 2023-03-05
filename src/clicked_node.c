@@ -25,6 +25,9 @@
 
 #include "clicked_node.h"
 
+/**
+ *
+ */
 ClickedNode *create_clicked_node(gboolean valid, GtkTreeIter iter, gchar *name, gint type)
 {
    ClickedNode *new_node = g_malloc(sizeof(ClickedNode));
