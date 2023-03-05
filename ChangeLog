@@ -1,6 +1,9 @@
 
 ChangeLog:
 ----------
+1.52
+   * Remove makefile.dep in clean target in makefile
+
 1.51
    * Add a check to make sure an iter is valid
    * Fix a bug where the wrong folder could be referenced
