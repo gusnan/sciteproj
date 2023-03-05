@@ -237,6 +237,10 @@ gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **e
    return finalResult;
 }
 
+
+/**
+ *
+ */
 void fix_expanded_folders(GtkTreeIter newiter, GtkTreePath *tree_path)
 {
    gchar *relFilePath;
@@ -293,6 +297,9 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
 
    gchar *tree_path_string = (gchar*)(user_data);
 
+   debug_printf("File changed: %s\n", fpath);
+   debug_printf("Tree path string: %s\n", tree_path_string);
+
    // save the current cursor position
    GtkTreePath *saved_cursor;
    GtkTreeViewColumn *focus_column;
@@ -305,23 +312,6 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
 
    gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &iter, tree_path);
 
-   GList *items_to_remove = NULL;
-
-   int antal_removed = 0;
-
-   GList *node;
-   for (node = items_to_remove; node != NULL; node = node -> next) {
-      tree_path = gtk_tree_row_reference_get_path((GtkTreeRowReference*)node->data);
-
-      if (tree_path) {
-         GtkTreeIter newIter;
-         if (gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &newIter, tree_path)) {
-            remove_tree_node(&newIter, NULL);
-            antal_removed++;
-         }
-      }
-   }
-
    GtkTreeIter newIter;
 
    tree_path = gtk_tree_path_new_from_string(tree_path_string);
@@ -331,6 +321,8 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
    GtkTreePath *parent_path = gtk_tree_path_copy(tree_path);
 
    GtkTreeIter parent_iter;
+
+   gtk_tree_path_up(parent_path);
 
    gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &parent_iter, parent_path);
 
@@ -345,10 +337,12 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
    fix_expanded_folders(tempIter, temp_tree_path);
 
    // restore cursor position
-   gtk_tree_view_set_cursor(GTK_TREE_VIEW(projectTreeView), saved_cursor, focus_column, FALSE);
+   if (saved_cursor != NULL)
+      gtk_tree_view_set_cursor(GTK_TREE_VIEW(projectTreeView), saved_cursor, focus_column, FALSE);
 
    g_free(fpath);
 }
+
 
 /**
  * Add a group node to an existing parent node, or to the root of the GtkTreeStore.
