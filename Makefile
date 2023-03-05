@@ -86,6 +86,7 @@ src/icons/icons_resources.c: ./src/icons/icons.gresource.xml
 clean:
 	rm -rf $(OBJECTS) $(PROG)
 	rm -f sciteproj.1.gz
+	rm -rf Makefile.dep
 	${MAKE} -C po clean
 	${MAKE} -C src/icons clean
 
