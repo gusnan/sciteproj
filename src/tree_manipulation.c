@@ -324,17 +324,22 @@ void file_changed_cb(GFileMonitor *monitor, GFile *file, GFile *other, GFileMoni
 
    gtk_tree_path_up(parent_path);
 
-   gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &parent_iter, parent_path);
+   int depth = gtk_tree_path_get_depth(parent_path);
 
-   ClickedNode *new_node;
-   new_node = create_clicked_node(TRUE, parent_iter, fpath, ITEMTYPE_GROUP);
+   if (depth > 0) {
 
-   refresh_folder(new_node);
+      gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &parent_iter, parent_path);
 
-   GtkTreeIter tempIter;
-   gtk_tree_model_get_iter_first(GTK_TREE_MODEL(sTreeStore), &tempIter);
-   GtkTreePath *temp_tree_path = gtk_tree_path_new_first();
-   fix_expanded_folders(tempIter, temp_tree_path);
+      ClickedNode *new_node;
+      new_node = create_clicked_node(TRUE, parent_iter, fpath, ITEMTYPE_GROUP);
+
+      refresh_folder(new_node);
+
+      GtkTreeIter tempIter;
+      gtk_tree_model_get_iter_first(GTK_TREE_MODEL(sTreeStore), &tempIter);
+      GtkTreePath *temp_tree_path = gtk_tree_path_new_first();
+      fix_expanded_folders(tempIter, temp_tree_path);
+   }
 
    // restore cursor position
    if (saved_cursor != NULL)
