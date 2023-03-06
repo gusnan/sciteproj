@@ -2,6 +2,10 @@
 ChangeLog:
 ----------
 
+1.55
+   * Remove installing pixmaps directory
+   * Fix bug where it would handle a folder of depth 0, which isn't a folder
+
 1.54
    * Do a proper release
 
