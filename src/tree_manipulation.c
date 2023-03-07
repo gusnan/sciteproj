@@ -257,7 +257,9 @@ void fix_expanded_folders(GtkTreeIter newiter, GtkTreePath *tree_path)
       if (nodeItemType == ITEMTYPE_GROUP) {
 
          GtkTreePath *srcPath = gtk_tree_model_get_path(GTK_TREE_MODEL(sTreeStore), &iter);
-         gboolean groupIsExpanded = tree_row_is_expanded(srcPath);
+
+         gboolean groupIsExpanded;
+         gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), &iter, COLUMN_EXPANDED, &groupIsExpanded, -1);
 
          if (groupIsExpanded) {
             set_tree_node_icon(&iter, directory_open_pixbuf, &error);
