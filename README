@@ -171,7 +171,7 @@ target to make it really simple. Simply run
 make cppcheck
 
 and it will run a cppcheck with the proper supressions and exclusions.
-s
+
 
 Credits
 =======
