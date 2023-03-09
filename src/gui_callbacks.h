@@ -37,4 +37,6 @@ void edit_properties_cb();
 void refresh_folder(ClickedNode *inNode);
 void refresh_folder_with_iter(GtkTreeIter *iter);
 
+void create_new_file_cb();
+
 #endif /*__HEADER_GUI_CALLBACKS_*/

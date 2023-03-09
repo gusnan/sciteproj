@@ -613,6 +613,7 @@ void refresh_folder_with_iter(GtkTreeIter *iter)
 
 }
 
+
 /**
  *
  */
@@ -628,3 +629,32 @@ void refresh_folder(ClickedNode *inNode)
       refresh_folder_with_iter(&iter);
    }
 }
+
+
+/**
+ *
+ */
+void create_new_file_cb()
+{
+   gchar *command = NULL;
+   GError *err = NULL;
+   GtkWidget *dialog = NULL;
+   gchar *absFilePath = NULL;
+
+   // several files in selection?
+
+   // We can only open files
+
+   if (!clicked_node.valid || clicked_node.type != ITEMTYPE_GROUP) {
+      goto EXITPOINT;
+   }
+
+   // add_file_to_recent(clicked_node.name, NULL);
+
+   printf("Clicked node: %s\n", clicked_node.name);
+
+EXITPOINT:
+
+   return;
+}
+

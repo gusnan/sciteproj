@@ -236,6 +236,8 @@ int init_menus(GtkWidget *window)
 
    g_signal_connect(G_OBJECT(propertiesGroupMenuItem), "activate", G_CALLBACK(group_properties_cb), NULL);
 
+   g_signal_connect(G_OBJECT(createNewFileMenuItem), "activate", G_CALLBACK(create_new_file_cb), NULL);
+
    gtk_widget_show_all(groupRightClickPopupMenu);
 
    gtk_widget_show_all(fileRightClickPopupMenu);
