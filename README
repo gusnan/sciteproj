@@ -10,7 +10,7 @@ SciteProj
 
 SciteProj is a Project Manager for usage with the SciTE text editor.
 It is based on ScitePM by Roy Wood. It is a "director" of SciTE, using
-it's director interface to communicate between SciteProj and SciTE. See
+its director interface to communicate between SciteProj and SciTE. See
 
 http://www.scintilla.org/SciTEDirector.html
 
