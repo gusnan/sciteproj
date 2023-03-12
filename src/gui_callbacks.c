@@ -624,9 +624,21 @@ void refresh_folder(ClickedNode *inNode)
    }
    
    GtkTreeIter iter = inNode->iter;
-   
+
    if (tree_iter_is_valid(&iter)) {
       refresh_folder_with_iter(&iter);
+   }
+}
+
+
+gchar *entry_text;
+GtkWidget *entry;
+
+
+static void text_entry_text_changed (void)
+{
+   if (entry != NULL) {
+      entry_text = gtk_entry_get_text (GTK_ENTRY (entry));
    }
 }
 
@@ -634,24 +646,130 @@ void refresh_folder(ClickedNode *inNode)
 /**
  *
  */
+gboolean
+get_requested_file_name (gchar **string_result)
+{
+   GtkWidget *dialog, *content_area;
+
+   GtkWidget *label;
+
+   GtkDialogFlags flags;
+
+   GtkWidget *grid;
+
+   // gchar *string_result = NULL;
+   gboolean int_result = FALSE;
+
+   GtkWindow *main_window = get_main_window();
+
+   // Create the widgets
+   flags = GTK_DIALOG_DESTROY_WITH_PARENT;
+   dialog = gtk_dialog_new_with_buttons ("Message",
+                                       main_window,
+                                       flags,
+                                       _("_OK"),
+                                       GTK_RESPONSE_ACCEPT,
+                                       _("_Cancel"),
+                                       GTK_RESPONSE_REJECT,
+                                       NULL);
+   content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+   label = gtk_label_new ("File name:");
+
+   // Ensure that the dialog box is destroyed when the user responds
+
+   // Add the label, and show everything we’ve added
+
+   grid = gtk_grid_new();
+
+   gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
+
+   entry = gtk_entry_new ();
+
+   gtk_widget_show (GTK_WIDGET (entry));
+
+   gtk_entry_set_max_length (GTK_ENTRY (entry), 0);
+
+   g_signal_connect (GTK_EDITABLE (entry), "changed", G_CALLBACK (text_entry_text_changed), NULL);
+
+   gtk_grid_attach (GTK_GRID (grid), entry, 1, 0, 1, 1);
+
+   gtk_widget_show (GTK_WIDGET (grid));
+   gtk_widget_show (GTK_WIDGET (label));
+
+   gtk_container_add (GTK_CONTAINER (content_area), grid);
+
+   gint result = gtk_dialog_run (GTK_DIALOG (dialog));
+
+   switch (result) {
+   case GTK_RESPONSE_ACCEPT:
+      int_result = 1;
+      if (string_result != NULL) {
+         (*string_result) = (gchar *)g_strdup_printf("%s", entry_text);
+      }
+      break;
+   case GTK_RESPONSE_REJECT:
+      int_result = 0;
+      break;
+   default:
+      int_result = 0;
+   };
+
+   gtk_widget_destroy (GTK_WIDGET (dialog));
+
+   return int_result;
+}
+
+/**
+ *
+ */
 void create_new_file_cb()
 {
-   gchar *command = NULL;
-   GError *err = NULL;
-   GtkWidget *dialog = NULL;
-   gchar *absFilePath = NULL;
-
-   // several files in selection?
+   GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
 
    // We can only open files
-
    if (!clicked_node.valid || clicked_node.type != ITEMTYPE_GROUP) {
       goto EXITPOINT;
    }
 
    // add_file_to_recent(clicked_node.name, NULL);
 
-   printf("Clicked node: %s\n", clicked_node.name);
+   // Open the folder if it isn't open already
+
+   GtkTreeIter *iter = gtk_tree_iter_copy(&(clicked_node.iter));
+
+   if (tree_iter_is_valid(iter)) {
+
+      printf("Clicked node: %s\n", clicked_node.name);
+
+      GtkTreePath *path;
+      path = gtk_tree_model_get_path(tree_model, iter);
+      expand_tree_row(path, FALSE);
+
+      gchar *filename = NULL;
+
+      int result = get_requested_file_name(&filename);
+
+      if (result != 0) {
+
+         printf("File name: %s\n", filename);
+
+         // build filename including folder
+
+         // check if the file already exists in the file system
+
+         GtkTreeIter new_iter;
+
+         add_tree_file(iter, ADD_CHILD, filename, &new_iter, FALSE, NULL);
+
+         // gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &iter, tree_path);
+
+         GtkTreePath *cursor_path = gtk_tree_model_get_path(tree_model, &new_iter);
+
+         gtk_tree_view_set_cursor(GTK_TREE_VIEW(projectTreeView), cursor_path, NULL, TRUE);
+      }
+
+      gtk_tree_path_free(path);
+   }
 
 EXITPOINT:
 
