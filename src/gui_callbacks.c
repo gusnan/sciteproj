@@ -833,6 +833,8 @@ void create_new_file_cb()
             goto EXITPOINT;
          }
 
+         // TODO: Find the iter for the created file, and set the cursor there
+
          /*
          GtkTreeIter new_iter;
 
