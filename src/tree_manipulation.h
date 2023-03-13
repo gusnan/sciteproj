@@ -87,7 +87,6 @@ void done_treestore();
 
 // Get the project file directory
 const gchar* get_project_directory();
-gchar* get_project_filepath();
 
 gboolean tree_iter_is_valid(GtkTreeIter *iter);
 
@@ -137,6 +136,8 @@ gchar *get_path_string(GtkTreeIter *iter);
 void sort_children(GtkTreeIter *node, GError **err, StringCompareFunction compare_func);
 
 gboolean add_tree_folderlist(GtkTreeIter *iter, GSList *folder_list, gchar *folder_path);
+
+GtkTreeIter *find_element_with_path (GtkTreeIter *start_iter, gchar *path_to_find);
 
 #ifdef _DEBUG
 void print_node(GtkTreeIter *iter);

@@ -621,6 +621,57 @@ int helper_remove(GtkTreeIter *iter, GList **items_to_remove)
 }
 
 
+
+/**
+ *
+ */
+GtkTreeIter *find_element_with_path (GtkTreeIter *start_iter, gchar *path_to_find)
+{
+   GtkTreeIter *temp_iter = gtk_tree_iter_copy(start_iter);
+
+   GtkTreeIter new_iter;
+
+   if (gtk_tree_model_iter_children (GTK_TREE_MODEL (sTreeStore), &new_iter, temp_iter)) {
+
+      gboolean next_valid = TRUE;
+
+      do {
+         if (next_valid) {
+
+            gchar *nodeContents;
+            int itemType;
+
+            gtk_tree_model_get(GTK_TREE_MODEL(sTreeStore), &new_iter,
+                               COLUMN_ITEMTYPE, &itemType,
+                               COLUMN_FILEPATH, &nodeContents, -1);
+
+            if (itemType == ITEMTYPE_GROUP) {
+               GtkTreeIter *iter = find_element_with_path(&new_iter, path_to_find);
+               if (iter != NULL) {
+                  return iter;
+               }
+            } else {
+
+               gchar *cleaned_folder = NULL;
+               cleaned_folder = g_strdup_printf("%s/%s", get_project_directory(), clean_folder(nodeContents));
+
+               if (g_strcmp0(clean_folder(cleaned_folder), path_to_find) == 0) {
+
+                  GtkTreeIter *result_iter = gtk_tree_iter_copy(&new_iter);
+
+                  return result_iter;
+               }
+            }
+         }
+
+         next_valid = gtk_tree_model_iter_next(GTK_TREE_MODEL(sTreeStore), &new_iter);
+
+      } while(next_valid);
+   }
+   return NULL;
+}
+
+
 /**
  * Remove a node from the GtkTreeStore.
  *

@@ -833,7 +833,25 @@ void create_new_file_cb()
             goto EXITPOINT;
          }
 
-         // TODO: Find the iter for the created file, and set the cursor there
+         GtkTreeIter newIter;
+
+         gtk_tree_model_iter_parent(tree_model, &newIter, iter);
+
+         refresh_folder_with_iter(&newIter);
+
+         GtkTreeIter temp;
+         GtkTreeIter *result_iter = NULL;
+
+         if (gtk_tree_model_get_iter_first (tree_model, &temp)) {
+            printf ("before find_element_with_path\n");
+            result_iter = find_element_with_path (&temp, full_file_name);
+         }
+
+         if (result_iter != NULL) {
+            GtkTreePath *cursor_path = gtk_tree_model_get_path(tree_model, result_iter);
+
+            gtk_tree_view_set_cursor(GTK_TREE_VIEW(projectTreeView), cursor_path, NULL, TRUE);
+         }
 
          /*
          GtkTreeIter new_iter;
