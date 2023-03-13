@@ -24,6 +24,10 @@
 #include <sys/stat.h>
 #include <glib.h>
 #include <gtk/gtk.h>
+#include <glib/gstdio.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include <gdk/gdkkeysyms.h>
 
@@ -633,23 +637,33 @@ void refresh_folder(ClickedNode *inNode)
 
 gchar *entry_text;
 GtkWidget *entry;
+GtkWidget *request_filename_dialog;
 
 
 static void text_entry_text_changed (void)
 {
    if (entry != NULL) {
-      entry_text = gtk_entry_get_text (GTK_ENTRY (entry));
+      entry_text = (gchar*)gtk_entry_get_text (GTK_ENTRY (entry));
    }
+}
+
+
+static void text_entry_activate (void)
+{
+   printf("activate\n");
+   // GtkWidget *dialog = (GtkWidget *)data;
+
+   gtk_dialog_response( GTK_DIALOG(request_filename_dialog), GTK_RESPONSE_ACCEPT);
 }
 
 
 /**
  *
  */
-gboolean
+int
 get_requested_file_name (gchar **string_result)
 {
-   GtkWidget *dialog, *content_area;
+   GtkWidget *content_area;
 
    GtkWidget *label;
 
@@ -658,13 +672,13 @@ get_requested_file_name (gchar **string_result)
    GtkWidget *grid;
 
    // gchar *string_result = NULL;
-   gboolean int_result = FALSE;
+   int int_result = 0;
 
    GtkWindow *main_window = get_main_window();
 
    // Create the widgets
    flags = GTK_DIALOG_DESTROY_WITH_PARENT;
-   dialog = gtk_dialog_new_with_buttons ("Message",
+   request_filename_dialog = gtk_dialog_new_with_buttons ("Message",
                                        main_window,
                                        flags,
                                        _("_OK"),
@@ -672,7 +686,7 @@ get_requested_file_name (gchar **string_result)
                                        _("_Cancel"),
                                        GTK_RESPONSE_REJECT,
                                        NULL);
-   content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+   content_area = gtk_dialog_get_content_area (GTK_DIALOG (request_filename_dialog));
    label = gtk_label_new ("File name:");
 
    // Ensure that the dialog box is destroyed when the user responds
@@ -690,6 +704,7 @@ get_requested_file_name (gchar **string_result)
    gtk_entry_set_max_length (GTK_ENTRY (entry), 0);
 
    g_signal_connect (GTK_EDITABLE (entry), "changed", G_CALLBACK (text_entry_text_changed), NULL);
+   g_signal_connect (GTK_ENTRY (entry), "activate", G_CALLBACK (text_entry_activate), NULL);
 
    gtk_grid_attach (GTK_GRID (grid), entry, 1, 0, 1, 1);
 
@@ -698,7 +713,9 @@ get_requested_file_name (gchar **string_result)
 
    gtk_container_add (GTK_CONTAINER (content_area), grid);
 
-   gint result = gtk_dialog_run (GTK_DIALOG (dialog));
+   gtk_dialog_set_default_response (GTK_DIALOG (request_filename_dialog), GTK_RESPONSE_ACCEPT);
+
+   gint result = gtk_dialog_run (GTK_DIALOG (request_filename_dialog));
 
    switch (result) {
    case GTK_RESPONSE_ACCEPT:
@@ -714,10 +731,41 @@ get_requested_file_name (gchar **string_result)
       int_result = 0;
    };
 
-   gtk_widget_destroy (GTK_WIDGET (dialog));
+   gtk_widget_destroy (GTK_WIDGET (request_filename_dialog));
 
    return int_result;
 }
+
+
+/**
+ *
+ */
+int warning_dialog(const char *fmt, ...)
+{
+   GtkWidget *warning_dialog;
+   GtkWindow *main_window = get_main_window();
+
+   gchar *formatted_string;
+
+   va_list argptr;
+   va_start(argptr, fmt);
+   formatted_string = g_strdup_vprintf(fmt, argptr);
+   va_end(argptr);
+
+   warning_dialog = gtk_message_dialog_new (main_window,
+                                            GTK_DIALOG_DESTROY_WITH_PARENT,
+                                            GTK_MESSAGE_ERROR,
+                                            GTK_BUTTONS_CLOSE,
+                                            "%s", formatted_string
+                                            );
+   gtk_dialog_run (GTK_DIALOG (warning_dialog));
+   gtk_widget_destroy (warning_dialog);
+   
+   g_free(formatted_string);
+
+   return 0;
+}
+
 
 /**
  *
@@ -725,6 +773,7 @@ get_requested_file_name (gchar **string_result)
 void create_new_file_cb()
 {
    GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
+   gchar *full_file_name = NULL;
 
    // We can only open files
    if (!clicked_node.valid || clicked_node.type != ITEMTYPE_GROUP) {
@@ -747,6 +796,8 @@ void create_new_file_cb()
 
       gchar *filename = NULL;
 
+      gchar *folder = clicked_node.name;
+
       int result = get_requested_file_name(&filename);
 
       if (result != 0) {
@@ -757,6 +808,32 @@ void create_new_file_cb()
 
          // check if the file already exists in the file system
 
+         full_file_name = g_build_filename(folder, filename, NULL);
+
+         printf("Full: %s\n", full_file_name);
+
+         if (g_file_test(full_file_name, G_FILE_TEST_EXISTS)) {
+            printf("Finns redan!\n");
+
+            warning_dialog("The file '%s' does already exist!", filename);
+
+            goto EXITPOINT;
+
+         }
+
+         mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+
+         int create_result = g_creat (full_file_name, mode);
+         printf("Create result: %d\n", create_result);
+         if (create_result == -1) {
+            printf("Couldn't create file!\n");
+
+            warning_dialog ("The file '%s' couldn't be created!", filename);
+
+            goto EXITPOINT;
+         }
+
+         /*
          GtkTreeIter new_iter;
 
          add_tree_file(iter, ADD_CHILD, filename, &new_iter, FALSE, NULL);
@@ -766,6 +843,7 @@ void create_new_file_cb()
          GtkTreePath *cursor_path = gtk_tree_model_get_path(tree_model, &new_iter);
 
          gtk_tree_view_set_cursor(GTK_TREE_VIEW(projectTreeView), cursor_path, NULL, TRUE);
+         */
       }
 
       gtk_tree_path_free(path);
@@ -773,6 +851,9 @@ void create_new_file_cb()
 
 EXITPOINT:
 
+   if (full_file_name != NULL) {
+      g_free(full_file_name);
+   }
+
    return;
 }
-
