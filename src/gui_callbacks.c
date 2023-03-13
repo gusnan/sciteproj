@@ -810,11 +810,7 @@ void create_new_file_cb()
 
          full_file_name = g_build_filename(folder, filename, NULL);
 
-         printf("Full: %s\n", full_file_name);
-
          if (g_file_test(full_file_name, G_FILE_TEST_EXISTS)) {
-            printf("Finns redan!\n");
-
             warning_dialog("The file '%s' does already exist!", filename);
 
             goto EXITPOINT;
@@ -824,10 +820,7 @@ void create_new_file_cb()
          mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
          int create_result = g_creat (full_file_name, mode);
-         printf("Create result: %d\n", create_result);
          if (create_result == -1) {
-            printf("Couldn't create file!\n");
-
             warning_dialog ("The file '%s' couldn't be created!", filename);
 
             goto EXITPOINT;
@@ -852,20 +845,7 @@ void create_new_file_cb()
 
             gtk_tree_view_set_cursor(GTK_TREE_VIEW(projectTreeView), cursor_path, NULL, TRUE);
          }
-
-         /*
-         GtkTreeIter new_iter;
-
-         add_tree_file(iter, ADD_CHILD, filename, &new_iter, FALSE, NULL);
-
-         // gtk_tree_model_get_iter(GTK_TREE_MODEL(sTreeStore), &iter, tree_path);
-
-         GtkTreePath *cursor_path = gtk_tree_model_get_path(tree_model, &new_iter);
-
-         gtk_tree_view_set_cursor(GTK_TREE_VIEW(projectTreeView), cursor_path, NULL, TRUE);
-         */
       }
-
       gtk_tree_path_free(path);
    }
 
