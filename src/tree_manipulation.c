@@ -955,38 +955,6 @@ void sort_children(GtkTreeIter *node, GError **err, StringCompareFunction compar
 }
 
 
-
-/*
-struct TestStruct
-{
-   gchar *string_to_check_for;
-   gboolean found;
-};
-
-typedef struct TestStruct TestStruct;
-gboolean foreach_finder(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
-{
-   gint nodeType=-1;
-   gchar *node_contents;
-
-   gtk_tree_model_get(model, iter, COLUMN_ITEMTYPE, &nodeType, COLUMN_FILENAME, &node_contents, -1);
-
-   TestStruct *test=(TestStruct*)(data);
-
-   gboolean res=FALSE;
-
-   if (g_ascii_strcasecmp(node_contents,test->string_to_check_for)==0) {
-      test->found=TRUE;
-      res=TRUE;
-   }
-
-   g_free(node_contents);
-
-   return res;
-}
-*/
-
-
 /**
  *
  */
