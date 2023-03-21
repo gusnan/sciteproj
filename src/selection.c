@@ -167,7 +167,6 @@ void selection_changed_cb (GtkTreeSelection *tree_selection, gpointer user_data)
 GList *get_list_of_marked_files()
 {
    GList *list;
-   GtkTreePath *current;
    GList *result_list = NULL;
 
    GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
@@ -179,7 +178,7 @@ GList *get_list_of_marked_files()
    if (list != NULL) {
 
       for (GList *l = list; l != NULL; l = l -> next) {
-         current = l->data;
+         GtkTreePath *current = l->data;
 
          if (current != NULL) {
 
