@@ -93,7 +93,7 @@ void popup_open_file_cb()
                goto EXITPOINT;
             }
 
-            printf("opened name: %s\n", curr->name);
+            debug_printf("opened name: %s\n", curr->name);
 
             if (!open_filename(curr->name, (gchar*)(get_project_directory()), &err)) {
                goto EXITPOINT;
