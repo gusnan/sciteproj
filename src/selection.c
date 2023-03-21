@@ -150,11 +150,6 @@ void selection_changed_cb (GtkTreeSelection *tree_selection, gpointer user_data)
          gtk_tree_selection_select_path (tree_selection, added_path);
    }
 
-   /*
-   if (added_path != NULL)
-      printf("Added depth: %d path: %s\n", depth, gtk_tree_path_to_string (added_path));
-   */
-
    // copy list to selected_items for next comparison
    selected_items = g_list_copy_deep (list, (GCopyFunc)gtk_tree_path_copy, NULL);
 
