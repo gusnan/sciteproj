@@ -6,17 +6,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: sciteproj 1.07\n"
+"Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-02-28 16:40+0100\n"
-"PO-Revision-Date: 2021-12-21 19:22+0100\n"
+"POT-Creation-Date: 2023-03-21 16:02+0100\n"
+"PO-Revision-Date: 2023-03-21 16:03+0100\n"
 "Last-Translator: Andreas Rönnquist <andreas@ronnquist.net>\n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: about.c:172
 msgid "Information"
@@ -75,20 +75,20 @@ msgstr ""
 msgid "version %s"
 msgstr "version %s"
 
-#: gui.c:125
+#: gui.c:127
 msgid "[UNTITLED]"
 msgstr "[NAMNLÖS]"
 
-#: gui.c:537 recent_files.c:548 scite_utils.c:216
+#: gui.c:546 recent_files.c:546 scite_utils.c:216
 #, c-format
 msgid "Opened %s"
 msgstr "Öppnade %s"
 
-#: gui.c:551
+#: gui.c:560
 msgid "Could not open selected file:"
 msgstr "Kunde inte öppna vald fil:"
 
-#: gui_callbacks.c:95 recent_files.c:561 recent_files.c:602
+#: gui_callbacks.c:116 recent_files.c:559 recent_files.c:600
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -98,6 +98,14 @@ msgstr ""
 "Kunde inte öppna vald fil: \n"
 "\n"
 "%s"
+
+#: gui_callbacks.c:701
+msgid "_OK"
+msgstr "_OK"
+
+#: gui_callbacks.c:703
+msgid "_Cancel"
+msgstr "Avbryt"
 
 #: main.c:69
 msgid "Show program version and quit"
@@ -128,27 +136,27 @@ msgstr "SciTE Projekthanterare"
 msgid "option parsing failed: %s"
 msgstr "tolkning av alternativ misslyckades: %s"
 
-#: main.c:142
+#: main.c:144
 #, c-format
 msgid "A folder is expected as parameter to sciteproj..."
 msgstr "En mapp väntas som parameter till sciteproj..."
 
-#: main.c:181 main.c:191
+#: main.c:183 main.c:193
 msgid ""
 "Environment variable exists, but doesn't point to a folder containing scite."
 msgstr ""
 "Miljövariabeln finns, men hänvisar inte till någon mapp som innehåller scite."
 
-#: main.c:208
+#: main.c:210
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
 msgstr "Kunde inte hitta en körbar fil för SciTE med namnet '%s'!\n"
 
-#: main.c:209
+#: main.c:211
 msgid "Checking for SciTE in the standard locations instead.\n"
 msgstr "Kollar efter SciTE på standard-platserna istället.\n"
 
-#: main.c:222
+#: main.c:224
 msgid ""
 "Warning! Couldn't locate SciTE!\n"
 "Program will start, but you won't be able to open SciTE to edit files."
@@ -157,89 +165,93 @@ msgstr ""
 "Programmet kommer att starta, men du kommer inte kunna använda SciTE för att "
 "editera filer."
 
-#: main.c:230
+#: main.c:232
 #, c-format
 msgid "Could not setup the gui: %s"
 msgstr "Kunde inte ställa in GUI: %s"
 
-#: main.c:236
+#: main.c:238
 #, c-format
 msgid "Not a valid folder!"
 msgstr "Inte en giltig mapp!"
 
-#: menus.c:118
+#: menus.c:121
 msgid "_File"
 msgstr "_Arkiv"
 
-#: menus.c:119
+#: menus.c:122
 msgid "_Edit"
 msgstr "R_edigera"
 
-#: menus.c:120
+#: menus.c:123
 msgid "_View"
 msgstr "_Visa"
 
-#: menus.c:121
+#: menus.c:124
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: menus.c:130
+#: menus.c:133
 msgid "_Quit"
 msgstr "Avsluta"
 
-#: menus.c:139
+#: menus.c:142
 msgid "Edit properties"
 msgstr "Editera egenskaper"
 
-#: menus.c:145
+#: menus.c:148
 msgid "Show Recently Opened Files"
 msgstr "Visa nyligen öppnade filer"
 
-#: menus.c:152
+#: menus.c:155
 msgid "About"
 msgstr "_Om"
 
-#: menus.c:165 menus.c:242
+#: menus.c:168 menus.c:253
 msgid "Open file in SciTE"
 msgstr "Öppna fil i SciTE"
 
-#: menus.c:168 menus.c:244
+#: menus.c:171 menus.c:255
 msgid "Copy filename to clipboard"
 msgstr "Kopiera filnamn till urklipp"
 
-#: menus.c:171
+#: menus.c:174
 msgid "Launch default program for uri"
 msgstr "Starta standardprogram för uri"
 
-#: menus.c:177 menus.c:218 menus.c:245
+#: menus.c:180 menus.c:225 menus.c:256
 msgid "Properties"
 msgstr "Egenskaper"
 
-#: menus.c:188
+#: menus.c:191
 msgid "Sort folder contents"
 msgstr "Sortera mappinnehåll"
 
-#: menus.c:190
+#: menus.c:193
 msgid "Sort ascending by name"
 msgstr "Sortera mapp stigande efter namn"
 
-#: menus.c:191
+#: menus.c:194
 msgid "Sort descending by name"
 msgstr "Sortera mapp fallande efter namn"
 
-#: menus.c:193
+#: menus.c:196
 msgid "Sort ascending by extension"
 msgstr "Sortera mapp stigande efter filändelse"
 
-#: menus.c:194
+#: menus.c:197
 msgid "Sort descending by extension"
 msgstr "Sortera mapp fallande efter filändelse"
 
-#: menus.c:214
+#: menus.c:217
 msgid "Browse folder"
 msgstr "Bläddra i mappen"
 
-#: menus.c:243
+#: menus.c:221
+msgid "Create new file"
+msgstr "Skapa ny fil"
+
+#: menus.c:254
 msgid "Remove file from this list"
 msgstr "Ta bort fil från denna lista"
 
@@ -275,7 +287,7 @@ msgstr "Sökväg:"
 msgid "File size:"
 msgstr "Filstorlek:"
 
-#: recent_files.c:178
+#: recent_files.c:176
 msgid "Recently opened files:"
 msgstr "Nyligen öppnade filer:"
 
