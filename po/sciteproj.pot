@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: sciteproj 1.50pre\n"
+"Project-Id-Version: sciteproj 1.55\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-02-28 16:40+0100\n"
+"POT-Creation-Date: 2023-03-21 16:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,25 +59,33 @@ msgstr ""
 msgid "version %s"
 msgstr ""
 
-#: gui.c:125
+#: gui.c:127
 msgid "[UNTITLED]"
 msgstr ""
 
-#: gui.c:537 recent_files.c:548 scite_utils.c:216
+#: gui.c:546 recent_files.c:546 scite_utils.c:216
 #, c-format
 msgid "Opened %s"
 msgstr ""
 
-#: gui.c:551
+#: gui.c:560
 msgid "Could not open selected file:"
 msgstr ""
 
-#: gui_callbacks.c:95 recent_files.c:561 recent_files.c:602
+#: gui_callbacks.c:116 recent_files.c:559 recent_files.c:600
 #, c-format
 msgid ""
 "Could not open selected file: \n"
 "\n"
 "%s"
+msgstr ""
+
+#: gui_callbacks.c:701
+msgid "_OK"
+msgstr ""
+
+#: gui_callbacks.c:703
+msgid "_Cancel"
 msgstr ""
 
 #: main.c:69
@@ -109,114 +117,118 @@ msgstr ""
 msgid "option parsing failed: %s"
 msgstr ""
 
-#: main.c:142
+#: main.c:144
 #, c-format
 msgid "A folder is expected as parameter to sciteproj..."
 msgstr ""
 
-#: main.c:181 main.c:191
+#: main.c:183 main.c:193
 msgid ""
 "Environment variable exists, but doesn't point to a folder containing scite."
 msgstr ""
 
-#: main.c:208
+#: main.c:210
 #, c-format
 msgid "Couldn't find a SciTE executable named '%s'!\n"
 msgstr ""
 
-#: main.c:209
+#: main.c:211
 msgid "Checking for SciTE in the standard locations instead.\n"
 msgstr ""
 
-#: main.c:222
+#: main.c:224
 msgid ""
 "Warning! Couldn't locate SciTE!\n"
 "Program will start, but you won't be able to open SciTE to edit files."
 msgstr ""
 
-#: main.c:230
+#: main.c:232
 #, c-format
 msgid "Could not setup the gui: %s"
 msgstr ""
 
-#: main.c:236
+#: main.c:238
 #, c-format
 msgid "Not a valid folder!"
 msgstr ""
 
-#: menus.c:118
+#: menus.c:121
 msgid "_File"
 msgstr ""
 
-#: menus.c:119
+#: menus.c:122
 msgid "_Edit"
 msgstr ""
 
-#: menus.c:120
+#: menus.c:123
 msgid "_View"
 msgstr ""
 
-#: menus.c:121
+#: menus.c:124
 msgid "_Help"
 msgstr ""
 
-#: menus.c:130
+#: menus.c:133
 msgid "_Quit"
 msgstr ""
 
-#: menus.c:139
+#: menus.c:142
 msgid "Edit properties"
 msgstr ""
 
-#: menus.c:145
+#: menus.c:148
 msgid "Show Recently Opened Files"
 msgstr ""
 
-#: menus.c:152
+#: menus.c:155
 msgid "About"
 msgstr ""
 
-#: menus.c:165 menus.c:242
+#: menus.c:168 menus.c:253
 msgid "Open file in SciTE"
 msgstr ""
 
-#: menus.c:168 menus.c:244
+#: menus.c:171 menus.c:255
 msgid "Copy filename to clipboard"
 msgstr ""
 
-#: menus.c:171
+#: menus.c:174
 msgid "Launch default program for uri"
 msgstr ""
 
-#: menus.c:177 menus.c:218 menus.c:245
+#: menus.c:180 menus.c:225 menus.c:256
 msgid "Properties"
 msgstr ""
 
-#: menus.c:188
+#: menus.c:191
 msgid "Sort folder contents"
 msgstr ""
 
-#: menus.c:190
+#: menus.c:193
 msgid "Sort ascending by name"
 msgstr ""
 
-#: menus.c:191
+#: menus.c:194
 msgid "Sort descending by name"
 msgstr ""
 
-#: menus.c:193
+#: menus.c:196
 msgid "Sort ascending by extension"
 msgstr ""
 
-#: menus.c:194
+#: menus.c:197
 msgid "Sort descending by extension"
 msgstr ""
 
-#: menus.c:214
+#: menus.c:217
 msgid "Browse folder"
 msgstr ""
 
-#: menus.c:243
+#: menus.c:221
+msgid "Create new file"
+msgstr ""
+
+#: menus.c:254
 msgid "Remove file from this list"
 msgstr ""
 
@@ -252,7 +264,7 @@ msgstr ""
 msgid "File size:"
 msgstr ""
 
-#: recent_files.c:178
+#: recent_files.c:176
 msgid "Recently opened files:"
 msgstr ""
 
