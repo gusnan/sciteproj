@@ -56,6 +56,8 @@
 
 #include "menus.h"
 
+#include "selection.h"
+
 
 
 // Forward-declare static functions
@@ -207,6 +209,11 @@ gboolean setup_gui(GError **err)
 
       goto EXITPOINT;
    }
+
+   init_selection ();
+
+   GtkTreeSelection *tree_view_selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (projectTreeView));
+   g_signal_connect (G_OBJECT (tree_view_selection), "changed", G_CALLBACK (selection_changed_cb), NULL);
 
    gtk_tree_view_set_enable_search(GTK_TREE_VIEW(projectTreeView), TRUE);
 
@@ -385,6 +392,8 @@ void gui_close()
    if (window_saved_title) g_free(window_saved_title);
 
    if (scrolledWindow) gtk_widget_destroy(scrolledWindow);
+
+   done_selection ();
 
    unload_graphics();
 
