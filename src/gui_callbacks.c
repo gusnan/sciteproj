@@ -93,13 +93,13 @@ void popup_open_file_cb()
                goto EXITPOINT;
             }
 
-            debug_printf("opened name: %s\n", curr->name);
+            gchar *fixed = fix_path((gchar*)get_project_directory(), curr->name);
 
             if (!open_filename(curr->name, (gchar*)(get_project_directory()), &err)) {
                goto EXITPOINT;
             }
 
-            add_file_to_recent(curr->name, NULL);
+            add_file_to_recent (fixed, NULL);
          }
       }
 
