@@ -64,6 +64,8 @@
 
 #include "expand.h"
 
+#include "selection.h"
+
 
 /**
  * Open the selected file.
@@ -78,17 +80,32 @@ void popup_open_file_cb()
 
    // several files in selection?
 
-   // We can only open files
+   GList *list = get_list_of_marked_files();
 
-   if (!clicked_node.valid || clicked_node.type != ITEMTYPE_FILE) {
-      goto EXITPOINT;
+   if (list != NULL) {
+      for (GList *temp = list; temp != NULL; temp = temp -> next) {
+         ClickedNode *curr = temp->data;
+
+         if (curr) {
+
+            // We can only open files
+            if (!curr->valid || curr->type != ITEMTYPE_FILE) {
+               goto EXITPOINT;
+            }
+
+            printf("opened name: %s\n", curr->name);
+
+            if (!open_filename(curr->name, (gchar*)(get_project_directory()), &err)) {
+               goto EXITPOINT;
+            }
+
+            add_file_to_recent(curr->name, NULL);
+         }
+      }
+
+      g_list_free_full (list, (GDestroyNotify) g_free);
    }
 
-   if (!open_filename(clicked_node.name, (gchar*)(get_project_directory()), &err)) {
-      goto EXITPOINT;
-   }
-
-   add_file_to_recent(clicked_node.name, NULL);
 
 
 EXITPOINT:

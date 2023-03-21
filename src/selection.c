@@ -19,7 +19,24 @@
  * along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
+#include <string.h>
+#include <sys/stat.h>
+#include <glib.h>
 #include <gtk/gtk.h>
+
+#include <gdk/gdkkeysyms.h>
+
+#include <stdlib.h>
+#include <glib/gi18n.h>
+
+#include <locale.h>
+
+#include "clicked_node.h"
+
+#include "gui.h"
+
+#include "tree_manipulation.h"
 
 
 /**
@@ -146,4 +163,54 @@ void selection_changed_cb (GtkTreeSelection *tree_selection, gpointer user_data)
    delete_list (list);
 
    in_function = FALSE;
+}
+
+
+/**
+ *
+ */
+GList *get_list_of_marked_files()
+{
+   GList *list;
+   GtkTreePath *current;
+   GList *result_list = NULL;
+
+   GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
+
+   GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (projectTreeView));
+
+   list = gtk_tree_selection_get_selected_rows (selection, NULL);
+
+   if (list != NULL) {
+
+      for (GList *l = list; l != NULL; l = l -> next) {
+         current = l->data;
+
+         if (current != NULL) {
+
+            GtkTreeIter iter;
+
+            gtk_tree_model_get_iter (GTK_TREE_MODEL (tree_model), &iter, current);
+
+            gchar *filepath;
+            gtk_tree_model_get (GTK_TREE_MODEL (tree_model), &iter, COLUMN_FILEPATH, &filepath, -1);
+
+            // printf("File: %s\n", filepath);
+
+            GtkTreeIter *newiter = gtk_tree_iter_copy (&iter);
+
+            gint type;
+            gtk_tree_model_get (GTK_TREE_MODEL (tree_model), &iter, COLUMN_ITEMTYPE, &type, -1);
+
+            ClickedNode *new_node = create_clicked_node (TRUE, *newiter, filepath, type);
+
+            result_list = g_list_prepend (result_list, new_node);
+
+         }
+      }
+   }
+
+   delete_list (list);
+
+   return result_list;
 }
