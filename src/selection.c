@@ -46,8 +46,6 @@ GList *selected_items = NULL;
 
 int old_depth = -1;
 
-static gboolean in_function = FALSE;
-
 static gchar *old_path_string = NULL;
 
 /**
@@ -125,6 +123,8 @@ GtkTreePath *get_newest_path_added (GList *list1, GList *list2)
  */
 void selection_changed_cb (GtkTreeSelection *tree_selection, gpointer user_data)
 {
+   static gboolean in_function = FALSE;
+
    // the in_function variable is used in a construction to make sure that this
    // changed callback isn't called when changing the selection below in
    // gtk_tree_selection_unselect_all and gtk_tree_selection_select_path
