@@ -44,8 +44,6 @@
  */
 GList *selected_items = NULL;
 
-int old_depth = -1;
-
 static gchar *old_path_string = NULL;
 
 /**
@@ -150,16 +148,6 @@ void selection_changed_cb (GtkTreeSelection *tree_selection, gpointer user_data)
       new_path_string = gtk_tree_path_to_string (new_path);
    }
 
-   int depth = -1;
-
-   if (added_path != NULL) {
-      depth = gtk_tree_path_get_depth(added_path);
-   } else {
-      // return;
-   }
-
-   // if (depth != old_depth) {
-
    if (new_path_string != NULL && old_path_string != NULL) {
 
       if (g_strcmp0 (new_path_string, old_path_string) != 0) {
@@ -173,7 +161,6 @@ void selection_changed_cb (GtkTreeSelection *tree_selection, gpointer user_data)
    // copy list to selected_items for next comparison
    selected_items = g_list_copy_deep (list, (GCopyFunc)gtk_tree_path_copy, NULL);
 
-   old_depth = depth;
    old_path_string = g_strdup (new_path_string);
 
    if (new_path_string != NULL) g_free (new_path_string);
