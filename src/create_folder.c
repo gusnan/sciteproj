@@ -50,20 +50,20 @@
 void create_new_folder_cb ()
 {
    gchar *filename = NULL;
-   GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
+   GtkTreeModel *tree_model = gtk_tree_view_get_model (GTK_TREE_VIEW(projectTreeView));
 
-   GtkTreeIter *iter = gtk_tree_iter_copy(&(clicked_node.iter));
+   GtkTreeIter *iter = gtk_tree_iter_copy (&(clicked_node.iter));
 
    // We can only use this on a folder
    if (!clicked_node.valid || clicked_node.type != ITEMTYPE_GROUP) {
       goto EXITPOINT;
    }
 
-   GtkTreeIter *itercopy = gtk_tree_iter_copy(&(clicked_node.iter));
+   GtkTreeIter *itercopy = gtk_tree_iter_copy (&(clicked_node.iter));
 
-   if (tree_iter_is_valid(iter)) {   
+   if (tree_iter_is_valid (iter)) {
 
-      printf("Clicked: %s\n", clicked_node.name);
+      printf ("Clicked: %s\n", clicked_node.name);
 
       if (get_requested_file_name (&filename) == 0) {
          printf ("Cancelled!\n");
@@ -76,17 +76,17 @@ void create_new_folder_cb ()
 
       debug_printf ("full filename: '%s'\n", full_filename);
 
-      if (g_mkdir(full_filename, S_IRWXU | S_IRWXG | S_IRWXO) != 0) {
+      if (g_mkdir (full_filename, S_IRWXU | S_IRWXG | S_IRWXO) != 0) {
 
       }
       GtkTreeIter iterHolder;
       GtkTreeIter *newIter = &iterHolder;
 
-      if (!gtk_tree_model_iter_parent(tree_model, newIter, itercopy)) {
+      if (!gtk_tree_model_iter_parent (tree_model, newIter, itercopy)) {
          newIter = gtk_tree_iter_copy (itercopy);
       }
 
-      refresh_folder_with_iter(newIter);
+      refresh_folder_with_iter (newIter);
    }
 
 EXITPOINT:
