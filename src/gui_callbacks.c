@@ -792,7 +792,7 @@ void create_new_file_cb()
    GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
    gchar *full_file_name = NULL;
 
-   // We can only open files
+   // We can only use this on a folder
    if (!clicked_node.valid || clicked_node.type != ITEMTYPE_GROUP) {
       goto EXITPOINT;
    }

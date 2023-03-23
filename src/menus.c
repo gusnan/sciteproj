@@ -47,6 +47,8 @@
 #include "launch_external.h"
 #include "recent_files.h"
 
+#include "create_folder.h"
+
 GtkWidget *menuBar = NULL;
 
 
@@ -95,6 +97,7 @@ GtkWidget *sortSeparator = NULL;
 GtkWidget *fileRightClickSeparator = NULL;
 
 GtkWidget *createNewFileMenuItem = NULL;
+GtkWidget *createNewFolderMenuItem = NULL;
 
 GtkWidget *folderPopupSeparator1 = NULL;
 GtkWidget *folderPopupSeparator2 = NULL;
@@ -219,6 +222,7 @@ int init_menus(GtkWidget *window)
    folderPopupSeparator2 = gtk_separator_menu_item_new();
 
    createNewFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Create new file"));
+   createNewFolderMenuItem = gtk_menu_item_new_with_mnemonic(_("Create new folder"));
 
    folderPopupSeparator3 = gtk_separator_menu_item_new();
 
@@ -227,6 +231,7 @@ int init_menus(GtkWidget *window)
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), sortMenuItem);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator1);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), createNewFileMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), createNewFolderMenuItem);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator2);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), browseFolderMenuItem);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator3);
@@ -237,6 +242,7 @@ int init_menus(GtkWidget *window)
    g_signal_connect(G_OBJECT(propertiesGroupMenuItem), "activate", G_CALLBACK(group_properties_cb), NULL);
 
    g_signal_connect(G_OBJECT(createNewFileMenuItem), "activate", G_CALLBACK(create_new_file_cb), NULL);
+   g_signal_connect(G_OBJECT(createNewFolderMenuItem), "activate", G_CALLBACK(create_new_folder_cb), NULL);
 
    gtk_widget_show_all(groupRightClickPopupMenu);
 

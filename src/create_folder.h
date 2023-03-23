@@ -1,7 +1,7 @@
 /**
- * gui_callbacks.h - GUI callback code for SciteProj
+ * create_folder.h - code for creating folder
  *
- *  Copyright 2006 Roy Wood, 2009-2023 Andreas Rönnquist
+ *  Copyright 2023 Andreas Rönnquist
  *
  * This file is part of SciteProj.
  *
@@ -19,27 +19,12 @@
  * along with SciteProj.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#ifndef __HEADER_GUI_CALLBACKS_
-#define __HEADER_GUI_CALLBACKS_
 
-#define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
-
-void row_expand_or_collapse_cb(GtkTreeView *treeview, GtkTreeIter *arg1, GtkTreePath *arg2, gpointer user_data);
-
-void quit_menu_cb();
-void about_menu_cb();
-void creategroup_menu_cb();
-
-void popup_open_file_cb();
-
-void edit_properties_cb();
-
-void refresh_folder(ClickedNode *inNode);
-void refresh_folder_with_iter(GtkTreeIter *iter);
-
-void create_new_file_cb();
-
-int get_requested_file_name (gchar **string_result);
+#ifndef __HEADER_CREATE_FOLDER_
+#define __HEADER_CREATE_FOLDER_
 
 
-#endif /*__HEADER_GUI_CALLBACKS_*/
+void create_new_folder_cb ();
+
+
+#endif /*__HEADER_CREATE_FOLDER_*/

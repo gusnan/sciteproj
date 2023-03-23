@@ -58,6 +58,8 @@
 
 #include "selection.h"
 
+#include "create_folder.h"
+
 
 
 // Forward-declare static functions

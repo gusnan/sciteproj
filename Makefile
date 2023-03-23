@@ -22,8 +22,8 @@ else
 endif
 
 OBJECTS=$(OBJ)/about.o $(OBJ)/clipboard.o $(OBJ)/clicked_node.o \
-$(OBJ)/expand.o $(OBJ)/file_utils.o $(OBJ)/folder_config.o\
-$(OBJ)/graphics.o $(OBJ)/gui.o $(OBJ)/gui_callbacks.o\
+$(OBJ)/create_folder.o $(OBJ)/expand.o $(OBJ)/file_utils.o \
+$(OBJ)/folder_config.o $(OBJ)/graphics.o $(OBJ)/gui.o $(OBJ)/gui_callbacks.o\
 $(OBJ)/load_folder.o $(OBJ)/launch_external.o $(OBJ)/menus.o \
 $(OBJ)/main.o $(OBJ)/prefs.o $(OBJ)/properties_dialog.o $(OBJ)/recent_files.o \
 $(OBJ)/remove.o $(OBJ)/scite_utils.o $(OBJ)/script.o $(OBJ)/selection.o \
