@@ -170,7 +170,6 @@ void selection_changed_cb (GtkTreeSelection *tree_selection, gpointer user_data)
    in_function = FALSE;
 }
 
-
 /**
  *
  */

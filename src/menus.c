@@ -49,6 +49,8 @@
 
 #include "create_folder.h"
 
+#include "delete.h"
+
 GtkWidget *menuBar = NULL;
 
 
@@ -85,6 +87,9 @@ GtkWidget *openFileMenuItem = NULL;
 GtkWidget *copyFilenameMenuItem = NULL;
 GtkWidget *launchDefaultForUriMenuItem = NULL;
 
+GtkWidget *deleteFileMenuItem = NULL;
+GtkWidget *deleteFolderMenuItem = NULL;
+
 GtkWidget *propertiesMenuItem = NULL;
 GtkWidget *propertiesFileMenuItem = NULL;
 GtkWidget *propertiesGroupMenuItem = NULL;
@@ -102,6 +107,7 @@ GtkWidget *createNewFolderMenuItem = NULL;
 GtkWidget *folderPopupSeparator1 = NULL;
 GtkWidget *folderPopupSeparator2 = NULL;
 GtkWidget *folderPopupSeparator3 = NULL;
+GtkWidget *folderPopupSeparator4 = NULL;
 
 GtkAccelGroup *accelerator_group = NULL;
 
@@ -174,6 +180,9 @@ int init_menus(GtkWidget *window)
    copyFilenameMenuItem = gtk_menu_item_new_with_mnemonic(_("Copy filename to clipboard"));
    gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), copyFilenameMenuItem);
 
+   deleteFileMenuItem = gtk_menu_item_new_with_mnemonic (_("Delete"));
+   gtk_menu_shell_append (GTK_MENU_SHELL (fileRightClickPopupMenu), deleteFileMenuItem);
+
    launchDefaultForUriMenuItem = gtk_menu_item_new_with_mnemonic(_("Launch default program for uri"));
    gtk_menu_shell_append(GTK_MENU_SHELL(fileRightClickPopupMenu), launchDefaultForUriMenuItem);
 
@@ -188,6 +197,7 @@ int init_menus(GtkWidget *window)
    g_signal_connect(G_OBJECT(launchDefaultForUriMenuItem), "activate", G_CALLBACK(launch_default_for_uri_cb), NULL);
    g_signal_connect(G_OBJECT(propertiesFileMenuItem), "activate", G_CALLBACK(file_properties_cb), NULL);
 
+   g_signal_connect (G_OBJECT (deleteFileMenuItem), "activate", G_CALLBACK (delete_item_cb), NULL);
 
    sortPopupMenu = gtk_menu_new();
 
@@ -221,10 +231,14 @@ int init_menus(GtkWidget *window)
 
    folderPopupSeparator2 = gtk_separator_menu_item_new();
 
+   deleteFolderMenuItem = gtk_menu_item_new_with_mnemonic (_("Delete"));
+
+   folderPopupSeparator3 = gtk_separator_menu_item_new ();
+
    createNewFileMenuItem = gtk_menu_item_new_with_mnemonic(_("Create new file"));
    createNewFolderMenuItem = gtk_menu_item_new_with_mnemonic(_("Create new folder"));
 
-   folderPopupSeparator3 = gtk_separator_menu_item_new();
+   folderPopupSeparator4 = gtk_separator_menu_item_new();
 
    propertiesGroupMenuItem = gtk_menu_item_new_with_mnemonic(_("Properties"));
 
@@ -233,8 +247,10 @@ int init_menus(GtkWidget *window)
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), createNewFileMenuItem);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), createNewFolderMenuItem);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator2);
-   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), browseFolderMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), deleteFolderMenuItem);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator3);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), browseFolderMenuItem);
+   gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), folderPopupSeparator4);
    gtk_menu_shell_append(GTK_MENU_SHELL(groupRightClickPopupMenu), propertiesGroupMenuItem);
 
    g_signal_connect(G_OBJECT(browseFolderMenuItem), "activate", G_CALLBACK(launch_default_for_uri_cb), NULL);
@@ -243,6 +259,8 @@ int init_menus(GtkWidget *window)
 
    g_signal_connect(G_OBJECT(createNewFileMenuItem), "activate", G_CALLBACK(create_new_file_cb), NULL);
    g_signal_connect(G_OBJECT(createNewFolderMenuItem), "activate", G_CALLBACK(create_new_folder_cb), NULL);
+
+   g_signal_connect (G_OBJECT (deleteFolderMenuItem), "activate", G_CALLBACK (delete_item_cb), NULL);
 
    gtk_widget_show_all(groupRightClickPopupMenu);
 
