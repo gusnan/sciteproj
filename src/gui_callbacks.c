@@ -805,7 +805,7 @@ void create_new_file_cb()
 
    if (tree_iter_is_valid(iter)) {
 
-      printf("Clicked node: %s\n", clicked_node.name);
+      debug_printf("Clicked node: %s\n", clicked_node.name);
 
       GtkTreePath *path;
       path = gtk_tree_model_get_path(tree_model, iter);
@@ -819,7 +819,7 @@ void create_new_file_cb()
 
       if (result != 0) {
 
-         printf("File name: %s\n", filename);
+         debug_printf("File name: %s\n", filename);
 
          // build filename including folder
 
