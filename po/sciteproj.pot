@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-03-25 15:20+0100\n"
+"POT-Creation-Date: 2023-03-25 16:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,6 +59,19 @@ msgstr ""
 msgid "version %s"
 msgstr ""
 
+#: create_folder.c:68
+msgid "Create folder"
+msgstr ""
+
+#: create_folder.c:68
+msgid "Folder name:"
+msgstr ""
+
+#: create_folder.c:80
+#, c-format
+msgid "The folder '%s' does already exist - cannot create it!"
+msgstr ""
+
 #: delete.c:79 gui_callbacks.c:701
 msgid "_OK"
 msgstr ""
@@ -90,6 +103,14 @@ msgid ""
 "Could not open selected file: \n"
 "\n"
 "%s"
+msgstr ""
+
+#: gui_callbacks.c:818
+msgid "Create File"
+msgstr ""
+
+#: gui_callbacks.c:818 properties_dialog.c:186
+msgid "Filename:"
 msgstr ""
 
 #: main.c:69
@@ -262,10 +283,6 @@ msgstr ""
 
 #: properties_dialog.c:162
 msgid "File Properties"
-msgstr ""
-
-#: properties_dialog.c:186
-msgid "Filename:"
 msgstr ""
 
 #: properties_dialog.c:187
