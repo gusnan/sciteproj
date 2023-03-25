@@ -678,7 +678,7 @@ static void text_entry_activate (void)
  *
  */
 int
-get_requested_file_name (gchar **string_result)
+get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_result)
 {
    GtkWidget *content_area;
 
@@ -695,7 +695,7 @@ get_requested_file_name (gchar **string_result)
 
    // Create the widgets
    flags = GTK_DIALOG_DESTROY_WITH_PARENT;
-   request_filename_dialog = gtk_dialog_new_with_buttons ("Message",
+   request_filename_dialog = gtk_dialog_new_with_buttons (window_title,
                                        main_window,
                                        flags,
                                        _("_OK"),
@@ -704,7 +704,7 @@ get_requested_file_name (gchar **string_result)
                                        GTK_RESPONSE_REJECT,
                                        NULL);
    content_area = gtk_dialog_get_content_area (GTK_DIALOG (request_filename_dialog));
-   label = gtk_label_new ("File name:");
+   label = gtk_label_new (label_text);
 
    // Ensure that the dialog box is destroyed when the user responds
 
@@ -815,7 +815,7 @@ void create_new_file_cb()
 
       gchar *folder = clicked_node.name;
 
-      int result = get_requested_file_name(&filename);
+      int result = get_requested_file_name(_("Create File"), _("Filename:"), &filename);
 
       if (result != 0) {
 

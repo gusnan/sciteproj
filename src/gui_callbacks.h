@@ -39,7 +39,7 @@ void refresh_folder_with_iter(GtkTreeIter *iter);
 
 void create_new_file_cb();
 
-int get_requested_file_name (gchar **string_result);
+int get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_result);
 
 int warning_dialog(const char *fmt, ...);
 
