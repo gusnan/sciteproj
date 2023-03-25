@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-03-25 16:59+0100\n"
-"PO-Revision-Date: 2023-03-25 17:00+0100\n"
+"POT-Creation-Date: 2023-03-25 17:03+0100\n"
+"PO-Revision-Date: 2023-03-25 17:03+0100\n"
 "Last-Translator: Andreas Rönnquist <andreas@ronnquist.net>\n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -131,6 +131,16 @@ msgstr "Skapa Fil"
 #: gui_callbacks.c:818 properties_dialog.c:186
 msgid "Filename:"
 msgstr "Filnamn:"
+
+#: gui_callbacks.c:831
+#, c-format
+msgid "The file '%s' does already exist!"
+msgstr "Filen '%s' finns redan!"
+
+#: gui_callbacks.c:841
+#, c-format
+msgid "The file '%s' couldn't be created!"
+msgstr "Filen '%s' kunde inte skapas!"
 
 #: main.c:69
 msgid "Show program version and quit"
