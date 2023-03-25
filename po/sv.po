@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-03-25 15:20+0100\n"
-"PO-Revision-Date: 2023-03-25 15:20+0100\n"
+"POT-Creation-Date: 2023-03-25 16:59+0100\n"
+"PO-Revision-Date: 2023-03-25 17:00+0100\n"
 "Last-Translator: Andreas Rönnquist <andreas@ronnquist.net>\n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -75,6 +75,19 @@ msgstr ""
 msgid "version %s"
 msgstr "version %s"
 
+#: create_folder.c:68
+msgid "Create folder"
+msgstr "Skapa mapp"
+
+#: create_folder.c:68
+msgid "Folder name:"
+msgstr "Mappnamn:"
+
+#: create_folder.c:80
+#, c-format
+msgid "The folder '%s' does already exist - cannot create it!"
+msgstr "Mappen '%s' finns redan - kan inte skapa den!"
+
 #: delete.c:79 gui_callbacks.c:701
 msgid "_OK"
 msgstr "_OK"
@@ -110,6 +123,14 @@ msgstr ""
 "Kunde inte öppna vald fil: \n"
 "\n"
 "%s"
+
+#: gui_callbacks.c:818
+msgid "Create File"
+msgstr "Skapa Fil"
+
+#: gui_callbacks.c:818 properties_dialog.c:186
+msgid "Filename:"
+msgstr "Filnamn:"
 
 #: main.c:69
 msgid "Show program version and quit"
@@ -286,10 +307,6 @@ msgstr "Fullständigt mappnamn:"
 #: properties_dialog.c:162
 msgid "File Properties"
 msgstr "Filegenskaper"
-
-#: properties_dialog.c:186
-msgid "Filename:"
-msgstr "Filnamn:"
 
 #: properties_dialog.c:187
 msgid "Path:"
