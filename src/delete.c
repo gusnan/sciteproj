@@ -82,7 +82,7 @@ int do_dialog_with_file_list(GList *file_list)
                                        GTK_RESPONSE_REJECT,
                                        NULL);
    content_area = gtk_dialog_get_content_area (GTK_DIALOG (file_list_dialog));
-   label = gtk_label_new ("The following files will be deleted:");
+   label = gtk_label_new (_("The following files will be deleted:"));
 
    // Ensure that the dialog box is destroyed when the user responds
 
