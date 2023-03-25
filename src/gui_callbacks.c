@@ -828,7 +828,7 @@ void create_new_file_cb()
          full_file_name = g_build_filename(folder, filename, NULL);
 
          if (g_file_test(full_file_name, G_FILE_TEST_EXISTS)) {
-            warning_dialog("The file '%s' does already exist!", filename);
+            warning_dialog(_("The file '%s' does already exist!"), filename);
 
             goto EXITPOINT;
 
@@ -838,7 +838,7 @@ void create_new_file_cb()
 
          int create_result = g_creat (full_file_name, mode);
          if (create_result == -1) {
-            warning_dialog ("The file '%s' couldn't be created!", filename);
+            warning_dialog (_("The file '%s' couldn't be created!"), filename);
 
             goto EXITPOINT;
          }
