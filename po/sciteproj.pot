@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-03-25 16:59+0100\n"
+"POT-Creation-Date: 2023-03-25 17:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,6 +111,16 @@ msgstr ""
 
 #: gui_callbacks.c:818 properties_dialog.c:186
 msgid "Filename:"
+msgstr ""
+
+#: gui_callbacks.c:831
+#, c-format
+msgid "The file '%s' does already exist!"
+msgstr ""
+
+#: gui_callbacks.c:841
+#, c-format
+msgid "The file '%s' couldn't be created!"
 msgstr ""
 
 #: main.c:69
