@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-03-25 15:06+0100\n"
-"PO-Revision-Date: 2023-03-25 15:07+0100\n"
+"POT-Creation-Date: 2023-03-25 15:20+0100\n"
+"PO-Revision-Date: 2023-03-25 15:20+0100\n"
 "Last-Translator: Andreas Rönnquist <andreas@ronnquist.net>\n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
@@ -82,6 +82,10 @@ msgstr "_OK"
 #: delete.c:81 gui_callbacks.c:703
 msgid "_Cancel"
 msgstr "Avbryt"
+
+#: delete.c:85
+msgid "The following files will be deleted:"
+msgstr "Följande filer kommer att tas bort:"
 
 #: gui.c:129
 msgid "[UNTITLED]"
