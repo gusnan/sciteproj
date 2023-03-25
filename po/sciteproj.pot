@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: sciteproj 1.55\n"
+"Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-03-21 16:02+0100\n"
+"POT-Creation-Date: 2023-03-25 15:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,16 +59,24 @@ msgstr ""
 msgid "version %s"
 msgstr ""
 
-#: gui.c:127
+#: delete.c:79 gui_callbacks.c:701
+msgid "_OK"
+msgstr ""
+
+#: delete.c:81 gui_callbacks.c:703
+msgid "_Cancel"
+msgstr ""
+
+#: gui.c:129
 msgid "[UNTITLED]"
 msgstr ""
 
-#: gui.c:546 recent_files.c:546 scite_utils.c:216
+#: gui.c:548 recent_files.c:546 scite_utils.c:216
 #, c-format
 msgid "Opened %s"
 msgstr ""
 
-#: gui.c:560
+#: gui.c:562
 msgid "Could not open selected file:"
 msgstr ""
 
@@ -78,14 +86,6 @@ msgid ""
 "Could not open selected file: \n"
 "\n"
 "%s"
-msgstr ""
-
-#: gui_callbacks.c:701
-msgid "_OK"
-msgstr ""
-
-#: gui_callbacks.c:703
-msgid "_Cancel"
 msgstr ""
 
 #: main.c:69
@@ -152,83 +152,91 @@ msgstr ""
 msgid "Not a valid folder!"
 msgstr ""
 
-#: menus.c:121
+#: menus.c:130
 msgid "_File"
 msgstr ""
 
-#: menus.c:122
+#: menus.c:131
 msgid "_Edit"
 msgstr ""
 
-#: menus.c:123
+#: menus.c:132
 msgid "_View"
 msgstr ""
 
-#: menus.c:124
+#: menus.c:133
 msgid "_Help"
 msgstr ""
 
-#: menus.c:133
+#: menus.c:142
 msgid "_Quit"
 msgstr ""
 
-#: menus.c:142
+#: menus.c:151
 msgid "Edit properties"
 msgstr ""
 
-#: menus.c:148
+#: menus.c:157
 msgid "Show Recently Opened Files"
 msgstr ""
 
-#: menus.c:155
+#: menus.c:164
 msgid "About"
 msgstr ""
 
-#: menus.c:168 menus.c:253
+#: menus.c:177 menus.c:277
 msgid "Open file in SciTE"
 msgstr ""
 
-#: menus.c:171 menus.c:255
+#: menus.c:180 menus.c:279
 msgid "Copy filename to clipboard"
 msgstr ""
 
-#: menus.c:174
+#: menus.c:183 menus.c:234
+msgid "Delete"
+msgstr ""
+
+#: menus.c:186
 msgid "Launch default program for uri"
 msgstr ""
 
-#: menus.c:180 menus.c:225 menus.c:256
+#: menus.c:192 menus.c:243 menus.c:280
 msgid "Properties"
 msgstr ""
 
-#: menus.c:191
+#: menus.c:204
 msgid "Sort folder contents"
 msgstr ""
 
-#: menus.c:193
+#: menus.c:206
 msgid "Sort ascending by name"
 msgstr ""
 
-#: menus.c:194
+#: menus.c:207
 msgid "Sort descending by name"
 msgstr ""
 
-#: menus.c:196
+#: menus.c:209
 msgid "Sort ascending by extension"
 msgstr ""
 
-#: menus.c:197
+#: menus.c:210
 msgid "Sort descending by extension"
 msgstr ""
 
-#: menus.c:217
+#: menus.c:230
 msgid "Browse folder"
 msgstr ""
 
-#: menus.c:221
+#: menus.c:238
 msgid "Create new file"
 msgstr ""
 
-#: menus.c:254
+#: menus.c:239
+msgid "Create new folder"
+msgstr ""
+
+#: menus.c:278
 msgid "Remove file from this list"
 msgstr ""
 
