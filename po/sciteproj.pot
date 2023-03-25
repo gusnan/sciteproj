@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-03-25 15:06+0100\n"
+"POT-Creation-Date: 2023-03-25 15:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,6 +65,10 @@ msgstr ""
 
 #: delete.c:81 gui_callbacks.c:703
 msgid "_Cancel"
+msgstr ""
+
+#: delete.c:85
+msgid "The following files will be deleted:"
 msgstr ""
 
 #: gui.c:129
