@@ -56,7 +56,7 @@ gchar *resulting_text;
 /**
  *
  */
-int do_dialog_with_file_list(GList *file_list)
+int do_dialog_with_file_list (GList *file_list)
 {
    GtkWidget *content_area;
 
@@ -115,13 +115,13 @@ int do_dialog_with_file_list(GList *file_list)
       gtk_text_buffer_insert_at_cursor (GTK_TEXT_BUFFER (text_buffer), temp, strlen (temp));
    }
 
-   scrolled_window = gtk_scrolled_window_new(NULL, NULL);
+   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                    GTK_POLICY_AUTOMATIC,
                                    GTK_POLICY_AUTOMATIC);
 
-   gtk_widget_set_vexpand(scrolled_window, TRUE);
-   gtk_widget_set_hexpand(scrolled_window, TRUE);
+   gtk_widget_set_vexpand (scrolled_window, TRUE);
+   gtk_widget_set_hexpand (scrolled_window, TRUE);
 
    gtk_container_add (GTK_CONTAINER (scrolled_window), delete_text_entry);
    gtk_widget_show_all (scrolled_window);
@@ -164,7 +164,7 @@ int do_dialog_with_file_list(GList *file_list)
 /**
  *
  */
-void recurse_folder(gchar *folder_name, GList **filenames)
+void recurse_folder (gchar *folder_name, GList **filenames)
 {
    GDir *dir = g_dir_open (folder_name, 0, NULL);
    const gchar *filename;
@@ -174,7 +174,7 @@ void recurse_folder(gchar *folder_name, GList **filenames)
 
    while ((filename = g_dir_read_name (dir))) {
 
-      gchar *full_filename = g_build_filename(folder_name, filename, NULL);
+      gchar *full_filename = g_build_filename (folder_name, filename, NULL);
 
       if (g_file_test (full_filename, G_FILE_TEST_IS_DIR)) {
 
@@ -248,7 +248,7 @@ void delete_item_cb ()
 
             file_to_delete = g_file_new_for_path(name);
 
-            g_autoptr(GError) err = NULL;
+            g_autoptr (GError) err = NULL;
 
             if (!g_file_delete (file_to_delete, NULL, &err)) {
                g_warning ("Failed to delete %s: %s\n", g_file_peek_path (file_to_delete), err->message);
