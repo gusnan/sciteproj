@@ -56,7 +56,7 @@ gchar *resulting_text;
 /**
  *
  */
-int do_dialog_with_file_list (GList *file_list)
+int do_dialog_with_file_list (gchar *title, GList *file_list)
 {
    GtkWidget *content_area;
 
@@ -73,7 +73,7 @@ int do_dialog_with_file_list (GList *file_list)
 
    // Create the widgets
    flags = GTK_DIALOG_DESTROY_WITH_PARENT;
-   file_list_dialog = gtk_dialog_new_with_buttons ("Delete files",
+   file_list_dialog = gtk_dialog_new_with_buttons (title,
                                        main_window,
                                        flags,
                                        _("_OK"),
@@ -89,7 +89,15 @@ int do_dialog_with_file_list (GList *file_list)
    // Add the label, and show everything we’ve added
    grid = gtk_grid_new();
 
-   gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
+
+   GtkWidget *image;
+   image = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_DIALOG);
+
+   gtk_widget_show (GTK_WIDGET (image));
+
+   gtk_grid_attach (GTK_GRID (grid), image, 0, 0, 1, 5);
+
+   gtk_grid_attach (GTK_GRID (grid), label, 1, 0, 2, 1);
 
    gtk_widget_set_halign (GTK_WIDGET (label), GTK_ALIGN_START);
 
@@ -128,7 +136,7 @@ int do_dialog_with_file_list (GList *file_list)
 
    gtk_widget_show (GTK_WIDGET (delete_text_entry));
 
-   gtk_grid_attach (GTK_GRID (grid), scrolled_window, 0, 1, 1, 20);
+   gtk_grid_attach (GTK_GRID (grid), scrolled_window, 1, 1, 1, 20);
 
    gtk_widget_show (GTK_WIDGET (label));
    gtk_widget_show (GTK_WIDGET (scrolled_window));
@@ -232,7 +240,7 @@ void delete_item_cb ()
          list_filenames = g_list_append (list_filenames, filename);
       }
 
-      if (do_dialog_with_file_list (list_filenames) != 0) {
+      if (do_dialog_with_file_list (_("Delete files"), list_filenames) != 0) {
 
          debug_printf("Remove the files!\n");
 
