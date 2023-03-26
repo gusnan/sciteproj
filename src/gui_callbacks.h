@@ -41,6 +41,6 @@ void create_new_file_cb();
 
 int get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_result);
 
-int warning_dialog(const char *title, const char *fmt, ...);
+
 
 #endif /*__HEADER_GUI_CALLBACKS_*/
