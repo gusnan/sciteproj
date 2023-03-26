@@ -145,45 +145,11 @@ void delete_item_cb ()
 
             g_object_unref (file_to_delete);
 
-            /*
-            int delete_result = g_remove(name);
-
-            if (delete_result != 0) {
-
-               printf ("Filename: %s\nError: %d\n", name, delete_result);
-            }
-            */
          }
       }
 
       // TODO: Free the strings in list_filenames
 
-      /*
-      printf ("Clicked: %s\n", clicked_node.name);
-
-      if (get_requested_file_name (&filename) == 0) {
-         printf ("Cancelled!\n");
-         return;
-      }
-
-      gchar *full_filename;
-
-      full_filename = g_build_filename (clicked_node.name, filename, NULL);
-
-      debug_printf ("full filename: '%s'\n", full_filename);
-
-      if (g_mkdir (full_filename, S_IRWXU | S_IRWXG | S_IRWXO) != 0) {
-         warning_dialog("The folder '%s' does already exist - cannot create it!", filename);
-      }
-      GtkTreeIter iterHolder;
-      GtkTreeIter *newIter = &iterHolder;
-
-      if (!gtk_tree_model_iter_parent (tree_model, newIter, itercopy)) {
-         newIter = gtk_tree_iter_copy (itercopy);
-      }
-
-      refresh_folder_with_iter (newIter);
-      */
    }
 
 }
