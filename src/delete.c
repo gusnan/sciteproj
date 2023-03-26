@@ -47,8 +47,6 @@
 
 #include "file_utils.h"
 
-gchar *resulting_text;
-
 
 
 /**
