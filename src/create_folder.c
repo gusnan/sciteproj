@@ -77,7 +77,7 @@ void create_new_folder_cb ()
       debug_printf ("full filename: '%s'\n", full_filename);
 
       if (g_mkdir (full_filename, S_IRWXU | S_IRWXG | S_IRWXO) != 0) {
-         warning_dialog(_("The folder '%s' does already exist - cannot create it!"), filename);
+         warning_dialog(_("File aready exists!"), _("The folder '%s' does already exist - cannot create it!"), filename);
       }
       GtkTreeIter iterHolder;
       GtkTreeIter *newIter = &iterHolder;

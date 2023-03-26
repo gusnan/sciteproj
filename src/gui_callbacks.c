@@ -756,30 +756,92 @@ get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_
 /**
  *
  */
-int warning_dialog(const char *fmt, ...)
+int warning_dialog(const char *window_title, const char *fmt, ...)
 {
+   GtkWidget *content_area;
    GtkWidget *warning_dialog;
+
+   GtkWidget *label;
+
+   GtkDialogFlags flags;
+
+   GtkWidget *grid;
+
+   GtkWidget *image;
+
+   // gchar *string_result = NULL;
+   int int_result = 0;
+
    GtkWindow *main_window = get_main_window();
 
-   gchar *formatted_string;
+   gchar label_text[256];
 
-   va_list argptr;
-   va_start(argptr, fmt);
-   formatted_string = g_strdup_vprintf(fmt, argptr);
-   va_end(argptr);
+   va_list args;
+   va_start(args, fmt);
+   vsprintf(label_text, fmt, args);
 
-   warning_dialog = gtk_message_dialog_new (main_window,
-                                            GTK_DIALOG_DESTROY_WITH_PARENT,
-                                            GTK_MESSAGE_ERROR,
-                                            GTK_BUTTONS_CLOSE,
-                                            "%s", formatted_string
-                                            );
-   gtk_dialog_run (GTK_DIALOG (warning_dialog));
-   gtk_widget_destroy (warning_dialog);
-   
-   g_free(formatted_string);
+   // dialog = do_question_dialog(buffer);
 
-   return 0;
+   va_end(args);
+
+
+   // Create the widgets
+   flags = GTK_DIALOG_DESTROY_WITH_PARENT;
+   warning_dialog = gtk_dialog_new_with_buttons (window_title,
+                                       main_window,
+                                       flags,
+                                       _("_OK"),
+                                       GTK_RESPONSE_ACCEPT,
+                                       // _("_Cancel"),
+                                       // GTK_RESPONSE_REJECT,
+                                       NULL);
+   content_area = gtk_dialog_get_content_area (GTK_DIALOG (warning_dialog));
+   label = gtk_label_new (label_text);
+
+   image = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_DIALOG);
+
+   // Ensure that the dialog box is destroyed when the user responds
+
+   // Add the label, and show everything we’ve added
+
+   grid = gtk_grid_new();
+
+   gtk_grid_set_column_spacing (GTK_GRID (grid), 10);
+   gtk_grid_set_row_spacing (GTK_GRID (grid), 10);
+
+   gtk_grid_attach (GTK_GRID (grid), image, 0, 0, 1, 2);
+
+   gtk_grid_attach (GTK_GRID (grid), label, 1, 0, 4, 2);
+
+   // gtk_grid_attach (GTK_GRID (grid), entry, 1, 0, 1, 1);
+
+   gtk_widget_show (GTK_WIDGET (image));
+   gtk_widget_show (GTK_WIDGET (grid));
+   gtk_widget_show (GTK_WIDGET (label));
+
+   gtk_container_add (GTK_CONTAINER (content_area), grid);
+
+   gtk_dialog_set_default_response (GTK_DIALOG (warning_dialog), GTK_RESPONSE_ACCEPT);
+
+   gint result = gtk_dialog_run (GTK_DIALOG (warning_dialog));
+
+   switch (result) {
+   case GTK_RESPONSE_ACCEPT:
+      int_result = 1;
+      // if (string_result != NULL) {
+         // (*string_result) = (gchar *)g_strdup_printf("%s", entry_text);
+      // }
+      break;
+   case GTK_RESPONSE_REJECT:
+      int_result = 0;
+      break;
+   default:
+      int_result = 0;
+   };
+
+   gtk_widget_destroy (GTK_WIDGET (warning_dialog));
+
+   return int_result;
 }
 
 
@@ -827,7 +889,7 @@ void create_new_file_cb()
          full_file_name = g_build_filename(folder, filename, NULL);
 
          if (g_file_test(full_file_name, G_FILE_TEST_EXISTS)) {
-            warning_dialog(_("The file '%s' does already exist!"), filename);
+            warning_dialog(_("File aready exists!"), _("The file '%s' does already exist!"), filename);
 
             goto EXITPOINT;
 
