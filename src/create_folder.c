@@ -43,6 +43,8 @@
 
 #include "string_utils.h"
 
+#include "dialogs.h"
+
 
 /**
  *

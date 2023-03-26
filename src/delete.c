@@ -47,6 +47,7 @@
 
 #include "file_utils.h"
 
+#include "dialogs.h"
 
 
 /**
