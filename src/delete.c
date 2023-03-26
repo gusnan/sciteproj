@@ -250,8 +250,8 @@ void delete_item_cb ()
 
             g_autoptr (GError) err = NULL;
 
-            if (!g_file_delete (file_to_delete, NULL, &err)) {
-               g_warning ("Failed to delete %s: %s\n", g_file_peek_path (file_to_delete), err->message);
+            if (!g_file_trash (file_to_delete, NULL, &err)) {
+               g_warning ("Failed to move to trash %s: %s\n", g_file_peek_path (file_to_delete), err->message);
             }
 
             g_object_unref (file_to_delete);
