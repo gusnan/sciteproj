@@ -667,7 +667,6 @@ static void text_entry_text_changed (void)
 
 static void text_entry_activate (void)
 {
-   printf("activate\n");
    // GtkWidget *dialog = (GtkWidget *)data;
 
    gtk_dialog_response( GTK_DIALOG(request_filename_dialog), GTK_RESPONSE_ACCEPT);
