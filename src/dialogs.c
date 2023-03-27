@@ -304,7 +304,7 @@ get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_
 
    GtkWidget *request_filename_dialog;
 
-   gchar *changing_text;
+   gchar *changing_text = NULL;
 
    // gchar *string_result = NULL;
    int int_result = 0;
