@@ -39,3 +39,15 @@ ClickedNode *create_clicked_node(gboolean valid, GtkTreeIter iter, gchar *name, 
 
    return new_node;
 }
+
+
+/**
+ *
+ */
+void free_clicked_node (ClickedNode *node)
+{
+   if (node != NULL) {
+
+      g_free (node);
+   }
+}

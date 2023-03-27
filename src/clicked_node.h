@@ -37,4 +37,6 @@ typedef struct ClickedNode ClickedNode;
 
 ClickedNode *create_clicked_node(gboolean valid, GtkTreeIter iter, gchar *name, gint type);
 
+void free_clicked_node (ClickedNode *node);
+
 #endif /*__HEADER_CLICKED_NODE_*/
