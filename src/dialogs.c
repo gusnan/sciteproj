@@ -263,3 +263,110 @@ int warning_dialog(const char *window_title, const char *fmt, ...)
 
    return int_result;
 }
+
+
+
+
+
+static void text_entry_text_changed (GtkEditable *self, gpointer user_data)
+{
+   // user_data is &changing_text, som we can use this to avoid using
+   // globals to set the values.
+   gchar **pointer = (gchar **)(user_data);
+   if (self != NULL) {
+      *pointer = g_strdup ((gchar*)gtk_entry_get_text (GTK_ENTRY (self)));
+   }
+}
+
+
+static void text_entry_activate (GtkEntry *self, gpointer user_data)
+{
+   GtkWidget *dialog = GTK_WIDGET (user_data);
+
+   gtk_dialog_response( GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
+}
+
+
+/**
+ *
+ */
+int
+get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_result)
+{
+   GtkWidget *content_area;
+
+   GtkWidget *label;
+
+   GtkDialogFlags flags;
+
+   GtkWidget *grid;
+   GtkWidget *entry;
+
+   GtkWidget *request_filename_dialog;
+
+   gchar *changing_text;
+
+   // gchar *string_result = NULL;
+   int int_result = 0;
+
+   GtkWindow *main_window = get_main_window();
+
+   // Create the widgets
+   flags = GTK_DIALOG_DESTROY_WITH_PARENT;
+   request_filename_dialog = gtk_dialog_new_with_buttons (window_title,
+                                       main_window,
+                                       flags,
+                                       _("_OK"),
+                                       GTK_RESPONSE_ACCEPT,
+                                       _("_Cancel"),
+                                       GTK_RESPONSE_REJECT,
+                                       NULL);
+   content_area = gtk_dialog_get_content_area (GTK_DIALOG (request_filename_dialog));
+   label = gtk_label_new (label_text);
+
+   // Ensure that the dialog box is destroyed when the user responds
+
+   // Add the label, and show everything we’ve added
+
+   grid = gtk_grid_new();
+
+   gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
+
+   entry = gtk_entry_new ();
+
+   gtk_widget_show (GTK_WIDGET (entry));
+
+   gtk_entry_set_max_length (GTK_ENTRY (entry), 0);
+
+   g_signal_connect (GTK_EDITABLE (entry), "changed", G_CALLBACK (text_entry_text_changed), (gpointer)(&changing_text));
+   g_signal_connect (GTK_ENTRY (entry), "activate", G_CALLBACK (text_entry_activate), request_filename_dialog);
+
+   gtk_grid_attach (GTK_GRID (grid), entry, 1, 0, 1, 1);
+
+   gtk_widget_show (GTK_WIDGET (grid));
+   gtk_widget_show (GTK_WIDGET (label));
+
+   gtk_container_add (GTK_CONTAINER (content_area), grid);
+
+   gtk_dialog_set_default_response (GTK_DIALOG (request_filename_dialog), GTK_RESPONSE_ACCEPT);
+
+   gint result = gtk_dialog_run (GTK_DIALOG (request_filename_dialog));
+
+   switch (result) {
+   case GTK_RESPONSE_ACCEPT:
+      int_result = 1;
+      if (string_result != NULL) {
+         (*string_result) = (gchar *)g_strdup_printf("%s", changing_text);
+      }
+      break;
+   case GTK_RESPONSE_REJECT:
+      int_result = 0;
+      break;
+   default:
+      int_result = 0;
+   };
+
+   gtk_widget_destroy (GTK_WIDGET (request_filename_dialog));
+
+   return int_result;
+}

@@ -27,4 +27,6 @@
 int do_dialog_with_file_list (gchar *title, GList *file_list);
 int warning_dialog(const char *title, const char *fmt, ...);
 
+int get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_result);
+
 #endif /*__HEADER_DIALOGS_*/

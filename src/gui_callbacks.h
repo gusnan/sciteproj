@@ -39,8 +39,6 @@ void refresh_folder_with_iter(GtkTreeIter *iter);
 
 void create_new_file_cb();
 
-int get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_result);
-
 
 
 #endif /*__HEADER_GUI_CALLBACKS_*/
