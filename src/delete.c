@@ -67,6 +67,8 @@ void delete_item_recurser (gchar *folder_name, GList **filenames)
 
       gchar *full_filename = fix_separators (temp_filename);
 
+      g_free(temp_filename);
+
       if (g_file_test (full_filename, G_FILE_TEST_IS_DIR)) {
 
          *filenames = g_list_prepend (*filenames, full_filename);
