@@ -654,24 +654,20 @@ void refresh_folder(ClickedNode *inNode)
 }
 
 
-gchar *entry_text;
-GtkWidget *entry;
-GtkWidget *request_filename_dialog;
-
-
-static void text_entry_text_changed (void)
+static void text_entry_text_changed (GtkEditable *self, gpointer user_data)
 {
-   if (entry != NULL) {
-      entry_text = (gchar*)gtk_entry_get_text (GTK_ENTRY (entry));
+   gchar **pointer = (gchar **)(user_data);
+   if (self != NULL) {
+      *pointer = g_strdup ((gchar*)gtk_entry_get_text (GTK_ENTRY (self)));
    }
 }
 
 
-static void text_entry_activate (void)
+static void text_entry_activate (GtkEntry *self, gpointer user_data)
 {
-   // GtkWidget *dialog = (GtkWidget *)data;
+   GtkWidget *dialog = GTK_WIDGET (user_data);
 
-   gtk_dialog_response( GTK_DIALOG(request_filename_dialog), GTK_RESPONSE_ACCEPT);
+   gtk_dialog_response( GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
 }
 
 
@@ -688,6 +684,11 @@ get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_
    GtkDialogFlags flags;
 
    GtkWidget *grid;
+   GtkWidget *entry;
+
+   GtkWidget *request_filename_dialog;
+
+   gchar *changing_text;
 
    // gchar *string_result = NULL;
    int int_result = 0;
@@ -721,8 +722,8 @@ get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_
 
    gtk_entry_set_max_length (GTK_ENTRY (entry), 0);
 
-   g_signal_connect (GTK_EDITABLE (entry), "changed", G_CALLBACK (text_entry_text_changed), NULL);
-   g_signal_connect (GTK_ENTRY (entry), "activate", G_CALLBACK (text_entry_activate), NULL);
+   g_signal_connect (GTK_EDITABLE (entry), "changed", G_CALLBACK (text_entry_text_changed), (gpointer)(&changing_text));
+   g_signal_connect (GTK_ENTRY (entry), "activate", G_CALLBACK (text_entry_activate), request_filename_dialog);
 
    gtk_grid_attach (GTK_GRID (grid), entry, 1, 0, 1, 1);
 
@@ -739,7 +740,7 @@ get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_
    case GTK_RESPONSE_ACCEPT:
       int_result = 1;
       if (string_result != NULL) {
-         (*string_result) = (gchar *)g_strdup_printf("%s", entry_text);
+         (*string_result) = (gchar *)g_strdup_printf("%s", changing_text);
       }
       break;
    case GTK_RESPONSE_REJECT:
