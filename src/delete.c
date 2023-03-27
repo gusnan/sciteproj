@@ -63,7 +63,9 @@ void recurse_folder (gchar *folder_name, GList **filenames)
 
    while ((filename = g_dir_read_name (dir))) {
 
-      gchar *full_filename = g_build_filename (folder_name, filename, NULL);
+      gchar *temp_filename = g_build_filename (folder_name, filename, NULL);
+
+      gchar *full_filename = fix_separators (temp_filename);
 
       if (g_file_test (full_filename, G_FILE_TEST_IS_DIR)) {
 
