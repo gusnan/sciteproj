@@ -686,7 +686,7 @@ void create_new_file_cb()
 
       gchar *folder = clicked_node.name;
 
-      int result = get_requested_file_name(_("Create File"), _("Filename:"), &filename);
+      int result = get_requested_file_name(_("Create File"), _("New File"), _("Enter the name of the new file:"), &filename);
 
       if (result != 0) {
 

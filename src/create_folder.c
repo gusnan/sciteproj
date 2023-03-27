@@ -67,7 +67,7 @@ void create_new_folder_cb ()
 
       debug_printf ("Clicked: %s\n", clicked_node.name);
 
-      if (get_requested_file_name (_("Create folder"), _("Folder name:"), &filename) == 0) {
+      if (get_requested_file_name (_("Create folder"), _("New Folder:"), _("Enter the name of the new folder:"), &filename) == 0) {
          debug_printf ("Cancelled!\n");
          return;
       }

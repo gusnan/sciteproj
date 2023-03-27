@@ -151,7 +151,7 @@ int do_dialog_with_file_list (gchar *title, GList *file_list)
 
    gtk_dialog_set_default_response (GTK_DIALOG (file_list_dialog), GTK_RESPONSE_ACCEPT);
 
-   gtk_window_resize (GTK_WINDOW (file_list_dialog), 500, 200);
+   gtk_window_resize (GTK_WINDOW (file_list_dialog), 600, 300);
 
    gint result = gtk_dialog_run (GTK_DIALOG (file_list_dialog));
 
@@ -291,11 +291,13 @@ static void text_entry_activate (GtkEntry *self, gpointer user_data)
  *
  */
 int
-get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_result)
+get_requested_file_name (gchar *window_title, gchar *label_text, gchar *info_label_text, gchar **string_result)
 {
    GtkWidget *content_area;
 
    GtkWidget *label;
+
+   GtkWidget *info_label;
 
    GtkDialogFlags flags;
 
@@ -322,7 +324,15 @@ get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_
                                        GTK_RESPONSE_REJECT,
                                        NULL);
    content_area = gtk_dialog_get_content_area (GTK_DIALOG (request_filename_dialog));
-   label = gtk_label_new (label_text);
+   // label = gtk_label_new (label_text);
+
+   gchar *formatted_label_text = g_strdup_printf ("<b>%s</b>", label_text);
+
+   label = gtk_label_new (NULL);
+   gtk_label_set_markup (GTK_LABEL (label), formatted_label_text);
+
+   info_label = gtk_label_new (info_label_text);
+
 
    // Ensure that the dialog box is destroyed when the user responds
 
@@ -330,7 +340,22 @@ get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_
 
    grid = gtk_grid_new();
 
-   gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
+   gtk_grid_set_row_spacing (GTK_GRID (grid), 10);
+   gtk_grid_set_column_spacing (GTK_GRID (grid), 10);
+
+   GtkWidget *image;
+   image = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_DIALOG);
+
+   gtk_widget_show (GTK_WIDGET (image));
+
+
+   gtk_grid_attach (GTK_GRID (grid), image, 0, 0, 1, 3);
+   gtk_grid_attach (GTK_GRID (grid), label, 1, 0, 50, 1);
+
+   gtk_grid_attach (GTK_GRID (grid), info_label, 1, 1, 50, 1);
+
+   gtk_widget_set_halign (GTK_WIDGET (label), GTK_ALIGN_START);
+   gtk_widget_set_halign (GTK_WIDGET (info_label), GTK_ALIGN_START);
 
    entry = gtk_entry_new ();
 
@@ -341,14 +366,19 @@ get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_
    g_signal_connect (GTK_EDITABLE (entry), "changed", G_CALLBACK (text_entry_text_changed), (gpointer)(&changing_text));
    g_signal_connect (GTK_ENTRY (entry), "activate", G_CALLBACK (text_entry_activate), request_filename_dialog);
 
-   gtk_grid_attach (GTK_GRID (grid), entry, 1, 0, 1, 1);
+   gtk_grid_attach (GTK_GRID (grid), entry, 1, 2, 50, 1);
 
    gtk_widget_show (GTK_WIDGET (grid));
    gtk_widget_show (GTK_WIDGET (label));
+   gtk_widget_show (GTK_WIDGET (info_label));
+
+   gtk_container_set_border_width (GTK_CONTAINER (content_area), 20);
 
    gtk_container_add (GTK_CONTAINER (content_area), grid);
 
    gtk_dialog_set_default_response (GTK_DIALOG (request_filename_dialog), GTK_RESPONSE_ACCEPT);
+
+   gtk_window_resize (GTK_WINDOW (request_filename_dialog), 500, 200);
 
    gint result = gtk_dialog_run (GTK_DIALOG (request_filename_dialog));
 
@@ -356,7 +386,16 @@ get_requested_file_name (gchar *window_title, gchar *label_text, gchar **string_
    case GTK_RESPONSE_ACCEPT:
       int_result = 1;
       if (string_result != NULL) {
-         (*string_result) = (gchar *)g_strdup_printf("%s", changing_text);
+
+         if (changing_text != NULL) {
+            if (strlen (changing_text) == 0) {
+               (*string_result) = NULL;
+            } else {
+               (*string_result) = (gchar *)g_strdup_printf("%s", changing_text);
+            }
+         } else {
+            (*string_result) = NULL;
+         }
       }
       break;
    case GTK_RESPONSE_REJECT:
