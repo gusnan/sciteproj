@@ -53,7 +53,7 @@
 /**
  *
  */
-void recurse_folder (gchar *folder_name, GList **filenames)
+void delete_item_recurser (gchar *folder_name, GList **filenames)
 {
    GDir *dir = g_dir_open (folder_name, 0, NULL);
    const gchar *filename;
@@ -70,7 +70,7 @@ void recurse_folder (gchar *folder_name, GList **filenames)
       if (g_file_test (full_filename, G_FILE_TEST_IS_DIR)) {
 
          *filenames = g_list_prepend (*filenames, full_filename);
-         recurse_folder ((gchar*)full_filename, filenames);
+         delete_item_recurser ((gchar*)full_filename, filenames);
       } else {
 
          *filenames = g_list_prepend (*filenames, full_filename);
@@ -110,7 +110,7 @@ void delete_item_cb ()
          if (node_iter->type == ITEMTYPE_GROUP) {
             filename = node_iter->name;
 
-            recurse_folder (filename, &list_filenames);
+            delete_item_recurser (filename, &list_filenames);
 
          } else {
             gchar *full_filename = g_build_filename (get_project_directory (), node_iter->name, NULL);
