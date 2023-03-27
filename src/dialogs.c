@@ -50,7 +50,7 @@
 #include "dialogs.h"
 
 
-
+const int BORDER_WIDTH = 5;
 
 /**
  *
@@ -147,6 +147,8 @@ int do_dialog_with_file_list (gchar *title, GList *file_list)
 
    gtk_container_add (GTK_CONTAINER (content_area), grid);
 
+   gtk_container_set_border_width (GTK_CONTAINER (content_area), BORDER_WIDTH);
+
    gtk_widget_show (GTK_WIDGET (content_area));
 
    gtk_dialog_set_default_response (GTK_DIALOG (file_list_dialog), GTK_RESPONSE_ACCEPT);
@@ -240,6 +242,8 @@ int warning_dialog(const char *window_title, const char *fmt, ...)
    gtk_widget_show (GTK_WIDGET (label));
 
    gtk_container_add (GTK_CONTAINER (content_area), grid);
+
+   gtk_container_set_border_width (GTK_CONTAINER (content_area), BORDER_WIDTH);
 
    gtk_dialog_set_default_response (GTK_DIALOG (warning_dialog), GTK_RESPONSE_ACCEPT);
 
@@ -372,7 +376,7 @@ get_requested_file_name (gchar *window_title, gchar *label_text, gchar *info_lab
    gtk_widget_show (GTK_WIDGET (label));
    gtk_widget_show (GTK_WIDGET (info_label));
 
-   gtk_container_set_border_width (GTK_CONTAINER (content_area), 20);
+   gtk_container_set_border_width (GTK_CONTAINER (content_area), BORDER_WIDTH);
 
    gtk_container_add (GTK_CONTAINER (content_area), grid);
 
