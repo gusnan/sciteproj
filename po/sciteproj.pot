@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-03-25 17:03+0100\n"
+"POT-Creation-Date: 2023-03-27 14:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,28 +59,40 @@ msgstr ""
 msgid "version %s"
 msgstr ""
 
-#: create_folder.c:68
+#: create_folder.c:70
 msgid "Create folder"
 msgstr ""
 
-#: create_folder.c:68
-msgid "Folder name:"
+#: create_folder.c:70
+msgid "New Folder:"
 msgstr ""
 
-#: create_folder.c:80
+#: create_folder.c:70
+msgid "Enter the name of the new folder:"
+msgstr ""
+
+#: create_folder.c:82 gui_callbacks.c:702
+msgid "File aready exists!"
+msgstr ""
+
+#: create_folder.c:82
 #, c-format
 msgid "The folder '%s' does already exist - cannot create it!"
 msgstr ""
 
-#: delete.c:79 gui_callbacks.c:701
+#: delete.c:124
+msgid "Delete files"
+msgstr ""
+
+#: dialogs.c:82 dialogs.c:213 dialogs.c:321
 msgid "_OK"
 msgstr ""
 
-#: delete.c:81 gui_callbacks.c:703
+#: dialogs.c:84 dialogs.c:323
 msgid "_Cancel"
 msgstr ""
 
-#: delete.c:85
+#: dialogs.c:88
 msgid "The following files will be deleted:"
 msgstr ""
 
@@ -97,7 +109,7 @@ msgstr ""
 msgid "Could not open selected file:"
 msgstr ""
 
-#: gui_callbacks.c:116 recent_files.c:559 recent_files.c:600
+#: gui_callbacks.c:118 recent_files.c:559 recent_files.c:600
 #, c-format
 msgid ""
 "Could not open selected file: \n"
@@ -105,20 +117,24 @@ msgid ""
 "%s"
 msgstr ""
 
-#: gui_callbacks.c:818
+#: gui_callbacks.c:689
 msgid "Create File"
 msgstr ""
 
-#: gui_callbacks.c:818 properties_dialog.c:186
-msgid "Filename:"
+#: gui_callbacks.c:689
+msgid "New File"
 msgstr ""
 
-#: gui_callbacks.c:831
+#: gui_callbacks.c:689
+msgid "Enter the name of the new file:"
+msgstr ""
+
+#: gui_callbacks.c:702
 #, c-format
 msgid "The file '%s' does already exist!"
 msgstr ""
 
-#: gui_callbacks.c:841
+#: gui_callbacks.c:712
 #, c-format
 msgid "The file '%s' couldn't be created!"
 msgstr ""
@@ -293,6 +309,10 @@ msgstr ""
 
 #: properties_dialog.c:162
 msgid "File Properties"
+msgstr ""
+
+#: properties_dialog.c:186
+msgid "Filename:"
 msgstr ""
 
 #: properties_dialog.c:187
