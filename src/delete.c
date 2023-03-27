@@ -152,8 +152,21 @@ void delete_item_cb ()
          }
       }
 
-      // TODO: Free the strings in list_filenames
+      for (curr = list_filenames; curr != NULL; curr = curr -> next) {
+         ClickedNode *node_iter = (ClickedNode *) curr->data;
 
+         g_free(node_iter);
+      }
+
+
+      if (list_of_files != NULL) {
+         for (curr = list_of_files; curr != NULL; curr = curr -> next) {
+            ClickedNode *node_iter = (ClickedNode *) curr->data;
+
+            if (node_iter != NULL) {
+               free_clicked_node (node_iter);
+            }
+         }
+      }
    }
-
 }
