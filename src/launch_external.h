@@ -25,7 +25,7 @@
 /**
  *
  */
-void launch_default_for_uri(GtkTreeModel *model, GtkTreeIter *iter);
-void launch_default_for_uri_cb();
+void launch_default_for_uri (GtkTreeModel *model, GtkTreeIter *iter);
+void launch_default_for_uri_cb ();
 
 #endif /*__HEADER_LAUNCH_EXTERNAL_*/

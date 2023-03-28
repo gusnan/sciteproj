@@ -30,27 +30,27 @@ extern gchar *current_directory;
 /**
  *
  */
-void init_file_utils();
-gchar *fix_path(gchar *base_dir,gchar *original);
-gboolean is_separator(gchar ch);
+void init_file_utils ();
+gchar *fix_path (gchar *base_dir,gchar *original);
+gboolean is_separator (gchar ch);
 
-gchar *fix_separators(gchar *source);
+gchar *fix_separators (gchar *source);
 
 // get the filename from a full path+filename
-gchar *get_filename_from_full_path(gchar *src);
+gchar *get_filename_from_full_path (gchar *src);
 
 // Convert an absolute file path to a relative file path
-gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, const gchar *basePath, GError **err);
+gboolean abs_path_to_relative_path (const gchar *absPath, gchar **relativePath, const gchar *basePath, GError **err);
 
 // Convert a relative file path to an absolute file path
-gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const gchar *basePath, GError **err);
+gboolean relative_path_to_abs_path (gchar *relativePath, gchar **absPath, const gchar *basePath, GError **err);
 
-gchar *get_file_extension(gchar *filename);
+gchar *get_file_extension (gchar *filename);
 
-int get_number_of_files_in_folder(gchar *folder_name);
+int get_number_of_files_in_folder (gchar *folder_name);
 
-gboolean is_string_folder(gchar *instring);
+gboolean is_string_folder (gchar *instring);
 
-gchar *clean_folder(gchar *folder_name);
+gchar *clean_folder (gchar *folder_name);
 
 #endif /*__HEADER_FILE_UTILS_*/

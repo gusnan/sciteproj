@@ -82,7 +82,7 @@ Window sSciteWin = 0;
 
 gboolean scite_exists = FALSE;
 
-void set_scite_launched(gboolean launched);
+void set_scite_launched (gboolean launched);
 
 
 /**
@@ -90,7 +90,7 @@ void set_scite_launched(gboolean launched);
  *
  * @return TRUE if Scite has been forked/executed and we have an open pipe, FALSE otherwise
  */
-gboolean scite_ready()
+gboolean scite_ready ()
 {
    return (sSciteLaunched && sRequestPipeFD != 0);
 }
@@ -100,21 +100,21 @@ gboolean scite_ready()
 /**
  * Shut down all the Scite pipes and associated GIOChannels.
  */
-void shutdown_pipes()
+void shutdown_pipes ()
 {
    if (sRequestPipeFD) {
-      close(sRequestPipeFD);
+      close (sRequestPipeFD);
       sRequestPipeFD = 0;
    }
 
    if (sResponsePipeGIOChannel) {
-      g_io_channel_unref(sResponsePipeGIOChannel);
-      g_io_channel_shutdown(sResponsePipeGIOChannel, FALSE, NULL);
+      g_io_channel_unref (sResponsePipeGIOChannel);
+      g_io_channel_shutdown (sResponsePipeGIOChannel, FALSE, NULL);
       sResponsePipeGIOChannel = NULL;
    }
 
    if (sResponsePipeFD) {
-      close(sResponsePipeFD);
+      close (sResponsePipeFD);
       sResponsePipeFD = 0;
    }
 
@@ -132,9 +132,9 @@ void shutdown_pipes()
  * @param condition is the GIOCondition for the event that triggered the callback
  * @param data is the user data item (not used)
  */
-gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gpointer data)
+gboolean scite_pipe_read_ready_cb (GIOChannel *source, GIOCondition condition, gpointer data)
 {
-   g_assert(source == sResponsePipeGIOChannel);
+   g_assert (source == sResponsePipeGIOChannel);
 
 
    static gchar buff[1024];
@@ -147,8 +147,8 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
 #endif
 
    if (condition & G_IO_IN) {
-      if (g_io_channel_read_chars(source, buff, sizeof(buff) - 1, &bytes_read, &error) != G_IO_STATUS_NORMAL) {
-         g_print("%s: %s = %s\n",
+      if (g_io_channel_read_chars (source, buff, sizeof (buff) - 1, &bytes_read, &error) != G_IO_STATUS_NORMAL) {
+         g_print ("%s: %s = %s\n",
                  __func__,
                  "g_io_channel_read_chars failed",
                  (error != NULL) ? error->message : "<unknown>");
@@ -166,72 +166,72 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
             //}
 
             // If the string ends with a newline, remove it!
-            int len=strlen(buff);
+            int len = strlen (buff);
 
             if (buff[len-1] == '\n') {
-               gchar *temp = g_strndup(buff, len-1);
-               g_snprintf(buff, 1024, "%s", temp);
-               g_free(temp);
+               gchar *temp = g_strndup (buff, len-1);
+               g_snprintf (buff, 1024, "%s", temp);
+               g_free (temp);
             }
 
             // Is it the response to an "askproperty" command?  Dunno why they are prefixed with "macro:stringinfo:" though....
             static char *askpropertyResponse = (char*)"macro:stringinfo:";
 
-            if (g_str_has_prefix(buff, askpropertyResponse)) {
+            if (g_str_has_prefix (buff, askpropertyResponse)) {
 
-               char *windowIDStr = buff + strlen(askpropertyResponse);
+               char *windowIDStr = buff + strlen (askpropertyResponse);
 
-               sSciteWin = strtol(windowIDStr, NULL, 0);
+               sSciteWin = strtol (windowIDStr, NULL, 0);
             }
 
-            if (g_str_has_prefix(buff, "closed:")) {
+            if (g_str_has_prefix (buff, "closed:")) {
 
-               gchar *file=get_filename_from_full_path(buff);
-               gchar *status_string = g_strdup_printf(_("Closed %s"),file);
+               gchar *file=get_filename_from_full_path (buff);
+               gchar *status_string = g_strdup_printf (_("Closed %s"),file);
 
-               set_statusbar_text(status_string);
+               set_statusbar_text (status_string);
 
-               g_free(status_string);
+               g_free (status_string);
             }
 
-            if (g_str_has_prefix(buff, "closing:")) {
+            if (g_str_has_prefix (buff, "closing:")) {
 
-               set_statusbar_text(_("Closed SciTE"));
+               set_statusbar_text (_("Closed SciTE"));
 
             }
 
-            if (g_str_has_prefix(buff, "switched:")) {
+            if (g_str_has_prefix (buff, "switched:")) {
 
-               gchar *file=get_filename_from_full_path(buff);
-               gchar *status_string = g_strdup_printf(_("Switched to %s"),file);
+               gchar *file=get_filename_from_full_path (buff);
+               gchar *status_string = g_strdup_printf (_("Switched to %s"),file);
 
-               set_statusbar_text(status_string);
+               set_statusbar_text (status_string);
 
-               g_free(status_string);
+               g_free (status_string);
             }
 
-            if (g_str_has_prefix(buff, "opened:")) {
+            if (g_str_has_prefix (buff, "opened:")) {
 
-               gchar *file=get_filename_from_full_path(buff);
-               gchar *status_string = g_strdup_printf(_("Opened %s"),file);
+               gchar *file=get_filename_from_full_path (buff);
+               gchar *status_string = g_strdup_printf (_("Opened %s"),file);
 
-               set_statusbar_text(status_string);
+               set_statusbar_text (status_string);
 
-               g_free(status_string);
+               g_free (status_string);
             }
          }
       }
    }
 
    if (condition & G_IO_ERR) {
-      g_print("%s: condition = G_IO_ERR\n", __func__);
+      g_print ("%s: condition = G_IO_ERR\n", __func__);
       finalResult = FALSE;
    }
 
    if (condition & G_IO_HUP) {
       // This is for SciteProj :
-      if(prefs.verbosity>50) {
-         g_print("%s: condition = G_IO_HUP\n", __func__);
+      if(prefs.verbosity > 50) {
+         g_print ("%s: condition = G_IO_HUP\n", __func__);
       }
       finalResult = FALSE;
    }
@@ -240,9 +240,9 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
    if (!finalResult) {
       // We want to stop monitoring this GIOChannel, so shut it all down
 
-      shutdown_pipes();
+      shutdown_pipes ();
 
-      set_scite_launched(FALSE);
+      set_scite_launched (FALSE);
 
 //~ 		GtkWidget *dialog = gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "Connection to current instance of Scite has been broken");
 //~ 		gtk_dialog_run(GTK_DIALOG(dialog));
@@ -250,7 +250,7 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
    }
 
 
-   if (error) g_error_free(error);
+   if (error) g_error_free (error);
 
    return finalResult;
 }
@@ -264,7 +264,7 @@ gboolean scite_pipe_read_ready_cb(GIOChannel *source, GIOCondition condition, gp
  * @param responseID is the responseID of the cancel button
  * @param userData is a pointer to a boolean that we set to true
  */
-static void cancel_button_cb(GtkDialog *dialog, gint responseID, gpointer userData)
+static void cancel_button_cb (GtkDialog *dialog, gint responseID, gpointer userData)
 {
    if (userData) {
       *((gboolean *) userData) = TRUE;
@@ -282,7 +282,7 @@ static void cancel_button_cb(GtkDialog *dialog, gint responseID, gpointer userDa
  *
  * @param err returns any errors
  */
-gboolean launch_scite(gchar *instring,GError **err)
+gboolean launch_scite (gchar *instring,GError **err)
 {
 
    debug_printf("launch_scite: %s\n", instring);
@@ -304,9 +304,9 @@ gboolean launch_scite(gchar *instring,GError **err)
 
    // Clean up anything open from previous attempts/activity
 
-   shutdown_pipes();
+   shutdown_pipes ();
 
-   set_scite_launched(FALSE);
+   set_scite_launched (FALSE);
 
 
    if (scite_exists) {
@@ -325,91 +325,91 @@ gboolean launch_scite(gchar *instring,GError **err)
       gulong usecs = 0;
       int errCode;
 
-      pid_t ourPID = getpid();
+      pid_t ourPID = getpid ();
 
       // The response pipe will be used by Scite to send data to us
 
-      g_snprintf(responsePipePath, sizeof(responsePipePath), "/tmp/sciteproj.%ld", (unsigned long) ourPID);
+      g_snprintf (responsePipePath, sizeof (responsePipePath), "/tmp/sciteproj.%ld", (unsigned long) ourPID);
 
-      if (setenv(ipcDirectorName, responsePipePath, TRUE)) {
+      if (setenv (ipcDirectorName, responsePipePath, TRUE)) {
          errCode = errno;
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, error = %s",
-                     __func__, ipcDirectorName, responsePipePath, strerror(errCode));
+                     __func__, ipcDirectorName, responsePipePath, strerror (errCode));
          goto EXITPOINT;
       }
 
       // The request pipe will be used to send data to Scite
 
-      g_snprintf(requestPipePath, sizeof(requestPipePath), "/tmp/scite.%ld", (unsigned long) ourPID);
+      g_snprintf (requestPipePath, sizeof (requestPipePath), "/tmp/scite.%ld", (unsigned long) ourPID);
 
-      if (setenv(ipcSciteName, requestPipePath, TRUE)) {
+      if (setenv (ipcSciteName, requestPipePath, TRUE)) {
          errCode = errno;
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, setenv(\"%s\", \"%s\") failed, error = %s",
-                     __func__, ipcSciteName, requestPipePath, strerror(errCode));
+                     __func__, ipcSciteName, requestPipePath, strerror (errCode));
          goto EXITPOINT;
       }
 
 
       // Remove any existing files that conflict with the pipe names
 
-      if (remove(responsePipePath) && errno != ENOENT) {
+      if (remove (responsePipePath) && errno != ENOENT) {
          errCode = errno;
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, remove(\"%s\") failed, error = %s",
-                     __func__, responsePipePath, strerror(errCode));
+                     __func__, responsePipePath, strerror (errCode));
          goto EXITPOINT;
       }
 
-      if (remove(requestPipePath) && errno != ENOENT) {
+      if (remove (requestPipePath) && errno != ENOENT) {
          errCode = errno;
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, remove(\"%s\") failed, error = %s",
-                     __func__, requestPipePath, strerror(errCode));
+                     __func__, requestPipePath, strerror (errCode));
          goto EXITPOINT;
       }
 
 
       // Now create our response pipe (Scite creates the request pipe, as long as it doesn't already exist)
 
-      if (mkfifo(responsePipePath, 0777)) {
+      if (mkfifo (responsePipePath, 0777)) {
          errCode = errno;
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, mkfifo(\"%s\") failed, error = %s",
-                     __func__, responsePipePath, strerror(errCode));
+                     __func__, responsePipePath, strerror (errCode));
          goto EXITPOINT;
       }
 
 
       // Open the Scite response pipe
 
-      if ((sResponsePipeFD = open(responsePipePath, O_RDONLY | O_NONBLOCK)) <= 0) {
+      if ((sResponsePipeFD = open (responsePipePath, O_RDONLY | O_NONBLOCK)) <= 0) {
          errCode = errno;
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, open(\"%s\") failed, error = %s",
-                     __func__, responsePipePath, strerror(errCode));
+                     __func__, responsePipePath, strerror (errCode));
          goto EXITPOINT;
       }
 
       // Hook up the Scite response pipe to our Gtk/GLib main loop
 
-      if ((sResponsePipeGIOChannel = g_io_channel_unix_new(sResponsePipeFD)) == NULL) {
+      if ((sResponsePipeGIOChannel = g_io_channel_unix_new (sResponsePipeFD)) == NULL) {
          errCode = errno;
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, g_io_channel_unix_new(\"%s\") failed, error = %s",
-                     __func__, responsePipePath, strerror(errCode));
+                     __func__, responsePipePath, strerror (errCode));
          goto EXITPOINT;
       }
 
-      if ((g_io_channel_set_encoding(sResponsePipeGIOChannel, NULL, err)) != G_IO_STATUS_NORMAL) {
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+      if ((g_io_channel_set_encoding (sResponsePipeGIOChannel, NULL, err)) != G_IO_STATUS_NORMAL) {
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, g_io_channel_set_encoding( ) failed, error = %s",
                      __func__, (err != NULL && *err != NULL) ? (*err)->message : "<unknown>");
          goto EXITPOINT;
       }
 
-      g_io_add_watch(sResponsePipeGIOChannel,
+      g_io_add_watch (sResponsePipeGIOChannel,
                      (GIOCondition) (G_IO_IN | G_IO_ERR | G_IO_HUP),
                      scite_pipe_read_ready_cb,
                      NULL);
@@ -417,9 +417,9 @@ gboolean launch_scite(gchar *instring,GError **err)
 
       // Also create a pipe pair so our child process can alert us if it fails to execute Scite
 
-      if (pipe(childPipePair)) {
+      if (pipe (childPipePair)) {
          errCode = errno;
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, pipe( ) failed, errno = %d = %s",
                      __func__, errCode, strerror(errCode));
          goto EXITPOINT;
@@ -434,7 +434,7 @@ gboolean launch_scite(gchar *instring,GError **err)
 
       if (instring != NULL) {
 
-         int len = strlen(instring);
+         int len = strlen (instring);
          int split = -1;
          gchar *tempstring = instring;
          gchar *place = NULL;
@@ -453,38 +453,38 @@ gboolean launch_scite(gchar *instring,GError **err)
          }
 
          if (split != -1) {
-            opt1 = g_strndup(instring, split);
-            opt2 = g_strdup(place);
+            opt1 = g_strndup (instring, split);
+            opt2 = g_strdup (place);
          } else {
-            opt1 = g_strdup(instring);
+            opt1 = g_strdup (instring);
          }
       }
 
-      debug_printf("opt1:%s\n", opt1);
-      debug_printf("opt2:%s\n", opt2);
+      debug_printf ("opt1:%s\n", opt1);
+      debug_printf ("opt2:%s\n", opt2);
 
       // Set up the command line
       if (opt1 != NULL) {
 
-         opt1 = g_strchug(opt1);
-         opt1 = g_strchomp(opt1);
+         opt1 = g_strchug (opt1);
+         opt1 = g_strchomp (opt1);
 
-         strcpy(scite_arg1, opt1);
+         strcpy (scite_arg1, opt1);
       } else {
-         strcpy(scite_arg1, "");
+         strcpy (scite_arg1, "");
       }
 
       if (opt2 != NULL) {
 
-         opt2 = g_strchug(opt2);
-         opt2 = g_strchomp(opt2);
+         opt2 = g_strchug (opt2);
+         opt2 = g_strchomp (opt2);
 
-         strcpy(scite_arg2, opt2);
+         strcpy (scite_arg2, opt2);
       } else {
-         strcpy(scite_arg2, "");
+         strcpy (scite_arg2, "");
       }
-      strcpy(scite_arg3, "");
-      strcpy(scite_arg4, "");
+      strcpy (scite_arg3, "");
+      strcpy (scite_arg4, "");
 
 
       // Fork and (we hope) exec Scite
@@ -493,36 +493,36 @@ gboolean launch_scite(gchar *instring,GError **err)
 
       if (childPID == -1) {
          errCode = errno;
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, fork() failed, errno = %d = %s",
-                     __func__, errCode, strerror(errCode));
+                     __func__, errCode, strerror (errCode));
          goto EXITPOINT;
       }
       else if (childPID == 0) {
 
-         debug_printf("Launching:'%s','%s','%s','%s'\n",scite_arg1,scite_arg2,scite_arg3,scite_arg4);
+         debug_printf ("Launching:'%s','%s','%s','%s'\n",scite_arg1,scite_arg2,scite_arg3,scite_arg4);
 
          // We are the child process, so close our end of the read pipe
 
-         close(childPipePair[0]);
+         close (childPipePair[0]);
 
 
          if (prefs.scite_path != NULL) {
-            execlp(prefs.scite_path, prefs.scite_path, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
+            execlp (prefs.scite_path, prefs.scite_path, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
          } else {
 
             // Execute Scite, if we can (Check for SciTE)
-            execlp(sSciteExecName0, sSciteExecName0, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
+            execlp (sSciteExecName0, sSciteExecName0, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
 
             // Apparently the execlp failed, so try the alternative SciTE executable name (scite)
-            execlp(sSciteExecName1, sSciteExecName1, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
+            execlp (sSciteExecName1, sSciteExecName1, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
 
 
             // (/usr/local/bin/SciTE)
-            execlp(sSciteExecName2, sSciteExecName2, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
+            execlp (sSciteExecName2, sSciteExecName2, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
 
             // (/usr/local/bin/scite)
-            execlp(sSciteExecName3, sSciteExecName3, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
+            execlp (sSciteExecName3, sSciteExecName3, scite_arg1, scite_arg2, scite_arg3, scite_arg4, (char *) NULL);
          }
 
          // If we get here, the execlp() failed, so tell our parent and exit
@@ -531,15 +531,15 @@ gboolean launch_scite(gchar *instring,GError **err)
          int messageLength = strlen(message);
          int bytesWritten;
 
-         g_print("%s: %s\n", __func__, message);
+         g_print ("%s: %s\n", __func__, message);
 
-         bytesWritten = write(childPipePair[1], message, messageLength);
+         bytesWritten = write (childPipePair[1], message, messageLength);
 
          if (bytesWritten < messageLength) {
-            g_print("%s: Problem sending message to parent: messageLength = %d, bytesWritten = %d\n", __func__, messageLength, bytesWritten);
+            g_print ("%s: Problem sending message to parent: messageLength = %d, bytesWritten = %d\n", __func__, messageLength, bytesWritten);
          }
 
-         close(childPipePair[1]);
+         close (childPipePair[1]);
 
          //_exit(0);
       }
@@ -547,12 +547,12 @@ gboolean launch_scite(gchar *instring,GError **err)
 
       // We are the parent process, and everything looks good so far
 
-      set_scite_launched(TRUE);
+      set_scite_launched (TRUE);
 
 
       // Close our end of the child write pipe
 
-      close(childPipePair[1]);
+      close (childPipePair[1]);
       childPipePair[1] = 0;
 
 
@@ -563,22 +563,22 @@ gboolean launch_scite(gchar *instring,GError **err)
 
          struct stat fileStat;
 
-         if (stat(requestPipePath, &fileStat) == 0 && S_ISFIFO(fileStat.st_mode)) {
+         if ( stat(requestPipePath, &fileStat) == 0 && S_ISFIFO (fileStat.st_mode)) {
             break;
          }
 
 
          // Did our child send back an error message?
 
-         FD_ZERO(&readFDS);
-         FD_SET(childPipePair[0], &readFDS);
+         FD_ZERO (&readFDS);
+         FD_SET (childPipePair[0], &readFDS);
          timeVal.tv_sec = 0;
          timeVal.tv_usec = 0;
 
          if (select(childPipePair[0] + 1, &readFDS, NULL, NULL, &timeVal) > 0) {
             // If the child sent *any* data, it failed to exec Scite
-            set_scite_launched(FALSE);
-            g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not launch Scite, execlp( ) failed", __func__);
+            set_scite_launched (FALSE);
+            g_set_error (err, APP_SCITEPROJ_ERROR, -1, "%s: Could not launch Scite, execlp( ) failed", __func__);
             goto EXITPOINT;
          }
 
@@ -586,17 +586,17 @@ gboolean launch_scite(gchar *instring,GError **err)
          // No luck yet, so display a progress dialog and wait a bit longer
 
          if (usecs > usecsDialogDelay && !dialog) {
-            dialog = gtk_message_dialog_new(get_main_window(), GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CANCEL, _("Connecting to Scite...."));
-            g_signal_connect(dialog, "response", G_CALLBACK(cancel_button_cb), (void *) &userClickedCancel);
-            gtk_widget_show_all(dialog);
+            dialog = gtk_message_dialog_new (get_main_window (), GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CANCEL, _("Connecting to Scite...."));
+            g_signal_connect (dialog, "response", G_CALLBACK (cancel_button_cb), (void *) &userClickedCancel);
+            gtk_widget_show_all (dialog);
          }
 
          while (gtk_events_pending()) {
-            gtk_main_iteration();
+            gtk_main_iteration ();
          }
 
          if (userClickedCancel) {
-            g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not connect to Scite", __func__);
+            g_set_error (err, APP_SCITEPROJ_ERROR, -1, "%s: Could not connect to Scite", __func__);
             goto EXITPOINT;
          }
 
@@ -606,11 +606,11 @@ gboolean launch_scite(gchar *instring,GError **err)
 
       // Try to open the request pipe
 
-      if ((sRequestPipeFD = open(requestPipePath, O_WRONLY | O_NONBLOCK)) <= 0) {
+      if ((sRequestPipeFD = open (requestPipePath, O_WRONLY | O_NONBLOCK)) <= 0) {
          errCode = errno;
          g_set_error(err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, open(\"%s\") failed, error = %s",
-                     __func__, requestPipePath, strerror(errCode));
+                     __func__, requestPipePath, strerror (errCode));
          goto EXITPOINT;
       }
 
@@ -619,7 +619,7 @@ gboolean launch_scite(gchar *instring,GError **err)
 
       scite_command = (gchar*)"askproperty:x11.windowid\n";
 
-      if (!send_scite_command(scite_command, err)) {
+      if (!send_scite_command (scite_command, err)) {
          goto EXITPOINT;
       }
 
@@ -635,21 +635,21 @@ gboolean launch_scite(gchar *instring,GError **err)
 
       resultCode = TRUE;
 
-      set_statusbar_text(_("Launched SciTE"));
+      set_statusbar_text (_("Launched SciTE"));
    }
 
    debug_printf("All done launching SciTE...\n");
 
 EXITPOINT:
 
-   if (dialog) gtk_widget_destroy(dialog);
+   if (dialog) gtk_widget_destroy (dialog);
    if (childPipePair[0]) close(childPipePair[0]);
    if (childPipePair[1]) close(childPipePair[1]);
 
    if (!resultCode) {
-      shutdown_pipes();
+      shutdown_pipes ();
 
-      set_scite_launched(FALSE);
+      set_scite_launched (FALSE);
    }
    return resultCode;
 }
@@ -664,21 +664,21 @@ EXITPOINT:
  * @param command is the command to send to Scite
  * @param err returns any errors
  */
-gboolean send_scite_command(gchar *command, GError **err)
+gboolean send_scite_command (gchar *command, GError **err)
 {
-   g_assert(command != NULL);
+   g_assert (command != NULL);
 
 #ifdef DEBUG_SCITE
    debug_printf("send_scite_command(%s)\n",command);
 #endif
 
    gboolean resultCode = FALSE;
-   int commandLength = strlen(command);
+   int commandLength = strlen (command);
 
 
    // Ensure we are connected to a running instance of Scite
 
-   if (!scite_ready() && !launch_scite(NULL,err)) {
+   if (!scite_ready() && !launch_scite (NULL,err)) {
       goto EXITPOINT;
    }
 
@@ -687,9 +687,9 @@ gboolean send_scite_command(gchar *command, GError **err)
 
    if ((write(sRequestPipeFD, command, commandLength)) < commandLength) {
       int errCode = errno;
-      g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+      g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                   "%s: Could not send command to Scite, write(\"%s\") failed, errno = %d = %s",
-                  __func__, command, errCode, strerror(errCode));
+                  __func__, command, errCode, strerror (errCode));
       goto EXITPOINT;
    }
 
@@ -709,7 +709,7 @@ EXITPOINT:
  *
  * @param err returns any errors
  */
-gboolean activate_scite(GError **err)
+gboolean activate_scite (GError **err)
 {
    gboolean finalResult = FALSE;
 
@@ -721,16 +721,16 @@ gboolean activate_scite(GError **err)
    // Open the X11 display, if we haven't already done so
 
    if (sDisplay == NULL) {
-      char *displayName = getenv("DISPLAY");
+      char *displayName = getenv ("DISPLAY");
 
       if (displayName == NULL || *displayName == '\0') {
          displayName = (char*)":0.0";
       }
 
-      sDisplay = XOpenDisplay(displayName);
+      sDisplay = XOpenDisplay (displayName);
 
       if (sDisplay == NULL) {
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not open X display, XOpenDisplay() = NULL", __func__);
          goto EXITPOINT;
       }
@@ -739,7 +739,7 @@ gboolean activate_scite(GError **err)
    // Do we actually have a reference to the SciTE window?
 
    if (sSciteWin == 0) {
-      g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+      g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                   "%s: Could not activate SciTE window, X11 window ID invalid", __func__);
       goto EXITPOINT;
    }
@@ -747,11 +747,11 @@ gboolean activate_scite(GError **err)
 
    // Send the "_NET_ACTIVE_WINDOW" message to the ewmh-compliant window manager (we hope)
 
-   rootWindow = DefaultRootWindow(sDisplay);
+   rootWindow = DefaultRootWindow (sDisplay);
 
    event.xclient.type = ClientMessage;
    event.xclient.window = sSciteWin;
-   event.xclient.message_type = XInternAtom(sDisplay, "_NET_ACTIVE_WINDOW", False);
+   event.xclient.message_type = XInternAtom (sDisplay, "_NET_ACTIVE_WINDOW", False);
    event.xclient.format = 32;
    event.xclient.data.l[0] = 1;
    event.xclient.data.l[1] = 0;
@@ -761,13 +761,13 @@ gboolean activate_scite(GError **err)
 
 //~ 	g_print("%s: sDisplay = 0x%lX, message_type = 0x%lX, window = 0x%lX, rootWindow = 0x%lX\n", __func__, (long) sDisplay, (long) event.xclient.message_type, (long) event.xclient.window, (long) rootWindow);
 
-   if (!XSendEvent(sDisplay, rootWindow, False, eventMask, &event)) {
-      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not activate SciTE, XSendEvent() = FALSE", __func__);
+   if (!XSendEvent (sDisplay, rootWindow, False, eventMask, &event)) {
+      g_set_error (err, APP_SCITEPROJ_ERROR, -1, "%s: Could not activate SciTE, XSendEvent() = FALSE", __func__);
    }
 
-   XFlush(sDisplay);
+   XFlush (sDisplay);
 
-   XMapRaised(sDisplay, sSciteWin);
+   XMapRaised (sDisplay, sSciteWin);
 
 
    finalResult = TRUE;
@@ -781,16 +781,16 @@ EXITPOINT:
 /**
  *
  */
-void set_scite_launched(gboolean launched)
+void set_scite_launched (gboolean launched)
 {
-   sSciteLaunched=launched;
+   sSciteLaunched = launched;
 }
 
 
 /**
  *	scite_exists
  */
-gboolean check_if_scite_exists()
+gboolean check_if_scite_exists ()
 {
    // Check if a config-file exists
 
@@ -801,36 +801,36 @@ gboolean check_if_scite_exists()
 #endif
 
    if (prefs.scite_path != NULL) {
-      if (g_file_test(prefs.scite_path, G_FILE_TEST_EXISTS)) exists = TRUE;
+      if (g_file_test (prefs.scite_path, G_FILE_TEST_EXISTS)) exists = TRUE;
 
    } else {
-      if (g_file_test(sSciteExecName0, G_FILE_TEST_EXISTS)) exists = TRUE;
-      if (g_file_test(sSciteExecName1, G_FILE_TEST_EXISTS)) exists = TRUE;
+      if (g_file_test (sSciteExecName0, G_FILE_TEST_EXISTS)) exists = TRUE;
+      if (g_file_test (sSciteExecName1, G_FILE_TEST_EXISTS)) exists = TRUE;
 
       // Check both
-      gchar *test_filename = g_build_filename("/bin", sSciteExecName2, NULL);
-      if (g_file_test(test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
-      if (test_filename != NULL) g_free(test_filename);
+      gchar *test_filename = g_build_filename ("/bin", sSciteExecName2, NULL);
+      if (g_file_test (test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
+      if (test_filename != NULL) g_free (test_filename);
 
-      test_filename = g_build_filename("/usr/bin", sSciteExecName2, NULL);
-      if (g_file_test(test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
-      if (test_filename != NULL) g_free(test_filename);
+      test_filename = g_build_filename ("/usr/bin", sSciteExecName2, NULL);
+      if (g_file_test (test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
+      if (test_filename != NULL) g_free (test_filename);
 
-      test_filename = g_build_filename("/usr/local/bin", sSciteExecName2, NULL);
-      if (g_file_test(test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
-      if (test_filename != NULL) g_free(test_filename);
+      test_filename = g_build_filename ("/usr/local/bin", sSciteExecName2, NULL);
+      if (g_file_test (test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
+      if (test_filename != NULL) g_free (test_filename);
 
-      test_filename = g_build_filename("/bin", sSciteExecName3, NULL);
-      if (g_file_test(test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
-      if (test_filename != NULL) g_free(test_filename);
+      test_filename = g_build_filename ("/bin", sSciteExecName3, NULL);
+      if (g_file_test (test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
+      if (test_filename != NULL) g_free (test_filename);
 
-      test_filename = g_build_filename("/usr/bin", sSciteExecName3, NULL);
-      if (g_file_test(test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
-      if (test_filename != NULL) g_free(test_filename);
+      test_filename = g_build_filename ("/usr/bin", sSciteExecName3, NULL);
+      if (g_file_test (test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
+      if (test_filename != NULL) g_free (test_filename);
 
-      test_filename = g_build_filename("/usr/local/bin", sSciteExecName3, NULL);
-      if (g_file_test(test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
-      if (test_filename != NULL) g_free(test_filename);
+      test_filename = g_build_filename ("/usr/local/bin", sSciteExecName3, NULL);
+      if (g_file_test (test_filename, G_FILE_TEST_EXISTS)) exists = TRUE;
+      if (test_filename != NULL) g_free (test_filename);
    }
 
    scite_exists = exists;
@@ -843,7 +843,7 @@ gboolean check_if_scite_exists()
  *		init_scite_connection
  *		currently doesn't do anything on GNU/Linux
  */
-void init_scite_connection()
+void init_scite_connectio ()
 {
 
 }
@@ -852,28 +852,28 @@ void init_scite_connection()
 /**
  *
  */
-gboolean open_filename(gchar *filename, gchar *project_directory, GError **err)
+gboolean open_filename (gchar *filename, gchar *project_directory, GError **err)
 {
    gchar *command = NULL;
 
-   if (!relative_path_to_abs_path(filename, &filename, project_directory, err)) {
+   if (!relative_path_to_abs_path (filename, &filename, project_directory, err)) {
       return FALSE;
    }
 
    // It's a file, so try to open it
 
-   if ((command = g_strdup_printf("open:%s\n", filename)) == NULL) {
-      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
+   if ((command = g_strdup_printf ("open:%s\n", filename)) == NULL) {
+      g_set_error (err, APP_SCITEPROJ_ERROR, -1, "%s: Error formatting Scite director command, g_strdup_printf() = NULL", __func__);
       return FALSE;
    }
    else {
-      if (send_scite_command(command, err)) {
+      if (send_scite_command (command, err)) {
          // Try to activate SciTE; ignore errors
 
-         activate_scite(NULL);
+         activate_scite (NULL);
 
          if (prefs.give_scite_focus == TRUE) {
-            send_scite_command((gchar*)"focus:0", NULL);
+            send_scite_command ((gchar*)"focus:0", NULL);
          }
       }
    }

@@ -36,10 +36,10 @@ typedef struct FolderStatus {
 /**
  *
  */
-void expand_tree_with_expanded_list(GtkTreeModel *tree_model, GtkTreeIter *start_iter, GList *folder_status_list);
+void expand_tree_with_expanded_list (GtkTreeModel *tree_model, GtkTreeIter *start_iter, GList *folder_status_list);
 
-void expand_tree(GtkTreeModel *tree_model, GtkTreeIter *start_iter);
-void start_expand_tree(GtkTreeModel *tree_model, GtkTreeIter *iter);
-gboolean get_expand_folder(gchar *folder_name);
+void expand_tree (GtkTreeModel *tree_model, GtkTreeIter *start_iter);
+void start_expand_tree (GtkTreeModel *tree_model, GtkTreeIter *iter);
+gboolean get_expand_folder (gchar *folder_name);
 
 #endif /*__HEADER_EXPAND_*/

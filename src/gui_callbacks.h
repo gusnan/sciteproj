@@ -24,20 +24,20 @@
 
 #define APP_SCITEPROJ_ERROR g_quark_from_static_string("APP_GUI_ERROR")
 
-void row_expand_or_collapse_cb(GtkTreeView *treeview, GtkTreeIter *arg1, GtkTreePath *arg2, gpointer user_data);
+void row_expand_or_collapse_cb (GtkTreeView *treeview, GtkTreeIter *arg1, GtkTreePath *arg2, gpointer user_data);
 
-void quit_menu_cb();
-void about_menu_cb();
-void creategroup_menu_cb();
+void quit_menu_cb ();
+void about_menu_cb ();
+void creategroup_menu_cb ();
 
-void popup_open_file_cb();
+void popup_open_file_cb ();
 
-void edit_properties_cb();
+void edit_properties_cb ();
 
-void refresh_folder(ClickedNode *inNode);
-void refresh_folder_with_iter(GtkTreeIter *iter);
+void refresh_folder (ClickedNode *inNode);
+void refresh_folder_with_iter (GtkTreeIter *iter);
 
-void create_new_file_cb();
+void create_new_file_cb ();
 
 
 

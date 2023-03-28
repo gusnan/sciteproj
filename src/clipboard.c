@@ -38,7 +38,7 @@
 /**
  * Copies the filename including full folder to the clipboard
  */
-void copy_filename_to_clipboard(GtkTreeModel *model, GtkTreeIter *iter)
+void copy_filename_to_clipboard (GtkTreeModel *model, GtkTreeIter *iter)
 {
    GError *err = NULL;
 
@@ -48,7 +48,7 @@ void copy_filename_to_clipboard(GtkTreeModel *model, GtkTreeIter *iter)
    GdkDisplay *display = NULL;
    GtkClipboard *clipboard = NULL;
 
-   gtk_tree_model_get(model, iter,
+   gtk_tree_model_get (model, iter,
                       COLUMN_FILENAME, &nodename,
                       COLUMN_ITEMTYPE, &nodeType,
                       COLUMN_FILEPATH, &filePath,
@@ -59,28 +59,28 @@ void copy_filename_to_clipboard(GtkTreeModel *model, GtkTreeIter *iter)
    // filePath is NULL?
    //if (!relative_path_to_abs_path(sClickedNodeName, &absFilePath, get_project_directory(), &err)) {
 
-   if (!relative_path_to_abs_path(filePath, &absFilePath, get_project_directory(), &err)) {
+   if (!relative_path_to_abs_path (filePath, &absFilePath, get_project_directory (), &err)) {
       goto EXITPOINT;
    }
 
-   display = gdk_display_get_default();
+   display = gdk_display_get_default ();
 
-   clipboard = gtk_clipboard_get_for_display(display, GDK_SELECTION_CLIPBOARD);
+   clipboard = gtk_clipboard_get_for_display (display, GDK_SELECTION_CLIPBOARD);
 
-   gtk_clipboard_set_text(clipboard, absFilePath, -1);
+   gtk_clipboard_set_text (clipboard, absFilePath, -1);
 
 EXITPOINT:
 
-   if (err) g_error_free(err);
+   if (err) g_error_free (err);
 }
 
 
 /**
  * Callback for the menu item
  */
-void copy_filename_to_clipboard_cb()
+void copy_filename_to_clipboard_cb ()
 {
    if (clicked_node.valid && clicked_node.type == ITEMTYPE_FILE) {
-      copy_filename_to_clipboard(gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView)), &(clicked_node.iter));
+      copy_filename_to_clipboard (gtk_tree_view_get_model (GTK_TREE_VIEW (projectTreeView)), &(clicked_node.iter));
    }
 }

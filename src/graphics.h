@@ -38,11 +38,11 @@ extern GdkPixbuf *directory_open_pixbuf;
 extern GdkPixbuf *program_icon_pixbuf;
 
 //
-GdkPixbuf *get_pixbuf_from_file(GFile *file, GtkIconSize size);
-GdkPixbuf *get_pixbuf_from_filename(gchar *filename, GtkIconSize size);
+GdkPixbuf *get_pixbuf_from_file (GFile *file, GtkIconSize size);
+GdkPixbuf *get_pixbuf_from_filename (gchar *filename, GtkIconSize size);
 
-gboolean load_graphics(GtkWidget *widget, GError **err);
-void unload_graphics();
+gboolean load_graphics (GtkWidget *widget, GError **err);
+void unload_graphics ();
 
 extern GdkCursor *standard_cursor;
 extern GdkCursor *busy_cursor;

@@ -37,21 +37,21 @@ enum {
 /**
  *
  */
-gint compare_strings_bigger(gconstpointer a, gconstpointer b);
-gint compare_strings_smaller(gconstpointer a, gconstpointer b);
+gint compare_strings_bigger (gconstpointer a, gconstpointer b);
+gint compare_strings_smaller (gconstpointer a, gconstpointer b);
 
-gint file_sort_by_extension_bigger_func(gconstpointer a, gconstpointer b);
-gint file_sort_by_extension_smaller_func(gconstpointer a, gconstpointer b);
+gint file_sort_by_extension_bigger_func (gconstpointer a, gconstpointer b);
+gint file_sort_by_extension_smaller_func (gconstpointer a, gconstpointer b);
 
-void sort_ascending_cb();
-void sort_descending_cb();
+void sort_ascending_cb ();
+void sort_descending_cb ();
 
-void sort_ascending_by_extension_cb();
-void sort_descending_by_extension_cb();
+void sort_ascending_by_extension_cb ();
+void sort_descending_by_extension_cb ();
 
-GCompareFunc get_compare_func_from_sort_order_value(int sort_order);
+GCompareFunc get_compare_func_from_sort_order_value (int sort_order);
 
-int get_sort_order_of_folder(gchar *folder_name);
-int get_sort_order_from_iter(GtkTreeView *tree_view, GtkTreeIter *iter);
+int get_sort_order_of_folder (gchar *folder_name);
+int get_sort_order_from_iter (GtkTreeView *tree_view, GtkTreeIter *iter);
 
 #endif /*__HEADER_SORT_*/

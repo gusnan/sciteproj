@@ -36,28 +36,28 @@ extern GtkTreeViewColumn *column1;
 extern ClickedNode clicked_node;
 
 // Initialize the GUI
-gboolean setup_gui(GError **err);
+gboolean setup_gui (GError **err);
 
-void gui_close();
+void gui_close ();
 
 // Enable/Disable the "Save Project" button
-void set_save_button_sensitivity(gboolean enabled);
+void set_save_button_sensitivity (gboolean enabled);
 
 // Set the window title
-void set_window_title(const gchar *newName);
+void set_window_title (const gchar *newName);
 
 // Is a given row expanded?
-gboolean tree_row_is_expanded(GtkTreePath *path);
+gboolean tree_row_is_expanded (GtkTreePath *path);
 
 // Expand a row
-void expand_tree_row(GtkTreePath *path, gboolean expandChildren);
+void expand_tree_row (GtkTreePath *path, gboolean expandChildren);
 
-gboolean dialog_response_is_exit(gint test);
+gboolean dialog_response_is_exit (gint test);
 
-void recent_files_switch_visible();
+void recent_files_switch_visible ();
 
-void set_dialog_transient(GtkWidget *dialog);
+void set_dialog_transient (GtkWidget *dialog);
 
-extern GtkWindow *get_main_window();
+extern GtkWindow *get_main_window ();
 
 #endif /*__HEADER_GUI_*/

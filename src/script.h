@@ -25,19 +25,19 @@
 /**
  *
  */
-lua_State *init_script();
-void register_cfunctions(lua_State *lua);
-int load_script(lua_State *lua, char *filename);
-void run_script(lua_State *lua);
-void done_script(lua_State *lua);
+lua_State *init_script ();
+void register_cfunctions (lua_State *lua);
+int load_script (lua_State *lua, char *filename);
+void run_script (lua_State *lua);
+void done_script (lua_State *lua);
 
-int load_script_buffer(lua_State *lua, const char *buffer);
+int load_script_buffer (lua_State *lua, const char *buffer);
 
-int lua_get_boolean(lua_State *lua, char *variable_name);
-double lua_get_number(lua_State *lua, char *variable_name);
+int lua_get_boolean (lua_State *lua, char *variable_name);
+double lua_get_number (lua_State *lua, char *variable_name);
 
-gboolean lua_global_exists(lua_State *lua, char *variable_name);
+gboolean lua_global_exists (lua_State *lua, char *variable_name);
 
-GSList *load_filter_from_lua();
+GSList *load_filter_from_lua ();
 
 #endif /*__HEADER_SCRIPT_*/

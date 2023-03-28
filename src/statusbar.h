@@ -22,10 +22,10 @@
 #ifndef __HEADER_STATUSBAR_
 #define __HEADER_STATUSBAR_
 
-gboolean init_statusbar(GtkWidget *grid, GtkWidget *next_to, GError **err);
+gboolean init_statusbar (GtkWidget *grid, GtkWidget *next_to, GError **err);
 
-void set_statusbar_text(const gchar *text);
+void set_statusbar_text (const gchar *text);
 
-void done_statusbar();
+void done_statusbar ();
 
 #endif /*__HEADER_STATUSBAR_*/

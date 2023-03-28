@@ -22,9 +22,9 @@
 #ifndef __HEADER_REMOVE_
 #define __HEADER_REMOVE_
 
-void do_remove_node(gboolean ignore_clicked_node);
-void popup_remove_node_cb();
+void do_remove_node (gboolean ignore_clicked_node);
+void popup_remove_node_cb ();
 
-void removeitem_menu_cb();
+void removeitem_menu_cb ();
 
 #endif /*__HEADER_REMOVE_*/

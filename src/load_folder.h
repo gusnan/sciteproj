@@ -22,11 +22,11 @@
 #ifndef __HEADER_LOAD_FOLDER_
 #define __HEADER_LOAD_FOLDER_
 
-gboolean ignore_pattern_matches(gchar *folder_name, const gchar *filename, GSList *filter_list);
+gboolean ignore_pattern_matches (gchar *folder_name, const gchar *filename, GSList *filter_list);
 
-gboolean load_folder(gchar *project_path, GError **err);
+gboolean load_folder (gchar *project_path, GError **err);
 
-GSList *load_folder_to_list(gchar *folder_path, gboolean read_directories, GCompareFunc compare_func, GSList *filter_list);
+GSList *load_folder_to_list (gchar *folder_path, gboolean read_directories, GCompareFunc compare_func, GSList *filter_list);
 
 
 #endif /*__HEADER_LOAD_FOLDER_*/

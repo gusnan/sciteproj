@@ -28,9 +28,9 @@
 /**
  *
  */
-ClickedNode *create_clicked_node(gboolean valid, GtkTreeIter iter, gchar *name, gint type)
+ClickedNode *create_clicked_node (gboolean valid, GtkTreeIter iter, gchar *name, gint type)
 {
-   ClickedNode *new_node = g_malloc(sizeof(ClickedNode));
+   ClickedNode *new_node = g_malloc (sizeof (ClickedNode));
 
    new_node->valid = valid;
    new_node->iter = iter;

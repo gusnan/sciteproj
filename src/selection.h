@@ -30,6 +30,6 @@ void done_selection ();
 
 void selection_changed_cb (GtkTreeSelection *treeselection, gpointer user_data);
 
-GList *get_list_of_marked_files();
+GList *get_list_of_marked_files ();
 
 #endif /*__HEADER_SELECTION_*/

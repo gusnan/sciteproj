@@ -36,8 +36,8 @@
  *
  */
 
-gboolean check_for_old_style_config();
-int load_lua_config(gchar *filename, gchar *full_string);
+gboolean check_for_old_style_config ();
+int load_lua_config (gchar *filename, gchar *full_string);
 
 /**
  *
@@ -82,7 +82,7 @@ gchar *default_config_string = (gchar*)"" \
 /**
  *		Check config string - is it valid?
  */
-gboolean check_config_string(gchar *in_config)
+gboolean check_config_string (gchar *in_config)
 {
    gboolean result = FALSE;
    int co = 0;
@@ -98,7 +98,7 @@ gboolean check_config_string(gchar *in_config)
 
    prefs.scite_path = NULL;
 
-   for (co = 0; co < (int)strlen(in_config); co++) {
+   for (co = 0; co < (int)strlen (in_config); co++) {
       if (in_config[co] == '=') pos = co;
 
       if (pos == -1) {
@@ -107,75 +107,75 @@ gboolean check_config_string(gchar *in_config)
    }
 
    if (pos != -1) {
-      tempstring = g_strndup(in_config, pos);
+      tempstring = g_strndup (in_config, pos);
       value++;
    }
 
    if ((tempstring != NULL) && (value != NULL)) {
 
-      tempstring = g_strchug(tempstring);
-      tempstring = g_strchomp(tempstring);
+      tempstring = g_strchug (tempstring);
+      tempstring = g_strchomp (tempstring);
 
-      value = g_strchug(value);
-      value = g_strchomp(value);
+      value = g_strchug (value);
+      value = g_strchomp (value);
 
-      if (g_ascii_strcasecmp(tempstring, "xpos") == 0) {
-         tempdouble = g_ascii_strtod(value, NULL);
+      if (g_ascii_strcasecmp (tempstring, "xpos") == 0) {
+         tempdouble = g_ascii_strtod (value, NULL);
          prefs.xpos = (int) tempdouble;
       }
 
-      if (g_ascii_strcasecmp(tempstring, "ypos") == 0) {
-         tempdouble = g_ascii_strtod(value, NULL);
+      if (g_ascii_strcasecmp (tempstring, "ypos") == 0) {
+         tempdouble = g_ascii_strtod (value, NULL);
          prefs.ypos = (int)tempdouble;
       }
 
-      if (g_ascii_strcasecmp(tempstring, "width") == 0) {
-         tempdouble = g_ascii_strtod(value, NULL);
+      if (g_ascii_strcasecmp (tempstring, "width") == 0) {
+         tempdouble = g_ascii_strtod (value, NULL);
          prefs.width = (int)tempdouble;
       }
 
-      if (g_ascii_strcasecmp(tempstring, "height") == 0) {
-         tempdouble = g_ascii_strtod(value, NULL);
+      if (g_ascii_strcasecmp (tempstring, "height") == 0) {
+         tempdouble = g_ascii_strtod (value, NULL);
          prefs.height = (int)tempdouble;
       }
 
-      if (g_ascii_strcasecmp(tempstring, "give_scite_focus") == 0) {
-         if (g_ascii_strcasecmp(value, "TRUE") == 0) {
+      if (g_ascii_strcasecmp (tempstring, "give_scite_focus") == 0) {
+         if (g_ascii_strcasecmp (value, "TRUE") == 0) {
             prefs.give_scite_focus = TRUE;
          }
       }
 
 
-      if (g_ascii_strcasecmp(tempstring, "scite_path") == 0) {
-         prefs.scite_path = g_strdup_printf("%s", value);
+      if (g_ascii_strcasecmp (tempstring, "scite_path") == 0) {
+         prefs.scite_path = g_strdup_printf ("%s", value);
       }
 
-      if (g_ascii_strcasecmp(tempstring, "show_recent") == 0) {
-         if (g_ascii_strcasecmp(value, "TRUE") == 0) {
+      if (g_ascii_strcasecmp (tempstring, "show_recent") == 0) {
+         if (g_ascii_strcasecmp (value, "TRUE") == 0) {
             prefs.show_recent = TRUE;
          }
       }
 
-      if (g_ascii_strcasecmp(tempstring, "recent_add_to_bottom") == 0) {
-         if (g_ascii_strcasecmp(value, "TRUE") == 0) {
+      if (g_ascii_strcasecmp (tempstring, "recent_add_to_bottom") == 0) {
+         if (g_ascii_strcasecmp (value, "TRUE") == 0) {
             prefs.recent_add_to_bottom = TRUE;
          }
       }
 
-      if (g_ascii_strcasecmp(tempstring, "hide_statusbar") == 0) {
-         if (g_ascii_strcasecmp(value, "TRUE") == 0) {
+      if (g_ascii_strcasecmp (tempstring, "hide_statusbar") == 0) {
+         if (g_ascii_strcasecmp (value, "TRUE") == 0) {
             prefs.hide_statusbar = TRUE;
          }
       }
 
-      if (g_ascii_strcasecmp(tempstring, "start_scite") == 0) {
-         if (g_ascii_strcasecmp(value, "TRUE") == 0) {
+      if (g_ascii_strcasecmp (tempstring, "start_scite") == 0) {
+         if (g_ascii_strcasecmp (value, "TRUE") == 0) {
             prefs.start_scite = TRUE;
          }
       }
    }
 
-   if (tempstring != NULL) g_free(tempstring);
+   if (tempstring != NULL) g_free (tempstring);
 
    return result;
 }
@@ -185,7 +185,7 @@ gboolean check_config_string(gchar *in_config)
 /**
  *		init_prefs
  */
-gboolean init_prefs(gchar *target_directory, GError **err)
+gboolean init_prefs (gchar *target_directory, GError **err)
 {
    //FILE *fp;
    //gchar buf[PREFS_BUFSIZE];
@@ -219,72 +219,72 @@ gboolean init_prefs(gchar *target_directory, GError **err)
 
    // First, check the file ~/.config/sciteprojrc.lua
 
-   gchar *test_prefs_filename = g_build_filename(g_get_user_config_dir(), "sciteprojrc.lua", NULL);
+   gchar *test_prefs_filename = g_build_filename (g_get_user_config_dir (), "sciteprojrc.lua", NULL);
 
-   if (g_file_test(test_prefs_filename, G_FILE_TEST_IS_REGULAR)) {
+   if (g_file_test (test_prefs_filename, G_FILE_TEST_IS_REGULAR)) {
 
       // the file exists, load it:
 
-      if (!g_file_get_contents(test_prefs_filename, &config_string, NULL, err)) {
+      if (!g_file_get_contents (test_prefs_filename, &config_string, NULL, err)) {
          result = FALSE;
          goto ERROR;
       }
 
-      if (load_lua_config(test_prefs_filename, config_string) != 0) {
+      if (load_lua_config (test_prefs_filename, config_string) != 0) {
          printf("error loading LUA config!\n");
       }
 
-      g_free(config_string);
+      g_free (config_string);
    }
 
-   g_free(test_prefs_filename);
+   g_free (test_prefs_filename);
 
    // Otherwise, check current directory, and the directories that the previous
    // versions used
 
-   test_prefs_filename = g_build_filename(target_directory, "sciteprojrc.lua", NULL);
+   test_prefs_filename = g_build_filename (target_directory, "sciteprojrc.lua", NULL);
 
-   if (!g_file_test(test_prefs_filename, G_FILE_TEST_IS_REGULAR)) {
+   if (!g_file_test (test_prefs_filename, G_FILE_TEST_IS_REGULAR)) {
 
       // the result of g_get_user_config_dir doesn't need to be freed, so we
       // dont need to put it in a pointer of its own.
-      prefs_filename = g_build_filename(g_get_user_config_dir(), "sciteprojrc", NULL);
+      prefs_filename = g_build_filename (g_get_user_config_dir (), "sciteprojrc", NULL);
 
       // Check if a config-file exists
-      if (!g_file_test(prefs_filename, G_FILE_TEST_IS_REGULAR)) {
+      if (!g_file_test (prefs_filename, G_FILE_TEST_IS_REGULAR)) {
 
          // First, check if ~/.sciteproj exists.
-         gchar *old_configfilename = g_build_filename(g_get_home_dir(), ".sciteproj", NULL);
+         gchar *old_configfilename = g_build_filename (g_get_home_dir (), ".sciteproj", NULL);
 
-         if (!g_file_test(old_configfilename, G_FILE_TEST_IS_REGULAR)) {
+         if (!g_file_test (old_configfilename, G_FILE_TEST_IS_REGULAR)) {
 
             // No config-file exists, default to sciteprojrc.lua
-            prefs_filename = g_strdup(test_prefs_filename);
+            prefs_filename = g_strdup (test_prefs_filename);
          }
       }
 
    } else {
-      prefs_filename = g_strdup(test_prefs_filename);
+      prefs_filename = g_strdup (test_prefs_filename);
    }
 
-   g_free(test_prefs_filename);
+   g_free (test_prefs_filename);
 
    // Load preferences from config
 
-   if (!g_file_get_contents(prefs_filename, &config_string, NULL, err)) {
+   if (!g_file_get_contents (prefs_filename, &config_string, NULL, err)) {
 
       result = FALSE;
       goto ERROR;
    }
 
    // Check if it is an old-style config, or a new LUA one
-   if (check_for_old_style_config(config_string)) {
+   if (check_for_old_style_config (config_string)) {
 
       gchar **savedlist;
 
-      debug_printf("Old style config\n");
+      debug_printf ("Old style config\n");
       // split out the lines, and add each to the list of strings
-      list = g_strsplit(config_string, "\n", -1);
+      list = g_strsplit (config_string, "\n", -1);
 
       savedlist = list;
 
@@ -296,32 +296,32 @@ gboolean init_prefs(gchar *target_directory, GError **err)
 
          if (temp != NULL) {
 
-            if ((temp[0] != '#') && (strcmp(temp, "") != 0)) {
+            if ((temp[0] != '#') && (strcmp (temp, "") != 0)) {
                // We got a valid string:
                // no starting #, and not an empty string.
 
-               check_config_string(temp);
+               check_config_string (temp);
             }
             list++;
          }
 
       } while (temp != NULL);
 
-      g_strfreev(savedlist);
+      g_strfreev (savedlist);
    } else {
       // ----- New style (LUA) config
 
 
 
       //if (!load_lua_config(config_string)) {
-      if (load_lua_config(prefs_filename, config_string) != 0) {
-         printf("error loading LUA config!\n");
+      if (load_lua_config (prefs_filename, config_string) != 0) {
+         printf ("error loading LUA config!\n");
       }
    }
 
 ERROR:
 
-   g_free(config_string);
+   g_free (config_string);
 
    return result;
 }
@@ -329,16 +329,16 @@ ERROR:
 /**
  *
  */
-void done_prefs()
+void done_prefs ()
 {
-   g_free(prefs_filename);
+   g_free (prefs_filename);
 }
 
 
 /**
  *
  */
-gboolean check_for_old_style_config(const gchar *teststring)
+gboolean check_for_old_style_config (const gchar *teststring)
 {
    gboolean result = FALSE;
    int co = 0;
@@ -346,7 +346,7 @@ gboolean check_for_old_style_config(const gchar *teststring)
    // We satisfy it by checking for the default header and assume that if
    // that is there, we have an old-styled (non-LUA) config file
 
-   if (g_str_has_prefix(teststring,
+   if (g_str_has_prefix (teststring,
                         "# ---------------------------\n"
                         "# Configuration for SciteProj\n"
                         "# ---------------------------\n")
@@ -357,7 +357,7 @@ gboolean check_for_old_style_config(const gchar *teststring)
    // Another way to check is to check for lines starting with # - as a comment
    // LUA uses "--", so this is should work to identify oldstyle config.
 
-   for (co = 0; co < strlen(teststring); co++) {
+   for (co = 0; co < strlen (teststring); co++) {
       if (teststring[co] == '\n') {
          //printf("Tecken: %c\n", teststring[co+1]);
 
@@ -374,86 +374,86 @@ gboolean check_for_old_style_config(const gchar *teststring)
 /**
  *
  */
-int load_lua_config(gchar *filename, gchar *full_string)
+int load_lua_config (gchar *filename, gchar *full_string)
 {
    lua_State *lua;
-   lua = init_script();
+   lua = init_script ();
 
    //if (load_script_buffer(lua, config_string)!=0) {
-   if (load_script_buffer(lua, full_string) != 0) {
+   if (load_script_buffer (lua, full_string) != 0) {
       printf("Error loading file: %s\n", filename);
       return FALSE;
    }
 
    run_script(lua);
 
-   if (lua_global_exists(lua, "xpos"))
-      prefs.xpos = lua_get_number(lua, "xpos");
+   if (lua_global_exists (lua, "xpos"))
+      prefs.xpos = lua_get_number (lua, "xpos");
 
-   if (lua_global_exists(lua, "ypos"))
-      prefs.ypos = lua_get_number(lua, "ypos");
+   if (lua_global_exists (lua, "ypos"))
+      prefs.ypos = lua_get_number (lua, "ypos");
 
-   if (lua_global_exists(lua, "width"))
-      prefs.width = lua_get_number(lua, "width");
+   if (lua_global_exists (lua, "width"))
+      prefs.width = lua_get_number (lua, "width");
 
-   if (lua_global_exists(lua, "height"))
-      prefs.height = lua_get_number(lua, "height");
+   if (lua_global_exists (lua, "height"))
+      prefs.height = lua_get_number (lua, "height");
 
-   if (lua_global_exists(lua, "give_scite_focus"))
-      prefs.give_scite_focus = lua_get_boolean(lua, "give_scite_focus");
+   if (lua_global_exists (lua, "give_scite_focus"))
+      prefs.give_scite_focus = lua_get_boolean (lua, "give_scite_focus");
 
-   if (lua_global_exists(lua, "show_recent"))
-      prefs.show_recent = (gboolean)lua_get_boolean(lua, "show_recent");
+   if (lua_global_exists (lua, "show_recent"))
+      prefs.show_recent = (gboolean)lua_get_boolean (lua, "show_recent");
 
-   if (lua_global_exists(lua, "recent_add_to_bottom"))
-      prefs.recent_add_to_bottom = (gboolean)lua_get_boolean(lua, "recent_add_to_bottom");
+   if (lua_global_exists (lua, "recent_add_to_bottom"))
+      prefs.recent_add_to_bottom = (gboolean)lua_get_boolean (lua, "recent_add_to_bottom");
 
-   if (lua_global_exists(lua, "hide_statusbar"))
-      prefs.hide_statusbar = lua_get_boolean(lua, "hide_statusbar");
+   if (lua_global_exists (lua, "hide_statusbar"))
+      prefs.hide_statusbar = lua_get_boolean (lua, "hide_statusbar");
 
-   if (lua_global_exists(lua, "use_stock_folder_icon"))
-      prefs.use_stock_folder_icon = lua_get_boolean(lua, "use_stock_folder_icon");
+   if (lua_global_exists (lua, "use_stock_folder_icon"))
+      prefs.use_stock_folder_icon = lua_get_boolean (lua, "use_stock_folder_icon");
 
-   if (lua_global_exists(lua, "write_protect"))
-      prefs.write_protect = lua_get_boolean(lua, "write_protect");
+   if (lua_global_exists (lua, "write_protect"))
+      prefs.write_protect = lua_get_boolean (lua, "write_protect");
 
-   if (lua_global_exists(lua, "start_scite"))
-      prefs.start_scite = lua_get_boolean(lua, "start_scite");
+   if (lua_global_exists (lua, "start_scite"))
+      prefs.start_scite = lua_get_boolean (lua, "start_scite");
 
-   if (lua_global_exists(lua, "hide_filter_global")) {
+   if (lua_global_exists (lua, "hide_filter_global")) {
 
-      lua_getglobal(lua, "hide_filter_global");
+      lua_getglobal (lua, "hide_filter_global");
 
-      if (lua_isnil(lua, -1)) {
-         printf("hide_filter_global not available in preferences.\n");
+      if (lua_isnil (lua, -1)) {
+         printf ("hide_filter_global not available in preferences.\n");
          goto EXITPOINT;
       }
 
       //	Make sure it is a table
-      if (!lua_istable(lua, -1)) {
+      if (!lua_istable (lua, -1)) {
          // We didn't find a table with the required name, then just exit
-         printf("Expected a table...\n");
+         printf ("Expected a table...\n");
          goto EXITPOINT;
       }
 
-      lua_pushnil(lua);
+      lua_pushnil (lua);
 
-      while(lua_next(lua, -2)) {
+      while (lua_next (lua, -2)) {
 
          // stack now contains: -1 => value; -2 => key; -3 => table
          // copy the key so that lua_tostring does not modify the original
-         lua_pushvalue(lua, -2);
+         lua_pushvalue (lua, -2);
          // stack now contains: -1 => key; -2 => value; -3 => key; -4 => table
-         const gchar *value = lua_tostring(lua, -2);
+         const gchar *value = lua_tostring (lua, -2);
 
          if (value != NULL) {
 
-            gchar *temp_string = g_strdup((gchar*)(value));
+            gchar *temp_string = g_strdup ((gchar*)(value));
 
-            prefs.hide_filter_global = g_slist_append(prefs.hide_filter_global, (gchar*)temp_string);
+            prefs.hide_filter_global = g_slist_append (prefs.hide_filter_global, (gchar*)temp_string);
          }
          // pop value + copy of key, leaving original key
-         lua_pop(lua, 2);
+         lua_pop (lua, 2);
          // stack now contains: -1 => key; -2 => table
       }
 
@@ -461,7 +461,7 @@ int load_lua_config(gchar *filename, gchar *full_string)
 
 EXITPOINT:
    if (lua)
-      done_script(lua);
+      done_script (lua);
 
    return 0;
 }

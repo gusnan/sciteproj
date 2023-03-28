@@ -46,26 +46,26 @@
  * @param src is the string to append to dst
  * @param err returns any errors
  */
-gboolean str_append(gchar **dst, const gchar *src, GError **err)
+gboolean str_append (gchar **dst, const gchar *src, GError **err)
 {
    gboolean finalResult = FALSE;
 
-   g_assert(dst != NULL);
-   g_assert(src != NULL);
+   g_assert (dst != NULL);
+   g_assert (src != NULL);
 
-   gulong dstLength = (*dst == NULL) ? 0 : strlen(*dst);
-   gulong srcLength = strlen(src);
+   gulong dstLength = (*dst == NULL) ? 0 : strlen (*dst);
+   gulong srcLength = strlen (src);
    gulong totalLength = dstLength + srcLength + 1;
 
-   gchar *newDst = (gchar *) g_try_realloc(*dst, totalLength);
+   gchar *newDst = (gchar *) g_try_realloc (*dst, totalLength);
 
    if (newDst == NULL) {
-      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not allocate memory, g_try_realloc(%ld) = NULL", __func__, totalLength);
+      g_set_error (err, APP_SCITEPROJ_ERROR, -1, "%s: Could not allocate memory, g_try_realloc (%ld) = NULL", __func__, totalLength);
 
       goto EXITPOINT;
    }
 
-   memmove(newDst + dstLength, src, srcLength + 1);
+   memmove (newDst + dstLength, src, srcLength + 1);
 
    *dst = newDst;
 
@@ -80,25 +80,25 @@ EXITPOINT:
 /**
  *
  */
-void debug_printf(const char *st, ...)
+void debug_printf (const char *st, ...)
 {
    va_list ap;
-   va_start(ap,st);
+   va_start (ap,st);
 
 #ifdef _DEBUG
-   vprintf(st,ap);
+   vprintf (st,ap);
 #endif
 
-   va_end(ap);
+   va_end (ap);
 }
 
 
 /**
  *
  */
-char *remove_newline( char *s )
+char *remove_newline (char *s )
 {
-   int len=strlen(s);
+   int len = strlen (s);
 
    if (s[len - 1] == '\n') {
       s[len - 1] = '\0';

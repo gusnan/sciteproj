@@ -47,7 +47,7 @@
 /**
  *
  */
-void expand_tree_with_expanded_list(GtkTreeModel *tree_model, GtkTreeIter *start_iter, GList *folder_status_list)
+void expand_tree_with_expanded_list (GtkTreeModel *tree_model, GtkTreeIter *start_iter, GList *folder_status_list)
 {
    GtkTreeIter child_iter;
 
@@ -56,20 +56,20 @@ void expand_tree_with_expanded_list(GtkTreeModel *tree_model, GtkTreeIter *start
    gchar *filename;
 
    if (start_iter) {
-      if (gtk_tree_model_iter_children(tree_model, &child_iter, start_iter)) {
+      if (gtk_tree_model_iter_children (tree_model, &child_iter, start_iter)) {
 
          do {
 
-            gtk_tree_model_get(tree_model, &child_iter,
-                               COLUMN_ITEMTYPE, &type,
-                               COLUMN_FILEPATH, &filepath,
-                               COLUMN_FILENAME, &filename,
-                              -1);
+            gtk_tree_model_get (tree_model, &child_iter,
+                                COLUMN_ITEMTYPE, &type,
+                                COLUMN_FILEPATH, &filepath,
+                                COLUMN_FILENAME, &filename,
+                                -1);
 
             if (type == ITEMTYPE_GROUP) {
 
                // Check if we should expand this row
-               GtkTreePath *path = gtk_tree_model_get_path(tree_model, &child_iter);
+               GtkTreePath *path = gtk_tree_model_get_path (tree_model, &child_iter);
 
                if (folder_status_list != NULL) {
 
@@ -77,15 +77,15 @@ void expand_tree_with_expanded_list(GtkTreeModel *tree_model, GtkTreeIter *start
                   for (node = folder_status_list; node != NULL; node = node -> next) {
                      struct FolderStatus *folder_status = node->data;
 
-                     if (g_strcmp0(folder_status->folder_name, filename) == 0) {
-                        expand_tree_row(path, FALSE);
-                        expand_tree(tree_model, &child_iter);
+                     if (g_strcmp0 (folder_status->folder_name, filename) == 0) {
+                        expand_tree_row (path, FALSE);
+                        expand_tree (tree_model, &child_iter);
 
                      }
                   }
                }
             }
-         } while (gtk_tree_model_iter_next(tree_model, &child_iter));
+         } while (gtk_tree_model_iter_next (tree_model, &child_iter));
       }
    }
 }
@@ -93,7 +93,7 @@ void expand_tree_with_expanded_list(GtkTreeModel *tree_model, GtkTreeIter *start
 /**
  *
  */
-void expand_tree(GtkTreeModel *tree_model, GtkTreeIter *start_iter)
+void expand_tree (GtkTreeModel *tree_model, GtkTreeIter *start_iter)
 {
    GtkTreeIter child_iter;
 
@@ -101,25 +101,25 @@ void expand_tree(GtkTreeModel *tree_model, GtkTreeIter *start_iter)
    gchar *filepath;
 
    if (start_iter) {
-      if (gtk_tree_model_iter_children(tree_model, &child_iter, start_iter)) {
+      if (gtk_tree_model_iter_children (tree_model, &child_iter, start_iter)) {
 
          do {
 
-            gtk_tree_model_get(tree_model, &child_iter,
+            gtk_tree_model_get (tree_model, &child_iter,
                                COLUMN_ITEMTYPE, &type,
                                COLUMN_FILEPATH, &filepath, -1);
 
             if (type == ITEMTYPE_GROUP) {
 
                // Check if we should expand this row
-               GtkTreePath *path = gtk_tree_model_get_path(tree_model, &child_iter);
+               GtkTreePath *path = gtk_tree_model_get_path (tree_model, &child_iter);
 
-               if (get_expand_folder(filepath)) {
-                  expand_tree_row(path, FALSE);
-                  expand_tree(tree_model, &child_iter);
+               if (get_expand_folder (filepath)) {
+                  expand_tree_row (path, FALSE);
+                  expand_tree (tree_model, &child_iter);
                }
             }
-         } while (gtk_tree_model_iter_next(tree_model, &child_iter));
+         } while (gtk_tree_model_iter_next (tree_model, &child_iter));
       }
    }
 }
@@ -128,68 +128,68 @@ void expand_tree(GtkTreeModel *tree_model, GtkTreeIter *start_iter)
 /**
  *
  */
-void start_expand_tree(GtkTreeModel *tree_model, GtkTreeIter *iter)
+void start_expand_tree (GtkTreeModel *tree_model, GtkTreeIter *iter)
 {
    if (iter)
-      expand_tree(tree_model, iter);
+      expand_tree (tree_model, iter);
 }
 
 
 /**
  *
  */
-gboolean get_expand_folder(gchar *folder_name)
+gboolean get_expand_folder (gchar *folder_name)
 {
    gboolean result = FALSE;
 
-   gchar *script_filename = g_build_filename(get_project_directory(), "sciteprojrc.lua", NULL);
+   gchar *script_filename = g_build_filename (get_project_directory(), "sciteprojrc.lua", NULL);
 
    lua_State *lua = NULL;
 
 
-   if (g_file_test(script_filename, G_FILE_TEST_EXISTS)) {
+   if (g_file_test (script_filename, G_FILE_TEST_EXISTS)) {
 
       int num = -1;
 
-      lua = init_script();
+      lua = init_script ();
 
-      if (load_script(lua, script_filename) != 0) {
-         printf("error loading script: %s\n", script_filename);
+      if (load_script (lua, script_filename) != 0) {
+         printf ("error loading script: %s\n", script_filename);
          goto EXITPOINT;
       }
 
-      run_script(lua);
+      run_script (lua);
 
-      lua_getglobal(lua, "open_folders");
+      lua_getglobal (lua, "open_folders");
 
       // Make sure we have a value at all
-      if (lua_isnil(lua, -1)) {
+      if (lua_isnil (lua, -1)) {
          goto EXITPOINT;
       }
 
       // And make sure that it is a table
-      if (!lua_istable(lua, -1)) {
-         printf("open_folders is supposed to be a table!\n");
+      if (!lua_istable (lua, -1)) {
+         printf ("open_folders is supposed to be a table!\n");
          goto EXITPOINT;
       }
 
-      lua_pushnil(lua);
+      lua_pushnil (lua);
 
-      while(lua_next(lua, -2)) {
+      while (lua_next (lua, -2)) {
 
          gchar *key = NULL;
 
-         if (lua_type(lua, -2) == LUA_TSTRING) { // key type is string
+         if (lua_type (lua, -2) == LUA_TSTRING) { // key type is string
 
-            key = g_strdup(lua_tostring(lua, -2));
-            gchar *temp = clean_folder(key);
-            g_free(key);
+            key = g_strdup (lua_tostring(lua, -2));
+            gchar *temp = clean_folder (key);
+            g_free (key);
             key = temp;
          }
 
-         if (lua_type(lua, -1) == LUA_TBOOLEAN) { // value is boolean
+         if (lua_type (lua, -1) == LUA_TBOOLEAN) { // value is boolean
 
-            num = lua_toboolean(lua, -1);
+            num = lua_toboolean (lua, -1);
          }
 
          // gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, const gchar *basePath, GError **err);
@@ -197,41 +197,41 @@ gboolean get_expand_folder(gchar *folder_name)
 
          gchar *relative_path = NULL;
 
-         if (g_strcmp0(folder_name, get_project_directory()) == 0) {
-            relative_path = g_strdup("."); //get_project_directory();
+         if (g_strcmp0 (folder_name, get_project_directory()) == 0) {
+            relative_path = g_strdup ("."); //get_project_directory();
          }
 
          if (!relative_path) {
-            if (abs_path_to_relative_path(folder_name, &relative_path, get_project_directory(), NULL)) {
+            if (abs_path_to_relative_path (folder_name, &relative_path, get_project_directory (), NULL)) {
 
             }
          }
 
-         gchar *folder_cleaned = clean_folder(relative_path);
+         gchar *folder_cleaned = clean_folder (relative_path);
 
-         if (g_strcmp0(key, folder_cleaned) == 0) {
+         if (g_strcmp0 (key, folder_cleaned) == 0) {
 
             result = FALSE;
             if (num) result = TRUE;
          }
 
-         if (key) g_free(key);
+         if (key) g_free (key);
 
-         if (relative_path) g_free(relative_path);
-         if (folder_cleaned) g_free(folder_cleaned);
-         lua_pop(lua, 1);
+         if (relative_path) g_free (relative_path);
+         if (folder_cleaned) g_free (folder_cleaned);
+         lua_pop (lua, 1);
       }
-      lua_pop(lua, 1);
+      lua_pop (lua, 1);
 
    }
 
 
 EXITPOINT:
 
-   g_free(script_filename);
+   g_free (script_filename);
 
    if (lua)
-      done_script(lua);
+      done_script (lua);
 
 
    return result;

@@ -27,8 +27,8 @@
 // Append a string to a (possibly) existing string
 gboolean str_append(gchar **dst, const gchar *src, GError **err);
 
-void debug_printf(const char *st, ...);
+void debug_printf (const char *st, ...);
 
-char *remove_newline(char *s);
+char *remove_newline (char *s);
 
 #endif /*__HEADER_STRING_UTILS_*/

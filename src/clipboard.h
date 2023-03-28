@@ -25,7 +25,7 @@
 /**
  *
  */
-void copy_filename_to_clipboard(GtkTreeModel *model, GtkTreeIter *iter);
-void copy_filename_to_clipboard_cb();
+void copy_filename_to_clipboard (GtkTreeModel *model, GtkTreeIter *iter);
+void copy_filename_to_clipboard_cb ();
 
 #endif /*__HEADER_CLIPBOARD_*/

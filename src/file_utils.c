@@ -53,7 +53,7 @@ gchar *current_directory = 0;
 /**
  *
  */
-gboolean is_separator(gchar ch)
+gboolean is_separator (gchar ch)
 {
    gboolean result = FALSE;
 
@@ -67,25 +67,25 @@ gboolean is_separator(gchar ch)
 /**
  *
  */
-gchar *path_up_string(gchar *instring)
+gchar *path_up_string (gchar *instring)
 {
-   int len = (int)strlen(instring);
+   int len = (int)strlen (instring);
    int co;
 
    int start = len - 1;
 
-   if (is_separator(instring[start])) {
+   if (is_separator (instring[start])) {
       start--;
    }
 
    int res = -1;
    for (co = start; co > 0; co--) {
-      if (is_separator(instring[co])) {
+      if (is_separator (instring[co])) {
          if (res == -1) res = co;
       }
    }
 
-   gchar *resstring = g_strdup_printf("%s", instring);
+   gchar *resstring = g_strdup_printf ("%s", instring);
 
    if (res != -1) {
       resstring[res] = '\0';
@@ -100,21 +100,21 @@ gchar *path_up_string(gchar *instring)
  *
  *		Replaces \\ and \ and // with /, and replaces stuff like /./ with just one separator
  */
-gchar *fix_separators(gchar *source)
+gchar *fix_separators (gchar *source)
 {
-   gchar *result = g_strdup(source);
+   gchar *result = g_strdup (source);
    gchar *pointer = result;
 
    if (pointer) {
       int co = 0;
-      for (co = 0; co < strlen(source); co++) {
-         if (is_separator(source[co])) {
+      for (co = 0; co < strlen (source); co++) {
+         if (is_separator (source[co])) {
             // if ((*pointer == G_DIR_SEPARATOR) || (*pointer == '\\') || (*pointer == '/')) {
 
             *pointer = '/';
 
             // skip /./ and similar
-            if ((source[co + 1] == '.') && (is_separator(source[co + 2]))) {
+            if ((source[co + 1] == '.') && (is_separator (source[co + 2]))) {
                co += 2;
             }
 
@@ -136,52 +136,52 @@ gchar *fix_separators(gchar *source)
 /**
  *
  */
-gchar *fix_path(char *base_dir, char *temp)
+gchar *fix_path (char *base_dir, char *temp)
 {
    // first, make slashes real ones for the platform.
-   gchar *curr = g_strdup(base_dir);
+   gchar *curr = g_strdup (base_dir);
 
-   gchar *infile = fix_separators(temp);
+   gchar *infile = fix_separators (temp);
 
    //gchar *pointer = infile;
 
 
-   gchar *out_path = g_strdup_printf("%s",curr);
+   gchar *out_path = g_strdup_printf ("%s",curr);
    gchar *current_path = 0;
 
 
-   if (!g_path_is_absolute(infile)) {
+   if (!g_path_is_absolute (infile)) {
       int co;
-      for (co = 0; co < (int)strlen(infile); co++) {
+      for (co = 0; co < (int)strlen (infile); co++) {
          char ch = infile[co];
 
-         if (!is_separator(ch)) {
+         if (!is_separator (ch)) {
 
             if (current_path != NULL) {
-               gchar *buf = g_strdup_printf("%s%c", current_path, ch);
+               gchar *buf = g_strdup_printf ("%s%c", current_path, ch);
 
-               g_free(current_path);
+               g_free (current_path);
 
                current_path = buf;
 
             } else {
-               current_path = g_strdup_printf("%c", ch);
+               current_path = g_strdup_printf ("%c", ch);
             }
 
          } else {
             //g_print("%s\n",current_path);
 
-            if (strcmp(current_path, "..") == 0) {
+            if (strcmp (current_path, "..") == 0) {
                //g_print("Up! curr:%s\n",out_path);
 
                //file_pointer = &infile[co];
 
-               gchar *buf = path_up_string(out_path);
+               gchar *buf = path_up_string (out_path);
 
-               g_free(out_path);
+               g_free (out_path);
                out_path = buf;
 
-               g_free(current_path);
+               g_free (current_path);
                current_path = 0;
 
             }
@@ -201,14 +201,14 @@ gchar *fix_path(char *base_dir, char *temp)
 
    } while((tempfile[0] == '.') && (tempfile[0] == G_DIR_SEPARATOR));
 
-   if (current_path != 0) g_free(current_path);
+   if (current_path != 0) g_free (current_path);
 
    //gchar *new_res = g_strdup_printf("%s%c%s",out_path,G_DIR_SEPARATOR,get_filename_from_full_path(file_pointer));
-   gchar *new_res = g_strdup_printf("%s%c%s", out_path, G_DIR_SEPARATOR, tempfile);
+   gchar *new_res = g_strdup_printf ("%s%c%s", out_path, G_DIR_SEPARATOR, tempfile);
 
-   if (infile != 0) g_free(infile);
+   if (infile != 0) g_free (infile);
 
-   g_free(curr);
+   g_free (curr);
    //g_free(infile);
 
    return new_res;
@@ -218,14 +218,14 @@ gchar *fix_path(char *base_dir, char *temp)
 /**
  *
  */
-void init_file_utils()
+void init_file_utils ()
 {
-   gchar *temp = g_get_current_dir();
-   current_directory = fix_separators(temp);
+   gchar *temp = g_get_current_dir ();
+   current_directory = fix_separators (temp);
 
    g_free(temp);
 
-   if (current_directory[strlen(current_directory) - 1] != G_DIR_SEPARATOR) {
+   if (current_directory[strlen (current_directory) - 1] != G_DIR_SEPARATOR) {
 
    }
 }
@@ -234,13 +234,13 @@ void init_file_utils()
 /**
  *	get_filename_from_full_path
  */
-gchar *get_filename_from_full_path(gchar *src)
+gchar *get_filename_from_full_path (gchar *src)
 {
    gchar *pointer;
    gchar *result = NULL;
    gboolean slashFound = FALSE;
 
-   g_assert(src != NULL);
+   g_assert (src != NULL);
 
    pointer = src;
 
@@ -272,10 +272,10 @@ gchar *get_filename_from_full_path(gchar *src)
  * @param basePath is the base file path against which the relative path is determined; pass NULL if the current working directory should be used as the base path
  * @param err returns any errors
  */
-gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, const gchar *basePath, GError **err)
+gboolean abs_path_to_relative_path (const gchar *absPath, gchar **relativePath, const gchar *basePath, GError **err)
 {
-   g_assert(absPath != NULL);
-   g_assert(relativePath != NULL);
+   g_assert (absPath != NULL);
+   g_assert (relativePath != NULL);
 
    gboolean finalResult = FALSE;
    gchar *localBasePath = NULL;
@@ -286,8 +286,8 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
    int dirSlashOffset = 0;
 
 
-   if (!g_path_is_absolute(absPath)) {
-      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Specified path, '%s', is not absolute", __func__ , absPath);
+   if (!g_path_is_absolute (absPath)) {
+      g_set_error (err, APP_SCITEPROJ_ERROR, -1, "%s: Specified path, '%s', is not absolute", __func__ , absPath);
 
       goto EXITPOINT;
    }
@@ -295,10 +295,10 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
    // If no basepath specified, use current working dir
 
    if (!basePath) {
-      workingDir = getcwd(NULL, 0);
+      workingDir = getcwd (NULL, 0);
 
       if (!workingDir) {
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Could not determine current working directory, getcwd() = NULL, errno = %d", __func__ , errno);
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1, "%s: Could not determine current working directory, getcwd() = NULL, errno = %d", __func__ , errno);
 
          goto EXITPOINT;
       }
@@ -309,14 +309,14 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 
    // Set up a local copy of the base path, and ensure it ends with a '/'
 
-   if (!str_append(&localBasePath, basePath, err)) {
+   if (!str_append (&localBasePath, basePath, err)) {
       goto EXITPOINT;
    }
 
    localBasePathLength = strlen(localBasePath);
 
    if (localBasePathLength <= 0 || localBasePath[localBasePathLength - 1] != G_DIR_SEPARATOR) {
-      if (!str_append(&localBasePath, G_DIR_SEPARATOR_S, err)) {
+      if (!str_append (&localBasePath, G_DIR_SEPARATOR_S, err)) {
          goto EXITPOINT;
       }
 
@@ -326,7 +326,7 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 
    // Start relative path with local dir
 
-   if (!str_append(relativePath, "./", err)) {
+   if (!str_append (relativePath, "./", err)) {
       goto EXITPOINT;
    }
 
@@ -344,7 +344,7 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 
    for (i = dirSlashOffset; i < localBasePathLength; ++i) {
       if (localBasePath[i] == G_DIR_SEPARATOR) {
-         if (!str_append(relativePath, "../", err)) {
+         if (!str_append (relativePath, "../", err)) {
             goto EXITPOINT;
          }
       }
@@ -352,7 +352,7 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 
    // Finally, add the leftover part of the absolute path
 
-   if (!str_append(relativePath, absPath + dirSlashOffset, err)) {
+   if (!str_append (relativePath, absPath + dirSlashOffset, err)) {
       goto EXITPOINT;
    }
 
@@ -362,7 +362,7 @@ gboolean abs_path_to_relative_path(const gchar *absPath, gchar **relativePath, c
 EXITPOINT:
 
    free(workingDir);
-   if (localBasePath) g_free(localBasePath);
+   if (localBasePath) g_free (localBasePath);
 
    return finalResult;
 }
@@ -378,10 +378,10 @@ EXITPOINT:
  * @param basePath is the base file path used to formulate the absolute path; pass NULL if the current working directory should be used as the base path
  * @param err returns any errors
  */
-gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const gchar *basePath, GError **err)
+gboolean relative_path_to_abs_path (gchar *relativePath, gchar **absPath, const gchar *basePath, GError **err)
 {
-   g_assert(absPath != NULL);
-   g_assert(relativePath != NULL);
+   g_assert (absPath != NULL);
+   g_assert (relativePath != NULL);
 
    int i=0;
    gboolean finalResult = FALSE;
@@ -399,8 +399,8 @@ gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const g
    // On GNU/Linux check if first character is '/', and on windows check for something
    // like "C:" in the beginning of the string
    if (relativePath[0] == G_DIR_SEPARATOR) {
-      g_set_error(err, APP_SCITEPROJ_ERROR, -1, "%s: Specified path, '%s', is absolute", __func__ , relativePath);
-      g_print("Separator at birth.\n");
+      g_set_error (err, APP_SCITEPROJ_ERROR, -1, "%s: Specified path, '%s', is absolute", __func__ , relativePath);
+      g_print ("Separator at birth.\n");
       goto EXITPOINT;
    }
 
@@ -415,57 +415,57 @@ gboolean relative_path_to_abs_path(gchar *relativePath, gchar **absPath, const g
 
    // Absolute path is base path + '/' + relative path
 
-   if (!str_append(&localAbsPath, basePath, err)) {
+   if (!str_append (&localAbsPath, basePath, err)) {
       goto EXITPOINT;
    }
 
-   if (!str_append(&localAbsPath, G_DIR_SEPARATOR_S, err)) {
+   if (!str_append (&localAbsPath, G_DIR_SEPARATOR_S, err)) {
       goto EXITPOINT;
    }
 
    //// Only do this if the relativepath REALLY is a realative path.
-   if (!str_append(&localAbsPath, relativePath, err)) {
+   if (!str_append (&localAbsPath, relativePath, err)) {
       goto EXITPOINT;
    }
 
    // Now go through and collapse elements like  "/./" and "/foo/../" and "//"
 
-   absPathLength = strlen(localAbsPath);
+   absPathLength = strlen (localAbsPath);
 
    for (i = 0; i < absPathLength; ) {
       gchar *tail = NULL;
       int tailLength;
 
-      if (g_str_has_prefix(localAbsPath + i, "/./")) {
+      if (g_str_has_prefix (localAbsPath + i, "/./")) {
          tail = localAbsPath + i + 2;
          tailLength = absPathLength - i - 1;
       }
-      else if (g_str_has_prefix(localAbsPath + i, "\\./")) {
+      else if (g_str_has_prefix (localAbsPath + i, "\\./")) {
          tail = localAbsPath + i + 2;
          tailLength = absPathLength - i - 1;
       }
-      else if (g_str_has_prefix(localAbsPath + i, "\\.\\")) {
+      else if (g_str_has_prefix (localAbsPath + i, "\\.\\")) {
          tail = localAbsPath + i + 2;
          tailLength = absPathLength - i - 1;
       }
-      else if (g_str_has_prefix(localAbsPath + i, "//")) {
+      else if (g_str_has_prefix (localAbsPath + i, "//")) {
          tail = localAbsPath + i + 1;
          tailLength = absPathLength - i;
       }
       else if (
-          (g_str_has_prefix(localAbsPath + i, "/../")) ||
-          (g_str_has_prefix(localAbsPath + i, "\\..\\"))
+          (g_str_has_prefix (localAbsPath + i, "/../")) ||
+          (g_str_has_prefix (localAbsPath + i, "\\..\\"))
       ) {
          tail = localAbsPath + i + 3;
          tailLength = absPathLength - i - 2;
 
          do {
             i = (i > 0) ? i - 1 : 0;
-         } while (i > 0 && !is_separator(localAbsPath[i])/* != G_DIR_SEPARATOR*/);
+         } while (i > 0 && !is_separator (localAbsPath[i])/* != G_DIR_SEPARATOR*/);
       }
 
       if (tail != NULL) {
-         memmove(localAbsPath + i, tail, tailLength);
+         memmove (localAbsPath + i, tail, tailLength);
 
          absPathLength -= (tail - localAbsPath - i);
       }
@@ -492,9 +492,9 @@ EXITPOINT:
 /**
  *
  */
-gchar *get_file_extension(gchar *filename)
+gchar *get_file_extension (gchar *filename)
 {
-   gchar *result = g_strrstr(filename, ".");
+   gchar *result = g_strrstr (filename, ".");
 
    if (!result) result = "";
 
@@ -505,15 +505,15 @@ gchar *get_file_extension(gchar *filename)
 /**
  *
  */
-int get_number_of_files_in_folder(gchar *folder_name)
+int get_number_of_files_in_folder (gchar *folder_name)
 {
    int result = 0;
 
    GSList *file_list;
    GSList *folder_list;
 
-   file_list = load_folder_to_list(folder_name, FALSE, file_sort_by_extension_bigger_func, NULL);
-   folder_list = load_folder_to_list(folder_name, TRUE, compare_strings_bigger, NULL);
+   file_list = load_folder_to_list (folder_name, FALSE, file_sort_by_extension_bigger_func, NULL);
+   folder_list = load_folder_to_list (folder_name, TRUE, compare_strings_bigger, NULL);
 
    if (file_list) {
       while (file_list)	{
@@ -529,11 +529,11 @@ int get_number_of_files_in_folder(gchar *folder_name)
       };
    }
 
-   g_slist_foreach(file_list, (GFunc)g_free, NULL);
-   g_slist_free(file_list);
+   g_slist_foreach (file_list, (GFunc)g_free, NULL);
+   g_slist_free (file_list);
 
-   g_slist_foreach(folder_list, (GFunc)g_free, NULL);
-   g_slist_free(folder_list);
+   g_slist_foreach (folder_list, (GFunc)g_free, NULL);
+   g_slist_free (folder_list);
 
    return result;
 }
@@ -544,15 +544,15 @@ int get_number_of_files_in_folder(gchar *folder_name)
  * @return gboolean TRUE if the entered string represent a folder in the
  *         systems folder structure.
  */
-gboolean is_string_folder(gchar *instring)
+gboolean is_string_folder (gchar *instring)
 {
    gboolean result = FALSE;
 
-   GDir *dir = g_dir_open(instring, 0, NULL);
+   GDir *dir = g_dir_open (instring, 0, NULL);
 
    if (dir) {
       result = TRUE;
-      g_dir_close(dir);
+      g_dir_close (dir);
    }
 
    return result;
@@ -562,12 +562,12 @@ gboolean is_string_folder(gchar *instring)
 /**
  *
  */
-gchar *clean_folder(gchar *infolder)
+gchar *clean_folder (gchar *infolder)
 {
    gchar *result = NULL;
 
-   if (g_strcmp0(infolder, "./") == 0) {
-      result = g_strdup_printf(".");
+   if (g_strcmp0 (infolder, "./") == 0) {
+      result = g_strdup_printf (".");
 
       return result;
    }
@@ -576,7 +576,7 @@ gchar *clean_folder(gchar *infolder)
 
       gchar *temp = infolder;
 
-      int len = strlen(temp);
+      int len = strlen (temp);
 
       if ((temp[0] == '.') && (temp[1] == G_DIR_SEPARATOR)) {
 
@@ -585,9 +585,9 @@ gchar *clean_folder(gchar *infolder)
       }
 
       if (temp[len - 1] == G_DIR_SEPARATOR) {
-         result = g_strndup(temp, len - 1);
+         result = g_strndup (temp, len - 1);
       } else {
-         result = g_strdup(temp);
+         result = g_strdup (temp);
       }
    }
 

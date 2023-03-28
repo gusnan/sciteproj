@@ -24,13 +24,13 @@
 
 /* extern gchar *sVersion;*/
 
-void show_about_dialog();
-void show_usage_dialog();
+void show_about_dialog ();
+void show_usage_dialog ();
 
-void show_version();
+void show_version ();
 
-void init_version_string();
-void done_version_string();
+void init_version_string ();
+void done_version_string ();
 
 extern gchar *version_string;
 

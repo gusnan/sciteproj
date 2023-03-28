@@ -53,7 +53,7 @@ static struct CommandLineIndata {
 /*
  *		Program main entry
  */
-int main(int argc, char *argv[])
+int main (int argc, char *argv[])
 {
    int returnCode = EXIT_FAILURE;
    GError *err = NULL;
@@ -81,26 +81,26 @@ int main(int argc, char *argv[])
    };
 
    // Init gettext stuff
-   setlocale(LC_ALL, "");
+   setlocale (LC_ALL, "");
 
-   bindtextdomain(PACKAGE, LOCALEDIR);
-   bind_textdomain_codeset(PACKAGE, "");
-   textdomain(PACKAGE);
+   bindtextdomain (PACKAGE, LOCALEDIR);
+   bind_textdomain_codeset (PACKAGE, "");
+   textdomain (PACKAGE);
 
-   gchar *sciteproj_description = g_strdup_printf(_("SciTE Project Manager"));
+   gchar *sciteproj_description = g_strdup_printf (_("SciTE Project Manager"));
 
-   gchar *full_desc_string = g_strdup_printf("- %s",sciteproj_description);
+   gchar *full_desc_string = g_strdup_printf ("- %s",sciteproj_description);
 
-   context = g_option_context_new(full_desc_string);
-   g_option_context_add_main_entries(context, options, NULL);
-   if (!g_option_context_parse(context, &argc, &argv, &err)) {
-      g_print(_("option parsing failed: %s"), err->message);
-      printf("\n");
-      exit(EXIT_FAILURE);
+   context = g_option_context_new (full_desc_string);
+   g_option_context_add_main_entries (context, options, NULL);
+   if (!g_option_context_parse (context, &argc, &argv, &err)) {
+      g_print (_("option parsing failed: %s"), err->message);
+      printf ("\n");
+      exit (EXIT_FAILURE);
    }
 
-   g_free(sciteproj_description);
-   g_free(full_desc_string);
+   g_free (sciteproj_description);
+   g_free (full_desc_string);
 
    /*
       Interpret the options
@@ -112,22 +112,22 @@ int main(int argc, char *argv[])
       cmd.scite_filename = scite_instance;
    }
 
-   init_version_string();
+   init_version_string ();
 
    /*
       Show SciteProj version
    */
    if (version) {
-      show_version();
-      printf("\n");
-      done_version_string();
-      exit(EXIT_SUCCESS);
+      show_version ();
+      printf ("\n");
+      done_version_string ();
+      exit (EXIT_SUCCESS);
    }
 
    // Init gtk
-   gtk_init(&argc, &argv);
+   gtk_init (&argc, &argv);
 
-   gtk_icon_theme_add_resource_path(gtk_icon_theme_get_default(), SP_RESOURCE_PATH_ICONS);
+   gtk_icon_theme_add_resource_path (gtk_icon_theme_get_default(), SP_RESOURCE_PATH_ICONS);
 
    // Since glib 2.36, this isn't needed
    /*
@@ -136,13 +136,13 @@ int main(int argc, char *argv[])
 #endif
 */
 
-   init_file_utils();
+   init_file_utils ();
 
-   gchar *current_dir = g_get_current_dir();
+   gchar *current_dir = g_get_current_dir ();
 
    if (argc > 2) {
-      printf(_("A folder is expected as parameter to sciteproj..."));
-      printf("\n");
+      printf (_("A folder is expected as parameter to sciteproj..."));
+      printf ("\n");
       return EXIT_FAILURE;
    }
 
@@ -155,13 +155,13 @@ int main(int argc, char *argv[])
 
       gchar *newpath;
 
-      if (relative_path_to_abs_path(dir_to_load, &newpath, current_dir, NULL)) {
+      if (relative_path_to_abs_path (dir_to_load, &newpath, current_dir, NULL)) {
          dir_to_load = newpath;
       }
    }
 
    // Init preferences
-   if (!init_prefs(dir_to_load, &err)) {
+   if (!init_prefs (dir_to_load, &err)) {
       /*
       g_print(_("Error initing preferences: %s"), err->message);
       done_version_string();
@@ -170,27 +170,27 @@ int main(int argc, char *argv[])
    }
 
    // check environment variable
-   gchar *scite_path_env = getenv("SciTE_HOME");
+   gchar *scite_path_env = getenv ("SciTE_HOME");
 
    // test for scite
    if (scite_path_env != NULL) {
-      gchar *env_filename = g_build_filename(scite_path_env, "scite", NULL);
-      if (g_file_test(env_filename, G_FILE_TEST_EXISTS)) {
+      gchar *env_filename = g_build_filename (scite_path_env, "scite", NULL);
+      if (g_file_test (env_filename, G_FILE_TEST_EXISTS)) {
          if (cmd.scite_filename == NULL) {
-            cmd.scite_filename = g_strdup(env_filename);
+            cmd.scite_filename = g_strdup (env_filename);
          }
       } else {
          g_warning(_("Environment variable exists, but doesn't point to a folder containing scite."));
       }
 
-      if (env_filename != NULL) g_free(env_filename);
-      env_filename = g_build_filename(scite_path_env, "SciTE", NULL);
-      if (g_file_test(env_filename, G_FILE_TEST_EXISTS)) {
+      if (env_filename != NULL) g_free (env_filename);
+      env_filename = g_build_filename (scite_path_env, "SciTE", NULL);
+      if (g_file_test (env_filename, G_FILE_TEST_EXISTS)) {
          if (cmd.scite_filename == NULL) {
             cmd.scite_filename = g_strdup(env_filename);
          }
       } else {
-         g_warning(_("Environment variable exists, but doesn't point to a folder containing scite."));
+         g_warning (_("Environment variable exists, but doesn't point to a folder containing scite."));
       }
    }
 
@@ -198,17 +198,17 @@ int main(int argc, char *argv[])
    if (cmd.scite_filename != NULL) {
 
       // Does SciTE exist at that location?
-      if (g_file_test(cmd.scite_filename, G_FILE_TEST_IS_REGULAR)) {
+      if (g_file_test (cmd.scite_filename, G_FILE_TEST_IS_REGULAR)) {
 
          // If we have already allocated memory for scite path, free it
-         if (prefs.scite_path != NULL) g_free(prefs.scite_path);
+         if (prefs.scite_path != NULL) g_free (prefs.scite_path);
 
          // Set the new one
-         prefs.scite_path = g_strdup(cmd.scite_filename);
+         prefs.scite_path = g_strdup (cmd.scite_filename);
 
       } else {
-         g_print(_("Couldn't find a SciTE executable named '%s'!\n"), cmd.scite_filename);
-         g_print(_("Checking for SciTE in the standard locations instead.\n"));
+         g_print (_("Couldn't find a SciTE executable named '%s'!\n"), cmd.scite_filename);
+         g_print (_("Checking for SciTE in the standard locations instead.\n"));
       }
    }
 
@@ -219,59 +219,59 @@ int main(int argc, char *argv[])
     */
 
    // Check for SciTE
-   if (!check_if_scite_exists()) {
-      GtkWidget *warningDialog = gtk_message_dialog_new(get_main_window(), GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,
+   if (!check_if_scite_exists ()) {
+      GtkWidget *warningDialog = gtk_message_dialog_new (get_main_window (), GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_OK,
                                  _("Warning! Couldn't locate SciTE!\n"
                                    "Program will start, but you won't be able to open SciTE to edit files."));
-      gtk_dialog_run(GTK_DIALOG(warningDialog));
-      gtk_widget_destroy(warningDialog);
+      gtk_dialog_run (GTK_DIALOG (warningDialog));
+      gtk_widget_destroy (warningDialog);
    }
 
    // Set up the GUI
-   if (!setup_gui(&err)) {
-      g_print(_("Could not setup the gui: %s"), err->message);
-      g_print("\n");
+   if (!setup_gui (&err)) {
+      g_print (_("Could not setup the gui: %s"), err->message);
+      g_print ("\n");
       goto EXITPOINT;
    }
 
-   if (!is_string_folder(dir_to_load)) {
-      printf(_("Not a valid folder!"));
-      printf("\n");
+   if (!is_string_folder (dir_to_load)) {
+      printf (_("Not a valid folder!"));
+      printf ("\n");
       return EXIT_FAILURE;
    }
 
    // Should we load a folder?
-   set_project_filepath(dir_to_load, NULL);
+   set_project_filepath (dir_to_load, NULL);
 
-   load_folder(dir_to_load, NULL);
+   load_folder (dir_to_load, NULL);
 
-   init_scite_connection();
+   init_scite_connection ();
 
    // open scite, if prefs says we should
    if (prefs.start_scite == TRUE || start_scite) {
-      launch_scite("", NULL);
+      launch_scite ("", NULL);
    }
 
    // Run the app
 
-   gtk_main();
+   gtk_main ();
 
    returnCode = EXIT_SUCCESS;
 
 EXITPOINT:
 
-   gui_close();
+   gui_close ();
 
-   done_prefs();
+   done_prefs ();
 
    // to release the file monitor list
-   done_treestore();
+   done_treestore ();
 
-   done_version_string();
+   done_version_string ();
 
-   g_free(current_dir);
+   g_free (current_dir);
 
-   if (err) g_error_free(err);
+   if (err) g_error_free (err);
 
    return returnCode;
 }

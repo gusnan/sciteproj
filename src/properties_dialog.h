@@ -22,11 +22,11 @@
 #ifndef __HEADER_PROPERTIES_DIALOG_
 #define __HEADER_PROPERTIES_DIALOG_
 
-void group_properties_gui(GtkTreeModel *model, GtkTreeIter *iter);
-void file_properties_gui(GtkTreeModel *model, GtkTreeIter *iter);
+void group_properties_gui (GtkTreeModel *model, GtkTreeIter *iter);
+void file_properties_gui (GtkTreeModel *model, GtkTreeIter *iter);
 
 
-void group_properties_cb();
-void file_properties_cb();
+void group_properties_cb ();
+void file_properties_cb ();
 
 #endif /*__HEADER_PROPERTIES_DIALOG_*/

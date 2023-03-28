@@ -74,73 +74,73 @@ enum {
 
 
 
-typedef gint(*StringCompareFunction)(gconstpointer,gconstpointer);
+typedef gint(*StringCompareFunction) (gconstpointer,gconstpointer);
 
 
 // Set the Project filepath
-gboolean set_project_filepath(const gchar *filepath, GError **err);
+gboolean set_project_filepath (const gchar *filepath, GError **err);
 
 // Get the GTKTreeStore
-GtkTreeStore* create_treestore(GError **err);
+GtkTreeStore* create_treestore (GError **err);
 
 void done_treestore();
 
 // Get the project file directory
-const gchar* get_project_directory();
+const gchar* get_project_directory ();
 
-gboolean tree_iter_is_valid(GtkTreeIter *iter);
+gboolean tree_iter_is_valid (GtkTreeIter *iter);
 
 // Allow user to select and add files to the project
-gboolean add_files_to_project(GtkTreeIter *parentIter, GError **err);
+gboolean add_files_to_project (GtkTreeIter *parentIter, GError **err);
 
 // Add a file node to a GtkTreeModel
-gboolean add_tree_file(GtkTreeIter *currentIter,
-                       enum NodePosition position,
-                       const gchar* filepath,
-                       GtkTreeIter *newIter,
-                       gboolean makeRelative,
-                       GError **err);
+gboolean add_tree_file (GtkTreeIter *currentIter,
+                        enum NodePosition position,
+                        const gchar* filepath,
+                        GtkTreeIter *newIter,
+                        gboolean makeRelative,
+                        GError **err);
 
 //gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **err);
-gboolean add_tree_filelist(GtkTreeIter *parentIter, GSList *fileList, GError **err);
+gboolean add_tree_filelist (GtkTreeIter *parentIter, GSList *fileList, GError **err);
 
 // Add a group node to a GtkTreeModel
-gboolean add_tree_group(GtkTreeIter *parentIter,
-                        enum NodePosition position,
-                        const gchar* groupname,
-                        const gchar* full_name,
-                        gboolean expanded,
-                        GtkTreeIter *newIter,
-                        GError **err);
+gboolean add_tree_group (GtkTreeIter *parentIter,
+                         enum NodePosition position,
+                         const gchar* groupname,
+                         const gchar* full_name,
+                         gboolean expanded,
+                         GtkTreeIter *newIter,
+                         GError **err);
 
 // Remove a node from a GtkTreeModel
-gboolean remove_tree_node(GtkTreeIter *iter, GError **err);
+gboolean remove_tree_node (GtkTreeIter *iter, GError **err);
 
-gboolean set_tree_node_expanded(GtkTreeIter *iter, gboolean expanded, GError **err);
+gboolean set_tree_node_expanded (GtkTreeIter *iter, gboolean expanded, GError **err);
 
-gboolean set_tree_node_icon(GtkTreeIter *iter, GdkPixbuf *pixbuf, GError **err);
+gboolean set_tree_node_icon (GtkTreeIter *iter, GdkPixbuf *pixbuf, GError **err);
 
-gboolean set_tree_node_loaded(GtkTreeIter *iter, gboolean loaded, GError **err);
+gboolean set_tree_node_loaded (GtkTreeIter *iter, gboolean loaded, GError **err);
 
-gboolean set_tree_node_sort_order(GtkTreeIter *iter, gint sort_order, GError **err);
+gboolean set_tree_node_sort_order (GtkTreeIter *iter, gint sort_order, GError **err);
 
 // Copy a node in the tree (including children)
-gboolean copy_tree_node(GtkTreeIter *srcIter,
-                        GtkTreeIter *dstIter,
-                        enum NodePosition position,
-                        GtkTreeIter *newIter,
-                        GError **err);
+gboolean copy_tree_node (GtkTreeIter *srcIter,
+                         GtkTreeIter *dstIter,
+                         enum NodePosition position,
+                         GtkTreeIter *newIter,
+                         GError **err);
 
-gchar *get_path_string(GtkTreeIter *iter);
+gchar *get_path_string (GtkTreeIter *iter);
 
-void sort_children(GtkTreeIter *node, GError **err, StringCompareFunction compare_func);
+void sort_children (GtkTreeIter *node, GError **err, StringCompareFunction compare_func);
 
-gboolean add_tree_folderlist(GtkTreeIter *iter, GSList *folder_list, gchar *folder_path);
+gboolean add_tree_folderlist (GtkTreeIter *iter, GSList *folder_list, gchar *folder_path);
 
 GtkTreeIter *find_element_with_path (GtkTreeIter *start_iter, gchar *path_to_find);
 
 #ifdef _DEBUG
-void print_node(GtkTreeIter *iter);
+void print_node (GtkTreeIter *iter);
 #endif
 
 #endif /*__HEADER_TREE_MANIPULATION_*/

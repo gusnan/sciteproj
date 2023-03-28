@@ -29,15 +29,15 @@
 extern GtkWidget *recentTreeView;
 //extern GtkWidget *recentPopupMenu;
 
-GtkWidget *init_recent_files(GError **err);
+GtkWidget *init_recent_files (GError **err);
 
-gboolean add_file_to_recent(gchar *filepath, GError **err);
+gboolean add_file_to_recent (gchar *filepath, GError **err);
 
-void popup_open_recent_file_cb();
-void popup_remove_recent_file_cb();
+void popup_open_recent_file_cb ();
+void popup_remove_recent_file_cb ();
 
-void copy_recent_filename_to_clipboard_cb();
+void copy_recent_filename_to_clipboard_cb ();
 
-void properties_recent_file_cb();
+void properties_recent_file_cb ();
 
 #endif /*__HEADER_RECENT_FILES_*/

@@ -58,53 +58,53 @@ GdkCursor *busy_cursor = NULL;
  * @param widget - we need a widget for the gtk_widget_render_icon function
  *
  */
-gboolean load_graphics(GtkWidget *widget, GError **err)
+gboolean load_graphics (GtkWidget *widget, GError **err)
 {
    GtkIconTheme *icon_theme;
 
-   icon_theme = gtk_icon_theme_get_default();
+   icon_theme = gtk_icon_theme_get_default ();
 
    gchar *program_icon_resource;
-   program_icon_resource = g_build_filename(SP_RESOURCE_PATH_ICONS,
+   program_icon_resource = g_build_filename (SP_RESOURCE_PATH_ICONS,
                                             PIXBUF_INLINE_PROGRAM_ICON
                                             ".png", NULL);
 
-   program_icon_pixbuf = gdk_pixbuf_new_from_resource(program_icon_resource, NULL);
-   g_free(program_icon_resource);
+   program_icon_pixbuf = gdk_pixbuf_new_from_resource (program_icon_resource, NULL);
+   g_free (program_icon_resource);
 
    if (prefs.use_stock_folder_icon) {
-      printf("Use stock folder icon!\n");
+      printf ("Use stock folder icon!\n");
       // use GTK_STOCK_DIRECTORY
-      directory_closed_pixbuf = gtk_icon_theme_load_icon(icon_theme, "folder", 14, 0, NULL);
-      directory_open_pixbuf = gtk_icon_theme_load_icon(icon_theme, "folder", 14, 0, NULL);
+      directory_closed_pixbuf = gtk_icon_theme_load_icon (icon_theme, "folder", 14, 0, NULL);
+      directory_open_pixbuf = gtk_icon_theme_load_icon (icon_theme, "folder", 14, 0, NULL);
 
    } else {
 
       gchar *resource_path_directory_open;
 
-      resource_path_directory_open = g_build_filename(SP_RESOURCE_PATH_ICONS,
+      resource_path_directory_open = g_build_filename (SP_RESOURCE_PATH_ICONS,
                                                       PIXBUF_INLINE_DIRECTORY_OPEN
                                                       ".png", NULL);
 
-      directory_open_pixbuf = gdk_pixbuf_new_from_resource(resource_path_directory_open, NULL);
-      g_free(resource_path_directory_open);
+      directory_open_pixbuf = gdk_pixbuf_new_from_resource (resource_path_directory_open, NULL);
+      g_free (resource_path_directory_open);
 
       gchar *resource_path_directory_closed;
 
-      resource_path_directory_closed = g_build_filename(SP_RESOURCE_PATH_ICONS,
-                                                        PIXBUF_INLINE_DIRECTORY_CLOSED
-                                                        ".png", NULL);
+      resource_path_directory_closed = g_build_filename (SP_RESOURCE_PATH_ICONS,
+                                                         PIXBUF_INLINE_DIRECTORY_CLOSED
+                                                         ".png", NULL);
 
-      directory_closed_pixbuf = gdk_pixbuf_new_from_resource(resource_path_directory_closed, NULL);
-      g_free(resource_path_directory_closed);
+      directory_closed_pixbuf = gdk_pixbuf_new_from_resource (resource_path_directory_closed, NULL);
+      g_free (resource_path_directory_closed);
    }
 
    GdkDisplay *default_display;
 
-   default_display = gdk_display_get_default();
+   default_display = gdk_display_get_default ();
 
-   standard_cursor = gdk_cursor_new_for_display(default_display, GDK_X_CURSOR);
-   busy_cursor = gdk_cursor_new_for_display(default_display, GDK_WATCH);
+   standard_cursor = gdk_cursor_new_for_display (default_display, GDK_X_CURSOR);
+   busy_cursor = gdk_cursor_new_for_display (default_display, GDK_WATCH);
 
    return TRUE;
 }
@@ -115,10 +115,10 @@ gboolean load_graphics(GtkWidget *widget, GError **err)
  */
 void unload_graphics()
 {
-   if (program_icon_pixbuf != NULL) g_object_unref(program_icon_pixbuf);
+   if (program_icon_pixbuf != NULL) g_object_unref (program_icon_pixbuf);
 
-   if (directory_closed_pixbuf != NULL) g_object_unref(directory_closed_pixbuf);
-   if (directory_open_pixbuf != NULL) g_object_unref(directory_open_pixbuf);
+   if (directory_closed_pixbuf != NULL) g_object_unref (directory_closed_pixbuf);
+   if (directory_open_pixbuf != NULL) g_object_unref (directory_open_pixbuf);
 }
 
 
@@ -126,7 +126,7 @@ void unload_graphics()
  *
  */
 GdkPixbuf *
-get_pixbuf_from_icon(GIcon *icon, GtkIconSize size)
+get_pixbuf_from_icon (GIcon *icon, GtkIconSize size)
 {
    GdkPixbuf *result = NULL;
    GtkIconTheme *theme;
@@ -136,10 +136,10 @@ get_pixbuf_from_icon(GIcon *icon, GtkIconSize size)
    if (!icon)
       return NULL;
 
-   theme = gtk_icon_theme_get_default();
-   gtk_icon_size_lookup(size, &width, NULL);
+   theme = gtk_icon_theme_get_default ();
+   gtk_icon_size_lookup (size, &width, NULL);
 
-   info = gtk_icon_theme_lookup_by_gicon(theme,
+   info = gtk_icon_theme_lookup_by_gicon (theme,
                                        icon,
                                        width,
                                        GTK_ICON_LOOKUP_USE_BUILTIN);
@@ -147,7 +147,7 @@ get_pixbuf_from_icon(GIcon *icon, GtkIconSize size)
    if (!info)
       return NULL;
 
-   result = gtk_icon_info_load_icon(info, NULL);
+   result = gtk_icon_info_load_icon (info, NULL);
 
    return result;
 }
@@ -157,29 +157,29 @@ get_pixbuf_from_icon(GIcon *icon, GtkIconSize size)
  *
  */
 GdkPixbuf *
-get_pixbuf_from_file(GFile *file, GtkIconSize size)
+get_pixbuf_from_file (GFile *file, GtkIconSize size)
 {
    GIcon *icon;
    GFileInfo *info;
 
    GdkPixbuf *result = NULL;
 
-   info = g_file_query_info(file,
-                          G_FILE_ATTRIBUTE_STANDARD_ICON,
-                          G_FILE_QUERY_INFO_NONE,
-                          NULL,
-                          NULL);
+   info = g_file_query_info (file,
+                             G_FILE_ATTRIBUTE_STANDARD_ICON,
+                             G_FILE_QUERY_INFO_NONE,
+                             NULL,
+                             NULL);
 
    if (!info)
       return NULL;
 
-   icon = g_file_info_get_icon(info);
+   icon = g_file_info_get_icon (info);
 
    if (icon != NULL) {
-      result = get_pixbuf_from_icon(icon, size);
+      result = get_pixbuf_from_icon (icon, size);
    }
 
-   g_object_unref(info);
+   g_object_unref (info);
 
    return result;
 }
@@ -189,11 +189,11 @@ get_pixbuf_from_file(GFile *file, GtkIconSize size)
  *
  */
 GdkPixbuf *
-get_pixbuf_from_filename(gchar *filename, GtkIconSize size)
+get_pixbuf_from_filename (gchar *filename, GtkIconSize size)
 {
-   GFile *tempfile = g_file_new_for_path(filename);
+   GFile *tempfile = g_file_new_for_path (filename);
 
-   GdkPixbuf *result = get_pixbuf_from_file(tempfile, size);
+   GdkPixbuf *result = get_pixbuf_from_file (tempfile, size);
 
    return result;
 }

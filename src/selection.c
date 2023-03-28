@@ -151,7 +151,7 @@ void selection_changed_cb (GtkTreeSelection *tree_selection, gpointer user_data)
    if (new_path_string != NULL && old_path_string != NULL) {
 
       if (g_strcmp0 (new_path_string, old_path_string) != 0) {
-         gtk_tree_selection_unselect_all ( tree_selection);
+         gtk_tree_selection_unselect_all (tree_selection);
 
          if (added_path != NULL)
             gtk_tree_selection_select_path (tree_selection, added_path);
@@ -173,12 +173,12 @@ void selection_changed_cb (GtkTreeSelection *tree_selection, gpointer user_data)
 /**
  *
  */
-GList *get_list_of_marked_files()
+GList *get_list_of_marked_files ()
 {
    GList *list;
    GList *result_list = NULL;
 
-   GtkTreeModel *tree_model = gtk_tree_view_get_model(GTK_TREE_VIEW(projectTreeView));
+   GtkTreeModel *tree_model = gtk_tree_view_get_model (GTK_TREE_VIEW(projectTreeView));
 
    GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (projectTreeView));
 

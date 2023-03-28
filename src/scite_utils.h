@@ -29,26 +29,26 @@ extern gboolean scite_exists;
 
 // Fork a child process and launch Scite from it
 //gboolean launch_scite(gchar *sciteExecutableName, GError **err);
-gboolean launch_scite(gchar *instring, GError **err);
+gboolean launch_scite (gchar *instring, GError **err);
 
 
 // Send a command to Scite, launching Scite if necessary
-gboolean send_scite_command(gchar *command, GError **err);
+gboolean send_scite_command (gchar *command, GError **err);
 
 
 // Determine whether Scite is currently launched and the communication pipes are open
-gboolean scite_ready();
+gboolean scite_ready ();
 
 
 // Activate the SciTE window (i.e. bring it the front)
-gboolean activate_scite(GError **err);
+gboolean activate_scite (GError **err);
 
 
-gboolean check_if_scite_exists();
+gboolean check_if_scite_exists ();
 
-void init_scite_connection();
+void init_scite_connection ();
 
-gboolean open_filename(gchar *filename, gchar *project_directory, GError **err);
+gboolean open_filename (gchar *filename, gchar *project_directory, GError **err);
 
 
 #endif /*__HEADER_SCITE_UTILS_*/
