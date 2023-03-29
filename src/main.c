@@ -127,7 +127,7 @@ int main (int argc, char *argv[])
    // Init gtk
    gtk_init (&argc, &argv);
 
-   gtk_icon_theme_add_resource_path (gtk_icon_theme_get_default(), SP_RESOURCE_PATH_ICONS);
+   gtk_icon_theme_add_resource_path (gtk_icon_theme_get_default (), SP_RESOURCE_PATH_ICONS);
 
    // Since glib 2.36, this isn't needed
    /*
@@ -187,7 +187,7 @@ int main (int argc, char *argv[])
       env_filename = g_build_filename (scite_path_env, "SciTE", NULL);
       if (g_file_test (env_filename, G_FILE_TEST_EXISTS)) {
          if (cmd.scite_filename == NULL) {
-            cmd.scite_filename = g_strdup(env_filename);
+            cmd.scite_filename = g_strdup (env_filename);
          }
       } else {
          g_warning (_("Environment variable exists, but doesn't point to a folder containing scite."));
