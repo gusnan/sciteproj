@@ -18,10 +18,10 @@ DATADIR = ${DESTDIR}${PREFIX}/share
 LOCALEDIR = ${DATADIR}/locale
 
 SOURCES = about.c clipboard.c clicked_node.c create_folder.c delete.c \
-dialogs.c file_utils.c expand.c folder_config.c graphics.c gui.c \
-gui_callbacks.c load_folder.c main.c menus.c prefs.c properties_dialog.c \
-recent_files.c remove.c scite_utils.c script.c selection.c sort.c statusbar.c \
-string_utils.c tree_manipulation.c menus.h
+dialogs.c file_utils.c expand.c graphics.c gui.c gui_callbacks.c load_folder.c \
+'main.c menus.c prefs.c properties_dialog.c recent_files.c remove.c \
+scite_utils.c script.c selection.c sort.c statusbar.c string_utils.c \
+tree_manipulation.c menus.h
 
 XG_ARGS = --keyword=_ --keyword=N_ --keyword=NC_:1c,2 -w 80 --package-name=${NAME} --package-version=${VERSION} --msgid-bugs-address=andreas@ronnquist.net
 LANGUAGES = sv
