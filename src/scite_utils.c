@@ -843,7 +843,7 @@ gboolean check_if_scite_exists ()
  *		init_scite_connection
  *		currently doesn't do anything on GNU/Linux
  */
-void init_scite_connectio ()
+void init_scite_connection ()
 {
 
 }

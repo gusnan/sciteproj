@@ -272,7 +272,7 @@ int init_menus (GtkWidget *window)
 
    g_signal_connect (G_OBJECT (quitMenuItem), "activate", G_CALLBACK (quit_menu_cb), NULL);
 
-   recentPopupMenu = gtk_menu_ne w();
+   recentPopupMenu = gtk_menu_new ();
 
    recentMenuOpenFileItem = gtk_menu_item_new_with_mnemonic (_("Open file in SciTE"));
    recentMenuRemoveFileItem = gtk_menu_item_new_with_mnemonic (_("Remove file from this list"));
