@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-03-27 14:25+0200\n"
+"POT-Creation-Date: 2023-03-29 16:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,7 +54,7 @@ msgid ""
 "is provided with this package."
 msgstr ""
 
-#: about.c:349
+#: about.c:348
 #, c-format
 msgid "version %s"
 msgstr ""
@@ -80,15 +80,15 @@ msgstr ""
 msgid "The folder '%s' does already exist - cannot create it!"
 msgstr ""
 
-#: delete.c:124
+#: delete.c:128
 msgid "Delete files"
 msgstr ""
 
-#: dialogs.c:82 dialogs.c:213 dialogs.c:321
+#: dialogs.c:82 dialogs.c:215 dialogs.c:325
 msgid "_OK"
 msgstr ""
 
-#: dialogs.c:84 dialogs.c:323
+#: dialogs.c:84 dialogs.c:327
 msgid "_Cancel"
 msgstr ""
 
