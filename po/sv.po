@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sciteproj 1.60\n"
 "Report-Msgid-Bugs-To: andreas@ronnquist.net\n"
-"POT-Creation-Date: 2023-03-27 14:25+0200\n"
+"POT-Creation-Date: 2023-03-29 16:30+0200\n"
 "PO-Revision-Date: 2023-03-27 14:38+0200\n"
 "Last-Translator: Andreas Rönnquist <andreas@ronnquist.net>\n"
 "Language-Team: Swedish\n"
@@ -70,7 +70,7 @@ msgstr ""
 "För mer information om SciteProj, se README-filen som\n"
 "är bifogad med detta paket."
 
-#: about.c:349
+#: about.c:348
 #, c-format
 msgid "version %s"
 msgstr "version %s"
@@ -96,15 +96,15 @@ msgstr "Filen finns redan!"
 msgid "The folder '%s' does already exist - cannot create it!"
 msgstr "Mappen '%s' finns redan - kan inte skapa den!"
 
-#: delete.c:124
+#: delete.c:128
 msgid "Delete files"
 msgstr "Ta bort filer"
 
-#: dialogs.c:82 dialogs.c:213 dialogs.c:321
+#: dialogs.c:82 dialogs.c:215 dialogs.c:325
 msgid "_OK"
 msgstr "_OK"
 
-#: dialogs.c:84 dialogs.c:323
+#: dialogs.c:84 dialogs.c:327
 msgid "_Cancel"
 msgstr "Avbryt"
 
