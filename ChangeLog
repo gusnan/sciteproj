@@ -1,6 +1,10 @@
 
 ChangeLog:
 ----------
+
+1.71
+   * Fix a typo aready/already
+
 1.70
    * Add functionality to add a folder and file
    * Add functionality to delete files/folders
