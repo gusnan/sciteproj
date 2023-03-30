@@ -107,7 +107,7 @@ gboolean set_project_filepath (const gchar *filepath, GError **err)
          }
       }
 
-      if (sProjectDir[strlen(sProjectDir) - 1] == G_DIR_SEPARATOR) {
+      if (sProjectDir[strlen (sProjectDir) - 1] == G_DIR_SEPARATOR) {
          gchar *finalSlash = strrchr (sProjectDir, G_DIR_SEPARATOR);
 
          if (finalSlash != NULL) {
@@ -118,7 +118,7 @@ gboolean set_project_filepath (const gchar *filepath, GError **err)
    }
    //}
 
-   windowTitle = g_strdup_printf ("%s", get_filename_from_full_path(sProjectFilepath));
+   windowTitle = g_strdup_printf ("%s", get_filename_from_full_path (sProjectFilepath));
 
    set_window_title (windowTitle);
 
@@ -476,9 +476,9 @@ gboolean add_tree_file (GtkTreeIter *currentIter,
                         gboolean makeRelative,
                         GError **err)
 {
-   g_assert(sTreeStore != NULL);
-   g_assert(filepath != NULL);
-   g_assert(position == ADD_BEFORE || position == ADD_AFTER || position == ADD_CHILD);
+   g_assert (sTreeStore != NULL);
+   g_assert (filepath != NULL);
+   g_assert (position == ADD_BEFORE || position == ADD_AFTER || position == ADD_CHILD);
 
    gboolean finalResult = FALSE;
    GtkTreeIter iter;
@@ -810,8 +810,8 @@ gboolean copy_tree_node (GtkTreeIter *srcIter,
                          GtkTreeIter *newIter,
                          GError **err)
 {
-   g_assert(srcIter != NULL);
-   g_assert(position == ADD_BEFORE || position == ADD_AFTER || position == ADD_CHILD);
+   g_assert (srcIter != NULL);
+   g_assert (position == ADD_BEFORE || position == ADD_AFTER || position == ADD_CHILD);
 
    gchar *nodeContents = NULL;
    gboolean finalResult = FALSE;
@@ -905,7 +905,7 @@ void sort_children (GtkTreeIter *node, GError **err, StringCompareFunction compa
 
    GtkTreeIter childIter;
 
-   GtkTreeModel *tree_model = GTK_TREE_MODEL(sTreeStore);
+   GtkTreeModel *tree_model = GTK_TREE_MODEL (sTreeStore);
 
    gint nodeType = -1;
 

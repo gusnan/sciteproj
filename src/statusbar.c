@@ -58,7 +58,7 @@ gboolean init_statusbar (GtkWidget *widget, GtkWidget *next_to, GError **err)
 
    gtk_widget_set_size_request (statusbar, -1, 20);
 
-   gtk_grid_attach_next_to (GTK_GRID(widget), statusbar, next_to, GTK_POS_BOTTOM, 1, 1);
+   gtk_grid_attach_next_to (GTK_GRID (widget), statusbar, next_to, GTK_POS_BOTTOM, 1, 1);
 
    gtk_widget_show (statusbar);
 

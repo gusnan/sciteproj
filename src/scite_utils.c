@@ -285,7 +285,7 @@ static void cancel_button_cb (GtkDialog *dialog, gint responseID, gpointer userD
 gboolean launch_scite (gchar *instring,GError **err)
 {
 
-   debug_printf("launch_scite: %s\n", instring);
+   debug_printf ("launch_scite: %s\n", instring);
 
    gboolean resultCode = FALSE;
    gchar* ipcDirectorName = (gchar*)"ipc.director.name";
@@ -489,7 +489,7 @@ gboolean launch_scite (gchar *instring,GError **err)
 
       // Fork and (we hope) exec Scite
 
-      childPID = fork();
+      childPID = fork ();
 
       if (childPID == -1) {
          errCode = errno;
@@ -608,7 +608,7 @@ gboolean launch_scite (gchar *instring,GError **err)
 
       if ((sRequestPipeFD = open (requestPipePath, O_WRONLY | O_NONBLOCK)) <= 0) {
          errCode = errno;
-         g_set_error(err, APP_SCITEPROJ_ERROR, -1,
+         g_set_error (err, APP_SCITEPROJ_ERROR, -1,
                      "%s: Could not launch Scite, open(\"%s\") failed, error = %s",
                      __func__, requestPipePath, strerror (errCode));
          goto EXITPOINT;
@@ -638,7 +638,7 @@ gboolean launch_scite (gchar *instring,GError **err)
       set_statusbar_text (_("Launched SciTE"));
    }
 
-   debug_printf("All done launching SciTE...\n");
+   debug_printf ("All done launching SciTE...\n");
 
 EXITPOINT:
 

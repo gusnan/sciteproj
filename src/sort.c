@@ -309,13 +309,13 @@ int get_sort_order_of_folder (gchar *folder_name)
 
       lua_pushnil (lua);
 
-      while(lua_next(lua, -2)) {
+      while (lua_next (lua, -2)) {
 
          gchar *key = NULL;
 
          if (lua_type (lua, -2) == LUA_TSTRING) { // key type is string
 
-            key = g_strdup (lua_tostring(lua, -2));
+            key = g_strdup (lua_tostring (lua, -2));
 
             gchar *temp = clean_folder (key);
 
@@ -340,7 +340,7 @@ int get_sort_order_of_folder (gchar *folder_name)
 
          gchar *relative_path = NULL;
 
-         if (g_strcmp0 (folder_name, get_project_directory()) == 0) {
+         if (g_strcmp0 (folder_name, get_project_directory ()) == 0) {
             relative_path = g_strdup ("."); //get_project_directory();
          }
 
