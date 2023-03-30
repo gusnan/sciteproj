@@ -699,7 +699,7 @@ void create_new_file_cb()
          full_file_name = g_build_filename (folder, filename, NULL);
 
          if (g_file_test (full_file_name, G_FILE_TEST_EXISTS)) {
-            warning_dialog (_("File aready exists!"), _("The file '%s' does already exist!"), filename);
+            warning_dialog (_("File already exists!"), _("The file '%s' does already exist!"), filename);
 
             goto EXITPOINT;
 
