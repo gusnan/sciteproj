@@ -1,6 +1,10 @@
 
 ChangeLog:
 ----------
+1.70
+   * Add functionality to add a folder and file
+   * Add functionality to delete files/folders
+   * Many minor fixes
 
 1.60
    * Limit selections in the tree to one folder
