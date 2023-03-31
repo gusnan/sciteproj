@@ -77,14 +77,14 @@ gboolean ignore_pattern_matches (gchar *folder_name, const gchar *filename, GSLi
             result = TRUE;
          }
 
-         g_pattern_spec_free(pattern_spec);
-         g_free(temp_filter_string);
+         g_pattern_spec_free (pattern_spec);
+         g_free (temp_filter_string);
 
          filter_list = filter_list->next;
       };
    }
 
-   g_free(full_filename);
+   g_free (full_filename);
 
    return result;
 }
@@ -109,7 +109,7 @@ GSList *load_folder_to_list (gchar *folder_path, gboolean read_directories, GCom
 
       if (read_directories) {
 
-         if (g_file_test(temp_file, G_FILE_TEST_IS_DIR)) {
+         if (g_file_test (temp_file, G_FILE_TEST_IS_DIR)) {
 
             if (filter_list != NULL) {
                if (!ignore_pattern_matches (folder_path, short_filename, filter_list)) {

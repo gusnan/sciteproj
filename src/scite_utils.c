@@ -186,7 +186,7 @@ gboolean scite_pipe_read_ready_cb (GIOChannel *source, GIOCondition condition, g
 
             if (g_str_has_prefix (buff, "closed:")) {
 
-               gchar *file=get_filename_from_full_path (buff);
+               gchar *file = get_filename_from_full_path (buff);
                gchar *status_string = g_strdup_printf (_("Closed %s"),file);
 
                set_statusbar_text (status_string);

@@ -40,8 +40,8 @@ static GtkWidget *window;
 
 void create_about_dialog ();
 
-gboolean handle_about_close_event(GtkWidget *widget, GdkEvent *event, gpointer user_data);
-void link_button_cb(GtkButton *button, gpointer user_data);
+gboolean handle_about_close_event (GtkWidget *widget, GdkEvent *event, gpointer user_data);
+void link_button_cb (GtkButton *button, gpointer user_data);
 
 gchar *version_string = NULL;
 
@@ -113,7 +113,7 @@ void create_about_dialog ()
 
    gtk_container_add (GTK_CONTAINER (window), grid);
 
-   logo_image = gtk_image_new_from_pixbuf(program_icon_pixbuf);
+   logo_image = gtk_image_new_from_pixbuf (program_icon_pixbuf);
 
    gtk_grid_attach (GTK_GRID (grid), logo_image, 0, 0, 5, 1);
 
@@ -234,7 +234,7 @@ void create_about_dialog ()
 
 #ifdef _DEBUG
 
-   gchar *prefs_dir_string = g_strdup_printf("Preferences loaded from %s",prefs_filename);
+   gchar *prefs_dir_string = g_strdup_printf ("Preferences loaded from %s", prefs_filename);
 
    text_to_add = g_strdup_printf ("%s\n\n%s", about_text2,
                                prefs_dir_string);
@@ -299,7 +299,7 @@ void create_about_dialog ()
    g_signal_connect (G_OBJECT (linkbutton), "released", G_CALLBACK (link_button_cb), linkbutton);
 
    // Handle ESC in about window
-   gtk_widget_add_events(window, GDK_KEY_PRESS_MASK);
+   gtk_widget_add_events (window, GDK_KEY_PRESS_MASK);
 
    g_signal_connect (G_OBJECT (window), "key_press_event", G_CALLBACK (handle_keyboard_event_cb), NULL);
 
