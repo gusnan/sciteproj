@@ -664,7 +664,7 @@ static gboolean mouse_button_pressed_cb (GtkWidget *treeView, GdkEventButton *ev
    }
    else if (nodeItemType == ITEMTYPE_GROUP) {
       if (groupRightClickPopupMenu) {
-         gtk_menu_popup_at_pointer (GTK_MENU(groupRightClickPopupMenu), (GdkEvent*)event);
+         gtk_menu_popup_at_pointer (GTK_MENU (groupRightClickPopupMenu), (GdkEvent*)event);
       }
    }
 
