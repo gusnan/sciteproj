@@ -216,7 +216,7 @@ gboolean add_tree_filelist (GtkTreeIter *parentIter, GSList *fileList, GError **
    // Reverse the list
    fileList = g_slist_reverse (fileList);
 
-   for (listIter = fileList; listIter != NULL; listIter = g_slist_next(listIter)) {
+   for (listIter = fileList; listIter != NULL; listIter = g_slist_next (listIter)) {
 
       gchar *absFilename = (gchar *) (listIter->data);
 
@@ -655,7 +655,7 @@ GtkTreeIter *find_element_with_path (GtkTreeIter *start_iter, gchar *path_to_fin
                gchar *cleaned_folder = NULL;
                cleaned_folder = g_strdup_printf ("%s/%s", get_project_directory (), clean_folder(nodeContents));
 
-               if (g_strcmp0(clean_folder (cleaned_folder), path_to_find) == 0) {
+               if (g_strcmp0 (clean_folder (cleaned_folder), path_to_find) == 0) {
 
                   GtkTreeIter *result_iter = gtk_tree_iter_copy (&new_iter);
 

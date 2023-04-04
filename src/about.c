@@ -143,7 +143,7 @@ void create_about_dialog ()
    copyrightstring = g_strdup_printf ("Copyright (C) 2008-2023 Andreas Rönnquist <andreas@ronnquist.net>");
 
    copyright_label = gtk_label_new(copyrightstring);
-   gtk_label_set_selectable (GTK_LABEL(copyright_label), FALSE);
+   gtk_label_set_selectable (GTK_LABEL (copyright_label), FALSE);
 
    gtk_grid_attach_next_to (GTK_GRID (grid), copyright_label, version_string_label, GTK_POS_BOTTOM, 5, 1);
 
