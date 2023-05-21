@@ -171,19 +171,22 @@ gchar *fix_path (char *base_dir, char *temp)
          } else {
             //g_print("%s\n",current_path);
 
-            if (strcmp (current_path, "..") == 0) {
-               //g_print("Up! curr:%s\n",out_path);
+            if (current_path != NULL) {
 
-               //file_pointer = &infile[co];
+               if (strcmp (current_path, "..") == 0) {
+                  //g_print("Up! curr:%s\n",out_path);
 
-               gchar *buf = path_up_string (out_path);
+                  //file_pointer = &infile[co];
 
-               g_free (out_path);
-               out_path = buf;
+                  gchar *buf = path_up_string (out_path);
 
-               g_free (current_path);
-               current_path = 0;
+                  g_free (out_path);
+                  out_path = buf;
 
+                  g_free (current_path);
+                  current_path = 0;
+
+               }
             }
          }
       }
