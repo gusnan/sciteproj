@@ -971,7 +971,7 @@ void print_node(GtkTreeIter *iter)
                        COLUMN_ITEMTYPE, &item_type,
                        COLUMN_FILEPATH, &node_contents,
                        COLUMN_FILENAME, &item_name,
-                       s-1);
+                       -1);
 
    gchar *type_string;
 
