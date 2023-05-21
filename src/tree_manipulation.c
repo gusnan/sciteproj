@@ -973,7 +973,7 @@ void print_node(GtkTreeIter *iter)
                        COLUMN_FILENAME, &item_name,
                        -1);
 
-   gchar *type_string;
+   gchar *type_string = NULL;
 
    switch (item_type) {
       case ITEMTYPE_GROUP:
@@ -984,7 +984,8 @@ void print_node(GtkTreeIter *iter)
          break;
    };
 
-   printf ("Type: %s\n", type_string);
+   if (type_string != NULL)
+      printf ("Type: %s\n", type_string);
    printf ("Contents: '%s'\n", node_contents);
    printf ("File name: '%s'\n", item_name);
    printf ("-----\n");
